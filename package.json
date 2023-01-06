@@ -1,13 +1,88 @@
 {
-    "name": "hello-world",
-    "description": "Sample NodeJs web application",
-    "version": "0.0.1",
-    "private": true,
-    "devDependencies": {
-        "mocha": "5.0.0",
-        "unit.js": "2.0.0"
-    },
-    "scripts": {
-        "test": "mocha --recursive tests"
+  "name": "carbon-tutorial",
+  "version": "0.0.0",
+  "private": true,
+  "repository": "git@github.com:carbon-design-system/carbon-tutorial.git",
+  "bugs": "https://github.com/carbon-design-system/carbon-tutorial/issues",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "react-scripts build",
+    "ci-check": "yarn format:diff",
+    "clean": "yarn cache clean && yarn install",
+    "eject": "react-scripts eject",
+    "format": "prettier --write \"**/*.{js,md,scss}\"",
+    "format:diff": "prettier --list-different \"**/*.{js,md,scss}\"",
+    "format:staged": "prettier --write",
+    "start": "react-scripts start",
+    "test": "mocha --recursive tests"
+  },
+  "dependencies": {
+    "@aws-sdk/client-cognito-identity-provider": "^3.154.0",
+    "@carbon/react": "1.1.0",
+    "amazon-cognito-identity-js": "^5.2.10",
+    "aws-sdk": "^2.1189.0",
+    "enzyme": "3.11.0",
+    "enzyme-adapter-react-16": "1.15.5",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "4.0.3"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "7.5.2",
+    "@commitlint/config-conventional": "7.5.0",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "husky": "^8.0.3",
+    "lint-staged": "8.1.5",
+    "mocha": "5.0.0",
+    "prettier": "1.17.0",
+    "sass": "1.51.0",
+    "unit.js": "2.0.0",
+    "wait-for-expect": "3.0.2"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
     }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "*.js": [
+      "yarn format:staged",
+      "git add"
+    ],
+    "*.{scss,css}": [
+      "yarn format:staged",
+      "git add"
+    ],
+    "*.md": [
+      "yarn format:staged",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "jsxBracketSameLine": true,
+    "printWidth": 80,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "resolutions": {
+    "postcss-custom-properties": "^9.1.1"
+  },
+  "homepage": "./"
 }

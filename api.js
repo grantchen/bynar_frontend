@@ -4,10 +4,11 @@ var fs = require('fs');
 var path = require('path');
 
 exports.get = function(event, context, callback) {
+  var contents = fs.readFileSync(`build${path.sep}index.html`);
   var result = {
     statusCode: 200,
-    body: '<h1>TEST API</h1>',
-    headers: {'content-type': 'text/html'}
+    body: contents.toString(),
+    headers: { 'content-type': 'text/html' },
   };
 
   callback(null, result);

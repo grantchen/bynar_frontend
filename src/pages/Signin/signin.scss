@@ -1,0 +1,141 @@
+.signin-container {
+  padding: 2rem 1rem;
+  background-color: white;
+}
+
+.headingSubtitle {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.42857;
+  letter-spacing: 0.16px;
+}
+
+.emailInputLabel {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.forgot-link {
+  float: right;
+}
+
+.backToEmailLink {
+  color: #8d8d8d;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.backToEmailLink:link {
+  text-decoration: none;
+  color: #8d8d8d;
+}
+.backToEmailLink:visited {
+  text-decoration: none;
+  color: #8d8d8d;
+}
+.backToEmailLink:hover {
+  text-decoration: none;
+  color: #8d8d8d;
+}
+.backToEmailLink:active {
+  text-decoration: none;
+  color: #8d8d8d;
+}
+
+.backToEmailLinkIcon {
+  margin-right: 4px;
+  flex-basis: auto;
+  width: 20px;
+  height: 20px;
+  color: var(--cds-button-primary, #0f62fe);
+}
+
+.heading-container {
+  margin-bottom: 0.5rem;
+  padding-bottom: 1rem;
+}
+
+.bottom-link-container {
+  border-top: 1px solid #dcdcdc;
+  // margin-top: 1.5rem;
+  background-color: white;
+  padding: 1rem;
+}
+
+.outer {
+  display: table;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #f4f4f4;
+  @media only screen and (max-width: 600px) {
+    background-color: white;
+  }
+}
+
+.middle {
+  display: table-cell;
+  vertical-align: middle;
+  @media only screen and (max-width: 600px) {
+    vertical-align: unset;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: lightblue;
+  }
+}
+
+.inner {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  max-width: 530px;
+  width: calc(100% - 40px);
+  margin-bottom: 28px;
+  min-width: 320px;
+  min-height: 338px;
+  overflow: hidden;
+  @media only screen and (max-width: 600px) {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+.carbon-footer {
+  font-family: 'ibm-plex-sans', Helvetica Neue, Arial, sans-serif;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  min-height: 3rem;
+  z-index: 5000;
+  width: 100%;
+  background-color: #262626;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 5px 0;
+}
+
+.footer-nav-container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 99rem;
+  padding: 0 1.5rem;
+}
+
+.footer-nav-container a {
+  color: #c6c6c6;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.footer-nav-container li {
+  display: inline-block;
+  padding-right: 20px;
+  @media only screen and (max-width: 600px) {
+    display: block;
+  }
+}
