@@ -29,5 +29,6 @@ phases:
 
 artifacts:
   files:
+    - public/**/*
     - template-export.yml
     - template-configuration.json
