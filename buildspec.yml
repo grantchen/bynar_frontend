@@ -7,7 +7,6 @@ phases:
     commands:
       # Install dependencies needed for running tests
       - npm install
-      - cd frontend && yarn install
 
       # Upgrade AWS CLI to the latest version
       - pip install --upgrade awscli
@@ -15,7 +14,6 @@ phases:
     commands:
       # Discover and run unit tests in the 'tests' directory
       - npm test
-      - cd frontend && yarn build
   build:
     commands:
       # Use AWS SAM to package the application by using AWS CloudFormation
