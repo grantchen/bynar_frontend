@@ -1,0 +1,17 @@
+@use './components/CarbonHeader/carbon-header';
+@use './components/AuthHeader/auth-header';
+@use './content/LandingPage/landing-page';
+@use './content/RepoPage/repo-page';
+@use './pages/Signup/signup';
+@use './pages/Signin/signin';
+@use './pages/Profile/profile';
+@use './pages/UserList/user-list';
+
+#root {
+    height: 100%;
+    width: 100%;
+}
+
+.cds--loading-overlay {
+    background-color: white;
+}
