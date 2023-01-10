@@ -1,0 +1,96 @@
+import React from 'react';
+
+import {
+  Heading,
+  FlexGrid,
+  Row,
+  Column,
+  Grid,
+  Tile,
+  Link,
+} from '@carbon/react';
+import { Warning, InformationDisabled } from '@carbon/react/icons';
+
+const Dashboard = () => {
+  return (<div>
+      <Heading>
+        Pkf Albania
+      </Heading>
+      <Grid style={{ 'paddingTop': '1rem' }} >
+        <Column className='bynar-info-column' lg={4} md={8} sm={4}>
+          <Tile className='bynar-dashboard-tile bynar-tile-blue' >
+            <div className='bynar-tile-header' style={{ 'height': '1rem', 'width': '100%' }} >
+              <h5 style={{ 'maxWidth': 'fit-content', 'float': 'left' }} ><strong>News</strong></h5>
+              <Link style={{ 'float':'right', 'color': 'white' }} >View all</Link>
+            </div>
+            <br/>
+            <div className='bynar-tile-content-area' >
+              <p>News 1</p>
+              <p>News 2</p>
+              <p>News 3</p>
+            </div>
+          </Tile>
+        </Column>
+        <Column className='bynar-info-column' lg={8} md={8} sm={4}>
+          <Tile className='bynar-dashboard-tile' style={{ 'backgroundColor': 'white' }} >
+            <div className='bynar-tile-header' style={{ 'height': '1rem', 'width': '100%' }} >
+              <h5 style={{ 'maxWidth': 'fit-content', 'float': 'left' }} ><strong>Usage</strong></h5>
+              <Link style={{ 'float':'right' }} >View all</Link>
+            </div>
+            <br/>
+            <div className='bynar-tile-content-area' >
+              <Warning size='100' style={{ 'margin': 'auto', 'color': 'cornflowerblue' }} />
+              <p>Widget cannot be loaded this time</p>
+            </div>
+          </Tile>
+        </Column>
+        <Column className='bynar-info-column' lg={4} md={8} sm={4}>
+          <Tile className='bynar-dashboard-tile' style={{ 'backgroundColor': 'white' }} >
+            <div className='bynar-tile-header' style={{ 'height': '1rem', 'width': '100%' }} >
+              <h5 style={{ 'maxWidth': 'fit-content', 'float': 'left' }} ><strong>Recent support cases</strong></h5>
+              <Link style={{ 'float':'right' }} >View usage</Link>
+            </div>
+            <br/>
+            <div className='bynar-tile-content-area' >
+              <InformationDisabled size='100' style={{ 'margin': 'auto', 'color': 'cornflowerblue' }} />
+              <p>You don't have permission to see support cases</p>
+            </div>
+          </Tile>
+        </Column>
+      </Grid>
+      <Grid style={{ 'paddingTop': '2rem' }} >
+        <Column lg={16} md={8} sm={4}>
+        <Tile className='bynar-dashboard-tile' style={{ 'backgroundColor': 'white' }} >
+          <div className='bynar-tile-header' style={{ 'height': '1rem', 'width': '100%' }} >
+            <h5 style={{ 'maxWidth': 'fit-content', 'float': 'left' }} ><strong>Tools</strong></h5>
+            <Link style={{ 'float':'right' }} >Application or data migration</Link>
+          </div>
+          <div className='bynar-tile-content-area' >
+            <div className='bynar-tool-cards' style={{ 'display': 'flex', 'overflowX': 'auto' }} >
+              <Tile className='bynar-dashboard-sub-tile bynar-tile-blue' >
+                <h5 style={{ 'maxWidth': 'fit-content' }} ><strong>Build</strong></h5>
+                <div className='bynar-tile-content-area' >
+                  <p>Explore Bynar</p>
+                </div>
+              </Tile>
+              <Tile className='bynar-dashboard-sub-tile' >
+                <h5 style={{ 'maxWidth': 'fit-content' }} ><strong>Browse, select and create a database</strong></h5>
+                <div className='bynar-tile-content-area' >
+                  <p>Explore Bynar database</p>
+                </div>
+              </Tile>
+              <Tile className='bynar-dashboard-sub-tile' >
+                <h5 style={{ 'maxWidth': 'fit-content' }} ><strong>Browse, select and create a database</strong></h5>
+                <div className='bynar-tile-content-area' >
+                  <p>Explore Bynar database</p>
+                </div>
+              </Tile>
+            </div>
+          </div>
+        </Tile>
+        </Column>
+      </Grid>
+  </div>);
+};
+
+export default Dashboard;

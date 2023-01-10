@@ -5,6 +5,7 @@ import { Content, Theme } from '@carbon/react';
 
 import CarbonHeader from './components/CarbonHeader';
 import LandingPage from './content/LandingPage';
+import Dashboard from './content/Dashboard';
 import Profile from './pages/Profile';
 import UserList from './pages/UserList';
 import Signin from './pages/Signin';
@@ -23,7 +24,7 @@ class App extends Component {
             <>
                 <Account>
                     <Routes>
-                        <Route exact path="/" element={<PrivateRoute><LandingPage/></PrivateRoute>} />
+                        <Route exact path="/" element={<PrivateRoute><Dashboard/></PrivateRoute>} />
                         <Route path="/profile" element={<PrivateRoute><Profile/></PrivateRoute>} />
                         <Route path="/userlist" element={<PrivateRoute><UserList/></PrivateRoute>} />
 

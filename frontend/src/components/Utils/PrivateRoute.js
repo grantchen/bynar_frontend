@@ -33,7 +33,7 @@ export default function PrivateRoute({children}) {
                     <Theme theme="g100">
                         <CarbonHeader />
                     </Theme>
-                    <Content>
+                    <Content style={{ 'backgroundColor': 'var(--cds-layer)' }} >
                     {children}
                     </Content>
                 </>

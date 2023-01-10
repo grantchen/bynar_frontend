@@ -6,3 +6,12 @@
 .cds--header__global .cds--popover-content {
   background-color: colors.$gray-20;
 }
+
+.bynar-search-dropdown button {
+  border-bottom: none;
+  background-color: #161616;
+}
+
+.side-nav-item-container {
+  display: block;
+}
