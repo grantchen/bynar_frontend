@@ -28,7 +28,7 @@ import { Search, Notification, User, Calculator, Notebook, Help } from '@carbon/
 
 const CarbonHeader = () => {
     let navigate = useNavigate();
-    let [profilePanelExpanded, setProfilePanelExpanded] = useState(true);
+    let [profilePanelExpanded, setProfilePanelExpanded] = useState(false);
     const { logout } = useContext(AccountContext);
     const logoutUser = () => {
         logout();
