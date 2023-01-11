@@ -359,6 +359,13 @@ const Signup = () => {
     if (fullName_bi && country_bi && address_bi && address2_bi && city_bi && postalCode_bi && !isNaN(postalCode_bi) && state_bi && phoneNumber_bi && organizationName_ti && taxNumber_ti) {
       startLoading();
 
+      setTimeout(() => {
+        stopLoading(() => {
+          setActiveStep(6);
+          setTimeout(() => cardNumber_cciInput.current.focus());
+        });
+      }, 500);
+      return;
       authenticate(email, passwordStorage).then(data => {
         getSession().then(({ user, accessToken, headers, attributes }) => {
   

@@ -13,6 +13,10 @@
     width: 100%;
 }
 
+html {
+  background-color: var(--cds-layer);
+}
+
 .cds--loading-overlay {
     background-color: white;
 }
