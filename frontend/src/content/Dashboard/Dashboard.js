@@ -8,10 +8,14 @@ import {
   Grid,
   Tile,
   Link,
+  ActionableNotification,
 } from '@carbon/react';
 import { Warning, InformationDisabled } from '@carbon/react/icons';
+import { useDispatch, useSelector } from 'react-redux'
+import { createNotification } from '../../store/appstate/appstate';
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
   return (<div>
       <Heading>
         Pkf Albania
@@ -21,7 +25,7 @@ const Dashboard = () => {
           <Tile className='bynar-dashboard-tile bynar-tile-blue' >
             <div className='bynar-tile-header' style={{ 'height': '1rem', 'width': '100%' }} >
               <h5 style={{ 'maxWidth': 'fit-content', 'float': 'left' }} ><strong>News</strong></h5>
-              <Link style={{ 'float':'right', 'color': 'white' }} >View all</Link>
+              <Link style={{ 'float':'right', 'color': 'white' }} onClick={() => dispatch(createNotification('Success', 'Action succeed','success'))} >View all</Link>
             </div>
             <br/>
             <div className='bynar-tile-content-area' >

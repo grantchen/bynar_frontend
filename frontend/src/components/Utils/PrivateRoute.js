@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Route, Navigate, Outlet } from 'react-router-dom';
 import { Content, Theme, Loading } from '@carbon/react';
 import { AccountContext } from '../Accounts'
+import DynamicNotifications from './DynamicNotifications';
 
 import CarbonHeader from '../CarbonHeader';
 
@@ -34,6 +35,7 @@ export default function PrivateRoute({children}) {
                         <CarbonHeader />
                     </Theme>
                     <Content style={{ 'backgroundColor': 'var(--cds-layer)' }} >
+                    <DynamicNotifications/>
                     {children}
                     </Content>
                 </>
