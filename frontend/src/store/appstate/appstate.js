@@ -4,6 +4,9 @@ const CREATE_NOTIFICATION = 'CREATE_NOTIFICATION';
 const DELETE_NOTIFICATION = 'DELETE_NOTIFICATION';
 const DELETE_ALL_NOTIFICATION = 'DELETE_ALL_NOTIFICATION';
 
+const APPLY_DARK_THEME = 'APPLY_DARK_THEME';
+const APPLY_lIGHT_THEME = 'APPLY_lIGHT_THEME';
+
 export function createNotification(title, subtitle, kind) {
   if (!title) title = "<Title>";
   if (!subtitle) subtitle = "<Subtitle>";
@@ -29,7 +32,20 @@ export function deleteAllNotifications() {
   }
 }
 
+export function applyDarkTheme(index) {
+  return {
+    type: APPLY_DARK_THEME,
+  }
+}
+
+export function applyLightTheme() {
+  return {
+    type: APPLY_lIGHT_THEME,
+  }
+}
+
 const defaultState = {
+  theme: 'dark',
   notifications:[],
 };
 
@@ -37,6 +53,7 @@ function appState(state=defaultState, action) {
   switch (action.type) {
     case CREATE_NOTIFICATION:
       return {
+        ...state,
         notifications: [
           ...state.notifications,
           {
@@ -47,15 +64,25 @@ function appState(state=defaultState, action) {
         ]
       };
     case DELETE_NOTIFICATION:
-      console.log(action.index);
       const notifications = state.notifications.filter((notif, key) => key !== action.index);
-      console.log(notifications);
       return {
         notifications
       };
     case DELETE_ALL_NOTIFICATION:
       state.notifications = [];
       return {...state};
+    case APPLY_DARK_THEME:
+
+      return {
+        ...state,
+        theme: 'dark',
+      };
+    case APPLY_lIGHT_THEME:
+
+      return {
+        ...state,
+        theme: 'light',
+      };
     default:
       return state;
   }

@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useContext, useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AccountContext } from '../Accounts';
 
 import {
@@ -23,17 +23,50 @@ import {
   Switcher,
   SwitcherItem,
   HeaderPanel,
+  Link,
+  Tile,
 } from '@carbon/react';
 import { Search, Notification, User, Calculator, Notebook, Help } from '@carbon/react/icons';
+import { useSelector, useDispatch } from 'react-redux';
+import { applyDarkTheme, applyLightTheme } from '../../store/appstate/appstate';
+import ProfileSettingsPanel from './ProfileSettingsPanel';
+
 
 const CarbonHeader = () => {
+    const dispatch = useDispatch();
     let navigate = useNavigate();
-    let [profilePanelExpanded, setProfilePanelExpanded] = useState(false);
+    let [rightPanelExpanded, setRightPanelExpanded] = useState(false);
+    let [showProfileSettingsPanel, setShowProfileSettingsPanel] = useState(false);
     const { logout } = useContext(AccountContext);
     const logoutUser = () => {
         logout();
         navigate("/signin");
     }
+
+    //--- auto close profile panel if clicked outside panel
+    //--- code start
+    const showProfileSettingsPanelRef = useRef(null);
+    const setShowProfileSettingsPanelRef = useRef(null);
+    showProfileSettingsPanelRef.current = showProfileSettingsPanel;
+    setShowProfileSettingsPanelRef.current = setShowProfileSettingsPanel;
+    const wrapperRef = useRef(null);
+    useEffect(() => {
+      const handleClickOutside = (event) => {
+        if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+          if (showProfileSettingsPanelRef.current) {
+            setShowProfileSettingsPanelRef.current(false);
+          }
+        }
+      }
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [wrapperRef]);
+    //--- code end
+
+
+    const theme = useSelector(state => state.appState.theme);
     return (
         <HeaderContainer
           render={({ isSideNavExpanded, onClickSideNavExpand }) => (
@@ -49,7 +82,7 @@ const CarbonHeader = () => {
                 ERP
               </HeaderName>
               <TextInput
-                className="input-test-class hidden-mobile"
+                className="hidden-mobile"
                 id="bynar-search"
                 onChange={function noRefCheck(){}}
                 onClick={function noRefCheck(){}}
@@ -57,9 +90,8 @@ const CarbonHeader = () => {
                 size="lg"
                 type="text"
                 labelText=""
-                style={{'borderBottom': 'none'}}
               />
-              <HeaderGlobalAction className='hidden-mobile' style={{'backgroundColor': '#262626'}} aria-label="Search" tooltipAlignment="end">
+              <HeaderGlobalAction className="bynar-search-input-button hidden-mobile" aria-label="Search" tooltipAlignment="end">
                 <Search size={20} />
               </HeaderGlobalAction>
               <Dropdown
@@ -68,7 +100,7 @@ const CarbonHeader = () => {
                 size="lg"
                 label="Region"
                 initialSelectedItem={'Pfk Albania'}
-                className="bynar-search-dropdown hidden-mobile"
+                className={"bynar-search-dropdown hidden-mobile " + (theme == 'dark' ? "theme-dark" : "theme-light")}
               />
               <SideNav
                 aria-label="Side navigation"
@@ -104,15 +136,15 @@ const CarbonHeader = () => {
                 <HeaderGlobalAction aria-label="Calculator" tooltipAlignment="end">
                   <Calculator size={20} />
                 </HeaderGlobalAction>
-                <HeaderGlobalAction aria-label="Notifications" tooltipAlignment="center">
+                <HeaderGlobalAction  onClick={() => { setRightPanelExpanded(!rightPanelExpanded); }} aria-label="Notifications" tooltipAlignment="center">
                   <Notification size={20} />
                 </HeaderGlobalAction>
-                <HeaderGlobalAction aria-label="Profile" onClick={() => { setProfilePanelExpanded(!profilePanelExpanded) }} tooltipAlignment="center">
-                  <User size={20} />
-                </HeaderGlobalAction>
+                <ProfileSettingsPanel rightPanelExpanded={rightPanelExpanded} setRightPanelExpanded={setRightPanelExpanded} />
               </HeaderGlobalBar>
 
-              <HeaderPanel expanded={profilePanelExpanded} aria-label="test">
+              
+
+              <HeaderPanel expanded={rightPanelExpanded} aria-label="test">
                 <Switcher aria-label="test">
                   <SwitcherItem aria-label="test">
                     Test

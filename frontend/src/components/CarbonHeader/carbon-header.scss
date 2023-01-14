@@ -9,9 +9,55 @@
 
 .bynar-search-dropdown button {
   border-bottom: none;
+  border-bottom: 1px solid var(--cds-border-subtle);
+}
+.bynar-search-dropdown.theme-light button {
+  background-color: white;
+}
+.bynar-search-dropdown.theme-dark button{
   background-color: #161616;
+}
+.bynar-search-input-button {
+  background-color: var(--cds-field);
+  border-bottom: 1px solid var(--cds-border-subtle);
+}
+#bynar-search {
+  border-bottom: 1px solid var(--cds-border-subtle);
 }
 
 .side-nav-item-container {
   display: block;
+}
+
+.bynar-profile-settings-panel {
+  top: 3.4em;
+  right: 0rem;
+  width: 16rem;
+  position: absolute;
+  background-color: var(--cds-background);
+  color: var(--cds-text-primary);
+  border-left: 1px solid var(--cds-border-subtle);
+  border-bottom: 1px solid var(--cds-border-subtle);
+}
+
+.bynar-profile-info-wrapper {
+  display: flex;
+}
+
+.profile-info-image {
+  background-color: var(--cds-layer);
+  border-radius: 50%;
+  width: 7rem;
+  height: 3.5rem;
+  text-align: center;
+  
+}
+
+.profile-info-image-icon {
+  position: relative;
+  top: 0.5rem;
+}
+
+.bynar-profile-settings-item {
+  margin: 0.5rem 0rem;
 }
