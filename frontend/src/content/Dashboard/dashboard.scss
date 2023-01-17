@@ -17,8 +17,32 @@
 .bynar-tile-blue {
   background: rgb(64,0,255);
   background: linear-gradient(170deg, rgba(64,0,255,1) 0%, rgba(64,0,255,1) 61%, rgba(184,0,255,1) 100%);
-  color: var(--cds-layer-01, #f4f4f4);
+  color: var(#f4f4f4);
 }
+
+.bynar-tab-panel {
+  &:focus {
+    outline: none;
+  }
+}
+
+.content-tabs-wrapper .cds--dropdown__wrapper {
+  width: 15rem;
+  float: right;
+}
+
+#close-tab-button {
+  position: absolute;
+  right: 2rem;
+  top: 10rem;
+  z-index: 9;
+}
+
+#bynar-tabs-menu-dropdown {
+  border-bottom: none;
+  min-width: 10rem;
+}
+
 
 @media (max-width: 767px) {
   .header-right-buttons {

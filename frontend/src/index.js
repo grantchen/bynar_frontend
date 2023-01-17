@@ -6,6 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import appStateStore from './store/appstate/appstate';
+import './i18nextConf';
 
 // ReactDOM.render(<App />, document.getElementById('root'));
 const root = ReactDOM.createRoot(document.getElementById("root"));

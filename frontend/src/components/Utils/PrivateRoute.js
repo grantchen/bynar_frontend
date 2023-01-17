@@ -35,14 +35,15 @@ export default function PrivateRoute({children}) {
         <>
                     <Theme theme={(theme == 'dark' ? "g100" : "white")}>
                         <CarbonHeader />
-                    </Theme>
-                    <Content style={{ 'backgroundColor': 'var(--cds-layer)' }} >
-                      <Theme theme={(theme == 'dark' ? "g100" : "white")}>
+                        <div className='bynar-backgroud-wrapper' ></div>
+                    <Content className='bynar-content-container' >
+                      
                     <DynamicNotifications/>
-                    </Theme>
+                    
                     
                     {children}
                     </Content>
+                    </Theme>
                 </>
     ) : <Navigate to={'/signin'} />
 }

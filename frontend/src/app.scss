@@ -17,6 +17,10 @@ html {
   background-color: var(--cds-layer);
 }
 
+.bynar-content-container {
+  background-color: var(--cds-layer);
+}
+
 .cds--loading-overlay {
     background-color: white;
 }
@@ -29,6 +33,14 @@ html {
 
 .dynamic-notification-element {
   margin-bottom: 1rem;
+}
+
+.bynar-backgroud-wrapper {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: -9;
+  background-color: var(--cds-layer);
 }
 
 @media (max-width: 767px) {
