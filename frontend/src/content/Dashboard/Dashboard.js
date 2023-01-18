@@ -27,24 +27,21 @@ const Dashboard = () => {
   const tabs = useSelector(state => state.appState.tabs);
   const selectedTab = useSelector(state => state.appState.selectedTab);
 
-  const addNewTab = (title, component) => {
-    dispatch(openNewTab(title, component));
-    dispatch(setSelectedTab(tabs.length));
+  const addNewTab = (id, title, component) => {
+    const tabFound = tabs.find(tab => tab.id == id);
+    if (tabFound) {
+      const tabIndex = tabs.findIndex(tab => tab.id == id);
+      dispatch(setSelectedTab(tabIndex));
+    } else {
+      dispatch(openNewTab(id, title, component));
+      dispatch(setSelectedTab(tabs.length));
+      window.dispatchEvent(new Event('resize'));
+    }
+    
   };
 
   return (<div>
     <div className='content-tabs-wrapper' >
-      {
-        (selectedTab != 0 ? (
-        <Button id="close-tab-button" size="sm" onClick={() => {
-            if (selectedTab == 0) return;
-            dispatch(closeTab(selectedTab));
-            dispatch(setSelectedTab(selectedTab - 1));
-          }} kind="ghost">
-          <CloseOutline />
-        </Button>
-        ) : '')
-      }
       
       <Dropdown
               id="bynar-tabs-menu-dropdown"
@@ -68,7 +65,7 @@ const Dashboard = () => {
               selectedItem={0}
               onChange={(selectionObject) => {
                 const selectedItem = selectionObject.selectedItem;
-                addNewTab(selectedItem.text, <div>{selectedItem.text}</div>);
+                addNewTab(selectedItem.id, selectedItem.text, <div>{selectedItem.text}</div>);
               }}
               // initialSelectedItem={'Pfk Albania'}
             />
@@ -76,10 +73,29 @@ const Dashboard = () => {
         <TabList aria-label="List of tabs" activation="automatic" scrollIntoView={true}>
           {
             tabs.map((tab, key) => (
-              <Tab data-id={key} onClick={(event) => {
+              <Tab data-id={key} style={{ 'outline': 'none' }} onClick={(event) => {
+                console.log(event.target);
                 let tabIndex = event.currentTarget.getAttribute('data-id');
-                setSelectedTab(parseInt(tabIndex));
-              }} key={key} >{tab.title}</Tab>
+                dispatch(setSelectedTab(parseInt(tabIndex)));
+              }} key={key} ><div>{tab.title}
+                {
+                  (key != 0 ? (
+                    <div className='tab-close-button' onClick={(event) => {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      let tabIndex = parseInt(event.currentTarget.parentElement.parentElement.getAttribute('data-id'));
+                      if (tabIndex == 0) return;
+                      dispatch(closeTab(parseInt(tabIndex)));
+                      if (selectedTab >= tabIndex) {
+                        dispatch(setSelectedTab(selectedTab - 1));
+                      }
+                      
+                      window.dispatchEvent(new Event('resize'));
+                    }} ><CloseOutline /></div>
+                  ) : '')
+                }
+                </div>
+              </Tab>
             ))
           }
         </TabList>

@@ -14,9 +14,10 @@ const SET_SELECTED_TAB = 'SET_SELECTED_TAB';
 const APPLY_DARK_THEME = 'APPLY_DARK_THEME';
 const APPLY_lIGHT_THEME = 'APPLY_lIGHT_THEME';
 
-export function openNewTab(title, component) {
+export function openNewTab(id, title, component) {
   return {
     type: OPEN_TAB,
+    id, 
     title,
     component,
   }
@@ -78,6 +79,7 @@ const defaultState = {
   notifications:[],
   tabs: [
     {
+      id: 'dashboard',
       title: 'Dashboard',
       component: <DashboardContent />,
     },
@@ -93,6 +95,7 @@ function appState(state=defaultState, action) {
         tabs: [
           ...state.tabs,
           {
+            id: action.id,
             title: action.title,
             component: action.component,
           },
