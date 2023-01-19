@@ -21,8 +21,18 @@
   background-color: var(--cds-field);
   border-bottom: 1px solid var(--cds-border-subtle);
 }
-#bynar-search {
+#bynar-search, #bynar-search-mobile {
   border-bottom: 1px solid var(--cds-border-subtle);
+  outline: none;
+}
+
+.bynar-search-mobile-wrapper {
+  position: absolute;
+  top: 0rem;
+  left: 0rem;
+  z-index: 9;
+  width: 100%;
+  display: flex;
 }
 
 .side-nav-item-container {

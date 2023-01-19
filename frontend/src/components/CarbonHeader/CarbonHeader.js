@@ -26,7 +26,7 @@ import {
   Link,
   Tile,
 } from '@carbon/react';
-import { Search, Notification, User, Calculator, Notebook, Help } from '@carbon/react/icons';
+import { Search, Notification, User, Calculator, Notebook, Help, Close } from '@carbon/react/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { applyDarkTheme, applyLightTheme } from '../../store/appstate/appstate';
 import ProfileSettingsPanel from './ProfileSettingsPanel';
@@ -37,6 +37,7 @@ const CarbonHeader = () => {
     let navigate = useNavigate();
     let [rightPanelExpanded, setRightPanelExpanded] = useState(false);
     let [showProfileSettingsPanel, setShowProfileSettingsPanel] = useState(false);
+    let [showMobileSearch, setShowMobileSearch] = useState(false);
     const { logout } = useContext(AccountContext);
     const logoutUser = () => {
         logout();
@@ -125,17 +126,38 @@ const CarbonHeader = () => {
                   </SideNavMenu>
                 </SideNavItems>
               </SideNav>
+
+              {showMobileSearch ? (
+                <div className='bynar-search-mobile-wrapper show-mobile' >
+                  <TextInput
+                    className="show-mobile"
+                    id="bynar-search-mobile"
+                    onChange={function noRefCheck(){}}
+                    onClick={function noRefCheck(){}}
+                    placeholder="Search resources and products..."
+                    size="lg"
+                    type="text"
+                    labelText=""
+                  />
+                  <HeaderGlobalAction className="bynar-search-input-button show-mobile" aria-label="Search" tooltipAlignment="end">
+                    <Search size={20} />
+                  </HeaderGlobalAction>
+                  <HeaderGlobalAction className="bynar-search-input-button show-mobile" aria-label="Search" tooltipAlignment="end" onClick={() => setShowMobileSearch(false)}>
+                    <Close size={20} />
+                  </HeaderGlobalAction>
+                </div>
+              ) : ''}
       
               <HeaderGlobalBar className="header-right-buttons" >
-                <HeaderGlobalAction aria-label="Help" tooltipAlignment="end">
-                  <Help size={20} />
+                <HeaderGlobalAction className="show-mobile" aria-label="Search" tooltipAlignment="end" onClick={() => setShowMobileSearch(true)}>
+                  <Search size={20} />
                 </HeaderGlobalAction>
-                <HeaderGlobalAction aria-label="Video" tooltipAlignment="end">
-                  <Notebook size={20} />
+                {/* <HeaderGlobalAction aria-label="Help" tooltipAlignment="end">
+                  <Help size={20} />
                 </HeaderGlobalAction>
                 <HeaderGlobalAction aria-label="Calculator" tooltipAlignment="end">
                   <Calculator size={20} />
-                </HeaderGlobalAction>
+                </HeaderGlobalAction> */}
                 <HeaderGlobalAction  onClick={() => { setRightPanelExpanded(!rightPanelExpanded); }} aria-label="Notifications" tooltipAlignment="center">
                   <Notification size={20} />
                 </HeaderGlobalAction>

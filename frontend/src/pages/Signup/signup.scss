@@ -100,6 +100,7 @@
 .right-column {
     background-color: #f9f9f9;
     margin: 0px;
+    // background: url('/signup-bg.svg') center 60% / 100% no-repeat rgb(249, 249, 249);
 }
 
 .right-content {
@@ -109,12 +110,29 @@
 
 .signup-grid {
   background-color: white;
-    padding: 0px;
-    max-width: none;
+  padding: 0px;
+  max-width: none;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .signup-grid-row {
   display: contents;
+}
+
+.signup-form-grid{
+  border-top: 3px solid #0062ff;
+  padding-top: 1rem;
+}
+
+.signup-heading-text {
+  font-size: 2.5rem !important;
+  margin-top: 1rem;
+  .cds--header__name--prefix {
+    font-weight: 300;
+  }
 }
 
 @media only screen and (max-width: 600px) {

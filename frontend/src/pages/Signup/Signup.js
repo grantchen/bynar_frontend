@@ -21,6 +21,7 @@ import {
   RadioButtonGroup,
   RadioButton,
   FlexGrid,
+  HeaderName,
 } from '@carbon/react';
 
 import { ArrowRight, ArrowLeft } from '@carbon/react/icons';
@@ -448,12 +449,25 @@ const Signup = () => {
     <> 
     <Theme theme="g10" className={'theme-container'} >
     <Grid className={'signup-grid'} >
+    <Column className={'right-column'} lg={7} md={8} sm={8} style={{ 'background': "url(signup-bg.svg) center 60% / 100% no-repeat rgb(249, 249, 249)" }} >
+    <Content className='right-content'>
+      <div className='signup-heading-text-wrapper' >
+        <HeaderName prefix="" className='signup-heading-text'>
+          Create your 
+        </HeaderName>
+        <HeaderName prefix="BYNAR" className='signup-heading-text'>
+          account
+        </HeaderName>
+      </div>
+    
+    </Content>
+    </Column>
     <Column className={'left-column'} xlg={9} lg={9} md={8} sm={16}>
     <Content className={'signup-container'} >
     <Theme theme="white">
     
     <div className='heading-container' >
-    <div className="login-link" style={{'marginBottom':'1.5rem'}}>Already have an IBM account? <Link href="/signin">Log in</Link></div>
+    <div className="login-link" style={{'marginBottom':'1.5rem'}}>Already have an BYNAR account? <Link href="/signin">Log in</Link></div>
     <Heading>Sign Up</Heading>
     </div>
     {(() => {
@@ -469,7 +483,7 @@ const Signup = () => {
           );
         }
       })()}
-      <Grid>
+      <Grid className='signup-form-grid' >
         <Row className="signup-grid-row" >
         <Column xlg={3} lg={3} md={2} sm={6} >
           <div className='progress-container' >
@@ -965,16 +979,10 @@ const Signup = () => {
                                           </Theme>
                                           </Content>
                                           </Column>
-    <Column className={'right-column'} lg={7} md={8} sm={0}>
-    <Content className='right-content' >
-    <h1>Create your account</h1>
-    </Content>
-    </Column>
-    
                                           </Grid>
                                           
                                           
-                                          <footer className="carbon-footer" role="contentinfo" aria-label="IBM">
+                                          <footer className="carbon-footer" role="contentinfo" aria-label="BYNAR">
                                           <div className='footer-nav-container' >
                                           
                                           <ul className="horizontal ibm-padding-bottom-0 bx--legal-nav__holder">

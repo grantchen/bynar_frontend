@@ -14,7 +14,7 @@ const AuthHeader = (props) => (
     render={({ isSideNavExpanded, onClickSideNavExpand }) => (
       <Header aria-label="Carbon Header">
         <SkipToContent />
-        <HeaderName href="/" prefix="IBM">
+        <HeaderName href="/" prefix="BYNAR">
           {props.isSignIn ? 'Sign In' : 'Sign up'} 
         </HeaderName>
     

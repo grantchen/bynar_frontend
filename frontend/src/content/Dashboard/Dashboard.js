@@ -74,7 +74,6 @@ const Dashboard = () => {
           {
             tabs.map((tab, key) => (
               <Tab data-id={key} style={{ 'outline': 'none' }} onClick={(event) => {
-                console.log(event.target);
                 let tabIndex = event.currentTarget.getAttribute('data-id');
                 dispatch(setSelectedTab(parseInt(tabIndex)));
               }} key={key} ><div>{tab.title}

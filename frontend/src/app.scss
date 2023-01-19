@@ -48,3 +48,16 @@ html {
     display: none;
   }
 }
+@media (max-width: 1024px) {
+  .hidden-mobile {
+    display: none;
+  }
+  .right-column {
+    background: rgb(249, 249, 249) !important;
+  }
+}
+@media (min-width: 768px) {
+  .show-mobile {
+    display: none;
+  }
+}
