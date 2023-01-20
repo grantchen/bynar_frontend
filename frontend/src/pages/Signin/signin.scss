@@ -1,8 +1,8 @@
 
 
 .signin-container {
-    padding: 2rem 1rem;
     background-color: white;
+    padding: 0px;
 }
 
 .headingSubtitle {
@@ -12,10 +12,7 @@
     letter-spacing: .16px;
 }
 
-.emailInputLabel {
-    width: 100%;
-    margin-bottom: 0.5rem;
-}
+
 
 .forgot-link {
     float: right;
@@ -42,14 +39,15 @@
 
 .heading-container {
     margin-bottom: 0.5rem;
-    padding-bottom: 1rem;
+    padding: 1rem 1rem;
 }
 
 .bottom-link-container {
-    border-top: 1px solid #dcdcdc;
-    // margin-top: 1.5rem;
-    background-color: white;
-    padding: 1rem;
+  border: none;
+  background-color: white;
+  padding: 0px;
+  text-align: right;
+  padding-top: 2rem;
 }
 
 .outer {
@@ -81,7 +79,7 @@
     margin-left: auto;
     margin-right: auto;
     position: relative;
-    max-width: 530px;
+    max-width: 500px;
     width: calc(100% - 40px);
     margin-bottom: 28px;
     min-width: 320px;
@@ -128,4 +126,54 @@
     @media only screen and (max-width: 600px) {
         display: block;
     }
+}
+
+.login-input-wrapper {
+  border-top: 1px solid var(--cds-border-subtle-00);
+  border-bottom: 1px solid var(--cds-border-strong-01);
+  padding: 0.3rem 0px;
+}
+
+.login-form-input {
+  border: none;
+  background-color: white;
+  outline: none;
+  &:focus {
+    outline: none;
+  }
+}
+
+.cds--checkbox-wrapper {
+  padding: 0px 1rem;
+}
+
+.submit-button {
+  width: 50%;
+  &:active {
+    outline: none;
+  }
+}
+
+.submit-button-loading {
+  height: 4rem;
+  width: 50%;
+  margin-left: 50%;
+  padding-left: 1rem;
+}
+
+.input-label {
+  width: 100%;
+  padding: 0px 1rem;
+  margin: 0px;
+  margin-bottom: -1rem;
+  z-index: 9;
+    position: relative;
+}
+
+.underlined-link {
+  text-decoration: underline;
+}
+
+.cds--link {
+  cursor: pointer;
 }

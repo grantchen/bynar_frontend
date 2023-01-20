@@ -449,7 +449,7 @@ const Signup = () => {
     <> 
     <Theme theme="g10" className={'theme-container'} >
     <Grid className={'signup-grid'} >
-    <Column className={'right-column'} lg={7} md={8} sm={8} style={{ 'background': "url(signup-bg.svg) center 60% / 100% no-repeat rgb(249, 249, 249)" }} >
+    <Column className={'right-column'} xlg={7} lg={7} md={8} sm={4} style={{ 'background': "url(signup-bg.svg) center 60% / 100% no-repeat rgb(249, 249, 249)" }} >
     <Content className='right-content'>
       <div className='signup-heading-text-wrapper' >
         <HeaderName prefix="" className='signup-heading-text'>
@@ -462,7 +462,7 @@ const Signup = () => {
     
     </Content>
     </Column>
-    <Column className={'left-column'} xlg={9} lg={9} md={8} sm={16}>
+    <Column className={'left-column'} xlg={9} lg={9} md={8} sm={12}>
     <Content className={'signup-container'} >
     <Theme theme="white">
     
@@ -485,7 +485,7 @@ const Signup = () => {
       })()}
       <Grid className='signup-form-grid' >
         <Row className="signup-grid-row" >
-        <Column xlg={3} lg={3} md={2} sm={6} >
+        <Column className='progress-bar-column' xlg={3} lg={3} md={2} sm={8} >
           <div className='progress-container' >
           <ProgressIndicator vertical={true} currentIndex={activeStep - 1}>
           <ProgressStep
@@ -534,7 +534,7 @@ const Signup = () => {
           </ProgressIndicator>
           </div>
         </Column>
-        <Column xlg={6} lg={6} md={6} sm={10} >
+        <Column className='signup-form-column' xlg={6} lg={6} md={6} sm={10} >
         <div className='signupStepsWrapper' >
       {(() => {
         switch (activeStep) {

@@ -2,7 +2,6 @@
 
 .signup-container {
     background-color: white;
-    max-width: 55rem;
 }
 
 .headingSubtitle {
@@ -135,17 +134,48 @@
   }
 }
 
-@media only screen and (max-width: 600px) {
+@media (max-width: 1055px) {
+  .right-column {
+    background: rgb(249, 249, 249) !important;
+  }
+}
+
+@media (max-width: 671px) {
+  .signup-form-column {
+    width: 100%;
+  }
+  .signup-form-grid {
+    display: flex;
+  }
+}
+@media (max-width: 365px) {
+  .progress-bar-column {
+    display: none;
+  }
+  .right-content {
+    padding-left: initial;
+  }
+}
+
+@media only screen and (max-width: 671px) {
   .signup-grid {
     display: block;
   }
   .left-column {
     margin: 0px;
   }
-  .signup-grid-row {
-    display: flex;
+  // .signup-grid-row {
+  //   display: flex;
+  // }
+}
+
+@media (min-width: 1056px) {
+  .signup-container {
+    max-width: 55rem;
   }
 }
+
+
 
 .progress-container {
     margin: 35px 0px;

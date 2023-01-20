@@ -119,19 +119,31 @@ const Signin = () => {
                         <div className='inner' >
 
 
+                        <Form onSubmit={handleSubmit}>
                             <Content className={'signin-container'} >
+                            
                                 <Theme theme="white">
                                 <div className='heading-container' >
-                                    <Heading>Sign In</Heading>
+                                    <Heading>Login In</Heading>
                                     {(() => {
                                     if (askForPassword) {
                                     return (
+                                        // <p className='headingSubtitle' > 
+                                        // <Link className="backToEmailLink" onClick={setEmailInputMode} >
+                                        //     <ArrowLeft className="backToEmailLinkIcon" /> Logging in as {email}
+                                        // </Link>
+                                        // </p>
                                         <p className='headingSubtitle' > 
-                                        <Link className="backToEmailLink" onClick={setEmailInputMode} >
-                                            <ArrowLeft className="backToEmailLinkIcon" /> {email}
-                                        </Link>
+                                          Logging in as {email}&nbsp;
+                                          <Link className="underlined-link" onClick={setEmailInputMode} >
+                                              Not you?
+                                          </Link>
                                         </p>
                                     )
+                                    } else {
+                                      return (
+                                        <p className="register-text body-01">Don't have an account? <Link className="underlined-link" href="/signup">Create an IBMid</Link></p>
+                                      )
                                     }
                                     })()}
                                 </div>
@@ -148,18 +160,19 @@ const Signin = () => {
                                         );
                                     }
                                 })()} */}
-                                    
-                                    <Form onSubmit={handleSubmit}>
                                         
                                         <Stack orientation={'vertical'} gap={7}>
                                             
                                             {
                                                 askForPassword ? 
                                                     (
+                                                      <div className='login-input-wrapper' >
+                                                        <FormLabel className={'input-label'} >Password <Link className="forgot-link" href="#">Forgot Password?</Link></FormLabel>
                                                         <TextInput.PasswordInput
                                                             ref={passwordInput}
                                                             id="password"
-                                                            labelText="Password"
+                                                            className="login-form-input"
+                                                            labelText=""
                                                             invalid= {typeof errorNotification == 'object' && Object.keys(errorNotification).length !== 0}
                                                             invalidText={(errorNotification && errorNotification.title) ? errorNotification.title : ""}
                                                             placeholder=""
@@ -167,19 +180,21 @@ const Signin = () => {
                                                             value={password}
                                                             onChange={e => setPassword(e.target.value)}
                                                         />
+                                                      </div>
                                                     ) 
                                                 : 
                                                     (
-                                                        <div>
-                                                            <FormLabel className={'emailInputLabel'} >E-Mail <Link className="forgot-link" href="#">Forgot password?</Link></FormLabel>
+                                                        <div className='login-input-wrapper' >
+                                                            <FormLabel className={'input-label'} >IBMid <Link className="forgot-link" href="#">Forgot ID?</Link></FormLabel>
                                                             <TextInput
                                                                 ref={emailInput}
                                                                 id="email"
+                                                                className="login-form-input"
                                                                 hideLabel={true}
                                                                 invalid= {typeof errorNotification == 'object' && Object.keys(errorNotification).length !== 0}
                                                                 labelText=""
                                                                 invalidText={(errorNotification && errorNotification.title) ? errorNotification.title : ""}
-                                                                placeholder=""
+                                                                placeholder="username@ibm.com"
                                                                 disabled={loading ? true : false}
                                                                 value={email}
                                                                 onChange={e => { setEmail(e.target.value); if (typeof errorNotification == 'object'  && Object.keys(errorNotification).length !== 0) setErrorNotification({}); }}
@@ -189,31 +204,39 @@ const Signin = () => {
                                                     )
                                             }
                                             
-
-                                            <Checkbox 
-                                                labelText={`Remember me`} 
+                                            {
+                                              !askForPassword ? 
+                                              (<Checkbox 
+                                                labelText={`Remember ID`} 
                                                 id="checkbox-label-1"
-                                            />
-                                        {loading ? 
-                                            (
-                                                <InlineLoading description={loadingSuccess ? 'Done!' : 'Please wait...'} status={loadingSuccess ? 'finished' : 'active'} />
-                                            ) : 
-                                            (
-                                                <Button
-                                                    renderIcon={ArrowRight} 
-                                                    type="submit"
-                                                    iconDescription={submitText}
-                                                >{submitText}</Button>
-                                            )
-                                        }
+                                            />)
+                                              :
+                                              (<div style={{'height': '1.5rem'}} ></div>)
+                                            }
+                                            
                                         
                                         </Stack>
-                                    </Form>
+                                    
                                 </Theme>
+                                
                             </Content>
                             <div className="fields-container bottom-link-container">
-                                    <p className="register-text body-01">Don't have an account? <Link href="/signup">Create an IBMid</Link></p>
-                                    </div>
+                              {loading ? 
+                                  (
+                                      <InlineLoading description={loadingSuccess ? 'Done!' : 'Please wait...'} className="submit-button-loading" status={loadingSuccess ? 'finished' : 'active'} />
+                                  ) : 
+                                  (
+                                      <Button
+                                          renderIcon={ArrowRight} 
+                                          type="submit"
+                                          iconDescription={submitText}
+                                          size="xl"
+                                          className="submit-button"
+                                      >{submitText}</Button>
+                                  )
+                              }      
+                            </div>
+                            </Form>
                         </div>
                     </div>
                 </div>

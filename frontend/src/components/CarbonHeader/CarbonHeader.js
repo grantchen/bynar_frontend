@@ -1,6 +1,5 @@
 import React, { useContext, useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AccountContext } from '../Accounts';
 
 import {
   Header,
@@ -38,11 +37,7 @@ const CarbonHeader = () => {
     let [rightPanelExpanded, setRightPanelExpanded] = useState(false);
     let [showProfileSettingsPanel, setShowProfileSettingsPanel] = useState(false);
     let [showMobileSearch, setShowMobileSearch] = useState(false);
-    const { logout } = useContext(AccountContext);
-    const logoutUser = () => {
-        logout();
-        navigate("/signin");
-    }
+    
 
     //--- auto close profile panel if clicked outside panel
     //--- code start
@@ -83,7 +78,7 @@ const CarbonHeader = () => {
                 ERP
               </HeaderName>
               <TextInput
-                className="hidden-mobile"
+                className="hidden-tablet"
                 id="bynar-search"
                 onChange={function noRefCheck(){}}
                 onClick={function noRefCheck(){}}
@@ -92,7 +87,7 @@ const CarbonHeader = () => {
                 type="text"
                 labelText=""
               />
-              <HeaderGlobalAction className="bynar-search-input-button hidden-mobile" aria-label="Search" tooltipAlignment="end">
+              <HeaderGlobalAction className="bynar-search-input-button hidden-tablet" aria-label="Search" tooltipAlignment="end">
                 <Search size={20} />
               </HeaderGlobalAction>
               <Dropdown
@@ -101,7 +96,7 @@ const CarbonHeader = () => {
                 size="lg"
                 label="Region"
                 initialSelectedItem={'Pfk Albania'}
-                className={"bynar-search-dropdown hidden-mobile " + (theme == 'dark' ? "theme-dark" : "theme-light")}
+                className={"bynar-search-dropdown hidden-tablet " + (theme == 'dark' ? "theme-dark" : "theme-light")}
               />
               <SideNav
                 aria-label="Side navigation"
@@ -128,9 +123,9 @@ const CarbonHeader = () => {
               </SideNav>
 
               {showMobileSearch ? (
-                <div className='bynar-search-mobile-wrapper show-mobile' >
+                <div className='bynar-search-mobile-wrapper show-tablet' >
                   <TextInput
-                    className="show-mobile"
+                    className="show-tablet"
                     id="bynar-search-mobile"
                     onChange={function noRefCheck(){}}
                     onClick={function noRefCheck(){}}
@@ -139,17 +134,17 @@ const CarbonHeader = () => {
                     type="text"
                     labelText=""
                   />
-                  <HeaderGlobalAction className="bynar-search-input-button show-mobile" aria-label="Search" tooltipAlignment="end">
+                  <HeaderGlobalAction className="bynar-search-input-button show-tablet" aria-label="Search" tooltipAlignment="end">
                     <Search size={20} />
                   </HeaderGlobalAction>
-                  <HeaderGlobalAction className="bynar-search-input-button show-mobile" aria-label="Search" tooltipAlignment="end" onClick={() => setShowMobileSearch(false)}>
+                  <HeaderGlobalAction className="bynar-search-input-button show-tablet" aria-label="Search" tooltipAlignment="end" onClick={() => setShowMobileSearch(false)}>
                     <Close size={20} />
                   </HeaderGlobalAction>
                 </div>
               ) : ''}
       
               <HeaderGlobalBar className="header-right-buttons" >
-                <HeaderGlobalAction className="show-mobile" aria-label="Search" tooltipAlignment="end" onClick={() => setShowMobileSearch(true)}>
+                <HeaderGlobalAction className="show-tablet" aria-label="Search" tooltipAlignment="end" onClick={() => setShowMobileSearch(true)}>
                   <Search size={20} />
                 </HeaderGlobalAction>
                 {/* <HeaderGlobalAction aria-label="Help" tooltipAlignment="end">

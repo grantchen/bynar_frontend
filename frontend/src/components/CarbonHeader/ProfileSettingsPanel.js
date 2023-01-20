@@ -1,4 +1,6 @@
 import React, { useContext, useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AccountContext } from '../Accounts';
 
 import {
   HeaderGlobalAction,
@@ -12,6 +14,7 @@ import { applyDarkTheme, applyLightTheme } from '../../store/appstate/appstate';
 
 const ProfileSettingsPanel = (props) => {
     const dispatch = useDispatch();
+    let navigate = useNavigate();
     let [showProfileSettingsPanel, setShowProfileSettingsPanel] = useState(false);
 
     //--- auto close profile panel if clicked outside panel
@@ -35,6 +38,12 @@ const ProfileSettingsPanel = (props) => {
       };
     }, [wrapperRef]);
     //--- code end
+
+    const { logout } = useContext(AccountContext);
+    const logoutUser = () => {
+        logout();
+        navigate("/signin");
+    }
 
 
     const theme = useSelector(state => state.appState.theme);
@@ -69,7 +78,7 @@ const ProfileSettingsPanel = (props) => {
                         return dispatch(applyDarkTheme());
                       }
                     }} >Change Theme</Link></li>
-                    <li className='bynar-profile-settings-item' ><Link>Logout</Link></li>
+                    <li className='bynar-profile-settings-item' onClick={logoutUser} ><Link>Logout</Link></li>
                   </ul>
                 </Tile>
               ) : ('')}
