@@ -75,7 +75,7 @@ export function applyLightTheme() {
 }
 
 const defaultState = {
-  theme: 'dark',
+  theme: 'light', //--- dark, light
   notifications:[],
   tabs: [
     {

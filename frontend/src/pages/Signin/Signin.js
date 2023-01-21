@@ -36,10 +36,70 @@ const Signin = () => {
     const emailInput = useRef(null);
     const passwordInput = useRef(null);
 
+    const validateEmail = (email) => {
+      return String(email)
+        .toLowerCase()
+        .match(
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+    };
+
+    const authenticatePasswordInput = () => {
+      var hasError = false;
+      if (password.trim() == "") {
+        hasError = "blank";
+      }
+
+      if (hasError) {
+        stopLoading(() => {
+          setErrorNotification({
+            title: "Password is required",
+            subtitle: "Try again.",
+          });
+          setPassword("");
+          passwordInput.current.focus();
+        });
+        return false;
+      }
+      return true;
+    };
+
+    const authenticateEmailInput = () => {
+      var hasError = false;
+      if (email.trim() == "") {
+        hasError = "blank";
+      } else if (!validateEmail(email)) {
+        hasError = "invalid";
+      }
+
+      if (hasError) {
+        var title = "Enter a valid IBMid or email address";
+        switch (hasError) {
+          case "blank": title = "IBMid or email is required"; break;
+          case "invalid": title = "Enter a valid IBMid or email address"; break;
+          default:
+            break;
+        }
+        stopLoading(() => {
+          setErrorNotification({
+            title: title,
+            subtitle: "Try again.",
+          });
+          setEmail("");
+          emailInput.current.focus();
+        });
+        return false;
+      }
+      return true;
+    };
+
     const handleSubmit = (event) => {
         event.preventDefault();
         if (askForPassword) {
             startLoading();
+            if (!authenticatePasswordInput()) {
+              return;
+            }
             authenticate(email, password)
             .then(data => {
                 stopLoading(() => {
@@ -49,7 +109,7 @@ const Signin = () => {
             .catch(err => {
                 stopLoading(() => {
                     setErrorNotification({
-                        title: "Password is invalid.",
+                        title: "Incorrect IBMid or password. Try again.",
                         subtitle: "Try again.",
                     });
                     setPassword("");
@@ -58,6 +118,9 @@ const Signin = () => {
             });
         } else {
             startLoading();
+            if (!authenticateEmailInput()) {
+              return;
+            }
             UserPool.signUp(email, '123', [], null, (err, data) => {
                 if (err.name.match(/UsernameExistsException/)) {
                     //--- User exist
@@ -68,7 +131,7 @@ const Signin = () => {
                     //--- User does not exist
                     stopLoading(() => {
                         setErrorNotification({
-                            title: "Email does not exist.",
+                            title: "Incorrect IBMid or password. Try again.",
                             subtitle: "Try again.",
                         });
                         setEmail("");
