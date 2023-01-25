@@ -62,6 +62,7 @@ const Account = (props) => {
             
 
 
+            console.log('user: ', user);
             resolve({
               user,
               accessToken,

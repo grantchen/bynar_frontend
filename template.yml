@@ -40,6 +40,27 @@ Resources:
           Properties:
             Path: /
             Method: get
+  SignupAPI:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub 'awscodestar-${ProjectId}-lambda-SignupAPI'
+      Handler: api/account/signup.handler
+      Runtime: nodejs16.x
+      Role:
+        Fn::GetAtt:
+        - LambdaExecutionRole
+        - Arn
+      Events:
+        GetEvent:
+          Type: Api
+          Properties:
+            Path: /account/signup
+            Method: get
+        PostEvent:
+          Type: Api
+          Properties:
+            Path: /account/signup
+            Method: post
   TestAPI:
     Type: AWS::Serverless::Function
     Properties:
