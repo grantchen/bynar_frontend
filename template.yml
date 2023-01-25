@@ -44,7 +44,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: !Sub 'awscodestar-${ProjectId}-lambda-SignupAPI'
-      Handler: api/account/signup.get
+      Handler: api/account/signup/signup.get
       Runtime: nodejs16.x
       Role:
         Fn::GetAtt:
