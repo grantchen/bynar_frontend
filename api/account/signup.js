@@ -1,9 +1,9 @@
 'use strict';
 
-import {
+const {
   SecretsManagerClient,
   GetSecretValueCommand,
-} from "@aws-sdk/client-secrets-manager";
+} = require("@aws-sdk/client-secrets-manager");
 
 exports.get = async function(event, context, callback) {
 
