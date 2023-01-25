@@ -45,7 +45,7 @@ Resources:
     Properties:
       FunctionName: !Sub 'awscodestar-${ProjectId}-lambda-SignupAPI'
       Handler: api/account/signup/signup.get
-      CodeUri: api/account/signup
+      CodeUri: api/account/signup/signup.zip
       Runtime: nodejs16.x
       Role:
         Fn::GetAtt:
