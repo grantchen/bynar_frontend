@@ -44,7 +44,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: !Sub 'awscodestar-${ProjectId}-lambda-SignupAPI'
-      Handler: api/account/signup/signup.handler
+      Handler: api/account/signup/index.handler
       CodeUri: api/account/signup/signup.zip
       Runtime: nodejs16.x
       Role:
