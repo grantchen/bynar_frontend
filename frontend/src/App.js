@@ -10,6 +10,7 @@ import Profile from './pages/Profile';
 import UserList from './pages/UserList';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
+import ForgotPassword from './pages/ForgotPassword';
 import PrivateRoute from './components/Utils/PrivateRoute';
 import PublicRoute from './components/Utils/PublicRoute';
 import AuthRoute from './components/Utils/AuthRoute';
@@ -30,6 +31,7 @@ class App extends Component {
 
                         <Route path="/signin" element={<><Theme><AuthHeader isSignIn={true} /></Theme><Signin/></>} />
                         <Route path="/signup" element={<><Theme><AuthHeader isSignIn={false} /></Theme><Signup/></>} />
+                        <Route path="/forgotpassword" element={<><Theme><AuthHeader isSignIn={false} /></Theme><ForgotPassword/></>} />
                     </Routes>
                 </Account>
             </>

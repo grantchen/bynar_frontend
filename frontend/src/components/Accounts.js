@@ -62,7 +62,6 @@ const Account = (props) => {
             
 
 
-            console.log('user: ', user);
             resolve({
               user,
               accessToken,
@@ -89,7 +88,6 @@ const Account = (props) => {
 
       user.authenticateUser(authDetails, {
         onSuccess: (data) => {
-          console.log('onSuccess:', data)
           resolve(data)
         },
 
@@ -99,7 +97,6 @@ const Account = (props) => {
         },
 
         newPasswordRequired: (data) => {
-          console.log('newPasswordRequired:', data)
           resolve(data)
         },
 

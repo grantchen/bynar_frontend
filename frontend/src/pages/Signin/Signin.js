@@ -230,7 +230,7 @@ const Signin = () => {
                                                 askForPassword ? 
                                                     (
                                                       <div className='login-input-wrapper' >
-                                                        <FormLabel className={'input-label'} >Password <Link className="forgot-link" href="#">Forgot Password?</Link></FormLabel>
+                                                        <FormLabel className={'input-label'} >Password <Link className="forgot-link" href="/forgotpassword">Forgot Password?</Link></FormLabel>
                                                         <TextInput.PasswordInput
                                                             ref={passwordInput}
                                                             id="password"
@@ -248,7 +248,7 @@ const Signin = () => {
                                                 : 
                                                     (
                                                         <div className='login-input-wrapper' >
-                                                            <FormLabel className={'input-label'} >IBMid <Link className="forgot-link" href="#">Forgot ID?</Link></FormLabel>
+                                                            <FormLabel className={'input-label'} >IBMid <Link className="forgot-link" href="/forgotpassword">Forgot ID?</Link></FormLabel>
                                                             <TextInput
                                                                 ref={emailInput}
                                                                 id="email"
