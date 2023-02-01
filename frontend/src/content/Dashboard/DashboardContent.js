@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 
+import { AccountContext } from './Accounts';
+
 import {
   Heading,
   FlexGrid,
@@ -20,15 +22,41 @@ import {
 import { Warning, InformationDisabled, CloseOutline, AddAlt } from '@carbon/react/icons';
 import { useDispatch, useSelector } from 'react-redux'
 import { createNotification } from '../../store/appstate/appstate';
+const { getSession } = useContext(AccountContext)
 
 const DashboardContent = () => {
   const dispatch = useDispatch();
+
+  const insertIntoDB = () => {
+    getSession().then(({ accessToken, headers }) => {
+      if (typeof accessToken !== 'string') {
+        accessToken = accessToken.jwtToken
+      }
+
+      const uri = `${API}?accessToken=${accessToken}`
+      console.log(uri)
+
+      fetch(uri, {
+        headers,
+      })
+        .then((data) => {
+            console.log(data.json());
+            return data.json();
+        })
+        .then(setImage)
+        .catch(console.error)
+    })
+  };
 
   return (<div>
     
       <Heading>
         Pkf Albania
       </Heading>
+      <Button
+      title="Insert into DB"
+      onClick={insertIntoDB}
+      />
       <Grid style={{ 'paddingTop': '1rem' }} >
         <Column className='bynar-info-column' lg={4} md={8} sm={4}>
           <Tile className='bynar-dashboard-tile bynar-tile-blue' >
