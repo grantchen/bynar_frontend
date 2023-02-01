@@ -130,7 +130,7 @@ const Signup = () => {
 
       if (!password.match(/(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{8,}).*$/)) {
         setErrorNotification({
-          title: "Password does not meed minimum requirements.",
+          title: "Password does not meet minimum requirements.",
           subtitle: "Try again.",
         });
         return;

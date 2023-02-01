@@ -10,18 +10,8 @@ import {
   Heading,
   InlineLoading,
   Link,
-  InlineNotification,
-  Grid,
-  Column,
   Row,
-  ProgressIndicator,
-  ProgressStep,
-  Select,
-  SelectItem,
-  RadioButtonGroup,
-  RadioButton,
-  FlexGrid,
-  HeaderName,
+  FormLabel,
 } from '@carbon/react';
 
 import { ArrowRight, ArrowLeft } from '@carbon/react/icons';
@@ -42,6 +32,7 @@ const ForgotPassword = () => {
   const [loadingSuccess, setLoadingSuccess] = useState(false);
   const [secLoadingSuccess, setSecLoadingSuccess] = useState(false);
   const [errorNotification, setErrorNotification] = useState({});
+  const [errorNotification1, setErrorNotification1] = useState({});
   const [activeStep, setActiveStep] = useState(1);
   
   const [email, setEmail] = useState("");
@@ -85,16 +76,49 @@ const ForgotPassword = () => {
   
   const handleSubmit = (event) => {
     event.preventDefault();
+    
+    if (activeStep == 1) {
+      requestVerificationCode();
+    } else if (activeStep == 2){
+      if (!verificationCode || !password) {
+        if (!verificationCode) {
+          setErrorNotification({
+            title: "Please insert verification code",
+            subtitle: "Try again.",
+          });
+        }
+        if (!password) {
+          setErrorNotification1({
+            title: "Password cannot be empty",
+            subtitle: "Try again.",
+          });
+        }
+        return;
+      }
+      if (!password.match(/(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{8,}).*$/)) {
+        setErrorNotification1({
+          title: "Password does not meet minimum requirements.",
+          subtitle: "Try again.",
+        });
+        return;
+      }
+      verifyCodeAction();
+    }
+  }
+
+  const requestVerificationCode = () => {
     if (email.trim()) {
 
       startLoading();
       getUser().forgotPassword({
         onSuccess: data => {
+          console.log(data);
           stopLoading(() => {
             setActiveStep(2);
           });
         },
         onFailure: err => {
+          console.log(err);
           stopLoading(() => {
             setErrorNotification({
               title: err,
@@ -103,6 +127,7 @@ const ForgotPassword = () => {
           });
         },
         inputVerificationCode: data => {
+          console.log(data);
           stopLoading(() => {
             setActiveStep(2);
           });
@@ -110,15 +135,13 @@ const ForgotPassword = () => {
       });
     } else {
       setErrorNotification({
-        title: "Please fill all inputs.",
+        title: "Email cannot be empty",
         subtitle: "Try again.",
       });
     }
-    
   }
   
-  const verifyCodeAction = (e) => {
-    e.preventDefault();
+  const verifyCodeAction = () => {
     if (verificationCode) {
       startLoading();
       getUser().confirmPassword(verificationCode, password, {
@@ -130,7 +153,7 @@ const ForgotPassword = () => {
         onFailure: err => {
           stopLoading(() => {
             setErrorNotification({
-              title: err,
+              title: 'Verification code mismatch',
               subtitle: "Try again.",
             });
           });
@@ -145,224 +168,135 @@ const ForgotPassword = () => {
   }
   
   return (
-    <> 
-    <Theme theme="g10" className={'theme-container'} >
-    <Grid className={'signup-grid'} >
-    <Column className={'right-column'} xlg={7} lg={7} md={8} sm={4} style={{ 'background': "url(signup-bg.svg) center 60% / 100% no-repeat rgb(249, 249, 249)" }} >
-    <Content className='right-content'>
-      <div className='signup-heading-text-wrapper' >
-        <HeaderName prefix="" className='signup-heading-text'>
-          Recover your 
-        </HeaderName>
-        <HeaderName prefix="BYNAR" className='signup-heading-text'>
-          account password
-        </HeaderName>
-      </div>
-    
-    </Content>
-    </Column>
-    <Column className={'left-column'} xlg={9} lg={9} md={8} sm={12}>
-    <Content className={'signup-container'} >
-    <Theme theme="white">
-    
-    <div className='heading-container' >
-    <div className="login-link" style={{'marginBottom':'1.5rem'}}>Already have an BYNAR account? <Link href="/signin">Log in</Link></div>
-    <Heading>Forgot password</Heading>
-    </div>
-    {(() => {
-      if (typeof errorNotification == 'object' && Object.keys(errorNotification).length !== 0) {
-        return (
-          <InlineNotification 
-          onClose={function noRefCheck(){}}
-          onCloseButtonClick={() => { setErrorNotification({}) }}
-          statusIconDescription="notification"
-          subtitle={errorNotification.subtitle ? errorNotification.subtitle : ''}
-          title={errorNotification.title ? errorNotification.title : ''}
-          />
-          );
-        }
-      })()}
-      <Grid className='signup-form-grid' >
-        <Row className="signup-grid-row" >
-        <Column className='progress-bar-column' xlg={3} lg={3} md={2} sm={8} >
-          <div className='progress-container' >
-          <ProgressIndicator vertical={true} currentIndex={activeStep - 1}>
-          <ProgressStep
-          complete={activeStep > 1}
-          current={activeStep == 1}
-          label="Account Email"
-          description="Step 1:"
-          onClick={() => setActiveStep(1)}
-          />
-          <ProgressStep
-          complete={activeStep > 2}
-          current={activeStep == 2}
-          label="Change password"
-          description="Step 2:"
-          />
-          </ProgressIndicator>
-          </div>
-        </Column>
-        <Column className='signup-form-column' xlg={6} lg={6} md={6} sm={10} >
-        <div className='signupStepsWrapper' >
-      {(() => {
-        switch (activeStep) {
-          case 1:
-          return (
-            <div className='signupStep-accountInformation' >
-            <div className='account-information-container' >
-            <h1 style={{paddingBottom: '20px'}} >Account Information</h1>
-            <Form onSubmit={handleSubmit}>
+    <>
+            <Theme theme="g10" className={'theme-container'} >
             
-            <Stack orientation={'vertical'} gap={5}>
-            
-            <TextInput
-            ref={emailInput}
-            id="email"
-            labelText="E-mail"
-            invalidText="Email does not exist"
-            placeholder=""
-            disabled={loading ? true : false}
-            value={email}
-            onChange={e => { setEmail(e.target.value); if (typeof errorNotification == 'object'  && Object.keys(errorNotification).length !== 0) setErrorNotification({}); }}
-            />
-            
-            {loading ? 
-              (
-                <InlineLoading description={loadingSuccess ? 'Done!' : 'Please wait...'} status={loadingSuccess ? 'finished' : 'active'} />
-                ) : 
-                (
-                  <Button
-                  renderIcon={ArrowRight} 
-                  type="submit"
-                  iconDescription="Next"
-                  >Next</Button>
-                  )
-                }
-                
-                </Stack>
-                </Form>
-                </div>
-                </div>
-                );
-                break;
-                
-                case 2:
-                return (
-                  <div className='signupStep-verifyEmail' >
-                  <h1 style={{paddingBottom: '20px'}} >Verify E-mail</h1>
-                  <Form onSubmit={verifyCodeAction}>
-                  <Stack orientation={'vertical'} gap={5}>
+                <div className='outer' >
+                    <div className='middle' >
+                        <div className='inner' >
 
-                  <TextInput
-                  ref={verificationCodeInput}
-                  id="verification-code"
-                  labelText="Verification code"
-                  invalidText=""
-                  placeholder=""
-                  disabled={loading ? true : false}
-                  value={verificationCode}
-                  onChange={e => { setVerificationCode(e.target.value); if (typeof errorNotification == 'object'  && Object.keys(errorNotification).length !== 0) setErrorNotification({}); }}
-                  />
-            
-                  <TextInput.PasswordInput
-                  ref={passwordInput}
-                  id="password"
-                  invalidText="Invalid error message."
-                  labelText="Password"
-                  placeholder=""
-                  disabled={loading ? true : false}
-                  value={password}
-                  onChange={e => { setPassword(e.target.value); if (typeof errorNotification == 'object'  && Object.keys(errorNotification).length !== 0) setErrorNotification({}); }}
-                  />
-                  
-                  <Row style={{display: 'flex'}} >
-                  {loading ? 
-                    (
-                      <InlineLoading style={{width: 'fit-content'}} description={loadingSuccess ? 'Done!' : 'Verifying code...'} status={loadingSuccess ? 'finished' : 'active'} />
-                      ) : 
-                      (
-                        <Button
-                        renderIcon={ArrowRight} 
-                        type="submit"
-                        iconDescription="Change password"
-                        >Verify Code</Button>
-                        )
-                      }
-                      {/* {secLoading ? 
-                        (
-                          <InlineLoading style={{marginLeft: '10px'}} description={secLoadingSuccess ? 'Done!' : 'Sending email...'} status={secLoadingSuccess ? 'finished' : 'active'} />
-                          ) : 
-                          (
-                            <Button 
-                            kind="ghost"
-                            onClick={resendVerificationCode}
-                            style={{marginLeft: '10px'}}
-                            >Resend Code</Button>
-                            )
-                          } */}
-                          
-                          </Row>
-                          
-                          </Stack>
-                          </Form>
-                          </div>
-                          );
-                          break;
 
-                          default:
-                          break;
-                              }
-                              
-                            })()}
+                        <Form onSubmit={handleSubmit}>
+                            <Content className={'signin-container'} >
+                            
+                                <Theme theme="white">
+                                <div className='heading-container' >
+                                  <Heading>Forgot password</Heading>
+                                </div>
+                                    {(() => {
+                                      switch (activeStep) {
+                                        case 1:
+                                          return(
+                                            <div className='login-input-wrapper' >
+                                              <p>Enter your E-Mail to reset your password.</p>
+                                            <TextInput
+                                              ref={emailInput}
+                                              id="email"
+                                              labelText="E-mail"
+                                              invalid= {typeof errorNotification == 'object' && Object.keys(errorNotification).length !== 0}
+                                              invalidText={(errorNotification && errorNotification.title) ? errorNotification.title : ""}
+                                              className="login-form-input"
+                                              placeholder=""
+                                              disabled={loading ? true : false}
+                                              value={email}
+                                              onChange={e => { setEmail(e.target.value); if (typeof errorNotification == 'object'  && Object.keys(errorNotification).length !== 0) setErrorNotification({}); }}
+                                              />
+                                              
+                                            </div>
+                                          );
+                                          break;
+                                        case 2:
+                                          return (
+                                            <div className='login-input-wrapper' >
+                                              <p>If there is an account associated with {email}, you will receive an email with a 6-digit temporary code.</p>
+                                            <TextInput
+                                          ref={verificationCodeInput}
+                                          id="verification-code"
+                                          labelText="Verification code"
+                                          className="login-form-input"
+                                          invalid= {typeof errorNotification == 'object' && Object.keys(errorNotification).length !== 0}
+                                          invalidText={(errorNotification && errorNotification.title) ? errorNotification.title : ""}
+                                          placeholder=""
+                                          disabled={loading ? true : false}
+                                          value={verificationCode}
+                                          onChange={e => { setVerificationCode(e.target.value); if (typeof errorNotification == 'object'  && Object.keys(errorNotification).length !== 0) setErrorNotification({}); }}
+                                          />
+                                    
+                                          <TextInput.PasswordInput
+                                          ref={passwordInput}
+                                          id="password"
+                                          invalid= {typeof errorNotification1 == 'object' && Object.keys(errorNotification1).length !== 0}
+                                          invalidText={(errorNotification1 && errorNotification1.title) ? errorNotification1.title : ""}
+                                          className="login-form-input"
+                                          labelText="Password"
+                                          placeholder=""
+                                          disabled={loading ? true : false}
+                                          value={password}
+                                          onChange={e => { setPassword(e.target.value); if (typeof errorNotification1 == 'object'  && Object.keys(errorNotification1).length !== 0) setErrorNotification1({}); }}
+                                          />
+                                          
+                                            </div>
+                                          );
+                                          break;
+                                      
+                                        default:
+                                          break;
+                                      }
+                                    })()}
+                                        
+                                        
+                                    
+                                </Theme>
+                                
+                            </Content>
+                            <div className="fields-container bottom-link-container">
+                            {loading ? 
+                              (
+                                <InlineLoading description={loadingSuccess ? 'Done!' : 'Please wait...'} className="submit-button-loading" status={loadingSuccess ? 'finished' : 'active'} />
+                                ) : 
+                                (
+                                  <Button
+                                  renderIcon={ArrowRight} 
+                                  type="submit"
+                                  iconDescription="Next"
+                                  size="xl"
+                                  className="submit-button"
+                                  >{activeStep == 1 ? "Next" : "Submit"}</Button>
+                                  )
+                                }
                             </div>
-        </Column>
-        </Row>
-      </Grid>
-      
-                                          
-                                          {/* <hr/>
-                                          <Button
-                                          renderIcon={ArrowRight} 
-                                          type="submit"
-                                          iconDescription="Continue"
-                                          style={{ margin: '15px', width: '100%' }}
-                                          disabled={activeStep != 7}
-                                          onClick={finishSignupProcess}
-                                          >Continue</Button> */}
-                                          <div style={{height: '30px'}} ></div>
-                                          </Theme>
-                                          </Content>
-                                          </Column>
-                                          </Grid>
-                                          
-                                          
-                                          <footer className="carbon-footer" role="contentinfo" aria-label="BYNAR">
-                                          <div className='footer-nav-container' >
-                                          
-                                          <ul className="horizontal ibm-padding-bottom-0 bx--legal-nav__holder">
-                                          <li>
-                                          <Link href='#' >
-                                          Contact
-                                          </Link>
-                                          </li>
-                                          <li>
-                                          <Link href='#' >
-                                          Privacy
-                                          </Link>
-                                          </li>
-                                          <li>
-                                          <Link href='#' >
-                                          Terms Of Use
-                                          </Link>
-                                          </li>
-                                          </ul>
-                                          </div>
-                                          </footer>
-                                          </Theme>
-                                          
-                                          
-                                          </>
+                            </Form>
+                        </div>
+                    </div>
+                </div>
+                
+                <footer className="carbon-footer" role="contentinfo" aria-label="IBM">
+                    <div className='footer-nav-container' >
+                        
+                        <ul className="horizontal ibm-padding-bottom-0 bx--legal-nav__holder">
+                            <li>
+                                <Link href='#' >
+                                    Contact
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href='#' >
+                                    Privacy
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href='#' >
+                                    Terms Of Use
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
+                </footer>
+            </Theme>
+
+  
+    </>
+    
                                           );
                                         };
                                         
