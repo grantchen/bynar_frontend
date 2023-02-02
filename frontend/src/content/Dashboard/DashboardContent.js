@@ -1,23 +1,11 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
 
-import { AccountContext } from '../../components/Accounts';
-
 import {
   Heading,
-  FlexGrid,
-  Row,
   Column,
   Grid,
   Tile,
   Link,
-  ActionableNotification,
-  Tabs,
-  Tab,
-  TabList,
-  TabPanels,
-  TabPanel,
-  Button,
-  Dropdown,
 } from '@carbon/react';
 import { Warning, InformationDisabled, CloseOutline, AddAlt } from '@carbon/react/icons';
 import { useDispatch, useSelector } from 'react-redux'
@@ -27,37 +15,11 @@ import { createNotification } from '../../store/appstate/appstate';
 const DashboardContent = () => {
   const dispatch = useDispatch();
 
-  const { getSession } = useContext(AccountContext)
-
-  const insertIntoDB = () => {
-    getSession().then(({ accessToken, headers }) => {
-      if (typeof accessToken !== 'string') {
-        accessToken = accessToken.jwtToken
-      }
-
-      const uri = `https://n6vnntb0y9.execute-api.eu-central-1.amazonaws.com/Prod/account/signup`
-      console.log(uri)
-
-      fetch(uri, {
-        headers,
-      })
-        .then((data) => {
-            console.log(data.json());
-            return data.json();
-        })
-        .catch(console.error)
-    })
-  };
-
   return (<div>
     
       <Heading>
         Pkf Albania
       </Heading>
-      <Button
-      title="Insert into DB"
-      onClick={insertIntoDB}
-      >Test</Button>
       <Grid style={{ 'paddingTop': '1rem' }} >
         <Column className='bynar-info-column' lg={4} md={8} sm={4}>
           <Tile className='bynar-dashboard-tile bynar-tile-blue' >

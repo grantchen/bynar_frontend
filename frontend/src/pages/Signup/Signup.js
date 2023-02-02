@@ -53,7 +53,7 @@ const Signup = () => {
 
   const [username_ci, setUsername_ci] = useState("");
   const [fullName_ci, setFullName_ci] = useState("");
-  const [country_ci, setCountry_ci] = useState("");
+  const [country_ci, setCountry_ci] = useState("Albania");
   const [addressLine_ci, setAddressLine_ci] = useState("");
   const [addressLine2_ci, setAddressLine2_ci] = useState("");
   const [city_ci, setCity_ci] = useState("");
@@ -63,7 +63,7 @@ const Signup = () => {
 
   const [organizationName_ti, setOrganizationName_ti] = useState("");
   const [taxNumber_ti, setTaxNumber_ti] = useState("");
-  const [country_ti, setCountry_ti] = useState("");
+  const [country_ti, setCountry_ti] = useState("Albania");
 
   const [cardNumber_cci, setCardNumber_cci] = useState("");
   const [expiryDate_cci, setExpiryDate_cci] = useState("");
@@ -268,123 +268,98 @@ const Signup = () => {
   
   const savePersonalInformation = (e) => {
     e.preventDefault();
-    if (username_ci && fullName_ci && country_ci && addressLine_ci && city_ci && postalCode_ci && state_ci && phoneNumber_ci) {
+
+    startLoading();
+    if (!username_ci.trim() || !fullName_ci.trim() || !country_ci.trim() || !addressLine_ci.trim() || !city_ci.trim() || !postalCode_ci.trim() || !state_ci.trim() || !phoneNumber_ci.trim()) {
       
-      // startLoading();
-      // authenticate(email, passwordStorage)
-      // .then(data => {
-      //   var cognitoUser = UserPool.getCurrentUser();
-        
-      //   cognitoUser.getSession((err, res) => {
-      //     const fullNameAttr = new CognitoUserAttribute({
-      //       Name: "name",
-      //       Value: (firstName + ' ' + lastName).trim()
-      //     });
-          
-      //     const phoneNumberAttr = new CognitoUserAttribute({
-      //       Name: "phone_number",
-      //       Value: phoneNumber,
-      //     });
-
-      //     const accountIdAttr = new CognitoUserAttribute({
-      //       Name: "custom:account_id",
-      //       Value: generateRandomId(),
-      //     });
-
-      //     const tenantIdAttr = new CognitoUserAttribute({
-      //       Name: "custom:tenant_id",
-      //       Value: generateRandomId(),
-      //     });
-
-      //     const accountTypeAttr = new CognitoUserAttribute({
-      //       Name: "custom:account_type",
-      //       Value: accountType,
-      //     });
-
-      //     const roleAttr = new CognitoUserAttribute({
-      //       Name: "custom:role",
-      //       Value: 'Root',
-      //     });
-          
-      //     cognitoUser.updateAttributes([fullNameAttr, phoneNumberAttr, accountIdAttr, tenantIdAttr, accountTypeAttr, roleAttr], function(err, res) {
-      //       console.log('err: ', err);
-      //       console.log('res: ', res);
-      //       if (err) {
-      //         stopLoading(() => {
-      //           setErrorNotification({
-      //             title: err.message,
-      //             subtitle: "Try again.",
-      //           });
-      //           firstNameInput.current.focus();
-      //         });
-      //       } else {
-      //         stopLoading(() => {
-      //           setActiveStep(4);
-      //           setTimeout(() => fullName_biInput.current.focus());
-      //         });
-              
-      //       }
-      //     });
-      //   });
-        
-      // })
-      // .catch(err => {
-      //   stopLoading(() => {
-      //     setErrorNotification({
-      //       title: err.message,
-      //       subtitle: "Try again.",
-      //     });
-      //     firstNameInput.current.focus();
-      //   });
-      // });
-    } else {
-      setErrorNotification({
-        title: "Please fill all inputs.",
-        subtitle: "Try again.",
+      stopLoading(() => {
+        setErrorNotification({
+          title: "Please fill all required inputs.",
+          subtitle: "Try again.",
+        });
       });
+      return;
     }
-    
+
+    if (isNaN(postalCode_ci.trim())) {
+      stopLoading(() => {
+        setErrorNotification({
+          title: "Postal code should be number.",
+          subtitle: "Try again.",
+        });
+      });
+      return;
+    }
+
+    stopLoading(() => {
+      setEmailCode("");
+      setActiveStep(4);
+      setPostalCode_ci(parseInt(postalCode_ci));
+    });
     
   } 
 
   const saveTaxInformation = (e) => {
     e.preventDefault();
-      // authenticate(email, passwordStorage).then(data => {
-      //   getSession().then(({ user, accessToken, headers, attributes }) => {
-  
-      //     console.log(attributes);
-      //     var dataObject = {
-      //       "account_id": attributes['custom:account_id'],
-      //       "company_id": attributes['custom:tenant_id'],
-      //       "organizaton_name": organizationName_ti,
-      //       "vat_number": taxNumber_ti
-      //     };
-      //     const uri = `https://bb990eda7j.execute-api.eu-central-1.amazonaws.com/dev`
     
-      //     fetch(uri, {
-      //       method: 'POST',
-      //       headers,
-      //       body: JSON.stringify(dataObject),
-      //     })
-      //       .then((data) => data.json())
-      //       .then((response) => {
-      //         console.log(response);
-      //         stopLoading(() => {
-      //           setActiveStep(6);
-      //           setTimeout(() => cardNumber_cciInput.current.focus());
-      //         });
-      //       })
-      //       .catch((error) => {
-      //         setErrorNotification({
-      //           title: "Unable to save tax information.",
-      //           subtitle: "Try again.",
-      //         });
-      //       })
-      //     });
-      // })
+    startLoading();
+    if (!organizationName_ti.trim() || !taxNumber_ti.trim() || !country_ti.trim()) {
       
+      stopLoading(() => {
+        setErrorNotification({
+          title: "Please fill all inputs.",
+          subtitle: "Try again.",
+        });
+      });
+      return;
+    }
+
+    authenticate('asad@byom.de', 'As@d1234')
+          .then(data => {
+            insertUserDataIntoDB();
+          })
+          .catch(err => {
+            console.log(err);
+          });
     
   } 
+
+  const insertUserDataIntoDB = () => {
+    getSession().then(({ accessToken, headers, user }) => {
+      if (typeof accessToken !== 'string') {
+        accessToken = accessToken.jwtToken
+      }
+
+      const uri = `https://n6vnntb0y9.execute-api.eu-central-1.amazonaws.com/Prod/account/signup`
+      
+      const dataUnit = {
+        username: username_ci,
+        full_name: fullName_ci,
+        country_ci: country_ci,
+        address_line: addressLine_ci,
+        address_line2: addressLine2_ci,
+        city: city_ci,
+        postal_code: postalCode_ci,
+        state: state_ci,
+        phone_number: phoneNumber_ci,
+        organization_name: organizationName_ti,
+        tax_number: taxNumber_ti,
+        country_ti: country_ti,
+        sub: user.username,
+      };
+
+      console.log('dataUnit: ', dataUnit);
+
+      fetch(uri, {
+        method:"post",
+        headers,
+        body: JSON.stringify(dataUnit),
+      })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(console.error)
+    })
+  };
 
   const saveCreditCardInformation = (e) => {
     e.preventDefault();
@@ -612,7 +587,7 @@ const Signup = () => {
                             <TextInput
                             ref={username_ciInput}
                             id="username-ci"
-                            labelText="Username"
+                            labelText="Username*"
                             invalidText=""
                             placeholder=""
                             disabled={loading ? true : false}
@@ -623,7 +598,7 @@ const Signup = () => {
                             <TextInput
                               ref={fullName_ciInput}
                               id="fullname-ci"
-                              labelText="Fullname"
+                              labelText="Fullname*"
                               invalidText=""
                               placeholder=""
                               disabled={loading ? true : false}
@@ -634,7 +609,7 @@ const Signup = () => {
                             <Select 
                               ref={country_ciInput}
                               id='country-ci'
-                              labelText='Country or region of residence'
+                              labelText='Country or region of residence*'
                               onChange={e => setCountry_ci(e.target.value)}
                               >
                               {countries.map((countryObject, countryIndex) => (<SelectItem
@@ -648,7 +623,7 @@ const Signup = () => {
                             <TextInput
                             ref={addressLine_ciInput}
                             id="addressLine-ci"
-                            labelText="Address Line"
+                            labelText="Address Line*"
                             invalidText=""
                             placeholder=""
                             disabled={loading ? true : false}
@@ -670,7 +645,7 @@ const Signup = () => {
                           <TextInput
                             ref={city_ciInput}
                             id="city-ci"
-                            labelText="City"
+                            labelText="City*"
                             invalidText=""
                             placeholder=""
                             disabled={loading ? true : false}
@@ -681,7 +656,7 @@ const Signup = () => {
                           <TextInput
                             ref={postalCode_ciInput}
                             id="postalCode-ci"
-                            labelText="Postal Code"
+                            labelText="Postal Code*"
                             invalidText=""
                             placeholder=""
                             disabled={loading ? true : false}
@@ -692,7 +667,7 @@ const Signup = () => {
                           <TextInput
                             ref={state_ciInput}
                             id="state-ci"
-                            labelText="State, Province, or Region"
+                            labelText="State, Province, or Region*"
                             invalidText=""
                             placeholder=""
                             disabled={loading ? true : false}
@@ -703,7 +678,7 @@ const Signup = () => {
                             <TextInput
                             ref={phoneNumber_ciInput}
                             id="phoneNumnber-ci"
-                            labelText="Phone Number"
+                            labelText="Phone Number*"
                             invalidText=""
                             placeholder=""
                             disabled={loading ? true : false}
@@ -760,7 +735,7 @@ const Signup = () => {
                             <TextInput
                             ref={organizationName_tiInput}
                             id="organization-name-ti"
-                            labelText="Organization Name"
+                            labelText="Organization Name*"
                             invalidText=""
                             placeholder=""
                             disabled={loading ? true : false}
@@ -771,7 +746,7 @@ const Signup = () => {
                             <TextInput
                             ref={taxNumber_tiInput}
                             id="tax-number-ti"
-                            labelText="VAT/GST/Tax Number"
+                            labelText="VAT/GST/Tax Number*"
                             invalidText=""
                             placeholder=""
                             disabled={loading ? true : false}
@@ -782,7 +757,7 @@ const Signup = () => {
                           <Select 
                             ref={country_tiInput}
                             id='country-ti'
-                            labelText='Country'
+                            labelText='Country*'
                             onChange={e => setCountry_ti(e.target.value)}
                             >
                             {countries.map((countryObject, countryIndex) => (<SelectItem
