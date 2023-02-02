@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 
-import { AccountContext } from './Accounts';
+import { AccountContext } from '../../components/Accounts';
 
 import {
   Heading,
@@ -22,10 +22,12 @@ import {
 import { Warning, InformationDisabled, CloseOutline, AddAlt } from '@carbon/react/icons';
 import { useDispatch, useSelector } from 'react-redux'
 import { createNotification } from '../../store/appstate/appstate';
-const { getSession } = useContext(AccountContext)
+
 
 const DashboardContent = () => {
   const dispatch = useDispatch();
+
+  const { getSession } = useContext(AccountContext)
 
   const insertIntoDB = () => {
     getSession().then(({ accessToken, headers }) => {
@@ -33,7 +35,7 @@ const DashboardContent = () => {
         accessToken = accessToken.jwtToken
       }
 
-      const uri = `${API}?accessToken=${accessToken}`
+      const uri = `https://n6vnntb0y9.execute-api.eu-central-1.amazonaws.com/Prod/account/signup`
       console.log(uri)
 
       fetch(uri, {
@@ -43,7 +45,6 @@ const DashboardContent = () => {
             console.log(data.json());
             return data.json();
         })
-        .then(setImage)
         .catch(console.error)
     })
   };
@@ -56,7 +57,7 @@ const DashboardContent = () => {
       <Button
       title="Insert into DB"
       onClick={insertIntoDB}
-      />
+      >Test</Button>
       <Grid style={{ 'paddingTop': '1rem' }} >
         <Column className='bynar-info-column' lg={4} md={8} sm={4}>
           <Tile className='bynar-dashboard-tile bynar-tile-blue' >
