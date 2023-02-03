@@ -294,7 +294,6 @@ const Signup = () => {
     stopLoading(() => {
       setEmailCode("");
       setActiveStep(4);
-      setPostalCode_ci(parseInt(postalCode_ci));
     });
     
   } 
@@ -333,19 +332,19 @@ const Signup = () => {
       const uri = `https://n6vnntb0y9.execute-api.eu-central-1.amazonaws.com/Prod/account/signup`
       
       const dataUnit = {
-        username: username_ci,
-        full_name: fullName_ci,
-        country_ci: country_ci,
-        address_line: addressLine_ci,
-        address_line2: addressLine2_ci,
-        city: city_ci,
-        postal_code: postalCode_ci,
-        state: state_ci,
-        phone_number: phoneNumber_ci,
-        organization_name: organizationName_ti,
-        tax_number: taxNumber_ti,
-        country_ti: country_ti,
-        sub: user.username,
+        "username": username_ci,
+        "full_name": fullName_ci,
+        "country_ci": country_ci,
+        "address_line": addressLine_ci,
+        "address_line2": addressLine2_ci,
+        "city": city_ci,
+        "postal_code": postalCode_ci,
+        "state": state_ci,
+        "phone_number": phoneNumber_ci,
+        "organization_name": organizationName_ti,
+        "tax_number": taxNumber_ti,
+        "country_ti": country_ti,
+        "sub": user.username,
       };
 
       console.log('dataUnit: ', dataUnit);
@@ -356,7 +355,23 @@ const Signup = () => {
         body: JSON.stringify(dataUnit),
       })
       .then(response => response.json())
-      .then(data => console.log(data))
+      .then(data => {
+        stopLoading(() => {
+          console.log(data);
+          if (data.error) {
+            console.log(data.message);
+            if (data.message.match(/Username already exists/)) {
+              setActiveStep(3);
+            }
+            setErrorNotification({
+              title: data.message,
+              subtitle: "Try again.",
+            });
+          } else {
+            setActiveStep(5);
+          }
+        });
+      })
       .catch(console.error)
     })
   };
