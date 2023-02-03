@@ -113,6 +113,12 @@ exports.handler = async function(event, context, callback) {
             console.log(mysqlResult);
         
             const organization_id = mysqlResult.insertId;
+
+            //--- Update account row with organization id
+            var mysqlResult = await connection.awaitQuery(`update bynar.accounts set organization_id = ${organization_id} where id = ${account_id};`);
+            
+            console.log("DB RES>>>");
+            console.log(mysqlResult);
           
             /** End the connection */
             connection.awaitEnd();
@@ -136,7 +142,7 @@ exports.handler = async function(event, context, callback) {
                 UserPoolId: 'eu-central-1_IWbh7BLrz',
                 Username: event.sub,
               }
-            );
+            ).promise();
             
             // cognitoidentityserviceprovider.adminGetUser(getUserParams, function(err, data) {
             //   if (err) console.log(err, err.stack); // an error occurred
