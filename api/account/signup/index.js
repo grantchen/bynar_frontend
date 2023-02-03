@@ -76,7 +76,7 @@ exports.handler = async function(event, context, callback) {
           });
 
           //--- Check if username exists already
-          var mysqlResult = await connection.awaitQuery(`SELECT * FROM bynar.accounts where username='${event.username}';`);
+          var mysqlResult = await connection.awaitQuery(`SELECT * FROM bynar.accounts where username=?;`, [event.username]);
 
           if (mysqlResult.length !== 0) {
             var result = {
@@ -98,7 +98,7 @@ exports.handler = async function(event, context, callback) {
           
             //--- Insert account info into database
             var mysqlResult = await connection.awaitQuery(`insert into bynar.accounts (username, full_name, country, address, address_2, city, postal_code, state, phone, cognito_user_groups, organization_id, organization_account) 
-            values ('${event.username}', '${event.full_name}', '${event.country_ci}', '${event.address_line}', '${event.address_line2}', '${event.city}', ${event.postal_code}, '${event.state}', '${event.phone_number}', '${userGroupName}', 0, 1);`);
+            values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 1);`, [event.username, event.full_name, event.country_ci, event.address_line, event.address_line2, event.city, parseInt(event.postal_code), event.state, event.phone_number, userGroupName]);
             
             console.log("DB RES>>>");
             console.log(mysqlResult);
@@ -107,7 +107,7 @@ exports.handler = async function(event, context, callback) {
         
             //--- Insert organization info into database
             var mysqlResult = await connection.awaitQuery(`insert into bynar.organisations (description, vat_number, country, status, seller_id) 
-            values ('${event.organization_name}', '${event.tax_number}', '${event.country_ti}', 1, 1);`);
+            values (?, ?, ?, 1, 1);`, [event.organization_name, event.tax_number, event.country_ti]);
             
             console.log("DB RES>>>");
             console.log(mysqlResult);

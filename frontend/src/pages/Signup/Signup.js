@@ -43,7 +43,7 @@ const Signup = () => {
   const [loadingSuccess, setLoadingSuccess] = useState(false);
   const [secLoadingSuccess, setSecLoadingSuccess] = useState(false);
   const [errorNotification, setErrorNotification] = useState({});
-  const [activeStep, setActiveStep] = useState(3);
+  const [activeStep, setActiveStep] = useState(1);
   
   const [email, setEmail] = useState("");
   const [accountType, setAccountType] = useState("personal");
@@ -313,13 +313,15 @@ const Signup = () => {
       return;
     }
 
-    authenticate('asad@byom.de', 'As@d1234')
-          .then(data => {
-            insertUserDataIntoDB();
-          })
-          .catch(err => {
-            console.log(err);
-          });
+    // authenticate('asad@byom.de', 'As@d1234')
+    //       .then(data => {
+            
+    //       })
+    //       .catch(err => {
+    //         console.log(err);
+    //       });
+
+    insertUserDataIntoDB();
     
   } 
 
