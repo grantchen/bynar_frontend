@@ -21,6 +21,8 @@ import { Warning, InformationDisabled, CloseOutline, AddAlt } from '@carbon/reac
 import { useDispatch, useSelector } from 'react-redux'
 import { openNewTab, closeTab, setSelectedTab } from '../../store/appstate/appstate';
 
+import UserList  from '../../pages/UserList'
+
 const Dashboard = () => {
   const dispatch = useDispatch();
 
@@ -46,10 +48,10 @@ const Dashboard = () => {
       <Dropdown
               id="bynar-tabs-menu-dropdown"
               items={[
-                { 'id': 'testpage1', 'text': 'Test Page 1' },
-                { 'id': 'testpage2', 'text': 'Test Page 2' },
-                { 'id': 'testpage3', 'text': 'Test Page 3' },
-                { 'id': 'testpage4', 'text': 'Test Page 4' },
+                { 'id': 'userlist',  'text': 'User List', component: <UserList/> },
+                { 'id': 'testpage2', 'text': 'Test Page 2', component: <div>Test Page</div> },
+                { 'id': 'testpage3', 'text': 'Test Page 3', component: <div>Test Page</div> },
+                { 'id': 'testpage4', 'text': 'Test Page 4', component: <div>Test Page</div> },
               ]}
               itemToElement={(item) =>
                 item ? (
@@ -65,7 +67,7 @@ const Dashboard = () => {
               selectedItem={0}
               onChange={(selectionObject) => {
                 const selectedItem = selectionObject.selectedItem;
-                addNewTab(selectedItem.id, selectedItem.text, <div>{selectedItem.text}</div>);
+                addNewTab(selectedItem.id, selectedItem.text, selectedItem.component);
               }}
               // initialSelectedItem={'Pfk Albania'}
             />

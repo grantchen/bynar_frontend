@@ -52,15 +52,32 @@ Resources:
         - LambdaExecutionRole
         - Arn
       Events:
-        GetEvent:
-          Type: Api
-          Properties:
-            Path: /account/signup
-            Method: get
         PostEvent:
           Type: Api
           Properties:
             Path: /account/signup
+            Method: post
+  UsersAPI:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub 'awscodestar-${ProjectId}-lambda-UsersAPI'
+      Handler: api/account/users/index.handler
+      CodeUri: api/account/users/users.zip
+      Runtime: nodejs16.x
+      Role:
+        Fn::GetAtt:
+        - LambdaExecutionRole
+        - Arn
+      Events:
+        GetEvent:
+          Type: Api
+          Properties:
+            Path: /account/users
+            Method: get
+        PostEvent:
+          Type: Api
+          Properties:
+            Path: /account/users
             Method: post
   TestAPI:
     Type: AWS::Serverless::Function
