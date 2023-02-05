@@ -27,6 +27,7 @@ const UserList = () => {
     const [loading, setLoading] = useState(true);
     const [usersData, setUsersData] = useState([]);
 
+    //--- execute function on mount
     useEffect(() => {
       getSession().then(({ user, accessToken, idTokenCode, headers, attributes }) => {
 
