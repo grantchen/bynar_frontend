@@ -1,0 +1,9 @@
+.dashboard-tile {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  justify-content: space-around;
+  background-color: var(--cds-ui-02,#fff);
+  padding-left: 8px;
+  padding-right: 8px;
+  }

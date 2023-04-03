@@ -1,0 +1,1 @@
+export const BaseURL="https://lc7p1jn3j0.execute-api.eu-central-1.amazonaws.com/awscodGetEvFeHM5ZAhd09N";

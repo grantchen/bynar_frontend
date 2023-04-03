@@ -1,0 +1,51 @@
+@import '../../../src/carbon-settings.scss'; 
+.edituser-box{
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+.edituser{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--cds-ui-navbar, #f4f4f4) !important;
+    overflow:auto;
+    width: 600px;
+    margin-bottom: 28px;
+    margin-top: 7%;
+    /* margin-bottom: 7%; */
+    height: calc(100vh - 109px);
+    overflow: scroll;
+    padding-bottom: 16px;
+    padding-top: 4px;
+
+    .bx--text-input{
+        display: flex;
+        width: 100%;
+        flex: 1 1 auto;
+        flex-direction: column;
+        align-items: flex-start;
+        border: 1px solid gray !important;
+        width: 266px;
+    }
+    .country-select-dropdown{
+        
+        .bx--select-input{
+             width: 266px;
+        }
+    }
+
+    .react-tel-input {
+        font-family: 'Roboto',sans-serif;
+        font-size: 15px;
+        position: relative;
+        width: 266px;
+    }
+}
+}
+.edituser-loader{
+   
+    span{
+        border: 3px solid gray;
+    }
+}

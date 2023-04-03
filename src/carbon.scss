@@ -1,0 +1,9 @@
+$feature-flags: (
+  enable-css-custom-properties: true,
+  grid-columns-16: true,
+);
+
+// vars accounts for most things except for the typography
+@import '../node_modules/carbon-components/scss/globals/scss/vars';
+@import '../node_modules/carbon-components/scss/globals/scss/typography';
+@import '../node_modules/carbon-components/scss/globals/grid/grid';

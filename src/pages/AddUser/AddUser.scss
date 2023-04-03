@@ -1,0 +1,51 @@
+@import '../../carbon-settings.scss';
+.adduser-box{
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+.adduser{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--cds-ui-navbar, #f4f4f4) !important;
+    overflow:auto;
+    width: 600px;
+    margin: 16px;
+    margin-bottom: 28px;
+
+    .bx--text-input{
+        display: flex;
+        width: 100%;
+        flex: 1 1 auto;
+        flex-direction: column;
+        align-items: flex-start;
+        border: 1px solid gray !important;
+        width: 266px;
+    }
+
+    .bx--text-input__field-outer-wrapper {
+        width: 266px;
+    }
+    .country-select-dropdown{
+        
+        .bx--select-input{
+             width: 266px;
+        }
+    }
+
+    .react-tel-input {
+        font-family: 'Roboto',sans-serif;
+        font-size: 15px;
+        position: relative;
+        width: 266px;
+    }
+}
+}
+
+.user-loader{
+   
+    span{
+        border: 3px solid gray;
+    }
+}
