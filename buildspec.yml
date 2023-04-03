@@ -6,7 +6,7 @@ phases:
       nodejs: 12
     commands:
       # Install dependencies needed for running tests
-      - npm install --legacy-peer-deps
+#      - npm install --legacy-peer-deps
 
       # Upgrade AWS CLI to the latest version
       - pip install --upgrade awscli
@@ -14,9 +14,9 @@ phases:
   build:
     commands:
       # build the static files to be copied to S3 bucket
-      - npm run build
+#      - npm run build
       # Use AWS SAM to package the application by using AWS CloudFormation
-      - aws s3 cp --recursive build/ s3://$WEBSITE_S3_BUCKET/ --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
+#      - aws s3 cp --recursive build/ s3://$WEBSITE_S3_BUCKET/ --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
       - aws s3 website s3://$WEBSITE_S3_BUCKET/ --index-document index.html
       # - sed -i -e "s|assets/|$WEBSITE_S3_PREFIX/public/assets/|g" public/index.html
       # - sed -i -e "s|./static/|$WEBSITE_S3_PREFIX/public/static/|g" public/index.html
