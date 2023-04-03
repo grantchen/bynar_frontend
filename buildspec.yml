@@ -10,6 +10,12 @@ phases:
 
       # Upgrade AWS CLI to the latest version
       - pip install --upgrade awscli
+
+  pre_build:
+    commands:
+      # Discover and run unit tests in the 'tests' directory
+      - npm test
+
   build:
     commands:
       # build the static files to be copied to S3 bucket
