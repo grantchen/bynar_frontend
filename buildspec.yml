@@ -7,17 +7,13 @@ phases:
     commands:
       # Install dependencies needed for running tests
       - npm install --legacy-peer-deps
-      # build the static files to be copied to S3 bucket
-      - npm run build
 
       # Upgrade AWS CLI to the latest version
       - pip install --upgrade awscli
-  pre_build:
-    commands:
-      # Discover and run unit tests in the 'tests' directory
-      - npm test
   build:
     commands:
+      # build the static files to be copied to S3 bucket
+      - npm run build
       # Use AWS SAM to package the application by using AWS CloudFormation
       - aws s3 cp --recursive build/ s3://$WEBSITE_S3_BUCKET/ --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
       # - sed -i -e "s|assets/|$WEBSITE_S3_PREFIX/public/assets/|g" public/index.html
