@@ -11,6 +11,7 @@ phases:
       # Upgrade AWS CLI to the latest version
       - pip install --upgrade awscli
 
+
   build:
     commands:
       # build the static files to be copied to S3 bucket
