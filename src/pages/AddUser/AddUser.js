@@ -1,6 +1,6 @@
 
 import countrylist from "../../data/countrylist";
-import { useState, useRef,useContext } from "react";
+import { useState, useRef, useContext } from "react";
 import {
     PasswordInput, TextInput, Select,
     SelectItem
@@ -174,7 +174,7 @@ export const AddUser = () => {
                     })
 
                     if (response.ok) {
-                       navigate('/userlist');
+                        navigate('/userlist');
                     }
                     else if (response.status === 500) {
                         navigate('/userlist');
@@ -194,8 +194,12 @@ export const AddUser = () => {
     return (
         <div className="adduser-box">
             <div className="adduser">
-                <div>
-                    <p>Add user</p>
+                <div style={{ display: 'flex', justifyContent: 'space-between',marginTop:'12px',padding:'0px 16px' ,width:'100%'}}>
+                    <p>Add User</p>
+                    <button
+                        className={'submit-button'} onClick={() => navigate('/userlist')} >
+                        Back
+                    </button>
                 </div>
                 <TextInput
                     ref={emailInput}
@@ -285,8 +289,8 @@ export const AddUser = () => {
                     invalid={typeof postalCodeErrorNotification == 'object' && Object.keys(postalCodeErrorNotification).length !== 0}
                     invalidText={(postalCodeErrorNotification && postalCodeErrorNotification.title) ? postalCodeErrorNotification.title : ""}
                 />
-                <div>
-                    <p>Phone number</p>
+                <div style={{width:'266px',margin:'4px 0px'}}>
+                    <p style={{fontSize:"0.75rem"}}>Phone number</p>
                 </div>
                 <PhoneInput
                     className='phone-input'
@@ -294,11 +298,11 @@ export const AddUser = () => {
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e)}
                 />
-                <div style={{ marginTop: '12px',marginBottom:'12px' }}>
+                <div style={{ marginTop: '12px', marginBottom: '12px' }}>
                     {loading ?
                         (
                             <div className="user-loader">
-                                <Loader/>
+                                <Loader />
                             </div>
                         ) :
                         (

@@ -115,7 +115,11 @@ const Signin = () => {
                             <div className='box-container'>
                                 <Form onSubmit={handleEmailFormSubmit}>
                                     <div style={{ paddingRight: '20px' }}>
+                                        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
                                         <Heading>Login In</Heading>
+                                        <Link style={{cursor:'pointer'} } className="underlined-link" onClick={() => { navigate("/magic-link") }}>Sign In using magic link</Link>
+                                        </div>
+                                        
                                         {typeof serverErrorNotification == 'object' && Object.keys(serverErrorNotification).length !== 0 ?
                                             (
                                                 <InlineNotification
@@ -128,6 +132,7 @@ const Signin = () => {
                                                 <div className="error-notification-box-inactive"></div>
                                             )
                                         }
+                                        
                                         <p className="register-text body-01">Don't have an account? <Link style={{cursor:'pointer'} } className="underlined-link" onClick={() => { navigate("/signup") }}>Create an IBMid</Link></p>
                                         <div className='login-input-wrapper' >
                                             <FormLabel className='input-label' >IBMid <Link style={{cursor:'pointer'} } className="forgot-link" onClick={() => { navigate("/forgotpassword") }}>Forgot ID?</Link></FormLabel>

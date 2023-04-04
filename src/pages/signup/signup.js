@@ -1,4 +1,4 @@
-import React, { useState, useEffect ,useLayoutEffect,useRef} from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import 'react-telephone-input/css/default.css'
 import {
     formatCreditCardNumber,
@@ -67,14 +67,15 @@ const Signup = () => {
     const [isError, setIsError] = useState(false);
     const [isAccountInfoError, setIsAccountInfoError] = useState(false);
     const [isVerifyEmailInfoError, setIsVerifyEmailError] = useState(false);
+    const [postalCodeErrorNotification, setPostalCodeErrorNotification] = useState({});
     const [isCreateAccountError, setIsCreateAccountError] = useState(false);
     const [userId, setUserId] = useState();
     const [message, setMessage] = useState('creating account ...');
     const ref = useRef(null);
 
-  const [width, setWidth] = useState(0);
+    const [width, setWidth] = useState(0);
     const accountInfoButtonDisabled = !passwordIsValid || !emailIsValid || email.length == 0 || password.length == 0 || isAccountInfoError;
-    const personalInfoButtonDisabled = firstName.length == 0 || lastName.length == 0 || city.length == 0 || state.length == 0 || postalCode.length == 0 || phoneNumber.length == 0 || addressLine1.length == 0;
+    const personalInfoButtonDisabled = firstName.length == 0 || lastName.length == 0 || city.length == 0 || state.length == 0 || postalCode.length == 0 || phoneNumber.length == 0 || addressLine1.length == 0 || Object.keys(postalCodeErrorNotification).length != 0;
     const verificationEmailButtonDisabled = verificationCode.length == 0 || isVerifyEmailInfoError;
     const handleFirstNameChange = (value) => {
         setFirstName(value);
@@ -92,16 +93,16 @@ const Signup = () => {
     useLayoutEffect(() => {
         // setWidth(ref?.current?.offsetWidth);
         handlePasswordStrengthLength(password);
-      }, [isPasswordVisible]);
+    }, [isPasswordVisible]);
 
-    const handlePasswordStrengthLength=(value)=>{
+    const handlePasswordStrengthLength = (value) => {
         const lengthRegex = /^.{8,}$/;
         const uppercaseRegex = /[A-Z]/;
         const lowercaseRegex = /[a-z]/;
         const numberRegex = /[0-9]/;
         const specialcharacterRegex = /[-!$%^&*()_+|~=`{}\[\]:\/;<>?,.@#]/;
         const tempArray = [lengthRegex.test(value.trim()), uppercaseRegex.test(value), lowercaseRegex.test(value), numberRegex.test(value), specialcharacterRegex.test(value), value.length == value.trim().length];
-        setpaswordStrengthWidth(tempArray.filter(i => i === true).length * ref?.current?.offsetWidth/6);
+        setpaswordStrengthWidth(tempArray.filter(i => i === true).length * ref?.current?.offsetWidth / 6);
     }
     const checkEmailValid = (value) => {
         var isEmailValid =
@@ -140,7 +141,7 @@ const Signup = () => {
         const specialcharacterRegex = /[-!$%^&*()_+|~=`{}\[\]:\/;<>?,.@#]/;
         const tempArray = [lengthRegex.test(value.trim()), uppercaseRegex.test(value), lowercaseRegex.test(value), numberRegex.test(value), specialcharacterRegex.test(value), value.length == value.trim().length];
         setPasswordArray(tempArray)
-        setpaswordStrengthWidth(tempArray.filter(i => i === true).length * ref?.current?.offsetWidth/6);
+        setpaswordStrengthWidth(tempArray.filter(i => i === true).length * ref?.current?.offsetWidth / 6);
         setPasswordIsValid(lengthRegex.test(value.trim()) && uppercaseRegex.test(value) && lowercaseRegex.test(value) && numberRegex.test(value) && specialcharacterRegex.test(value))
     };
 
@@ -161,7 +162,7 @@ const Signup = () => {
                         'Content-Type': 'application/json',
                     },
                 })
-                
+
                 const res = await response.json();
 
                 if (response.ok) {
@@ -226,11 +227,11 @@ const Signup = () => {
                 }
                 setLoading(false);
 
-                
+
             }
             catch (e) {
                 setLoading(false);
-                
+
             }
         }
         // setActiveStep(3);
@@ -306,8 +307,8 @@ const Signup = () => {
     const handleVatNumberChange = (value) => {
         setVatNumber(value);
         // const gstRegex = /[0-9]{2}[A-Z]{3}[ABCFGHLJPTF]{1}[A-Z]{1}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}/;
-        setGstValid(value.length >0);
-      
+        setGstValid(value.length > 0);
+
     }
 
     const handleTaxInfo = () => {
@@ -331,8 +332,24 @@ const Signup = () => {
         }
     }
 
+    const handlePostalCode = (e) => {
+        setPostalCode(e.target.value);
+        if (!/^\d+$/.test(e.target.value)) {
+            setPostalCodeErrorNotification({ title: 'Postal code should be integer' });
+        }
+        else if (e.target.value.length === 0) {
+            setPostalCodeErrorNotification({ title: 'Postal code should not be blank' });
+        }
+        else if (e.target.value.length != 6) {
+            setPostalCodeErrorNotification({ title: 'Postal code should be of 6 digit' });
+        }
+        else {
+            setPostalCodeErrorNotification({});
+        }
+    }
+
     const creditCardButtonDisabled = cardCVV.length == 0 || cardExpiryDate.length == 0 || cardNumber.length == 0;
-    const taxInfoButtonDisabled = organizationName.length == 0 || organizationCountry.length == 0 || ( vatNumber.length === 0);
+    const taxInfoButtonDisabled = organizationName.length == 0 || organizationCountry.length == 0 || (vatNumber.length === 0);
     useEffect(() => {
         // 👇️ scroll to top on page load
         if (isError) {
@@ -383,8 +400,8 @@ const Signup = () => {
                             labelText="Enter Password"
                             value={password}
                             onChange={(e) => handlePasswordChange(e.target.value)}
-                            onFocus={() => { setIsPasswordVisible(true);setWidth(ref?.current?.offsetWidth) }}
-                            onBlur={() => { setIsPasswordVisible(false); setWidth(ref?.current?.offsetWidth)}}
+                            onFocus={() => { setIsPasswordVisible(true); setWidth(ref?.current?.offsetWidth) }}
+                            onBlur={() => { setIsPasswordVisible(false); setWidth(ref?.current?.offsetWidth) }}
 
                             invalid={!passwordIsValid && password.length > 0}
                             invalidText={
@@ -394,7 +411,7 @@ const Signup = () => {
                             }
                         />
                         {isPasswordVisible && <div style={{ width: `${passwordStrengthWidth}px`, height: '4px', backgroundColor: 'green', marginTop: '2px' }}></div>}
-                        {isPasswordVisible &&  <PasswordStrength passwordArray={passwordArray} />}
+                        {isPasswordVisible && <PasswordStrength passwordArray={passwordArray} />}
 
                         {loading ?
                             (
@@ -502,9 +519,13 @@ const Signup = () => {
                             onChange={(e) => setState(e.target.value)}
                         />
                         <TextInput type="text"
+                            id="postalcode"
                             labelText="Postal Code"
+                            className='postalcode'
                             value={postalCode}
-                            onChange={(e) => setPostalCode(e.target.value)}
+                            onChange={(e) => handlePostalCode(e)}
+                            invalid={typeof postalCodeErrorNotification == 'object' && Object.keys(postalCodeErrorNotification).length !== 0}
+                            invalidText={(postalCodeErrorNotification && postalCodeErrorNotification.title) ? postalCodeErrorNotification.title : ""}
                         />
                         <div>
                             <p>Phone number</p>

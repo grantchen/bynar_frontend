@@ -285,6 +285,15 @@ label[for=password-input]{
   margin-top: 16px;
 }
 
+.postalcode{
+   svg{
+    display: none;
+   }
+   .cds--form-requirement{
+    color: #fa4d56;
+    padding-top: 4px;
+   }
+}
 @media screen and (max-width:600px) {
   .account{
     width: 278px;

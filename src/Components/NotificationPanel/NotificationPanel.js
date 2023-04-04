@@ -9,10 +9,10 @@ export const NotificationPanel=({open,setOpen,setNotificationsData, notification
           onClickOutside={() => setOpen(false)}
           data={notificationsData}
           onDoNotDisturbChange={(event) =>
-            console.log('Toggled do not disturb', event)
+            {}
           }
-          onViewAllClick={() => console.log('Clicked view all button')}
-          onSettingsClick={() => console.log('Clicked settings gear button')}
+          onViewAllClick={() => {}}
+          onSettingsClick={() => {}}
           onDismissAllNotifications={() => setNotificationsData([])}
           onDismissSingleNotification={({ id }) => {
             let tempData = [...notificationsData];

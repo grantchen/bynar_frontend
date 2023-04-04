@@ -1,6 +1,6 @@
 
 import countrylist from "../../data/countrylist";
-import { useState, useRef ,useContext} from "react";
+import { useState, useRef, useContext } from "react";
 import {
     PasswordInput, TextInput, Select,
     SelectItem
@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { Loader } from "../../Components/Loader/Loader";
 import { AuthContext } from "../../sdk/context/AuthContext";
 
-export const EditUser = ({ userDetails, setIsEditUserDetail ,setServerNotification, setServerErrorNotification}) => {
+export const EditUser = ({ userDetails, setIsEditUserDetail, setServerNotification, setServerErrorNotification }) => {
 
     const token = localStorage.getItem('token');
     const authContext = useContext(AuthContext)
@@ -34,7 +34,7 @@ export const EditUser = ({ userDetails, setIsEditUserDetail ,setServerNotificati
     const [cityErrorNotification, setCityErrorNotification] = useState({});
     const [stateErrorNotification, setStateErrorNotification] = useState({});
     const [postalCodeErrorNotification, setPostalCodeErrorNotification] = useState({});
-   
+
     const emailInput = useRef(null);
     const fullNameInput = useRef(null);
     const [loading, setLoading] = useState(false);
@@ -118,7 +118,7 @@ export const EditUser = ({ userDetails, setIsEditUserDetail ,setServerNotificati
 
     }
 
-    const addUserButtonDisabled = (Object.keys(postalCodeErrorNotification).length != 0 || Object.keys(stateErrorNotification).length != 0 || Object.keys(cityErrorNotification).length != 0 || Object.keys(addressErrorNotification).length != 0 || Object.keys(errorNotification).length != 0 || Object.keys(emailErrorNotification).length != 0  || fullName.length === 0 || addressLine1.length === 0 || city.length === 0 || state.length === 0 || postalCode.length === 0 );
+    const addUserButtonDisabled = (Object.keys(postalCodeErrorNotification).length != 0 || Object.keys(stateErrorNotification).length != 0 || Object.keys(cityErrorNotification).length != 0 || Object.keys(addressErrorNotification).length != 0 || Object.keys(errorNotification).length != 0 || Object.keys(emailErrorNotification).length != 0 || fullName.length === 0 || addressLine1.length === 0 || city.length === 0 || state.length === 0 || postalCode.length === 0);
 
 
     const handleUserInfo = () => {
@@ -153,7 +153,7 @@ export const EditUser = ({ userDetails, setIsEditUserDetail ,setServerNotificati
                 if (response.ok) {
                     setIsEditUserDetail(false);
                     setServerNotification(true);
-                    setServerErrorNotification({message:'User detail edited sucessfully',status:'success'})
+                    setServerErrorNotification({ message: 'User detail edited sucessfully', status: 'success' })
                 }
                 else if (response.status === 500) {
                     // setErrorNotification({
@@ -161,7 +161,7 @@ export const EditUser = ({ userDetails, setIsEditUserDetail ,setServerNotificati
                     // })
                     setIsEditUserDetail(false);
                     setServerNotification(true);
-                    setServerErrorNotification({message:'Failed to edit user',status:'error'})
+                    setServerErrorNotification({ message: 'Failed to edit user', status: 'error' })
                 }
                 setLoading(false);
 
@@ -177,8 +177,12 @@ export const EditUser = ({ userDetails, setIsEditUserDetail ,setServerNotificati
     return (
         <div className="edituser-box">
             <div className="edituser">
-                <div>
-                    <p>Edit user</p>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '12px', padding: '0px 16px', width: '100%' }}>
+                    <p>Edit User</p>
+                    <button
+                        className={'submit-button'} onClick={() => setIsEditUserDetail(false)} >
+                        Back
+                    </button>
                 </div>
                 {/* <TextInput
                     ref={emailInput}
@@ -259,8 +263,8 @@ export const EditUser = ({ userDetails, setIsEditUserDetail ,setServerNotificati
                     invalid={typeof postalCodeErrorNotification == 'object' && Object.keys(postalCodeErrorNotification).length !== 0}
                     invalidText={(postalCodeErrorNotification && postalCodeErrorNotification.title) ? postalCodeErrorNotification.title : ""}
                 />
-                <div>
-                    <p>Phone number</p>
+                <div style={{width:'266px',margin:'4px 0px'}}>
+                    <p style={{fontSize:"0.75rem"}}>Phone number</p>
                 </div>
                 <PhoneInput
                     className='phone-input'
@@ -272,7 +276,7 @@ export const EditUser = ({ userDetails, setIsEditUserDetail ,setServerNotificati
                     {loading ?
                         (
                             <div className="edituser-loader">
-                                <Loader/>
+                                <Loader />
                             </div>
                         ) :
                         (

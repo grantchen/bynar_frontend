@@ -151,7 +151,6 @@ export const UserList = () => {
     const handleUserEdit = (index) => {
 
         const userEditArray=rows?.filter(a => a.id === index);
-        console.log(userEditArray[0]);
         setUserDetails(userEditArray[0]);
         setServerNotification(false);
          setIsEditUserDetail(true);

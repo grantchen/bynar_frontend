@@ -12,6 +12,7 @@ import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
 import { AuthProvider } from './sdk/context/AuthContext';
 import { UserList } from './pages/UserList/UserList';
 import { AddUser } from './pages/AddUser/AddUser';
+import { MagicLink } from './pages/MagicLink/MagicLink';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route exact path="/signin" element={<Signin />} /> 
           <Route exact path="/forgotpassword" element={<ForgotPassword />} /> 
           <Route exact path="/adduser" element={<AddUser/>} /> 
+          <Route exact path="/magic-link" element={<MagicLink />} /> 
         </Routes>
         </AuthProvider>
       </BrowserRouter>

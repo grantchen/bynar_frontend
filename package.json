@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@aws-amplify/amplify-category-auth": "^3.0.1",
     "@carbon/elements": "^10",
     "@carbon/ibm-products": "^1",
     "@carbon/icons-react": "^10",
     "@carbon/react": "^1.25.0",
     "@carbon/themes": "^11.17.0",
+    "aws-amplify": "^5.0.23",
     "carbon-components": "^10",
     "carbon-components-react": "^7",
     "carbon-icons": "latest",
@@ -30,7 +32,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

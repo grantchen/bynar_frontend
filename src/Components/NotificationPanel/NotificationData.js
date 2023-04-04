@@ -12,8 +12,7 @@ export const sampleData = [
     description: 'LogRhythm is failing to connect, check timeout.',
     timestamp: currentDate,
     unread: true,
-    onNotificationClick: (notification) =>
-      console.log(`Clicked on notification with id "${notification.id}"`),
+    onNotificationClick: (notification) =>{},
   },
   {
     id: 1,
@@ -22,7 +21,7 @@ export const sampleData = [
     description: 'Email classification was exported successfully.',
     timestamp: new Date(currentDate.getTime() - 11 * msInOneMinute),
     onNotificationClick: (notification) =>
-      console.log(`Clicked on notification with id "${notification.id}"`),
+      {},
   },
   {
     id: 2,
@@ -31,7 +30,7 @@ export const sampleData = [
     description: 'Successfully connected cartridge',
     timestamp: new Date(currentDate.getTime() - 120 * msInOneMinute),
     onNotificationClick: (notification) =>
-      console.log(`Clicked on notification with id "${notification.id}"`),
+      {},
   },
   {
     id: 3,
@@ -40,7 +39,7 @@ export const sampleData = [
     description: 'App connection succeeded',
     timestamp: yesterdayDate,
     onNotificationClick: (notification) =>
-      console.log(`Clicked on notification with id "${notification.id}"`),
+     {},
   },
   {
     id: 4,
@@ -49,7 +48,7 @@ export const sampleData = [
     description: 'Allocated app memory low',
     timestamp: dayBeforeYesterday,
     onNotificationClick: (notification) =>
-      console.log(`Clicked on notification with id "${notification.id}"`),
+      {},
   },
   {
     id: 5,
@@ -61,7 +60,7 @@ export const sampleData = [
     },
     timestamp: dayBeforeYesterday,
     onNotificationClick: (notification) =>
-      console.log(`Clicked on notification with id "${notification.id}"`),
+      {},
   },
   {
     id: 6,
@@ -71,6 +70,6 @@ export const sampleData = [
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
     onNotificationClick: (notification) =>
-      console.log(`Clicked on notification with id "${notification.id}"`),
+     {},
   }
 ];
