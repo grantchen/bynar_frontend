@@ -153,7 +153,7 @@ const Signup = () => {
                 setLoading(true);
                 const data = {
                     email: email,
-                    password: password,
+                    // password: password,
                 }
                 const response = await fetch(`${BaseURL}/signup`, {
                     method: 'POST',
@@ -395,7 +395,7 @@ const Signup = () => {
                                     ? 'Enter valid email address' : null
                             }
                         />
-                        <PasswordInput ref={ref} type="password" className='password-text-input'
+                        {/* <PasswordInput ref={ref} type="password" className='password-text-input'
                             id="password-input"
                             labelText="Enter Password"
                             value={password}
@@ -409,9 +409,9 @@ const Signup = () => {
                                     ? 'Aleast 8 characters are required including uppercase, lowercase and a number.'
                                     : null
                             }
-                        />
-                        {isPasswordVisible && <div style={{ width: `${passwordStrengthWidth}px`, height: '4px', backgroundColor: 'green', marginTop: '2px' }}></div>}
-                        {isPasswordVisible && <PasswordStrength passwordArray={passwordArray} />}
+                        /> */}
+                        {/* {isPasswordVisible && <div style={{ width: `${passwordStrengthWidth}px`, height: '4px', backgroundColor: 'green', marginTop: '2px' }}></div>}
+                        {isPasswordVisible && <PasswordStrength passwordArray={passwordArray} />} */}
 
                         {loading ?
                             (
@@ -421,8 +421,12 @@ const Signup = () => {
                             ) :
                             (
                                 <div style={{ marginTop: '32px' }}>
-                                    <button disabled={!passwordIsValid || !emailIsValid || email.length == 0 || password.length == 0 || isAccountInfoError}
+                                    {/* <button disabled={!passwordIsValid || !emailIsValid || email.length == 0 || password.length == 0 || isAccountInfoError}
                                         className={!passwordIsValid || !emailIsValid || email.length == 0 || password.length == 0 || isAccountInfoError ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleSignupRequest()}>
+                                        {!isAccountInfoUpdated ? "Next" : "Update"}
+                                    </button> */}
+                                    <button disabled={!emailIsValid || email.length == 0 || isAccountInfoError}
+                                        className={!emailIsValid || email.length == 0 || isAccountInfoError ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleSignupRequest()}>
                                         {!isAccountInfoUpdated ? "Next" : "Update"}
                                     </button>
                                 </div>
@@ -621,19 +625,25 @@ const Signup = () => {
                             <p className='text-heading'>Credit Card information</p>
                         </div>
                         <div className="form-group">
+                            <div>
+                                <p>Card Number</p>
+                            </div>
                             <input
                                 type="tel"
                                 name="number"
                                 className="form-control"
                                 placeholder="Card Number"
                                 pattern="[\d| ]{16,22}"
+                                label="card number"
                                 value={cardNumber}
                                 onChange={handleInputChange}
 
                             />
                         </div>
                         <div className="form-group">
-
+                            <div>
+                                <p>Expiration Date</p>
+                            </div>
                             <input
                                 type="tel"
                                 name="expiry"
@@ -645,11 +655,14 @@ const Signup = () => {
                             />
                         </div>
                         <div className="form-group">
+                            <div>
+                                <p>Security Code</p>
+                            </div>
                             <input
                                 type="tel"
                                 name="cvc"
                                 className="form-control"
-                                placeholder="CVC"
+                                placeholder="CVV"
                                 pattern="\d{3,4}"
                                 value={cardCVV}
                                 onChange={handleInputChange}
@@ -660,13 +673,13 @@ const Signup = () => {
                         <div >
                             <button disabled={creditCardButtonDisabled}
                                 className={creditCardButtonDisabled ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleCardInfo()}>
-                                Next
+                                Submit
                             </button>
                         </div>
                     </div>) :
                     (isCardInfoUpdated && activeStep > 5 ? (<div id="verify-section" className="email-verification">
                         <div className='box'>
-                            <p className='text-heading'>Card info</p>
+                            <p className='text-heading'>Credit Card Information</p>
                             <button className='edit-button' onClick={() => handleEditClick("5")}>Edit</button>
                         </div>
                         <p className='text-heading-edit'>**** **** **** ****</p>
@@ -674,7 +687,7 @@ const Signup = () => {
                     </div>) : (
                         <div id="verify-section" className="email-verification">
                             <div className='box'>
-                                <p className='text-heading'>Card info</p>
+                                <p className='text-heading'>Credit Card information</p>
                             </div>
                         </div>
                     ))}
