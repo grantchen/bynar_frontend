@@ -69,7 +69,7 @@ const Signup = () => {
     const [userId, setUserId] = useState();
     const [message, setMessage] = useState('creating account ...');
     const ref = useRef(null);
-    const accountInfoButtonDisabled = !passwordIsValid || !emailIsValid || email.length == 0 || password.length == 0 || isAccountInfoError;
+    const accountInfoButtonDisabled = !emailIsValid || email.length == 0 || isAccountInfoError;
     const personalInfoButtonDisabled = firstName.length == 0 || lastName.length == 0 || city.length == 0 || state.length == 0 || postalCode.length == 0 || phoneNumber.length == 0 || addressLine1.length == 0 || Object.keys(postalCodeErrorNotification).length != 0;
     const verificationEmailButtonDisabled = verificationCode.length == 0 || isVerifyEmailInfoError;
     
@@ -165,7 +165,7 @@ const Signup = () => {
                 }
                 else if (response.status === 500) {
                     setIsError(true)
-                    setIsAccountInfoError(true);
+                    // setIsAccountInfoError(true);
                     setActiveStep(1);
                     setErrorNotification({
                         title: res.error
@@ -216,7 +216,7 @@ const Signup = () => {
                     setActiveStep(1);
                     setErrorNotification({
                         title: "Enter valid confirmation email code"
-                    })
+                    })             
                 }
                 setLoading(false);
             }
@@ -257,12 +257,7 @@ const Signup = () => {
                 })
 
                 if (response.ok) {
-                    setMessage("account created ... moving to signin page")
-                    setTimeout(() => {
-
-                        setLoadingSuccess(false);
-                        navigate('/signin');
-                    }, [4000])
+                    navigate('/signin');
                 }
                 else if (response.status === 500) {
                     setIsError(true)
