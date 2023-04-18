@@ -15,6 +15,9 @@ const Signin = React.lazy(() => import('./pages/signin/signin'));
 
 
 function App() {
+  window.LOG_LEVEL = 'DEBUG' 
+
+
   return (
     <div className="app">
     <Suspense fallback="loading">

@@ -140,6 +140,7 @@ const Signup = () => {
         setPasswordIsValid(lengthRegex.test(value.trim()) && uppercaseRegex.test(value) && lowercaseRegex.test(value) && numberRegex.test(value) && specialcharacterRegex.test(value))
     };
 
+    /* Function to send email as payload  ,if api response is 200 then proceed with email verification,otherwise in case of error show error in signup page*/
     const handleSignupRequest = () => {
         const fetchData = async () => {
             try {
@@ -185,6 +186,7 @@ const Signup = () => {
         setActiveStep(value)
     }
 
+    /* Function to verify user email during signup process , if email is verified sucessfully then proceed to next step ,otherwise in case of error show error in signup page*/
     const handleVerifyEmail = () => {
 
         const fetchData = async () => {
@@ -225,6 +227,7 @@ const Signup = () => {
         fetchData();
     }
 
+    /* Function to create user account ,if account created sucessfully then navigate to signin page ,otherwise in case of error show error in signup page */
     const handleCreateAccount = () => {
         const fetchData = async () => {
             try {
