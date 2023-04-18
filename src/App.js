@@ -3,16 +3,15 @@ import React, {Suspense} from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import './index.scss'
 import { DataTables } from './Components/DataTable/DataTable';
-import Dashboard from './Components/Dashboard/Dashboard';
 import { TearSheets } from './Components/TearSheet/TearSheets';
 import { SidePanels } from './Components/SidePanel/SidePanels';
-import Signup from './pages/signup/signup';
-import Signin from './pages/signin/signin';
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
 import { AuthProvider } from './sdk/context/AuthContext';
 import { UserList } from './pages/UserList/UserList';
 import { AddUser } from './pages/AddUser/AddUser';
-import { MagicLink } from './pages/MagicLink/MagicLink';
+const Dashboard = React.lazy(() => import('./Components/Dashboard/Dashboard'));
+const Signup = React.lazy(() => import('./pages/signup/signup'));
+const Signin = React.lazy(() => import('./pages/signin/signin'));
 
 
 function App() {
@@ -33,7 +32,6 @@ function App() {
           <Route exact path="/signin" element={<Signin />} /> 
           <Route exact path="/forgotpassword" element={<ForgotPassword />} /> 
           <Route exact path="/adduser" element={<AddUser/>} /> 
-          <Route exact path="/magic-link" element={<MagicLink />} /> 
         </Routes>
         </AuthProvider>
       </BrowserRouter>

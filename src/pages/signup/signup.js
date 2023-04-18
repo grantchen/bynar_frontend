@@ -26,12 +26,9 @@ import 'react-phone-input-2/lib/style.css'
 import { Loader } from '../../Components/Loader/Loader.js';
 import { BaseURL } from '../../sdk/constant.js';
 
-
-
 const Signup = () => {
     const navigate = useNavigate();
     const [errorNotification, setErrorNotification] = useState({});
-
     const [loading, setLoading] = useState(false);
     const [loadingSuccess, setLoadingSuccess] = useState(false);
     const [password, setPassword] = useState('');
@@ -72,17 +69,18 @@ const Signup = () => {
     const [userId, setUserId] = useState();
     const [message, setMessage] = useState('creating account ...');
     const ref = useRef(null);
-
-    const [width, setWidth] = useState(0);
     const accountInfoButtonDisabled = !passwordIsValid || !emailIsValid || email.length == 0 || password.length == 0 || isAccountInfoError;
     const personalInfoButtonDisabled = firstName.length == 0 || lastName.length == 0 || city.length == 0 || state.length == 0 || postalCode.length == 0 || phoneNumber.length == 0 || addressLine1.length == 0 || Object.keys(postalCodeErrorNotification).length != 0;
     const verificationEmailButtonDisabled = verificationCode.length == 0 || isVerifyEmailInfoError;
+    
     const handleFirstNameChange = (value) => {
         setFirstName(value);
     }
+
     const handleLastNameChange = (value) => {
         setLastName(value);
     }
+
     const handleVerificationCodeChange = (value) => {
         setErrorNotification({});
         setVerificationCode(value);
@@ -91,7 +89,6 @@ const Signup = () => {
     }
 
     useLayoutEffect(() => {
-        // setWidth(ref?.current?.offsetWidth);
         handlePasswordStrengthLength(password);
     }, [isPasswordVisible]);
 
@@ -104,6 +101,7 @@ const Signup = () => {
         const tempArray = [lengthRegex.test(value.trim()), uppercaseRegex.test(value), lowercaseRegex.test(value), numberRegex.test(value), specialcharacterRegex.test(value), value.length == value.trim().length];
         setpaswordStrengthWidth(tempArray.filter(i => i === true).length * ref?.current?.offsetWidth / 6);
     }
+
     const checkEmailValid = (value) => {
         var isEmailValid =
             /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
@@ -119,20 +117,17 @@ const Signup = () => {
     }
 
     const handleEmailChange = (value) => {
-
         setErrorNotification({});
         setIsError(false);
         setIsAccountInfoError(false);
-
         setEmailAddress(value);
         setEmailValid(checkEmailValid(value));
-    };
-    const handlePasswordChange = (value) => {
+    }
 
+    const handlePasswordChange = (value) => {
         setErrorNotification({});
         setIsError(false)
         setIsAccountInfoError(false);
-
         setPassword(value);
         const lengthRegex = /^.{8,}$/;
         const uppercaseRegex = /[A-Z]/;
@@ -146,8 +141,6 @@ const Signup = () => {
     };
 
     const handleSignupRequest = () => {
-
-
         const fetchData = async () => {
             try {
                 setLoading(true);
@@ -162,9 +155,7 @@ const Signup = () => {
                         'Content-Type': 'application/json',
                     },
                 })
-
                 const res = await response.json();
-
                 if (response.ok) {
                     setActiveStep(2);
                     setIsAccountInfoUpdated(true);
@@ -226,15 +217,11 @@ const Signup = () => {
                     })
                 }
                 setLoading(false);
-
-
             }
             catch (e) {
                 setLoading(false);
-
             }
         }
-        // setActiveStep(3);
         fetchData();
     }
 
@@ -276,30 +263,21 @@ const Signup = () => {
                 }
                 else if (response.status === 500) {
                     setIsError(true)
-                    // setIsVerifyEmailError(true);
-                    // setActiveStep(1);
                     setErrorNotification({
                         title: response.error
                     })
                 }
                 setLoadingSuccess(false);
-
             }
             catch (e) {
-                // setMessage("account created ... moving to signin page")
-                // setTimeout(() => {
-
-                //     setLoading(false);
-                //     navigate('/signin');
-                // }, [4000])
                 setLoadingSuccess(false);
             }
 
         }
         fetchData();
     }
-    const handlePersonalInfo = () => {
 
+    const handlePersonalInfo = () => {
         setIsProfileInfoUpdated(true);
         setActiveStep(4);
     }
@@ -308,17 +286,18 @@ const Signup = () => {
         setVatNumber(value);
         // const gstRegex = /[0-9]{2}[A-Z]{3}[ABCFGHLJPTF]{1}[A-Z]{1}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}/;
         setGstValid(value.length > 0);
-
     }
 
     const handleTaxInfo = () => {
         setIsTaxInfoUpdated(true);
         setActiveStep(5);
     }
+
     const handleCardInfo = () => {
         setCardInfoUpdated(true);
         setActiveStep(6);
     }
+
     const handleInputChange = ({ target }) => {
         if (target.name === "number") {
             target.value = formatCreditCardNumber(target.value);
@@ -349,7 +328,9 @@ const Signup = () => {
     }
 
     const creditCardButtonDisabled = cardCVV.length == 0 || cardExpiryDate.length == 0 || cardNumber.length == 0;
+
     const taxInfoButtonDisabled = organizationName.length == 0 || organizationCountry.length == 0 || (vatNumber.length === 0);
+
     useEffect(() => {
         // 👇️ scroll to top on page load
         if (isError) {
@@ -370,7 +351,6 @@ const Signup = () => {
                             onClose={function noRefCheck() { }}
                             onCloseButtonClick={() => { setErrorNotification({}); setIsError(false) }}
                             statusIconDescription="notification"
-                            // subtitle={errorNotification.subtitle ? errorNotification.subtitle : ''}
                             title={errorNotification.title ? errorNotification.title : ''}
                         />) : (
                         <div className="error-notification-inactive"></div>
@@ -395,6 +375,7 @@ const Signup = () => {
                                     ? 'Enter valid email address' : null
                             }
                         />
+                        {/* COMMENTED CODE FOR PASSWORD VALIDATION IN SIGN UP FLOW */}
                         {/* <PasswordInput ref={ref} type="password" className='password-text-input'
                             id="password-input"
                             labelText="Enter Password"
@@ -421,6 +402,7 @@ const Signup = () => {
                             ) :
                             (
                                 <div style={{ marginTop: '32px' }}>
+                                    {/* COMMENTED CODE FOR APPLYING STYLE ON ACCOUNT INFORMATION BUTTON WHEN SIGN IN USING PASSWORD*/}
                                     {/* <button disabled={!passwordIsValid || !emailIsValid || email.length == 0 || password.length == 0 || isAccountInfoError}
                                         className={!passwordIsValid || !emailIsValid || email.length == 0 || password.length == 0 || isAccountInfoError ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleSignupRequest()}>
                                         {!isAccountInfoUpdated ? "Next" : "Update"}
@@ -668,8 +650,6 @@ const Signup = () => {
                                 onChange={handleInputChange}
                             />
                         </div>
-
-
                         <div >
                             <button disabled={creditCardButtonDisabled}
                                 className={creditCardButtonDisabled ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleCardInfo()}>
@@ -711,6 +691,7 @@ const Signup = () => {
                             </div>
                         </div>
                     )}
+                {/* COMMENTED CODE FOR APPLYING STYLE ON CREATE ACCOUNT BUTTON WHEN SIGN UP THROUGH PASSWORD */}
                 {/* <div className='create-account' >
                         <button disabled={accountInfoButtonDisabled || verificationEmailButtonDisabled || personalInfoButtonDisabled || taxInfoButtonDisabled || creditCardButtonDisabled || !isChecked}
                             className={accountInfoButtonDisabled || verificationEmailButtonDisabled || personalInfoButtonDisabled || taxInfoButtonDisabled || creditCardButtonDisabled || !isChecked ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleCreateAccount()}>
@@ -734,10 +715,6 @@ const Signup = () => {
                         </div>)}
             </div>
         </div>
-
-
-
-
     )
 
 };
