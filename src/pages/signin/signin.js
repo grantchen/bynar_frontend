@@ -55,11 +55,9 @@ const Signin = () => {
             })
             setLoading(true);
             try {
-
                 cognitoUser.current = await Auth.signIn({
                     username: email,
                 });
-                console.log({sss:cognitoUser.current});
                 setSignInPhaseOne(false);
                 setServerErrorNotification({})
                 setLoading(false)
@@ -111,17 +109,6 @@ const Signin = () => {
         }
 
     }
-    useEffect(()=>{
-        (async()=>{
-            try {
-                const res = await Auth.currentUserPoolUser();
-            console.log({lplpl:res});
-            } catch (error) {
-                console.log(error);
-            }
-        })()
-
-    },[])
 
     /** Function to perform action in case of sigin using magic link ,if any validation process failed then show error , otherwise enable user to sign in  */
     const verifyMagicLink = async (e) => {
@@ -133,12 +120,9 @@ const Signin = () => {
             });
             setLoading(false)
         }
-        const n = await Auth.sendCustomChallengeAnswer(cognitoUser.current, verificationCode);
-        console.log(n, "resuul");
+        await Auth.sendCustomChallengeAnswer(cognitoUser.current, verificationCode);
+        
         try {
-            console.log(n, "resuul");
-            const r = await Auth.currentAuthenticatedUser()
-            console.log(r, "resuul");
             const res = await Auth.currentSession();
             setLoading(false)
             if (res?.accessToken?.jwtToken) {
@@ -150,7 +134,6 @@ const Signin = () => {
                 navigate("/dashboard");
             }
         } catch (err) {
-            console.log(err);
             console.log('Apparently the user did not enter the right code');
             setServerErrorNotification({ title: 'Enter valid code', status: 'error' });
             setSignInPhaseOne(true)
