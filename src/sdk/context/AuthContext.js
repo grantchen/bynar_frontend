@@ -1,6 +1,7 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useReducer, createContext, useMemo } from "react";
 import { BaseURL } from "../constant";
+import { Auth } from "aws-amplify";
 const initialState = {
   signin: () =>
     Promise.resolve(null),
@@ -120,7 +121,9 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const signout = () => {
+  const signout = async() => {
+    try{
+    await Auth.signOut()
     localStorage.removeItem("token");
     localStorage.removeItem("theme");
     localStorage.removeItem("lang");
@@ -130,6 +133,10 @@ export const AuthProvider = ({ children }) => {
       token: null,
       isLoggedIn: false
     });
+    }
+    catch(e){
+      console.log(e)
+    }  
   };
 
 
