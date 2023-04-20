@@ -1,5 +1,5 @@
 import { CommonHeader } from './Components/Header/Header';
-import React, { Suspense } from 'react';
+import React, { Suspense ,lazy} from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import './index.scss'
 import '../src/pages/UserList/UserList.scss'
