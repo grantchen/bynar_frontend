@@ -146,7 +146,7 @@ const Signup = () => {
             try {
                 setLoading(true);
                 const data = {
-                    email: email,
+                    email: email.trim(),
                 }
                 const response = await fetch(`${BaseURL}/verify-email`, {
                     method: 'POST',
@@ -194,7 +194,7 @@ const Signup = () => {
             setLoading(true)
             try {
                 const data = {
-                    email: email,
+                    email: email.trim(),
                     // password: password,
                 }
                 const response = await fetch(`${BaseURL}/signup`, {
