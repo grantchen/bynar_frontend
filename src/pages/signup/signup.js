@@ -72,7 +72,7 @@ const Signup = () => {
     const accountInfoButtonDisabled = !emailIsValid || email.length == 0 || isAccountInfoError;
     const personalInfoButtonDisabled = firstName.length == 0 || lastName.length == 0 || city.length == 0 || state.length == 0 || postalCode.length == 0 || phoneNumber.length == 0 || addressLine1.length == 0 || Object.keys(postalCodeErrorNotification).length != 0;
     const verificationEmailButtonDisabled = verificationCode.length == 0 || isVerifyEmailInfoError;
-    
+
     const handleFirstNameChange = (value) => {
         setFirstName(value);
     }
@@ -140,11 +140,59 @@ const Signup = () => {
         setPasswordIsValid(lengthRegex.test(value.trim()) && uppercaseRegex.test(value) && lowercaseRegex.test(value) && numberRegex.test(value) && specialcharacterRegex.test(value))
     };
 
-    /* Function to send email as payload  ,if api response is 200 then proceed with email verification,otherwise in case of error show error in signup page*/
-    const handleSignupRequest = () => {
+     /* Function to check if email address is of valid organization during signup process */
+    const checkValidOrganizationEmail = () => {
         const fetchData = async () => {
             try {
                 setLoading(true);
+                const data = {
+                    email: email,
+                }
+                const response = await fetch(`${BaseURL}/verify-email`, {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                const res = await response.json();
+                if (response.ok) {
+                    if (res.isValid) {
+                        handleSignupRequest()
+                    }
+                    else {
+                        setIsError(true)
+                        setActiveStep(1);
+                        setErrorNotification({
+                            title: 'Enter valid organization email'
+                        })
+                        setLoading(false)
+                    }
+                }
+                else if (response.status === 500) {
+                    setIsError(true)
+                    setActiveStep(1);
+                    setErrorNotification({
+                        title: res.error
+                    })
+                    setLoading(false);
+                }
+                
+            }
+            catch (e) {
+                setLoading(false)
+            }
+
+        }
+        fetchData();
+    }
+
+    /* Function to send email as payload  ,if api response is 200 then proceed with email verification,otherwise in case of error show error in signup page*/
+    const handleSignupRequest = () => {
+        
+        const fetchData = async () => {
+            setLoading(true)
+            try {
                 const data = {
                     email: email,
                     // password: password,
@@ -159,7 +207,6 @@ const Signup = () => {
                 const res = await response.json();
                 if (response.ok) {
                     setActiveStep(2);
-                    setIsAccountInfoUpdated(true);
                     setIsError(false);
                     setIsAccountInfoError(false);
                 }
@@ -168,14 +215,14 @@ const Signup = () => {
                     // setIsAccountInfoError(true);
                     setActiveStep(1);
                     setErrorNotification({
-                        title: res.error
+                        title: res.error === "user already exists"?res.error:"Some error occured, please try after some time"
                     })
                 }
                 setLoading(false);
             }
             catch (e) {
                 setLoading(false)
-                setActiveStep(2)
+                console.log(e)
             }
 
         }
@@ -184,6 +231,7 @@ const Signup = () => {
 
     const handleEditClick = (value) => {
         setActiveStep(value)
+        setIsAccountInfoUpdated(true);
     }
 
     /* Function to verify user email during signup process , if email is verified sucessfully then proceed to next step ,otherwise in case of error show error in signup page*/
@@ -216,12 +264,14 @@ const Signup = () => {
                     setActiveStep(1);
                     setErrorNotification({
                         title: "Enter valid confirmation email code"
-                    })             
+                    })
+                    setVerificationCode('');
                 }
                 setLoading(false);
             }
             catch (e) {
                 setLoading(false);
+                console.log(e)
             }
         }
         fetchData();
@@ -269,6 +319,7 @@ const Signup = () => {
             }
             catch (e) {
                 setLoadingSuccess(false);
+                console.log(e)
             }
 
         }
@@ -406,7 +457,7 @@ const Signup = () => {
                                         {!isAccountInfoUpdated ? "Next" : "Update"}
                                     </button> */}
                                     <button disabled={!emailIsValid || email.length == 0 || isAccountInfoError}
-                                        className={!emailIsValid || email.length == 0 || isAccountInfoError ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleSignupRequest()}>
+                                        className={!emailIsValid || email.length == 0 || isAccountInfoError ? 'submit-button-disabled' : 'submit-button'} onClick={() => checkValidOrganizationEmail()}>
                                         {!isAccountInfoUpdated ? "Next" : "Update"}
                                     </button>
                                 </div>
@@ -425,11 +476,11 @@ const Signup = () => {
                     </div>)}
                 {activeStep == 2 ?
                     (<div id="verify-section" className="email-verification">
-                        <p>Verify Email</p>
+                        <p>Verify email</p>
                         <p>We sent a 7-digit verification code to {email}.</p>
                         <p>This code is valid for 30 minutes.</p>
                         <TextInput type="text" className='verification-text-input'
-                            labelText="Verification code"
+                            labelText="Enter verification code"
                             value={verificationCode}
                             onChange={(e) => handleVerificationCodeChange(e.target.value)}
                         />
@@ -452,12 +503,12 @@ const Signup = () => {
                                 </div>)}
                     </div>) :
                     (<div id="verify-section" className="email-verification">
-                        <p>Verify Email</p>
+                        <p>Verify email</p>
                     </div>)}
                 {activeStep == 3 ?
                     (<div id="verify-section" className='personal-info'>
                         <div className='account-header'>
-                            <p className='text-heading'>Personal information</p>
+                            <p className='text-heading'>Contact information</p>
                         </div>
                         <TextInput type="text"
                             labelText="First name"
@@ -488,7 +539,7 @@ const Signup = () => {
                             onChange={(e) => setAddressLine1(e.target.value)}
                         />
                         <TextInput type="text"
-                            labelText="Address line 1 (optional)"
+                            labelText="Address line 2 (optional)"
                             value={addressLine2}
                             onChange={(e) => setAddressLine2(e.target.value)}
                         />
@@ -504,7 +555,7 @@ const Signup = () => {
                         />
                         <TextInput type="text"
                             id="postalcode"
-                            labelText="Postal Code"
+                            labelText="Postal code"
                             className='postalcode'
                             value={postalCode}
                             onChange={(e) => handlePostalCode(e)}
@@ -556,7 +607,7 @@ const Signup = () => {
                             onChange={(e) => setOrganizationName(e.target.value)}
                         />
                         <TextInput type="text"
-                            labelText="Vat Number"
+                            labelText="VAT/GST/Tax Number"
                             value={vatNumber}
                             onChange={(e) => handleVatNumberChange(e.target.value)}
                             invalid={!isGstValid && vatNumber.length === 0}
@@ -568,7 +619,7 @@ const Signup = () => {
                         <Select className='country-select'
                             value={organizationCountry}
                             id='country-ci'
-                            labelText='Organisation Country'
+                            labelText='Organization Country'
                             onChange={e => setCountryName(e.target.value)}
                         >
                             {countrylist.map((countryObject, countryIndex) => (<SelectItem

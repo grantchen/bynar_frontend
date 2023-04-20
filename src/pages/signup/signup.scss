@@ -277,6 +277,13 @@ label[for=password-input]{
   
 
 }
+
+.verification-text-input{
+    .cds--text-input__label-wrapper{
+      margin: 8px 0px;
+    }
+}
+
 .checkbox{
   width: 20px !important;
 }
