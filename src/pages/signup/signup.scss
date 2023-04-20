@@ -360,6 +360,28 @@ label[for=password-input]{
 .error-notification{ 
   width: 278px;
 }
+.account-info{
+  border-left: 2px solid  #6f6f6f;
+  background-color: #262626;
+  padding: 1rem;
+  position: relative;
+  margin-bottom: 0.5rem;
+  width: 278px !important;
+  color: #ffff;
+  display: flex;
+    flex-direction: column;
+    gap: 16px;
+    label{
+      letter-spacing:  0.32px;
+      display: inline-block;
+      color:#ffff;
+      font-weight: 400;
+      line-height: 1rem;
+      vertical-align: baseline;
+      width: 100%;
+      
+    }
+  }
 }
 .verify-button-class{
   display: flex;

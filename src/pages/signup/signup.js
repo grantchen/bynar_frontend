@@ -102,6 +102,7 @@ const Signup = () => {
         setpaswordStrengthWidth(tempArray.filter(i => i === true).length * ref?.current?.offsetWidth / 6);
     }
 
+     /* Function to check if email address is valid or not */
     const checkEmailValid = (value) => {
         var isEmailValid =
             /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
@@ -116,6 +117,7 @@ const Signup = () => {
         }
     }
 
+     /* Function to set state, check email address validation when email address is changed  */
     const handleEmailChange = (value) => {
         setErrorNotification({});
         setIsError(false);
@@ -360,6 +362,7 @@ const Signup = () => {
         }
     }
 
+     /* Function to handle postal code change and also check validations for postal code */
     const handlePostalCode = (e) => {
         setPostalCode(e.target.value);
         if (!/^\d+$/.test(e.target.value)) {
@@ -391,7 +394,7 @@ const Signup = () => {
 
         <div id="scroller" style={{ overflow: 'auto', backgroundColor: '#000' }}>
             <div className='header-box'>
-                <div className="login-link" style={{ 'marginBottom': '1.5rem' }}>Already have an account? <Link href="/signin">Log in</Link></div>
+                <div className="login-link" style={{ 'marginBottom': '1.5rem' }}>Already have an account? <Link  style={{ cursor: 'pointer' }} onClick={()=>navigate("/signin")}>Log in</Link></div>
                 <Heading>Sign Up</Heading>
                 {typeof errorNotification == 'object' && Object.keys(errorNotification).length !== 0 ?
                     (
@@ -415,6 +418,7 @@ const Signup = () => {
                         </div>
 
                         <TextInput type="email" className='email-text-input'
+                            id="email"
                             labelText="Email"
                             value={email}
                             onChange={(e) => handleEmailChange(e.target.value)}
@@ -480,6 +484,7 @@ const Signup = () => {
                         <p>We sent a 7-digit verification code to {email}.</p>
                         <p>This code is valid for 30 minutes.</p>
                         <TextInput type="text" className='verification-text-input'
+                            id="verification code"
                             labelText="Enter verification code"
                             value={verificationCode}
                             onChange={(e) => handleVerificationCodeChange(e.target.value)}
@@ -511,11 +516,13 @@ const Signup = () => {
                             <p className='text-heading'>Contact information</p>
                         </div>
                         <TextInput type="text"
+                            id="first name"
                             labelText="First name"
                             value={firstName}
                             onChange={(e) => handleFirstNameChange(e.target.value)}
                         />
                         <TextInput type="text"
+                            id="last name"
                             labelText="Last name"
                             value={lastName}
                             onChange={(e) => handleLastNameChange(e.target.value)}
@@ -535,20 +542,24 @@ const Signup = () => {
                         </Select>
                         <TextInput type="text"
                             labelText="Address line 1"
+                            id="address line 1"
                             value={addressLine1}
                             onChange={(e) => setAddressLine1(e.target.value)}
                         />
                         <TextInput type="text"
+                            id="address line 2"
                             labelText="Address line 2 (optional)"
                             value={addressLine2}
                             onChange={(e) => setAddressLine2(e.target.value)}
                         />
                         <TextInput type="text"
+                            id="city"
                             labelText="City"
                             value={city}
                             onChange={(e) => setCity(e.target.value)}
                         />
                         <TextInput type="text"
+                            id="state"
                             labelText="State"
                             value={state}
                             onChange={(e) => setState(e.target.value)}
@@ -602,11 +613,13 @@ const Signup = () => {
                             <p className='text-heading'>Tax information</p>
                         </div>
                         <TextInput type="text"
+                            id="Organization Name"
                             labelText="Organization Name"
                             value={organizationName}
                             onChange={(e) => setOrganizationName(e.target.value)}
                         />
                         <TextInput type="text"
+                            id="VAT/GST/Tax Number"
                             labelText="VAT/GST/Tax Number"
                             value={vatNumber}
                             onChange={(e) => handleVatNumberChange(e.target.value)}
@@ -729,7 +742,7 @@ const Signup = () => {
                         <p>You can withdraw your marketing consent at any time by submitting an opt-out request. Also you may unsubscribe from receiving marketing emails by clicking the unsubscribe link in each email.</p>
                         <div style={{ display: 'flex', alignItems: 'center' }}>
                             <input type="checkbox" id="vehicle1" className='checkbox' name="vehicle1" value="Bike" onChange={(e) => { setIsChecked(e.target.checked) }} />
-                            <label for="vehicle1"> I accept Product terms and condition</label><br></br>
+                            <label> I accept Product terms and condition</label><br></br>
                         </div>
 
                     </div>) :
