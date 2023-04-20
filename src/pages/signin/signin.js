@@ -56,7 +56,7 @@ const Signin = () => {
             setLoading(true);
             try {
                 cognitoUser.current = await Auth.signIn({
-                    username: email,
+                    username: email.trim(),
                 });
                 setSignInPhaseOne(false);
                 setServerErrorNotification({})
