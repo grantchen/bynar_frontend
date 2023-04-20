@@ -11,6 +11,7 @@ import { AuthProvider } from './sdk/context/AuthContext';
 import { UserList } from './pages/UserList/UserList';
 import { AddUser } from './pages/AddUser/AddUser';
 import { DataLoader } from './Components/Loader/DataLoder';
+import Home from './Components/Home/Home';
 const Dashboard = lazy(() => import('./Components/Dashboard/Dashboard'));
 const Signup = lazy(() => import('./pages/signup/signup'));
 const Signin = lazy(() => import('./pages/signin/signin'));
@@ -25,12 +26,13 @@ function App() {
         <BrowserRouter>
           <AuthProvider>
             <Routes>
+            <Route path='/' element={<Home />}/>
               <Route exact path="/signup" element={<Signup />} />
-              <Route path='/' element={<CommonHeader />}>
-                <Route exact path="/dashboard" element={<Dashboard />} />    {/*A nested route!*/}
+              {/* <Route path='/' element={<CommonHeader />}>
+                <Route exact path="/dashboard" element={<Dashboard />} />    
                 <Route exact path="/datatable" element={<DataTables />} />
                 <Route exact path="/userlist" element={<UserList />} />
-              </Route>
+              </Route> */}
               <Route exact path="/signin" element={<Signin />} />
               <Route exact path="/forgotpassword" element={<ForgotPassword />} />
               <Route exact path="/adduser" element={<AddUser/>} />

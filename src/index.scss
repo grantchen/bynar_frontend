@@ -3,6 +3,36 @@
 @use '@carbon/themes/scss/themes' as *;
 // @use '@carbon/themes' with ($theme: $g100);
 @import 'carbon';
+@import 'carbon-components/scss/globals/scss/css--reset';
+@import '@carbon/type/scss/font-face/mono';
+@import '@carbon/type/scss/font-face/sans';
+@import '@carbon/grid/scss/grid';
+@include carbon--font-face-mono();
+@include carbon--font-face-sans();
+@include carbon--type-reset();
+.dark-theme {
+  @include carbon--theme($carbon--theme--g100, true);
+
+  background-color: var(--cds-ui-background);
+  color: var(--cds-text-01);
+}
+
+.g10-theme {
+  @include carbon--theme($carbon--theme--g10, true);
+}
+
+.g90-theme {
+  @include carbon--theme($carbon--theme--g90, true);
+}
+
+.dark-theme {
+  @include carbon--theme($carbon--theme--g100, true);
+}
+
+*[class$='-theme'] {
+  background-color: var(--cds-ui-background);
+  color: var(--cds-text-01);
+}
 
 
 

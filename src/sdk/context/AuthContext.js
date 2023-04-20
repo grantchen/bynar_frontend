@@ -53,11 +53,11 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const tokenCheck=localStorage.getItem("token");
     if (tokenCheck !== null) {
-      if (location.pathname === '/signin' || location.pathname === '/' || location.pathname === '/forgotpassword' || location.pathname === '/signup') {
+      if (location.pathname === '/signin' || location.pathname === '/forgotpassword' || location.pathname === '/signup') {
         navigate('/dashboard')
       }
     } else {
-      if (location.pathname === '/' || location.pathname === '/dashboard' || location.pathname === '/datatable' || location.pathname === '/tearsheet' || location.pathname === '/adduser' || location.pathname === '/userlist') {
+      if (location.pathname === '/dashboard' || location.pathname === '/datatable' || location.pathname === '/tearsheet' || location.pathname === '/adduser' || location.pathname === '/userlist') {
         navigate('/signin');
       }
 
