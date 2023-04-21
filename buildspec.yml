@@ -17,7 +17,7 @@ phases:
       - npm run build
       # Use AWS SAM to package the application by using AWS CloudFormation
       - aws s3 cp --recursive build/ s3://$WEBSITE_S3_BUCKET/ --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
-      - aws s3 website s3://$WEBSITE_S3_BUCKET/ --index-document index.html
+      - aws s3 website s3://$WEBSITE_S3_BUCKET/ --index-document index.html --error-document index.html
       # - sed -i -e "s|assets/|$WEBSITE_S3_PREFIX/public/assets/|g" public/index.html
       # - sed -i -e "s|./static/|$WEBSITE_S3_PREFIX/public/static/|g" public/index.html
       # - sed -i -e "s|./favicon.ico|$WEBSITE_S3_PREFIX/public/favicon.ico|g" public/index.html
