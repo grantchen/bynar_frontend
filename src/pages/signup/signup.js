@@ -392,10 +392,10 @@ const Signup = () => {
 
     return (
 
-        <div id="scroller" style={{ overflow: 'auto', backgroundColor: '#000' }}>
+        <div id="scroller" style={{ overflow: 'auto', backgroundColor: '#E6E6E6' }}>
             <div className='header-box'>
                 <div className="login-link" style={{ 'marginBottom': '1.5rem' }}>Already have an account? <Link  style={{ cursor: 'pointer' }} onClick={()=>navigate("/signin")}>Log in</Link></div>
-                <Heading>Sign Up</Heading>
+                <Heading style={{color:'#262626'}}>Sign Up</Heading>
                 {typeof errorNotification == 'object' && Object.keys(errorNotification).length !== 0 ?
                     (
                         <InlineNotification
@@ -574,7 +574,7 @@ const Signup = () => {
                             invalidText={(postalCodeErrorNotification && postalCodeErrorNotification.title) ? postalCodeErrorNotification.title : ""}
                         />
                         <div>
-                            <p>Phone number</p>
+                            <p style={{color:'#525252'}}>Phone number</p>
                         </div>
                         <PhoneInput className='phone-input'
                             country={'in'}
@@ -670,7 +670,7 @@ const Signup = () => {
                         </div>
                         <div className="form-group">
                             <div>
-                                <p>Card Number</p>
+                                <p className='input-heading'>Card Number</p>
                             </div>
                             <input
                                 type="tel"
@@ -686,7 +686,7 @@ const Signup = () => {
                         </div>
                         <div className="form-group">
                             <div>
-                                <p>Expiration Date</p>
+                                <p className='input-heading'>Expiration Date</p>
                             </div>
                             <input
                                 type="tel"
@@ -700,7 +700,7 @@ const Signup = () => {
                         </div>
                         <div className="form-group">
                             <div>
-                                <p>Security Code</p>
+                                <p className='input-heading'>Security Code</p>
                             </div>
                             <input
                                 type="tel"
@@ -764,7 +764,7 @@ const Signup = () => {
                     (
                         <div className='create-account-loader'>
                             <Loader />
-                            <p>{message}</p>
+                            <p style={{color:'#161616'}}>{message}</p>
                         </div>
                     ) : (
                         <div className='create-account' >

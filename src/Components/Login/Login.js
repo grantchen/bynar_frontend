@@ -26,7 +26,7 @@ const Login = ({ heading, loading, handleFormSubmit, setErrorNotification, setSe
                                 <InlineNotification
                                     className="error-notification-box"
                                     onClose={function noRefCheck() { }}
-                                    onCloseButtonClick={() => { setErrorNotification({}) }}
+                                    onCloseButtonClick={() => { setErrorNotification({});setServerErrorNotification({}) }}
                                     statusIconDescription="notification"
                                     title={serverErrorNotification.title ? serverErrorNotification.title : ''}
                                 />) : (
@@ -36,8 +36,8 @@ const Login = ({ heading, loading, handleFormSubmit, setErrorNotification, setSe
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <Heading>{heading}</Heading>
                         </div>
-                        {navigateToLogin && <p className="register-text body-01">{text}<Link className="underlined-link" style={{ cursor: 'pointer' }} onClick={() => { setSignInPhaseOne(true) }}> {subtitle}</Link></p>}
-                        {showCreateAccount && <p className="register-text body-01">{createAccoutText}<Link style={{ cursor: 'pointer' }} className="underlined-link" onClick={() => { navigate(`${navigationUrl}`) }}> {navigationUrlText}</Link></p>}
+                        {navigateToLogin && <p className="register-text-body-01">{text}<Link className="underlined-link" style={{ cursor: 'pointer' }} onClick={() => { setSignInPhaseOne(true) }}> {subtitle}</Link></p>}
+                        {showCreateAccount && <p className="register-text-body-01">{createAccoutText}<Link style={{ cursor: 'pointer' }} className="underlined-link" onClick={() => { navigate(`${navigationUrl}`) }}> {navigationUrlText}</Link></p>}
                         <div className='login-input-wrapper' >
                             {enableForgotPassword ? (<FormLabel className='input-label' >{labelText} <Link style={{ cursor: 'pointer' }} className="forgot-link" onClick={() => { navigate("/forgotpassword") }}>Forgot Password?</Link></FormLabel>) : (<FormLabel className='input-label' >{labelText} </FormLabel>)}
                             <TextInput

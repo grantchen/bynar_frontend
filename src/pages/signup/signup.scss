@@ -36,8 +36,8 @@
   height: 32px;
 }
 .account{
-  border-left: 2px solid  #6f6f6f;
-  background-color:  #262626;
+  border-left: 2px solid  #0062ff;
+  background-color:  #ffffff;
   padding: 1rem;
   position: relative;
   margin-bottom: 0.5rem;
@@ -45,8 +45,8 @@
   height:330px;
 }
 .account-edit{
-  border-left: 2px solid #6f6f6f;
-  background-color:  #262626;
+  border-left: 2px solid #0062ff;
+  background-color:  #ffffff;
   padding: 1rem;
   position: relative;
   margin-bottom: 0.5rem;
@@ -76,10 +76,10 @@
   color:  #0f62fe;
 }
 .text-heading{
-  color: #ffff;
+  color:#161616;
 }
 .text-heading-edit{
-  color: #ffff;
+  color: #525252;
   font-size: 14px;
   overflow-wrap: break-word;
 }
@@ -114,13 +114,18 @@
   }
 }
 
+.input-heading{
+  color:#525252;
+  font-size: 14px;
+}
+
 .email-text-input{
 
   .cds--label{
     letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
     display: inline-block;
     margin-bottom: 0.5rem;
-    color:#ffff;
+    color:#525252;
     font-weight: 400;
     line-height: 1rem;
     vertical-align: baseline;
@@ -168,21 +173,26 @@ label[for=password-input]{
   margin-top: 12px;
 }
 .accordian{
-  background-color: #000;
+  background-color: #E6E6E6;
   padding: 0px 48px 48px 48px;
   
   .bx--accordion__text-heading{
      display: none;
   }
 }
+
+.login-link{
+  color: #262626;
+}
+
 .email-verification{
-  border-left: 2px solid  #6f6f6f;
-  background-color: #262626;
+  border-left: 2px solid  #0062ff;
+  background-color: #ffffff;
   padding: 1rem;
   position: relative;
   margin-bottom: 0.5rem;
   width: 400px;
-  color: #ffff;
+  color: #161616;
   display: flex;
     flex-direction: column;
     gap: 16px;
@@ -196,13 +206,13 @@ label[for=password-input]{
 }
 
 .personal-info{
-  border-left: 2px solid  #6f6f6f;
-  background-color: #262626;
+  border-left: 2px solid  #0062ff;
+  background-color: #ffffff;
   padding: 1rem;
   position: relative;
   margin-bottom: 0.5rem;
   width: 400px;
-  color: #ffff;
+  color: #161616;
   display: flex;
     flex-direction: column;
     gap: 16px;
@@ -210,7 +220,7 @@ label[for=password-input]{
     letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
     display: inline-block;
     margin-bottom: 0.5rem;
-    color:#ffff;
+    color:#525252;
     font-weight: 400;
     line-height: 1rem;
     vertical-align: baseline;
@@ -237,13 +247,13 @@ label[for=password-input]{
   }
 }
 .vat-info{
-  border-left: 2px solid  #6f6f6f;
-  background-color: #262626;
+  border-left: 2px solid  #0062ff;
+  background-color: #FFFFFF;
   padding: 1rem;
   position: relative;
   margin-bottom: 0.5rem;
   width: 400px;
-  color: #ffff;
+  color: #161616;
   display: flex;
     flex-direction: column;
     gap: 16px;
@@ -251,7 +261,7 @@ label[for=password-input]{
       letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
       display: inline-block;
       margin-bottom: 0.5rem;
-      color:#ffff;
+      color:#525252;
       font-weight: 400;
       line-height: 1rem;
       vertical-align: baseline;
@@ -340,7 +350,7 @@ label[for=password-input]{
   height: 40px;
 }
 .vat-info {
-  border-left: 2px solid #6f6f6f;
+  border-left: 2px solid #0062ff;
   background-color: #262626;
   padding: 1rem;
   position: relative;
@@ -361,20 +371,20 @@ label[for=password-input]{
   width: 278px;
 }
 .account-info{
-  border-left: 2px solid  #6f6f6f;
-  background-color: #262626;
+  border-left: 2px solid  #0062ff;
+  background-color: #FFFFFF;
   padding: 1rem;
   position: relative;
   margin-bottom: 0.5rem;
   width: 278px !important;
-  color: #ffff;
+  color: #262626;
   display: flex;
     flex-direction: column;
     gap: 16px;
     label{
       letter-spacing:  0.32px;
       display: inline-block;
-      color:#ffff;
+      color:#525252;
       font-weight: 400;
       line-height: 1rem;
       vertical-align: baseline;
@@ -397,20 +407,20 @@ label[for=password-input]{
   }
 }
 .account-info{
-  border-left: 2px solid  #6f6f6f;
-  background-color: #262626;
+  border-left: 2px solid  #0062ff;
+  background-color: #FFFFFF;
   padding: 1rem;
   position: relative;
   margin-bottom: 0.5rem;
   width: 400px;
-  color: #ffff;
+  color: #525252;
   display: flex;
     flex-direction: column;
     gap: 16px;
     label{
       letter-spacing:  0.32px;
       display: inline-block;
-      color:#ffff;
+      color:#525252;
       font-weight: 400;
       line-height: 1rem;
       vertical-align: baseline;

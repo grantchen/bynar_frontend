@@ -53,16 +53,17 @@ const Signin = () => {
         else {
             setErrorNotification({
             })
+            setServerErrorNotification({})
             setLoading(true);
             try {
                 cognitoUser.current = await Auth.signIn({
                     username: email.trim(),
                 });
                 setSignInPhaseOne(false);
-                setServerErrorNotification({})
                 setLoading(false)
             }
             catch (e) {
+                console.log(e)
                 setLoading(false)
                 setServerErrorNotification({ title: 'Email address not verified', status: 'error' });
             }
