@@ -1,6 +1,6 @@
 import { CommonHeader } from './Components/Header/Header';
 import React, { Suspense ,lazy} from 'react';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 import './index.scss'
 import '../src/pages/UserList/UserList.scss'
 import { DataTables } from './Components/DataTable/DataTable';
@@ -26,13 +26,13 @@ function App() {
         <BrowserRouter>
           <AuthProvider>
             <Routes>
-            <Route path='/' element={<Home />}/>
+              <Route path='/' element={<Home />}/>
               <Route exact path="/signup" element={<Signup />} />
-              {/* <Route path='/' element={<CommonHeader />}>
-                <Route exact path="/dashboard" element={<Dashboard />} />    
-                <Route exact path="/datatable" element={<DataTables />} />
-                <Route exact path="/userlist" element={<UserList />} />
-              </Route> */}
+              <Route path='/home/' element={<CommonHeader />}>
+                <Route exact path="dashboard" element={<Dashboard />} />    
+                <Route exact path="datatable" element={<DataTables />} />
+                <Route exact path="userlist" element={<UserList />} />
+              </Route>
               <Route exact path="/signin" element={<Signin />} />
               <Route exact path="/forgotpassword" element={<ForgotPassword />} />
               <Route exact path="/adduser" element={<AddUser/>} />
