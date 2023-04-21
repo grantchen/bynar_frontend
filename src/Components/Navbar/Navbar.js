@@ -32,8 +32,8 @@ export const Navbar = ({isSideNavExpanded,onClickSideNavExpand}) => {
             expanded={isSideNavExpanded} 
             >
               <SideNavItems className="side-nav">
-                <SideNavLink renderIcon={Search20} className="side-nav-link" title="Data Table" onClick={()=>{navigate("/datatable")}}>{t('data-table')}</SideNavLink> 
-                <SideNavLink renderIcon={Search20} className="side-nav-link" title="User List" onClick={()=>{navigate("/userlist")}}>User List</SideNavLink> 
+                <SideNavLink renderIcon={Search20} className="side-nav-link" title="Data Table" onClick={()=>{navigate("/home/datatable")}}>{t('data-table')}</SideNavLink> 
+                <SideNavLink renderIcon={Search20} className="side-nav-link" title="User List" onClick={()=>{navigate("/home/userlist")}}>User List</SideNavLink> 
                 {/* <SideNavLink renderIcon={Fade16} title="Side Panel" onClick={()=>{navigate("/sidepanel")}}>Side Panel</SideNavLink> 
                 <SideNavLink renderIcon={Fade16} title="Tear Sheet" onClick={()=>{navigate("/tearsheet")}}>TearSheet</SideNavLink> */}
                  

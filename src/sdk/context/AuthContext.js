@@ -57,8 +57,14 @@ export const AuthProvider = ({ children }) => {
       {
         navigate('/home/dashboard')
       }
+      else if(location.pathname === '/userlist'){
+        navigate('/home/userlist')
+      }
+      else if(location.pathname === '/datatable'){
+        navigate('/home/datatable')
+      }
     } else {
-      if (location.pathname === '/home' || location.pathname === '/dashboard' || location.pathname === '/datatable' || location.pathname === '/tearsheet' || location.pathname === '/adduser' || location.pathname === '/userlist' || location.pathname === '/home/dashboard' || location.pathname === '/home/datatable' ) {
+      if (location.pathname === '/home' || location.pathname === '/dashboard' || location.pathname === '/datatable' || location.pathname === '/tearsheet' || location.pathname === '/adduser' || location.pathname === '/userlist' || location.pathname === '/datatable' || location.pathname === '/home/userlist'|| location.pathname === '/home/dashboard' || location.pathname === '/home/datatable' ) {
         navigate('/signin');
       }
 
