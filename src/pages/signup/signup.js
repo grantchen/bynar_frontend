@@ -142,53 +142,6 @@ const Signup = () => {
         setPasswordIsValid(lengthRegex.test(value.trim()) && uppercaseRegex.test(value) && lowercaseRegex.test(value) && numberRegex.test(value) && specialcharacterRegex.test(value))
     };
 
-     /* Function to check if email address is of valid organization during signup process */
-    const checkValidOrganizationEmail = () => {
-        const fetchData = async () => {
-            try {
-                setLoading(true);
-                const data = {
-                    email: email.trim(),
-                }
-                const response = await fetch(`${BaseURL}/verify-email`, {
-                    method: 'POST',
-                    body: JSON.stringify(data),
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                })
-                const res = await response.json();
-                if (response.ok) {
-                    if (res.isValid) {
-                        handleSignupRequest()
-                    }
-                    else {
-                        setIsError(true)
-                        setActiveStep(1);
-                        setErrorNotification({
-                            title: 'Enter valid organization email'
-                        })
-                        setLoading(false)
-                    }
-                }
-                else if (response.status === 500) {
-                    setIsError(true)
-                    setActiveStep(1);
-                    setErrorNotification({
-                        title: res.error
-                    })
-                    setLoading(false);
-                }
-                
-            }
-            catch (e) {
-                setLoading(false)
-            }
-
-        }
-        fetchData();
-    }
-
     /* Function to send email as payload  ,if api response is 200 then proceed with email verification,otherwise in case of error show error in signup page*/
     const handleSignupRequest = () => {
         
@@ -214,7 +167,6 @@ const Signup = () => {
                 }
                 else if (response.status === 500) {
                     setIsError(true)
-                    // setIsAccountInfoError(true);
                     setActiveStep(1);
                     setErrorNotification({
                         title: res.error === "user already exists"?res.error:"Some error occured, please try after some time"
@@ -461,7 +413,7 @@ const Signup = () => {
                                         {!isAccountInfoUpdated ? "Next" : "Update"}
                                     </button> */}
                                     <button disabled={!emailIsValid || email.length == 0 || isAccountInfoError}
-                                        className={!emailIsValid || email.length == 0 || isAccountInfoError ? 'submit-button-disabled' : 'submit-button'} onClick={() => checkValidOrganizationEmail()}>
+                                        className={!emailIsValid || email.length == 0 || isAccountInfoError ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleSignupRequest()}>
                                         {!isAccountInfoUpdated ? "Next" : "Update"}
                                     </button>
                                 </div>
