@@ -169,7 +169,7 @@ const Signup = () => {
                     setIsError(true)
                     setActiveStep(1);
                     setErrorNotification({
-                        title: res.error === "user already exists"?res.error:"Some error occured, please try after some time"
+                        title: res.error === "username already exist"?res.error:"Some error occured, please try after some time"
                     })
                 }
                 setLoading(false);
@@ -259,6 +259,7 @@ const Signup = () => {
                         'Content-Type': 'application/json',
                     },
                 })
+                const res = await response.json();
 
                 if (response.ok) {
                     navigate('/signin');
@@ -266,7 +267,7 @@ const Signup = () => {
                 else if (response.status === 500) {
                     setIsError(true)
                     setErrorNotification({
-                        title: response.error
+                        title: 'error occured while creating user account'
                     })
                 }
                 setLoadingSuccess(false);
