@@ -7,13 +7,31 @@ import {
     formatFormData
 } from "../../../src/utils/util.js";
 import {
-    TextInput,
+    Theme,
+    Content,
+    Form,
+    FormGroup,
+    Stack,
+    Button,
     Heading,
+    InlineLoading,
     Link,
     InlineNotification,
+    Grid,
+    Column,
+    Row,
+    ProgressIndicator,
+    ProgressStep,
+    RadioButtonGroup,
+    RadioButton,
+    FlexGrid,
+    HeaderName,
+} from '@carbon/react';
+import {
+    TextInput,
     Select,
     SelectItem,
-} from '@carbon/react';
+} from 'carbon-components-react';
 import {
     PasswordInput
 } from 'carbon-components-react';
@@ -30,6 +48,8 @@ const Signup = () => {
     const navigate = useNavigate();
     const [errorNotification, setErrorNotification] = useState({});
     const [loading, setLoading] = useState(false);
+    const [resendCodeLoading, setResendCodeLoading] = useState(false)
+    const [verifyEmailLoading, setVerifyEmailLoading] = useState(false)
     const [loadingSuccess, setLoadingSuccess] = useState(false);
     const [password, setPassword] = useState('');
     const [email, setEmailAddress] = useState('');
@@ -38,10 +58,11 @@ const Signup = () => {
     const [passwordStrengthWidth, setpaswordStrengthWidth] = useState(0);
     const [passwordIsValid, setPasswordIsValid] = useState(true);
     const [emailIsValid, setEmailValid] = useState(true);
-    const [activeStep, setActiveStep] = useState(1);
+    const [activeStep, setActiveStep] = useState(3);
     const [verificationCode, setVerificationCode] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [fullName, setFullName] = useState('');
     const [isProfileInfoUpdated, setIsProfileInfoUpdated] = useState(false)
     const [isAccountInfoUpdated, setIsAccountInfoUpdated] = useState(false)
     const [country, setCountry] = useState("India");
@@ -102,7 +123,7 @@ const Signup = () => {
         setpaswordStrengthWidth(tempArray.filter(i => i === true).length * ref?.current?.offsetWidth / 6);
     }
 
-     /* Function to check if email address is valid or not */
+    /* Function to check if email address is valid or not */
     const checkEmailValid = (value) => {
         var isEmailValid =
             /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
@@ -117,7 +138,7 @@ const Signup = () => {
         }
     }
 
-     /* Function to set state, check email address validation when email address is changed  */
+    /* Function to set state, check email address validation when email address is changed  */
     const handleEmailChange = (value) => {
         setErrorNotification({});
         setIsError(false);
@@ -144,9 +165,10 @@ const Signup = () => {
 
     /* Function to send email as payload  ,if api response is 200 then proceed with email verification,otherwise in case of error show error in signup page*/
     const handleSignupRequest = () => {
-        
+
         const fetchData = async () => {
             setLoading(true)
+            setResendCodeLoading(true)
             try {
                 const data = {
                     email: email.trim(),
@@ -167,12 +189,13 @@ const Signup = () => {
                 }
                 else if (response.status === 500) {
                     setIsError(true)
-                    setActiveStep(1);
+                    setActiveStep(2);
                     setErrorNotification({
-                        title: res.error === "username already exist"?res.error:"Some error occured, please try after some time"
+                        title: res.error === "username already exist" || "email is not valid" ? res.error : "Some error occured, please try after some time"
                     })
                 }
                 setLoading(false);
+                setResendCodeLoading(false);
             }
             catch (e) {
                 setLoading(false)
@@ -193,7 +216,7 @@ const Signup = () => {
 
         const fetchData = async () => {
             try {
-                setLoading(true);
+                setVerifyEmailLoading(true);
                 const data = {
                     email: email,
                     code: verificationCode,
@@ -215,16 +238,16 @@ const Signup = () => {
                 else if (response.status === 500) {
                     setIsError(true)
                     setIsVerifyEmailError(true);
-                    setActiveStep(1);
+                    // setActiveStep(1);
                     setErrorNotification({
                         title: "Enter valid confirmation email code"
                     })
                     setVerificationCode('');
                 }
-                setLoading(false);
+                setVerifyEmailLoading(false);
             }
             catch (e) {
-                setLoading(false);
+                setVerifyEmailLoading(false);
                 console.log(e)
             }
         }
@@ -315,7 +338,7 @@ const Signup = () => {
         }
     }
 
-     /* Function to handle postal code change and also check validations for postal code */
+    /* Function to handle postal code change and also check validations for postal code */
     const handlePostalCode = (e) => {
         setPostalCode(e.target.value);
         if (!/^\d+$/.test(e.target.value)) {
@@ -336,400 +359,222 @@ const Signup = () => {
 
     const taxInfoButtonDisabled = organizationName.length == 0 || organizationCountry.length == 0 || (vatNumber.length === 0);
 
-    useEffect(() => {
-        // 👇️ scroll to top on page load
-        if (isError) {
-            document.getElementById("scroller").scroll(0, 0);
-        }
-    }, [isError]);
+    // useEffect(() => {
+    //     // 👇️ scroll to top on page load
+    //     if (isError) {
+    //         document.getElementById("scroller").scroll(0, 0);
+    //     }
+    // }, [isError]);
 
     return (
-
-        <div id="scroller" style={{ overflow: 'auto', backgroundColor: '#E6E6E6' }}>
-            <div className='header-box'>
-                <div className="login-link" style={{ 'marginBottom': '1.5rem' }}>Already have an account? <Link  style={{ cursor: 'pointer' }} onClick={()=>navigate("/signin")}>Log in</Link></div>
-                <Heading style={{color:'#262626'}}>Sign Up</Heading>
-                {typeof errorNotification == 'object' && Object.keys(errorNotification).length !== 0 ?
-                    (
-                        <InlineNotification
-                            className="error-notification"
-                            onClose={function noRefCheck() { }}
-                            onCloseButtonClick={() => { setErrorNotification({}); setIsError(false) }}
-                            statusIconDescription="notification"
-                            title={errorNotification.title ? errorNotification.title : ''}
-                        />) : (
-                        <div className="error-notification-inactive"></div>
-                    )
-                }
-            </div>
-
-            <div className="accordian">
-                {activeStep == 1 ? (
-                    <div className='account'>
-                        <div className='account-header'>
-                            <p className='text-heading'>Account information</p>
+        <>
+            <Grid className={'signup-grid'} >
+                <Column className={'right-column'} style={{ background: "url(./image/signup-bg.svg) center 60% / 100% no-repeat rgb(249, 249, 249)" }} >
+                    <Content className='right-content'>
+                        <div className='signup-heading-text-wrapper' >
+                            <HeaderName prefix="" className='signup-heading-text'>
+                                Create your
+                            </HeaderName>
+                            <HeaderName prefix="Bynar" className='signup-heading-text'>
+                                account
+                            </HeaderName>
                         </div>
 
-                        <TextInput type="email" className='email-text-input'
-                            id="email"
-                            labelText="Email"
-                            value={email}
-                            onChange={(e) => handleEmailChange(e.target.value)}
-                            invalid={!emailIsValid && email.length > 0}
-                            invalidText={
-                                !emailIsValid && email.length > 0
-                                    ? 'Enter valid email address' : null
-                            }
-                        />
-                        {/* COMMENTED CODE FOR PASSWORD VALIDATION IN SIGN UP FLOW */}
-                        {/* <PasswordInput ref={ref} type="password" className='password-text-input'
-                            id="password-input"
-                            labelText="Enter Password"
-                            value={password}
-                            onChange={(e) => handlePasswordChange(e.target.value)}
-                            onFocus={() => { setIsPasswordVisible(true); setWidth(ref?.current?.offsetWidth) }}
-                            onBlur={() => { setIsPasswordVisible(false); setWidth(ref?.current?.offsetWidth) }}
-
-                            invalid={!passwordIsValid && password.length > 0}
-                            invalidText={
-                                !passwordIsValid && password.length > 0
-                                    ? 'Aleast 8 characters are required including uppercase, lowercase and a number.'
-                                    : null
-                            }
-                        /> */}
-                        {/* {isPasswordVisible && <div style={{ width: `${passwordStrengthWidth}px`, height: '4px', backgroundColor: 'green', marginTop: '2px' }}></div>}
-                        {isPasswordVisible && <PasswordStrength passwordArray={passwordArray} />} */}
-
-                        {loading ?
-                            (
-                                <div style={{ marginTop: '32px' }}>
-                                    <Loader />
+                    </Content>
+                </Column>
+                <Column className={'left-column'}>
+                    <Content className={'signup-container'} >
+                        <div className='heading-container' >
+                            <div className="login-link" style={{ 'marginBottom': '1.5rem' }}>Already have an BYNAR account? <Link href="/signin">Log in</Link></div>
+                            <Heading style={{ fontSize: '24px' }}>Sign up for an Bynar account</Heading>
+                            <hr className="underline" />
+                        </div>
+                    </Content>
+                    {typeof errorNotification == 'object' && Object.keys(errorNotification).length !== 0 ?
+                        (
+                            <InlineNotification
+                                className="error-notification"
+                                onClose={function noRefCheck() { }}
+                                onCloseButtonClick={() => { setErrorNotification({}); setIsError(false) }}
+                                statusIconDescription="notification"
+                                title={errorNotification.title ? errorNotification.title : ''}
+                            />) : (
+                            <div className="error-notification-inactive"></div>
+                        )
+                    }
+                    <div className="signup-form">
+                        {activeStep == 1 && (
+                            <div className='account-info-box'>
+                                <div className='account-heading'>
+                                    <p className='heading'>Organization account</p>
                                 </div>
-                            ) :
-                            (
-                                <div style={{ marginTop: '32px' }}>
-                                    {/* COMMENTED CODE FOR APPLYING STYLE ON ACCOUNT INFORMATION BUTTON WHEN SIGN IN USING PASSWORD*/}
-                                    {/* <button disabled={!passwordIsValid || !emailIsValid || email.length == 0 || password.length == 0 || isAccountInfoError}
-                                        className={!passwordIsValid || !emailIsValid || email.length == 0 || password.length == 0 || isAccountInfoError ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleSignupRequest()}>
-                                        {!isAccountInfoUpdated ? "Next" : "Update"}
-                                    </button> */}
-                                    <button disabled={!emailIsValid || email.length == 0 || isAccountInfoError}
-                                        className={!emailIsValid || email.length == 0 || isAccountInfoError ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleSignupRequest()}>
-                                        {!isAccountInfoUpdated ? "Next" : "Update"}
-                                    </button>
+                                <TextInput
+                                    id="email"
+                                    className="email-form-input"
+                                    // hideLabel={true}
+                                    value={email}
+                                    labelText="E-mail"
+                                    onChange={(e) => handleEmailChange(e.target.value)}
+                                    invalid={!emailIsValid && email.length > 0}
+                                    invalidText={
+                                        !emailIsValid && email.length > 0
+                                            ? 'Enter valid email address' : null
+                                    }
+                                    disabled={loading ? true : false}
+                                />
+                                {loading ?
+                                    (
+                                        <div style={{ marginTop: '32px' }}>
+                                            <Loader />
+                                        </div>
+                                    ) : (
+                                        <div style={{ marginTop: '32px' }}>
+                                            <button disabled={!emailIsValid || email.length == 0 || isAccountInfoError}
+                                                className={!emailIsValid || email.length == 0 || isAccountInfoError ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleSignupRequest()}>
+                                                {!isAccountInfoUpdated ? "Next" : "Update"}
+                                            </button>
+                                        </div>)}
+                            </div>)}
+                        {activeStep == 2 && (
+                            <div className='account-info-box'>
+                                <div className='account-heading'>
+                                    <p className='heading'>2-Verify email</p>
                                 </div>
-                            )
-                        }
-                    </div>) :
-                    (<div className='account-edit'>
-                        <div className='account-header-edit'>
-                            <div className='box'>
-                                <p className='text-heading'>Account information</p>
-                                <button className='edit-button' onClick={() => handleEditClick("1")}>Edit</button>
-                            </div>
-                            <p className='text-heading-edit'>{email}</p>
-                            <p className='text-heading-edit'>******</p>
-                        </div>
-                    </div>)}
-                {activeStep == 2 ?
-                    (<div id="verify-section" className="email-verification">
-                        <p>Verify email</p>
-                        <p>We sent a 7-digit verification code to {email}.</p>
-                        <p>This code is valid for 30 minutes.</p>
-                        <TextInput type="text" className='verification-text-input'
-                            id="verification code"
-                            labelText="Enter verification code"
-                            value={verificationCode}
-                            onChange={(e) => handleVerificationCodeChange(e.target.value)}
-                        />
-                        {loading ?
-                            (
-                                <div style={{ marginTop: '8px' }}>
-                                    <Loader />
+                                <TextInput
+                                    type="text"
+                                    className='verification-text-input'
+                                    id="verification code"
+                                    labelText="Enter verification code"
+                                    value={verificationCode}
+                                    onChange={(e) => handleVerificationCodeChange(e.target.value)}
+                                    invalid={verificationCode.length == 0}
+                                    invalidText={
+                                        verificationCode.length == 0
+                                            ? 'A verification code is required' : null
+                                    }
+                                    disabled={loading ? true : false}
+                                />
+                                <div>
+                                    <p className='email-text'>Didn’t receive the email? Check your spam filter for an email from noreply@bynar.al.</p>
                                 </div>
-                            ) :
-                            (
-                                <div className='verify-button-class'>
-                                    <button disabled={verificationCode.length == 0 || isVerifyEmailInfoError}
-                                        className={verificationCode.length == 0 || isVerifyEmailInfoError ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleVerifyEmail()}>
-                                        Submit
-                                    </button>
-                                    <button
-                                        className={'resend-button'} onClick={() => handleSignupRequest()}>
-                                        Resend
-                                    </button>
-                                </div>)}
-                    </div>) :
-                    (<div id="verify-section" className="email-verification">
-                        <p>Verify email</p>
-                    </div>)}
-                {activeStep == 3 ?
-                    (<div id="verify-section" className='personal-info'>
-                        <div className='account-header'>
-                            <p className='text-heading'>Contact information</p>
-                        </div>
-                        <TextInput type="text"
-                            id="first name"
-                            labelText="First name"
-                            value={firstName}
-                            onChange={(e) => handleFirstNameChange(e.target.value)}
-                        />
-                        <TextInput type="text"
-                            id="last name"
-                            labelText="Last name"
-                            value={lastName}
-                            onChange={(e) => handleLastNameChange(e.target.value)}
-                        />
-                        <Select className='country-select'
-                            value={country}
-                            id='country-ci'
-                            labelText='Country or region of residence*'
-                            onChange={e => setCountry(e.target.value)}
-                        >
-                            {countrylist.map((countryObject, countryIndex) => (<SelectItem
-                                text={countryObject.name}
-                                value={countryObject.name}
-                                key={countryIndex}
-                            />))}
+                                <div>
+                                    {resendCodeLoading ? (
+                                        <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', gap: '8px' }}>
+                                            <Loader />
+                                            <p className='email-text'>re-sending confirmation-code </p>
+                                        </div>
+                                    ) : (
+                                        <p className='resend-code' onClick={handleSignupRequest}>Resend code</p>
+                                    )}
 
-                        </Select>
-                        <TextInput type="text"
-                            labelText="Address line 1"
-                            id="address line 1"
-                            value={addressLine1}
-                            onChange={(e) => setAddressLine1(e.target.value)}
-                        />
-                        <TextInput type="text"
-                            id="address line 2"
-                            labelText="Address line 2 (optional)"
-                            value={addressLine2}
-                            onChange={(e) => setAddressLine2(e.target.value)}
-                        />
-                        <TextInput type="text"
-                            id="city"
-                            labelText="City"
-                            value={city}
-                            onChange={(e) => setCity(e.target.value)}
-                        />
-                        <TextInput type="text"
-                            id="state"
-                            labelText="State"
-                            value={state}
-                            onChange={(e) => setState(e.target.value)}
-                        />
-                        <TextInput type="text"
-                            id="postalcode"
-                            labelText="Postal code"
-                            className='postalcode'
-                            value={postalCode}
-                            onChange={(e) => handlePostalCode(e)}
-                            invalid={typeof postalCodeErrorNotification == 'object' && Object.keys(postalCodeErrorNotification).length !== 0}
-                            invalidText={(postalCodeErrorNotification && postalCodeErrorNotification.title) ? postalCodeErrorNotification.title : ""}
-                        />
-                        <div>
-                            <p style={{color:'#525252'}}>Phone number</p>
-                        </div>
-                        <PhoneInput className='phone-input'
-                            country={'in'}
-                            value={phoneNumber}
-                            onChange={(e) => setPhoneNumber(e)}
-                        />
-                        <div >
-                            <button disabled={personalInfoButtonDisabled}
-                                className={personalInfoButtonDisabled ? 'submit-button-disabled' : 'submit-button'} onClick={() => handlePersonalInfo()}>
-                                Submit
-                            </button>
-                        </div>
-                    </div>) :
-                    (isProfileInfoUpdated && activeStep > 3 ? (<div id="verify-section" className="email-verification">
-                        <div className='box'>
-                            <p className='text-heading'>Personal information</p>
-                            <button className='edit-button' onClick={() => handleEditClick("3")}>Edit</button>
-                        </div>
-                        <p className='text-heading-edit'>{firstName + " " + lastName}</p>
-                        <p className='text-heading-edit'>{country}</p>
-                        <p className='text-heading-edit'>{city}</p>
-                        <p className='text-heading-edit'>{state}</p>
-                        <p className='text-heading-edit'>{addressLine1 + " " + addressLine2}</p>
-                        <p className='text-heading-edit'>{postalCode}</p>
-                        <p className='text-heading-edit'>{phoneNumber}</p>
-                    </div>) : (
-                        <div id="verify-section" className="email-verification">
-                            <div className='box'>
-                                <p className='text-heading'>Personal information</p>
-                            </div>
-                        </div>
-                    ))}
-                {activeStep == "4" ?
-                    (<div id="verify-section" className='vat-info'>
-                        <div className='account-header'>
-                            <p className='text-heading'>Tax information</p>
-                        </div>
-                        <TextInput type="text"
-                            id="Organization Name"
-                            labelText="Organization Name"
-                            value={organizationName}
-                            onChange={(e) => setOrganizationName(e.target.value)}
-                        />
-                        <TextInput type="text"
-                            id="VAT/GST/Tax Number"
-                            labelText="VAT/GST/Tax Number"
-                            value={vatNumber}
-                            onChange={(e) => handleVatNumberChange(e.target.value)}
-                            invalid={!isGstValid && vatNumber.length === 0}
-                            invalidText={
-                                !isGstValid && vatNumber.length === 0
-                                    ? 'Vat number cannot be blank' : null
-                            }
-                        />
-                        <Select className='country-select'
-                            value={organizationCountry}
-                            id='country-ci'
-                            labelText='Organization Country'
-                            onChange={e => setCountryName(e.target.value)}
-                        >
-                            {countrylist.map((countryObject, countryIndex) => (<SelectItem
-                                text={countryObject.name}
-                                value={countryObject.name}
-                                key={countryIndex}
-                            />))}
+                                </div>
+                                <hr />
+                                <div>
+                                    <p className='verify-email-text'>Bynar may use my contact data to keep me informed of products, services and offerings:</p>
+                                </div>
+                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                    <input type="checkbox" id="vehicle1" className='checkbox' name="vehicle1" value="Bike" onChange={(e) => { setIsChecked(e.target.checked) }} />
+                                    <label>by email</label>
+                                </div>
+                                <div>
+                                    <p className='verify-email-text'>You can withdraw your marketing consent at any time by submitting an <Link href="/signup">opt-out request</Link>. Also you may unsubscribe from receiving marketing emails by clicking the unsubscribe link in each email.</p>
+                                </div>
+                                <div>
+                                    <p className='verify-email-text'>More information on our processing can be found in the <Link href="/signup">Bynar Privacy Statement.</Link> By submitting this form, I acknowledge that I have read and understand the Bynar Privacy Statement.</p>
+                                </div>
+                                <div>
+                                    <p className='verify-email-text'>I accept the product <Link href="/signup">Terms and Conditions</Link> of this registration form.</p>
+                                </div>
+                                {verifyEmailLoading ?
+                                    (
+                                        <div style={{ marginTop: '32px' }}>
+                                            <Loader />
+                                        </div>
+                                    ) : (
+                                        <div style={{ marginTop: '32px', marginBottom: '16px' }}>
+                                            <button disabled={verificationCode.length == 0 || isVerifyEmailInfoError}
+                                                className={verificationCode.length == 0 || isVerifyEmailInfoError ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleVerifyEmail()}>
+                                                Verify Email
+                                            </button>
+                                            <hr />
+                                        </div>)}
+                            </div>)}
+                        {activeStep == 3 && (
+                            <div className='account-info-box'>
+                                <div className='account-heading'>
+                                    <p className='heading'>Account information</p>
+                                </div>
+                                <TextInput type="text"
+                                    className="email-form-input"
+                                    id="full name"
+                                    labelText="Full name"
+                                    value={firstName}
+                                    onChange={(e) => setFullName(e.target.value)}
+                                />
+                                <Select className='country-select'
+                                    value={country}
+                                    id='country-ci'
+                                    labelText='Country or region*'
+                                    onChange={e => setCountry(e.target.value)}
+                                >
+                                    {countrylist.map((countryObject, countryIndex) => (<SelectItem
+                                        text={countryObject.name}
+                                        value={countryObject.name}
+                                        key={countryIndex}
+                                    />))}
 
-                        </Select>
-                        <div >
-                            <button disabled={taxInfoButtonDisabled}
-                                className={taxInfoButtonDisabled ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleTaxInfo()}>
-                                Submit
-                            </button>
-                        </div>
-                    </div>) :
-                    (isTaxInfoUpdated && activeStep > 4 ? (<div id="verify-section" className="email-verification">
-                        <div className='box'>
-                            <p className='text-heading'>Tax information</p>
-                            <button className='edit-button' onClick={() => handleEditClick("4")}>Edit</button>
-                        </div>
-                        <p className='text-heading-edit'>{country}</p>
-                        <p className='text-heading-edit'>{city}</p>
-                    </div>) : (
-                        <div id="verify-section" className="email-verification">
-                            <div className='box'>
-                                <p className='text-heading'>Tax information</p>
+                                </Select>
+                                <TextInput type="text"
+                                    className="email-form-input"
+                                    labelText="Address line 1"
+                                    id="address line 1"
+                                    value={addressLine1}
+                                    onChange={(e) => setAddressLine1(e.target.value)}
+                                />
+                                <TextInput type="text"
+                                    id="address line 2"
+                                    className="email-form-input"
+                                    labelText="Address line 2 (optional)"
+                                    value={addressLine2}
+                                    onChange={(e) => setAddressLine2(e.target.value)}
+                                />
+                                <TextInput type="text"
+                                    className="email-form-input"
+                                    id="city"
+                                    labelText="City"
+                                    value={city}
+                                    onChange={(e) => setCity(e.target.value)}
+                                />
+                                <TextInput type="text"
+                                    className="email-form-input"
+                                    id="state"
+                                    labelText="State"
+                                    value={state}
+                                    onChange={(e) => setState(e.target.value)}
+                                />
+                                <TextInput type="text"
+                                    id="postalcode"
+                                    labelText="Postal code"
+                                    className='postalcode'
+                                    value={postalCode}
+                                    onChange={(e) => handlePostalCode(e)}
+                                    invalid={typeof postalCodeErrorNotification == 'object' && Object.keys(postalCodeErrorNotification).length !== 0}
+                                    invalidText={(postalCodeErrorNotification && postalCodeErrorNotification.title) ? postalCodeErrorNotification.title : ""}
+                                />
+                                <div>
+                                    <p style={{ color: '#525252' }}>Phone number</p>
+                                </div>
+                                <PhoneInput className='phone-input'
+                                    country={'in'}
+                                    value={phoneNumber}
+                                    onChange={(e) => setPhoneNumber(e)}
+                                />
                             </div>
-                        </div>
-                    ))}
-                {activeStep == "5" ?
-                    (<div id="verify-section" className='vat-info'>
-                        <div className='account-header'>
-                            <p className='text-heading'>Credit Card information</p>
-                        </div>
-                        <div className="form-group">
-                            <div>
-                                <p className='input-heading'>Card Number</p>
-                            </div>
-                            <input
-                                type="tel"
-                                name="number"
-                                className="form-control"
-                                placeholder="Card Number"
-                                pattern="[\d| ]{16,22}"
-                                label="card number"
-                                value={cardNumber}
-                                onChange={handleInputChange}
-
-                            />
-                        </div>
-                        <div className="form-group">
-                            <div>
-                                <p className='input-heading'>Expiration Date</p>
-                            </div>
-                            <input
-                                type="tel"
-                                name="expiry"
-                                className="form-control"
-                                placeholder="Valid Thru"
-                                pattern="\d\d/\d\d"
-                                value={cardExpiryDate}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <div>
-                                <p className='input-heading'>Security Code</p>
-                            </div>
-                            <input
-                                type="tel"
-                                name="cvc"
-                                className="form-control"
-                                placeholder="CVV"
-                                pattern="\d{3,4}"
-                                value={cardCVV}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div >
-                            <button disabled={creditCardButtonDisabled}
-                                className={creditCardButtonDisabled ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleCardInfo()}>
-                                Submit
-                            </button>
-                        </div>
-                    </div>) :
-                    (isCardInfoUpdated && activeStep > 5 ? (<div id="verify-section" className="email-verification">
-                        <div className='box'>
-                            <p className='text-heading'>Credit Card Information</p>
-                            <button className='edit-button' onClick={() => handleEditClick("5")}>Edit</button>
-                        </div>
-                        <p className='text-heading-edit'>**** **** **** ****</p>
-                        <p className='text-heading-edit'>**/**</p>
-                    </div>) : (
-                        <div id="verify-section" className="email-verification">
-                            <div className='box'>
-                                <p className='text-heading'>Credit Card information</p>
-                            </div>
-                        </div>
-                    ))}
-                {activeStep == "6" ?
-                    (<div id="verify-section" className='account-info'>
-                        <div className='account-header'>
-                            <p className='text-heading'>Account notice</p>
-                        </div>
-                        <p>Organisation may use my contact data to keep me informed of products, services and offerings:</p>
-                        <p>You can withdraw your marketing consent at any time by submitting an opt-out request. Also you may unsubscribe from receiving marketing emails by clicking the unsubscribe link in each email.</p>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <input type="checkbox" id="vehicle1" className='checkbox' name="vehicle1" value="Bike" onChange={(e) => { setIsChecked(e.target.checked) }} />
-                            <label> I accept Product terms and condition</label><br></br>
-                        </div>
-
-                    </div>) :
-                    (
-                        <div id="verify-section" className="email-verification">
-                            <div className='box'>
-                                <p className='text-heading'>Account  notice</p>
-                            </div>
-                        </div>
-                    )}
-                {/* COMMENTED CODE FOR APPLYING STYLE ON CREATE ACCOUNT BUTTON WHEN SIGN UP THROUGH PASSWORD */}
-                {/* <div className='create-account' >
-                        <button disabled={accountInfoButtonDisabled || verificationEmailButtonDisabled || personalInfoButtonDisabled || taxInfoButtonDisabled || creditCardButtonDisabled || !isChecked}
-                            className={accountInfoButtonDisabled || verificationEmailButtonDisabled || personalInfoButtonDisabled || taxInfoButtonDisabled || creditCardButtonDisabled || !isChecked ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleCreateAccount()}>
-                            Create Account
-                        </button>
-                    </div> */}
-                {loadingSuccess ?
-                    (
-                        <div className='create-account-loader'>
-                            <Loader />
-                            <p style={{color:'#161616'}}>{message}</p>
-                        </div>
-                    ) : (
-                        <div className='create-account' >
-                            <div className='create-account' >
-                                <button disabled={accountInfoButtonDisabled || verificationEmailButtonDisabled || personalInfoButtonDisabled || taxInfoButtonDisabled || creditCardButtonDisabled || !isChecked}
-                                    className={accountInfoButtonDisabled || verificationEmailButtonDisabled || personalInfoButtonDisabled || taxInfoButtonDisabled || creditCardButtonDisabled || !isChecked ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleCreateAccount()}>
-                                    Create Account
-                                </button>
-                            </div>
-                        </div>)}
-            </div>
-        </div>
+                        )}
+                    </div>
+                </Column>
+            </Grid>
+        </>
     )
 
 };
