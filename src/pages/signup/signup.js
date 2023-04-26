@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import { Frames, CardNumber, Cvv, ExpiryDate } from 'frames-react';
 import 'react-telephone-input/css/default.css'
 import {
     formatCreditCardNumber,
@@ -43,6 +44,7 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { Loader } from '../../Components/Loader/Loader.js';
 import { BaseURL } from '../../sdk/constant.js';
+import '../../styles/paymentform/paymentform.scss'
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -58,7 +60,7 @@ const Signup = () => {
     const [passwordStrengthWidth, setpaswordStrengthWidth] = useState(0);
     const [passwordIsValid, setPasswordIsValid] = useState(true);
     const [emailIsValid, setEmailValid] = useState(true);
-    const [activeStep, setActiveStep] = useState(5);
+    const [activeStep, setActiveStep] = useState(1);
     const [verificationCode, setVerificationCode] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -90,6 +92,7 @@ const Signup = () => {
     const [userId, setUserId] = useState();
     const [message, setMessage] = useState('creating account ...');
     const ref = useRef(null);
+    const [loadingCardSuccess, setLoadingCardSuccess] = useState(false)
     const accountInfoButtonDisabled = !emailIsValid || email.length == 0 || isAccountInfoError;
     const personalInfoButtonDisabled = fullName.length == 0 || city.length == 0 || state.length == 0 || postalCode.length == 0 || phoneNumber.length == 0 || addressLine1.length == 0 || Object.keys(postalCodeErrorNotification).length != 0;
     const verificationEmailButtonDisabled = verificationCode.length == 0 || isVerifyEmailInfoError;
@@ -355,15 +358,27 @@ const Signup = () => {
         }
     }
 
+    const handleVerifyCardDetails = async (e) => {
+        e.preventDefault();
+        try {
+            await Frames.submitCard();
+        }
+        catch (e) {
+            setIsError(true)
+            setErrorNotification({
+                title: e == "Card form invalid" ? 'Invalid card details' : 'error occured while creating user account'
+            })
+            console.log(e)
+        }
+    }
+
     const creditCardButtonDisabled = cardCVV.length == 0 || cardExpiryDate.length == 0 || cardNumber.length == 0;
 
     const taxInfoButtonDisabled = organizationName.length == 0 || (vatNumber.length === 0);
 
-
-
     return (
         <>
-            <div style={{display:'flex',flexDirection:'column'}}>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <Grid className={'signup-grid'} >
                     <Column className={'right-column'} style={{ background: "url(./image/signup-bg.svg) center 60% / 100% no-repeat rgb(249, 249, 249)" }} >
                         <Content className='right-content'>
@@ -610,74 +625,139 @@ const Signup = () => {
                                     </div>
                                 )}
                                 {activeStep == 5 && (
-                                    <div className='account-info-box'>
-                                        <div className='account-heading'>
-                                            <p className='heading'>5.Credit card information</p>
-                                        </div>
-                                        
-                                        <div className="form-group">
-                                            <div>
-                                                <p className='input-heading'>Card number</p>
+                                    <>
+                                        {/* <div className='account-info-box'>
+                                            <div className='account-heading'>
+                                                <p className='heading'>5.Credit card information</p>
                                             </div>
-                                            <input
-                                                type="tel"
-                                                name="number"
-                                                className="form-control"
-                                                placeholder=""
-                                                pattern="[\d| ]{16,22}"
-                                                label="card number"
-                                                value={cardNumber}
-                                                onChange={handleInputChange}
 
-                                            />
-                                        </div>
-                                        <div className='form-box'>
-                                            <div className="form-group-one">
+                                            <div className="form-group">
                                                 <div>
-                                                    <p className='input-heading'>Expiration date</p>
+                                                    <p className='input-heading'>Card number</p>
                                                 </div>
                                                 <input
                                                     type="tel"
-                                                    name="expiry"
+                                                    name="number"
                                                     className="form-control"
                                                     placeholder=""
-                                                    pattern="\d\d/\d\d"
-                                                    value={cardExpiryDate}
+                                                    pattern="[\d| ]{16,22}"
+                                                    label="card number"
+                                                    value={cardNumber}
                                                     onChange={handleInputChange}
-                                                />
-                                            </div>
-                                            <div className="form-group-one">
-                                                <div>
-                                                    <p className='input-heading'>Security code</p>
-                                                </div>
-                                                <input
-                                                    type="tel"
-                                                    name="cvc"
-                                                    className="form-control"
-                                                    placeholder=""
-                                                    pattern="\d{3,4}"
-                                                    value={cardCVV}
-                                                    onChange={handleInputChange}
-                                                />
-                                            </div>
-                                        </div>
 
-                                        {loadingSuccess ?
-                                            (
-                                                <div className='create-account-loader'>
-                                                    <Loader />
-                                                    <p style={{ color: '#161616' }}>{message}</p>
-                                                </div>
-                                            ) : (
-                                                <div className='create-account' >
-                                                    <div className='create-account' >
-                                                        <button disabled={accountInfoButtonDisabled || verificationEmailButtonDisabled || personalInfoButtonDisabled || taxInfoButtonDisabled || creditCardButtonDisabled }
-                                                            className={accountInfoButtonDisabled || verificationEmailButtonDisabled || personalInfoButtonDisabled || taxInfoButtonDisabled || creditCardButtonDisabled ? 'create-account-button-disabled' : 'create-account-button'} onClick={() => handleCreateAccount()}>
-                                                            Create Account
-                                                        </button>
+                                                />
+                                            </div>
+                                            <div className='form-box'>
+                                                <div className="form-group-one">
+                                                    <div>
+                                                        <p className='input-heading'>Expiration date</p>
                                                     </div>
-                                                </div>)}
-                                    </div>
+                                                    <input
+                                                        type="tel"
+                                                        name="expiry"
+                                                        className="form-control"
+                                                        placeholder=""
+                                                        pattern="\d\d/\d\d"
+                                                        value={cardExpiryDate}
+                                                        onChange={handleInputChange}
+                                                    />
+                                                </div>
+                                                <div className="form-group-one">
+                                                    <div>
+                                                        <p className='input-heading'>Security code</p>
+                                                    </div>
+                                                    <input
+                                                        type="tel"
+                                                        name="cvc"
+                                                        className="form-control"
+                                                        placeholder=""
+                                                        pattern="\d{3,4}"
+                                                        value={cardCVV}
+                                                        onChange={handleInputChange}
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            {loadingSuccess ?
+                                                (
+                                                    <div className='create-account-loader'>
+                                                        <Loader />
+                                                        <p style={{ color: '#161616' }}>{message}</p>
+                                                    </div>
+                                                ) : (
+                                                    <div className='create-account' >
+                                                        <div className='create-account' >
+                                                            <button disabled={accountInfoButtonDisabled || verificationEmailButtonDisabled || personalInfoButtonDisabled || taxInfoButtonDisabled || creditCardButtonDisabled}
+                                                                className={accountInfoButtonDisabled || verificationEmailButtonDisabled || personalInfoButtonDisabled || taxInfoButtonDisabled || creditCardButtonDisabled ? 'create-account-button-disabled' : 'create-account-button'} onClick={() => handleCreateAccount()}>
+                                                                Create Account
+                                                            </button>
+                                                        </div>
+                                                    </div>)}
+                                        </div> */}
+                                        <div className='account-info-box'>
+                                            <div className='account-heading'>
+                                                <p className='heading'>5.Credit card information</p>
+                                            </div>
+                                        </div>
+                                        <Frames
+                                            config={{
+                                                publicKey: "pk_sbox_u4jn2iacxvzosov4twmtl2yzlqe",
+                                            }}
+                                            cardTokenized={(e) => {
+                                                alert(e.token);
+                                            }}
+                                        >
+                                            <div style={{ backgroundColor: 'white', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+
+                                                <div >
+                                                    <div>
+                                                        <p className='input-heading'>Card number</p>
+                                                    </div>
+                                                    <CardNumber id="card-number" className='card-number' />
+                                                </div>
+
+                                                <div className="date-and-code">
+                                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                                        <div>
+                                                            <p className='input-heading'>Expiration Date</p>
+                                                        </div>
+                                                        <ExpiryDate className='expiry-date' />
+                                                    </div>
+                                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                                        <div>
+                                                            <p className='input-heading'>Security Code</p>
+                                                        </div>
+                                                        <Cvv className='security-code' />
+                                                    </div>
+                                                </div>
+
+                                                {loadingCardSuccess ?
+                                                    (
+                                                        <div className='create-account-loader'>
+                                                            <Loader />
+                                                            <p style={{ color: '#161616' }}>{message}</p>
+                                                        </div>
+                                                    ) : (
+                                                        // <div className='create-account' >
+                                                        //     <div className='create-account' >
+                                                        //         <button disabled={accountInfoButtonDisabled || verificationEmailButtonDisabled || personalInfoButtonDisabled || taxInfoButtonDisabled || creditCardButtonDisabled}
+                                                        //             className={accountInfoButtonDisabled || verificationEmailButtonDisabled || personalInfoButtonDisabled || taxInfoButtonDisabled || creditCardButtonDisabled ? 'create-account-button-disabled' : 'create-account-button'} onClick={() => handleCreateAccount()}>
+                                                        //             Create Account
+                                                        //         </button>
+                                                        //     </div>
+                                                        // </div>
+                                                        <div className='create-account' >
+                                                            <div className='create-account' >
+                                                                <button className='submit-button' onClick={handleVerifyCardDetails}>
+                                                                    Verify card
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                }
+                                            </div>
+                                        </Frames>
+                                    </>
                                 )}
                             </div>
                         </Column>

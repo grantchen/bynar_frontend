@@ -18,6 +18,7 @@
     "carbon-icons": "latest",
     "carbon-web-components": "^1.21.0",
     "firebase": "^9.18.0",
+    "frames-react": "^1.1.0",
     "i18next": "^22.4.13",
     "jwt-decode": "^3.1.2",
     "payment": "^2.4.6",
