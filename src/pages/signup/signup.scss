@@ -396,13 +396,13 @@ label[for=password-input] {
       height: 40px;
     }
 
-      .bx--select-input__wrapper {
-        position: relative;
-        display: flex;
-        width: 370px !important;
-        flex-direction: column;
-        align-items: flex-start;
-      }
+    .bx--select-input__wrapper {
+      position: relative;
+      display: flex;
+      width: 370px !important;
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
 
   .vat-info {
@@ -539,17 +539,35 @@ label[for=password-input] {
 
 .right-content {
   text-align: center;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .signup-heading-text-wrapper {
-  margin-top: 5%;
   display: flex;
   flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  color: #fff;
+  padding: 0 3rem;
+  margin-bottom: 6rem;
+  align-items: center;
+
+  .signup-text{
+   padding: 24px 0px 0px;
+    .content{
+     font-size: 14px;
+     color: #323232;
+    }
+  }
 }
 
 .signup-heading-text {
-  font-size: 28px;
+  font-size: 40px;
   color: #161616;
+  align-self: flex-start;
+  font-weight: 600px;
 }
 
 .underline {
@@ -578,7 +596,7 @@ label[for=password-input] {
   }
 }
 
-.verification-box{
+.verification-box {
   width: 240px;
 }
 
@@ -628,6 +646,8 @@ label[for=password-input] {
     .right-content {
       width: 100%;
       padding-bottom: 32px;
+      display: flex;
+      justify-content: center;
     }
   }
 
@@ -674,13 +694,20 @@ label[for=password-input] {
       height: 40px;
     }
 
-      .bx--select-input__wrapper {
-        position: relative;
-        display: flex;
-        width: 100% !important;
-        flex-direction: column;
-        align-items: flex-start;
-      }
+    .bx--select-input__wrapper {
+      position: relative;
+      display: flex;
+      width: 100% !important;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  .signup-heading-text {
+    font-size: 40px;
+    color: #161616;
+    font-weight: 600px;
+    // align-self: center !important;
   }
 
 }
@@ -699,6 +726,8 @@ label[for=password-input] {
     .right-content {
       width: 100%;
       padding-bottom: 32px;
+      display: flex;
+      justify-content: center;
     }
   }
 
@@ -738,18 +767,47 @@ label[for=password-input] {
 
   }
 
-  .list{
+  .list {
     display: flex;
     align-items: center;
     padding: 0px 0px 0px 10px !important;
     width: 282px !important;
   }
-  .ui-list{
+
+  .ui-list {
     width: 100%;
     margin: 0px 4px !important;
-    .cds--link{
+
+    .cds--link {
       color: #C6C6C6;
       text-decoration: none;
+    }
+  }
+
+  .signup-heading-text {
+    font-size: 40px;
+    color: #161616;
+    font-weight: 600px;
+    // align-self: center !important;
+  }
+
+  .signup-heading-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    margin-top: 3rem;
+    color: #fff;
+    padding: 0 1rem;
+    margin-bottom: 6rem;
+    align-items: center;
+  
+    .signup-text{
+     padding: 24px 0px 0px;
+      .content{
+       font-size: 14px;
+       color: #323232;
+      }
     }
   }
 
@@ -827,23 +885,25 @@ label[for=password-input] {
   cursor: not-allowed;
 }
 
-.carbon-footer{
+.carbon-footer {
   background-color: #262626;
   height: 50px;
   display: flex;
   align-items: center;
 }
 
-.list{
+.list {
   display: flex;
   align-items: center;
   padding: 0px 20px;
   width: 600px;
 }
-.ui-list{
+
+.ui-list {
   width: 100%;
   margin: 0px 10px;
-  .cds--link{
+
+  .cds--link {
     color: #C6C6C6;
     text-decoration: none;
   }

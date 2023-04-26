@@ -389,6 +389,9 @@ const Signup = () => {
                                 <HeaderName prefix="Bynar" className='signup-heading-text'>
                                     account
                                 </HeaderName>
+                                <div className='signup-text'>
+                                    <p className='content'>Access to trials, demos, starter kits, services and APIs</p>
+                                </div>
                             </div>
 
                         </Content>
