@@ -272,7 +272,7 @@ label[for=password-input] {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
 }
 
 .vat-info {
@@ -317,7 +317,18 @@ label[for=password-input] {
   }
 }
 
-.phone-input {}
+.phone-input {
+  width: 90% !important;
+
+  input {
+    border: none !important;
+    border-bottom: 1px solid var(--cds-ui-04, #8d8d8d) !important;
+    background-color: var(--cds-field-01, #f4f4f4) !important;
+    color: var(--cds-text-01, #161616) !important;
+    transition: background-color 70ms cubic-bezier(0.2, 0, 0.38, 0.9), outline 70ms cubic-bezier(0.2, 0, 0.38, 0.9);
+  }
+
+}
 
 .verification-text-input {
 
@@ -344,6 +355,7 @@ label[for=password-input] {
 
 .postalcode {
   width: 90%;
+
   svg {
     display: none;
   }
@@ -501,7 +513,7 @@ label[for=password-input] {
 
 .signup-grid {
   background-color: white;
-  padding: 0px;
+  // padding: 0px;
   max-width: none;
   position: fixed;
   width: 100vw;
@@ -519,10 +531,16 @@ label[for=password-input] {
   // background: url('/signup-bg.svg') center 60% / 100% no-repeat rgb(249, 249, 249);
 }
 
-.left-column {
+.form-container {
   width: 60%;
+  padding: 20px 0px;
+}
+
+.left-column {
   background-color: #ffffff;
-  padding: 40px 20px 0px 80px;
+  padding: 30px 20px 40px 80px;
+  overflow-y: auto;
+  height: 100%;
 }
 
 .right-content {
@@ -545,7 +563,8 @@ label[for=password-input] {
 }
 
 .signup-form {
-  height: 80%;
+  height: 70%;
+  // overflow-y: auto;
 
   .account-info-box {
 
@@ -610,6 +629,15 @@ label[for=password-input] {
     }
   }
 
+  .postalcode {
+    width: 100%;
+  }
+
+  .form-container {
+    width: 100%;
+    padding: 0px 0px 32px 0px;
+  }
+
   .left-column {
     width: 100%;
     background-color: #ffffff;
@@ -631,6 +659,11 @@ label[for=password-input] {
 
   .email-form-input {
     width: 100%;
+  }
+
+  .phone-input {
+    width: 100% !important;
+
   }
 
 }
@@ -652,8 +685,12 @@ label[for=password-input] {
     }
   }
 
-  .left-column {
+  .form-container {
     width: 100%;
+    padding: 0px 0px 32px 0px;
+  }
+
+  .left-column {
     background-color: #ffffff;
     // padding: 40px 20px 0px 80px;
     padding: 40px 0px 0px 0px;
@@ -675,4 +712,46 @@ label[for=password-input] {
     width: 100%;
   }
 
+  .postalcode {
+    width: 100%;
+  }
+
+  .phone-input {
+    width: 100% !important;
+
+  }
+
+}
+
+.form-group{
+  input {
+    width: 81%;
+    height: 40px;
+    padding: 0 1rem;
+    border: none !important;
+    border-bottom: 1px solid var(--cds-ui-04, #8d8d8d) !important;
+    background-color: var(--cds-field-01, #f4f4f4) !important;
+    color: var(--cds-text-01, #161616) !important;
+    transition: background-color 70ms cubic-bezier(0.2, 0, 0.38, 0.9), outline 70ms cubic-bezier(0.2, 0, 0.38, 0.9);
+  }
+  input:hover{
+    border: 1px solid #0f62fe;
+  }
+}
+
+.form-group-one{
+  width: 39%;
+  input {
+    width: 100%;
+    height: 40px;
+    padding: 0 1rem;
+    border: none !important;
+    border-bottom: 1px solid var(--cds-ui-04, #8d8d8d) !important;
+    background-color: var(--cds-field-01, #f4f4f4) !important;
+    color: var(--cds-text-01, #161616) !important;
+    transition: background-color 70ms cubic-bezier(0.2, 0, 0.38, 0.9), outline 70ms cubic-bezier(0.2, 0, 0.38, 0.9);
+  }
+  input:hover{
+    border: 1px solid #0f62fe;
+  }
 }

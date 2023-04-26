@@ -58,7 +58,7 @@ const Signup = () => {
     const [passwordStrengthWidth, setpaswordStrengthWidth] = useState(0);
     const [passwordIsValid, setPasswordIsValid] = useState(true);
     const [emailIsValid, setEmailValid] = useState(true);
-    const [activeStep, setActiveStep] = useState(3);
+    const [activeStep, setActiveStep] = useState(5);
     const [verificationCode, setVerificationCode] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -91,7 +91,7 @@ const Signup = () => {
     const [message, setMessage] = useState('creating account ...');
     const ref = useRef(null);
     const accountInfoButtonDisabled = !emailIsValid || email.length == 0 || isAccountInfoError;
-    const personalInfoButtonDisabled = firstName.length == 0 || lastName.length == 0 || city.length == 0 || state.length == 0 || postalCode.length == 0 || phoneNumber.length == 0 || addressLine1.length == 0 || Object.keys(postalCodeErrorNotification).length != 0;
+    const personalInfoButtonDisabled = fullName.length == 0 || city.length == 0 || state.length == 0 || postalCode.length == 0 || phoneNumber.length == 0 || addressLine1.length == 0 || Object.keys(postalCodeErrorNotification).length != 0;
     const verificationEmailButtonDisabled = verificationCode.length == 0 || isVerifyEmailInfoError;
 
     const handleFirstNameChange = (value) => {
@@ -357,7 +357,7 @@ const Signup = () => {
 
     const creditCardButtonDisabled = cardCVV.length == 0 || cardExpiryDate.length == 0 || cardNumber.length == 0;
 
-    const taxInfoButtonDisabled = organizationName.length == 0 || organizationCountry.length == 0 || (vatNumber.length === 0);
+    const taxInfoButtonDisabled = organizationName.length == 0 || (vatNumber.length === 0);
 
     // useEffect(() => {
     //     // 👇️ scroll to top on page load
@@ -382,197 +382,296 @@ const Signup = () => {
 
                     </Content>
                 </Column>
-                <Column className={'left-column'}>
-                    <Content className={'signup-container'} >
-                        <div className='heading-container' >
-                            <div className="login-link" style={{ 'marginBottom': '1.5rem' }}>Already have an BYNAR account? <Link href="/signin">Log in</Link></div>
-                            <Heading style={{ fontSize: '24px' }}>Sign up for an Bynar account</Heading>
-                            <hr className="underline" />
-                        </div>
-                    </Content>
-                    {typeof errorNotification == 'object' && Object.keys(errorNotification).length !== 0 ?
-                        (
-                            <InlineNotification
-                                className="error-notification"
-                                onClose={function noRefCheck() { }}
-                                onCloseButtonClick={() => { setErrorNotification({}); setIsError(false) }}
-                                statusIconDescription="notification"
-                                title={errorNotification.title ? errorNotification.title : ''}
-                            />) : (
-                            <div className="error-notification-inactive"></div>
-                        )
-                    }
-                    <div className="signup-form">
-                        {activeStep == 1 && (
-                            <div className='account-info-box'>
-                                <div className='account-heading'>
-                                    <p className='heading'>Organization account</p>
-                                </div>
-                                <TextInput
-                                    id="email"
-                                    className="email-form-input"
-                                    // hideLabel={true}
-                                    value={email}
-                                    labelText="E-mail"
-                                    onChange={(e) => handleEmailChange(e.target.value)}
-                                    invalid={!emailIsValid && email.length > 0}
-                                    invalidText={
-                                        !emailIsValid && email.length > 0
-                                            ? 'Enter valid email address' : null
-                                    }
-                                    disabled={loading ? true : false}
-                                />
-                                {loading ?
-                                    (
-                                        <div style={{ marginTop: '32px' }}>
-                                            <Loader />
-                                        </div>
-                                    ) : (
-                                        <div style={{ marginTop: '32px' }}>
-                                            <button disabled={!emailIsValid || email.length == 0 || isAccountInfoError}
-                                                className={!emailIsValid || email.length == 0 || isAccountInfoError ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleSignupRequest()}>
-                                                {!isAccountInfoUpdated ? "Next" : "Update"}
-                                            </button>
-                                        </div>)}
-                            </div>)}
-                        {activeStep == 2 && (
-                            <div className='account-info-box'>
-                                <div className='account-heading'>
-                                    <p className='heading'>2-Verify email</p>
-                                </div>
-                                <TextInput
-                                    type="text"
-                                    className='verification-text-input'
-                                    id="verification code"
-                                    labelText="Enter verification code"
-                                    value={verificationCode}
-                                    onChange={(e) => handleVerificationCodeChange(e.target.value)}
-                                    invalid={verificationCode.length == 0}
-                                    invalidText={
-                                        verificationCode.length == 0
-                                            ? 'A verification code is required' : null
-                                    }
-                                    disabled={loading ? true : false}
-                                />
-                                <div>
-                                    <p className='email-text'>Didn’t receive the email? Check your spam filter for an email from noreply@bynar.al.</p>
-                                </div>
-                                <div>
-                                    {resendCodeLoading ? (
-                                        <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', gap: '8px' }}>
-                                            <Loader />
-                                            <p className='email-text'>re-sending confirmation-code </p>
-                                        </div>
-                                    ) : (
-                                        <p className='resend-code' onClick={handleSignupRequest}>Resend code</p>
-                                    )}
-
-                                </div>
-                                <hr />
-                                <div>
-                                    <p className='verify-email-text'>Bynar may use my contact data to keep me informed of products, services and offerings:</p>
-                                </div>
-                                <div style={{ display: 'flex', alignItems: 'center' }}>
-                                    <input type="checkbox" id="vehicle1" className='checkbox' name="vehicle1" value="Bike" onChange={(e) => { setIsChecked(e.target.checked) }} />
-                                    <label>by email</label>
-                                </div>
-                                <div>
-                                    <p className='verify-email-text'>You can withdraw your marketing consent at any time by submitting an <Link href="/signup">opt-out request</Link>. Also you may unsubscribe from receiving marketing emails by clicking the unsubscribe link in each email.</p>
-                                </div>
-                                <div>
-                                    <p className='verify-email-text'>More information on our processing can be found in the <Link href="/signup">Bynar Privacy Statement.</Link> By submitting this form, I acknowledge that I have read and understand the Bynar Privacy Statement.</p>
-                                </div>
-                                <div>
-                                    <p className='verify-email-text'>I accept the product <Link href="/signup">Terms and Conditions</Link> of this registration form.</p>
-                                </div>
-                                {verifyEmailLoading ?
-                                    (
-                                        <div style={{ marginTop: '32px' }}>
-                                            <Loader />
-                                        </div>
-                                    ) : (
-                                        <div style={{ marginTop: '32px', marginBottom: '16px' }}>
-                                            <button disabled={verificationCode.length == 0 || isVerifyEmailInfoError}
-                                                className={verificationCode.length == 0 || isVerifyEmailInfoError ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleVerifyEmail()}>
-                                                Verify Email
-                                            </button>
-                                            <hr />
-                                        </div>)}
-                            </div>)}
-                        {activeStep == 3 && (
-                            <div className='account-info-box'>
-                                <div className='account-heading'>
-                                    <p className='heading'>Account information</p>
-                                </div>
-                                <TextInput type="text"
-                                    className="email-form-input"
-                                    id="full name"
-                                    labelText="Full name"
-                                    value={firstName}
-                                    onChange={(e) => setFullName(e.target.value)}
-                                />
-                                <Select className='country-select'
-                                    value={country}
-                                    id='country-ci'
-                                    labelText='Country or region*'
-                                    onChange={e => setCountry(e.target.value)}
-                                >
-                                    {countrylist.map((countryObject, countryIndex) => (<SelectItem
-                                        text={countryObject.name}
-                                        value={countryObject.name}
-                                        key={countryIndex}
-                                    />))}
-
-                                </Select>
-                                <TextInput type="text"
-                                    className="email-form-input"
-                                    labelText="Address line 1"
-                                    id="address line 1"
-                                    value={addressLine1}
-                                    onChange={(e) => setAddressLine1(e.target.value)}
-                                />
-                                <TextInput type="text"
-                                    id="address line 2"
-                                    className="email-form-input"
-                                    labelText="Address line 2 (optional)"
-                                    value={addressLine2}
-                                    onChange={(e) => setAddressLine2(e.target.value)}
-                                />
-                                <TextInput type="text"
-                                    className="email-form-input"
-                                    id="city"
-                                    labelText="City"
-                                    value={city}
-                                    onChange={(e) => setCity(e.target.value)}
-                                />
-                                <TextInput type="text"
-                                    className="email-form-input"
-                                    id="state"
-                                    labelText="State"
-                                    value={state}
-                                    onChange={(e) => setState(e.target.value)}
-                                />
-                                <TextInput type="text"
-                                    id="postalcode"
-                                    labelText="Postal code"
-                                    className='postalcode'
-                                    value={postalCode}
-                                    onChange={(e) => handlePostalCode(e)}
-                                    invalid={typeof postalCodeErrorNotification == 'object' && Object.keys(postalCodeErrorNotification).length !== 0}
-                                    invalidText={(postalCodeErrorNotification && postalCodeErrorNotification.title) ? postalCodeErrorNotification.title : ""}
-                                />
-                                <div>
-                                    <p style={{ color: '#525252' }}>Phone number</p>
-                                </div>
-                                <PhoneInput className='phone-input'
-                                    country={'in'}
-                                    value={phoneNumber}
-                                    onChange={(e) => setPhoneNumber(e)}
-                                />
+                <div className='form-container'>
+                    <Column className={'left-column'}>
+                        <Content className={'signup-container'} >
+                            <div className='heading-container' >
+                                <div className="login-link" style={{ 'marginBottom': '1.5rem' }}>Already have an BYNAR account? <Link href="/signin">Log in</Link></div>
+                                <Heading style={{ fontSize: '24px' }}>Sign up for an Bynar account</Heading>
+                                <hr className="underline" />
                             </div>
-                        )}
-                    </div>
-                </Column>
+                        </Content>
+                        {typeof errorNotification == 'object' && Object.keys(errorNotification).length !== 0 ?
+                            (
+                                <InlineNotification
+                                    className="error-notification"
+                                    onClose={function noRefCheck() { }}
+                                    onCloseButtonClick={() => { setErrorNotification({}); setIsError(false) }}
+                                    statusIconDescription="notification"
+                                    title={errorNotification.title ? errorNotification.title : ''}
+                                />) : (
+                                <div className="error-notification-inactive"></div>
+                            )
+                        }
+                        <div className="signup-form">
+                            {activeStep == 1 && (
+                                <div className='account-info-box'>
+                                    <div className='account-heading'>
+                                        <p className='heading'>Organization account</p>
+                                    </div>
+                                    <TextInput
+                                        id="email"
+                                        className="email-form-input"
+                                        // hideLabel={true}
+                                        value={email}
+                                        labelText="E-mail"
+                                        onChange={(e) => handleEmailChange(e.target.value)}
+                                        invalid={!emailIsValid && email.length > 0}
+                                        invalidText={
+                                            !emailIsValid && email.length > 0
+                                                ? 'Enter valid email address' : null
+                                        }
+                                        disabled={loading ? true : false}
+                                    />
+                                    {loading ?
+                                        (
+                                            <div style={{ marginTop: '32px' }}>
+                                                <Loader />
+                                            </div>
+                                        ) : (
+                                            <div style={{ marginTop: '32px' }}>
+                                                <button disabled={!emailIsValid || email.length == 0 || isAccountInfoError}
+                                                    className={!emailIsValid || email.length == 0 || isAccountInfoError ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleSignupRequest()}>
+                                                    {!isAccountInfoUpdated ? "Next" : "Update"}
+                                                </button>
+                                            </div>)}
+                                </div>)}
+                            {activeStep == 2 && (
+                                <div className='account-info-box'>
+                                    <div className='account-heading'>
+                                        <p className='heading'>2-Verify email</p>
+                                    </div>
+                                    <TextInput
+                                        type="text"
+                                        className='verification-text-input'
+                                        id="verification code"
+                                        labelText="Enter verification code"
+                                        value={verificationCode}
+                                        onChange={(e) => handleVerificationCodeChange(e.target.value)}
+                                        invalid={verificationCode.length == 0}
+                                        invalidText={
+                                            verificationCode.length == 0
+                                                ? 'A verification code is required' : null
+                                        }
+                                        disabled={loading ? true : false}
+                                    />
+                                    <div>
+                                        <p className='email-text'>Didn’t receive the email? Check your spam filter for an email from noreply@bynar.al.</p>
+                                    </div>
+                                    <div>
+                                        {resendCodeLoading ? (
+                                            <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', gap: '8px' }}>
+                                                <Loader />
+                                                <p className='email-text'>re-sending confirmation-code </p>
+                                            </div>
+                                        ) : (
+                                            <p className='resend-code' onClick={handleSignupRequest}>Resend code</p>
+                                        )}
+
+                                    </div>
+                                    <hr />
+                                    <div>
+                                        <p className='verify-email-text'>Bynar may use my contact data to keep me informed of products, services and offerings:</p>
+                                    </div>
+                                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                                        <input type="checkbox" id="vehicle1" className='checkbox' name="vehicle1" value="Bike" onChange={(e) => { setIsChecked(e.target.checked) }} />
+                                        <label>by email</label>
+                                    </div>
+                                    <div>
+                                        <p className='verify-email-text'>You can withdraw your marketing consent at any time by submitting an <Link href="/signup">opt-out request</Link>. Also you may unsubscribe from receiving marketing emails by clicking the unsubscribe link in each email.</p>
+                                    </div>
+                                    <div>
+                                        <p className='verify-email-text'>More information on our processing can be found in the <Link href="/signup">Bynar Privacy Statement.</Link> By submitting this form, I acknowledge that I have read and understand the Bynar Privacy Statement.</p>
+                                    </div>
+                                    <div>
+                                        <p className='verify-email-text'>I accept the product <Link href="/signup">Terms and Conditions</Link> of this registration form.</p>
+                                    </div>
+                                    {verifyEmailLoading ?
+                                        (
+                                            <div style={{ marginTop: '32px' }}>
+                                                <Loader />
+                                            </div>
+                                        ) : (
+                                            <div style={{ marginTop: '32px', marginBottom: '16px' }}>
+                                                <button disabled={verificationCode.length == 0 || isVerifyEmailInfoError}
+                                                    className={verificationCode.length == 0 || isVerifyEmailInfoError ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleVerifyEmail()}>
+                                                    Verify Email
+                                                </button>
+                                                <hr />
+                                            </div>)}
+                                </div>)}
+                            {activeStep == 3 && (
+                                <div className='account-info-box'>
+                                    <div className='account-heading'>
+                                        <p className='heading'>Account information</p>
+                                    </div>
+                                    <TextInput type="text"
+                                        className="email-form-input"
+                                        id="full name"
+                                        labelText="Full name"
+                                        value={fullName}
+                                        onChange={(e) => setFullName(e.target.value)}
+                                    />
+                                    <Select className='country-select'
+                                        value={country}
+                                        id='country-ci'
+                                        labelText='Country or region*'
+                                        onChange={e => setCountry(e.target.value)}
+                                    >
+                                        {countrylist.map((countryObject, countryIndex) => (<SelectItem
+                                            text={countryObject.name}
+                                            value={countryObject.name}
+                                            key={countryIndex}
+                                        />))}
+
+                                    </Select>
+                                    <TextInput type="text"
+                                        className="email-form-input"
+                                        labelText="Address line 1"
+                                        id="address line 1"
+                                        value={addressLine1}
+                                        onChange={(e) => setAddressLine1(e.target.value)}
+                                    />
+                                    <TextInput type="text"
+                                        id="address line 2"
+                                        className="email-form-input"
+                                        labelText="Address line 2 (optional)"
+                                        value={addressLine2}
+                                        onChange={(e) => setAddressLine2(e.target.value)}
+                                    />
+                                    <TextInput type="text"
+                                        className="email-form-input"
+                                        id="city"
+                                        labelText="City"
+                                        value={city}
+                                        onChange={(e) => setCity(e.target.value)}
+                                    />
+                                    <TextInput type="text"
+                                        className="email-form-input"
+                                        id="state"
+                                        labelText="State"
+                                        value={state}
+                                        onChange={(e) => setState(e.target.value)}
+                                    />
+                                    <TextInput type="text"
+                                        id="postalcode"
+                                        labelText="Postal code"
+                                        className='postalcode'
+                                        value={postalCode}
+                                        onChange={(e) => handlePostalCode(e)}
+                                        invalid={typeof postalCodeErrorNotification == 'object' && Object.keys(postalCodeErrorNotification).length !== 0}
+                                        invalidText={(postalCodeErrorNotification && postalCodeErrorNotification.title) ? postalCodeErrorNotification.title : ""}
+                                    />
+                                    <div>
+                                        <p style={{ color: '#525252' }}>Phone number</p>
+                                    </div>
+                                    <PhoneInput className='phone-input'
+                                        country={'in'}
+                                        value={phoneNumber}
+                                        onChange={(e) => setPhoneNumber(e)}
+                                    />
+                                    <div style={{ marginTop: '32px', marginBottom: '16px' }}>
+                                        <button disabled={personalInfoButtonDisabled}
+                                            className={personalInfoButtonDisabled ? 'submit-button-disabled' : 'submit-button'} onClick={() => handlePersonalInfo()}>
+                                            Next
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+                            {activeStep == 4 && (
+                                <div className='account-info-box'>
+                                    <div className='account-heading'>
+                                        <p className='heading'>Organization information</p>
+                                    </div>
+                                    <TextInput type="text"
+                                        className="email-form-input"
+                                        id="Organization Name"
+                                        labelText="Organization Name"
+                                        value={organizationName}
+                                        onChange={(e) => setOrganizationName(e.target.value)}
+                                    />
+                                    <TextInput type="text"
+                                        className="email-form-input"
+                                        id="VAT/GST/Tax Number"
+                                        labelText="Organization Number"
+                                        value={vatNumber}
+                                        onChange={(e) => handleVatNumberChange(e.target.value)}
+                                        invalid={!isGstValid && vatNumber.length === 0}
+                                        invalidText={
+                                            !isGstValid && vatNumber.length === 0
+                                                ? 'Organization number cannot be blank' : null
+                                        }
+                                    />
+                                    <div style={{ marginTop: '32px', marginBottom: '16px' }}>
+                                        <button disabled={taxInfoButtonDisabled}
+                                            className={taxInfoButtonDisabled ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleTaxInfo()}>
+                                            Next
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+                            {activeStep == 5 && (
+                                <div className='account-info-box'>
+                                    <div className='account-heading'>
+                                        <p className='heading'>Credit card information</p>
+                                    </div>
+                                    <div className="form-group">
+                                        <div>
+                                            <p className='input-heading'>Card number</p>
+                                        </div>
+                                        <input
+                                            type="tel"
+                                            name="number"
+                                            className="form-control"
+                                            placeholder=""
+                                            pattern="[\d| ]{16,22}"
+                                            label="card number"
+                                            value={cardNumber}
+                                            onChange={handleInputChange}
+
+                                        />
+                                    </div>
+                                    <div style={{display:'flex',justifyContent:'space-evenly',gap:'15px'}}>
+                                    <div className="form-group-one">
+                                        <div>
+                                            <p className='input-heading'>Expiration date</p>
+                                        </div>
+                                        <input
+                                            type="tel"
+                                            name="expiry"
+                                            className="form-control"
+                                            placeholder=""
+                                            pattern="\d\d/\d\d"
+                                            value={cardExpiryDate}
+                                            onChange={handleInputChange}
+                                        />
+                                    </div>
+                                    <div className="form-group-one">
+                                        <div>
+                                            <p className='input-heading'>Security code</p>
+                                        </div>
+                                        <input
+                                            type="tel"
+                                            name="cvc"
+                                            className="form-control"
+                                            placeholder=""
+                                            pattern="\d{3,4}"
+                                            value={cardCVV}
+                                            onChange={handleInputChange}
+                                        />
+                                    </div>
+                                    </div>
+                                    <div style={{ marginTop: '32px', marginBottom: '16px' }}>
+                                        <button disabled={creditCardButtonDisabled}
+                                            className={creditCardButtonDisabled ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleCardInfo()}>
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </Column>
+                </div>
             </Grid>
         </>
     )
