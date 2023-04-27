@@ -36,6 +36,40 @@
   }
 }
 
+.toast-notification{
+  display: flex;
+  // border-left: 3px solid #fa4d56;
+  background: #393939;
+  width:400px;
+  // height: 48px !important;
+  margin-top: 12px !important;
+  color: #FFFFFF;
+
+  .cds--inline-notification__details {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: stretch;
+    gap: 12px;
+  }
+
+  button {
+    background: transparent;
+    border: 0;
+    color: white;
+    cursor: pointer;
+    margin-top: 0px;
+
+    svg {
+      fill: white;
+    }
+  }
+
+  svg {
+    fill: #fa4d56;
+  }
+}
+
 .error-notification-inactive {
   width: 400px;
   height: 32px;
@@ -452,6 +486,40 @@ label[for=password-input] {
 
     }
   }
+
+  .toast-notification{
+    display: flex;
+    // border-left: 3px solid #fa4d56;
+    background: #393939;
+    width: 100%;
+    // height: 48px !important;
+    margin-top: 12px !important;
+    color: #FFFFFF;
+  
+    .cds--inline-notification__details {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: stretch;
+      gap: 12px;
+    }
+  
+    button {
+      background: transparent;
+      border: 0;
+      color: white;
+      cursor: pointer;
+      margin-top: 0px;
+  
+      svg {
+        fill: white;
+      }
+    }
+  
+    svg {
+      fill: #fa4d56;
+    }
+  }
 }
 
 .verify-button-class {
@@ -551,7 +619,7 @@ label[for=password-input] {
   margin-top: 40px;
   color: #fff;
   padding: 0 3rem;
-  margin-bottom: 6rem;
+  margin-bottom: 4rem;
   align-items: center;
 
   .signup-text{
@@ -710,6 +778,26 @@ label[for=password-input] {
     // align-self: center !important;
   }
 
+  .signup-heading-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    margin-top: 3rem;
+    color: #fff;
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+    align-items: center;
+  
+    .signup-text{
+     padding: 24px 0px 0px;
+      .content{
+       font-size: 14px;
+       color: #323232;
+      }
+    }
+  }
+
 }
 
 
@@ -799,7 +887,7 @@ label[for=password-input] {
     margin-top: 3rem;
     color: #fff;
     padding: 0 1rem;
-    margin-bottom: 6rem;
+    margin-bottom: 1rem;
     align-items: center;
   
     .signup-text{
