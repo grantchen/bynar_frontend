@@ -212,9 +212,9 @@
   cursor: pointer;
   min-width: 120px;
   max-width: 60%;
-  padding: 4px 0px;
+  padding: 0px 12px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .submit-button-disabled {
@@ -228,10 +228,9 @@
   min-height: 32px;
   min-width: 120px;
   max-width: 60%;
-  padding: 4px 0px;
+  padding: 0px 12px;
   display: flex;
-  justify-content: center;
-
+  justify-content: flex-start;
   cursor: not-allowed;
 }
 
