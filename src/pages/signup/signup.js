@@ -13,9 +13,7 @@ import {
     Form,
     FormGroup,
     Stack,
-    Button,
     Heading,
-    InlineLoading,
     Link,
     InlineNotification,
     Grid,
@@ -32,7 +30,9 @@ import {
     TextInput,
     Select,
     SelectItem,
-    ToastNotification
+    ToastNotification,
+    InlineLoading,
+    Button
 } from 'carbon-components-react';
 import {
     PasswordInput
@@ -535,14 +535,15 @@ const Signup = () => {
                                             {loading ?
                                                 (
                                                     <div style={{ marginTop: '32px' }}>
-                                                        <Loader />
+                                                        {/* <Loader /> */}
+                                                        <InlineLoading description={''} className="submit-button-loading"  />
                                                     </div>
                                                 ) : (
                                                     <div style={{ marginTop: '32px' }}>
-                                                        <button disabled={!emailIsValid || email.length == 0 || isAccountInfoError}
+                                                        <Button disabled={!emailIsValid || email.length == 0 || isAccountInfoError}
                                                             className={!emailIsValid || email.length == 0 || isAccountInfoError ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleSignupRequest()}>
                                                             {!isAccountInfoUpdated ? "Next" : "Update"}
-                                                        </button>
+                                                        </Button>
                                                     </div>)}
                                         </div>)}
                                     {activeStep == 2 && (
@@ -573,8 +574,9 @@ const Signup = () => {
                                             <div>
                                                 {resendCodeLoading ? (
                                                     <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', gap: '8px' }}>
-                                                        <Loader />
-                                                        <p className='email-text'>re-sending confirmation-code </p>
+                                                        {/* <Loader /> */}
+                                                        <InlineLoading description={'re-sending confirmation-code'} className="submit-button-loading"  />
+                                                        {/* <p className='email-text'>re-sending confirmation-code </p> */}
                                                     </div>
                                                 ) : (
                                                     <p className='resend-code' onClick={handleSignupRequest}>Resend code</p>
@@ -601,14 +603,15 @@ const Signup = () => {
                                             {verifyEmailLoading ?
                                                 (
                                                     <div style={{ marginTop: '32px' }}>
-                                                        <Loader />
+                                                        {/* <Loader /> */}
+                                                        <InlineLoading description={''} className="submit-button-loading"  />
                                                     </div>
                                                 ) : (
                                                     <div style={{ marginTop: '32px', marginBottom: '16px' }}>
-                                                        <button disabled={verificationCode.length == 0 || isVerifyEmailInfoError || !isChecked}
+                                                        <Button disabled={verificationCode.length == 0 || isVerifyEmailInfoError || !isChecked}
                                                             className={verificationCode.length == 0 || isVerifyEmailInfoError || !isChecked ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleVerifyEmail()}>
                                                             Verify Email
-                                                        </button>
+                                                        </Button>
                                                         <hr />
                                                     </div>)}
                                         </div>)}
@@ -683,10 +686,10 @@ const Signup = () => {
                                                 onChange={(e) => setPhoneNumber(e)}
                                             />
                                             <div style={{ marginTop: '32px', marginBottom: '16px' }}>
-                                                <button disabled={personalInfoButtonDisabled}
-                                                    className={personalInfoButtonDisabled ? 'submit-button-disabled' : 'submit-button'} onClick={() => handlePersonalInfo()}>
+                                                <Button disabled={personalInfoButtonDisabled}
+                                                    className={personalInfoButtonDisabled ? 'submit-button-disabled' : 'submit-Button'} onClick={() => handlePersonalInfo()}>
                                                     Next
-                                                </button>
+                                                </Button>
                                             </div>
                                         </div>
                                     )}
@@ -715,10 +718,10 @@ const Signup = () => {
                                                 }
                                             />
                                             <div style={{ marginTop: '32px', marginBottom: '16px' }}>
-                                                <button disabled={taxInfoButtonDisabled}
+                                                <Button disabled={taxInfoButtonDisabled}
                                                     className={taxInfoButtonDisabled ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleTaxInfo()}>
                                                     Next
-                                                </button>
+                                                </Button>
                                             </div>
                                         </div>
                                     )}
@@ -762,15 +765,16 @@ const Signup = () => {
                                                     {loadingCardSuccess ?
                                                         (
                                                             <div className='create-account-loader'>
-                                                                <Loader />
-                                                                <p style={{ color: '#161616' }}>{"verifying card details"}</p>
+                                                                {/* <Loader /> */}
+                                                                <InlineLoading description={'verifying card details...'} className="submit-button-loading"  />
+                                                                {/* <p style={{ color: '#161616' }}>{"verifying card details"}</p> */}
                                                             </div>
                                                         ) : (
                                                             <div className='create-account' >
                                                                 <div className='create-account' >
-                                                                    <button className='submit-button' onClick={handleVerifyCardDetails}>
+                                                                    <Button className='submit-button' onClick={handleVerifyCardDetails}>
                                                                         Verify card
-                                                                    </button>
+                                                                    </Button>
                                                                 </div>
                                                             </div>
                                                         )

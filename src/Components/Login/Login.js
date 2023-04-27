@@ -9,11 +9,13 @@ import {
     InlineNotification,
 } from '@carbon/react';
 import {
-    TextInput
+    TextInput,
+    InlineLoading
 } from 'carbon-components-react';
+import { ArrowRight, ArrowLeft } from '@carbon/react/icons';
 import { Loader } from '../Loader/Loader';
 import { useNavigate } from "react-router-dom";
-const Login = ({ heading, loading, handleFormSubmit, setErrorNotification, setServerErrorNotification, serverErrorNotification, errorNotification, showCreateAccount, createAccoutText, navigationUrl, navigationUrlText, labelText, labelValue, setFormLabelState, buttonText, enableForgotPassword, placeholderText, showRememberId = false ,navigateToLogin=false,text,subtitle,setSignInPhaseOne}) => {
+const Login = ({ heading, loading, handleFormSubmit, setErrorNotification, setServerErrorNotification, serverErrorNotification, errorNotification, showCreateAccount, createAccoutText, navigationUrl, navigationUrlText, labelText, labelValue, setFormLabelState, buttonText, enableForgotPassword, placeholderText, showRememberId = false, navigateToLogin = false, text, subtitle, setSignInPhaseOne }) => {
 
     const navigate = useNavigate();
     return (
@@ -26,7 +28,7 @@ const Login = ({ heading, loading, handleFormSubmit, setErrorNotification, setSe
                                 <InlineNotification
                                     className="error-notification-box"
                                     onClose={function noRefCheck() { }}
-                                    onCloseButtonClick={() => { setErrorNotification({});setServerErrorNotification({}) }}
+                                    onCloseButtonClick={() => { setErrorNotification({}); setServerErrorNotification({}) }}
                                     statusIconDescription="notification"
                                     title={serverErrorNotification.title ? serverErrorNotification.title : ''}
                                 />) : (
@@ -34,10 +36,10 @@ const Login = ({ heading, loading, handleFormSubmit, setErrorNotification, setSe
                             )
                         }
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <Heading>{heading}</Heading>
+                            <Heading style={{ fontSize: '28px' }}>{heading}</Heading>
                         </div>
                         {navigateToLogin && <p className="register-text-body-01">{text}<Link className="underlined-link" style={{ cursor: 'pointer' }} onClick={() => { setSignInPhaseOne(true) }}> {subtitle}</Link></p>}
-                        {showCreateAccount && <p className="register-text-body-01">{createAccoutText}<Link style={{ cursor: 'pointer' }} className="underlined-link" onClick={() => { navigate(`${navigationUrl}`) }}> {navigationUrlText}</Link></p>}
+                        {/* {showCreateAccount && <p className="register-text-body-01">{createAccoutText}<Link style={{ cursor: 'pointer' }} className="underlined-link" onClick={() => { navigate(`${navigationUrl}`) }}> {navigationUrlText}</Link></p>} */}
                         <div className='login-input-wrapper' >
                             {enableForgotPassword ? (<FormLabel className='input-label' >{labelText} <Link style={{ cursor: 'pointer' }} className="forgot-link" onClick={() => { navigate("/forgotpassword") }}>Forgot Password?</Link></FormLabel>) : (<FormLabel className='input-label' >{labelText} </FormLabel>)}
                             <TextInput
@@ -62,16 +64,25 @@ const Login = ({ heading, loading, handleFormSubmit, setErrorNotification, setSe
                     <div className='fields-container'>
                         {loading ?
                             (<div className='loader-signin'>
-                                <Loader />
+                                {/* <Loader /> */}
+                                <InlineLoading description={'Please wait...'} className="submit-button-loading" />
                             </div>) :
                             (<Button
+                                renderIcon={ArrowRight}
                                 type="submit"
                                 iconDescription={""}
                                 size="xl"
                                 className="submit-button"
                             >{buttonText}</Button>)}
                     </div>
+                    <div className='footer-container'>
+                        <hr />
+                        {showCreateAccount && <p className="register-text-body-01">{createAccoutText}<Link style={{ cursor: 'pointer' ,textDecoration: 'underline'}} className="underlined-link" onClick={() => { navigate(`${navigationUrl}`) }}> {navigationUrlText}</Link></p>}
+                    </div>
                 </Form>
+            </div>
+            <div className='footer-text'>
+                <p className="register-text-body-01">{"Need help?"}<Link style={{ cursor: 'pointer' ,textDecoration:'underline',paddingLeft:'4px'}}  onClick={() => { navigate(`/signin`)}}> {"Contact the Bynar help desk"}</Link></p>
             </div>
         </div>
     )

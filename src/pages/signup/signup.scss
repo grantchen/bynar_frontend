@@ -206,9 +206,15 @@
   border-color: #0f62fe;
   background-color: #FFFFFF;
   color: #0f62fe;
-  width: 112px;
+  // width: 140px;
   height: 32px;
+  min-height: 32px;
   cursor: pointer;
+  min-width: 120px;
+  max-width: 60%;
+  padding: 4px 0px;
+  display: flex;
+  justify-content: center;
 }
 
 .submit-button-disabled {
@@ -217,8 +223,15 @@
   border-color: #0f62fe;
   background-color: #FFFFFF;
   color: #0f62fe;
-  width: 112px;
+  // width: 140px;
   height: 32px;
+  min-height: 32px;
+  min-width: 120px;
+  max-width: 60%;
+  padding: 4px 0px;
+  display: flex;
+  justify-content: center;
+
   cursor: not-allowed;
 }
 
