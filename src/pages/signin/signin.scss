@@ -66,6 +66,7 @@
 
   .register-text-body-01 {
     color: #525252;
+    font-size: 14px;
   }
 
   .fields-container {
@@ -176,6 +177,15 @@
 
     .box-container {
       margin-bottom: 0px;
+
+      .cds--form {
+        width: 100%;
+        padding: 16px 0px 0px 0px;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
     }
   }
   .footer-text {
@@ -183,6 +193,6 @@
     width: calc(100% - 40px);
     display: flex;
     justify-content: flex-start;
-    padding-left: 16px;
+    padding-left: 0px;
   }
 }

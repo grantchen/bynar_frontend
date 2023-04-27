@@ -5,12 +5,12 @@ import {
     Heading,
     Checkbox,
     FormLabel,
-    Link,
     InlineNotification,
 } from '@carbon/react';
 import {
     TextInput,
-    InlineLoading
+    InlineLoading,
+    Link,
 } from 'carbon-components-react';
 import { ArrowRight, ArrowLeft } from '@carbon/react/icons';
 import { Loader } from '../Loader/Loader';
@@ -76,12 +76,12 @@ const Login = ({ heading, loading, handleFormSubmit, setErrorNotification, setSe
                     </div>
                     <div className='footer-container'>
                         <hr />
-                        {showCreateAccount && <p className="register-text-body-01">{createAccoutText}<Link style={{ cursor: 'pointer' ,textDecoration: 'underline'}} className="underlined-link" href={`${navigationUrl}`}> {navigationUrlText}</Link></p>}
+                        {showCreateAccount && <p className="register-text-body-01">{createAccoutText}<Link style={{ cursor: 'pointer' ,textDecoration: 'underline',paddingLeft:'4px',outline:'none'}} className="underlined-link" href={`${navigationUrl}`}> {navigationUrlText}</Link></p>}
                     </div>
                 </Form>
             </div>
             <div className='footer-text'>
-                <p className="register-text-body-01">{"Need help?"}<Link style={{ cursor: 'pointer' ,textDecoration:'underline',paddingLeft:'4px'}} href={`signin`}> {"Contact the Bynar help desk"}</Link></p>
+                <p className="register-text-body-01">{"Need help?"}<Link style={{ cursor: 'pointer' ,textDecoration:'underline',paddingLeft:'4px',outline:'none'}} href={`signin`}> {"Contact the Bynar help desk"}</Link></p>
             </div>
         </div>
     )

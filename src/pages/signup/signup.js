@@ -351,6 +351,8 @@ const Signup = () => {
                         title: 'error occured while creating user account',
                         status: 'error'
                     })
+                    setVerificationCode('');
+                    setIsChecked(false)
                     setActiveStep(1)
                 }
                  setLoadingSuccess(false);

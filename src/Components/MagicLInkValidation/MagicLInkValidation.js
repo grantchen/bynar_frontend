@@ -3,12 +3,12 @@ import {
     Form,
     Button,
     Heading,
-    FormLabel,
-    Link
+    FormLabel
 } from '@carbon/react';
 import {
     TextInput,
-    InlineLoading
+    InlineLoading,
+    Link
 } from 'carbon-components-react';
 import { Loader } from '../Loader/Loader';
 import { ArrowRight, ArrowLeft } from '@carbon/react/icons';
@@ -23,7 +23,7 @@ const MagicLinkValidation = ({ heading, loading, handleFormSubmit, errorNotifica
                     <Form onSubmit={handleFormSubmit}>
                         <div style={{ paddingRight: '20px' }}>
                             <Heading style={{ fontSize: '28px' }}>{heading}</Heading>
-                            <p className="register-text body-01">{text}<Link className="underlined-link" style={{ cursor: 'pointer' }} onClick={() => { setSignInPhaseOne(true) }}> {subtitle}</Link></p>
+                            <p className="register-text body-01">{text}<Link className="underlined-link" style={{ cursor: 'pointer', paddingLeft:'4px',textDecoration:'underline' }} onClick={() => { setSignInPhaseOne(true) }}> {subtitle}</Link></p>
                             <div className='login-input-wrapper' >
                                 <FormLabel className='input-label' >{labelText}</FormLabel>
                                 {/* <OtpInput
@@ -66,12 +66,12 @@ const MagicLinkValidation = ({ heading, loading, handleFormSubmit, errorNotifica
                         </div>
                         <div className='footer-container'>
                             <hr />
-                            {showCreateAccount && <p className="register-text-body-01">{createAccoutText}<Link style={{ cursor: 'pointer',textDecoration: 'underline' }} className="underlined-link" href={`${navigationUrl}`}> {navigationUrlText}</Link></p>}
+                            {showCreateAccount && <p className="register-text-body-01">{createAccoutText}<Link style={{ cursor: 'pointer',textDecoration: 'underline' ,paddingLeft:'4px',outline:'none'}} className="underlined-link" href={`${navigationUrl}`}> {navigationUrlText}</Link></p>}
                         </div>
                     </Form>
                 </div>
                 <div className='footer-text'>
-                    <p className="register-text-body-01">{"Need help?"}<Link style={{ cursor: 'pointer', textDecoration: 'underline', paddingLeft: '4px' }} className="underlined-link" href={`signin`}> {"Contact the Bynar help desk"}</Link></p>
+                    <p className="register-text-body-01">{"Need help?"}<Link style={{ cursor: 'pointer', textDecoration: 'underline', paddingLeft: '4px' ,outline:'none'}} className="underlined-link" href={`signin`}> {"Contact the Bynar help desk"}</Link></p>
                 </div>
             </div>
         </>
