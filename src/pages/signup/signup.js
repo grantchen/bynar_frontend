@@ -535,7 +535,6 @@ const Signup = () => {
                                             {loading ?
                                                 (
                                                     <div style={{ marginTop: '32px' }}>
-                                                        {/* <Loader /> */}
                                                         <InlineLoading description={''} className="submit-button-loading"  />
                                                     </div>
                                                 ) : (
@@ -574,7 +573,6 @@ const Signup = () => {
                                             <div>
                                                 {resendCodeLoading ? (
                                                     <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', gap: '8px' }}>
-                                                        {/* <Loader /> */}
                                                         <InlineLoading description={'re-sending confirmation-code'} className="submit-button-loading"  />
                                                         {/* <p className='email-text'>re-sending confirmation-code </p> */}
                                                     </div>
@@ -603,7 +601,6 @@ const Signup = () => {
                                             {verifyEmailLoading ?
                                                 (
                                                     <div style={{ marginTop: '32px' }}>
-                                                        {/* <Loader /> */}
                                                         <InlineLoading description={''} className="submit-button-loading"  />
                                                     </div>
                                                 ) : (
@@ -687,7 +684,7 @@ const Signup = () => {
                                             />
                                             <div style={{ marginTop: '32px', marginBottom: '16px' }}>
                                                 <Button disabled={personalInfoButtonDisabled}
-                                                    className={personalInfoButtonDisabled ? 'submit-button-disabled' : 'submit-Button'} onClick={() => handlePersonalInfo()}>
+                                                    className={personalInfoButtonDisabled ? 'submit-button-disabled' : 'submit-button'} onClick={() => handlePersonalInfo()}>
                                                     Next
                                                 </Button>
                                             </div>
@@ -765,7 +762,6 @@ const Signup = () => {
                                                     {loadingCardSuccess ?
                                                         (
                                                             <div className='create-account-loader'>
-                                                                {/* <Loader /> */}
                                                                 <InlineLoading description={'verifying card details...'} className="submit-button-loading"  />
                                                                 {/* <p style={{ color: '#161616' }}>{"verifying card details"}</p> */}
                                                             </div>

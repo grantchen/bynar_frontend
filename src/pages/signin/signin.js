@@ -122,7 +122,7 @@ const Signin = () => {
             setLoading(false)
         }
         await Auth.sendCustomChallengeAnswer(cognitoUser.current, verificationCode);
-        
+
         try {
             const res = await Auth.currentSession();
             setLoading(false)
@@ -151,19 +151,24 @@ const Signin = () => {
 
     return (
         <>
-            {signInPhaseOne ?
-                (
-                    <Login heading={"Log in to Bynar"} loading={loading} handleFormSubmit={handleEmailFormSubmit} setErrorNotification={setErrorNotification} setServerErrorNotification={setServerErrorNotification} serverErrorNotification={serverErrorNotification} errorNotification={errorNotification} showCreateAccount={true} createAccoutText={"Don't have an account?"} navigationUrl={"/signup"} navigationUrlText={"Create a new account"} labelText={"E-mail"} labelValue={email} setFormLabelState={setEmail} buttonText={"Continue"} enableForgotPassword={false} placeholderText={" "} showRememberId={false} text={`Logging in as ${email}`} subtitle={'Not you?'} setSignInPhaseOne={setSignInPhaseOne} />
-                ) : (isPasswordLessSignin ?
+            <div style={{display:'flex',flexDirection:'column'}}>
+                <div className='signin-header'>
+                    <p>Bynar</p>
+                </div>
+                {signInPhaseOne ?
                     (
-                        /* isPaswordLessSignin if true then sign in using magic link based on otp validation */
-                        <MagicLinkValidation heading={"Log in to Bynar"} loading={loading} handleFormSubmit={verifyMagicLink} errorNotification={errorNotification} labelText={"Security code"} labelValue={verificationCode} setFormLabelState={setVerificationCode} buttonText={"Login"} text={`Logging in as ${email}`} subtitle={'Not you?'} setSignInPhaseOne={setSignInPhaseOne} showCreateAccount={true} createAccoutText={"Don't have an account?"} navigationUrl={"/signup"} navigationUrlText={"Create a new account"} placeholderText={""} setErrorNotification={setErrorNotification} setServerErrorNotification={setServerErrorNotification}/>
-                    ) :
-                    (
-                        /* isPaswordLessSignin if false then sign in using password */
-                        <Login heading={"Login"} loading={loading} handleFormSubmit={handleFormSubmit} setErrorNotification={setErrorNotification} setServerErrorNotification={setServerErrorNotification} serverErrorNotification={serverErrorNotification} errorNotification={errorNotification} showCreateAccount={false} createAccoutText={""} navigationUrl={"/signup"} navigationUrlText={""} labelText={"Password"} labelValue={password} setFormLabelState={setPassword} buttonText={"Login"} enableForgotPassword={false} placeholderText={"Password"} navigateToLogin={true} text={`Logging in as ${email}`} subtitle={'Not you?'} setSignInPhaseOne={setSignInPhaseOne} />
-                    )
-                )}
+                        <Login heading={"Log in to Bynar"} loading={loading} handleFormSubmit={handleEmailFormSubmit} setErrorNotification={setErrorNotification} setServerErrorNotification={setServerErrorNotification} serverErrorNotification={serverErrorNotification} errorNotification={errorNotification} showCreateAccount={true} createAccoutText={"Don't have an account?"} navigationUrl={"/signup"} navigationUrlText={"Create a new account"} labelText={"E-mail"} labelValue={email} setFormLabelState={setEmail} buttonText={"Continue"} enableForgotPassword={false} placeholderText={" "} showRememberId={false} text={`Logging in as ${email}`} subtitle={'Not you?'} setSignInPhaseOne={setSignInPhaseOne} />
+                    ) : (isPasswordLessSignin ?
+                        (
+                            /* isPaswordLessSignin if true then sign in using magic link based on otp validation */
+                            <MagicLinkValidation heading={"Log in to Bynar"} loading={loading} handleFormSubmit={verifyMagicLink} errorNotification={errorNotification} labelText={"Security code"} labelValue={verificationCode} setFormLabelState={setVerificationCode} buttonText={"Login"} text={`Logging in as ${email}`} subtitle={'Not you?'} setSignInPhaseOne={setSignInPhaseOne} showCreateAccount={true} createAccoutText={"Don't have an account?"} navigationUrl={"/signup"} navigationUrlText={"Create a new account"} placeholderText={""} setErrorNotification={setErrorNotification} setServerErrorNotification={setServerErrorNotification} />
+                        ) :
+                        (
+                            /* isPaswordLessSignin if false then sign in using password */
+                            <Login heading={"Login"} loading={loading} handleFormSubmit={handleFormSubmit} setErrorNotification={setErrorNotification} setServerErrorNotification={setServerErrorNotification} serverErrorNotification={serverErrorNotification} errorNotification={errorNotification} showCreateAccount={false} createAccoutText={""} navigationUrl={"/signup"} navigationUrlText={""} labelText={"Password"} labelValue={password} setFormLabelState={setPassword} buttonText={"Login"} enableForgotPassword={false} placeholderText={"Password"} navigateToLogin={true} text={`Logging in as ${email}`} subtitle={'Not you?'} setSignInPhaseOne={setSignInPhaseOne} />
+                        )
+                    )}
+            </div>
         </>
     );
 };

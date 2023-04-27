@@ -64,7 +64,6 @@ const Login = ({ heading, loading, handleFormSubmit, setErrorNotification, setSe
                     <div className='fields-container'>
                         {loading ?
                             (<div className='loader-signin'>
-                                {/* <Loader /> */}
                                 <InlineLoading description={'Please wait...'} className="submit-button-loading" />
                             </div>) :
                             (<Button
@@ -77,12 +76,12 @@ const Login = ({ heading, loading, handleFormSubmit, setErrorNotification, setSe
                     </div>
                     <div className='footer-container'>
                         <hr />
-                        {showCreateAccount && <p className="register-text-body-01">{createAccoutText}<Link style={{ cursor: 'pointer' ,textDecoration: 'underline'}} className="underlined-link" onClick={() => { navigate(`${navigationUrl}`) }}> {navigationUrlText}</Link></p>}
+                        {showCreateAccount && <p className="register-text-body-01">{createAccoutText}<Link style={{ cursor: 'pointer' ,textDecoration: 'underline'}} className="underlined-link" href={`${navigationUrl}`}> {navigationUrlText}</Link></p>}
                     </div>
                 </Form>
             </div>
             <div className='footer-text'>
-                <p className="register-text-body-01">{"Need help?"}<Link style={{ cursor: 'pointer' ,textDecoration:'underline',paddingLeft:'4px'}}  onClick={() => { navigate(`/signin`)}}> {"Contact the Bynar help desk"}</Link></p>
+                <p className="register-text-body-01">{"Need help?"}<Link style={{ cursor: 'pointer' ,textDecoration:'underline',paddingLeft:'4px'}} href={`signin`}> {"Contact the Bynar help desk"}</Link></p>
             </div>
         </div>
     )
