@@ -207,8 +207,8 @@
   background-color: #FFFFFF;
   color: #0f62fe;
   // width: 140px;
-  height: 32px;
-  min-height: 32px;
+  height: 40px;
+  min-height: 40px;
   cursor: pointer;
   min-width: 120px;
   max-width: 60%;
@@ -224,8 +224,8 @@
   background-color: #FFFFFF;
   color: #0f62fe;
   // width: 140px;
-  height: 32px;
-  min-height: 32px;
+  height: 40px;
+  min-height: 40px;
   min-width: 120px;
   max-width: 60%;
   padding: 0px 12px;
@@ -651,7 +651,7 @@ label[for=password-input] {
 }
 
 .underline {
-  border: 1px solid #0062ff;
+  border: 2px solid #0062ff;
 }
 
 .signup-form {
@@ -659,19 +659,19 @@ label[for=password-input] {
   // overflow-y: auto;
 
   .account-info-box {
-
+    padding: 0px 16px;
     // margin-top: 16px;
     .account-heading {
-      margin: 8px 0px;
+      margin: 16px 0px 22px 0px;
     }
 
     .heading {
-      font-size: 16px;
-      color: #525252;
+      font-size: 20px;
+      color: #171717;
     }
 
     .bx--form-item {
-      padding: 8px 0px;
+      padding: 14px 0px;
     }
   }
 }
@@ -752,11 +752,11 @@ label[for=password-input] {
   }
 
   .signup-container {
-    width: 50%;
+    width: 80%;
   }
 
   .signup-form {
-    width: 50%;
+    width: 80%;
   }
 
   .email-form-input {
@@ -847,11 +847,11 @@ label[for=password-input] {
   }
 
   .signup-container {
-    width: 82%;
+    width: 88%;
   }
 
   .signup-form {
-    width: 82%;
+    width: 88%;
   }
 
   .email-form-input {
@@ -1007,4 +1007,13 @@ label[for=password-input] {
     color: #C6C6C6;
     text-decoration: none;
   }
+}
+
+.heading-container{
+  padding: 0px 16px;
+}
+
+.underline-border{
+  margin-top: 32px;
+  margin-left: -16px;
 }

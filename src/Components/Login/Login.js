@@ -23,23 +23,26 @@ const Login = ({ heading, loading, handleFormSubmit, setErrorNotification, setSe
             <div className='box-container'>
                 <Form onSubmit={handleFormSubmit}>
                     <div style={{ paddingRight: '20px' }}>
+                        
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <Heading style={{ fontSize: '28px' ,fontWeight:'400'}}>{heading}</Heading>
+                        </div>
+                        {navigateToLogin && <p className="register-text-body-01">{text}<Link className="underlined-link" style={{ cursor: 'pointer' }} onClick={() => { setSignInPhaseOne(true) }}> {subtitle}</Link></p>}
+                        {/* {showCreateAccount && <p className="register-text-body-01">{createAccoutText}<Link style={{ cursor: 'pointer' }} className="underlined-link" onClick={() => { navigate(`${navigationUrl}`) }}> {navigationUrlText}</Link></p>} */}
                         {typeof serverErrorNotification == 'object' && Object.keys(serverErrorNotification).length !== 0 ?
                             (
+                                <div className='notification-container'>
                                 <InlineNotification
                                     className="error-notification-box"
                                     onClose={function noRefCheck() { }}
                                     onCloseButtonClick={() => { setErrorNotification({}); setServerErrorNotification({}) }}
                                     statusIconDescription="notification"
                                     title={serverErrorNotification.title ? serverErrorNotification.title : ''}
-                                />) : (
-                                <div className="error-notification-box-inactive"></div>
+                                />
+                                </div>) : (
+                                <div></div>
                             )
                         }
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <Heading style={{ fontSize: '28px' }}>{heading}</Heading>
-                        </div>
-                        {navigateToLogin && <p className="register-text-body-01">{text}<Link className="underlined-link" style={{ cursor: 'pointer' }} onClick={() => { setSignInPhaseOne(true) }}> {subtitle}</Link></p>}
-                        {/* {showCreateAccount && <p className="register-text-body-01">{createAccoutText}<Link style={{ cursor: 'pointer' }} className="underlined-link" onClick={() => { navigate(`${navigationUrl}`) }}> {navigationUrlText}</Link></p>} */}
                         <div className='login-input-wrapper' >
                             {enableForgotPassword ? (<FormLabel className='input-label' >{labelText} <Link style={{ cursor: 'pointer' }} className="forgot-link" onClick={() => { navigate("/forgotpassword") }}>Forgot Password?</Link></FormLabel>) : (<FormLabel className='input-label' >{labelText} </FormLabel>)}
                             <TextInput
@@ -75,13 +78,12 @@ const Login = ({ heading, loading, handleFormSubmit, setErrorNotification, setSe
                             >{buttonText}</Button>)}
                     </div>
                     <div className='footer-container'>
-                        <hr />
                         {showCreateAccount && <p className="register-text-body-01">{createAccoutText}<Link style={{ cursor: 'pointer' ,textDecoration: 'underline',paddingLeft:'4px',outline:'none'}} className="underlined-link" href={`${navigationUrl}`}> {navigationUrlText}</Link></p>}
                     </div>
                 </Form>
             </div>
             <div className='footer-text'>
-                <p className="register-text-body-01">{"Need help?"}<Link style={{ cursor: 'pointer' ,textDecoration:'underline',paddingLeft:'4px',outline:'none'}} href={`signin`}> {"Contact the Bynar help desk"}</Link></p>
+                <p className="register-text-body-02">{"Need help?"}<Link style={{ cursor: 'pointer' ,textDecoration:'underline',paddingLeft:'4px',outline:'none'}} href={`signin`}> {"Contact the Bynar help desk"}</Link></p>
             </div>
         </div>
     )

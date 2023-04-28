@@ -23,11 +23,11 @@ const MagicLinkValidation = ({ heading, loading, loadingSucess, handleFormSubmit
                 <div className='box-container'>
                     <Form onSubmit={handleFormSubmit}>
                         <div style={{ paddingRight: '20px' }}>
-                            <Heading style={{ fontSize: '28px' }}>{heading}</Heading>
+                            <Heading style={{ fontSize: '28px',fontWeight:'400' }}>{heading}</Heading>
                             <p className="register-text body-01">{text}<Link className="underlined-link" style={{ cursor: 'pointer', paddingLeft: '4px', textDecoration: 'underline' }} onClick={() => { setSignInPhaseOne(true) }}> {subtitle}</Link></p>
                             {typeof serverErrorNotification == 'object' && Object.keys(serverErrorNotification).length !== 0 ?
                                 (
-                                    <div>
+                                    <div className='notification-container'>
                                         <ToastNotification
                                             className='toast-notification'
                                             iconDescription="describes the close button"
@@ -38,7 +38,7 @@ const MagicLinkValidation = ({ heading, loading, loadingSucess, handleFormSubmit
                                             onCloseButtonClick={() => { setErrorNotification({}); setServerErrorNotification({}) }}
                                         />
                                     </div>) : (
-                                    <div className="error-notification-inactive"></div>
+                                    <div></div>
                                 )
                             }
                             <div className='login-input-wrapper' >
@@ -78,7 +78,6 @@ const MagicLinkValidation = ({ heading, loading, loadingSucess, handleFormSubmit
                                 >{buttonText}</Button>)}
                         </div>
                         <div className='footer-container'>
-                            <hr />
                             {showCreateAccount && <p className="register-text-body-01">{createAccoutText}<Link style={{ cursor: 'pointer', textDecoration: 'underline', paddingLeft: '4px', outline: 'none' }} className="underlined-link" href={`${navigationUrl}`}> {navigationUrlText}</Link></p>}
                         </div>
                     </Form>

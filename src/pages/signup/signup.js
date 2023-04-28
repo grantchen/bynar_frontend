@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
-import { Frames, CardNumber, Cvv, ExpiryDate } from 'frames-react';
+import { Frames, CardNumber, Cvv, ExpiryDate, CardFrame } from 'frames-react';
 import 'react-telephone-input/css/default.css'
 import {
     formatCreditCardNumber,
@@ -343,7 +343,12 @@ const Signup = () => {
                 const res = await response.json();
 
                 if (response.ok) {
-                    navigate('/signin');
+                    localStorage.setItem("token", res.token);
+                    localStorage.setItem("theme", 'carbon-theme--white');
+                    localStorage.setItem("lang", "english");
+                    const bodyElement = document.body;
+                    bodyElement.className = localStorage.getItem("theme");
+                    navigate("/dashboard");
                 }
                 else if (response.status === 500) {
                     setIsError(true)
@@ -355,7 +360,7 @@ const Signup = () => {
                     setIsChecked(false)
                     setActiveStep(1)
                 }
-                 setLoadingSuccess(false);
+                setLoadingSuccess(false);
             }
             catch (e) {
                 setLoadingSuccess(false);
@@ -445,13 +450,13 @@ const Signup = () => {
     const selectedTab = useRef(null);
 
     const containerRef = useRef(0);
-    
+
     const cardElement = useRef(null);
 
     useEffect(() => {
         // 👇️ scroll to top on page load
-       
-        if (isError && activeStep !=1 && activeStep !=5 && activeStep !=4) {
+
+        if (isError && activeStep != 1 && activeStep != 5 && activeStep != 4) {
             const currentWidth = containerRef.current ? containerRef.current.offsetWidth : 0;
             if (currentWidth >= 1055) {
                 document.getElementById("scroller").scroll(0, 0);
@@ -462,13 +467,13 @@ const Signup = () => {
         }
     }, [isError]);
 
-    
+
 
     return (
         <>
             {loadingSuccess ? (<div className='loader-page'>
                 <DataLoader />
-                <p style={{ color: '#161616',marginLeft:'32px' }}>{"Creating account"}</p>
+                <p style={{ color: '#161616', marginLeft: '32px' }}>{"Creating account"}</p>
             </div>) : (
                 <div style={{ display: 'flex', flexDirection: 'column' }} ref={containerRef}>
                     <Grid className={'signup-grid'} >
@@ -493,9 +498,10 @@ const Signup = () => {
                                 <Content className={'signup-container'} >
                                     <div className='heading-container' >
                                         <div className="login-link" style={{ 'marginBottom': '1.5rem' }}>Already have an BYNAR account? <Link href="/signin">Log in</Link></div>
-                                        <Heading style={{ fontSize: '24px' }}>Sign up for an Bynar account</Heading>
-                                        <hr className="underline" />
+                                        <Heading style={{ fontSize: '28px',fontWeight:'400' ,marginBottom:'16px'}}>Sign up for an Bynar account</Heading>
+                                        
                                     </div>
+                                    <hr className="underline" />
                                 </Content>
                                 {typeof errorNotification == 'object' && Object.keys(errorNotification).length !== 0 ?
                                     (
@@ -510,7 +516,7 @@ const Signup = () => {
                                                 onCloseButtonClick={() => { setErrorNotification({}); setIsError(false) }}
                                             />
                                         </div>) : (
-                                        <div className="error-notification-inactive"></div>
+                                        <div></div>
                                     )
                                 }
 
@@ -518,7 +524,7 @@ const Signup = () => {
                                     {activeStep == 1 && (
                                         <div className='account-info-box'>
                                             <div className='account-heading'>
-                                                <p className='heading'>1.Organization account</p>
+                                                <p className='heading'>1. Organization account</p>
                                             </div>
                                             <TextInput
                                                 id="email"
@@ -537,7 +543,7 @@ const Signup = () => {
                                             {loading ?
                                                 (
                                                     <div style={{ marginTop: '32px' }}>
-                                                        <InlineLoading description={''} className="submit-button-loading"  />
+                                                        <InlineLoading description={''} className="submit-button-loading" />
                                                     </div>
                                                 ) : (
                                                     <div style={{ marginTop: '32px' }}>
@@ -550,7 +556,7 @@ const Signup = () => {
                                     {activeStep == 2 && (
                                         <div className='account-info-box'>
                                             <div className='account-heading'>
-                                                <p className='heading'>2-Verify email</p>
+                                                <p className='heading'>2. Verify email</p>
                                             </div>
                                             <div className='verification-box'>
                                                 <TextInput
@@ -575,7 +581,7 @@ const Signup = () => {
                                             <div>
                                                 {resendCodeLoading ? (
                                                     <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', gap: '8px' }}>
-                                                        <InlineLoading description={'re-sending confirmation-code'} className="submit-button-loading"  />
+                                                        <InlineLoading description={'re-sending confirmation-code'} className="submit-button-loading" />
                                                         {/* <p className='email-text'>re-sending confirmation-code </p> */}
                                                     </div>
                                                 ) : (
@@ -583,13 +589,13 @@ const Signup = () => {
                                                 )}
 
                                             </div>
-                                            <hr />
+                                            <hr className='underline-border'/>
                                             <div>
                                                 <p className='verify-email-text'>Bynar may use my contact data to keep me informed of products, services and offerings:</p>
                                             </div>
                                             <div style={{ display: 'flex', alignItems: 'center' }}>
                                                 <input type="checkbox" id="vehicle1" className='checkbox' name="vehicle1" value="Bike" onChange={(e) => { setIsChecked(e.target.checked) }} />
-                                                <label style={{color:'#161616',fontWeight:'normal'}}>by email</label>
+                                                <label style={{ color: '#161616', fontWeight: 'normal' }}>by email</label>
                                             </div>
                                             <div>
                                                 <p className='verify-email-text'>You can withdraw your marketing consent at any time by submitting an <Link href="/signup">opt-out request</Link>. Also you may unsubscribe from receiving marketing emails by clicking the unsubscribe link in each email.</p>
@@ -603,7 +609,7 @@ const Signup = () => {
                                             {verifyEmailLoading ?
                                                 (
                                                     <div style={{ marginTop: '32px' }}>
-                                                        <InlineLoading description={''} className="submit-button-loading"  />
+                                                        <InlineLoading description={''} className="submit-button-loading" />
                                                     </div>
                                                 ) : (
                                                     <div style={{ marginTop: '32px', marginBottom: '16px' }}>
@@ -611,13 +617,13 @@ const Signup = () => {
                                                             className={verificationCode.length == 0 || isVerifyEmailInfoError || !isChecked ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleVerifyEmail()}>
                                                             Verify Email
                                                         </Button>
-                                                        <hr />
+                                                        <hr className='underline-border'/>
                                                     </div>)}
                                         </div>)}
                                     {activeStep == 3 && (
                                         <div className='account-info-box'>
                                             <div className='account-heading'>
-                                                <p className='heading'>3.Account information</p>
+                                                <p className='heading'>3. Account information</p>
                                             </div>
                                             <TextInput type="text"
                                                 className="email-form-input"
@@ -676,7 +682,7 @@ const Signup = () => {
                                                 invalid={typeof postalCodeErrorNotification == 'object' && Object.keys(postalCodeErrorNotification).length !== 0}
                                                 invalidText={(postalCodeErrorNotification && postalCodeErrorNotification.title) ? postalCodeErrorNotification.title : ""}
                                             />
-                                            <div>
+                                            <div style={{marginTop:'6px'}}>
                                                 <p className='input-heading'>Phone number</p>
                                             </div>
                                             <PhoneInput className='phone-input'
@@ -695,7 +701,7 @@ const Signup = () => {
                                     {activeStep == 4 && (
                                         <div className='account-info-box'>
                                             <div className='account-heading'>
-                                                <p className='heading'>4.Organization information</p>
+                                                <p className='heading'>4. Organization information</p>
                                             </div>
                                             <TextInput type="text"
                                                 className="email-form-input"
@@ -728,7 +734,7 @@ const Signup = () => {
                                         <>
                                             <div className='account-info-box'>
                                                 <div className='account-heading'>
-                                                    <p className='heading'>5.Credit card information</p>
+                                                    <p className='heading'>5. Credit card information</p>
                                                 </div>
                                             </div>
                                             <Frames
@@ -737,9 +743,9 @@ const Signup = () => {
                                                 }}
                                                 ref={cardElement}
                                             >
-                                                <div style={{ backgroundColor: 'white', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                                                <div style={{ backgroundColor: 'white', display: 'flex', flexDirection: 'column',padding:'0px 16px' }}>
 
-                                                    <div >
+                                                    {/* <div >
                                                         <div>
                                                             <p className='input-heading'>Card number</p>
                                                         </div>
@@ -759,12 +765,18 @@ const Signup = () => {
                                                             </div>
                                                             <Cvv className='security-code' />
                                                         </div>
+                                                    </div> */}
+                                                    <div>
+                                                        <p className='input-heading'>Card details</p>
+                                                    </div>
+                                                    <div>
+                                                        <CardFrame className='card-number' />
                                                     </div>
 
                                                     {loadingCardSuccess ?
                                                         (
                                                             <div className='create-account-loader'>
-                                                                <InlineLoading description={'verifying card details...'} className="submit-button-loading"  />
+                                                                <InlineLoading description={'verifying card details...'} className="submit-button-loading" />
                                                                 {/* <p style={{ color: '#161616' }}>{"verifying card details"}</p> */}
                                                             </div>
                                                         ) : (
