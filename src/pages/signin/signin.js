@@ -27,6 +27,7 @@ const Signin = () => {
     const [password, setPassword] = useState("")
     const [isPasswordLessSignin, setPasswordLessSignin] = useState(true)
     const cognitoUser = useRef(null);
+    const [loadingSucess,setLoadingSucess]=useState(false)
 
     /** function to validate email address. */
     const validateEmail = (email) => {
@@ -54,17 +55,21 @@ const Signin = () => {
             setErrorNotification({
             })
             setServerErrorNotification({})
-            setLoading(true);
+            setLoadingSucess(true);
             try {
                 cognitoUser.current = await Auth.signIn({
                     username: email.trim(),
                 });
                 setSignInPhaseOne(false);
-                setLoading(false)
+                setLoadingSucess(false)
+                setVerificationCode('')
+                if(!signInPhaseOne)
+                setServerErrorNotification({ title: `security code sent to ${email}`, status: 'success' });
             }
             catch (e) {
                 console.log(e)
-                setLoading(false)
+                setLoadingSucess(false)
+                setVerificationCode('')
                 setServerErrorNotification({ title: 'Email address not verified', status: 'error' });
             }
         }
@@ -115,9 +120,10 @@ const Signin = () => {
     const verifyMagicLink = async (e) => {
         e.preventDefault()
         setLoading(true)
+        setServerErrorNotification({})
         if (verificationCode.length == 0) {
             setErrorNotification({
-                title: "Verification code should not be blank"
+                title: "Security code should not be blank"
             });
             setLoading(false)
         }
@@ -136,9 +142,10 @@ const Signin = () => {
             }
         } catch (err) {
             console.log('Apparently the user did not enter the right code');
-            setServerErrorNotification({ title: 'Enter valid code', status: 'error' });
-            setSignInPhaseOne(true)
+            setServerErrorNotification({ title: 'Enter correct security code', status: 'error' });
+            // setSignInPhaseOne(true)
             setLoading(false)
+            setVerificationCode('')
         }
     }
 
@@ -157,11 +164,11 @@ const Signin = () => {
                 </div>
                 {signInPhaseOne ?
                     (
-                        <Login heading={"Log in to Bynar"} loading={loading} handleFormSubmit={handleEmailFormSubmit} setErrorNotification={setErrorNotification} setServerErrorNotification={setServerErrorNotification} serverErrorNotification={serverErrorNotification} errorNotification={errorNotification} showCreateAccount={true} createAccoutText={"Don't have an account?"} navigationUrl={"/signup"} navigationUrlText={"Create an Bynar account"} labelText={"E-mail"} labelValue={email} setFormLabelState={setEmail} buttonText={"Continue"} enableForgotPassword={false} placeholderText={" "} showRememberId={false} text={`Logging in as ${email}`} subtitle={'Not you?'} setSignInPhaseOne={setSignInPhaseOne} />
+                        <Login heading={"Log in to Bynar"} loading={loadingSucess} handleFormSubmit={handleEmailFormSubmit} setErrorNotification={setErrorNotification} setServerErrorNotification={setServerErrorNotification} serverErrorNotification={serverErrorNotification} errorNotification={errorNotification} showCreateAccount={true} createAccoutText={"Don't have an account?"} navigationUrl={"/signup"} navigationUrlText={"Create an Bynar account"} labelText={"E-mail"} labelValue={email} setFormLabelState={setEmail} buttonText={"Continue"} enableForgotPassword={false} placeholderText={" "} showRememberId={false} text={`Logging in as ${email}`} subtitle={'Not you?'} setSignInPhaseOne={setSignInPhaseOne} />
                     ) : (isPasswordLessSignin ?
                         (
                             /* isPaswordLessSignin if true then sign in using magic link based on otp validation */
-                            <MagicLinkValidation heading={"Log in to Bynar"} loading={loading} handleFormSubmit={verifyMagicLink} errorNotification={errorNotification} labelText={"Security code"} labelValue={verificationCode} setFormLabelState={setVerificationCode} buttonText={"Login"} text={`Logging in as ${email}`} subtitle={'Not you?'} setSignInPhaseOne={setSignInPhaseOne} showCreateAccount={true} createAccoutText={"Don't have an account?"} navigationUrl={"/signup"} navigationUrlText={"Create an Bynar account"} placeholderText={""} setErrorNotification={setErrorNotification} setServerErrorNotification={setServerErrorNotification} />
+                            <MagicLinkValidation heading={"Log in to Bynar"} loading={loading} loadingSucess={loadingSucess} handleFormSubmit={verifyMagicLink} errorNotification={errorNotification} labelText={"Security code"} labelValue={verificationCode} setFormLabelState={setVerificationCode} buttonText={"Login"} text={`Logging in as ${email}`} subtitle={'Not you?'} setSignInPhaseOne={setSignInPhaseOne} showCreateAccount={true} createAccoutText={"Don't have an account?"} navigationUrl={"/signup"} navigationUrlText={"Create an Bynar account"} placeholderText={""} setErrorNotification={setErrorNotification} setServerErrorNotification={setServerErrorNotification} serverErrorNotification={serverErrorNotification} handleEmailFormSubmit={handleEmailFormSubmit}/>
                         ) :
                         (
                             /* isPaswordLessSignin if false then sign in using password */

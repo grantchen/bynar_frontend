@@ -8,13 +8,14 @@ import {
 import {
     TextInput,
     InlineLoading,
+    ToastNotification,
     Link
 } from 'carbon-components-react';
 import { Loader } from '../Loader/Loader';
 import { ArrowRight, ArrowLeft } from '@carbon/react/icons';
 import OtpInput from 'react-otp-input';
 import { useNavigate } from 'react-router-dom';
-const MagicLinkValidation = ({ heading, loading, handleFormSubmit, errorNotification, labelText, labelValue, setFormLabelState, buttonText, text, subtitle, setSignInPhaseOne, showCreateAccount, createAccoutText, navigationUrl, navigationUrlText, placeholderText, setErrorNotification, setServerErrorNotification }) => {
+const MagicLinkValidation = ({ heading, loading, loadingSucess, handleFormSubmit, errorNotification, labelText, labelValue, setFormLabelState, buttonText, text, subtitle, setSignInPhaseOne, showCreateAccount, createAccoutText, navigationUrl, navigationUrlText, placeholderText, setErrorNotification, setServerErrorNotification, serverErrorNotification, handleEmailFormSubmit }) => {
     const navigate = useNavigate();
     return (
         <>
@@ -23,17 +24,25 @@ const MagicLinkValidation = ({ heading, loading, handleFormSubmit, errorNotifica
                     <Form onSubmit={handleFormSubmit}>
                         <div style={{ paddingRight: '20px' }}>
                             <Heading style={{ fontSize: '28px' }}>{heading}</Heading>
-                            <p className="register-text body-01">{text}<Link className="underlined-link" style={{ cursor: 'pointer', paddingLeft:'4px',textDecoration:'underline' }} onClick={() => { setSignInPhaseOne(true) }}> {subtitle}</Link></p>
+                            <p className="register-text body-01">{text}<Link className="underlined-link" style={{ cursor: 'pointer', paddingLeft: '4px', textDecoration: 'underline' }} onClick={() => { setSignInPhaseOne(true) }}> {subtitle}</Link></p>
+                            {typeof serverErrorNotification == 'object' && Object.keys(serverErrorNotification).length !== 0 ?
+                                (
+                                    <div>
+                                        <ToastNotification
+                                            className='toast-notification'
+                                            iconDescription="describes the close button"
+                                            subtitle={serverErrorNotification?.title}
+                                            timeout={0}
+                                            title={""}
+                                            kind={serverErrorNotification?.status}
+                                            onCloseButtonClick={() => { setErrorNotification({}); setServerErrorNotification({}) }}
+                                        />
+                                    </div>) : (
+                                    <div className="error-notification-inactive"></div>
+                                )
+                            }
                             <div className='login-input-wrapper' >
                                 <FormLabel className='input-label' >{labelText}</FormLabel>
-                                {/* <OtpInput
-                                    value={labelValue}
-                                    onChange={setFormLabelState}
-                                    numInputs={6}
-                                    renderSeparator={<span>-</span>}
-                                    renderInput={(props) => <input {...props} />}
-                                    inputStyle={{ width: '56px' }}
-                                /> */}
                                 <TextInput
                                     id="security-code"
                                     className="login-form-input"
@@ -46,9 +55,13 @@ const MagicLinkValidation = ({ heading, loading, handleFormSubmit, errorNotifica
                                     value={labelValue}
                                     onChange={e => { setFormLabelState(e.target.value); if (typeof errorNotification == 'object' && Object.keys(errorNotification).length !== 0) setErrorNotification({}); setServerErrorNotification({}); }}
                                 />
-                                {/* <div>
-                                    {(errorNotification && errorNotification.title && labelValue.length == 0) ? <p style={{ color: '#DA1E28', fontSize: '12px', marginTop: '4px' }}>{errorNotification.title}</p> : ""}
-                                </div> */}
+                                <div className='resend-code'>
+                                    {loadingSucess ?
+                                        (<div >
+                                            <InlineLoading description={'resending security code...'} className="submit-button-loading" />
+                                        </div>) :
+                                        (<p className='resend-code-text' onClick={handleEmailFormSubmit}>Resend security code</p>)}
+                                </div>
                             </div>
                         </div>
                         <div className='fields-container'>
@@ -66,12 +79,12 @@ const MagicLinkValidation = ({ heading, loading, handleFormSubmit, errorNotifica
                         </div>
                         <div className='footer-container'>
                             <hr />
-                            {showCreateAccount && <p className="register-text-body-01">{createAccoutText}<Link style={{ cursor: 'pointer',textDecoration: 'underline' ,paddingLeft:'4px',outline:'none'}} className="underlined-link" href={`${navigationUrl}`}> {navigationUrlText}</Link></p>}
+                            {showCreateAccount && <p className="register-text-body-01">{createAccoutText}<Link style={{ cursor: 'pointer', textDecoration: 'underline', paddingLeft: '4px', outline: 'none' }} className="underlined-link" href={`${navigationUrl}`}> {navigationUrlText}</Link></p>}
                         </div>
                     </Form>
                 </div>
                 <div className='footer-text'>
-                    <p className="register-text-body-01">{"Need help?"}<Link style={{ cursor: 'pointer', textDecoration: 'underline', paddingLeft: '4px' ,outline:'none'}} className="underlined-link" href={`signin`}> {"Contact the Bynar help desk"}</Link></p>
+                    <p className="register-text-body-01">{"Need help?"}<Link style={{ cursor: 'pointer', textDecoration: 'underline', paddingLeft: '4px', outline: 'none' }} className="underlined-link" href={`signin`}> {"Contact the Bynar help desk"}</Link></p>
                 </div>
             </div>
         </>
