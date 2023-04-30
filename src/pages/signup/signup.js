@@ -48,7 +48,9 @@ import { BaseURL } from '../../sdk/constant.js';
 import { DataLoader } from '../../Components/Loader/DataLoder.js';
 import '../../styles/paymentform/paymentform.scss'
 
+
 const Signup = () => {
+    
     const navigate = useNavigate();
     const [errorNotification, setErrorNotification] = useState({});
     const [loading, setLoading] = useState(false);
@@ -96,23 +98,73 @@ const Signup = () => {
     const [validationToken, setValidationToken] = useState('');
     const ref = useRef(null);
     const [loadingCardSuccess, setLoadingCardSuccess] = useState(false)
+    const [errors, setErrors] = useState({});
+    const [phoneNumberValid, setIsPhoneNumberValid] = useState(true)
+    const [errorMessage, setErrorMessage] = useState('')
+    const [accountInfoErrors, setAccountInfoErrors] = useState({
+        fullName: false,
+        addressLine1: false,
+        city: false,
+        state: false,
+        postalCode: false,
+        phoneNumber: false,
+    })
+    const [organizationInfoErrors, setOrganizationInfoErrors] = useState({
+        organizationName: false,
+        organizationNumber: false,
+    })
     const accountInfoButtonDisabled = !emailIsValid || email.length == 0 || isAccountInfoError;
-    const personalInfoButtonDisabled = fullName.length == 0 || city.length == 0 || state.length == 0 || postalCode.length == 0 || phoneNumber.length == 0 || addressLine1.length == 0 || Object.keys(postalCodeErrorNotification).length != 0;
+    const personalInfoButtonDisabled = fullName.trim().length == 0 || city.trim().length == 0 || state.trim().length == 0 || postalCode.trim().length == 0 || !phoneNumberValid || addressLine1.trim().length == 0 || Object.keys(postalCodeErrorNotification).length != 0;
     const verificationEmailButtonDisabled = verificationCode.length == 0 || isVerifyEmailInfoError;
 
-    const handleFirstNameChange = (value) => {
-        setFirstName(value);
+    const handleFullName = (e) => {
+        const { name, value } = e.target;
+        setFullName(value)
+        setAccountInfoErrors({ ...accountInfoErrors, [name]: value.trim().length == 0 })
     }
 
-    const handleLastNameChange = (value) => {
-        setLastName(value);
+    const handleAddressLine1 = (e) => {
+        const { name, value } = e.target;
+        setAddressLine1(value)
+        setAccountInfoErrors({ ...accountInfoErrors, [name]: value.trim().length == 0 })
     }
+
+    const handleCity = (e) => {
+        const { name, value } = e.target;
+        setCity(value)
+        setAccountInfoErrors({ ...accountInfoErrors, [name]: value.trim().length == 0 })
+    }
+
+    const handleState = (e) => {
+        const { name, value } = e.target;
+        setState(value)
+        setAccountInfoErrors({ ...accountInfoErrors, [name]: value.trim().length == 0 })
+    }
+
+    const validatePhoneNumber = (value, country) => {
+        
+        if (value.length == 0) {
+            setErrorMessage("Phone number is required")
+            setIsPhoneNumberValid(false)
+        }
+        else{
+            setErrorMessage(" ")
+            setIsPhoneNumberValid(true)
+        }
+    }
+    const handlePhoneNumber = (value, country, formattedValue) => {
+        setPhoneNumber(value)
+        validatePhoneNumber(value, country);
+    }
+
 
     const handleVerificationCodeChange = (value) => {
         setErrorNotification({});
         setVerificationCode(value);
         setIsError(false)
         setIsVerifyEmailError(false);
+        const errors = validateVerifyEmailForm(value);
+        setErrors(errors);
     }
 
     useLayoutEffect(() => {
@@ -131,17 +183,11 @@ const Signup = () => {
 
     /* Function to check if email address is valid or not */
     const checkEmailValid = (value) => {
-        var isEmailValid =
-            /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-        if (value || value.length !== 0) {
-            if (isEmailValid.test(value)) {
-                return true
-            } else {
-                return false
-            }
-        } else {
-            return false
-        }
+        return String(value)
+            .toLowerCase()
+            .match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
     }
 
     /* Function to set state, check email address validation when email address is changed  */
@@ -150,7 +196,9 @@ const Signup = () => {
         setIsError(false);
         setIsAccountInfoError(false);
         setEmailAddress(value);
-        setEmailValid(checkEmailValid(value));
+        const errors = validateOrganizationForm(value);
+        setErrors(errors);
+        // setEmailValid(checkEmailValid(value));
     }
 
     const handlePasswordChange = (value) => {
@@ -376,10 +424,18 @@ const Signup = () => {
         setActiveStep(4);
     }
 
-    const handleVatNumberChange = (value) => {
+    const handleVatNumberChange = (e) => {
+        const { name, value } = e.target;
         setVatNumber(value);
+        setOrganizationInfoErrors({ ...organizationInfoErrors, [name]: value.trim().length == 0 })
         // const gstRegex = /[0-9]{2}[A-Z]{3}[ABCFGHLJPTF]{1}[A-Z]{1}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}/;
         setGstValid(value.length > 0);
+    }
+
+    const handleOrganizationNameChange = (e) => {
+        const { name, value } = e.target;
+        setOrganizationName(value)
+        setOrganizationInfoErrors({ ...organizationInfoErrors, [name]: value.trim().length == 0 })
     }
 
     const handleTaxInfo = () => {
@@ -405,21 +461,23 @@ const Signup = () => {
         }
     }
 
-    /* Function to handle postal code change and also check validations for postal code */
-    const handlePostalCode = (e) => {
-        setPostalCode(e.target.value);
-        if (!/^\d+$/.test(e.target.value)) {
+    const postalCodeValidation = (value) => {
+        if (value.length === 0) {
+            setPostalCodeErrorNotification({ title: 'Postal code is required' });
+        }
+        else if (!/^\d+$/.test(value)) {
             setPostalCodeErrorNotification({ title: 'Postal code should be integer' });
-        }
-        else if (e.target.value.length === 0) {
-            setPostalCodeErrorNotification({ title: 'Postal code should not be blank' });
-        }
-        else if (e.target.value.length != 6) {
-            setPostalCodeErrorNotification({ title: 'Postal code should be of 6 digit' });
         }
         else {
             setPostalCodeErrorNotification({});
         }
+    }
+
+    /* Function to handle postal code change and also check validations for postal code */
+    const handlePostalCode = (e) => {
+        setPostalCode(e.target.value.trim());
+        postalCodeValidation(e.target.value.trim());
+
     }
 
     const handleVerifyCardDetails = async (e) => {
@@ -453,6 +511,8 @@ const Signup = () => {
 
     const cardElement = useRef(null);
 
+    const inputRefs = useRef([]);
+
     useEffect(() => {
         // 👇️ scroll to top on page load
 
@@ -468,6 +528,89 @@ const Signup = () => {
     }, [isError]);
 
 
+    const validateOrganizationForm = (email) => {
+        const errors = {};
+        if (email.trim() === '') {
+            errors.email = 'Email is required';
+        } else if (email.length > 0) {
+            if (!checkEmailValid(email.trim())) {
+                errors.email = 'Suggested format (name@company.com)';
+            }
+        }
+
+        return errors;
+    };
+
+    const validateVerifyEmailForm = (verificationCode) => {
+
+        const errors = {};
+        if (verificationCode.trim() === '') {
+            errors.verificationCode = 'A verification code is required';
+        } else if (verificationCode.length > 0) {
+            if (verificationCode.trim().length != 6) {
+                errors.verificationCode = 'Code should be 6 digit long';
+            }
+        }
+
+        return errors;
+
+    }
+
+    const handleOrganizationFormSubmit = () => {
+        const errors = validateOrganizationForm(email);
+        setErrors(errors);
+
+        if (Object.keys(errors).length === 0) {
+            handleSignupRequest()
+        }
+    }
+
+    const handleVerifyEmailFormSubmit = () => {
+        const errors = validateVerifyEmailForm(verificationCode);
+        setErrors(errors);
+        if (Object.keys(errors).length === 0) {
+            handleVerifyEmail()
+        }
+        else {
+            setIsError(true)
+        }
+    }
+
+    const handleAccountInformationFormSubmit = () => {
+        const error = {}
+        postalCodeValidation(postalCode)
+        error.fullName = fullName.trim().length == 0;
+        error.addressLine1 = addressLine1.trim().length == 0;
+        error.city = city.trim().length == 0;
+        error.fullName = fullName.trim().length == 0;
+        error.state = state.trim().length == 0;
+        error.phoneNumber = phoneNumber.length == 0;
+        setAccountInfoErrors(error)
+        if (phoneNumber.length == 0) {
+            setErrorMessage('Phone number is required')
+            setIsPhoneNumberValid(false)
+        }
+
+        const emptyInput = inputRefs.current.find((ref) => ref && ref.value === '');
+
+        if (emptyInput) {
+          emptyInput.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        if (!personalInfoButtonDisabled) {
+            handlePersonalInfo()
+        }    
+    }
+
+    const handleOrganizationInformationFormSubmit = () => {
+        const error = {}
+        error.organizationName = organizationName.trim().length == 0;
+        error.organizationNumber = vatNumber.trim().length == 0;
+        setOrganizationInfoErrors(error)
+        if (!taxInfoButtonDisabled) {
+            handleTaxInfo()
+        }
+    }
 
     return (
         <>
@@ -498,8 +641,8 @@ const Signup = () => {
                                 <Content className={'signup-container'} >
                                     <div className='heading-container' >
                                         <div className="login-link" style={{ 'marginBottom': '1.5rem' }}>Already have an BYNAR account? <Link href="/signin">Log in</Link></div>
-                                        <Heading style={{ fontSize: '28px',fontWeight:'400' ,marginBottom:'16px'}}>Sign up for an Bynar account</Heading>
-                                        
+                                        <Heading style={{ fontSize: '28px', fontWeight: '400', marginBottom: '16px' }}>Sign up for an Bynar account</Heading>
+
                                     </div>
                                     <hr className="underline" />
                                 </Content>
@@ -533,11 +676,8 @@ const Signup = () => {
                                                 value={email}
                                                 labelText="E-mail"
                                                 onChange={(e) => handleEmailChange(e.target.value)}
-                                                invalid={!emailIsValid && email.length > 0}
-                                                invalidText={
-                                                    !emailIsValid && email.length > 0
-                                                        ? 'Enter valid email address (Suggested format (name@company.com))' : null
-                                                }
+                                                invalid={!!errors.email}
+                                                invalidText={errors.email}
                                                 disabled={loading ? true : false}
                                             />
                                             {loading ?
@@ -547,9 +687,8 @@ const Signup = () => {
                                                     </div>
                                                 ) : (
                                                     <div style={{ marginTop: '32px' }}>
-                                                        <Button disabled={!emailIsValid || email.length == 0 || isAccountInfoError}
-                                                            className={!emailIsValid || email.length == 0 || isAccountInfoError ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleSignupRequest()}>
-                                                            {!isAccountInfoUpdated ? "Next" : "Update"}
+                                                        <Button className='submit-button' onClick={handleOrganizationFormSubmit}>
+                                                            {"Next"}
                                                         </Button>
                                                     </div>)}
                                         </div>)}
@@ -567,10 +706,9 @@ const Signup = () => {
                                                     placeholder="6 digit code"
                                                     value={verificationCode}
                                                     onChange={(e) => handleVerificationCodeChange(e.target.value)}
-                                                    invalid={verificationCode.length == 0}
+                                                    invalid={!!errors.verificationCode}
                                                     invalidText={
-                                                        verificationCode.length == 0
-                                                            ? 'A verification code is required' : null
+                                                        errors.verificationCode
                                                     }
                                                     disabled={loading ? true : false}
                                                 />
@@ -589,7 +727,7 @@ const Signup = () => {
                                                 )}
 
                                             </div>
-                                            <hr className='underline-border'/>
+                                            <hr className='underline-border' />
                                             <div>
                                                 <p className='verify-email-text'>Bynar may use my contact data to keep me informed of products, services and offerings:</p>
                                             </div>
@@ -613,11 +751,11 @@ const Signup = () => {
                                                     </div>
                                                 ) : (
                                                     <div style={{ marginTop: '32px', marginBottom: '16px' }}>
-                                                        <Button disabled={verificationCode.length == 0 || isVerifyEmailInfoError || !isChecked}
-                                                            className={verificationCode.length == 0 || isVerifyEmailInfoError || !isChecked ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleVerifyEmail()}>
+                                                        <Button
+                                                            className={'submit-button'} onClick={() => handleVerifyEmailFormSubmit()}>
                                                             Verify Email
                                                         </Button>
-                                                        <hr className='underline-border'/>
+                                                        <hr className='underline-border' />
                                                     </div>)}
                                         </div>)}
                                     {activeStep == 3 && (
@@ -626,11 +764,15 @@ const Signup = () => {
                                                 <p className='heading'>3. Account information</p>
                                             </div>
                                             <TextInput type="text"
+                                                ref={(el) => inputRefs.current[0] = el}
+                                                name='fullName'
                                                 className="email-form-input"
                                                 id="full name"
                                                 labelText="Full name"
                                                 value={fullName}
-                                                onChange={(e) => setFullName(e.target.value)}
+                                                onChange={handleFullName}
+                                                invalid={accountInfoErrors.fullName}
+                                                invalidText={"Full name is required"}
                                             />
                                             <Select className='country-select'
                                                 value={country}
@@ -646,11 +788,15 @@ const Signup = () => {
 
                                             </Select>
                                             <TextInput type="text"
+                                                name='addressLine1'
                                                 className="email-form-input"
                                                 labelText="Address line 1"
+                                                ref={(el) => inputRefs.current[1] = el}
                                                 id="address line 1"
                                                 value={addressLine1}
-                                                onChange={(e) => setAddressLine1(e.target.value)}
+                                                onChange={handleAddressLine1}
+                                                invalid={accountInfoErrors.addressLine1}
+                                                invalidText={"Address line1 is required"}
                                             />
                                             <TextInput type="text"
                                                 id="address line 2"
@@ -660,39 +806,53 @@ const Signup = () => {
                                                 onChange={(e) => setAddressLine2(e.target.value)}
                                             />
                                             <TextInput type="text"
+                                                name='city'
                                                 className="email-form-input"
                                                 id="city"
+                                                ref={(el) => inputRefs.current[2] = el}
                                                 labelText="City"
                                                 value={city}
-                                                onChange={(e) => setCity(e.target.value)}
+                                                onChange={handleCity}
+                                                invalid={accountInfoErrors.city}
+                                                invalidText={"City name is required"}
                                             />
                                             <TextInput type="text"
+                                                name='state'
                                                 className="email-form-input"
+                                                ref={(el) => inputRefs.current[3] = el}
                                                 id="state"
                                                 labelText="State"
                                                 value={state}
-                                                onChange={(e) => setState(e.target.value)}
+                                                onChange={handleState}
+                                                invalid={accountInfoErrors.state}
+                                                invalidText={"State is required"}
                                             />
                                             <TextInput type="text"
+                                                name='postalCode'
+                                                ref={(el) => inputRefs.current[4] = el}
                                                 id="postalcode"
                                                 labelText="Postal code"
                                                 className='postalcode'
                                                 value={postalCode}
-                                                onChange={(e) => handlePostalCode(e)}
+                                                onChange={handlePostalCode}
                                                 invalid={typeof postalCodeErrorNotification == 'object' && Object.keys(postalCodeErrorNotification).length !== 0}
                                                 invalidText={(postalCodeErrorNotification && postalCodeErrorNotification.title) ? postalCodeErrorNotification.title : ""}
                                             />
-                                            <div style={{marginTop:'6px'}}>
+                                            <div style={{ marginTop: '6px' }}>
                                                 <p className='input-heading'>Phone number</p>
                                             </div>
                                             <PhoneInput className='phone-input'
-                                                country={'in'}
+                                                ref={(el) => inputRefs.current[5] = el}
+                                                style={{ border: !phoneNumberValid ? '2px solid red' : 0 }}
+                                                name='phoneNumber'
+                                                country={''}
                                                 value={phoneNumber}
-                                                onChange={(e) => setPhoneNumber(e)}
+                                                onChange={(value, country, formattedValue) => handlePhoneNumber(value, country, formattedValue)}
                                             />
+                                            {!phoneNumberValid && <p style={{ marginTop: '4px', fontSize: '12px', color: '#DA1E28' }}>{errorMessage}</p>}
                                             <div style={{ marginTop: '32px', marginBottom: '16px' }}>
-                                                <Button disabled={personalInfoButtonDisabled}
-                                                    className={personalInfoButtonDisabled ? 'submit-button-disabled' : 'submit-button'} onClick={() => handlePersonalInfo()}>
+                                                <Button
+                                                    className={'submit-button'} onClick={handleAccountInformationFormSubmit}>
                                                     Next
                                                 </Button>
                                             </div>
@@ -704,27 +864,32 @@ const Signup = () => {
                                                 <p className='heading'>4. Organization information</p>
                                             </div>
                                             <TextInput type="text"
+                                                name='organizationName'
                                                 className="email-form-input"
                                                 id="Organization Name"
                                                 labelText="Organization Name"
                                                 value={organizationName}
-                                                onChange={(e) => setOrganizationName(e.target.value)}
+                                                onChange={handleOrganizationNameChange}
+                                                invalid={organizationInfoErrors.organizationName}
+                                                invalidText={'Organization name is required'
+
+                                                }
                                             />
                                             <TextInput type="text"
+                                                name='organizationNumber'
                                                 className="email-form-input"
                                                 id="VAT/GST/Tax Number"
                                                 labelText="Organization Number"
                                                 value={vatNumber}
-                                                onChange={(e) => handleVatNumberChange(e.target.value)}
-                                                invalid={!isGstValid && vatNumber.length === 0}
-                                                invalidText={
-                                                    !isGstValid && vatNumber.length === 0
-                                                        ? 'Organization number cannot be blank' : null
+                                                onChange={handleVatNumberChange}
+                                                invalid={organizationInfoErrors.organizationNumber}
+                                                invalidText={'Organization number is required'
+
                                                 }
                                             />
                                             <div style={{ marginTop: '32px', marginBottom: '16px' }}>
-                                                <Button disabled={taxInfoButtonDisabled}
-                                                    className={taxInfoButtonDisabled ? 'submit-button-disabled' : 'submit-button'} onClick={() => handleTaxInfo()}>
+                                                <Button 
+                                                    className={'submit-button'} onClick={handleOrganizationInformationFormSubmit}>
                                                     Next
                                                 </Button>
                                             </div>
@@ -743,7 +908,7 @@ const Signup = () => {
                                                 }}
                                                 ref={cardElement}
                                             >
-                                                <div style={{ backgroundColor: 'white', display: 'flex', flexDirection: 'column',padding:'0px 16px' }}>
+                                                <div style={{ backgroundColor: 'white', display: 'flex', flexDirection: 'column', padding: '0px 16px' }}>
 
                                                     {/* <div >
                                                         <div>

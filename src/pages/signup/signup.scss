@@ -361,7 +361,7 @@ label[for=password-input] {
 }
 
 .phone-input {
-  width: 90% !important;
+  width: 100% !important;
 
   input {
     border: none !important;
@@ -384,7 +384,7 @@ label[for=password-input] {
 }
 
 .postalcode {
-  width: 90%;
+  width: 100%;
 
   svg {
     display: none;
@@ -612,7 +612,7 @@ label[for=password-input] {
 
 .left-column {
   background-color: #ffffff;
-  padding: 30px 20px 40px 80px;
+  padding: 30px 80px 40px 80px;
   overflow-y: auto;
   height: 100%;
 }
@@ -681,7 +681,7 @@ label[for=password-input] {
 }
 
 .email-form-input {
-  width: 90%;
+  width: 100%;
 
   .bx--label {
     display: inline-block;
