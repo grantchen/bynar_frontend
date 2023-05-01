@@ -121,7 +121,7 @@ const Signin = () => {
         e.preventDefault()
         setLoading(true)
         setServerErrorNotification({})
-        if (verificationCode.length == 0) {
+        if (verificationCode.trim().length == 0) {
             setErrorNotification({
                 title: "Security code should not be blank"
             });
