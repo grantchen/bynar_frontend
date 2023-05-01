@@ -126,6 +126,7 @@ const Signin = () => {
                 title: "Security code should not be blank"
             });
             setLoading(false)
+            setVerificationCode('')
         }
         else {
 
