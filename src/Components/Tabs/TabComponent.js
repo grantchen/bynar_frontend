@@ -75,9 +75,9 @@ export const TabComponent=()=>{
         <div className={activeTab ===1?'active-tab':'active-tab-new'}>
          {data[activeTab-1]?.component}
        </div>
-       <div className={activeTab ===1?'active-tab':'active-tab-new'}>
+       {/* <div className={activeTab ===1?'active-tab':'active-tab-new'}>
          {data[activeTab-1]?.component}
-       </div>
+       </div> */}
         
        </>
     )

@@ -18,7 +18,8 @@ import Dashboard from '../Dashboard/Dashboard';
 import { Outlet } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ProfileDropdown from '../ProfileDropdown/ProfileDropdown';
-import HeaderTabComponent from './HeaderTabComponent';
+import HeaderTabComponents from './HeaderTabComponents';
+import HeaderTab from './HeaderTab';
 import '@carbon/ibmdotcom-web-components/es/components/masthead/masthead-container';
 // import '@carbon/ibmdotcom-web-components/es/components/top-nav/top-nav.js';
 
@@ -89,7 +90,7 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
         />
         <HeaderName style={{color:'black'}} prefix={t('bynar')}>{t('platform')}</HeaderName>
         
-        <HeaderTabComponent/>
+        <HeaderTab/>
         
         
         <HeaderGlobalBar>
