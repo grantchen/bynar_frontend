@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import {
   SideNav,
   SideNavItems,
@@ -10,7 +10,8 @@ import { useNavigate } from "react-router-dom";
 import './Navbar.scss'
 import { Search20 } from '@carbon/icons-react';
 import { useTranslation } from "react-i18next";
-export const Navbar = ({isSideNavExpanded,onClickSideNavExpand}) => {
+import HeaderTabComponents from "../Header/HeaderTabComponents";
+export const Navbar = ({isSideNavExpanded}) => {
   let navigate = useNavigate();
   const {t}=useTranslation();
   const Fade16 = () => (
@@ -25,26 +26,15 @@ export const Navbar = ({isSideNavExpanded,onClickSideNavExpand}) => {
     </svg>
   );
 
+    console.log(isSideNavExpanded,"expandddd")
     return (
         <div >    
          <SideNav aria-label="Side navigation" 
-            isRail 
+            
             expanded={isSideNavExpanded} 
             >
               <SideNavItems className="side-nav">
-                <SideNavLink renderIcon={Search20} className="side-nav-link" title="Data Table" onClick={()=>{navigate("/home/datatable")}}>{t('data-table')}</SideNavLink> 
-                <SideNavLink renderIcon={Search20} className="side-nav-link" title="User List" onClick={()=>{navigate("/home/userlist")}}>User List</SideNavLink> 
-                {/* <SideNavLink renderIcon={Fade16} title="Side Panel" onClick={()=>{navigate("/sidepanel")}}>Side Panel</SideNavLink> 
-                <SideNavLink renderIcon={Fade16} title="Tear Sheet" onClick={()=>{navigate("/tearsheet")}}>TearSheet</SideNavLink> */}
-                 
-                 <SideNavMenu renderIcon={Fade16} title={t('category')} className="side-nav-menu">
-                  <SideNavMenuItem
-                    aria-current="page"
-                    className="side-nav-menu-item"
-                  >
-                    {t('link')}
-                  </SideNavMenuItem>
-                </SideNavMenu>
+               <HeaderTabComponents/>
               </SideNavItems>
             </SideNav>
         </div>

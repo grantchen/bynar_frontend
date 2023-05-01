@@ -53,7 +53,7 @@ export const TabComponent=()=>{
    }
     return(
       <>
-        <div className={activeTab ===1?'active-tab-div':'tab-div'}>
+        {/* <div className={activeTab ===1?'active-tab-div':'tab-div'}>
           <button className="button-dashboard" onClick={addTab}>{t('add-new-tab')}</button>
           <div style={{display:'flex',overflowY:'auto',whiteSpace:'nowrap',cursor:'pointer'}}>
             {data.map((item,index)=>{
@@ -71,8 +71,11 @@ export const TabComponent=()=>{
           </div>
          
          
-        </div>
+        </div> */}
         <div className={activeTab ===1?'active-tab':'active-tab-new'}>
+         {data[activeTab-1]?.component}
+       </div>
+       <div className={activeTab ===1?'active-tab':'active-tab-new'}>
          {data[activeTab-1]?.component}
        </div>
         

@@ -1,4 +1,3 @@
-
 @use '@carbon/themes';
 @use '@carbon/themes/scss/themes' as *;
 // @use '@carbon/themes' with ($theme: $g100);
@@ -10,6 +9,7 @@
 @include carbon--font-face-mono();
 @include carbon--font-face-sans();
 @include carbon--type-reset();
+
 .dark-theme {
   @include carbon--theme($carbon--theme--g100, true);
 
@@ -39,17 +39,18 @@
 :root {
   @include themes.theme($white);
   --cds-ui-background: #f4f4f4;
-  --cds-ui-navbar:#fff;
+  --cds-ui-navbar: #fff;
 }
 
-.carbon-theme--white{
+.carbon-theme--white {
   --cds-ui-background: #f4f4f4;
-  --cds-layer-accent:#8d8d8d;
-  --cds-layer:#fff;
+  --cds-layer-accent: #8d8d8d;
+  --cds-layer: #fff;
 }
-.carbon-theme--g90{
+
+.carbon-theme--g90 {
   --cds-ui-navbar: #161616;
-  --cds-icon-02:#c6c6c6;
+  --cds-icon-02: #c6c6c6;
 }
 
 body {
@@ -58,7 +59,8 @@ body {
   // color: $text-01;
 
 }
-.bx--grid{
+
+.bx--grid {
   color: black;
   background: #262626;
   padding-right: 0rem !important;
@@ -67,41 +69,44 @@ body {
 }
 
 .app {
-    display: flex;
-    // app should have no horizontal scroll bar, this should be in content area
-    overflow: hidden;
-    max-width: 100%;
-    height: 100vh;
-    flex-direction: column;
-    background-color: var(--cds-ui-background, #f4f4f4);
+  display: flex;
+  // app should have no horizontal scroll bar, this should be in content area
+  overflow: hidden;
+  max-width: 100%;
+  height: 100vh;
+  flex-direction: column;
+  background-color: var(--cds-ui-background, #f4f4f4);
 }
 
-  .bx--side-nav__overlay-active  {
-    opacity: 0 !important ; 
-  }
-  
-  .bx--side-nav__items {
-    padding: 0 !important;   
-  }
+.bx--side-nav__overlay-active {
+  opacity: 0 !important;
+}
 
-  .bx--side-nav__navigation { 
-    background-color: var(--cds-ui-navbar, #f4f4f4) !important;  
-    border-right: 1px solid var(--cds-ui-03, #e0e0e0);
-    width: 189px;
+.bx--side-nav__items {
+  padding: 0 !important;
+}
+
+.bx--side-nav__navigation {
+  background-color: var(--cds-ui-navbar, #f4f4f4) !important;
+  border-right: 1px solid var(--cds-ui-03, #e0e0e0);
+  width: 189px;
 }
 
 .bx--content {
   height: 100vh;
   background-color: var(--cds-ui-background, #f4f4f4);
 }
+
 .bx--side-nav__item--active .bx--side-nav__submenu[aria-expanded=false]::before {
   // background-color: var(--cds-ui-background, #f4f4f4) !important;
 }
+
 .bx--side-nav__item--active .bx--side-nav__submenu[aria-expanded=false] {
   position: relative;
   background-color: var(--cds-ui-navbar, #f4f4f4) !important;
   color: var(--cds-text-02, #525252);
 }
+
 .bx--header__action--active {
   border-right: 1px solid #393939;
   border-bottom: 1px solid #393939 !important;
@@ -138,6 +143,7 @@ body {
   justify-content: center;
   margin-top: $spacing-09;
 }
+
 // .carbon-theme-dropdown {
 //   height:60px;
 //   border:1px solid red;
@@ -166,16 +172,16 @@ body {
   border-left: 1px solid var(--cds-border-subtle);
   border-bottom: 1px solid var(--cds-border-subtle);
   padding: 1rem 1.5rem 1rem 1rem;
-} 
+}
 
 .bynar-profile-info-wrapper {
   display: flex;
   color: #f3f3f3;
-    font-weight: 400;
-    font-size: 1.25rem;
-    line-height: 1.2;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .profile-info-image {
@@ -184,16 +190,19 @@ body {
   // // width: 7rem;
   // // height: 3.5rem;
   // text-align: center;
-  
+
 }
+
 .bx--side-nav__submenu:focus {
   outline: 2px solid var(--cds-ui-navbar) !important;
   outline-offset: -2px;
-  
+
 }
+
 button.bx--side-nav__submenu::before {
   background-color: var(--cds-ui-navbar, #f4f4f4) !important;
 }
+
 // li.bx--side-nav__item--active{
 //   background: red !important;
 // }
@@ -249,3 +258,46 @@ button.bx--side-nav__submenu::before {
   white-space: nowrap;
 }
 
+.bx--tab-content {
+  padding: 1rem;
+  height: calc(100vh - 116px) !important;
+  overflow: auto !important;
+  // border: 1px solid red;
+}
+
+.bx--tabs--scrollable {
+  min-height: 48px !important;
+}
+
+.modified-tabs__tab-close {
+  border: 1px solid red;
+}
+
+
+.bx--header__menu-toggle {
+  display: none !important;
+}
+
+.bx--side-nav__navigation {
+  display: none !important;
+}
+
+@media screen and (max-width:600px) {
+
+  .bx--header__menu-toggle {
+    display: flex !important;
+
+    svg {
+      fill: #161616 !important;
+    }
+
+  }
+
+  .bx--side-nav__navigation {
+    display: flex !important;
+    height: 100%;
+    flex-direction: column;
+  }
+
+
+}

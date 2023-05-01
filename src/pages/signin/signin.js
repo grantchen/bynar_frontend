@@ -140,7 +140,7 @@ const Signin = () => {
                     localStorage.setItem("lang", "english");
                     const bodyElement = document.body;
                     bodyElement.className = localStorage.getItem("theme");
-                    navigate("/dashboard");
+                    navigate("/home");
                 }
             } catch (err) {
                 console.log(err)

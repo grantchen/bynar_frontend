@@ -1,0 +1,30 @@
+.tab{
+   
+    position: absolute;
+    /* position: sticky; */
+    height: 90vh;
+    width: 75%;
+    overflow-x: scroll;
+    border: "1px solid red";
+    left: 177px;
+    top: 0;
+}
+.header-tab{
+    position: relative;
+}
+.modified-tabs{
+    .bx--tab-content {
+        padding: 1rem;
+        height: calc(100vh - 48px) !important;
+        overflow: auto !important;
+    }
+}
+
+@media screen and (max-width:600px){
+
+    .tab{
+   
+        display: none;
+    }
+    
+  }

@@ -29,10 +29,12 @@ function App() {
               <Route path='/' element={<Home />}/>
               <Route exact path="/signup" element={<Signup />} />
               <Route path='/home/' element={<CommonHeader />}>
-                <Route exact path="dashboard" element={<Dashboard />} />    
+                {/* <Route exact path="dashboard" element={} />    
                 <Route exact path="datatable" element={<DataTables />} />
-                <Route exact path="userlist" element={<UserList />} />
+                <Route exact path="userlist" element={<UserList />} /> */}
+
               </Route>
+            <Route exact path="/userlist" element={<UserList />} />
               <Route exact path="/signin" element={<Signin />} />
               <Route exact path="/forgotpassword" element={<ForgotPassword />} />
               <Route exact path="/adduser" element={<AddUser/>} />

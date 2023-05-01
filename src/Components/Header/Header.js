@@ -18,6 +18,17 @@ import Dashboard from '../Dashboard/Dashboard';
 import { Outlet } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ProfileDropdown from '../ProfileDropdown/ProfileDropdown';
+import HeaderTabComponent from './HeaderTabComponent';
+import '@carbon/ibmdotcom-web-components/es/components/masthead/masthead-container';
+// import '@carbon/ibmdotcom-web-components/es/components/top-nav/top-nav.js';
+
+// import { MastheadContainer } from '@carbon/ibmdotcom-web-components/es/components-react/masthead/masthead-container';
+
+// import DDSMastheadContainer from "@carbon/ibmdotcom-web-components/es/components-react/masthead/masthead-container";
+// import {DDSMastheadContainer} from "@carbon/ibmdotcom-web-components";
+// import DDSMastheadContainer from '@carbon/ibmdotcom-web-components/es/components-react/masthead/masthead-container.js';
+
+
 export const CommonHeader = () => {
   return (
     <div >
@@ -65,38 +76,43 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
   }, [wrapperRef]);
 
 
+
   return (
     <>
-      <Header aria-label="IBM Platform Name">
+      <div  >
+        <Header aria-label="IBM Platform Name" style={{backgroundColor:'#FFFFFF'}}>
         <HeaderMenuButton
           aria-label="Open menu"
           isCollapsible
           onClick={onClickSideNavExpand}
           isActive={isSideNavExpanded}
         />
-        <HeaderName prefix={t('bynar')}>{t('platform')}</HeaderName>
+        <HeaderName style={{color:'black'}} prefix={t('bynar')}>{t('platform')}</HeaderName>
+        
+        <HeaderTabComponent/>
+        
+        
         <HeaderGlobalBar>
           <HeaderGlobalAction aria-label="Search" onClick={() => { }}>
             <Search20 />
           </HeaderGlobalAction>
-          <HeaderGlobalAction aria-label="Notifications" onClick={() => setOpen(!open)}>
+          {/* <HeaderGlobalAction aria-label="Notifications" onClick={() => setOpen(!open)}>
             <Notification20 />
-          </HeaderGlobalAction>
+          </HeaderGlobalAction> */}
           <div ref={wrapperRef}>
             <>
               <HeaderGlobalAction aria-label="User" onClick={handleDropDown}>
                 <UserAvatar20 />
               </HeaderGlobalAction>
-              {profileDropdown && <ProfileDropdown/>}
+              {profileDropdown && <ProfileDropdown />}
             </>
           </div>
         </HeaderGlobalBar>
-        <Navbar isSideNavExpanded={isSideNavExpanded} onClickSideNavExpand={onClickSideNavExpand} />
+        <Navbar isSideNavExpanded={isSideNavExpanded}  />
       </Header>
-      <Outlet />
-
-      <div className="main--content">
+      {/* <div className="main--content">
         <NotificationPanel open={open} setOpen={setOpen} setNotificationsData={setNotificationsData} notificationsData={notificationsData} />
+      </div> */}
       </div>
     </>
   )

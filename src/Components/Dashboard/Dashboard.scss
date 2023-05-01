@@ -5,7 +5,7 @@
   // background-color: var(--cds-field-01,#fff);
   
   background-color: $ui-background;
-  padding-left: 3rem;
+  padding-left: 0rem;
   padding-top: 3rem;
   overflow-x: auto;
   padding-bottom: 2rem;
@@ -13,7 +13,7 @@
 }
 
 .bynar-heading{
-  padding-left: 13.25rem!important;
+  padding-left: 0 !important;
     padding-right: 1.75rem!important;
     margin-top: 20px;
     display: flex;
@@ -42,7 +42,7 @@
     overflow-x: auto;
 }
 .container{
-  padding-left: 13.25rem !important;
+  padding-left: 0 !important;
   padding-right: 1.75rem !important;
   margin-top: 16px;
   display: flex;
@@ -93,13 +93,13 @@
   }
 
   .bynar-heading {
-      padding-left: 0.75rem!important;
+      padding-left: 0 !important;
       padding-right: 1.75rem!important;
       display: flex;
       flex-direction: column;
   }
   .container{
-    padding-left: 0.75rem!important;
+    padding-left: 0 !important;
     padding-right: 1.75rem!important;
     display: flex; 
     justify-content: flex-start;
