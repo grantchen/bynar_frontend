@@ -24,7 +24,7 @@ const MagicLinkValidation = ({ heading, loading, loadingSucess, handleFormSubmit
                     <Form onSubmit={handleFormSubmit}>
                         <div style={{ paddingRight: '20px' }}>
                             <Heading style={{ fontSize: '28px',fontWeight:'400' }}>{heading}</Heading>
-                            <p className="register-text body-01">{text}<Link className="underlined-link" style={{ cursor: 'pointer', paddingLeft: '4px', textDecoration: 'underline' }} onClick={() => { setSignInPhaseOne(true) }}> {subtitle}</Link></p>
+                            <p className="register-text body-01">{text}<Link className="underlined-link" style={{ cursor: 'pointer', paddingLeft: '4px', textDecoration: 'underline' }} onClick={() => { setSignInPhaseOne(true);setServerErrorNotification({ }); }}> {subtitle}</Link></p>
                             {typeof serverErrorNotification == 'object' && Object.keys(serverErrorNotification).length !== 0 ?
                                 (
                                     <div className='notification-container'>

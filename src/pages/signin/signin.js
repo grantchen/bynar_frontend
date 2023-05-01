@@ -143,7 +143,11 @@ const Signin = () => {
                     navigate("/dashboard");
                 }
             } catch (err) {
-                console.log('Apparently the user did not enter the right code');
+                console.log(err)
+                if(err == 'NotAuthorizedException: Invalid session for the user.'){
+                    setServerErrorNotification({ title: 'Maximum attempts reached , please login using new code', status: 'error' });
+                }
+                else
                 setServerErrorNotification({ title: 'Enter correct security code', status: 'error' });
                 // setSignInPhaseOne(true)
                 setLoading(false)
