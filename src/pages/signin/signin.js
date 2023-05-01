@@ -127,25 +127,27 @@ const Signin = () => {
             });
             setLoading(false)
         }
-        await Auth.sendCustomChallengeAnswer(cognitoUser.current, verificationCode);
+        else {
 
-        try {
-            const res = await Auth.currentSession();
-            setLoading(false)
-            if (res?.accessToken?.jwtToken) {
-                localStorage.setItem("token", res.accessToken.jwtToken);
-                localStorage.setItem("theme", 'carbon-theme--white');
-                localStorage.setItem("lang", "english");
-                const bodyElement = document.body;
-                bodyElement.className = localStorage.getItem("theme");
-                navigate("/dashboard");
+            try {
+                await Auth.sendCustomChallengeAnswer(cognitoUser.current, verificationCode);
+                const res = await Auth.currentSession();
+                setLoading(false)
+                if (res?.accessToken?.jwtToken) {
+                    localStorage.setItem("token", res.accessToken.jwtToken);
+                    localStorage.setItem("theme", 'carbon-theme--white');
+                    localStorage.setItem("lang", "english");
+                    const bodyElement = document.body;
+                    bodyElement.className = localStorage.getItem("theme");
+                    navigate("/dashboard");
+                }
+            } catch (err) {
+                console.log('Apparently the user did not enter the right code');
+                setServerErrorNotification({ title: 'Enter correct security code', status: 'error' });
+                // setSignInPhaseOne(true)
+                setLoading(false)
+                setVerificationCode('')
             }
-        } catch (err) {
-            console.log('Apparently the user did not enter the right code');
-            setServerErrorNotification({ title: 'Enter correct security code', status: 'error' });
-            // setSignInPhaseOne(true)
-            setLoading(false)
-            setVerificationCode('')
         }
     }
 
