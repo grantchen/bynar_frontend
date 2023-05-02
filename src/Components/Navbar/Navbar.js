@@ -26,7 +26,6 @@ export const Navbar = ({isSideNavExpanded}) => {
     </svg>
   );
 
-    console.log(isSideNavExpanded,"expandddd")
     return (
         <div >    
          <SideNav aria-label="Side navigation" 

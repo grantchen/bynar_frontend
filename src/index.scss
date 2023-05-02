@@ -282,6 +282,76 @@ button.bx--side-nav__submenu::before {
   display: none !important;
 }
 
+.header-text {}
+
+
+a.bx--header__name,
+a.bx--header__name:hover {
+  /* color: #f4f4f4; */
+  color: #161616 !important;
+  font-weight: 600 !important;
+}
+
+.heading-content {
+  width: 94px;
+  padding: 0px 16px !important;
+  height: 48px !important;
+  // border-right: 1px solid #cacaca !important;
+  // height: 35px !important;
+}
+
+.heading-content-new {
+  width: 100px;
+  padding: 0px 16px !important;
+  height: 48px !important;
+  // border-right: 1px solid #cacaca !important;
+  // height: 35px !important;
+}
+
+.heading-content-new:hover {
+  background-color: #e5e5e5 !important;
+  // cursor: pointer;
+}
+
+.heading-content:hover {
+  background-color: #e5e5e5 !important;
+  // cursor: pointer;
+}
+
+.border-outline {
+  background: #cacaca !important;
+  width: 1px;
+  height: 35px;
+}
+
+.header-tab {
+  svg {
+    fill: #525252 !important;
+  }
+
+  .bx--header__action:hover {
+    background-color: #FFFFFF !important;
+    // height: 48px !important;
+    border-bottom: 1px solid red !important;
+    border: none !important;
+  }
+}
+
+.header-container-box {
+  background-color: rgba(22, 22, 22, 0.5);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.header-box {
+  background-color: #FFFFFF;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
 @media screen and (max-width:600px) {
 
   .bx--header__menu-toggle {
@@ -299,5 +369,36 @@ button.bx--side-nav__submenu::before {
     flex-direction: column;
   }
 
+  .bx--side-nav.bx--side-nav--rail:not(.bx--side-nav--fixed):hover, .bx--side-nav--expanded {
+    /* width: 24rem; */
+    width: 100% !important;
+}
+
+  //   .bx--side-nav__navigation {
+  //     display: flex;
+  //     height: 100%;
+  //     flex-direction: column;
+  //     max-width: 100% !important;
+  //     width: 100% !important;
+  // }
+
+  .bx--side-nav {
+    // width: 16rem;
+    max-width: 100% !important;
+  }
+
+  .heading-content-new {
+    display: none !important;
+  }
+
+  .border-outline {
+    display: none !important;
+  }
+
+  .bx--header__action:hover {
+    background-color: #FFFFFF !important;
+  }
+
+  //background-color: rgba(22, 22, 22, 0.5);
 
 }

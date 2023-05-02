@@ -56,13 +56,12 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (!isMounted) {
       const tokenCheck = localStorage.getItem("token");
-      console.log("errororo")
       if (tokenCheck !== null) {
         if (location.pathname === '/signin' || location.pathname === '/forgotpassword' || location.pathname === '/signup' || location.pathname === '/home' || location.pathname === '/dashboard') {
-          navigate('/home')
+          navigate('/home/dashboard')
         }
         else if (location.pathname === '/userlist') {
-          navigate('/userlist')
+          navigate('/home/userlist')
         }
         else if (location.pathname === '/datatable') {
           navigate('/home/datatable')

@@ -1,78 +1,118 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import Dashboard from '../Dashboard/Dashboard';
 import { Close } from '@carbon/react/icons'
+import Carousel from 'react-carousel-light';
+import { Button } from '@carbon/react';
+import './HeaderTab.scss'
+import { TabContext } from '../../sdk/context/TabContext';
 
 const HeaderTab = () => {
 
-    const [activeTab, setActiveTab] = useState(1);
-    const [selectedIndex, setSelectedIndex] = useState(0);
+    const { tab, handleAddTab, handleRemoveTab, setStartIndex, setEndIndex, startIndex, endIndex, activeTab, setActiveTab, maxTab, setMaxTab } = useContext(TabContext);
+    const [showLeftArrow, setShowLeftArrow] = useState(false);
+    const [showRightArrow, setShowRightArrow] = useState(false);
+    const carouselRef = useRef(null);
+    const width = window.innerWidth - 360;
 
-    const [tab, setTab] = useState([
-        {
-            content: <Dashboard />,
-            id: 1,
-            label: 'Dashboard',
-            isDelted: false,
+    const handleLeftScroll = () => {
+
+        if (startIndex > 0) {
+            setStartIndex(startIndex - 1);
+            setEndIndex(endIndex - 1);
+            if (tab.length > maxTab) {
+                setShowRightArrow(true)
+            }
+            else {
+                setShowRightArrow(false)
+            }
         }
-    ])
-
-
-
-    const handleRemoveTab = (idToRemove, index) => {
-        const updatedTabs = tab.filter((tab) => tab.id !== idToRemove);
-        // const res = updatedTabs.map((data,index)=>data.id=index+1 && data.id!=1)
-        setTab(updatedTabs);
-        // console.log(idToRemove,"id to remove",index,tab[index].label,updatedTabs,activeTab)
-        setActiveTab(index)
+        if (startIndex == 0) {
+            setShowLeftArrow(false)
+        }
     };
 
-    const handleAddTab = () => {
-        const newId = Math.max(...tab.map((tab) => tab.id), 0) + 1;
-        const maxId = tab.reduce((max, item) => {
-            return item.id > max ? item.id : max;
-        }, 0);
-        // console.log(maxId+1,"id is  ","active",tab.length+1)
-        const newTab = { id: (maxId + 1), label: `Tab ${maxId + 1}`, content: `This is the content for Tab ${maxId + 1}`, isDelted: true };
-        setTab([...tab, newTab]);
-        // console.log(tab.length+1,"test")
-        setActiveTab(tab.length + 1)
+    const handleRightScroll = () => {
 
+        const l = tab.slice(startIndex + 1, endIndex + 1).length;
+        if (l < maxTab) {
+            setShowRightArrow(false)
+            setShowLeftArrow(true)
+        }
+        else {
+            setStartIndex(startIndex + 1)
+            setEndIndex(endIndex + 1)
+        }
+    };
 
+    const removeTab = (idToRemove, index) => {
+        handleRemoveTab(idToRemove, index)
+    };
 
+    const addTab = () => {
+        handleAddTab()
     }
 
-    // console.log(tab, "ddd", activeTab)
+    useEffect(() => {
+        setShowLeftArrow(startIndex > 0 ? true : false);
+        setShowRightArrow(tab.length > maxTab && maxTab > 0 ? true : false)
+    }, [tab]);
+
+
+
+    useEffect(() => {
+        const width = window.innerWidth - 360;     
+        const res = (width - 150) / 130;
+        if (res < 0) {
+            setMaxTab(7);
+            setEndIndex(7);
+        }
+        else {
+            setMaxTab(Math.floor(res));
+            setEndIndex(Math.floor(res));
+        }
+
+    }, [carouselRef?.current?.offsetWidth]);
+    
+
     return (
         <>
-            <div style={{ overflowX: 'auto', width: '80%' }}>
-                <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
+            <div className='tab'>
+                {showLeftArrow && startIndex > 0 ? (
+                    <Button className="left-arrow" onClick={handleLeftScroll}>
+                        <img src={'../image/left-arrow.svg'} style={{ width: '15px', height: '15px' }} alt="left arrow" />
+                    </Button>
+                ):(
+                    <div style={{width:'40x'}}></div>
+                )}
 
-                    {tab.map((item, index) => {
-                        return (
-                            <div key={index} style={{ display: 'flex', alignItems: 'center' }} >
+                <div style={{ overflowX: 'hidden', width: 'calc(100vw - 360px)'}} ref={carouselRef}>
+                    <div style={{ display: 'flex', whiteSpace: 'nowrap' }} >
 
+                        {tab.slice(startIndex, endIndex).map((item, index) => {
+                            return (
+                                <div key={index} className='tabs'>
+                                    <div className={activeTab === index + 1 ? "active-tab-new1" : "inactive-tab-new"} onClick={() => { setActiveTab(index + 1) }}>
+                                        <p>{item.label}</p>
+                                    </div>
+                                    {item.isDelted ?( <div className="close-icon">
+                                        <Close size={20} style={{ cursor: 'pointer' }} onClick={() => removeTab(item.id, index)} />
+                                    </div>):(
+                                        <div style={{width:'20px'}}></div>
+                                    )}
+                                </div>
+                            )
+                        })}
+                        <button className='button-tab' onClick={addTab}>{'Add-new-tab'}</button>
 
-                                <div className={activeTab === index + 1 ? "active-tab-new1" : "inactive-tab-new"} onClick={() => { setActiveTab(index + 1) }}>{item.label}</div>
-                                {item.isDelted && <div className="close-icon">
-                                    <Close size={20} style={{ cursor: 'pointer' }} onClick={() => handleRemoveTab(item.id, index)} />
-                                </div>}
-                            </div>
-                        )
-                    })}
-                    <button className="button-dashboard" onClick={handleAddTab}>{'add-new-tab'}</button>
-
-                </div>
-                <div style={{
-                    display: 'flex', flexDirection: 'column', position: 'absolute', overflow: 'auto',
-                    height: 'calc(100vh - 48px)', paddingTop: '2rem', paddingBottom: '2rem', marginLeft: '-40px'
-                }}>
-                    <div>
-                        {tab[activeTab - 1]?.content}
                     </div>
-                    {/* <div>
-                        {tab[activeTab - 1]?.content}
-                    </div> */}
                 </div>
+                {showRightArrow ?(
+                    <Button className="right-arrow" onClick={handleRightScroll}>
+                        <img src={'../image/right-arrow.svg'} style={{ width: '12px', height: '12px' }} alt="right arrow" />
+                    </Button>
+                ):(
+                    <div style={{width:'40px'}}></div>
+                )}
             </div>
         </>
     )

@@ -81,37 +81,40 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
   return (
     <>
       <div  >
-        <Header aria-label="IBM Platform Name" style={{backgroundColor:'#FFFFFF'}}>
-        <HeaderMenuButton
-          aria-label="Open menu"
-          isCollapsible
-          onClick={onClickSideNavExpand}
-          isActive={isSideNavExpanded}
-        />
-        <HeaderName style={{color:'black'}} prefix={t('bynar')}>{t('platform')}</HeaderName>
-        
-        <HeaderTab/>
-        
-        
-        <HeaderGlobalBar>
-          <HeaderGlobalAction aria-label="Search" onClick={() => { }}>
-            <Search20 />
-          </HeaderGlobalAction>
-          {/* <HeaderGlobalAction aria-label="Notifications" onClick={() => setOpen(!open)}>
+        <Header aria-label="IBM Platform Name" style={{ backgroundColor: '#FFFFFF' }}>
+          <HeaderMenuButton
+            aria-label="Open menu"
+            isCollapsible
+            onClick={onClickSideNavExpand}
+            isActive={isSideNavExpanded}
+          />
+          <div className={isSideNavExpanded?'header-container-box':'header-box'}>
+          <HeaderName className="heading-content" prefix={t('')}>{t('Bynar')}</HeaderName>
+          <div className='border-outline'></div>
+          <HeaderName className="heading-content-new" prefix={t('')}>{t('platform')}</HeaderName>
+          <HeaderTab />
+          <div className='border-outline'></div>
+          <HeaderGlobalBar className='header-tab'>
+            <HeaderGlobalAction aria-label="Search" onClick={() => { }}>
+              <Search20 />
+            </HeaderGlobalAction>
+            {/* <HeaderGlobalAction aria-label="Notifications" onClick={() => setOpen(!open)}>
             <Notification20 />
           </HeaderGlobalAction> */}
-          <div ref={wrapperRef}>
-            <>
-              <HeaderGlobalAction aria-label="User" onClick={handleDropDown}>
-                <UserAvatar20 />
-              </HeaderGlobalAction>
-              {profileDropdown && <ProfileDropdown />}
-            </>
+            <div ref={wrapperRef}>
+              <>
+                <HeaderGlobalAction className='header-tab' aria-label="User" onClick={handleDropDown}>
+                  <UserAvatar20 />
+                </HeaderGlobalAction>
+                {profileDropdown && <ProfileDropdown />}
+              </>
+            </div>
+          </HeaderGlobalBar>
           </div>
-        </HeaderGlobalBar>
-        <Navbar isSideNavExpanded={isSideNavExpanded}  />
-      </Header>
-      {/* <div className="main--content">
+          <Navbar isSideNavExpanded={isSideNavExpanded} />
+        </Header>
+        <Outlet />
+        {/* <div className="main--content">
         <NotificationPanel open={open} setOpen={setOpen} setNotificationsData={setNotificationsData} notificationsData={notificationsData} />
       </div> */}
       </div>

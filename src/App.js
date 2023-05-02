@@ -12,6 +12,7 @@ import { UserList } from './pages/UserList/UserList';
 import { AddUser } from './pages/AddUser/AddUser';
 import { DataLoader } from './Components/Loader/DataLoder';
 import Home from './Components/Home/Home';
+import { TabContextProvider } from './sdk/context/TabContext';
 const Dashboard = lazy(() => import('./Components/Dashboard/Dashboard'));
 const Signup = lazy(() => import('./pages/signup/signup'));
 const Signin = lazy(() => import('./pages/signin/signin'));
@@ -25,13 +26,14 @@ function App() {
       </div>}>
         <BrowserRouter>
           <AuthProvider>
+          <TabContextProvider>
             <Routes>
               <Route path='/' element={<Home />}/>
               <Route exact path="/signup" element={<Signup />} />
               <Route path='/home/' element={<CommonHeader />}>
-                {/* <Route exact path="dashboard" element={} />    
+                <Route exact path="dashboard" element={<Dashboard/>} />    
                 <Route exact path="datatable" element={<DataTables />} />
-                <Route exact path="userlist" element={<UserList />} /> */}
+                <Route exact path="userlist" element={<UserList />} /> 
 
               </Route>
             <Route exact path="/userlist" element={<UserList />} />
@@ -39,6 +41,7 @@ function App() {
               <Route exact path="/forgotpassword" element={<ForgotPassword />} />
               <Route exact path="/adduser" element={<AddUser/>} />
             </Routes>
+            </TabContextProvider>
           </AuthProvider>
         </BrowserRouter>
       </Suspense>

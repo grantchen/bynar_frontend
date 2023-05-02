@@ -13,7 +13,6 @@ import '../Dashboard/Dashboard.scss'
 import { NewsInfoCard } from '../Cards/NewsInfoCard/NewsInfoCard.js';
 import { ViewUsageCard } from '../Cards/ViewUsageCard/ViewUsageCard';
 import { SupportCard } from '../Cards/SupportCard/SupportCard';
-import { TabComponent } from '../Tabs/TabComponent';
 import { useTranslation } from "react-i18next";
 
 const DashboardContainer = () => {

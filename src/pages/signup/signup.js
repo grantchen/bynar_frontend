@@ -379,7 +379,7 @@ const Signup = () => {
                     organizationName: organizationName,
                     VAT: vatNumber,
                     organisationCountry: organizationCountry,
-                    isAgreementSigned: isChecked,
+                    isAgreementSigned: true,
                 }
                 const response = await fetch(`${BaseURL}/create-user`, {
                     method: 'POST',

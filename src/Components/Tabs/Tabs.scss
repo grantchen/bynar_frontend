@@ -10,47 +10,7 @@
     margin-left: 257px;
     margin-right: 32px;
 }
-.active-tab-new{
-    height: 100vh;
-    margin-left: 206px;
-    margin-right: 32px;
-    padding-left: 3rem;
-    padding-top: 3rem;
-    overflow-x: auto;
-    padding-bottom: 2rem;
-}
-.active-tab-new1{
-   min-width: 65px;
-   width: 100%;
-   height: 46px;
-   border-bottom: 2px solid #0f62fe;
-   display: flex;
-   align-items: center;
-   padding: 0px 8px;
-   .active-tab-new1::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
-}
-}
 
-.inactive-tab-new{
-    min-width: 65px;
-    width: 100%;
-    height: 46px;
-    border-bottom: 2px solid transparent;
-    display: flex;
-    align-items: center;
-    padding: 0px 8px;
-    .inactive-tab-new1::-webkit-scrollbar { 
-        display: none;  /* Safari and Chrome */
-    }
-}
-::-webkit-scrollbar {
-    display: none;
-}
-.close-icon{
-    display: flex;
-    align-items: center;
-}
 
 @media screen and (max-width: 600px){
     .active-tab-div {
