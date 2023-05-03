@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }) => {
           navigate('/home/dashboard')
         }
         else if (location.pathname === '/userlist') {
-          navigate('/home/userlist')
+          navigate('/userlist')
         }
         else if (location.pathname === '/datatable') {
           navigate('/home/datatable')

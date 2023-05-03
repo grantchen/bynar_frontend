@@ -32,8 +32,8 @@ function App() {
               <Route exact path="/signup" element={<Signup />} />
               <Route path='/home/' element={<CommonHeader />}>
                 <Route exact path="dashboard" element={<Dashboard/>} />    
-                <Route exact path="datatable" element={<DataTables />} />
-                <Route exact path="userlist" element={<UserList />} /> 
+                {/* <Route exact path="datatable" element={<DataTables />} /> */}
+                {/* <Route exact path="userlist" element={<UserList />} />  */}
 
               </Route>
             <Route exact path="/userlist" element={<UserList />} />

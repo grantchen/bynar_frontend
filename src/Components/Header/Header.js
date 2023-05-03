@@ -20,15 +20,6 @@ import { useTranslation } from 'react-i18next';
 import ProfileDropdown from '../ProfileDropdown/ProfileDropdown';
 import HeaderTabComponents from './HeaderTabComponents';
 import HeaderTab from './HeaderTab';
-import '@carbon/ibmdotcom-web-components/es/components/masthead/masthead-container';
-// import '@carbon/ibmdotcom-web-components/es/components/top-nav/top-nav.js';
-
-// import { MastheadContainer } from '@carbon/ibmdotcom-web-components/es/components-react/masthead/masthead-container';
-
-// import DDSMastheadContainer from "@carbon/ibmdotcom-web-components/es/components-react/masthead/masthead-container";
-// import {DDSMastheadContainer} from "@carbon/ibmdotcom-web-components";
-// import DDSMastheadContainer from '@carbon/ibmdotcom-web-components/es/components-react/masthead/masthead-container.js';
-
 
 export const CommonHeader = () => {
   return (

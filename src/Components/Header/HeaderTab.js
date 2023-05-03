@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect, useContext ,useLayoutEffect} from 'react';
 import Dashboard from '../Dashboard/Dashboard';
 import { Close } from '@carbon/react/icons'
-import Carousel from 'react-carousel-light';
 import { Button } from '@carbon/react';
 import './HeaderTab.scss'
 import { TabContext } from '../../sdk/context/TabContext';
