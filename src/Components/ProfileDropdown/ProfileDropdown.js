@@ -40,11 +40,11 @@ const ProfileDropdown = React.memo(() => {
   }
 
   return (
-    <div>
+    <div >
       {profileDropdownOpen ?
-        (<Tile  style={{marginTop:"3px"}} className="bynar-profile-settings-panel" >
+        (<Tile  style={{marginTop:"3px",backgroundColor:'#FFF'}} className="bynar-profile-settings-panel" >
           <div className='bynar-profile-info-wrapper' >
-            <h4 style={{ 'width': '20rem', 'margin': 'auto' }} >
+            <h4 style={{ 'width': '20rem', 'margin': 'auto' ,color:'#161616'}} >
               Evin Lewis
             </h4>
             <div className='profile-info-image' >
