@@ -341,11 +341,10 @@ a.bx--header__name:hover {
 }
 
 .header-container-box {
-  background-color: rgba(22, 22, 22, 0.5);
+  background-color: #FFFFFF;
   width: 100%;
   display: flex;
   align-items: center;
-  pointer-events: none;
 }
 
 .header-box {
@@ -401,6 +400,15 @@ a.bx--header__name:hover {
   .bx--header__action:hover {
     background-color: #FFFFFF !important;
   }
+
+  .header-container-box {
+    background-color: rgba(22, 22, 22, 0.5);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+  }
+  
 
   //background-color: rgba(22, 22, 22, 0.5);
 
