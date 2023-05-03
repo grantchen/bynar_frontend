@@ -6,8 +6,6 @@ import './TearSheet.scss';
 import { UserList } from '../../pages/UserList/UserList';
 
 export const TearSheets = ({setIsOpen,isOpen}) => {
-  
-  console.log(isOpen,"testtt")
   const handleCloseModal = () => {
     setIsOpen(false);
   };

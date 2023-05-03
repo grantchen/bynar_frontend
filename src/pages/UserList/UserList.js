@@ -40,6 +40,7 @@ import { SidePanels } from '../../Components/SidePanel/SidePanels';
 export const UserList = () => {
 
     const token = localStorage.getItem('token');
+    
     const navigate = useNavigate();
     const [isDelete, setIsDelete] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
@@ -80,16 +81,18 @@ export const UserList = () => {
 
     const deleteUser = async (filteredOrganisationId) => {
         try {
+            debugger;
             setLoading(true);
+            const token1= "eyJraWQiOiJ3SGw5Yzg5cDhnQW80MlVSdVBYZW9CT1wvcVk5Y3ZobGNTWXBxbUlpXC9JQ2s9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiJlNWIwN2EwYi04YzAwLTQwZDktYjZlMC01ZjNiMDM3M2U1YzciLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAuZXUtY2VudHJhbC0xLmFtYXpvbmF3cy5jb21cL2V1LWNlbnRyYWwtMV9JV2JoN0JMcnoiLCJjbGllbnRfaWQiOiIxYm1wNjZiMjM1MnMzYzBic2xsOGM1cWZkOSIsIm9yaWdpbl9qdGkiOiIyNjBjZjA4OC1lMzc3LTQ5YTktYWY2OS1jZDMxZDkxYmI2ZGUiLCJldmVudF9pZCI6ImY1NGFjM2EwLThmMWQtNGY1OS1hOTE4LTM5YTQyNzY2NzVjOCIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2ODAxNTE0MTksImV4cCI6MTY4MDE1NTAxOSwiaWF0IjoxNjgwMTUxNDIwLCJqdGkiOiJlOWE0YzNjYi0yYjI0LTQyZjEtOTI3My01YjdkM2U0YjgxMzAiLCJ1c2VybmFtZSI6ImU1YjA3YTBiLThjMDAtNDBkOS1iNmUwLTVmM2IwMzczZTVjNyJ9.XZlNtiXP3a5zDs5tBZr-jIniVSoago8MizEdeng_UIIWAMr9FI5I7_bRrcKhjdTEA3AWPAy4FgD8-zJBpFB5VzDs78h73EtTEpzxhzpxC1zEpW7FD6WuF31GfT5afAGA4eM9u2vRyJo_M2DoJnE0vDLG7ogk124r0dWBuGN8CnRGsTqdXUCrPnvV5MmxItefehfxFIU5yvORfXxgt8gv9PliEagXirRm2d_y2TvuL4VzJ1p4EvbGw7kCABjKFd9qlxAjbXCNjpFp7rwYcjwmSDSXRA-3EO_CLXP2ANUcXdlTwt5tFleCYXGUcAT71v2u0rhDhcNFYb4G7mwKxHuwvg"
             const response = await fetch(`${BaseURL}/user`, {
                 method: 'DELETE',
                 body: JSON.stringify({ accountIDs: filteredOrganisationId }),
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + token1
                 },
             })
-           
+           debugger;
             const res = await response.json();
             if (response.ok) {
              setServerNotification(true);
@@ -104,7 +107,7 @@ export const UserList = () => {
         }
         catch (e) {
             setLoading(false);
-            // await authContext.signout();
+            await authContext.signout();
 
         }
     }
@@ -180,15 +183,21 @@ export const UserList = () => {
     const handleUserEdit = (index) => {
 
         const userEditArray=rows?.filter(a => a.id === index);
-        setUserDetails(userEditArray[0]);
-        setServerNotification(false);
-         setIsEditUserDetail(true);
+        navigate(`/home/dashboard?editUser=true&&Id=${index}`)
+        console.log("id is ",index)
+        // setUserDetails(userEditArray[0]);
+        // setServerNotification(false);
+        //  setIsEditUserDetail(true);
     }
 
     const handleDelete = (selectedRows) => {
         const tempArray = selectedRows.map(a => a.id);
         let filteredOrganisationId = rows?.filter(person => tempArray.includes(person.id)).map(a => a.id);
         deleteUser(filteredOrganisationId);
+    }
+
+    const handleAddUser=()=>{
+        navigate('/home/dashboard?addUser=true')
     }
 
     console.log(addUserPanelOpen,"panel -open")
@@ -253,7 +262,7 @@ export const UserList = () => {
                                                     <Button
                                                         className="button"
                                                         tabIndex={getBatchActionProps().shouldShowBatchActions ? -1 : 0}
-                                                        onClick={() => setIsAddUserPanel(true)}
+                                                        onClick={handleAddUser}
                                                         size="sm"
                                                         kind="primary"
                                                     >

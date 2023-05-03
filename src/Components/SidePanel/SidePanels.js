@@ -4,7 +4,7 @@ import { Button, TextInput } from 'carbon-components-react';
 import './SidePanel.scss'
 import { AddUser } from '../../pages/AddUser/AddUser';
 import countrylist from "../../data/countrylist";
-import { useState, useRef, useContext } from "react";
+import { useState, useRef, useContext, useEffect } from "react";
 import {
     PasswordInput, Select,
     SelectItem
@@ -13,11 +13,11 @@ import 'react-telephone-input/css/default.css'
 import { BaseURL } from "../../sdk/constant";
 import PhoneInput from 'react-phone-input-2'
 // import './AddUser.scss';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate ,useSearchParams} from "react-router-dom";
 import { Loader } from "../../Components/Loader/Loader";
 import { AuthContext } from "../../sdk/context/AuthContext";
 export const SidePanels = () => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
     const [accountInfoErrors, setAccountInfoErrors] = useState({
         userName: false,
         password: false,
@@ -56,6 +56,8 @@ export const SidePanels = () => {
     const [phoneNumberValid, setIsPhoneNumberValid] = useState(true)
     const [errors, setErrors] = useState({});
     const inputRefs = useRef([]);
+    const [searchParams] = useSearchParams();
+    const [userId,setUserId] = useState(0);
 
 
     const checkEmailValid = (email) => {
@@ -262,11 +264,68 @@ export const SidePanels = () => {
             fetchData();
         }
     }
+   
+
+    const getUserList = async () => {
+        try {
+            
+            const response = await fetch(`${BaseURL}/list-users`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                },
+            })
+            
+
+            if (response.ok) {
+                const res = await response.json();
+                const userEditArray=res?.result?.filter(a => a.id === userId);
+                console.log(userEditArray,"testtt",res?.result,userId,"id is ")
+                setFullName(userEditArray?.fullName);
+                setAddressLine1(userEditArray?.addressLine1);
+
+
+                // setRow(res?.result);
+            }
+            else if(response.status === 500){
+
+            }
+            // setLoading(false);
+        }
+        catch (e) {
+            await authContext.signout();
+            // setLoading(false);
+        }
+    }
+
+
+    const handleClose=()=>{
+        setOpen(false);
+        navigate('/home/dashboard');
+    }
+
+    const location = useLocation();
+    useEffect(()=>{
+    //   if(location.pathname.includes('/home/dashboard')){
+    //     getUserList()
+    //   }
+      console.log(searchParams?.get('Id'),"id-side-panel")
+      setUserId(parseInt(searchParams?.get('Id')));
+    //   getUserList()
+    },[searchParams?.get('editUser')])
+
+    useEffect(()=>{
+      getUserList();
+    },[userId])
+
+    console.log(fullName,"fullname")
+
     return (
         <div className="main--content">
-            <Button onClick={() => setOpen(true)}>
+            {/* <Button onClick={() => setOpen(true)}>
                 Open side panel
-            </Button>
+            </Button> */}
             {/* <SidePanel
                 includeOverlay
                 className="test"
@@ -307,7 +366,7 @@ export const SidePanels = () => {
                 includeOverlay
                 className="test"
                 open={open}
-                onRequestClose={() => setOpen(false)}
+                // onRequestClose={handleClose}
                 title=""
                 subtitle=""
                 actions={[
@@ -318,7 +377,7 @@ export const SidePanels = () => {
                     },
                     {
                         label: 'Cancel',
-                        onClick: () => setOpen(false),
+                        onClick: () =>{ handleClose()},
                         kind: 'secondary',
                     },
                 ]}

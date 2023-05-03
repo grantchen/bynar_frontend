@@ -8,7 +8,7 @@ import {
 } from 'carbon-components-react';
 import HeaderContainer from "carbon-components-react/lib/components/UIShell/HeaderContainer";
 import {
-  Notification20, Search20, UserAvatar20
+  Notification20, Search20, UserAvatar20,Edit20
 } from '@carbon/icons-react';
 import { Navbar } from '../Navbar/Navbar';
 import { NotificationPanel } from '../NotificationPanel/NotificationPanel';
@@ -24,6 +24,7 @@ import { BaseURL } from '../../sdk/constant';
 import { AuthContext } from '../../sdk/context/AuthContext';
 import { TearSheets } from '../TearSheet/TearSheets';
 import { SidePanels } from '../SidePanel/SidePanels';
+import { useSearchParams } from 'react-router-dom';
 
 export const CommonHeader = () => {
   return (
@@ -39,6 +40,7 @@ export const CommonHeader = () => {
 const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
 
   const authContext = useContext(AuthContext)
+  const [searchParams] = useSearchParams();
   const token = localStorage.getItem('token');
   const [profileDropdown, setProfileDropdown] = useState(false);
   const [open, setOpen] = useState(false);
@@ -102,9 +104,35 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
   }, [])
 
   const [isOpen, setIsOpen] = useState(false);
+  const [addUserPanel, setAddUserPanel] = useState(false);
+  const [editUserPanel, setEditUserPanel] = useState(false);
   const handleOpenModalClick = () => {
     setIsOpen(true);
   };
+
+  // const location = useLocation();
+  useEffect(() => {
+    //  console.log(searchParams,"search",searchParams.get('addUser'))
+    if (searchParams.get('addUser')) {
+      setIsOpen(false)
+      setAddUserPanel(true)
+    }
+    else {
+      // setIsOpen(false)
+      setAddUserPanel(false)
+    }
+  }, [searchParams?.get('addUser')])
+
+  useEffect(() => {
+    //  console.log(searchParams,"search",searchParams.get('addUser'))
+    if (searchParams.get('editUser')) {
+      setIsOpen(false)
+      setEditUserPanel(true)
+    }
+    else {
+      setEditUserPanel(false)
+    }
+  }, [searchParams?.get('editUser')])
 
 
   return (
@@ -123,8 +151,11 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
             <HeaderName className="heading-content-new" prefix={t('')}>{t('platform')}</HeaderName>
             <HeaderTab />
             <div className='border-outline'></div>
-            <button style={{cursor:'pointer'}} onClick={handleOpenModalClick}>user</button>
+            {/* <button style={{ cursor: 'pointer' }} onClick={handleOpenModalClick}>user</button> */}
             <HeaderGlobalBar className='header-tab'>
+              <HeaderGlobalAction aria-label="Edit user" onClick={handleOpenModalClick}>
+                <Edit20 />
+              </HeaderGlobalAction>
               <HeaderGlobalAction aria-label="Search" onClick={() => { }}>
                 <Search20 />
               </HeaderGlobalAction>
@@ -147,8 +178,9 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
         {/* <div className="main--content">
         <NotificationPanel open={open} setOpen={setOpen} setNotificationsData={setNotificationsData} notificationsData={notificationsData} />
       </div> */}
-      <TearSheets  setIsOpen={setIsOpen} isOpen={isOpen}/>
-      <SidePanels/>
+        <TearSheets setIsOpen={setIsOpen} isOpen={isOpen} />
+        {addUserPanel && <SidePanels />}
+        {editUserPanel && <SidePanels />}
       </div>
     </>
   )
