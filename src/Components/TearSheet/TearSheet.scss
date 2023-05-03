@@ -1,0 +1,23 @@
+.tearsheet{
+
+    .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header {
+        padding: 6px 16px !important;
+        margin: 0;
+    }
+    .c4p--tearsheet.c4p--tearsheet .c4p--tearsheet__body {
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+        margin: 0;
+        height: 80vh;
+    }
+
+    .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__buttons {
+        background: var(--cds-ui-background, #ffffff);
+        height: 50px;
+    }
+}
+// .bx--modal-content c4p--tearsheet__body{
+//     height: 70vh !important;
+//     margin: 40px !important;
+// }

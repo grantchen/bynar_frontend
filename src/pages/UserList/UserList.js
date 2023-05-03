@@ -34,6 +34,7 @@ import { DataLoader } from '../../Components/Loader/DataLoder';
 import { useNavigate } from 'react-router-dom';
 import './UserList.scss'
 import { EditUser } from '../EditUser/EditUser';
+import { SidePanels } from '../../Components/SidePanel/SidePanels';
 // import { ToastNotification } from "@carbon/react";
 
 export const UserList = () => {
@@ -49,6 +50,7 @@ export const UserList = () => {
     const [isUserDetailEdit, setIsEditUserDetail] = useState(false);
     const [serverErrorNotification,setServerErrorNotification] =useState({}) 
     const [serverNotification,setServerNotification] =useState(false);
+    const [addUserPanelOpen,setIsAddUserPanel]=useState(false)
     const getUserList = async () => {
         try {
             setLoading(true);
@@ -109,7 +111,34 @@ export const UserList = () => {
 
 
     useEffect(async () => {
-        getUserList();
+        let isMounted = true;
+        try {
+            setLoading(true);
+            const response = await fetch(`${BaseURL}/list-users`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                },
+            })
+            
+
+            if (response.ok && isMounted) {
+                const res = await response.json();
+                setRow(res?.result);
+            }
+            else if(response.status === 500){
+
+            }
+            setLoading(false);
+        }
+        catch (e) {
+            await authContext.signout();
+            setLoading(false);
+        }
+        return () => {
+            isMounted = false;
+          };
     }, [])
 
     useEffect(async () => {
@@ -161,6 +190,8 @@ export const UserList = () => {
         let filteredOrganisationId = rows?.filter(person => tempArray.includes(person.id)).map(a => a.id);
         deleteUser(filteredOrganisationId);
     }
+
+    console.log(addUserPanelOpen,"panel -open")
     return (
         <>
             {loading ? (
@@ -222,7 +253,7 @@ export const UserList = () => {
                                                     <Button
                                                         className="button"
                                                         tabIndex={getBatchActionProps().shouldShowBatchActions ? -1 : 0}
-                                                        onClick={() => navigate('/adduser')}
+                                                        onClick={() => setIsAddUserPanel(true)}
                                                         size="sm"
                                                         kind="primary"
                                                     >
@@ -273,7 +304,7 @@ export const UserList = () => {
                                                                 <TableCell key={cell.id}>{cell.value}</TableCell>
 
                                                             ))}
-                                                            {isEdit && <TableCell style={{cursor:'pointer'}} onClick={() => { handleUserEdit(row.id) }}>{<Edit20/>}</TableCell>}
+                                                            {isEdit && <TableCell className={!row.canUpdate?'edit-icon':'edit-icon-disabled'}  onClick={() => { handleUserEdit(row.id) }}>{<Edit20/>}</TableCell>}
                                                         </TableRow>
                                                     ))}
                                                 </TableBody>
@@ -289,6 +320,7 @@ export const UserList = () => {
                     </>
                 )
             }
+            {/* {<SidePanels/>} */}
         </>
     )
 }

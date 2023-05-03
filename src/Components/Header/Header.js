@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import {
   Header,
   HeaderMenuButton,
@@ -20,6 +20,10 @@ import { useTranslation } from 'react-i18next';
 import ProfileDropdown from '../ProfileDropdown/ProfileDropdown';
 import HeaderTabComponents from './HeaderTabComponents';
 import HeaderTab from './HeaderTab';
+import { BaseURL } from '../../sdk/constant';
+import { AuthContext } from '../../sdk/context/AuthContext';
+import { TearSheets } from '../TearSheet/TearSheets';
+import { SidePanels } from '../SidePanel/SidePanels';
 
 export const CommonHeader = () => {
   return (
@@ -33,6 +37,9 @@ export const CommonHeader = () => {
 
 
 const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
+
+  const authContext = useContext(AuthContext)
+  const token = localStorage.getItem('token');
   const [profileDropdown, setProfileDropdown] = useState(false);
   const [open, setOpen] = useState(false);
   const [notificationsData, setNotificationsData] = useState(sampleData);
@@ -67,6 +74,37 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
 
   }, [wrapperRef]);
 
+  const getUserDetail = async () => {
+    try {
+      const response = await fetch(`${BaseURL}/user`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        },
+      })
+
+
+      if (response.ok) {
+        const res = await response.json();
+      }
+      else if (response.status === 500) {
+
+      }
+    }
+    catch (e) {
+      // await authContext.signout();
+    }
+  }
+
+  useEffect(() => {
+    getUserDetail()
+  }, [])
+
+  const [isOpen, setIsOpen] = useState(false);
+  const handleOpenModalClick = () => {
+    setIsOpen(true);
+  };
 
 
   return (
@@ -79,28 +117,29 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
             onClick={onClickSideNavExpand}
             isActive={isSideNavExpanded}
           />
-          <div className={isSideNavExpanded?'header-container-box':'header-box'}>
-          <HeaderName className="heading-content" prefix={t('')}>{t('Bynar')}</HeaderName>
-          <div className='border-outline'></div>
-          <HeaderName className="heading-content-new" prefix={t('')}>{t('platform')}</HeaderName>
-          <HeaderTab />
-          <div className='border-outline'></div>
-          <HeaderGlobalBar className='header-tab'>
-            <HeaderGlobalAction aria-label="Search" onClick={() => { }}>
-              <Search20 />
-            </HeaderGlobalAction>
-            {/* <HeaderGlobalAction aria-label="Notifications" onClick={() => setOpen(!open)}>
+          <div className={isSideNavExpanded ? 'header-container-box' : 'header-box'}>
+            <HeaderName className="heading-content" prefix={t('')}>{t('Bynar')}</HeaderName>
+            <div className='border-outline'></div>
+            <HeaderName className="heading-content-new" prefix={t('')}>{t('platform')}</HeaderName>
+            <HeaderTab />
+            <div className='border-outline'></div>
+            <button style={{cursor:'pointer'}} onClick={handleOpenModalClick}>user</button>
+            <HeaderGlobalBar className='header-tab'>
+              <HeaderGlobalAction aria-label="Search" onClick={() => { }}>
+                <Search20 />
+              </HeaderGlobalAction>
+              {/* <HeaderGlobalAction aria-label="Notifications" onClick={() => setOpen(!open)}>
             <Notification20 />
           </HeaderGlobalAction> */}
-            <div ref={wrapperRef}>
-              <>
-                <HeaderGlobalAction className='header-tab' aria-label="User" onClick={handleDropDown}>
-                  <UserAvatar20 />
-                </HeaderGlobalAction>
-                {profileDropdown && <ProfileDropdown />}
-              </>
-            </div>
-          </HeaderGlobalBar>
+              <div ref={wrapperRef}>
+                <>
+                  <HeaderGlobalAction className='header-tab' aria-label="User" onClick={handleDropDown}>
+                    <UserAvatar20 />
+                  </HeaderGlobalAction>
+                  {profileDropdown && <ProfileDropdown />}
+                </>
+              </div>
+            </HeaderGlobalBar>
           </div>
           <Navbar isSideNavExpanded={isSideNavExpanded} />
         </Header>
@@ -108,6 +147,8 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
         {/* <div className="main--content">
         <NotificationPanel open={open} setOpen={setOpen} setNotificationsData={setNotificationsData} notificationsData={notificationsData} />
       </div> */}
+      <TearSheets  setIsOpen={setIsOpen} isOpen={isOpen}/>
+      <SidePanels/>
       </div>
     </>
   )

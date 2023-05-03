@@ -1,9 +1,78 @@
 @import '../../../src/carbon-settings.scss';
+
 .main--content {
-    display: flex;
-    width: 100%;
-    height: calc(100vh);
-    align-items: center;
-    justify-content: center;
-    margin-top: 40px;
+  display: flex;
+  // width: 100%;
+  // height: calc(100vh);
+  // align-items: center;
+  // justify-content: center;
+  // margin-top: 40px;
+  
+
+  .c4p--side-panel__container .c4p--side-panel__inner-content {
+    overflow: auto;
+    height: calc(100vh - 3rem);
+    margin-top: calc(var(--c4p--side-panel--title-text-height) + var(--c4p--side-panel--subtitle-container-height) + var(--c4p--side-panel--action-bar-container-height) + var(--c4p--side-panel--label-text-height));
+    overflow-x: hidden;
+    background: #FFFFFF !important;
   }
+}
+
+@import '../../carbon-settings.scss';
+
+.adduser-box-content {
+  display: flex;
+  justify-content: center;
+  overflow: auto;
+
+  .adduser {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+    // background-color: var(--cds-ui-navbar, #f4f4f4) !important;
+    overflow: auto;
+    width: 600px;
+    margin: 16px;
+    margin-bottom: 28px;
+    height: calc(100vh - 132px);
+    padding-bottom: 40px;
+
+    .bx--text-input {
+      display: flex;
+      width: 100%;
+      flex: 1 1 auto;
+      flex-direction: column;
+      align-items: flex-start;
+      border: 1px solid gray !important;
+      width: 344px;
+      background: #F4F4F4 !important;
+    }
+
+    .bx--text-input__field-outer-wrapper {
+      width: 344px;
+    }
+
+    .country-select-dropdown {
+
+      .bx--select-input {
+        width: 344px;
+        background: #F4F4F4 !important;
+      }
+    }
+
+    .react-tel-input {
+      font-family: 'Roboto', sans-serif;
+      font-size: 15px;
+      position: relative;
+      width: 344px;
+    }
+  }
+}
+
+.user-loader {
+
+  span {
+    border: 3px solid gray;
+  }
+}

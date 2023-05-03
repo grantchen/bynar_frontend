@@ -1,6 +1,6 @@
 .userdata-table{
-    margin: 64px;
-    margin-top: 32px;
+    margin: 16px;
+    margin-top: 16px;
     overflow-x: auto;
 }
 .bx--batch-summary__cancel {
@@ -40,10 +40,17 @@
     width: 18rem;
     height: 50px;
     padding-left: 1rem;
-    margin-top: 5% !important;
+    // margin-top: 5% !important;
     margin-right: 1rem;
     margin-bottom: 0.5rem;
     margin: auto;
+}
+
+.edit-icon{
+    cursor: pointer;
+}
+.edit-icon-disabled{
+    cursor: not-allowed;
 }
 
 @media screen and (max-width:600px){

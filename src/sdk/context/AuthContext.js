@@ -67,8 +67,9 @@ export const AuthProvider = ({ children }) => {
           navigate('/home/datatable')
         }
       } else {
+        debugger;
         if (location.pathname === '/home' || location.pathname === '/dashboard' || location.pathname === '/datatable' || location.pathname === '/tearsheet' || location.pathname === '/adduser' || location.pathname === '/userlist' || location.pathname === '/datatable' || location.pathname === '/home/userlist' || location.pathname === '/home/dashboard' || location.pathname === '/home/datatable') {
-          navigate('/signin');
+          navigate('/home/dashboard');
         }
 
       }
