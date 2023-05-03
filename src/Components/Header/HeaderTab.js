@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import React, { useState, useRef, useEffect, useContext ,useLayoutEffect} from 'react';
 import Dashboard from '../Dashboard/Dashboard';
 import { Close } from '@carbon/react/icons'
 import Carousel from 'react-carousel-light';
@@ -12,7 +12,8 @@ const HeaderTab = () => {
     const [showLeftArrow, setShowLeftArrow] = useState(false);
     const [showRightArrow, setShowRightArrow] = useState(false);
     const carouselRef = useRef(null);
-    const width = window.innerWidth - 360;
+    const tabRef = useRef(null);
+
 
     const handleLeftScroll = () => {
 
@@ -57,9 +58,9 @@ const HeaderTab = () => {
         setShowRightArrow(tab.length > maxTab && maxTab > 0 ? true : false)
     }, [tab]);
 
+   
 
-
-    useEffect(() => {
+    const handleWindowSizeChange = () => {
         const width = window.innerWidth - 360;     
         const res = (width - 150) / 130;
         if (res < 0) {
@@ -70,13 +71,18 @@ const HeaderTab = () => {
             setMaxTab(Math.floor(res));
             setEndIndex(Math.floor(res));
         }
+    };
 
-    }, [carouselRef?.current?.offsetWidth]);
+    useEffect(() => {
+        handleWindowSizeChange()
+
+    }, []);
+
     
 
     return (
         <>
-            <div className='tab'>
+            <div className='tab' ref={tabRef}>
                 {showLeftArrow && startIndex > 0 ? (
                     <Button className="left-arrow" onClick={handleLeftScroll}>
                         <img src={'../image/left-arrow.svg'} style={{ width: '15px', height: '15px' }} alt="left arrow" />
@@ -85,8 +91,8 @@ const HeaderTab = () => {
                     <div style={{width:'40x'}}></div>
                 )}
 
-                <div style={{ overflowX: 'hidden', width: 'calc(100vw - 360px)'}} ref={carouselRef}>
-                    <div style={{ display: 'flex', whiteSpace: 'nowrap' }} >
+                <div style={{ overflowX: 'hidden'}} ref={carouselRef}>
+                    <div style={{ display: 'flex', whiteSpace: 'nowrap'}} >
 
                         {tab.slice(startIndex, endIndex).map((item, index) => {
                             return (
@@ -103,7 +109,6 @@ const HeaderTab = () => {
                             )
                         })}
                         <button className='button-tab' onClick={addTab}>{'Add-new-tab'}</button>
-
                     </div>
                 </div>
                 {showRightArrow ?(

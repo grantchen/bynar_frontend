@@ -4,7 +4,8 @@ import {
   SideNavItems,
   SideNavLink,
   SideNavMenu,
-  SideNavMenuItem
+  SideNavMenuItem,
+  HeaderName
 } from 'carbon-components-react';
 import { useNavigate } from "react-router-dom";
 import './Navbar.scss'
@@ -32,7 +33,11 @@ export const Navbar = ({isSideNavExpanded}) => {
             
             expanded={isSideNavExpanded} 
             >
+              {/* <SideNavItems className="side-nav">
+              <HeaderName className="heading-content-new" prefix={t('')}>{t('platform')}</HeaderName>
+              </SideNavItems> */}
               <SideNavItems className="side-nav">
+              {/* <HeaderName className="heading-content-new" prefix={t('')}>{t('platform')}</HeaderName> */}
                <HeaderTabComponents/>
               </SideNavItems>
             </SideNav>

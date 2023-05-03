@@ -18,16 +18,21 @@ const HeaderTabComponents = () => {
 
     return (
         <>
-            <div style={{ display: 'flex', flexDirection: 'column' ,marginBottom:'52px'}}>
+            <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '52px' }}>
                 {/* <button className="button-dashboard" onClick={handleAddTab}>{'add-new-tab'}</button> */}
+                <div className="box-container" >
+                    <div className="tab-new">
+                        <p>{'Platform'}</p>
+                    </div>
+                </div>
                 {tab.map((item, index) => {
                     return (
                         <div key={index} className="tab-container" >
                             <div className={activeTab === index + 1 ? "active-tab-new1" : "inactive-tab-new"} onClick={() => { setActiveTab(index + 1) }}>
                                 <p>{item.label}</p>
                                 {item.isDelted && <div className="close-icon">
-                                <Close size={12}  onClick={() => removeTab(item.id, index)} />
-                            </div>}
+                                    <Close size={12} onClick={() => removeTab(item.id, index)} />
+                                </div>}
                             </div>
                             {/* {item.isDelted && <div className="close-icon">
                                 <Close size={12} onClick={() => removeTab(index + 1)} />
