@@ -17,13 +17,48 @@
     // background: #FFFFFF !important;
   }
 
-  
+  .bx--form-item {
+    margin: 16px 0px;
+  }
+
   // .c4p--side-panel__container .bx--btn.c4p--side-panel__close-button {
   //   display: none;
   //   svg {
   //     display: none;
   //   }
   // }
+
+  .react-tel-input input[type='tel'] {
+    position: relative;
+    z-index: 0;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-left: 44px;
+    margin-left: 0;
+    background: #ffffff;
+    /* border: 1px solid #cacaca; */
+    /* border-radius: 3px; */
+    box-shadow: 0 1px 2px #e3e3e3 inset;
+    line-height: 25px;
+    height: 28px;
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid var(--cds-ui-04, #8d8d8d);
+    border-radius: 0;
+    height: 40px;
+    height: 40px !important;
+  }
+
+  .react-tel-input .flag-dropdown {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    padding: 0;
+    background-color: #FFFFFF;
+    /* border: 1px solid #cacaca; */
+    /* border-radius: 3px 0 0 3px; */
+    border-bottom: 1px solid var(--cds-ui-04, #8d8d8d);
+}
 }
 
 @import '../../carbon-settings.scss';
@@ -56,9 +91,9 @@
       width: 344px;
       background: #F4F4F4 !important;
     }
-    
+
     .bx--label {
-     padding-top: 8px !important;
+      padding-top: 8px !important;
     }
 
     .bx--text-input__field-outer-wrapper {
@@ -89,18 +124,19 @@
   }
 }
 
-.phone-label-wrapper{
+.phone-label-wrapper {
 
   width: 266px;
   margin-top: 8px;
 }
-.phone-label{
+
+.phone-label {
   font-size: 0.75rem;
-    letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
-    display: inline-block;
-    margin-bottom: 0.5rem;
-    color: var(--cds-text-02, #525252);
-    font-weight: 400;
-    line-height: 1rem;
-    vertical-align: baseline;
+  letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  color: var(--cds-text-02, #525252);
+  font-weight: 400;
+  line-height: 1rem;
+  vertical-align: baseline;
 }
