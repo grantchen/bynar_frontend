@@ -22,7 +22,7 @@ import { Loader } from "../../Components/Loader/Loader";
 import { DataLoader } from '../Loader/DataLoder';
 import { AuthContext } from "../../sdk/context/AuthContext";
 export const SidePanels = () => {
-   
+
     const [open, setOpen] = useState(true);
     const [accountInfoErrors, setAccountInfoErrors] = useState({
         userName: false,
@@ -74,7 +74,7 @@ export const SidePanels = () => {
         { "name": "Owner" },
         { "name": "Administrator" },
         { "name": "Users" }]
-    const [countryCode,setCountryCode]=useState('IN');
+    const [countryCode, setCountryCode] = useState('IN');
 
 
     const checkEmailValid = (email) => {
@@ -199,7 +199,7 @@ export const SidePanels = () => {
         setAccountInfoErrors({ ...accountInfoErrors, [name]: value.trim().length == 0 })
     }
     // invalidText={(passwordErrorNotification && passwordErrorNotification.title) ? passwordErrorNotification.title : ""}
-    const personalInfoButtonDisabled = fullName.trim().length == 0 || city.trim().length == 0 || state.trim().length == 0 || postalCode.toString().trim().length == 0 || !phoneNumberValid || addressLine1.trim().length == 0 || Object.keys(postalCodeErrorNotification).length != 0 ;
+    const personalInfoButtonDisabled = fullName.trim().length == 0 || city.trim().length == 0 || state.trim().length == 0 || postalCode.toString().trim().length == 0 || !phoneNumberValid || addressLine1.trim().length == 0 || Object.keys(postalCodeErrorNotification).length != 0;
     const handleAccountInformationFormSubmit = () => {
 
         const error = {}
@@ -427,12 +427,12 @@ export const SidePanels = () => {
 
     }, [open])
 
-    const handleCountryChange=(e)=>{
+    const handleCountryChange = (e) => {
         const selectedItem = countrylist.find((item) => item.name === e.target.value);
-        if(Object.keys(selectedItem).length == 0){
-          setPhoneNumber('')
+        if (Object.keys(selectedItem).length == 0) {
+            setPhoneNumber('')
         }
-        else{
+        else {
             setCountry(e.target.value)
             setPhoneNumber(selectedItem?.dial_code.toString())
         }
@@ -444,8 +444,8 @@ export const SidePanels = () => {
                 includeOverlay
                 className="test"
                 open={open}
-                // onRequestClose={handleClose}
-                title=""
+                onRequestClose={handleClose}
+                title={isUserEdit?'Edit User':'Add User'}
                 subtitle=""
                 actions={[
                     {
@@ -460,159 +460,143 @@ export const SidePanels = () => {
                     },
                 ]}
             >
-                <div className="adduser-box-content">
-                    {loading ? (
-                        <div className='loader-page'>
-                            <DataLoader />
-                        </div>) : (
+                <div className={`story__body-content`}>
+                    {/* <h5>{isUserEdit?'EditUser':'AddUser'}</h5> */}
+                    <div className={`story__text-inputs`}>
+                        {/* <TextInput
+                            labelText="Input A"
+                            id="side-panel-story-text-input-a"
+                            className={`story__text-input`}
+                        /> */}
+                        <TextInput
+                            ref={emailInput}
+                            name="userName"
+                            type="text"
+                            id="username"
+                            className={`story__text-input`}
+                            labelText="User Name *"
+                            value={userName}
+                            onChange={handleEmailChange}
+                            invalid={!!errors.userName}
+                            invalidText={errors.userName}
+                            disabled={loading ? true : false}
 
-                        <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            {serverNotification && (
-                                <div className='notification-box' >
-                                    <ToastNotification
-                                        iconDescription="describes the close button"
-                                        subtitle={serverErrorNotification?.message}
-                                        timeout={0}
-                                        title={""}
-                                        kind={serverErrorNotification?.status}
-                                    />
-                                </div>
-                            )}
-                            <div className="adduser">
+                        />
+                        <TextInput
+                            ref={fullNameInput}
+                            type="text"
+                            name="fullName"
+                            id="fullname"
+                            labelText="Full Name *"
+                            className={`story__text-input`}
+                            value={fullName}
+                            onChange={handleFullName}
+                            invalid={accountInfoErrors.fullName}
+                            invalidText={"Full name is required"}
+                        />
+                    </div>
+                    <div className={`story__text-inputs`}>
+                        {!isUserEdit && <Select className={`story__text-input`}
+                            name="role"
+                            value={role}
+                            id='country-ci'
+                            labelText='Role *'
+                            onChange={handleRoleChange}
+                            invalid={accountInfoErrors.role}
+                            invalidText={"User role is required"}
+                        // defaultValue={''}
+                        >
+                            {roleslist.map((rolesObject, rolesIndex) => (<SelectItem
+                                text={rolesObject.name}
+                                value={rolesObject.name}
+                                key={rolesIndex}
+                            />))}
 
-                                <TextInput
-                                    ref={emailInput}
-                                    name="userName"
-                                    type="text"
-                                    id="username"
-                                    className='text-input'
-                                    labelText="User Name *"
-                                    value={userName}
-                                    onChange={handleEmailChange}
-                                    invalid={!!errors.userName}
-                                    invalidText={errors.userName}
-                                    disabled={loading ? true : false}
+                        </Select>}
+                        <Select
+                            className={`story__text-input`}
+                            value={country}
+                            id='country-ci'
+                            labelText='Country or region of residence*'
+                            onChange={handleCountryChange}
+                        >
+                            {countrylist.map((countryObject, countryIndex) => (<SelectItem
+                                text={countryObject.name}
+                                value={countryObject.name}
+                                key={countryIndex}
+                            />))}
 
-                                />
-                                <TextInput
-                                    ref={fullNameInput}
-                                    type="text"
-                                    name="fullName"
-                                    id="fullname"
-                                    labelText="Full Name *"
-                                    className='text-input'
-                                    value={fullName}
-                                    onChange={handleFullName}
-                                    invalid={accountInfoErrors.fullName}
-                                    invalidText={"Full name is required"}
-                                />
-                                {!isUserEdit && <Select className='country-select-dropdown'
-                                    name="role"
-                                    value={role}
-                                    id='country-ci'
-                                    labelText='Role *'
-                                    onChange={handleRoleChange}
-                                    invalid={accountInfoErrors.role}
-                                    invalidText={"User role is required"}
-                                // defaultValue={''}
-                                >
-                                    {roleslist.map((rolesObject, rolesIndex) => (<SelectItem
-                                        text={rolesObject.name}
-                                        value={rolesObject.name}
-                                        key={rolesIndex}
-                                    />))}
-
-                                </Select>}
-                                {/* {!isUserEdit &&
-                                    <PasswordInput type="text"
-                                        ref={passwordInput}
-                                        name="password"
-                                        id="password"
-                                        labelText="Password"
-                                        className='text-input'
-                                        value={password}
-                                        onChange={(e) => handlePasswordChange(e)}
-                                        invalid={typeof passwordErrorNotification == 'object' && Object.keys(passwordErrorNotification).length !== 0}
-                                        invalidText={(passwordErrorNotification && passwordErrorNotification.title) ? passwordErrorNotification.title : ""}
-                                    />} */}
-                                <Select className='country-select-dropdown'
-                                    value={country}
-                                    id='country-ci'
-                                    labelText='Country or region of residence*'
-                                    onChange={handleCountryChange}
-                                >
-                                    {countrylist.map((countryObject, countryIndex) => (<SelectItem
-                                        text={countryObject.name}
-                                        value={countryObject.name}
-                                        key={countryIndex}
-                                    />))}
-
-                                </Select>
-                                <TextInput type="text"
-                                    name="addressLine1"
-                                    id="addressline"
-                                    className='text-input'
-                                    labelText="Address line 1 *"
-                                    value={addressLine1}
-                                    onChange={handleAddressLine1}
-                                    invalid={accountInfoErrors.addressLine1}
-                                    invalidText={"Address line1 is required"}
-                                />
-                                <TextInput type="text"
-                                    id="addressline1"
-                                    className='text-input'
-                                    labelText="Address line 2 (optional)"
-                                    value={addressLine2}
-                                    onChange={(e) => setAddressLine2(e.target.value)}
-                                />
-                                <TextInput type="text"
-                                    id="city"
-                                    name="city"
-                                    labelText="City *"
-                                    className='text-input'
-                                    value={city}
-                                    onChange={handleCity}
-                                    invalid={accountInfoErrors.city}
-                                    invalidText={"City name is required"}
-                                />
-                                <TextInput type="text"
-                                    id="state"
-                                    name="state"
-                                    labelText="State *"
-                                    className='text-input'
-                                    value={state}
-                                    onChange={handleState}
-                                    invalid={accountInfoErrors.state}
-                                    invalidText={"State is required"}
-                                />
-                                <TextInput type="text"
-                                    id="postalcode"
-                                    name="postalCode"
-                                    labelText="Postal Code *"
-                                    className='text-input'
-                                    value={postalCode}
-                                    onChange={handlePostalCode}
-                                    invalid={typeof postalCodeErrorNotification == 'object' && Object.keys(postalCodeErrorNotification).length !== 0}
-                                    invalidText={(postalCodeErrorNotification && postalCodeErrorNotification.title) ? postalCodeErrorNotification.title : ""}
-                                />
-                                <div>
-                                <div className='phone-label-wrapper'>
-                                    <p className='phone-label'>Phone Number *</p>
-                                </div>
-                                <PhoneInput
-                                    className='phone-input'
-                                    // defaultCountry="in"
-                                    style={{ border: !phoneNumberValid ? '2px solid red' : 0 }}
-                                    name='phoneNumber'
-                                    country={'IN'}
-                                    value={phoneNumber}
-                                    onChange={(value, country, formattedValue) => handlePhoneNumber(value, country, formattedValue)}
-                                />
-                                {!phoneNumberValid && <p style={{ marginTop: '4px', fontSize: '12px', color: '#DA1E28' }}>{errorMessage}</p>}
-                                </div>
+                        </Select>
+                    </div>
+                    <div className={`story__text-inputs`}>
+                        <TextInput type="text"
+                            name="addressLine1"
+                            id="addressline"
+                            className={`story__text-input`}
+                            labelText="Address line 1 *"
+                            value={addressLine1}
+                            onChange={handleAddressLine1}
+                            invalid={accountInfoErrors.addressLine1}
+                            invalidText={"Address line1 is required"}
+                        />
+                        <TextInput type="text"
+                            id="addressline1"
+                            className={`story__text-input`}
+                            labelText="Address line 2 (optional)"
+                            value={addressLine2}
+                            onChange={(e) => setAddressLine2(e.target.value)}
+                        />
+                    </div>
+                    <div className={`story__text-inputs`}>
+                        <TextInput type="text"
+                            id="city"
+                            name="city"
+                            labelText="City *"
+                            className={`story__text-input`}
+                            value={city}
+                            onChange={handleCity}
+                            invalid={accountInfoErrors.city}
+                            invalidText={"City name is required"}
+                        />
+                        <TextInput type="text"
+                            id="state"
+                            name="state"
+                            labelText="State *"
+                            className={`story__text-input`}
+                            value={state}
+                            onChange={handleState}
+                            invalid={accountInfoErrors.state}
+                            invalidText={"State is required"}
+                        />
+                    </div>
+                    <div className={`story__text-inputs`}>
+                        <TextInput type="text"
+                            id="postalcode"
+                            name="postalCode"
+                            labelText="Postal Code *"
+                            className={`story__text-inputs`}
+                            value={postalCode}
+                            onChange={handlePostalCode}
+                            invalid={typeof postalCodeErrorNotification == 'object' && Object.keys(postalCodeErrorNotification).length !== 0}
+                            invalidText={(postalCodeErrorNotification && postalCodeErrorNotification.title) ? postalCodeErrorNotification.title : ""}
+                        />
+                        <div>
+                            <div className='phone-label-wrapper'>
+                                <p className='phone-label'>Phone Number *</p>
                             </div>
-                        </div>)}
-                </div>
+                            <PhoneInput
+                                className='phone-input'
+                                // defaultCountry="in"
+                                style={{ border: !phoneNumberValid ? '2px solid red' : 0 }}
+                                name='phoneNumber'
+                                country={'IN'}
+                                value={phoneNumber}
+                                onChange={(value, country, formattedValue) => handlePhoneNumber(value, country, formattedValue)}
+                            />
+                            {!phoneNumberValid && <p style={{ marginTop: '4px', fontSize: '12px', color: '#DA1E28' }}>{errorMessage}</p>}
+                        </div>
+                    </div>
+                    </div>
             </SidePanel >
         </div >
     )

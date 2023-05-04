@@ -11,19 +11,19 @@
 
   .c4p--side-panel__container .c4p--side-panel__inner-content {
     overflow: auto;
-    height: calc(100vh - 3rem);
+    height: calc(100vh - 150px) !important;
     margin-top: calc(var(--c4p--side-panel--title-text-height) + var(--c4p--side-panel--subtitle-container-height) + var(--c4p--side-panel--action-bar-container-height) + var(--c4p--side-panel--label-text-height));
     overflow-x: hidden;
-    background: #FFFFFF !important;
+    // background: #FFFFFF !important;
   }
 
   
-  .c4p--side-panel__container .bx--btn.c4p--side-panel__close-button {
-    display: none;
-    svg {
-      display: none;
-    }
-  }
+  // .c4p--side-panel__container .bx--btn.c4p--side-panel__close-button {
+  //   display: none;
+  //   svg {
+  //     display: none;
+  //   }
+  // }
 }
 
 @import '../../carbon-settings.scss';
