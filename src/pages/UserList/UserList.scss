@@ -1,5 +1,5 @@
 .userdata-table{
-    margin: 16px;
+    margin: 12px;
     margin-top: 16px;
     overflow-x: auto;
 }
@@ -53,10 +53,16 @@
     cursor: not-allowed;
 }
 
+.bx--action-list{
+    svg{
+        display: none !important;
+    }
+}
+
 @media screen and (max-width:600px){
     .userdata-table{
-        margin: 64px;
-        margin-top: 32px;
+        margin: 15px;
+        margin-top: 16px;
         overflow-x: auto;
         margin-right: 32px;
     }

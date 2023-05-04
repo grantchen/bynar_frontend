@@ -3,7 +3,7 @@
     flex-direction: row;
     padding: 0;
     margin: 0;
-    height: 80vh !important;
+    height: calc(100vh - 140px) !important;
 }
 
 .c4p--tearsheet .c4p--tearsheet__button-container {
@@ -17,10 +17,10 @@
 
 .tearsheet{
 
-    .bx--modal-content {
-        height: 80vh;
-        border: 1px solid red;
-      }
+    // .bx--modal-content {
+    //     height: 80vh;
+    //     border: 1px solid red;
+    //   }
       
     .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header {
         padding: 6px 16px !important;

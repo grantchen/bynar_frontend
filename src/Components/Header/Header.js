@@ -8,7 +8,7 @@ import {
 } from 'carbon-components-react';
 import HeaderContainer from "carbon-components-react/lib/components/UIShell/HeaderContainer";
 import {
-  Notification20, Search20, UserAvatar20,Edit20
+  Notification20, Search20, UserAvatar20, Edit20
 } from '@carbon/icons-react';
 import { Navbar } from '../Navbar/Navbar';
 import { NotificationPanel } from '../NotificationPanel/NotificationPanel';
@@ -51,6 +51,7 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
   const setShowProfilePanelRef = useRef(null);
   showProfilePanelRef.current = profileDropdown;
   setShowProfilePanelRef.current = setProfileDropdown;
+  const [showButton, setShowButton] = useState(false)
   const { t } = useTranslation();
 
   const handleDropDown = (e) => {
@@ -89,6 +90,12 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
 
       if (response.ok) {
         const res = await response.json();
+        if (res.cognitoUserGroups === "Users" && res.cognitoUserGroups.lenngth == 0) {
+          setShowButton(false)
+        }
+        else {
+          setShowButton(true)
+        }
       }
       else if (response.status === 500) {
 
@@ -134,6 +141,17 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
     }
   }, [searchParams?.get('editUser')])
 
+  useEffect(() => {
+    //  console.log(searchParams,"search",searchParams.get('addUser'))
+    if (searchParams.get('addUserMessage')) {
+      setIsOpen(true)
+      // setEditUserPanel(true)
+    }
+    // else {
+    //   setEditUserPanel(false)
+    // }
+  }, [searchParams?.get('addUserMessage')])
+
 
   return (
     <>
@@ -153,9 +171,9 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
             <div className='border-outline'></div>
             {/* <button style={{ cursor: 'pointer' }} onClick={handleOpenModalClick}>user</button> */}
             <HeaderGlobalBar className='header-tab'>
-              <HeaderGlobalAction aria-label="Edit user" onClick={handleOpenModalClick}>
-                <Edit20 />
-              </HeaderGlobalAction>
+              {showButton && <HeaderGlobalAction aria-label="Users" onClick={handleOpenModalClick}>
+                <img src={'../image/user-list.svg'} />
+              </HeaderGlobalAction>}
               <HeaderGlobalAction aria-label="Search" onClick={() => { }}>
                 <Search20 />
               </HeaderGlobalAction>

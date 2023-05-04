@@ -52,7 +52,7 @@ export const TearSheets = ({setIsOpen,isOpen}) => {
         title="User list"
       >
         <div className="tearsheet">
-          <UserList/>
+          <UserList isOpen={isOpen}/>
         </div>
       </Tearsheet>
     </>
