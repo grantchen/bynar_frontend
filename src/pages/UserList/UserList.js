@@ -329,12 +329,12 @@ export const UserList = ({isOpen}) => {
                                                     <TableBody>
                                                         {rows.map((row, index) => (
                                                             <TableRow {...getRowProps({ row })}>
-                                                                {isDelete && <TableSelectRow className={row.canDelete ? 'edit-icon' : 'edit-icon-disabled'} {...getSelectionProps({ row })} />}
+                                                                {isDelete && <TableSelectRow className={'edit-icon'} {...getSelectionProps({ row })} />}
                                                                 {row.cells.map((cell) => (
                                                                     <TableCell key={cell.id}>{cell.value}</TableCell>
 
                                                                 ))}
-                                                                {<TableCell className={row.canUpdate ? 'edit-icon' : 'edit-icon-disabled'} onClick={() => { handleUserEdit(row.id) }}>{<Edit20 />}</TableCell>}
+                                                                {<TableCell className={'edit-icon'} onClick={() => { handleUserEdit(row.id) }}>{<Edit20 />}</TableCell>}
                                                             </TableRow>
                                                         ))}
                                                     </TableBody>

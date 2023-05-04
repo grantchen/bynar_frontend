@@ -37,7 +37,6 @@ function App() {
                 {/* <Route exact path="userlist" element={<UserList />} />  */}
 
               </Route>
-            <Route exact path="/userlist" element={<UserList />} />
               <Route exact path="/signin" element={<Signin />} />
               <Route exact path="/forgotpassword" element={<ForgotPassword />} />
               <Route exact path="/adduser" element={<AddUser/>} />
