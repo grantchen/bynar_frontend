@@ -298,7 +298,7 @@ export const UserList = ({isOpen}) => {
                                                         >
                                                             {isDelete ? "Cancel Delete" : "Delete User"}
                                                         </Button>
-                                                        <Button
+                                                        {/* <Button
                                                             className="button"
                                                             tabIndex={getBatchActionProps().shouldShowBatchActions ? -1 : 0}
                                                             onClick={() => setIsEdit(!isEdit)}
@@ -308,7 +308,7 @@ export const UserList = ({isOpen}) => {
                                                             style={{cursor:'pointer'}}
                                                         >
                                                             {isEdit ? "Cancel Edit" : "Edit User"}
-                                                        </Button>
+                                                        </Button> */}
                                                     </TableToolbarContent>
                                                 </TableToolbar>
                                                 <Table>
@@ -321,7 +321,7 @@ export const UserList = ({isOpen}) => {
                                                                     {header.header}
                                                                 </TableHeader>
                                                             ))}
-                                                            {isEdit && <TableHeader />}
+                                                            {<TableHeader />}
 
                                                         </TableRow>
                                                     </TableHead>
@@ -329,12 +329,12 @@ export const UserList = ({isOpen}) => {
                                                     <TableBody>
                                                         {rows.map((row, index) => (
                                                             <TableRow {...getRowProps({ row })}>
-                                                                {isDelete && <TableSelectRow className={!row.canDelete ? 'edit-icon' : 'edit-icon-disabled'} {...getSelectionProps({ row })} />}
+                                                                {isDelete && <TableSelectRow className={row.canDelete ? 'edit-icon' : 'edit-icon-disabled'} {...getSelectionProps({ row })} />}
                                                                 {row.cells.map((cell) => (
                                                                     <TableCell key={cell.id}>{cell.value}</TableCell>
 
                                                                 ))}
-                                                                {isEdit && <TableCell className={!row.canUpdate ? 'edit-icon' : 'edit-icon-disabled'} onClick={() => { handleUserEdit(row.id) }}>{<Edit20 />}</TableCell>}
+                                                                {<TableCell className={row.canUpdate ? 'edit-icon' : 'edit-icon-disabled'} onClick={() => { handleUserEdit(row.id) }}>{<Edit20 />}</TableCell>}
                                                             </TableRow>
                                                         ))}
                                                     </TableBody>

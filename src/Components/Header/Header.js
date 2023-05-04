@@ -172,7 +172,7 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
             {/* <button style={{ cursor: 'pointer' }} onClick={handleOpenModalClick}>user</button> */}
             <HeaderGlobalBar className='header-tab'>
               {showButton && <HeaderGlobalAction aria-label="Users" onClick={handleOpenModalClick}>
-                <img src={'../image/user-list.svg'} />
+                <img src={'../image/user-list.svg'} style={{height:'20px',width:'20px'}}/>
               </HeaderGlobalAction>}
               <HeaderGlobalAction aria-label="Search" onClick={() => { }}>
                 <Search20 />
