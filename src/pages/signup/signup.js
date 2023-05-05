@@ -68,7 +68,7 @@ const Signup = () => {
     const [passwordStrengthWidth, setpaswordStrengthWidth] = useState(0);
     const [passwordIsValid, setPasswordIsValid] = useState(true);
     const [emailIsValid, setEmailValid] = useState(true);
-    const [activeStep, setActiveStep] = useState(3);
+    const [activeStep, setActiveStep] = useState(1);
     const [verificationCode, setVerificationCode] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -90,7 +90,7 @@ const Signup = () => {
     const [cardNumber, setCardNumber] = useState('');
     const [cardExpiryDate, setCardExpiryDate] = useState('');
     const [cardCVV, setCardCVV] = useState('');
-    const [isChecked, setIsChecked] = useState(false);
+    const [isChecked, setIsChecked] = useState(true);
     const [isCardInfoUpdated, setCardInfoUpdated] = useState(false);
     const [isError, setIsError] = useState(false);
     const [isAccountInfoError, setIsAccountInfoError] = useState(false);
