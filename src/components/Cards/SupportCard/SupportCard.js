@@ -6,18 +6,21 @@ export const SupportCard = () => {
   const { t } = useTranslation();
   return (
     <div className="dashboard-tile">
-      <div className="bynar-tile-header">
-        <h5 style={{ maxWidth: "fit-content", float: "left" }}>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <h5 style={{ maxWidth: "fit-content" }}>
           <strong>{t("supportcard_heading1")}</strong>
         </h5>
-        <Link style={{ float: "right" }}>{t("supportcard_heading2")}</Link>
+        <Link>{t("supportcard_heading2")}</Link>
       </div>
       <br />
-      <div className="bynar-tile-content-area">
-        <Warning
-          size="100"
-          style={{ margin: "auto", color: "cornflowerblue" }}
-        />
+      <Warning size="100" style={{ color: "cornflowerblue" }} />
+      <div>
         <p>{t("supportcard_heading3")}</p>
       </div>
     </div>

@@ -1,17 +1,17 @@
 .dashboard-tile {
-    display: flex;
-    flex-direction: column;
-    height: 300px;
-    justify-content: space-around;
-    background-color: var(--cds-ui-02,#fff);
-    padding-left: 8px;
-    padding-right: 8px;
-    color: black;
-    }
-.bynar-tile-header{
-    height: 1rem;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  justify-content: space-between;
+  background-color: var(--cds-ui-02, #fff);
+  padding: 16px;
+  color: black;
+  align-items: flex-start;
+}
+.bynar-tile-header {
+  height: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
 }

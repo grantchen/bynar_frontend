@@ -7,20 +7,20 @@ export const ViewUsageCard = () => {
   return (
     <div className="dashboard-tile">
       <div
-        className="bynar-tile-header"
-        style={{ height: "1rem", width: "100%" }}
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
       >
-        <h5 style={{ maxWidth: "fit-content", float: "left" }}>
+        <h5 style={{ maxWidth: "fit-content" }}>
           <strong>{t("usagecard_heading1")}</strong>
         </h5>
-        <Link style={{ float: "right" }}>{t("usagecard_heading2")}</Link>
+        <Link>{t("usagecard_heading2")}</Link>
       </div>
       <br />
-      <div className="bynar-tile-content-area">
-        <Warning
-          size="100"
-          style={{ margin: "auto", color: "cornflowerblue" }}
-        />
+      <Warning size="100" style={{ color: "cornflowerblue" }} />
+      <div>
         <p>{t("usagecard_heading3")}</p>
       </div>
     </div>
