@@ -47,10 +47,14 @@ import { Loader } from '../../Components/Loader/Loader.js';
 import { BaseURL } from '../../sdk/constant.js';
 import { DataLoader } from '../../Components/Loader/DataLoder.js';
 import '../../styles/paymentform/paymentform.scss'
+import {
+    PhoneNumberUtil,
+    PhoneNumberFormat as PNF
+} from "google-libphonenumber";
 
 
 const Signup = () => {
-    
+    const phoneUtil = PhoneNumberUtil.getInstance();
     const navigate = useNavigate();
     const [errorNotification, setErrorNotification] = useState({});
     const [loading, setLoading] = useState(false);
@@ -64,7 +68,7 @@ const Signup = () => {
     const [passwordStrengthWidth, setpaswordStrengthWidth] = useState(0);
     const [passwordIsValid, setPasswordIsValid] = useState(true);
     const [emailIsValid, setEmailValid] = useState(true);
-    const [activeStep, setActiveStep] = useState(1);
+    const [activeStep, setActiveStep] = useState(3);
     const [verificationCode, setVerificationCode] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -101,6 +105,8 @@ const Signup = () => {
     const [errors, setErrors] = useState({});
     const [phoneNumberValid, setIsPhoneNumberValid] = useState(true)
     const [errorMessage, setErrorMessage] = useState('')
+    const [countryCode, setCountryCode] = useState('IN');
+    const [countryDialCode, setCountryDialCode] = useState('91');
     const [accountInfoErrors, setAccountInfoErrors] = useState({
         fullName: false,
         addressLine1: false,
@@ -141,20 +147,47 @@ const Signup = () => {
         setAccountInfoErrors({ ...accountInfoErrors, [name]: value.trim().length == 0 })
     }
 
-    const validatePhoneNumber = (value, country) => {
-        
-        if (value.length == 0) {
-            setErrorMessage("Phone number is required")
+    const validatePhoneNumber = (value, dialCode, country) => {
+        if (value == dialCode) {
+            setErrorMessage("Enter valid phone number")
             setIsPhoneNumberValid(false)
         }
-        else{
-            setErrorMessage(" ")
-            setIsPhoneNumberValid(true)
+        else {
+            const phoneNumberWithoutDialCode = value.toString().replace(dialCode, '');
+            if (phoneNumberWithoutDialCode.length == 0) {
+                setErrorMessage("Phone number is required")
+                setIsPhoneNumberValid(false)
+            }
+            else if (phoneNumberWithoutDialCode == value) {
+                setErrorMessage("Enter valid phone number")
+                setIsPhoneNumberValid(false)
+            }
+            else {
+
+                try {
+                    const number = phoneUtil.parse(phoneNumberWithoutDialCode, country);
+                    const isValid = phoneUtil.isValidNumber(number);
+                    if (!isValid) {
+                        setErrorMessage("Enter valid phone number")
+                        setIsPhoneNumberValid(false)
+                    }
+                    else {
+                        setErrorMessage("")
+                        setIsPhoneNumberValid(true)
+                    }
+                }
+                catch (e) {
+                    setErrorMessage("Enter valid phone number")
+                    setIsPhoneNumberValid(false)
+                }
+            }
         }
     }
+
     const handlePhoneNumber = (value, country, formattedValue) => {
         setPhoneNumber(value)
-        validatePhoneNumber(value, country);
+        validatePhoneNumber(value, country.dialCode, country?.countryCode);
+
     }
 
 
@@ -590,16 +623,19 @@ const Signup = () => {
             setErrorMessage('Phone number is required')
             setIsPhoneNumberValid(false)
         }
+        else {
+            validatePhoneNumber(phoneNumber, countryDialCode, countryCode)
+        }
 
         const emptyInput = inputRefs.current.find((ref) => ref && ref.value === '');
 
         if (emptyInput) {
-          emptyInput.scrollIntoView({ behavior: 'smooth' });
+            emptyInput.scrollIntoView({ behavior: 'smooth' });
         }
 
         if (!personalInfoButtonDisabled) {
             handlePersonalInfo()
-        }    
+        }
     }
 
     const handleOrganizationInformationFormSubmit = () => {
@@ -609,6 +645,19 @@ const Signup = () => {
         setOrganizationInfoErrors(error)
         if (!taxInfoButtonDisabled) {
             handleTaxInfo()
+        }
+    }
+
+    const handleCountryChange = (e) => {
+        const selectedItem = countrylist.find((item) => item.name === e.target.value);
+        if (Object.keys(selectedItem).length == 0) {
+            setPhoneNumber('')
+        }
+        else {
+            setCountry(e.target.value)
+            setPhoneNumber(selectedItem?.dial_code.toString())
+            setCountryCode(selectedItem?.code)
+            setCountryDialCode(selectedItem?.dial_code.toString())
         }
     }
 
@@ -778,7 +827,7 @@ const Signup = () => {
                                                 value={country}
                                                 id='country-ci'
                                                 labelText='Country or region*'
-                                                onChange={e => setCountry(e.target.value)}
+                                                onChange={handleCountryChange}
                                             >
                                                 {countrylist.map((countryObject, countryIndex) => (<SelectItem
                                                     text={countryObject.name}
@@ -845,7 +894,7 @@ const Signup = () => {
                                                 ref={(el) => inputRefs.current[5] = el}
                                                 style={{ border: !phoneNumberValid ? '2px solid red' : 0 }}
                                                 name='phoneNumber'
-                                                country={''}
+                                                country={'IN'}
                                                 value={phoneNumber}
                                                 onChange={(value, country, formattedValue) => handlePhoneNumber(value, country, formattedValue)}
                                             />
@@ -888,7 +937,7 @@ const Signup = () => {
                                                 }
                                             />
                                             <div style={{ marginTop: '32px', marginBottom: '16px' }}>
-                                                <Button 
+                                                <Button
                                                     className={'submit-button'} onClick={handleOrganizationInformationFormSubmit}>
                                                     Next
                                                 </Button>

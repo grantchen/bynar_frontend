@@ -21,8 +21,12 @@ import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Loader } from "../../Components/Loader/Loader";
 import { DataLoader } from '../Loader/DataLoder';
 import { AuthContext } from "../../sdk/context/AuthContext";
+import {
+    PhoneNumberUtil,
+    PhoneNumberFormat as PNF
+} from "google-libphonenumber";
 export const SidePanels = () => {
-
+    const phoneUtil = PhoneNumberUtil.getInstance();
     const [open, setOpen] = useState(true);
     const [accountInfoErrors, setAccountInfoErrors] = useState({
         userName: false,
@@ -75,7 +79,7 @@ export const SidePanels = () => {
         { "name": "Administrator" },
         { "name": "Users" }]
     const [countryCode, setCountryCode] = useState('IN');
-
+    const [countryDialCode, setCountryDialCode] = useState('91');
 
     const checkEmailValid = (email) => {
         return String(email)
@@ -156,23 +160,48 @@ export const SidePanels = () => {
         setAccountInfoErrors({ ...accountInfoErrors, [name]: value.trim().length == 0 })
     }
 
-    const validatePhoneNumber = (value, country) => {
-
-        if (value.length == 0) {
-            setErrorMessage("Phone number is required")
+    const validatePhoneNumber = (value, dialCode, country) => {
+        if (value == dialCode) {
+            setErrorMessage("Enter valid phone number")
             setIsPhoneNumberValid(false)
         }
         else {
-            setErrorMessage(" ")
-            setIsPhoneNumberValid(true)
+            const phoneNumberWithoutDialCode = value.toString().replace(dialCode, '');
+            if (phoneNumberWithoutDialCode.length == 0) {
+                setErrorMessage("Phone number is required")
+                setIsPhoneNumberValid(false)
+            }
+            else if (phoneNumberWithoutDialCode == value) {
+                setErrorMessage("Enter valid phone number")
+                setIsPhoneNumberValid(false)
+            }
+            else {
+
+                try {
+                    const number = phoneUtil.parse(phoneNumberWithoutDialCode, country);
+                    const isValid = phoneUtil.isValidNumber(number);
+                    if (!isValid) {
+                        setErrorMessage("Enter valid phone number")
+                        setIsPhoneNumberValid(false)
+                    }
+                    else {
+                        setErrorMessage("")
+                        setIsPhoneNumberValid(true)
+                    }
+                }
+                catch (e) {
+                    setErrorMessage("Enter valid phone number")
+                    setIsPhoneNumberValid(false)
+                }
+            }
         }
     }
+
     const handlePhoneNumber = (value, country, formattedValue) => {
         setPhoneNumber(value)
-        validatePhoneNumber(value, country);
+        validatePhoneNumber(value, country.dialCode, country?.countryCode);
+
     }
-
-
 
     const postalCodeValidation = (value) => {
         if (value.length === 0) {
@@ -198,7 +227,7 @@ export const SidePanels = () => {
         setRole(value)
         setAccountInfoErrors({ ...accountInfoErrors, [name]: value.trim().length == 0 })
     }
-    // invalidText={(passwordErrorNotification && passwordErrorNotification.title) ? passwordErrorNotification.title : ""}
+
     const personalInfoButtonDisabled = fullName.trim().length == 0 || city.trim().length == 0 || state.trim().length == 0 || postalCode.toString().trim().length == 0 || !phoneNumberValid || addressLine1.trim().length == 0 || Object.keys(postalCodeErrorNotification).length != 0;
     const handleAccountInformationFormSubmit = () => {
 
@@ -214,10 +243,12 @@ export const SidePanels = () => {
         const emailError = validateEmail(userName.trim())
         setErrors(validateEmail(userName.trim()))
         setAccountInfoErrors(error)
-        // validatePassword(password)
         if (phoneNumber.length == 0) {
             setErrorMessage('Phone number is required')
             setIsPhoneNumberValid(false)
+        }
+        else {
+            validatePhoneNumber(phoneNumber, countryDialCode, countryCode)
         }
 
         if (Object.keys(emailError).length == 0 && !personalInfoButtonDisabled) {
@@ -252,8 +283,9 @@ export const SidePanels = () => {
             setErrorMessage('Phone number is required')
             setIsPhoneNumberValid(false)
         }
-        console.log(emailError, personalInfoButtonDisabled, "test")
-
+        else {
+            validatePhoneNumber(phoneNumber, countryDialCode, countryCode)
+        }
         if (Object.keys(emailError).length == 0 && !editInfoButtonDisabled) {
             handleEditUser();
         }
@@ -271,8 +303,6 @@ export const SidePanels = () => {
 
     // const addUserButtonDisabled = (Object.keys(postalCodeErrorNotification).length != 0 || Object.keys(stateErrorNotification).length != 0 || Object.keys(cityErrorNotification).length != 0 || Object.keys(addressErrorNotification).length != 0 || Object.keys(passwordErrorNotification).length != 0 || Object.keys(errorNotification).length != 0 || Object.keys(emailErrorNotification).length != 0 || userName.length === 0 || fullName.length === 0 || password.length === 0 || addressLine1.length === 0 || city.length === 0 || state.length === 0 || postalCode.length === 0);
     const handleAddUser = () => {
-
-
 
         const fetchData = async () => {
             setLoading(true);
@@ -435,6 +465,8 @@ export const SidePanels = () => {
         else {
             setCountry(e.target.value)
             setPhoneNumber(selectedItem?.dial_code.toString())
+            setCountryCode(selectedItem?.code)
+            setCountryDialCode(selectedItem?.dial_code.toString())
         }
     }
 
@@ -445,7 +477,7 @@ export const SidePanels = () => {
                 className="test"
                 open={open}
                 onRequestClose={handleClose}
-                title={isUserEdit?'Edit User':'Add User'}
+                title={isUserEdit ? 'Edit User' : 'Add User'}
                 subtitle=""
                 actions={[
                     {
@@ -461,13 +493,7 @@ export const SidePanels = () => {
                 ]}
             >
                 <div className={`story__body-content`}>
-                    {/* <h5>{isUserEdit?'EditUser':'AddUser'}</h5> */}
                     <div className={`story__text-inputs`}>
-                        {/* <TextInput
-                            labelText="Input A"
-                            id="side-panel-story-text-input-a"
-                            className={`story__text-input`}
-                        /> */}
                         <TextInput
                             ref={emailInput}
                             name="userName"
@@ -596,7 +622,7 @@ export const SidePanels = () => {
                             {!phoneNumberValid && <p style={{ marginTop: '4px', fontSize: '12px', color: '#DA1E28' }}>{errorMessage}</p>}
                         </div>
                     </div>
-                    </div>
+                </div>
             </SidePanel >
         </div >
     )

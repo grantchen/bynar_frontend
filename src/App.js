@@ -1,6 +1,6 @@
 import { CommonHeader } from './Components/Header/Header';
-import React, { Suspense ,lazy} from 'react';
-import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
+import React, { Suspense ,lazy,useEffect} from 'react';
+import { Routes, Route, BrowserRouter, Navigate, useNavigate } from 'react-router-dom';
 import './index.scss'
 import '../src/pages/UserList/UserList.scss'
 import { DataTables } from './Components/DataTable/DataTable';
@@ -17,11 +17,11 @@ const Dashboard = lazy(() => import('./Components/Dashboard/Dashboard'));
 const Signup = lazy(() => import('./pages/signup/signup'));
 const Signin = lazy(() => import('./pages/signin/signin'));
 
-
-
 function App() {
   return (
+    <>
     <div className="app">
+    <div style={{display:'none'}}id="google_translate_element"></div>
       <Suspense fallback={<div className='loader-page'>
         <DataLoader />
       </div>}>
@@ -46,6 +46,7 @@ function App() {
         </BrowserRouter>
       </Suspense>
     </div>
+    </>
   );
 }
 

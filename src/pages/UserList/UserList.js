@@ -54,6 +54,7 @@ export const UserList = ({isOpen}) => {
     const [addUserPanelOpen, setIsAddUserPanel] = useState(false)
     const [searchParams] = useSearchParams();
     const getUserList = async () => {
+        
         try {
             setLoading(true);
             const response = await fetch(`${BaseURL}/list-users`, {
@@ -82,9 +83,7 @@ export const UserList = ({isOpen}) => {
 
     const deleteUser = async (filteredOrganisationId) => {
         try {
-            // debugger;
             setLoading(true);
-            // const token1 = "eyJraWQiOiJ3SGw5Yzg5cDhnQW80MlVSdVBYZW9CT1wvcVk5Y3ZobGNTWXBxbUlpXC9JQ2s9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiJlNWIwN2EwYi04YzAwLTQwZDktYjZlMC01ZjNiMDM3M2U1YzciLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAuZXUtY2VudHJhbC0xLmFtYXpvbmF3cy5jb21cL2V1LWNlbnRyYWwtMV9JV2JoN0JMcnoiLCJjbGllbnRfaWQiOiIxYm1wNjZiMjM1MnMzYzBic2xsOGM1cWZkOSIsIm9yaWdpbl9qdGkiOiIyNjBjZjA4OC1lMzc3LTQ5YTktYWY2OS1jZDMxZDkxYmI2ZGUiLCJldmVudF9pZCI6ImY1NGFjM2EwLThmMWQtNGY1OS1hOTE4LTM5YTQyNzY2NzVjOCIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2ODAxNTE0MTksImV4cCI6MTY4MDE1NTAxOSwiaWF0IjoxNjgwMTUxNDIwLCJqdGkiOiJlOWE0YzNjYi0yYjI0LTQyZjEtOTI3My01YjdkM2U0YjgxMzAiLCJ1c2VybmFtZSI6ImU1YjA3YTBiLThjMDAtNDBkOS1iNmUwLTVmM2IwMzczZTVjNyJ9.XZlNtiXP3a5zDs5tBZr-jIniVSoago8MizEdeng_UIIWAMr9FI5I7_bRrcKhjdTEA3AWPAy4FgD8-zJBpFB5VzDs78h73EtTEpzxhzpxC1zEpW7FD6WuF31GfT5afAGA4eM9u2vRyJo_M2DoJnE0vDLG7ogk124r0dWBuGN8CnRGsTqdXUCrPnvV5MmxItefehfxFIU5yvORfXxgt8gv9PliEagXirRm2d_y2TvuL4VzJ1p4EvbGw7kCABjKFd9qlxAjbXCNjpFp7rwYcjwmSDSXRA-3EO_CLXP2ANUcXdlTwt5tFleCYXGUcAT71v2u0rhDhcNFYb4G7mwKxHuwvg"
             const response = await fetch(`${BaseURL}/user`, {
                 method: 'DELETE',
                 body: JSON.stringify({ accountIDs: filteredOrganisationId }),
@@ -114,41 +113,11 @@ export const UserList = ({isOpen}) => {
         }
     }
 
-
-    useEffect(async () => {
-        let isMounted = true;
-        try {
-            setLoading(true);
-            const response = await fetch(`${BaseURL}/list-users`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + token
-                },
-            })
-
-
-            if (response.ok && isMounted) {
-                const res = await response.json();
-                setRow(res?.result);
-            }
-            else if (response.status === 500) {
-
-            }
-            setLoading(false);
-        }
-        catch (e) {
-            await authContext.signout();
-            setLoading(false);
-        }
-        return () => {
-            isMounted = false;
-        };
-    }, [])
-
     useEffect(async () => {
         if (serverNotification)
+        {
             getUserList();
+        }
     }, [serverNotification])
 
     useEffect(()=>{
@@ -203,10 +172,6 @@ export const UserList = ({isOpen}) => {
 
         const userEditArray = rows?.filter(a => a.id === index);
         navigate(`/home/dashboard?editUser=true&&Id=${index}`)
-        // console.log("id is ", index)
-        // setUserDetails(userEditArray[0]);
-        // setServerNotification(false);
-        //  setIsEditUserDetail(true);
     }
 
     const handleDelete = (selectedRows) => {
@@ -234,7 +199,7 @@ export const UserList = ({isOpen}) => {
                             </div>
                         ) : (
                             <>
-                                {serverNotification ? (
+                                {serverNotification && (
                                     <div className='notification-box'>
                                         <ToastNotification
                                             iconDescription="describes the close button"
@@ -244,12 +209,7 @@ export const UserList = ({isOpen}) => {
                                             kind={serverErrorNotification?.status}
                                         />
                                     </div>
-                                ) :
-                                    (
-                                        <div className='notification-box'>
-
-                                        </div>
-                                    )}
+                                )}
                                 <div className='userdata-table'>
                                     <DataTable rows={rows} headers={headers}>
                                         {({
@@ -350,7 +310,6 @@ export const UserList = ({isOpen}) => {
                     </>
                 )
             }
-            {/* {<SidePanels/>} */}
         </>
     )
 }
