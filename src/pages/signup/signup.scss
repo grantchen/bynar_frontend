@@ -652,8 +652,8 @@ label[for="password-input"] {
       color: #171717;
     }
 
-    .bx--form-item {
-      padding: 14px 0px;
+    .cds--form-item {
+      padding: 8px 0px;
     }
   }
 }
@@ -1000,4 +1000,13 @@ label[for="password-input"] {
 .underline-border {
   margin-top: 32px;
   margin-left: -16px;
+}
+
+.phone-input-signup{
+  input{
+    width: 100% !important;
+    border-radius: 0px !important;
+    height: 40px !important;
+    background: #F4F4F4 !important;
+  }
 }

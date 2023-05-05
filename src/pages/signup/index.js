@@ -28,8 +28,13 @@ import "react-phone-input-2/lib/style.css";
 import { useNavigate } from "react-router-dom";
 import "./../../styles/paymentform.scss";
 import "./signup.scss";
+import {
+  PhoneNumberUtil,
+  PhoneNumberFormat as PNF
+} from "google-libphonenumber";
 
 const Signup = () => {
+  const phoneUtil = PhoneNumberUtil.getInstance();
   const navigate = useNavigate();
   const [errorNotification, setErrorNotification] = useState({});
   const [loading, setLoading] = useState(false);
@@ -56,7 +61,7 @@ const Signup = () => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [postalCode, setPostalCode] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("91");
   const [isTaxInfoUpdated, setIsTaxInfoUpdated] = useState(false);
   const [vatNumber, setVatNumber] = useState("");
   const [organizationName, setOrganizationName] = useState("");
@@ -65,7 +70,7 @@ const Signup = () => {
   const [cardNumber, setCardNumber] = useState("");
   const [cardExpiryDate, setCardExpiryDate] = useState("");
   const [cardCVV, setCardCVV] = useState("");
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
   const [isCardInfoUpdated, setCardInfoUpdated] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isAccountInfoError, setIsAccountInfoError] = useState(false);
@@ -79,7 +84,7 @@ const Signup = () => {
   const ref = useRef(null);
   const [loadingCardSuccess, setLoadingCardSuccess] = useState(false);
   const [errors, setErrors] = useState({});
-  const [phoneNumberValid, setIsPhoneNumberValid] = useState(true);
+  const [phoneNumberValid, setIsPhoneNumberValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [accountInfoErrors, setAccountInfoErrors] = useState({
     fullName: false,
@@ -93,6 +98,8 @@ const Signup = () => {
     organizationName: false,
     organizationNumber: false,
   });
+  const [countryCode, setCountryCode] = useState('IN');
+  const [countryDialCode, setCountryDialCode] = useState('91');
   const accountInfoButtonDisabled =
     !emailIsValid || email.length === 0 || isAccountInfoError;
   const personalInfoButtonDisabled =
@@ -142,19 +149,49 @@ const Signup = () => {
     });
   };
 
-  const validatePhoneNumber = (value, country) => {
-    if (value.length === 0) {
-      setErrorMessage("Phone number is required");
-      setIsPhoneNumberValid(false);
-    } else {
-      setErrorMessage(" ");
-      setIsPhoneNumberValid(true);
+  const validatePhoneNumber = (value, dialCode, country) => {
+    if (value == dialCode) {
+      setErrorMessage("Enter valid phone number")
+      setIsPhoneNumberValid(false)
     }
-  };
+    else {
+      const phoneNumberWithoutDialCode = value.toString().replace(dialCode, '');
+      if (phoneNumberWithoutDialCode.length == 0) {
+        setErrorMessage("Phone number is required")
+        setIsPhoneNumberValid(false)
+      }
+      else if (phoneNumberWithoutDialCode == value) {
+        setErrorMessage("Enter valid phone number")
+        setIsPhoneNumberValid(false)
+      }
+      else {
+
+        try {
+          const number = phoneUtil.parse(phoneNumberWithoutDialCode, country);
+          const isValid = phoneUtil.isValidNumber(number);
+          if (!isValid) {
+            setErrorMessage("Enter valid phone number")
+            setIsPhoneNumberValid(false)
+          }
+          else {
+            setErrorMessage("")
+            setIsPhoneNumberValid(true)
+          }
+        }
+        catch (e) {
+          setErrorMessage("Enter valid phone number")
+          setIsPhoneNumberValid(false)
+        }
+      }
+    }
+  }
+
   const handlePhoneNumber = (value, country, formattedValue) => {
-    setPhoneNumber(value);
-    validatePhoneNumber(value, country);
-  };
+    setPhoneNumber(value)
+    validatePhoneNumber(value, country.dialCode, country?.countryCode);
+
+  }
+
 
   const handleVerificationCodeChange = (value) => {
     setErrorNotification({});
@@ -185,7 +222,7 @@ const Signup = () => {
     ];
     setpaswordStrengthWidth(
       (tempArray.filter((i) => i === true).length * ref?.current?.offsetWidth) /
-        6
+      6
     );
   };
 
@@ -230,14 +267,14 @@ const Signup = () => {
     setPasswordArray(tempArray);
     setpaswordStrengthWidth(
       (tempArray.filter((i) => i === true).length * ref?.current?.offsetWidth) /
-        6
+      6
     );
     setPasswordIsValid(
       lengthRegex.test(value.trim()) &&
-        uppercaseRegex.test(value) &&
-        lowercaseRegex.test(value) &&
-        numberRegex.test(value) &&
-        specialcharacterRegex.test(value)
+      uppercaseRegex.test(value) &&
+      lowercaseRegex.test(value) &&
+      numberRegex.test(value) &&
+      specialcharacterRegex.test(value)
     );
   };
 
@@ -413,7 +450,7 @@ const Signup = () => {
           localStorage.setItem("lang", "english");
           const bodyElement = document.body;
           bodyElement.className = localStorage.getItem("theme");
-          navigate("/dashboard");
+          navigate("/home/dashboard");
         } else if (response.status === 500) {
           setIsError(true);
           setErrorNotification({
@@ -608,9 +645,12 @@ const Signup = () => {
     error.state = state.trim().length === 0;
     error.phoneNumber = phoneNumber.length === 0;
     setAccountInfoErrors(error);
-    if (phoneNumber.length === 0) {
-      setErrorMessage("Phone number is required");
-      setIsPhoneNumberValid(false);
+    if (phoneNumber.length == 0) {
+      setErrorMessage('Phone number is required')
+      setIsPhoneNumberValid(false)
+    }
+    else {
+      validatePhoneNumber(phoneNumber, countryDialCode, countryCode)
     }
 
     const emptyInput = inputRefs.current.find((ref) => ref && ref.value === "");
@@ -633,6 +673,19 @@ const Signup = () => {
       handleTaxInfo();
     }
   };
+
+  const handleCountryChange = (e) => {
+    const selectedItem = COUNTRIES.find((item) => item.name === e.target.value);
+    if (Object.keys(selectedItem).length == 0) {
+      setPhoneNumber('')
+    }
+    else {
+      setCountry(e.target.value)
+      setPhoneNumber(selectedItem?.dial_code.toString())
+      setCountryCode(selectedItem?.code)
+      setCountryDialCode(selectedItem?.dial_code.toString())
+    }
+  }
 
   return (
     <>
@@ -699,7 +752,7 @@ const Signup = () => {
                   <hr className="underline" />
                 </Content>
                 {typeof errorNotification === "object" &&
-                Object.keys(errorNotification).length !== 0 ? (
+                  Object.keys(errorNotification).length !== 0 ? (
                   <div>
                     <ToastNotification
                       className="error-notification-box"
@@ -880,7 +933,7 @@ const Signup = () => {
                         name="fullName"
                         className="email-form-input"
                         id="full name"
-                        labelText="Full name"
+                        labelText="Full name *"
                         value={fullName}
                         onChange={handleFullName}
                         invalid={accountInfoErrors.fullName}
@@ -890,8 +943,8 @@ const Signup = () => {
                         className="country-select"
                         value={country}
                         id="country-ci"
-                        labelText="Country or region*"
-                        onChange={(e) => setCountry(e.target.value)}
+                        labelText="Country or region *"
+                        onChange={handleCountryChange}
                       >
                         {COUNTRIES.map((countryObject, countryIndex) => (
                           <SelectItem
@@ -905,7 +958,7 @@ const Signup = () => {
                         type="text"
                         name="addressLine1"
                         className="email-form-input"
-                        labelText="Address line 1"
+                        labelText="Address line 1 *"
                         ref={(el) => (inputRefs.current[1] = el)}
                         id="address line 1"
                         value={addressLine1}
@@ -927,7 +980,7 @@ const Signup = () => {
                         className="email-form-input"
                         id="city"
                         ref={(el) => (inputRefs.current[2] = el)}
-                        labelText="City"
+                        labelText="City *"
                         value={city}
                         onChange={handleCity}
                         invalid={accountInfoErrors.city}
@@ -939,7 +992,7 @@ const Signup = () => {
                         className="email-form-input"
                         ref={(el) => (inputRefs.current[3] = el)}
                         id="state"
-                        labelText="State"
+                        labelText="State *"
                         value={state}
                         onChange={handleState}
                         invalid={accountInfoErrors.state}
@@ -950,7 +1003,7 @@ const Signup = () => {
                         name="postalCode"
                         ref={(el) => (inputRefs.current[4] = el)}
                         id="postalcode"
-                        labelText="Postal code"
+                        labelText="Postal code *"
                         className="postalcode"
                         value={postalCode}
                         onChange={handlePostalCode}
@@ -960,19 +1013,19 @@ const Signup = () => {
                         }
                         invalidText={
                           postalCodeErrorNotification &&
-                          postalCodeErrorNotification.title
+                            postalCodeErrorNotification.title
                             ? postalCodeErrorNotification.title
                             : ""
                         }
                       />
                       <div style={{ marginTop: "6px" }}>
-                        <p className="input-heading">Phone number</p>
+                        <p className="input-heading">Phone number *</p>
                       </div>
                       <PhoneInput
-                        className="phone-input"
+                        className="phone-input-signup"
                         ref={(el) => (inputRefs.current[5] = el)}
                         style={{
-                          border: !phoneNumberValid ? "2px solid red" : 0,
+                          border: !phoneNumberValid && errorMessage.length>0 ? "2px solid red" : 0,
                         }}
                         name="phoneNumber"
                         country={""}
@@ -981,7 +1034,7 @@ const Signup = () => {
                           handlePhoneNumber(value, country, formattedValue)
                         }
                       />
-                      {!phoneNumberValid && (
+                      {!phoneNumberValid && errorMessage.length>0 && (
                         <p
                           style={{
                             marginTop: "4px",
@@ -999,6 +1052,7 @@ const Signup = () => {
                         >
                           Next
                         </Button>
+                        <hr class="underline-border"></hr>
                       </div>
                     </div>
                   )}
