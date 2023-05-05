@@ -1,96 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
 
-<head>
-  <meta charset="utf-8" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#000000" />
-  <meta charset="UTF-8" />
-
-  <link rel="icon" href="//www.ibm.com/favicon.ico" />
-
-  <meta name="dcterms.date" content="YYYY-MM-DD" /> <!--  replace with today's date -->
-  <meta name="dcterms.rights" content="© Copyright IBM Corp. 2021" />
-  <meta name="geo.country" content="US" />
-  <meta name="robots" content="index,follow" />
-  <title>Carbon Tutorial</title>
-  <link rel="alternate" hreflang="en-us" href="./?cc=us&lc=en" />
-  <link rel="alternate" hreflang="fr-ca" href="./?cc=ca&lc=fr" />
-  <link rel="alternate" hreflang="ko-kr" href="./?cc=kr&lc=ko" />
-  <link rel="alternate" hreflang="ja-jp" href="./?cc=jp&lc=ja" />
-  <script>
-    window.digitalData = {
-      page: {
-
-        pageInfo: {
-
-          language: 'en-US',
-
-          ibm: {
-
-            country: 'US',
-
-          }
-        }
-      }
-    };
-    var params = new URLSearchParams(window.location.search);
-
-    if (params.has('lc') && params.has('cc')) {
-      var currentLang =
-        params.get('lc') + '-' + params.get('cc').toUpperCase();
-      document
-        .getElementsByTagName('html')[0]
-        .setAttribute('lang', currentLang);
-      digitalData.page.pageInfo.language = currentLang;
-      digitalData.page.pageInfo.ibm.country = params.get('cc').toUpperCase();
-    }
-  </script>
-  <script src="//1.www.s81c.com/common/stats/ibm-common.js" type="text/javascript" async="async"></script>
-  <script src="https://cdn.checkout.com/js/framesv2.min.js"></script>
-  <script src="https://unpkg.com/react-phone-input-2@2.x/dist/lib.js"></script>
-  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-    async></script>
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
-      setTimeout(() => {
-        var selectElement = document.querySelector('#google_translate_element select');
-        if(selectElement != null){
-        selectElement.value = navigator.language.split('-')[0];
-        selectElement.dispatchEvent(new Event('change'));
-        }
-      }, 1000)
-    }
-  </script>
-
-</head>
-<style>
-  body>.skiptranslate {
-    display: none;
-  }
-
-  .goog-te-banner-frame.skiptranslate {
-    display: none !important;
-  }
-
-  body {
-    top: 0px !important;
-  }
-
-  /* @media print {
-    #google_translate_element {
-      display: none;
-    }
-  } */
-</style>
-
-
-<body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
-  <!--
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Bynar</title>
+    <!-- todo move to signup -->
+    <script src="https://cdn.checkout.com/js/framesv2.min.js"></script>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -100,6 +41,5 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-</body>
-
+  </body>
 </html>

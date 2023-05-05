@@ -1,38 +1,31 @@
-import React, { createContext, useEffect, useReducer } from 'react';
-import { useTranslation } from 'react-i18next';
-
-
+import React, { createContext, useEffect, useReducer } from "react";
+import { useTranslation } from "react-i18next";
 
 export const ThemeContext = createContext();
 
-
-
-
-export const ThemeProvider=(props)=> {
- 
-
-  const {t}=useTranslation();
+export const ThemeProvider = (props) => {
+  const { t } = useTranslation();
 
   const themeData = [
     {
-      text: t('white'),
-      value: 'carbon-theme--white',
+      text: t("white"),
+      value: "carbon-theme--white",
     },
     {
-      text: t('gray'),
-      value: 'carbon-theme--g90',
-    }
+      text: t("gray"),
+      value: "carbon-theme--g90",
+    },
   ];
-  
+
   const initialState = {
-    currentTheme: themeData[0], 
-  }
-  
+    currentTheme: themeData[0],
+  };
+
   const themeReducer = (state, action) => {
     switch (action.type.value) {
-      case 'carbon-theme--white':
+      case "carbon-theme--white":
         return { currentTheme: action.type };
-      case 'carbon-theme--g90':
+      case "carbon-theme--g90":
         return { currentTheme: action.type };
       default:
         return state;
@@ -43,9 +36,9 @@ export const ThemeProvider=(props)=> {
 
   useEffect(() => {
     const bodyElement = document.body;
-    bodyElement.className = localStorage.getItem("theme") ;
-    dispatch({type: themeData[0]})
-  }, [])
+    bodyElement.className = 'carbon-theme--white'//localStorage.getItem("theme");
+    dispatch({ type: themeData[0] });
+  }, []);
   return (
     <ThemeContext.Provider value={{ state, dispatch }}>
       {
@@ -54,4 +47,4 @@ export const ThemeProvider=(props)=> {
       }
     </ThemeContext.Provider>
   );
-}
+};

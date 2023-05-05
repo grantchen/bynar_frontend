@@ -2,6 +2,9 @@
   padding: 80px 48px 20px 48px;
   color: white;
 }
+.bold {
+  font-weight: bold;
+}
 
 .error-notification {
   display: flex;
@@ -10,7 +13,7 @@
   width: 400px;
   height: 48px;
   margin-top: 12px;
-  color: #FFFFFF;
+  color: #ffffff;
 
   .cds--inline-notification__details {
     width: 100%;
@@ -36,14 +39,15 @@
   }
 }
 
-.toast-notification{
+.toast-notification {
   display: flex;
+  align-items: center;
   // border-left: 3px solid #fa4d56;
   background: #393939;
-  width:400px;
+  width: 400px;
   // height: 48px !important;
   margin-top: 12px !important;
-  color: #FFFFFF;
+  color: #ffffff;
 
   .cds--inline-notification__details {
     width: 100%;
@@ -133,7 +137,6 @@
 .text {
   height: 150px;
   background-color: antiquewhite;
-
 }
 
 .password-text-input {
@@ -168,7 +171,6 @@
 }
 
 .email-text-input {
-
   .cds--label {
     letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
     display: inline-block;
@@ -182,7 +184,6 @@
   }
 
   input {
-
     background-color: white;
     width: 366px;
     height: 40px;
@@ -204,7 +205,7 @@
   border-width: 1px;
   border-style: solid;
   border-color: #0f62fe;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   color: #0f62fe;
   // width: 140px;
   height: 40px;
@@ -221,7 +222,7 @@
   border-width: 1px;
   border-style: solid;
   border-color: #0f62fe;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   color: #0f62fe;
   // width: 140px;
   height: 40px;
@@ -234,7 +235,7 @@
   cursor: not-allowed;
 }
 
-label[for=password-input] {
+label[for="password-input"] {
   color: white;
   margin-top: 12px;
 }
@@ -265,7 +266,6 @@ label[for=password-input] {
   gap: 16px;
 
   input {
-
     background-color: white;
     width: 366px;
     height: 40px;
@@ -294,11 +294,9 @@ label[for=password-input] {
     line-height: 1rem;
     vertical-align: baseline;
     width: 100%;
-
   }
 
   input {
-
     background-color: white;
     width: 366px;
     height: 40px;
@@ -307,7 +305,6 @@ label[for=password-input] {
 }
 
 .country-select {
-
   .bx--select-input__wrapper {
     position: relative;
     display: flex;
@@ -315,12 +312,11 @@ label[for=password-input] {
     flex-direction: column;
     align-items: flex-start;
   }
-
 }
 
 .vat-info {
   border-left: 2px solid #0062ff;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   padding: 1rem;
   position: relative;
   margin-bottom: 0.5rem;
@@ -339,11 +335,9 @@ label[for=password-input] {
     line-height: 1rem;
     vertical-align: baseline;
     width: 100%;
-
   }
 
   input {
-
     background-color: white;
     width: 366px;
     height: 40px;
@@ -368,12 +362,10 @@ label[for=password-input] {
     border-bottom: 1px solid var(--cds-ui-04, #8d8d8d) !important;
     background-color: var(--cds-field-01, #f4f4f4) !important;
     color: var(--cds-text-01, #161616) !important;
-    transition: background-color 70ms cubic-bezier(0.2, 0, 0.38, 0.9), outline 70ms cubic-bezier(0.2, 0, 0.38, 0.9);
+    transition: background-color 70ms cubic-bezier(0.2, 0, 0.38, 0.9),
+      outline 70ms cubic-bezier(0.2, 0, 0.38, 0.9);
   }
-
 }
-
-
 
 .checkbox {
   width: 20px !important;
@@ -396,7 +388,7 @@ label[for=password-input] {
   }
 }
 
-@media screen and (max-width:600px) {
+@media screen and (max-width: 600px) {
   .account {
     width: 278px;
   }
@@ -424,9 +416,7 @@ label[for=password-input] {
   }
 
   .personal-info {
-
     width: 278px;
-
   }
 
   .personal-info input {
@@ -453,7 +443,7 @@ label[for=password-input] {
 
   .vat-info {
     border-left: 2px solid #0062ff;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     padding: 1rem;
     position: relative;
     margin-bottom: 0.5rem;
@@ -477,7 +467,7 @@ label[for=password-input] {
 
   .account-info {
     border-left: 2px solid #0062ff;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     padding: 1rem;
     position: relative;
     margin-bottom: 0.5rem;
@@ -495,19 +485,18 @@ label[for=password-input] {
       line-height: 1rem;
       vertical-align: baseline;
       width: 100%;
-
     }
   }
 
-  .toast-notification{
+  .toast-notification {
     display: flex;
     // border-left: 3px solid #fa4d56;
     background: #393939;
     width: 100%;
     // height: 48px !important;
     margin-top: 12px !important;
-    color: #FFFFFF;
-  
+    color: #ffffff;
+
     .cds--inline-notification__details {
       width: 100%;
       display: flex;
@@ -515,19 +504,19 @@ label[for=password-input] {
       justify-content: stretch;
       gap: 12px;
     }
-  
+
     button {
       background: transparent;
       border: 0;
       color: white;
       cursor: pointer;
       margin-top: 0px;
-  
+
       svg {
         fill: white;
       }
     }
-  
+
     svg {
       fill: #fa4d56;
     }
@@ -551,7 +540,7 @@ label[for=password-input] {
 
 .account-info {
   border-left: 2px solid #0062ff;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   padding: 1rem;
   position: relative;
   margin-bottom: 0.5rem;
@@ -569,7 +558,6 @@ label[for=password-input] {
     line-height: 1rem;
     vertical-align: baseline;
     width: 100%;
-
   }
 }
 
@@ -586,20 +574,19 @@ label[for=password-input] {
 }
 
 .signup-grid {
-  background-color: white;
-  // padding: 0px;
+  padding: 0;
   max-width: none;
-  // position: fixed;
   width: 100vw;
+  background: no-repeat url("~/public/images/ibmid_bkg.svg");
+  background-position-y: 80%;
+  background-size: 45%;
   height: calc(100vh - 50px);
   overflow-y: auto;
   display: flex;
   justify-content: space-between;
 }
 
-
 .right-column {
-  background-color: #f9f9f9;
   margin: 0px;
   width: 40%;
   // background: url('/signup-bg.svg') center 60% / 100% no-repeat rgb(249, 249, 249);
@@ -607,7 +594,6 @@ label[for=password-input] {
 
 .form-container {
   width: 60%;
-  padding: 20px 0px;
 }
 
 .left-column {
@@ -615,30 +601,26 @@ label[for=password-input] {
   padding: 30px 80px 40px 80px;
   overflow-y: auto;
   height: 100%;
+  margin: 0;
 }
 
 .right-content {
-  text-align: center;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .signup-heading-text-wrapper {
   display: flex;
   flex-direction: column;
-  display: flex;
-  flex-direction: column;
   margin-top: 40px;
   color: #fff;
-  padding: 0 3rem;
   margin-bottom: 4rem;
-  align-items: center;
 
-  .signup-text{
-   padding: 24px 0px 0px;
-    .content{
-     font-size: 14px;
-     color: #323232;
+  .signup-text {
+    padding: 24px 0px 0px;
+    .content {
+      font-size: 14px;
+      color: #323232;
     }
   }
 }
@@ -715,8 +697,10 @@ label[for=password-input] {
 
 @media (max-width: 1055px) {
   .signup-grid {
+    background: none;
     flex-direction: column;
     justify-content: flex-start;
+    padding: 0;
   }
 
   .right-column {
@@ -737,21 +721,22 @@ label[for=password-input] {
 
   .form-container {
     width: 100%;
-    padding: 0px 0px 32px 0px;
   }
 
   .left-column {
     width: 100%;
+    margin: 0;
+
     background-color: #ffffff;
     // padding: 40px 20px 0px 80px;
     padding: 40px 0px 0px 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
-
   }
 
   .signup-container {
+    padding: 0;
     width: 80%;
   }
 
@@ -765,7 +750,6 @@ label[for=password-input] {
 
   .phone-input {
     width: 100% !important;
-
   }
 
   .country-select {
@@ -800,21 +784,21 @@ label[for=password-input] {
     padding: 0 1rem;
     margin-bottom: 1rem;
     align-items: center;
-  
-    .signup-text{
-     padding: 24px 0px 0px;
-      .content{
-       font-size: 14px;
-       color: #323232;
+
+    .signup-text {
+      padding: 24px 0px 0px;
+      .content {
+        font-size: 14px;
+        color: #323232;
       }
     }
   }
-
 }
-
 
 @media (max-width: 600px) {
   .signup-grid {
+    padding: 0;
+    background: none;
     flex-direction: column;
     justify-content: flex-start;
   }
@@ -833,7 +817,6 @@ label[for=password-input] {
 
   .form-container {
     width: 100%;
-    padding: 0px 0px 32px 0px;
   }
 
   .left-column {
@@ -843,11 +826,12 @@ label[for=password-input] {
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    margin: 0;
   }
 
   .signup-container {
     width: 88%;
+    padding: 0;
   }
 
   .signup-form {
@@ -864,7 +848,6 @@ label[for=password-input] {
 
   .phone-input {
     width: 100% !important;
-
   }
 
   .list {
@@ -879,7 +862,7 @@ label[for=password-input] {
     margin: 0px 4px !important;
 
     .cds--link {
-      color: #C6C6C6;
+      color: #c6c6c6;
       text-decoration: none;
     }
   }
@@ -901,16 +884,15 @@ label[for=password-input] {
     padding: 0 1rem;
     margin-bottom: 1rem;
     align-items: center;
-  
-    .signup-text{
-     padding: 24px 0px 0px;
-      .content{
-       font-size: 14px;
-       color: #323232;
+
+    .signup-text {
+      padding: 24px 0px 0px;
+      .content {
+        font-size: 14px;
+        color: #323232;
       }
     }
   }
-
 }
 
 .form-group {
@@ -924,7 +906,8 @@ label[for=password-input] {
     border-bottom: 1px solid var(--cds-ui-04, #8d8d8d) !important;
     background-color: var(--cds-field-01, #f4f4f4) !important;
     color: var(--cds-text-01, #161616) !important;
-    transition: background-color 70ms cubic-bezier(0.2, 0, 0.38, 0.9), outline 70ms cubic-bezier(0.2, 0, 0.38, 0.9);
+    transition: background-color 70ms cubic-bezier(0.2, 0, 0.38, 0.9),
+      outline 70ms cubic-bezier(0.2, 0, 0.38, 0.9);
   }
 
   .input-heading {
@@ -955,7 +938,8 @@ label[for=password-input] {
     border-bottom: 1px solid var(--cds-ui-04, #8d8d8d) !important;
     background-color: var(--cds-field-01, #f4f4f4) !important;
     color: var(--cds-text-01, #161616) !important;
-    transition: background-color 70ms cubic-bezier(0.2, 0, 0.38, 0.9), outline 70ms cubic-bezier(0.2, 0, 0.38, 0.9);
+    transition: background-color 70ms cubic-bezier(0.2, 0, 0.38, 0.9),
+      outline 70ms cubic-bezier(0.2, 0, 0.38, 0.9);
   }
 
   input:hover {
@@ -970,14 +954,14 @@ label[for=password-input] {
 
 .create-account-button {
   background-color: #0f62fe;
-  color: #FFFFFF;
+  color: #ffffff;
   width: 112px;
   height: 32px;
   cursor: pointer;
 }
 
 .create-account-button-disabled {
-  background-color: #E6E6E6;
+  background-color: #e6e6e6;
   color: #525252;
   width: 112px;
   height: 32px;
@@ -1004,16 +988,16 @@ label[for=password-input] {
   margin: 0px 10px;
 
   .cds--link {
-    color: #C6C6C6;
+    color: #c6c6c6;
     text-decoration: none;
   }
 }
 
-.heading-container{
+.heading-container {
   padding: 0px 16px;
 }
 
-.underline-border{
+.underline-border {
   margin-top: 32px;
   margin-left: -16px;
 }

@@ -1,10 +1,9 @@
 import {
   Modal,
   Dropdown,
-} from 'carbon-components-react';
-import React, { useState, useContext, useEffect, useRef } from 'react';
+} from '@carbon/react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ThemeContext } from './ThemeContext';
 
 
 export const ThemeModel = React.memo(({ openModel, setModelOpen }) => {

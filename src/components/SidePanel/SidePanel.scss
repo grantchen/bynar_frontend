@@ -1,0 +1,101 @@
+.main--content {
+  display: flex;
+  // width: 100%;
+  // height: calc(100vh);
+  // align-items: center;
+  // justify-content: center;
+  // margin-top: 40px;
+
+  .c4p--side-panel__container .c4p--side-panel__inner-content {
+    overflow: auto;
+    height: calc(100vh - 3rem);
+    margin-top: calc(
+      var(--c4p--side-panel--title-text-height) +
+        var(--c4p--side-panel--subtitle-container-height) +
+        var(--c4p--side-panel--action-bar-container-height) +
+        var(--c4p--side-panel--label-text-height)
+    );
+    overflow-x: hidden;
+    background: #ffffff !important;
+  }
+
+  .c4p--side-panel__container .bx--btn.c4p--side-panel__close-button {
+    display: none;
+    svg {
+      display: none;
+    }
+  }
+}
+
+.adduser-box-content {
+  display: flex;
+  overflow: auto;
+  flex: 1;
+
+  .adduser {
+    display: flex;
+    /* justify-content: center; */
+    flex-direction: column;
+    // background-color: var(--cds-ui-navbar, #f4f4f4) !important;
+    overflow: auto;
+    margin-bottom: 28px;
+    height: calc(100vh - 132px);
+    padding: 40px;
+    width: 100%;
+
+    .bx--text-input {
+      display: flex;
+      width: 100%;
+      flex: 1 1 auto;
+      flex-direction: column;
+      align-items: flex-start;
+      border: 1px solid gray !important;
+      width: 344px;
+      background: #f4f4f4 !important;
+    }
+
+    .bx--label {
+      padding-top: 8px !important;
+    }
+
+    .bx--text-input__field-outer-wrapper {
+      width: 344px;
+    }
+
+    .country-select-dropdown {
+      .bx--select-input {
+        width: 344px;
+        background: #f4f4f4 !important;
+      }
+    }
+
+    .react-tel-input {
+      font-family: "Roboto", sans-serif;
+      font-size: 15px;
+      position: relative;
+      width: 344px;
+    }
+  }
+}
+
+.user-loader {
+  background-color: red;
+  span {
+    border: 3px solid gray;
+  }
+}
+
+.phone-label-wrapper {
+  width: 266px;
+  margin-top: 8px;
+}
+.phone-label {
+  font-size: 0.75rem;
+  letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  color: var(--cds-text-02, #525252);
+  font-weight: 400;
+  line-height: 1rem;
+  vertical-align: baseline;
+}
