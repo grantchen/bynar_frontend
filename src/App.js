@@ -12,6 +12,7 @@ import { AuthProvider, TabContextProvider } from "./sdk";
 
 function App() {
   return (
+    <>
     <Suspense
       fallback={
         <div className="loader-page">
@@ -46,6 +47,7 @@ function App() {
         </AuthProvider>
       </BrowserRouter>
     </Suspense>
+    </>
   );
 }
 
