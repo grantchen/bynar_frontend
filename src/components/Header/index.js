@@ -96,7 +96,7 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
       } else if (response.status === 500) {
       }
     } catch (e) {
-      // await authContext.signout();
+      await authContext.signout();
     }
   };
 
