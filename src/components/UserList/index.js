@@ -100,32 +100,6 @@ export const UserList = ({ isOpen }) => {
     }
   };
 
-  useEffect(async () => {
-    let isMounted = true;
-    try {
-      setLoading(true);
-      const response = await fetch(`${BaseURL}/list-users`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-      });
-
-      if (response.ok && isMounted) {
-        const res = await response.json();
-        setRow(res?.result);
-      } else if (response.status === 500) {
-      }
-      setLoading(false);
-    } catch (e) {
-      await authContext.signout();
-      setLoading(false);
-    }
-    return () => {
-      isMounted = false;
-    };
-  }, []);
 
   useEffect(async () => {
     if (serverNotification) getUserList();
@@ -180,10 +154,6 @@ export const UserList = ({ isOpen }) => {
   const handleUserEdit = (index) => {
     const userEditArray = rows?.filter((a) => a.id === index);
     navigate(`/home/dashboard?editUser=true&&Id=${index}`);
-    // console.log("id is ", indexsdfa'lfmglkdamglad fkvl lrmg)
-    // setUserDetails(userEditArrdf
-    // setServerNotification(false);
-    //  setIsEditUserDetail(true);
   };
 
   const handleDelete = (selectedRows) => {
