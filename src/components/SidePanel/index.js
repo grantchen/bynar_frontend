@@ -159,16 +159,19 @@ export const SidePanels = () => {
     if (value == dialCode) {
       setErrorMessage("Enter valid phone number")
       setIsPhoneNumberValid(false)
+      return false;
     }
     else {
       const phoneNumberWithoutDialCode = value.toString().replace(dialCode, '');
       if (phoneNumberWithoutDialCode.length == 0) {
         setErrorMessage("Phone number is required")
         setIsPhoneNumberValid(false)
+        return false;
       }
       else if (phoneNumberWithoutDialCode == value) {
         setErrorMessage("Enter valid phone number")
         setIsPhoneNumberValid(false)
+        return false;
       }
       else {
 
@@ -178,15 +181,18 @@ export const SidePanels = () => {
           if (!isValid) {
             setErrorMessage("Enter valid phone number")
             setIsPhoneNumberValid(false)
+            return false;
           }
           else {
             setErrorMessage("")
             setIsPhoneNumberValid(true)
+            return true;
           }
         }
         catch (e) {
           setErrorMessage("Enter valid phone number")
           setIsPhoneNumberValid(false)
+          return false;
         }
       }
     }
@@ -260,7 +266,7 @@ export const SidePanels = () => {
     // }    
   }
 
-  const editInfoButtonDisabled = fullName.trim().length == 0 || city.trim().length == 0 || state.trim().length == 0 || postalCode.toString().trim().length == 0 || !phoneNumberValid || addressLine1.trim().length == 0 || Object.keys(postalCodeErrorNotification).length != 0;
+  const editInfoButtonDisabled = fullName.trim().length == 0 || city.trim().length == 0 || state.trim().length == 0 || postalCode.toString().trim().length == 0  || addressLine1.trim().length == 0 || Object.keys(postalCodeErrorNotification).length != 0;
   const handleEditInformationFormSubmit = () => {
 
     const error = {}
@@ -274,14 +280,16 @@ export const SidePanels = () => {
     const emailError = validateEmail(userName.trim())
     setErrors(validateEmail(userName.trim()))
     setAccountInfoErrors(error)
+    let phoneNumberValidCheck = phoneNumberValid;
     if (phoneNumber.length == 0) {
       setErrorMessage('Phone number is required')
       setIsPhoneNumberValid(false)
+      phoneNumberValidCheck = false;
     }
     else {
-      validatePhoneNumber(phoneNumber, countryDialCode, countryCode)
+      phoneNumberValidCheck = validatePhoneNumber(phoneNumber, countryDialCode, countryCode)
     }
-    if (Object.keys(emailError).length == 0 && !editInfoButtonDisabled) {
+    if (Object.keys(emailError).length == 0 && !editInfoButtonDisabled && phoneNumberValidCheck) {
       handleEditUser();
     }
     // const emptyInput = inputRefs.current.find((ref) => ref && ref.value === '');
@@ -425,6 +433,9 @@ export const SidePanels = () => {
         setPostalCode(userEditArray[0]?.postalCode);
         setPhoneNumber(userEditArray[0]?.phoneNumber);
         setOrganizationId(userEditArray[0]?.organisationID)
+        const selectedItem = COUNTRIES.find((item) => item.name === userEditArray[0]?.country);
+        setCountryCode(selectedItem?.code)
+        setCountryDialCode(selectedItem?.dial_code.toString().replace('+', ''))
       }
       else if (response.status === 500) {
 
@@ -440,7 +451,7 @@ export const SidePanels = () => {
 
   const handleClose = () => {
     setOpen(false);
-    navigate('/home/dashboard');
+    navigate('/home/dashboard?tearSheet=true');
   }
 
   useEffect(() => {

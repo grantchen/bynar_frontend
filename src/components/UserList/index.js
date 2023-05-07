@@ -40,6 +40,7 @@ export const UserList = ({ isOpen }) => {
   const [serverNotification, setServerNotification] = useState(false);
   const [addUserPanelOpen, setIsAddUserPanel] = useState(false);
   const [searchParams] = useSearchParams();
+  const [userList, setUserList] = useState([])
   const getUserList = async () => {
     try {
       setLoading(true);
@@ -53,7 +54,13 @@ export const UserList = ({ isOpen }) => {
 
       if (response.ok) {
         const res = await response.json();
-        setRow(res?.result);
+        const result = res?.result.map((value, index) => ({
+          ...value,
+          disabled: !value?.canDelete,
+          isEditable: value?.canUpdate
+        }));
+        setUserList(result)
+        setRow(result);
       } else if (response.status === 500) {
       }
       setLoading(false);
@@ -65,9 +72,7 @@ export const UserList = ({ isOpen }) => {
 
   const deleteUser = async (filteredOrganisationId) => {
     try {
-      // debugger;
       setLoading(true);
-      // const token1 = "eyJraWQiOiJ3SGw5Yzg5cDhnQW80MlVSdVBYZW9CT1wvcVk5Y3ZobGNTWXBxbUlpXC9JQ2s9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiJlNWIwN2EwYi04YzAwLTQwZDktYjZlMC01ZjNiMDM3M2U1YzciLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAuZXUtY2VudHJhbC0xLmFtYXpvbmF3cy5jb21cL2V1LWNlbnRyYWwtMV9JV2JoN0JMcnoiLCJjbGllbnRfaWQiOiIxYm1wNjZiMjM1MnMzYzBic2xsOGM1cWZkOSIsIm9yaWdpbl9qdGkiOiIyNjBjZjA4OC1lMzc3LTQ5YTktYWY2OS1jZDMxZDkxYmI2ZGUiLCJldmVudF9pZCI6ImY1NGFjM2EwLThmMWQtNGY1OS1hOTE4LTM5YTQyNzY2NzVjOCIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2ODAxNTE0MTksImV4cCI6MTY4MDE1NTAxOSwiaWF0IjoxNjgwMTUxNDIwLCJqdGkiOiJlOWE0YzNjYi0yYjI0LTQyZjEtOTI3My01YjdkM2U0YjgxMzAiLCJ1c2VybmFtZSI6ImU1YjA3YTBiLThjMDAtNDBkOS1iNmUwLTVmM2IwMzczZTVjNyJ9.XZlNtiXP3a5zDs5tBZr-jIniVSoago8MizEdeng_UIIWAMr9FI5I7_bRrcKhjdTEA3AWPAy4FgD8-zJBpFB5VzDs78h73EtTEpzxhzpxC1zEpW7FD6WuF31GfT5afAGA4eM9u2vRyJo_M2DoJnE0vDLG7ogk124r0dWBuGN8CnRGsTqdXUCrPnvV5MmxItefehfxFIU5yvORfXxgt8gv9PliEagXirRm2d_y2TvuL4VzJ1p4EvbGw7kCABjKFd9qlxAjbXCNjpFp7rwYcjwmSDSXRA-3EO_CLXP2ANUcXdlTwt5tFleCYXGUcAT71v2u0rhDhcNFYb4G7mwKxHuwvg"
       const response = await fetch(`${BaseURL}/user`, {
         method: "DELETE",
         body: JSON.stringify({ accountIDs: filteredOrganisationId }),
@@ -168,6 +173,7 @@ export const UserList = ({ isOpen }) => {
     navigate("/home/dashboard?addUser=true");
   };
 
+  
   return (
     <>
       {loading ? (
@@ -185,17 +191,6 @@ export const UserList = ({ isOpen }) => {
           />
         </div>
       ) : (
-        <>
-          {isUserDetailEdit ? (
-            <div>
-              <EditUser
-                userDetails={userDetails}
-                setIsEditUserDetail={setIsEditUserDetail}
-                setServerNotification={setServerNotification}
-                setServerErrorNotification={setServerErrorNotification}
-              />
-            </div>
-          ) : (
             <>
               {serverNotification && (
                 <ToastNotification
@@ -328,10 +323,8 @@ export const UserList = ({ isOpen }) => {
                               ))}
                               {
                                 <TableCell
-                                  className={"edit-icon"}
-                                  onClick={() => {
-                                    handleUserEdit(row.id);
-                                  }}
+                                  className={userList[index].canUpdate ? "edit-icon" : "edit-icon-disabled"}
+                                  onClick={userList[index].canUpdate ? () => { handleUserEdit(row.id) } : null}
                                 >
                                   {<Edit20 />}
                                 </TableCell>
@@ -346,9 +339,6 @@ export const UserList = ({ isOpen }) => {
               </div>
             </>
           )}
-        </>
-      )}
-      {/* {<SidePanels/>} */}
     </>
   );
 };

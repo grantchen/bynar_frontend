@@ -142,10 +142,13 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
       setIsOpen(true);
       // setEditUserPanel(true)
     }
-    // else {
-    //   setEditUserPanel(false)
-    // }
   }, [searchParams?.get("addUserMessage")]);
+
+  useEffect(() => {
+    if (searchParams.get("tearSheet")) {
+      setIsOpen(true);
+    }
+  }, [searchParams?.get("tearSheet")]);
 
   return (
     <>

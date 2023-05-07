@@ -1,9 +1,12 @@
 import React from "react";
 import { Tearsheet } from "@carbon/ibm-products";
 import { UserList } from "./../UserList";
+import { useNavigate } from "react-router-dom";
 export const TearSheets = ({ setIsOpen, isOpen }) => {
+  const navigate = useNavigate();
   const handleCloseModal = () => {
     setIsOpen(false);
+    navigate('/home/dashboard');
   };
 
   return (
@@ -27,46 +30,3 @@ export const TearSheets = ({ setIsOpen, isOpen }) => {
   );
 };
 
-// import { Tearsheet ,TearsheetNarrow} from '@carbon/ibm-products';
-// import { Button, Tabs, Tab ,FormGroup,Form,TextInput} from 'carbon-components-react';
-// export const TearSheets =()=>{
-//   return(
-//     <>
-//   <style>
-//     {`.c4p--tearsheet { opacity: 0 };`}
-//   </style>
-//   <Button onClick={function noRefCheck(){}}>
-//     Open Tearsheet
-//   </Button>
-//   <div
-//     ref={{
-//       current: '[Circular]'
-//     }}
-//   >
-//     <TearsheetNarrow
-//       actions={[]}
-//       closeIconDescription="Close the tearsheet"
-//       description="This is a description for the tearsheet, providing an opportunity to   describe the flow."
-//       hasCloseIcon
-//       label="The label of the tearsheet"
-//       onClose={function noRefCheck(){}}
-//       title="Title of the tearsheet"
-//     >
-//       <div className="tearsheet-stories__narrow-content-block">
-//         <Form>
-//           <p>
-//             Main content
-//           </p>
-//           <FormGroup legendText="">
-//             <TextInput
-//               id="tss-ft1"
-//               labelText="Enter an important value here"
-//             />
-//           </FormGroup>
-//         </Form>
-//       </div>
-//     </TearsheetNarrow>
-//   </div>
-// </>
-//   )
-// }
