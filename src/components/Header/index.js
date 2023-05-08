@@ -25,6 +25,7 @@ import {
 import { TearSheets } from "../TearSheet";
 import { SidePanels } from "../SidePanel";
 import { useSearchParams } from "react-router-dom";
+import { RemoveModal } from "@carbon/ibm-products";
 
 export const CommonHeader = () => {
   return (
@@ -36,7 +37,8 @@ export const CommonHeader = () => {
 
 const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
   const authContext = useContext(AuthContext);
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  //todo for Suyash: get token from auth context
   const token = localStorage.getItem("token");
   const [profileDropdown, setProfileDropdown] = useState(false);
   const [open, setOpen] = useState(false);
@@ -86,7 +88,7 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
       if (response.ok) {
         const res = await response.json();
         if (
-          res?.result.cognitoUserGroups === "Users" || 
+          res?.result.cognitoUserGroups === "Users" ||
           res?.result.cognitoUserGroups.length == 0
         ) {
           setShowButton(false);
@@ -109,12 +111,13 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
   const [editUserPanel, setEditUserPanel] = useState(false);
   const [openLanguageModel, setLanguageModelOpen] = useState(false);
   const [openThemeModel, setThemeModelOpen] = useState(false);
+  const [deleteModalProps, setDeleteModalProps] = useState(null)
 
   const handleOpenModalClick = () => {
     setIsOpen(true);
   };
 
-  // const location = useLocation();
+  // TODO for Suyash, refactor these effect and merge into one
   useEffect(() => {
     //  console.log(searchParams,"search",searchParams.get('addUser'))
     if (searchParams.get("addUser")) {
@@ -149,6 +152,50 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
       setIsOpen(true);
     }
   }, [searchParams?.get("tearSheet")]);
+
+  useEffect(() => {
+    const userIdToBeDeleted = searchParams.get('userIdToBeDeleted')
+    const userNameToBeDeleted = searchParams.get('userNameToBeDeleted')
+    if (userIdToBeDeleted && userNameToBeDeleted) {
+      setDeleteModalProps({
+        body: `Deleting ${userNameToBeDeleted} will permanently delete the user. This action cannot be undone.`,
+        className: 'remove-modal-test',
+        title: 'Confirm delete',
+        iconDescription: 'close',
+        inputInvalidText: 'A valid value is required',
+        inputLabelText: `Type ${userNameToBeDeleted} to confirm`,
+        inputPlaceholderText: userNameToBeDeleted,
+        open: true,
+        onClose: () => setIsOpen(false),
+        primaryButtonText: 'Delete',
+        resourceName: userNameToBeDeleted,
+        secondaryButtonText: 'Close',
+        label: `Delete ${userNameToBeDeleted}`,
+        textConfirmation: true,
+        onRequestSubmit: async () => {
+          try {
+            // todo: refactor to show error
+            const response = await fetch(`${BaseURL}/user`, {
+              method: "DELETE",
+              body: JSON.stringify({ accountIDs: [parseInt(userIdToBeDeleted)] }),
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+              },
+            })
+          } catch (error) {
+
+          }
+          finally {
+            setSearchParams({
+              tearSheet: true
+            })
+          }
+        }
+      })
+      setIsOpen(false);
+    }
+  }, [searchParams.get('userIdToBeDeleted'), searchParams.get('userNameToBeDeleted')])
 
   return (
     <>
@@ -192,7 +239,7 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
                   />
                 </HeaderGlobalAction>
               )}
-              <HeaderGlobalAction aria-label="Search" onClick={() => {}}>
+              <HeaderGlobalAction aria-label="Search" onClick={() => { }}>
                 <Search20 />
               </HeaderGlobalAction>
               {/* <HeaderGlobalAction aria-label="Notifications" onClick={() => setOpen(!open)}>
@@ -241,6 +288,7 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
         <TearSheets setIsOpen={setIsOpen} isOpen={isOpen} />
         {showButton && addUserPanel && <SidePanels />}
         {showButton && editUserPanel && <SidePanels />}
+        {deleteModalProps && <RemoveModal {...deleteModalProps} />}
       </div>
     </>
   );

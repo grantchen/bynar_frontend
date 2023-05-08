@@ -1,4 +1,5 @@
 .userdata-table {
+  width: calc(100vw - 150px);
   margin: 12px;
   margin-top: 16px;
   overflow-x: auto;
@@ -63,9 +64,9 @@
 
 @media screen and (max-width: 600px) {
   .userdata-table {
+    width: calc(100vw - 22px);
     margin: 15px;
     margin-top: 16px;
     overflow-x: auto;
-    margin-right: 32px;
   }
 }

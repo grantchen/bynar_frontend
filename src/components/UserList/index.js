@@ -18,15 +18,22 @@ import {
   Button,
   InlineLoading,
   ButtonSet,
+  Pagination
 } from "@carbon/react";
+import { RemoveModal } from '@carbon/ibm-products';
+import {
+  OverflowMenu,
+  OverflowMenuItem
+} from 'carbon-components-react';
 import { useEffect, useState, useContext } from "react";
 import { BaseURL, AuthContext } from "../../sdk";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { EditUser } from "../EditUser";
 import { Edit20, Restart20, Restart16 } from "@carbon/icons-react";
 import "./UserList.scss";
 export const UserList = ({ isOpen }) => {
   const token = localStorage.getItem("token");
+  const location = useLocation();
 
   const navigate = useNavigate();
   const [isDelete, setIsDelete] = useState(false);
@@ -39,12 +46,24 @@ export const UserList = ({ isOpen }) => {
   const [serverErrorNotification, setServerErrorNotification] = useState({});
   const [serverNotification, setServerNotification] = useState(false);
   const [addUserPanelOpen, setIsAddUserPanel] = useState(false);
-  const [searchParams] = useSearchParams();
+  const [_, setSearchParams] = useSearchParams();
   const [userList, setUserList] = useState([])
-  const getUserList = async () => {
+  const queryParams = new URLSearchParams(location);
+  const [searchValue, setSearchValue] = useState(queryParams.get('search') || '');
+  const [sortColumn, setSortColumn] = useState(queryParams.get('sortByColumn') || '');
+  const [sortDirection, setSortDirection] = useState(queryParams.get('sortByOrder') || '');
+  const [totalRowCount, setRowCount] = useState(0);
+  const [pageSize, setPageSize] = useState(queryParams.get('page') || 0);
+  const [pageLimit, setPageLimit] = useState(queryParams.get('limit') || 10);
+  
+  
+  
+  
+  const getUserList = async (props) => {
     try {
       setLoading(true);
-      const response = await fetch(`${BaseURL}/list-users`, {
+      // const queryParams = new URLSearchParams(filters)
+      const response = await fetch(`${BaseURL}/list-users?${props.filters}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -60,6 +79,8 @@ export const UserList = ({ isOpen }) => {
         }));
         setUserList(result)
         setRow(result);
+        setRowCount(res?.result?.totalCount)
+        navigate(`/home/dashboard?${props.filters}`)
       } else if (response.status === 500) {
       }
       setLoading(false);
@@ -106,7 +127,15 @@ export const UserList = ({ isOpen }) => {
 
 
   useEffect(async () => {
-    if (serverNotification) getUserList();
+    if (serverNotification) {
+      const query = new URLSearchParams();
+      if (searchValue) query.set('search', searchValue);
+      if (sortColumn) query.set('sortByColumn', sortColumn);
+      if (sortDirection) query.set('sortByOrder', sortDirection.toLowerCase());
+      if (pageSize) query.set('page', pageSize);
+      if (pageLimit) query.set('limit', pageLimit)
+      getUserList({ filters: query.toString() })
+    }
   }, [serverNotification]);
 
   useEffect(() => {
@@ -116,7 +145,13 @@ export const UserList = ({ isOpen }) => {
       setServerErrorNotification({});
       setServerNotification(false);
     } else {
-      getUserList();
+      const query = new URLSearchParams();
+      if (searchValue) query.set('search', searchValue);
+      if (sortColumn) query.set('sortByColumn', sortColumn);
+      if (sortDirection) query.set('sortByOrder', sortDirection.toLowerCase());
+      if (pageSize) query.set('page', pageSize);
+      if (pageLimit) query.set('limit', pageLimit)
+      getUserList({ filters: query.toString() })
     }
   }, [isOpen]);
 
@@ -172,9 +207,29 @@ export const UserList = ({ isOpen }) => {
     navigate("/home/dashboard?addUser=true");
   };
 
-  const handleSort=(value,e)=>{
-    console.log("test",value,e.target.value)
+  const handleSort = (val1, val2, sortConfig) => {
+    // const { key, sortDirection } = sortConfig;
+    // setSortColumn(key);
+    // setSortDirection(sortDirection);
   }
+
+  const handlePageChange = (e) => {
+    setPageSize(e?.page - 1);
+    setPageLimit(e?.pageSize);
+  }
+
+  useEffect(() => {
+    // update the URL when the searchValue, sortColumn or sortDirection changes
+    const query = new URLSearchParams();
+    if (searchValue) query.set('search', searchValue);
+    if (sortColumn) query.set('sortByColumn', sortColumn);
+    if (sortDirection) query.set('sortByOrder', sortDirection.toLowerCase());
+    if (pageSize) query.set('page', pageSize);
+    if (pageLimit) query.set('limit', pageLimit)
+    getUserList({ filters: query.toString() })
+  }, [searchValue, sortColumn, sortDirection, pageSize, pageLimit]);
+
+  
 
 
   return (
@@ -206,7 +261,9 @@ export const UserList = ({ isOpen }) => {
             />
           )}
           <div className="userdata-table">
-            <DataTable rows={rows} headers={headers} isSortable  sortDirection={'ASC'} sortRow={(e)=>{console.log(e)}} >
+            <DataTable rows={rows} headers={headers} isSortable sortRow={(val1, val2, sortConfig) => {
+              handleSort(val1, val2, sortConfig)
+            }} >
               {({
                 rows,
                 headers,
@@ -240,9 +297,10 @@ export const UserList = ({ isOpen }) => {
                             ? -1
                             : 0
                         }
-                        onChange={(e)=>console.log(e.target.value,"search")}
+                      // onChange={(e)=>setSearchValue(e.target.value)}
+                      // value={searchValue}
                       />
-                      <Button
+                      {/* <Button
                         kind='ghost'
                         tabIndex={
                           getBatchActionProps().shouldShowBatchActions
@@ -255,7 +313,7 @@ export const UserList = ({ isOpen }) => {
                         style={{ cursor: "pointer" }}
                         aria-label="Refresh"
                       >
-                      </Button>
+                      </Button> */}
                       <ButtonSet>
                         <Button
                           tabIndex={
@@ -285,7 +343,7 @@ export const UserList = ({ isOpen }) => {
                               header,
                               // isSortable:true
                             })}
-                            //  onClick={(e) => handleSort(header.key,e)}
+                          //  onClick={(e) => handleSort(header.key,e)}
                           >
                             {header.header}
                           </TableHeader>
@@ -308,14 +366,16 @@ export const UserList = ({ isOpen }) => {
                               {cell.value}
                             </TableCell>
                           ))}
-                          {
-                            <TableCell
-                              className={userList[index].canUpdate ? "edit-icon" : "edit-icon-disabled"}
-                              onClick={userList[index].canUpdate ? () => { handleUserEdit(row.id) } : null}
-                            >
-                              {<Edit20 />}
-                            </TableCell>
-                          }
+                          <TableCell className="cds--table-column-menu">
+                            <OverflowMenu aria-label="overflow-menu" align="bottom">
+                              <OverflowMenuItem disabled={!userList[index]?.canUpdate }  onClick={() => { handleUserEdit(row.id) }} itemText="Edit" requireTitle />
+                              <OverflowMenuItem hasDivider isDelete itemText="Delete" 
+                                onClick={()=> setSearchParams({
+                                  userIdToBeDeleted: row.id,
+                                  userNameToBeDeleted: userList[index].username
+                                })}/>
+                            </OverflowMenu>
+                          </TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
@@ -323,6 +383,31 @@ export const UserList = ({ isOpen }) => {
                 </TableContainer>
               )}
             </DataTable>
+            <div
+              style={{
+                maxWidth: '100%'
+              }}
+            >
+              <Pagination
+                backwardText="Previous page"
+                forwardText="Next page"
+                itemsPerPageText="Items per page:"
+                onChange={(e) => { handlePageChange(e) }}
+                page={pageSize + 1}
+                pageSize={pageLimit}
+                pageSizes={[
+                  2,
+                  5,
+                  10,
+                  20,
+                  30,
+                  40,
+                  50
+                ]}
+                size="md"
+                totalItems={totalRowCount}
+              />
+            </div>
           </div>
         </>
       )}
