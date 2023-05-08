@@ -54,17 +54,20 @@ export const UserList = ({ isOpen }) => {
 
       if (response.ok) {
         const res = await response.json();
+        console.log(res);
         const result = res?.result?.userAccountDetails.map((value, index) => ({
           ...value,
           disabled: !value?.canDelete,
           isEditable: value?.canUpdate
         }));
+        console.log(result);
         setUserList(result)
         setRow(result);
       } else if (response.status === 500) {
       }
       setLoading(false);
     } catch (e) {
+      console.log(e)
       await authContext.signout();
       setLoading(false);
     }
@@ -207,7 +210,7 @@ export const UserList = ({ isOpen }) => {
             />
           )}
           <div className="userdata-table">
-            <DataTable rows={rows} headers={headers} isSortable  sortDirection={'ASC'} sortRow={()=>{}} >
+            <DataTable rows={rows} headers={headers} isSortable  sortDirection={'ASC'} sortRow={(e)=>{console.log(e)}} >
               {({
                 rows,
                 headers,
