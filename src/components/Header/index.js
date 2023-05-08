@@ -86,8 +86,8 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
       if (response.ok) {
         const res = await response.json();
         if (
-          res.cognitoUserGroups === "Users" &&
-          res.cognitoUserGroups.lenngth == 0
+          res?.result.cognitoUserGroups === "Users" || 
+          res?.result.cognitoUserGroups.length == 0
         ) {
           setShowButton(false);
         } else {
@@ -239,8 +239,8 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
           setLanguageModelOpen={setLanguageModelOpen}
         />
         <TearSheets setIsOpen={setIsOpen} isOpen={isOpen} />
-        {addUserPanel && <SidePanels />}
-        {editUserPanel && <SidePanels />}
+        {showButton && addUserPanel && <SidePanels />}
+        {showButton && editUserPanel && <SidePanels />}
       </div>
     </>
   );
