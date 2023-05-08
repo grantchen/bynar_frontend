@@ -51,23 +51,19 @@ export const UserList = ({ isOpen }) => {
           Authorization: "Bearer " + token,
         },
       });
-
       if (response.ok) {
         const res = await response.json();
-        console.log(res);
         const result = res?.result?.userAccountDetails.map((value, index) => ({
           ...value,
           disabled: !value?.canDelete,
           isEditable: value?.canUpdate
         }));
-        console.log(result);
         setUserList(result)
         setRow(result);
       } else if (response.status === 500) {
       }
       setLoading(false);
     } catch (e) {
-      console.log(e)
       await authContext.signout();
       setLoading(false);
     }

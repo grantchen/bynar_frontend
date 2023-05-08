@@ -422,7 +422,7 @@ export const SidePanels = () => {
 
       if (response.ok) {
         const res = await response.json();
-        const userEditArray = res?.result?.filter(a => a.id === userid);
+        const userEditArray = res?.result?.userAccountDetails.filter(a => a.id === userid);
         setFullName(userEditArray[0]?.fullName);
         setUserName(userEditArray[0]?.username);
         setCountry(userEditArray[0]?.country);
