@@ -23,7 +23,7 @@ import { useEffect, useState, useContext } from "react";
 import { BaseURL, AuthContext } from "../../sdk";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { EditUser } from "../EditUser";
-import { Edit20 } from "@carbon/icons-react";
+import { Edit20, Restart20, Restart16 } from "@carbon/icons-react";
 import "./UserList.scss";
 export const UserList = ({ isOpen }) => {
   const token = localStorage.getItem("token");
@@ -54,7 +54,7 @@ export const UserList = ({ isOpen }) => {
 
       if (response.ok) {
         const res = await response.json();
-        const result = res?.result.map((value, index) => ({
+        const result = res?.result?.userAccountDetails.map((value, index) => ({
           ...value,
           disabled: !value?.canDelete,
           isEditable: value?.canUpdate
@@ -173,7 +173,11 @@ export const UserList = ({ isOpen }) => {
     navigate("/home/dashboard?addUser=true");
   };
 
-  
+  const handleSort=(value,e)=>{
+    console.log("test",value,e.target.value)
+  }
+
+
   return (
     <>
       {loading ? (
@@ -191,154 +195,138 @@ export const UserList = ({ isOpen }) => {
           />
         </div>
       ) : (
-            <>
-              {serverNotification && (
-                <ToastNotification
-                  className="error-notification-box"
-                  iconDescription="describes the close button"
-                  subtitle={serverErrorNotification?.message}
-                  timeout={0}
-                  title={""}
-                  kind={serverErrorNotification?.status}
-                />
-              )}
-              <div className="userdata-table">
-                <DataTable rows={rows} headers={headers}>
-                  {({
-                    rows,
-                    headers,
-                    getHeaderProps,
-                    getRowProps,
-                    getSelectionProps,
-                    getBatchActionProps,
-                    onInputChange,
-                    selectedRows,
-                  }) => (
-                    <TableContainer>
-                      <TableToolbar>
-                        <TableBatchActions {...getBatchActionProps()}>
-                          <TableBatchAction
-                            tabIndex={
-                              getBatchActionProps().shouldShowBatchActions
-                                ? 0
-                                : -1
-                            }
-                            onClick={() => {
-                              handleDelete(selectedRows);
-                            }}
-                          >
-                            Delete
-                          </TableBatchAction>
-                        </TableBatchActions>
-                        <TableToolbarContent>
-                          <TableToolbarSearch
-                            tabIndex={
-                              getBatchActionProps().shouldShowBatchActions
-                                ? -1
-                                : 0
-                            }
-                            onChange={onInputChange}
-                          />
-                          <ButtonSet>
-                            <Button
-                              tabIndex={
-                                getBatchActionProps().shouldShowBatchActions
-                                  ? -1
-                                  : 0
-                              }
-                              onClick={handleAddUser}
-                              size="sm"
-                              kind="primary"
-                              style={{ cursor: "pointer" }}
-                            >
-                              Add new user
-                            </Button>
-                            {isDelete ? (
-                              <Button
-                                tabIndex={
-                                  getBatchActionProps().shouldShowBatchActions
-                                    ? -1
-                                    : 0
-                                }
-                                onClick={() => setIsDelete(!isDelete)}
-                                size="sm"
-                                kind="secondary"
-                                disabled={rows?.length === 0 ? true : false}
-                                style={{ cursor: "pointer" }}
-                              >
-                                Cancel Delete
-                              </Button>
-                            ) : (
-                              <Button
-                                tabIndex={
-                                  getBatchActionProps().shouldShowBatchActions
-                                    ? -1
-                                    : 0
-                                }
-                                onClick={() => setIsDelete(!isDelete)}
-                                kind="danger"
-                                size="sm"
-                                disabled={rows?.length === 0 ? true : false}
-                                style={{ cursor: "pointer" }}
-                              >
-                                Delete User
-                              </Button>
-                            )}
-                          </ButtonSet>
-                        </TableToolbarContent>
-                      </TableToolbar>
-                      <Table>
-                        <TableHead>
-                          <TableRow>
-                            {isDelete && (
-                              <TableSelectAll {...getSelectionProps()} />
-                            )}
-                            {headers.map((header) => (
-                              <TableHeader
-                                {...getHeaderProps({
-                                  header,
-                                  isSortable: true,
-                                })}
-                              >
-                                {header.header}
-                              </TableHeader>
-                            ))}
-                            {<TableHeader />}
-                          </TableRow>
-                        </TableHead>
-
-                        <TableBody>
-                          {rows.map((row, index) => (
-                            <TableRow {...getRowProps({ row })}>
-                              {isDelete && (
-                                <TableSelectRow
-                                  className={"edit-icon"}
-                                  {...getSelectionProps({ row })}
-                                />
-                              )}
-                              {row.cells.map((cell) => (
-                                <TableCell key={cell.id}>
-                                  {cell.value}
-                                </TableCell>
-                              ))}
-                              {
-                                <TableCell
-                                  className={userList[index].canUpdate ? "edit-icon" : "edit-icon-disabled"}
-                                  onClick={userList[index].canUpdate ? () => { handleUserEdit(row.id) } : null}
-                                >
-                                  {<Edit20 />}
-                                </TableCell>
-                              }
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
-                  )}
-                </DataTable>
-              </div>
-            </>
+        <>
+          {serverNotification && (
+            <ToastNotification
+              className="error-notification-box"
+              iconDescription="describes the close button"
+              subtitle={serverErrorNotification?.message}
+              timeout={0}
+              title={""}
+              kind={serverErrorNotification?.status}
+            />
           )}
+          <div className="userdata-table">
+            <DataTable rows={rows} headers={headers} isSortable  sortDirection={'ASC'} sortRow={()=>{}} >
+              {({
+                rows,
+                headers,
+                getHeaderProps,
+                getRowProps,
+                getSelectionProps,
+                getBatchActionProps,
+                onInputChange,
+                selectedRows,
+              }) => (
+                <TableContainer>
+                  <TableToolbar>
+                    <TableBatchActions {...getBatchActionProps()}>
+                      <TableBatchAction
+                        tabIndex={
+                          getBatchActionProps().shouldShowBatchActions
+                            ? 0
+                            : -1
+                        }
+                        onClick={() => {
+                          handleDelete(selectedRows);
+                        }}
+                      >
+                        Delete
+                      </TableBatchAction>
+                    </TableBatchActions>
+                    <TableToolbarContent>
+                      <TableToolbarSearch
+                        tabIndex={
+                          getBatchActionProps().shouldShowBatchActions
+                            ? -1
+                            : 0
+                        }
+                        onChange={(e)=>console.log(e.target.value,"search")}
+                      />
+                      <Button
+                        kind='ghost'
+                        tabIndex={
+                          getBatchActionProps().shouldShowBatchActions
+                            ? -1
+                            : 0
+                        }
+                        onClick={() => { getUserList() }}
+                        renderIcon={Restart16}
+                        size="sm"
+                        style={{ cursor: "pointer" }}
+                        aria-label="Refresh"
+                      >
+                      </Button>
+                      <ButtonSet>
+                        <Button
+                          tabIndex={
+                            getBatchActionProps().shouldShowBatchActions
+                              ? -1
+                              : 0
+                          }
+                          onClick={handleAddUser}
+                          size="sm"
+                          kind="primary"
+                          style={{ cursor: "pointer" }}
+                        >
+                          Add new user
+                        </Button>
+                      </ButtonSet>
+                    </TableToolbarContent>
+                  </TableToolbar>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        {(
+                          <TableSelectAll {...getSelectionProps()} />
+                        )}
+                        {headers.map((header) => (
+                          <TableHeader
+                            {...getHeaderProps({
+                              header,
+                              // isSortable:true
+                            })}
+                            //  onClick={(e) => handleSort(header.key,e)}
+                          >
+                            {header.header}
+                          </TableHeader>
+                        ))}
+                        {<TableHeader />}
+                      </TableRow>
+                    </TableHead>
+
+                    <TableBody>
+                      {rows.map((row, index) => (
+                        <TableRow {...getRowProps({ row })}>
+                          {(
+                            <TableSelectRow
+                              className={"edit-icon"}
+                              {...getSelectionProps({ row })}
+                            />
+                          )}
+                          {row.cells.map((cell) => (
+                            <TableCell key={cell.id}>
+                              {cell.value}
+                            </TableCell>
+                          ))}
+                          {
+                            <TableCell
+                              className={userList[index].canUpdate ? "edit-icon" : "edit-icon-disabled"}
+                              onClick={userList[index].canUpdate ? () => { handleUserEdit(row.id) } : null}
+                            >
+                              {<Edit20 />}
+                            </TableCell>
+                          }
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              )}
+            </DataTable>
+          </div>
+        </>
+      )}
     </>
   );
 };
