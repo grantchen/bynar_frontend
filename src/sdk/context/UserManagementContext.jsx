@@ -11,6 +11,7 @@ import { useSearchParams } from "react-router-dom";
 import { mergeQueryParams, removeNullEntries } from "../util";
 import { RemoveModal } from "@carbon/ibm-products";
 import { SidePanels } from "../../components/SidePanel";
+import { UserDetailPanel } from "../../components/UserDetailPanel";
 
 const UserManagementContext = createContext();
 
@@ -30,6 +31,7 @@ const UserManagementProvider = ({ children }) => {
 
     const editUserPanelOpen = searchParams.get("userIdToBeEdited");
     const addUserPanelOpen = searchParams.get("openAddUserPanel");
+    const userDetailsOpen = searchParams.get("userIdToShowDetails");
 
     const getUserList = useCallback(async (queryParams = {}) => {
         setLoading(true);
@@ -153,6 +155,21 @@ const UserManagementProvider = ({ children }) => {
         }
     });
 
+    const getUserById = useCallback(async (id) => {
+        const token = localStorage.getItem("token");
+        const response = await fetch(
+            `${BaseURL}/user/${id}`,
+            {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + token,
+                },
+            }
+        ).then(res => res.json())
+        return response
+    }, [])
+
     const openDeleteModal = useCallback(
         ({ userIdToBeDeleted, userNameToBeDeleted }) => {
             if (!userIdToBeDeleted || !userNameToBeDeleted) {
@@ -220,6 +237,70 @@ const UserManagementProvider = ({ children }) => {
         [searchParams]
     );
 
+    const openBulkDeleteConfirmModal = useCallback(({userIdsToBeDeleted = []}) => {
+        if (!userIdsToBeDeleted) {
+            return;
+        }
+        setUserListParams(mergeQueryParams(searchParams, {}));
+        setSearchParams({ userIdsToBeDeleted });
+        setDeleteModalProps({
+            body: `Confirming will permanently delete the users. This action cannot be undone.`,
+            className: "remove-modal-test",
+            title: "Confirm delete",
+            iconDescription: "close",
+            inputInvalidText: "A valid value is required",
+            inputLabelText: `Type "delete users" to confirm`,
+            inputPlaceholderText: 'delete users',
+            open: true,
+            onClose: () => {
+                setDeleteModalProps(null);
+                setUserListParams((prev) => {
+                    setSearchParams(prev);
+                    return {};
+                });
+            },
+            primaryButtonText: "Delete",
+            resourceName: 'delete users',
+            secondaryButtonText: "Close",
+            label: `Delete Users`,
+            textConfirmation: true,
+            onRequestSubmit: async () => {
+                try {
+                    const token = localStorage.getItem("token"); //todo
+                    const response = await fetch(`${BaseURL}/user`, {
+                        method: "DELETE",
+                        body: JSON.stringify({
+                            accountIDs: userIdsToBeDeleted,
+                        }),
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: "Bearer " + token,
+                        },
+                    });
+                    if (response.ok) {
+                        setNotification({
+                            type: "success",
+                            message: "User deleted successfully.",
+                        });
+                    } else {
+                        throw "error";
+                    }
+                } catch (error) {
+                    setNotification({
+                        type: "error",
+                        message: "Error deleting user.",
+                    });
+                } finally {
+                    setDeleteModalProps(null);
+                    setUserListParams((prev) => {
+                        setSearchParams(prev);
+                        return {};
+                    });
+                }
+            },
+        });
+    }, [searchParams])
+
     const openEditPanel = useCallback(
         ({ userIdToBeEdited }) => {
             if (!userIdToBeEdited) {
@@ -235,6 +316,14 @@ const UserManagementProvider = ({ children }) => {
         setUserListParams(mergeQueryParams(searchParams, {}));
         setSearchParams({ openAddUserPanel: true });
     }, [searchParams]);
+
+    const openUserDetails = useCallback(({userIdToShowDetails}) => {
+        if(!userIdToShowDetails){
+            return
+        }
+        setUserListParams(mergeQueryParams(searchParams, {}));
+        setSearchParams({ userIdToShowDetails });
+    }, [searchParams])
 
     const closeModalAndGoBackToUserList = useCallback(() => {
         setUserListParams((prev) => {
@@ -265,7 +354,10 @@ const UserManagementProvider = ({ children }) => {
             closeModalAndGoBackToUserList,
             updateUser,
             openAddUserModel,
-            addUser
+            addUser,
+            openUserDetails,
+            getUserById,
+            openBulkDeleteConfirmModal
         }),
         [
             userListData,
@@ -278,7 +370,10 @@ const UserManagementProvider = ({ children }) => {
             closeModalAndGoBackToUserList,
             updateUser,
             openAddUserModel,
-            addUser
+            addUser,
+            openUserDetails,
+            getUserById,
+            openBulkDeleteConfirmModal
         ]
     );
 
@@ -316,6 +411,7 @@ const UserManagementProvider = ({ children }) => {
                 {children}
                 {userHasPermission && editUserPanelOpen && <SidePanels />}
                 {userHasPermission && addUserPanelOpen && <SidePanels />}
+                {userHasPermission && userDetailsOpen && <UserDetailPanel />}
             </UserManagementContext.Provider>
             {deleteModalProps && <RemoveModal {...deleteModalProps} />}
         </>

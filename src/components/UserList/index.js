@@ -26,6 +26,8 @@ import {
     useActionsColumn,
     useStickyColumn,
     useSelectRows,
+    useOnRowClick,
+    useSortableColumns,
     Datagrid,
     pkg,
 } from "@carbon/ibm-products";
@@ -49,20 +51,22 @@ import {
 } from "@carbon/icons-react";
 import "./UserList.scss";
 pkg.component.Datagrid = true;
-export const UserList = ({ isOpen }) => {
-    const navigate = useNavigate();
+export const UserList = () => {
     const {
         getUserList,
         userListData,
-        deleteUser,
         loading,
         openDeleteModal,
         notification,
         openEditPanel,
-        openAddUserModel
+        openAddUserModel,
+        openUserDetails,
+        openBulkDeleteConfirmModal
     } = useUserManagement();
 
     const [searchParams, setSearchParams] = useSearchParams();
+
+    const [searchText, setSearchText] = useState(searchParams.get('search') ?? '')
 
     const { page, pageLimit } = useMemo(() => {
         let values = {
@@ -95,6 +99,18 @@ export const UserList = ({ isOpen }) => {
             await getUserList(getUserAPIQuery());
         })();
     }, [searchParams, getUserAPIQuery]);
+
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            (async () => {
+                if(searchText){
+                    setSearchParams({isUserListOpen: true})
+                    await getUserList({search: searchText});
+                }
+            })()
+        }, 300)
+        return () => clearTimeout(timeoutId)
+    }, [searchText])
     const handleSort = useCallback((val1, val2, sortConfig) => {
         setSearchParams((prev) => ({
             ...prev,
@@ -102,9 +118,6 @@ export const UserList = ({ isOpen }) => {
             sortByOrder: sortConfig.sortDirection,
         }));
     }, []);
-
-
-    const onActionClick = (actionId, row, event) => {};
     const columns = useMemo(
         () => getColumns(userListData.userAccountDetails),
         [userListData.userAccountDetails]
@@ -115,18 +128,32 @@ export const UserList = ({ isOpen }) => {
             data: userListData.userAccountDetails,
             isFetching: loading,
             onRowSelect: (row, event) => console.log(row, event),
+            // onSort: (sortByColumn, sortByOrder) => {
+            //     if(sortByOrder === 'none'){
+            //         const {sortByColumn: sBC, sortByOrder: sBO, ...rest} = searchParams
+            //         setSearchParams(rest)
+            //     }
+            //     else{
+            //         setSearchParams({...searchParams, sortByColumn, sortByOrder})
+            //     }
+            // },
+            onRowClick: ({original}) => {
+                openUserDetails({userIdToShowDetails: original.id})
+            },
             rowActions: [
                 {
                     id: "edit",
                     itemText: "Edit",
-                    onClick: (_, { original }) => openEditPanel({
-                        userIdToBeEdited: original.id,
-                    })
+                    onClick: (_, { original }) =>
+                        openEditPanel({
+                            userIdToBeEdited: original.id,
+                        }),
+                    shouldDisableMenuItem: ({original}) => !original.canUpdate
                 },
                 {
                     id: "hidden",
                     itemText: "Hidden item",
-                    onClick: onActionClick,
+                    onClick: () => {},
                     shouldHideMenuItem: () => true,
                 },
                 {
@@ -134,6 +161,7 @@ export const UserList = ({ isOpen }) => {
                     itemText: "Delete",
                     hasDivider: true,
                     isDelete: true,
+                    shouldDisableMenuItem: ({original}) => !original.canDelete,
                     onClick: (_, { original }) =>
                         openDeleteModal({
                             userIdToBeDeleted: original.id,
@@ -185,7 +213,7 @@ export const UserList = ({ isOpen }) => {
                         id="columnSearch"
                         persistent
                         placeHolderText={"Search here"}
-                        onChange={(e) => console.log(e)}
+                        onChange={(e) => setSearchText(e.target.value)}
                     />
                     <Button
                         kind="ghost"
@@ -206,11 +234,24 @@ export const UserList = ({ isOpen }) => {
                 </TableToolbarContent>
             ),
             batchActions: true,
-            toolbarBatchActions: getBatchActions(),
+            toolbarBatchActions: [
+                {
+                    label: "Delete",
+                    renderIcon: Add16,
+                    onClick: () => {
+                        const idsToDelete = datagridState.selectedFlatRows.map(row => row.original.id)
+                        openBulkDeleteConfirmModal({userIdsToBeDeleted: idsToDelete})
+                    },
+                    hasDivider: true,
+                    kind: "danger",
+                },
+            ],
         },
         useStickyColumn,
         useActionsColumn,
-        useSelectRows
+        useSelectRows,
+        useOnRowClick,
+        // useSortableColumns
     );
 
     return (
@@ -281,20 +322,6 @@ const getColumns = (rows) => {
             accessor: "actions",
             isAction: true,
             sticky: "right",
-        },
-    ];
-};
-
-const action = (test) => alert(test);
-
-const getBatchActions = () => {
-    return [
-        {
-            label: "Delete",
-            renderIcon: Add16,
-            onClick: () => action("Clicked batch action button"),
-            hasDivider: true,
-            kind: "danger",
         },
     ];
 };
