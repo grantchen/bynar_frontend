@@ -26,7 +26,8 @@ import { useSearchParams } from "react-router-dom";
 import { Restart16, Activity16, Add16 } from "@carbon/icons-react";
 import "./UserList.scss";
 pkg.component.Datagrid = true;
-pkg.feature.Datagrid.useActionsColumn = true
+// pkg.feature.Datagrid = true
+// pkg.feature['Datagrid.useActionsColumn'] = true
 
 export const UserList = () => {
     const {
