@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext, useMemo } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import {
   Header,
   HeaderMenuButton,
@@ -16,17 +16,12 @@ import { useTranslation } from "react-i18next";
 import ProfileDropdown from "../ProfileDropdown";
 import HeaderTab from "./HeaderTab";
 import {
-  BaseURL,
-  AuthContext,
-  SAMPLE_NOTIFICATION_DATA,
   ThemeModel,
   LanguageModel,
-  mergeQueryParams,
+  useUserManagement,
 } from "../../sdk";
 import { TearSheets } from "../TearSheet";
-import { SidePanels } from "../SidePanel";
 import { useSearchParams } from "react-router-dom";
-import { RemoveModal } from "@carbon/ibm-products";
 
 export const CommonHeader = () => {
   return (
@@ -37,23 +32,19 @@ export const CommonHeader = () => {
 };
 
 const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
-  const authContext = useContext(AuthContext);
   const [searchParams, setSearchParams] = useSearchParams();
   //todo for Suyash: get token from auth context
-  const token = localStorage.getItem("token");
+  
   const [profileDropdown, setProfileDropdown] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [notificationsData, setNotificationsData] = useState(
-    SAMPLE_NOTIFICATION_DATA
-  );
-
+  
   const wrapperRef = useRef(null);
   const showProfilePanelRef = useRef(null);
   const setShowProfilePanelRef = useRef(null);
   showProfilePanelRef.current = profileDropdown;
   setShowProfilePanelRef.current = setProfileDropdown;
-  const [showButton, setShowButton] = useState(false);
   const { t } = useTranslation();
+
+  const {isUserManagementAllowed} = useUserManagement()
 
   const handleDropDown = (e) => {
     e.preventDefault();
@@ -75,37 +66,6 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [wrapperRef]);
-
-  const getUserDetail = async () => {
-    try {
-      const response = await fetch(`${BaseURL}/user`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-      });
-
-      if (response.ok) {
-        const res = await response.json();
-        if (
-          res?.result.cognitoUserGroups === "Users" ||
-          res?.result.cognitoUserGroups.length == 0
-        ) {
-          setShowButton(false);
-        } else {
-          setShowButton(true);
-        }
-      } else if (response.status === 500) {
-      }
-    } catch (e) {
-      await authContext.signout();
-    }
-  };
-
-  useEffect(() => {
-    getUserDetail();
-  }, []);
 
   const [openLanguageModel, setLanguageModelOpen] = useState(false);
   const [openThemeModel, setThemeModelOpen] = useState(false);
@@ -146,7 +106,7 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
             <div className="border-outline"></div>
             {/* <button style={{ cursor: 'pointer' }} onClick={handleOpenModalClick}>user</button> */}
             <HeaderGlobalBar className="header-tab">
-              {showButton && (
+              {isUserManagementAllowed && (
                 <HeaderGlobalAction
                   aria-label="Users"
                   onClick={() => setIsUserListOpen(true)}

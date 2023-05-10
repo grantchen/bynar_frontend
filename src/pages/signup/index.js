@@ -7,7 +7,6 @@ import {
   Heading,
   InlineLoading,
   Link,
-  Loading,
   Select,
   SelectItem,
   TextInput,
@@ -21,6 +20,7 @@ import {
   formatCVC,
   formatCreditCardNumber,
   formatExpirationDate,
+  useAuth,
 } from "./../../sdk";
 
 import PhoneInput from "react-phone-input-2";
@@ -29,9 +29,7 @@ import { useNavigate } from "react-router-dom";
 import "./../../styles/paymentform.scss";
 import "./signup.scss";
 import {
-  PhoneNumberUtil,
-  PhoneNumberFormat as PNF
-} from "google-libphonenumber";
+  PhoneNumberUtil} from "google-libphonenumber";
 
 const Signup = () => {
   const phoneUtil = PhoneNumberUtil.getInstance();
@@ -100,6 +98,10 @@ const Signup = () => {
   });
   const [countryCode, setCountryCode] = useState('IN');
   const [countryDialCode, setCountryDialCode] = useState('91');
+
+  const {hackPatchToken} = useAuth()
+
+
   const accountInfoButtonDisabled =
     !emailIsValid || email.length === 0 || isAccountInfoError;
   const personalInfoButtonDisabled =
@@ -346,6 +348,9 @@ const Signup = () => {
           email: email,
           code: verificationCode,
         };
+        // debugger
+        // await Auth.confirmSignUp(email, verificationCode);
+        // debugger
         const response = await fetch(`${BaseURL}/confirm-email`, {
           method: "POST",
           body: JSON.stringify(data),
@@ -442,15 +447,10 @@ const Signup = () => {
             "Content-Type": "application/json",
           },
         });
-        const res = await response.json();
 
         if (response.ok) {
-          localStorage.setItem("token", res.token);
-          localStorage.setItem("theme", "carbon-theme--white");
-          localStorage.setItem("lang", "english");
-          const bodyElement = document.body;
-          bodyElement.className = localStorage.getItem("theme");
-          navigate("/home/dashboard");
+          const res = await response.json();
+          hackPatchToken(res.token)
         } else if (response.status === 500) {
           setIsError(true);
           setErrorNotification({

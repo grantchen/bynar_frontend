@@ -1,56 +1,33 @@
 import {
-    DataTable,
-    Table,
-    TableHead,
-    TableRow,
-    TableHeader,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableToolbar,
     TableBatchActions,
     TableBatchAction,
     TableToolbarSearch,
     TableToolbarContent,
-    TableSelectAll,
-    TableSelectRow,
     ToastNotification,
     Button,
-    InlineLoading,
-    ButtonSet,
     Pagination,
 } from "@carbon/react";
 import {
-    RemoveModal,
     useDatagrid,
     useActionsColumn,
     useStickyColumn,
     useSelectRows,
     useOnRowClick,
-    useSortableColumns,
     Datagrid,
     pkg,
 } from "@carbon/ibm-products";
-import { OverflowMenu, OverflowMenuItem } from "carbon-components-react";
-import { useEffect, useState, useContext, useCallback, useMemo } from "react";
+import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import {
-    BaseURL,
-    AuthContext,
     useUserManagement,
     mergeQueryParams,
     getAutoSizedColumnWidth,
 } from "../../sdk";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { EditUser } from "../EditUser";
-import {
-    Edit20,
-    Restart20,
-    Restart16,
-    Activity16,
-    Add16,
-} from "@carbon/icons-react";
+import { useSearchParams } from "react-router-dom";
+import { Restart16, Activity16, Add16 } from "@carbon/icons-react";
 import "./UserList.scss";
 pkg.component.Datagrid = true;
+pkg.feature.Datagrid.useActionsColumn = true
+
 export const UserList = () => {
     const {
         getUserList,
@@ -61,12 +38,16 @@ export const UserList = () => {
         openEditPanel,
         openAddUserModel,
         openUserDetails,
-        openBulkDeleteConfirmModal
+        openBulkDeleteConfirmModal,
     } = useUserManagement();
 
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const [searchText, setSearchText] = useState(searchParams.get('search') ?? '')
+    const [searchText, setSearchText] = useState(
+        searchParams.get("search") ?? ""
+    );
+
+    const skipOnMount = useRef(true);
 
     const { page, pageLimit } = useMemo(() => {
         let values = {
@@ -101,19 +82,26 @@ export const UserList = () => {
     }, [searchParams, getUserAPIQuery]);
 
     useEffect(() => {
-        const timeoutId = setTimeout(() => {
-            (async () => {
-                if(searchText){
-                    setSearchParams({isUserListOpen: true})
-                    await getUserList({search: searchText});
-                }
-                else{
-                    await getUserList({});
-                }
-            })()
-        }, 300)
-        return () => clearTimeout(timeoutId)
-    }, [searchText])
+        console.log('executed')
+        if (!skipOnMount.current) {
+            console.log('not skipped')
+            const timeoutId = setTimeout(() => {
+                (async () => {
+                    if (searchText) {
+                        setSearchParams({ isUserListOpen: true });
+                        await getUserList({ search: searchText });
+                    } else {
+                        await getUserList({});
+                    }
+                })();
+            }, 300);
+            return () => clearTimeout(timeoutId);
+        }
+        else{
+            console.log('skipped')
+        }
+        skipOnMount.current = false
+    }, [searchText]);
     const handleSort = useCallback((val1, val2, sortConfig) => {
         setSearchParams((prev) => ({
             ...prev,
@@ -140,8 +128,8 @@ export const UserList = () => {
             //         setSearchParams({...searchParams, sortByColumn, sortByOrder})
             //     }
             // },
-            onRowClick: ({original}) => {
-                openUserDetails({userIdToShowDetails: original.id})
+            onRowClick: ({ original }) => {
+                openUserDetails({ userIdToShowDetails: original.id });
             },
             rowActions: [
                 {
@@ -151,7 +139,8 @@ export const UserList = () => {
                         openEditPanel({
                             userIdToBeEdited: original.id,
                         }),
-                    shouldDisableMenuItem: ({original}) => !original.canUpdate
+                    shouldDisableMenuItem: ({ original }) =>
+                        !original.canUpdate,
                 },
                 {
                     id: "hidden",
@@ -164,7 +153,8 @@ export const UserList = () => {
                     itemText: "Delete",
                     hasDivider: true,
                     isDelete: true,
-                    shouldDisableMenuItem: ({original}) => !original.canDelete,
+                    shouldDisableMenuItem: ({ original }) =>
+                        !original.canDelete,
                     onClick: (_, { original }) =>
                         openDeleteModal({
                             userIdToBeDeleted: original.id,
@@ -242,8 +232,12 @@ export const UserList = () => {
                     label: "Delete",
                     renderIcon: Add16,
                     onClick: () => {
-                        const idsToDelete = datagridState.selectedFlatRows.map(row => row.original.id)
-                        openBulkDeleteConfirmModal({userIdsToBeDeleted: idsToDelete})
+                        const idsToDelete = datagridState.selectedFlatRows.map(
+                            (row) => row.original.id
+                        );
+                        openBulkDeleteConfirmModal({
+                            userIdsToBeDeleted: idsToDelete,
+                        });
                     },
                     hasDivider: true,
                     kind: "danger",
@@ -253,7 +247,7 @@ export const UserList = () => {
         useStickyColumn,
         useActionsColumn,
         useSelectRows,
-        useOnRowClick,
+        useOnRowClick
         // useSortableColumns
     );
 

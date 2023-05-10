@@ -1,163 +1,212 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import {
-  useEffect,
-  useReducer,
-  createContext,
-  useMemo,
-  useState,
-  useContext,
+    useEffect,
+    useReducer,
+    createContext,
+    useMemo,
+    useContext,
+    useCallback,
 } from "react";
 import { BaseURL } from "./constant";
 import { Auth } from "aws-amplify";
 const initialState = {
-  signin: () => Promise.resolve(null),
-  signout: () => Promise.resolve(null),
-  user: null,
-  token: null,
-  isLoggedIn: false,
-  error: null,
-  isLoading: false,
-  isValidLogin: false,
-  theme: null,
-  lang: null,
+    user: null,
+    token: "loading",
+    theme: null,
+    lang: null,
 };
 export const AuthContext = createContext(initialState);
 const { Provider, Consumer } = AuthContext;
 const simpleReducer = (state, payload) => ({ ...state, ...payload });
 
 export const AuthProvider = ({ children }) => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [state, setState] = useReducer(simpleReducer, initialState);
-  const [isMounted, setIsMounted] = useState(false);
+    const [state, setState] = useReducer(simpleReducer, initialState);
 
-  useEffect(() => {
-    try {
-      const token = localStorage.getItem("token");
-      if (token) {
-        setState({
-          token,
-          isLoggedIn: true,
-        });
-      }
-    } catch (e) {
-      setState({
-        token: null,
-        isLoggedIn: false,
-        name: null,
-        theme: null,
-        lang: null,
-      });
-    } finally {
-      setState({
-        isFirstRender: false,
-      });
-    }
-  }, []);
+    const navigate = useNavigate();
+    const location = useLocation();
 
-  useEffect(() => {
-    // todo ask suyash why is this
-    // if (!isMounted) {
-    //   const tokenCheck = localStorage.getItem("token");
-    //   if (tokenCheck !== null) {
-    //     if (location.pathname === '/signin' || location.pathname === '/forgotpassword' || location.pathname === '/signup' || location.pathname === '/home' || location.pathname === '/dashboard') {
-    //       navigate('/home/dashboard')
-    //     }
-    //     else if (location.pathname === '/userlist') {
-    //       navigate('/userlist')
-    //     }
-    //     else if (location.pathname === '/datatable') {
-    //       navigate('/home/datatable')
-    //     }
-    //   } else {
-    //     if (location.pathname === '/home' || location.pathname === '/dashboard' || location.pathname === '/datatable' || location.pathname === '/tearsheet' || location.pathname === '/adduser' || location.pathname === '/userlist' || location.pathname === '/datatable' || location.pathname === '/home/userlist' || location.pathname === '/home/dashboard' || location.pathname === '/home/datatable') {
-    //       navigate('/home/dashboard');
-    //     }
+    useEffect(() => {
+        (async () => {
+            try {
+                const res = await Auth.currentSession();
+                if (res?.accessToken?.jwtToken) {
+                    setState({ token: res?.accessToken?.jwtToken });
+                } else {
+                    setState({ token: null });
+                }
+            } catch (e) {
+                // todo remove this fucking hack
+                const token = localStorage.getItem("token")
+                if(token){
+                    const response = await fetch(`${BaseURL}/user`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: "Bearer " + token,
+                        },
+                    })
+                    if(response.status === 401){
+                        localStorage.clear()
+                    }
+                    else if(response.ok){
+                        setState({token})
+                        return
+                    }
+                }
+                setState({ token: null });
+            }
+        })();
+    }, []);
 
-    //   }
-    // }
-    setIsMounted(true);
-  }, [location, navigate, isMounted]);
+    const getUser = useCallback(async () => {
+        if (state.token === "loading" || state.token === null) {
+            return;
+        }
+        try {
+            const response = await fetch(`${BaseURL}/user`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + state.token,
+                },
+            });
 
-  const signin = async (data, isMfa) => {
-    try {
-      setState({ isLoading: true, isValidLogin: false });
-      let endPoint = "";
-      let token = "";
-      let message = "";
-      if (isMfa) {
-        endPoint = "mfa";
-      } else {
-        endPoint = "login";
-      }
-      const response = await fetch(`${BaseURL}/${endPoint}`, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
+            if (response.ok) {
+                const res = await response.json();
+                setState({ user: res.result });
+            } else {
+                await Auth.signOut();
+                navigate("/signin");
+            }
+        } catch (e) {
+            console.log("Error signing out!");
+            navigate("/signin");
+        }
+    }, [state.token]);
+    useEffect(() => {
+        getUser();
+    }, [getUser]);
+
+    useEffect(() => {
+        switch (state.token) {
+            case "loading":
+                return;
+            case null:
+                if (
+                    !(location.pathname === "/signin" ||
+                    location.pathname === "/forgotpassword" ||
+                    location.pathname === "/signup")
+                ) {
+                    navigate("/signin");
+                }
+                break;
+            default:
+                if (
+                    location.pathname === "/signin" ||
+                    location.pathname === "/forgotpassword" ||
+                    location.pathname === "/signup"
+                ) {
+                    navigate("/home/dashboard");
+                }
+                break;
+        }
+    }, [location.pathname, state.token]);
+
+    const authFetch = useCallback(
+        async (url, options = {}) => {
+            let token = state.token;
+            if (token === "loading") {
+                try {
+                    const user = await Auth.currentSession();
+                    token = user?.accessToken?.jwtToken;
+                } catch (error) {
+                    return new Promise()
+                }
+            }
+            let res = await fetch(url, {
+                ...options,
+                headers: {
+                    ...options.headers,
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + token,
+                },
+            });
+            if (res.status === 401) {
+                try {
+                    const user = await Auth.currentSession();
+                    token = user?.accessToken?.jwtToken;
+                }
+                catch (error) {
+                    signout();
+                    return new Promise()
+                }
+                if (token) {
+                    setState({ token });
+                    res = await fetch(url, {
+                        ...options,
+                        headers: {
+                            ...options.headers,
+                            "Content-Type": "application/json",
+                            Authorization: "Bearer " + token,
+                        },
+                    });
+                    if(res.status === 401){
+                        signout();
+                        return new Promise()
+                    }
+                } else {
+                    signout();
+                }
+            }
+            return res;
         },
-      });
-      const res = await response.json();
-      if (response.ok) {
-        token = res.Token;
-        message = res.message;
-      } else {
-        return res;
-      }
-      if (token) {
-        setState({
-          isLoggedIn: true,
-          token,
-          error: null,
-        });
-        localStorage.setItem("token", token);
-        localStorage.setItem("theme", "carbon-theme--white");
-        localStorage.setItem("lang", "english");
-        const bodyElement = document.body;
-        bodyElement.className = localStorage.getItem("theme");
-        navigate("/dashboard");
-      } else {
-        setState({
-          inValidLogin: true,
-          isLoggedIn: false,
-          token: null,
-        });
-        return res;
-      }
-    } catch (e) {
-      setState({ error: "Error logging in" });
-      return { error: "Error logging in" };
-    } finally {
-      setState({ isLoading: false });
-    }
-  };
+        [state.token]
+    );
 
-  const signout = async () => {
-    try {
-      await Auth.signOut();
-      localStorage.removeItem("token");
-      localStorage.removeItem("theme");
-      localStorage.removeItem("lang");
-      navigate("/signin");
-      setState({
-        user: null,
-        token: null,
-        isLoggedIn: false,
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  };
+    const signout = useCallback(async () => {
+        try {
+            await Auth.signOut();
+            navigate("/signin");
+            setState({
+                ...initialState,
+                token: null,
+            });
+            // todo remove this fucking hack
+            localStorage.clear()
+        } catch (e) {
+            console.log(e);
+        }
+    }, []);
 
-  const providerValue = useMemo(
-    () => ({
-      ...state,
-      signin,
-      signout,
-    }),
-    [state, signin, signout]
-  );
-  return <Provider value={providerValue}>{children}</Provider>;
+    const refreshPostSignIn = useCallback(async() => {
+        try {
+            const res = await Auth.currentSession();
+            if (res?.accessToken?.jwtToken) {
+                setState({ token: res?.accessToken?.jwtToken });
+            } else {
+                setState({ token: null });
+            }
+        } catch (e) {
+            setState({ token: null });
+        }
+    }, [])
+    // todo remove this fucking hack
+    const hackPatchToken = useCallback((token) => {
+        localStorage.setItem('token', token)
+        setState({token})
+    }, [])
+
+    const providerValue = useMemo(
+        () => ({
+            ...state,
+            signout,
+            authFetch,
+            refreshPostSignIn,
+            hackPatchToken
+        }),
+        [state, signout, authFetch, refreshPostSignIn, hackPatchToken]
+    );
+    return <Provider value={providerValue}>{children}</Provider>;
 };
 
 export const useAuth = () => useContext(AuthContext);

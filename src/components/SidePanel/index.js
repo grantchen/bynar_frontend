@@ -36,9 +36,6 @@ export const SidePanels = () => {
         phoneNumber: false,
         role: false,
     });
-    const navigate = useNavigate();
-    const authContext = useContext(AuthContext);
-    const token = localStorage.getItem("token");
     const [country, setCountry] = useState("India");
     const [addressLine1, setAddressLine1] = useState("");
     const [addressLine2, setAddressLine2] = useState("");
@@ -83,9 +80,9 @@ export const SidePanels = () => {
     const [countryCode, setCountryCode] = useState("IN");
     const [countryDialCode, setCountryDialCode] = useState("91");
 
-    const isUserEdit = searchParams.get('userIdToBeEdited')
+    const isUserEdit = searchParams.get("userIdToBeEdited");
 
-    const { closeModalAndGoBackToUserList, updateUser, addUser } =
+    const { closeModalAndGoBackToUserList, updateUser, addUser, getUserById } =
         useUserManagement();
 
     const checkEmailValid = (email) => {
@@ -227,7 +224,6 @@ export const SidePanels = () => {
     };
 
     const handlePhoneNumber = (value, country, formattedValue) => {
-      debugger
         setPhoneNumber(value);
         validatePhoneNumber(value, country.dialCode, country?.countryCode);
     };
@@ -271,7 +267,6 @@ export const SidePanels = () => {
         Object.keys(postalCodeErrorNotification).length != 0;
 
     const handleAccountInformationFormSubmit = () => {
-      debugger
         const error = {};
         postalCodeValidation(postalCode);
         error.fullName = fullName.trim().length == 0;
@@ -417,41 +412,26 @@ export const SidePanels = () => {
     const getUserList = async (userid) => {
         try {
             setLoading(true);
-            const response = await fetch(`${BaseURL}/list-users`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: "Bearer " + token,
-                },
-            });
-
-            if (response.ok) {
-                const res = await response.json();
-                const userEditArray = res?.result?.userAccountDetails.filter(
-                    (a) => a.id === userid
-                );
-                setFullName(userEditArray[0]?.fullName);
-                setUserName(userEditArray[0]?.username);
-                setCountry(userEditArray[0]?.country);
-                setAddressLine1(userEditArray[0]?.addressLine);
-                setAddressLine2(userEditArray[0]?.addressLine2);
-                setCity(userEditArray[0]?.city);
-                setState(userEditArray[0]?.state);
-                setPostalCode(userEditArray[0]?.postalCode);
-                setPhoneNumber(userEditArray[0]?.phoneNumber);
-                setOrganizationId(userEditArray[0]?.organisationID);
-                const selectedItem = COUNTRIES.find(
-                    (item) => item.name === userEditArray[0]?.country
-                );
-                setCountryCode(selectedItem?.code);
-                setCountryDialCode(
-                    selectedItem?.dial_code.toString().replace("+", "")
-                );
-            } else if (response.status === 500) {
-            }
-            setLoading(false);
+            const { result } = await getUserById(userid);
+            setFullName(result?.fullName);
+            setUserName(result?.username);
+            setCountry(result?.country);
+            setAddressLine1(result?.addressLine);
+            setAddressLine2(result?.addressLine2);
+            setCity(result?.city);
+            setState(result?.state);
+            setPostalCode(result?.postalCode);
+            setPhoneNumber(result?.phoneNumber);
+            setOrganizationId(result?.organisationID);
+            const selectedItem = COUNTRIES.find(
+                (item) => item.name === result?.country
+            );
+            setCountryCode(selectedItem?.code);
+            setCountryDialCode(
+                selectedItem?.dial_code.toString().replace("+", "")
+            );
         } catch (e) {
-            await authContext.signout();
+        } finally {
             setLoading(false);
         }
     };
@@ -477,7 +457,9 @@ export const SidePanels = () => {
             setCountry(e.target.value);
             setPhoneNumber(selectedItem?.dial_code.toString());
             setCountryCode(selectedItem?.code);
-            setCountryDialCode(selectedItem?.dial_code.toString().replace('+', ''));
+            setCountryDialCode(
+                selectedItem?.dial_code.toString().replace("+", "")
+            );
         }
     };
 

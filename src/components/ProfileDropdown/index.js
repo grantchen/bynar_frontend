@@ -2,7 +2,7 @@ import { UserProfileImage } from "@carbon/ibm-products";
 import { Link, Tile } from "@carbon/react";
 import { ArrowRight } from "@carbon/react/icons";
 import React, { useContext, useState } from "react";
-import { AuthContext, ThemeContext } from "../../sdk";
+import { ThemeContext, useAuth } from "../../sdk";
 
 import { useTranslation } from "react-i18next";
 import "./profileDropdown.scss";
@@ -14,12 +14,11 @@ const ProfileDropdown = React.memo(
     setLanguageModelOpen,
   }) => {
     const [t, i18n] = useTranslation();
-    const authContext = useContext(AuthContext);
+    const {signout} = useAuth();
     const theme = useContext(ThemeContext);
-    const [profileDropdownOpen, setProfileDropdownOpen] = useState(true);
     const handleLogout = async (e) => {
       e.preventDefault();
-      const logout = await authContext.signout();
+      await signout();
     };
     const handleLanguageChange = (e) => {
       e.preventDefault();

@@ -12,10 +12,12 @@ import { mergeQueryParams, removeNullEntries } from "../util";
 import { RemoveModal } from "@carbon/ibm-products";
 import { SidePanels } from "../../components/SidePanel";
 import { UserDetailPanel } from "../../components/UserDetailPanel";
+import { useAuth } from "../AuthContext";
 
 const UserManagementContext = createContext();
 
 const UserManagementProvider = ({ children }) => {
+    const { user, authFetch } = useAuth();
     /**render aware states */
     const [userListData, setUserListData] = useState({
         userAccountDetails: [],
@@ -33,23 +35,23 @@ const UserManagementProvider = ({ children }) => {
     const addUserPanelOpen = searchParams.get("openAddUserPanel");
     const userDetailsOpen = searchParams.get("userIdToShowDetails");
 
+    const isUserManagementAllowed = useMemo(
+        () =>
+        user && !(user?.cognitoUserGroups === "Users" ||
+            user?.cognitoUserGroups?.length === 0),
+        [user]
+    );
+    
+
     const getUserList = useCallback(async (queryParams = {}) => {
         setLoading(true);
-        const token = localStorage.getItem("token"); //todo
         try {
             const searchQueryParams = new URLSearchParams(
                 removeNullEntries(queryParams)
             ).toString();
 
-            const response = await fetch(
-                `${BaseURL}/list-users?${searchQueryParams}`,
-                {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: "Bearer " + token,
-                    },
-                }
+            const response = await authFetch(
+                `${BaseURL}/list-users?${searchQueryParams}`
             );
             if (response.ok) {
                 const res = await response.json();
@@ -73,20 +75,15 @@ const UserManagementProvider = ({ children }) => {
         } finally {
             setLoading(false);
         }
-    }, []);
+    }, [authFetch]);
 
     const deleteUser = useCallback(
         async (ids) => {
             setLoading(true);
-            const token = localStorage.getItem("token");
             try {
-                const response = await fetch(`${BaseURL}/user`, {
+                const response = await authFetch(`${BaseURL}/user`, {
                     method: "DELETE",
-                    body: JSON.stringify({ accountIDs: [...ids] }),
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: "Bearer " + token,
-                    },
+                    body: JSON.stringify({ accountIDs: [...ids] })
                 });
                 if (response.ok) {
                     setNotification({
@@ -109,18 +106,13 @@ const UserManagementProvider = ({ children }) => {
                 setLoading(false);
             }
         },
-        [getUserList]
+        [getUserList, authFetch]
     );
 
     const updateUser = useCallback(async ({ userDetails }) => {
-        const token = localStorage.getItem("token"); //todo
-        const response = await fetch(`${BaseURL}/user`, {
+        const response = await authFetch(`${BaseURL}/user`, {
             method: "PUT",
-            body: JSON.stringify(userDetails),
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + token,
-            },
+            body: JSON.stringify(userDetails)
         });
 
         const res = await response.json();
@@ -132,16 +124,11 @@ const UserManagementProvider = ({ children }) => {
         } else {
             throw { message: "Error updating user", type: "error" };
         }
-    });
+    }, [authFetch]);
     const addUser = useCallback(async ({ userDetails }) => {
-        const token = localStorage.getItem("token"); //todo
-        const response = await fetch(`${BaseURL}/user`, {
+        const response = await authFetch(`${BaseURL}/user`, {
             method: "POST",
-            body: JSON.stringify(userDetails),
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + token,
-            },
+            body: JSON.stringify(userDetails)
         });
 
         const res = await response.json();
@@ -153,22 +140,12 @@ const UserManagementProvider = ({ children }) => {
         } else {
             throw { message: "Error updating user", type: "error" };
         }
-    });
+    }, [authFetch]);
 
     const getUserById = useCallback(async (id) => {
-        const token = localStorage.getItem("token");
-        const response = await fetch(
-            `${BaseURL}/user/${id}`,
-            {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: "Bearer " + token,
-                },
-            }
-        ).then(res => res.json())
-        return response
-    }, [])
+        const response = await authFetch(`${BaseURL}/user/${id}`).then((res) => res.json());
+        return response;
+    }, [authFetch]);
 
     const openDeleteModal = useCallback(
         ({ userIdToBeDeleted, userNameToBeDeleted }) => {
@@ -200,16 +177,11 @@ const UserManagementProvider = ({ children }) => {
                 textConfirmation: true,
                 onRequestSubmit: async () => {
                     try {
-                        const token = localStorage.getItem("token"); //todo
-                        const response = await fetch(`${BaseURL}/user`, {
+                        const response = await authFetch(`${BaseURL}/user`, {
                             method: "DELETE",
                             body: JSON.stringify({
                                 accountIDs: [parseInt(userIdToBeDeleted)],
-                            }),
-                            headers: {
-                                "Content-Type": "application/json",
-                                Authorization: "Bearer " + token,
-                            },
+                            })
                         });
                         if (response.ok) {
                             setNotification({
@@ -234,72 +206,70 @@ const UserManagementProvider = ({ children }) => {
                 },
             });
         },
-        [searchParams]
+        [searchParams, authFetch]
     );
 
-    const openBulkDeleteConfirmModal = useCallback(({userIdsToBeDeleted = []}) => {
-        if (!userIdsToBeDeleted) {
-            return;
-        }
-        setUserListParams(mergeQueryParams(searchParams, {}));
-        setSearchParams({ userIdsToBeDeleted });
-        setDeleteModalProps({
-            body: `Confirming will permanently delete the users. This action cannot be undone.`,
-            className: "remove-modal-test",
-            title: "Confirm delete",
-            iconDescription: "close",
-            inputInvalidText: "A valid value is required",
-            inputLabelText: `Type "delete users" to confirm`,
-            inputPlaceholderText: 'delete users',
-            open: true,
-            onClose: () => {
-                setDeleteModalProps(null);
-                setUserListParams((prev) => {
-                    setSearchParams(prev);
-                    return {};
-                });
-            },
-            primaryButtonText: "Delete",
-            resourceName: 'delete users',
-            secondaryButtonText: "Close",
-            label: `Delete Users`,
-            textConfirmation: true,
-            onRequestSubmit: async () => {
-                try {
-                    const token = localStorage.getItem("token"); //todo
-                    const response = await fetch(`${BaseURL}/user`, {
-                        method: "DELETE",
-                        body: JSON.stringify({
-                            accountIDs: userIdsToBeDeleted,
-                        }),
-                        headers: {
-                            "Content-Type": "application/json",
-                            Authorization: "Bearer " + token,
-                        },
-                    });
-                    if (response.ok) {
-                        setNotification({
-                            type: "success",
-                            message: "User deleted successfully.",
-                        });
-                    } else {
-                        throw "error";
-                    }
-                } catch (error) {
-                    setNotification({
-                        type: "error",
-                        message: "Error deleting user.",
-                    });
-                } finally {
+    const openBulkDeleteConfirmModal = useCallback(
+        ({ userIdsToBeDeleted = [] }) => {
+            if (!userIdsToBeDeleted) {
+                return;
+            }
+            setUserListParams(mergeQueryParams(searchParams, {}));
+            setSearchParams({ userIdsToBeDeleted });
+            setDeleteModalProps({
+                body: `Confirming will permanently delete the users. This action cannot be undone.`,
+                className: "remove-modal-test",
+                title: "Confirm delete",
+                iconDescription: "close",
+                inputInvalidText: "A valid value is required",
+                inputLabelText: `Type "delete users" to confirm`,
+                inputPlaceholderText: "delete users",
+                open: true,
+                onClose: () => {
                     setDeleteModalProps(null);
                     setUserListParams((prev) => {
                         setSearchParams(prev);
                         return {};
                     });
-                }
-            },
-        });
-    }, [searchParams])
+                },
+                primaryButtonText: "Delete",
+                resourceName: "delete users",
+                secondaryButtonText: "Close",
+                label: `Delete Users`,
+                textConfirmation: true,
+                onRequestSubmit: async () => {
+                    try {
+                        const response = await authFetch(`${BaseURL}/user`, {
+                            method: "DELETE",
+                            body: JSON.stringify({
+                                accountIDs: userIdsToBeDeleted,
+                            })
+                        });
+                        if (response.ok) {
+                            setNotification({
+                                type: "success",
+                                message: "User deleted successfully.",
+                            });
+                        } else {
+                            throw "error";
+                        }
+                    } catch (error) {
+                        setNotification({
+                            type: "error",
+                            message: "Error deleting user.",
+                        });
+                    } finally {
+                        setDeleteModalProps(null);
+                        setUserListParams((prev) => {
+                            setSearchParams(prev);
+                            return {};
+                        });
+                    }
+                },
+            });
+        },
+        [searchParams, authFetch]
+    );
 
     const openEditPanel = useCallback(
         ({ userIdToBeEdited }) => {
@@ -317,13 +287,16 @@ const UserManagementProvider = ({ children }) => {
         setSearchParams({ openAddUserPanel: true });
     }, [searchParams]);
 
-    const openUserDetails = useCallback(({userIdToShowDetails}) => {
-        if(!userIdToShowDetails){
-            return
-        }
-        setUserListParams(mergeQueryParams(searchParams, {}));
-        setSearchParams({ userIdToShowDetails });
-    }, [searchParams])
+    const openUserDetails = useCallback(
+        ({ userIdToShowDetails }) => {
+            if (!userIdToShowDetails) {
+                return;
+            }
+            setUserListParams(mergeQueryParams(searchParams, {}));
+            setSearchParams({ userIdToShowDetails });
+        },
+        [searchParams]
+    );
 
     const closeModalAndGoBackToUserList = useCallback(() => {
         setUserListParams((prev) => {
@@ -347,6 +320,7 @@ const UserManagementProvider = ({ children }) => {
             userListData,
             notification,
             loading,
+            isUserManagementAllowed,
             getUserList,
             deleteUser,
             openDeleteModal,
@@ -357,13 +331,14 @@ const UserManagementProvider = ({ children }) => {
             addUser,
             openUserDetails,
             getUserById,
-            openBulkDeleteConfirmModal
+            openBulkDeleteConfirmModal,
         }),
         [
             userListData,
             getUserList,
             deleteUser,
             loading,
+            isUserManagementAllowed,
             openDeleteModal,
             notification,
             openEditPanel,
@@ -373,45 +348,16 @@ const UserManagementProvider = ({ children }) => {
             addUser,
             openUserDetails,
             getUserById,
-            openBulkDeleteConfirmModal
+            openBulkDeleteConfirmModal,
         ]
     );
-
-    /**todo remove this whole block later */
-    const [userHasPermission, setUserHasPermission] = useState(false);
-    useEffect(() => {
-        (async () => {
-            try {
-                const token = localStorage.getItem("token"); //todo
-                const response = await fetch(`${BaseURL}/user`, {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: "Bearer " + token,
-                    },
-                });
-
-                if (response.ok) {
-                    const res = await response.json();
-                    if (
-                        res?.result.cognitoUserGroups === "Users" ||
-                        res?.result.cognitoUserGroups.length == 0
-                    ) {
-                        setUserHasPermission(false);
-                    } else {
-                        setUserHasPermission(true);
-                    }
-                }
-            } catch (e) {}
-        })();
-    }, []);
     return (
         <>
             <UserManagementContext.Provider value={value}>
                 {children}
-                {userHasPermission && editUserPanelOpen && <SidePanels />}
-                {userHasPermission && addUserPanelOpen && <SidePanels />}
-                {userHasPermission && userDetailsOpen && <UserDetailPanel />}
+                {isUserManagementAllowed && editUserPanelOpen && <SidePanels />}
+                {isUserManagementAllowed && addUserPanelOpen && <SidePanels />}
+                {isUserManagementAllowed && userDetailsOpen && <UserDetailPanel />}
             </UserManagementContext.Provider>
             {deleteModalProps && <RemoveModal {...deleteModalProps} />}
         </>
