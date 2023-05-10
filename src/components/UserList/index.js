@@ -107,6 +107,9 @@ export const UserList = () => {
                     setSearchParams({isUserListOpen: true})
                     await getUserList({search: searchText});
                 }
+                else{
+                    await getUserList({});
+                }
             })()
         }, 300)
         return () => clearTimeout(timeoutId)

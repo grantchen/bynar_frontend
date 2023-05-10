@@ -683,7 +683,7 @@ const Signup = () => {
       setCountry(e.target.value)
       setPhoneNumber(selectedItem?.dial_code.toString())
       setCountryCode(selectedItem?.code)
-      setCountryDialCode(selectedItem?.dial_code.toString())
+      setCountryDialCode(selectedItem?.dial_code.toString().replace("+", ""))
     }
   }
 
