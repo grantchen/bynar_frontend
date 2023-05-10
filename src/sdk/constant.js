@@ -1,4 +1,4 @@
-export const BaseURL="https://lc7p1jn3j0.execute-api.eu-central-1.amazonaws.com/awscodGetEvFeHM5ZAhd09N";
+export const BaseURL="https://7mz10vfch8.execute-api.eu-central-1.amazonaws.com/awscodGetEvnfbFeDdO1oAy";
 
 export const COUNTRIES = [
     {
