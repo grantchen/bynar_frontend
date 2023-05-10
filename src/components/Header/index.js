@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect, useRef, useContext, useMemo } from "react";
 import {
   Header,
   HeaderMenuButton,
@@ -21,10 +21,12 @@ import {
   SAMPLE_NOTIFICATION_DATA,
   ThemeModel,
   LanguageModel,
+  mergeQueryParams,
 } from "../../sdk";
 import { TearSheets } from "../TearSheet";
 import { SidePanels } from "../SidePanel";
 import { useSearchParams } from "react-router-dom";
+import { RemoveModal } from "@carbon/ibm-products";
 
 export const CommonHeader = () => {
   return (
@@ -36,7 +38,8 @@ export const CommonHeader = () => {
 
 const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
   const authContext = useContext(AuthContext);
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  //todo for Suyash: get token from auth context
   const token = localStorage.getItem("token");
   const [profileDropdown, setProfileDropdown] = useState(false);
   const [open, setOpen] = useState(false);
@@ -86,7 +89,7 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
       if (response.ok) {
         const res = await response.json();
         if (
-          res?.result.cognitoUserGroups === "Users" || 
+          res?.result.cognitoUserGroups === "Users" ||
           res?.result.cognitoUserGroups.length == 0
         ) {
           setShowButton(false);
@@ -104,51 +107,13 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
     getUserDetail();
   }, []);
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [addUserPanel, setAddUserPanel] = useState(false);
-  const [editUserPanel, setEditUserPanel] = useState(false);
   const [openLanguageModel, setLanguageModelOpen] = useState(false);
   const [openThemeModel, setThemeModelOpen] = useState(false);
 
-  const handleOpenModalClick = () => {
-    setIsOpen(true);
-  };
-
-  // const location = useLocation();
-  useEffect(() => {
-    //  console.log(searchParams,"search",searchParams.get('addUser'))
-    if (searchParams.get("addUser")) {
-      setIsOpen(false);
-      setAddUserPanel(true);
-    } else {
-      // setIsOpen(false)
-      setAddUserPanel(false);
-    }
-  }, [searchParams?.get("addUser")]);
-
-  useEffect(() => {
-    //  console.log(searchParams,"search",searchParams.get('addUser'))
-    if (searchParams.get("editUser")) {
-      setIsOpen(false);
-      setEditUserPanel(true);
-    } else {
-      setEditUserPanel(false);
-    }
-  }, [searchParams?.get("editUser")]);
-
-  useEffect(() => {
-    //  console.log(searchParams,"search",searchParams.get('addUser'))
-    if (searchParams.get("addUserMessage")) {
-      setIsOpen(true);
-      // setEditUserPanel(true)
-    }
-  }, [searchParams?.get("addUserMessage")]);
-
-  useEffect(() => {
-    if (searchParams.get("tearSheet")) {
-      setIsOpen(true);
-    }
-  }, [searchParams?.get("tearSheet")]);
+  const {isUserListOpen, setIsUserListOpen} = useMemo(() => ({
+    isUserListOpen: searchParams.get('isUserListOpen') === 'true', 
+    setIsUserListOpen: (shouldOpen) => setSearchParams({isUserListOpen: shouldOpen})
+  }), [searchParams.get('isUserListOpen')])
 
   return (
     <>
@@ -184,7 +149,7 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
               {showButton && (
                 <HeaderGlobalAction
                   aria-label="Users"
-                  onClick={handleOpenModalClick}
+                  onClick={() => setIsUserListOpen(true)}
                 >
                   <img
                     src={"../../../images/user-list.svg"}
@@ -192,7 +157,7 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
                   />
                 </HeaderGlobalAction>
               )}
-              <HeaderGlobalAction aria-label="Search" onClick={() => {}}>
+              <HeaderGlobalAction aria-label="Search" onClick={() => { }}>
                 <Search20 />
               </HeaderGlobalAction>
               {/* <HeaderGlobalAction aria-label="Notifications" onClick={() => setOpen(!open)}>
@@ -238,10 +203,11 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
           openLanguageModel={openLanguageModel}
           setLanguageModelOpen={setLanguageModelOpen}
         />
-        <TearSheets setIsOpen={setIsOpen} isOpen={isOpen} />
-        {showButton && addUserPanel && <SidePanels />}
-        {showButton && editUserPanel && <SidePanels />}
+        
+        
       </div>
+
+      {isUserListOpen && <TearSheets setIsOpen={setIsUserListOpen} isOpen={true} />}
     </>
   );
 };

@@ -22,9 +22,7 @@ export const TearSheets = ({ setIsOpen, isOpen }) => {
         preventCloseOnClickOutside
         title="User list"
       >
-        {/* <div className="tearsheet"> */}
         <UserList isOpen={isOpen} />
-        {/* </div> */}
       </Tearsheet>
     </>
   );

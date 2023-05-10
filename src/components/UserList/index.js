@@ -1,331 +1,327 @@
 import {
-  DataTable,
-  Table,
-  TableHead,
-  TableRow,
-  TableHeader,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableToolbar,
-  TableBatchActions,
-  TableBatchAction,
-  TableToolbarSearch,
-  TableToolbarContent,
-  TableSelectAll,
-  TableSelectRow,
-  ToastNotification,
-  Button,
-  InlineLoading,
-  ButtonSet,
+    DataTable,
+    Table,
+    TableHead,
+    TableRow,
+    TableHeader,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableToolbar,
+    TableBatchActions,
+    TableBatchAction,
+    TableToolbarSearch,
+    TableToolbarContent,
+    TableSelectAll,
+    TableSelectRow,
+    ToastNotification,
+    Button,
+    InlineLoading,
+    ButtonSet,
+    Pagination,
 } from "@carbon/react";
-import { useEffect, useState, useContext } from "react";
-import { BaseURL, AuthContext } from "../../sdk";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import {
+    RemoveModal,
+    useDatagrid,
+    useActionsColumn,
+    useStickyColumn,
+    useSelectRows,
+    useOnRowClick,
+    useSortableColumns,
+    Datagrid,
+    pkg,
+} from "@carbon/ibm-products";
+import { OverflowMenu, OverflowMenuItem } from "carbon-components-react";
+import { useEffect, useState, useContext, useCallback, useMemo } from "react";
+import {
+    BaseURL,
+    AuthContext,
+    useUserManagement,
+    mergeQueryParams,
+    getAutoSizedColumnWidth,
+} from "../../sdk";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { EditUser } from "../EditUser";
-import { Edit20, Restart20, Restart16 } from "@carbon/icons-react";
+import {
+    Edit20,
+    Restart20,
+    Restart16,
+    Activity16,
+    Add16,
+} from "@carbon/icons-react";
 import "./UserList.scss";
-export const UserList = ({ isOpen }) => {
-  const token = localStorage.getItem("token");
+pkg.component.Datagrid = true;
+export const UserList = () => {
+    const {
+        getUserList,
+        userListData,
+        loading,
+        openDeleteModal,
+        notification,
+        openEditPanel,
+        openAddUserModel,
+        openUserDetails,
+        openBulkDeleteConfirmModal
+    } = useUserManagement();
 
-  const navigate = useNavigate();
-  const [isDelete, setIsDelete] = useState(false);
-  const [isEdit, setIsEdit] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const authContext = useContext(AuthContext);
-  const [rows, setRow] = useState([]);
-  const [userDetails, setUserDetails] = useState({});
-  const [isUserDetailEdit, setIsEditUserDetail] = useState(false);
-  const [serverErrorNotification, setServerErrorNotification] = useState({});
-  const [serverNotification, setServerNotification] = useState(false);
-  const [addUserPanelOpen, setIsAddUserPanel] = useState(false);
-  const [searchParams] = useSearchParams();
-  const [userList, setUserList] = useState([])
-  const getUserList = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch(`${BaseURL}/list-users`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-      });
-      if (response.ok) {
-        const res = await response.json();
-        const result = res?.result?.userAccountDetails.map((value, index) => ({
-          ...value,
-          disabled: !value?.canDelete,
-          isEditable: value?.canUpdate
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const [searchText, setSearchText] = useState(searchParams.get('search') ?? '')
+
+    const { page, pageLimit } = useMemo(() => {
+        let values = {
+            page: 0,
+            pageLimit: 10,
+        };
+        try {
+            values = {
+                page: parseInt(searchParams.get("page") ?? 0),
+                pageLimit: parseInt(searchParams.get("limit") ?? 10),
+            };
+        } catch (error) {
+        } finally {
+            return values;
+        }
+    }, [searchParams]);
+
+    const getUserAPIQuery = useCallback(() => {
+        return {
+            limit: searchParams.get("limit") ?? 10,
+            page: searchParams.get("page") ?? 0,
+            search: searchParams.get("search") ?? "",
+            sortByColumn: searchParams.get("sortByColumn"),
+            sortByOrder: searchParams.get("sortByOrder"),
+        };
+    }, [searchParams]);
+
+    useEffect(() => {
+        (async () => {
+            await getUserList(getUserAPIQuery());
+        })();
+    }, [searchParams, getUserAPIQuery]);
+
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            (async () => {
+                if(searchText){
+                    setSearchParams({isUserListOpen: true})
+                    await getUserList({search: searchText});
+                }
+            })()
+        }, 300)
+        return () => clearTimeout(timeoutId)
+    }, [searchText])
+    const handleSort = useCallback((val1, val2, sortConfig) => {
+        setSearchParams((prev) => ({
+            ...prev,
+            sortByColumn: sortConfig.key,
+            sortByOrder: sortConfig.sortDirection,
         }));
-        setUserList(result)
-        setRow(result);
-      } else if (response.status === 500) {
-      }
-      setLoading(false);
-    } catch (e) {
-      await authContext.signout();
-      setLoading(false);
-    }
-  };
-
-  const deleteUser = async (filteredOrganisationId) => {
-    try {
-      setLoading(true);
-      const response = await fetch(`${BaseURL}/user`, {
-        method: "DELETE",
-        body: JSON.stringify({ accountIDs: filteredOrganisationId }),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-      });
-      const res = await response.json();
-      if (response.ok) {
-        setServerNotification(true);
-        setServerErrorNotification({
-          message: "User deleted sucessfully",
-          status: "success",
-        });
-        setIsDelete(false);
-        setIsEdit(false);
-      } else if (response.status === 500) {
-        setServerNotification(true);
-        setServerErrorNotification({
-          message: "Error deleting user",
-          status: "error",
-        });
-      }
-      getUserList();
-      // setLoading(false);
-    } catch (e) {
-      setLoading(false);
-      await authContext.signout();
-    }
-  };
-
-
-  useEffect(async () => {
-    if (serverNotification) getUserList();
-  }, [serverNotification]);
-
-  useEffect(() => {
-    setIsEdit(false);
-    setIsDelete(false);
-    if (!isOpen) {
-      setServerErrorNotification({});
-      setServerNotification(false);
-    } else {
-      getUserList();
-    }
-  }, [isOpen]);
-
-  const headers = [
-    {
-      header: "Username",
-      key: "username",
-    },
-    {
-      header: "Fullname",
-      key: "fullName",
-    },
-    {
-      header: "Country",
-      key: "country",
-    },
-    {
-      header: "City",
-      key: "city",
-    },
-    {
-      header: "PostalCode",
-      key: "postalCode",
-    },
-    {
-      header: "State",
-      key: "state",
-    },
-    {
-      header: "Phonenumber",
-      key: "phoneNumber",
-    },
-    {
-      header: "Roles",
-      key: "cognitoUserGroups",
-    },
-  ];
-
-  const handleUserEdit = (index) => {
-    const userEditArray = rows?.filter((a) => a.id === index);
-    navigate(`/home/dashboard?editUser=true&&Id=${index}`);
-  };
-
-  const handleDelete = (selectedRows) => {
-    const tempArray = selectedRows.map((a) => a.id);
-    let filteredOrganisationId = rows
-      ?.filter((person) => tempArray.includes(person.id))
-      .map((a) => a.id);
-    deleteUser(filteredOrganisationId);
-  };
-
-  const handleAddUser = () => {
-    navigate("/home/dashboard?addUser=true");
-  };
-
-  const handleSort=(value,e)=>{
-    console.log("test",value,e.target.value)
-  }
-
-
-  return (
-    <>
-      {loading ? (
-        <div
-          style={{
-            paddingTop: "20%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <InlineLoading
-            style={{ maxWidth: "fit-content" }}
-            description="Loading..."
-          />
-        </div>
-      ) : (
-        <>
-          {serverNotification && (
-            <ToastNotification
-              className="error-notification-box"
-              iconDescription="describes the close button"
-              subtitle={serverErrorNotification?.message}
-              timeout={0}
-              title={""}
-              kind={serverErrorNotification?.status}
-            />
-          )}
-          <div className="userdata-table">
-            <DataTable rows={rows} headers={headers} isSortable  sortDirection={'ASC'} sortRow={(e)=>{console.log(e)}} >
-              {({
-                rows,
-                headers,
-                getHeaderProps,
-                getRowProps,
-                getSelectionProps,
-                getBatchActionProps,
-                onInputChange,
-                selectedRows,
-              }) => (
-                <TableContainer>
-                  <TableToolbar>
-                    <TableBatchActions {...getBatchActionProps()}>
-                      <TableBatchAction
-                        tabIndex={
-                          getBatchActionProps().shouldShowBatchActions
-                            ? 0
-                            : -1
-                        }
-                        onClick={() => {
-                          handleDelete(selectedRows);
-                        }}
-                      >
-                        Delete
-                      </TableBatchAction>
-                    </TableBatchActions>
-                    <TableToolbarContent>
-                      <TableToolbarSearch
-                        tabIndex={
-                          getBatchActionProps().shouldShowBatchActions
-                            ? -1
-                            : 0
-                        }
-                        onChange={(e)=>console.log(e.target.value,"search")}
-                      />
-                      <Button
-                        kind='ghost'
-                        tabIndex={
-                          getBatchActionProps().shouldShowBatchActions
-                            ? -1
-                            : 0
-                        }
-                        onClick={() => { getUserList() }}
-                        renderIcon={Restart16}
-                        size="sm"
-                        style={{ cursor: "pointer" }}
-                        aria-label="Refresh"
-                      >
-                      </Button>
-                      <ButtonSet>
-                        <Button
-                          tabIndex={
-                            getBatchActionProps().shouldShowBatchActions
-                              ? -1
-                              : 0
-                          }
-                          onClick={handleAddUser}
-                          size="sm"
-                          kind="primary"
-                          style={{ cursor: "pointer" }}
+    }, []);
+    const columns = useMemo(
+        () => getColumns(userListData.userAccountDetails),
+        [userListData.userAccountDetails]
+    );
+    const datagridState = useDatagrid(
+        {
+            columns,
+            data: userListData.userAccountDetails,
+            isFetching: loading,
+            onRowSelect: (row, event) => console.log(row, event),
+            // onSort: (sortByColumn, sortByOrder) => {
+            //     if(sortByOrder === 'none'){
+            //         const {sortByColumn: sBC, sortByOrder: sBO, ...rest} = searchParams
+            //         setSearchParams(rest)
+            //     }
+            //     else{
+            //         setSearchParams({...searchParams, sortByColumn, sortByOrder})
+            //     }
+            // },
+            onRowClick: ({original}) => {
+                openUserDetails({userIdToShowDetails: original.id})
+            },
+            rowActions: [
+                {
+                    id: "edit",
+                    itemText: "Edit",
+                    onClick: (_, { original }) =>
+                        openEditPanel({
+                            userIdToBeEdited: original.id,
+                        }),
+                    shouldDisableMenuItem: ({original}) => !original.canUpdate
+                },
+                {
+                    id: "hidden",
+                    itemText: "Hidden item",
+                    onClick: () => {},
+                    shouldHideMenuItem: () => true,
+                },
+                {
+                    id: "delete",
+                    itemText: "Delete",
+                    hasDivider: true,
+                    isDelete: true,
+                    shouldDisableMenuItem: ({original}) => !original.canDelete,
+                    onClick: (_, { original }) =>
+                        openDeleteModal({
+                            userIdToBeDeleted: original.id,
+                            userNameToBeDeleted: original.username,
+                        }),
+                },
+            ],
+            DatagridPagination: ({ state, setPageSize, gotoPage }) => (
+                <Pagination
+                    page={page + 1}
+                    pageSize={pageLimit}
+                    pageSizes={[2, 5, 10, 25, 50]}
+                    totalItems={userListData?.totalCount}
+                    onChange={({ page, pageSize }) => {
+                        setSearchParams((prev) => {
+                            return mergeQueryParams(prev, {
+                                page: page - 1,
+                                limit: pageSize,
+                            });
+                        });
+                    }}
+                />
+            ),
+            DatagridBatchActions: ({
+                selectedFlatRows,
+                toggleAllRowsSelected,
+            }) => {
+                const totalSelected =
+                    selectedFlatRows && selectedFlatRows.length;
+                return (
+                    <TableBatchActions
+                        shouldShowBatchActions={totalSelected > 0}
+                        totalSelected={totalSelected}
+                        onCancel={() => toggleAllRowsSelected(false)}
+                    >
+                        <TableBatchAction
+                            renderIcon={Activity16}
+                            onClick={() => alert("Batch action")}
                         >
-                          Add new user
-                        </Button>
-                      </ButtonSet>
-                    </TableToolbarContent>
-                  </TableToolbar>
-                  <Table>
-                    <TableHead>
-                      <TableRow>
-                        {(
-                          <TableSelectAll {...getSelectionProps()} />
-                        )}
-                        {headers.map((header) => (
-                          <TableHeader
-                            {...getHeaderProps({
-                              header,
-                              // isSortable:true
-                            })}
-                            //  onClick={(e) => handleSort(header.key,e)}
-                          >
-                            {header.header}
-                          </TableHeader>
-                        ))}
-                        {<TableHeader />}
-                      </TableRow>
-                    </TableHead>
+                            Action
+                        </TableBatchAction>
+                    </TableBatchActions>
+                );
+            },
+            DatagridActions: () => (
+                <TableToolbarContent>
+                    <TableToolbarSearch
+                        size="xl"
+                        id="columnSearch"
+                        persistent
+                        placeHolderText={"Search here"}
+                        onChange={(e) => setSearchText(e.target.value)}
+                    />
+                    <Button
+                        kind="ghost"
+                        hasIconOnly
+                        tooltipPosition="bottom"
+                        renderIcon={Restart16}
+                        iconDescription={"Refresh"}
+                        onClick={() => getUserList(getUserAPIQuery())}
+                    />
+                    <Button
+                        onClick={openAddUserModel}
+                        size="sm"
+                        kind="primary"
+                        style={{ cursor: "pointer" }}
+                    >
+                        Add new user
+                    </Button>
+                </TableToolbarContent>
+            ),
+            batchActions: true,
+            toolbarBatchActions: [
+                {
+                    label: "Delete",
+                    renderIcon: Add16,
+                    onClick: () => {
+                        const idsToDelete = datagridState.selectedFlatRows.map(row => row.original.id)
+                        openBulkDeleteConfirmModal({userIdsToBeDeleted: idsToDelete})
+                    },
+                    hasDivider: true,
+                    kind: "danger",
+                },
+            ],
+        },
+        useStickyColumn,
+        useActionsColumn,
+        useSelectRows,
+        useOnRowClick,
+        // useSortableColumns
+    );
 
-                    <TableBody>
-                      {rows.map((row, index) => (
-                        <TableRow {...getRowProps({ row })}>
-                          {(
-                            <TableSelectRow
-                              className={"edit-icon"}
-                              {...getSelectionProps({ row })}
-                            />
-                          )}
-                          {row.cells.map((cell) => (
-                            <TableCell key={cell.id}>
-                              {cell.value}
-                            </TableCell>
-                          ))}
-                          {
-                            <TableCell
-                              className={userList[index].canUpdate ? "edit-icon" : "edit-icon-disabled"}
-                              onClick={userList[index].canUpdate ? () => { handleUserEdit(row.id) } : null}
-                            >
-                              {<Edit20 />}
-                            </TableCell>
-                          }
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              )}
-            </DataTable>
-          </div>
+    return (
+        <>
+            <>
+                {notification && (
+                    <ToastNotification
+                        className="error-notification-box"
+                        iconDescription="close notification"
+                        subtitle={notification?.message}
+                        timeout={0}
+                        title={""}
+                        kind={notification.type}
+                    />
+                )}
+                <div className="userdata-table">
+                    <Datagrid datagridState={datagridState} />
+                </div>
+            </>
         </>
-      )}
-    </>
-  );
+    );
+};
+
+const getColumns = (rows) => {
+    return [
+        {
+            Header: "Username",
+            accessor: "username",
+            width: getAutoSizedColumnWidth(rows, "username", "Username"),
+        },
+        {
+            Header: "Fullname",
+            accessor: "fullName",
+            width: getAutoSizedColumnWidth(rows, "fullName", "Fullname"),
+        },
+        {
+            Header: "Country",
+            accessor: "country",
+            width: getAutoSizedColumnWidth(rows, "country", "Country"),
+        },
+        {
+            Header: "City",
+            accessor: "city",
+            width: getAutoSizedColumnWidth(rows, "city", "City"),
+        },
+        {
+            Header: "PostalCode",
+            accessor: "postalCode",
+            width: getAutoSizedColumnWidth(rows, "postalCode", "PostalCode"),
+        },
+        {
+            Header: "State",
+            accessor: "state",
+            width: getAutoSizedColumnWidth(rows, "state", "State"),
+        },
+        {
+            Header: "Phonenumber",
+            accessor: "phoneNumber",
+            width: getAutoSizedColumnWidth(rows, "phoneNumber", "Phonenumber"),
+        },
+        {
+            Header: "Roles",
+            accessor: "cognitoUserGroups",
+            width: getAutoSizedColumnWidth(rows, "cognitoUserGroups", "Roles"),
+        },
+        {
+            Header: "",
+            accessor: "actions",
+            isAction: true,
+            sticky: "right",
+        },
+    ];
 };
