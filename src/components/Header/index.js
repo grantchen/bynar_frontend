@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect, useRef, useContext, useMemo } from "react";
 import {
   Header,
   HeaderMenuButton,
@@ -21,6 +21,7 @@ import {
   SAMPLE_NOTIFICATION_DATA,
   ThemeModel,
   LanguageModel,
+  mergeQueryParams,
 } from "../../sdk";
 import { TearSheets } from "../TearSheet";
 import { SidePanels } from "../SidePanel";
@@ -106,96 +107,13 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
     getUserDetail();
   }, []);
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [addUserPanel, setAddUserPanel] = useState(false);
-  const [editUserPanel, setEditUserPanel] = useState(false);
   const [openLanguageModel, setLanguageModelOpen] = useState(false);
   const [openThemeModel, setThemeModelOpen] = useState(false);
-  const [deleteModalProps, setDeleteModalProps] = useState(null)
 
-  const handleOpenModalClick = () => {
-    setIsOpen(true);
-  };
-
-  // TODO for Suyash, refactor these effect and merge into one
-  useEffect(() => {
-    //  console.log(searchParams,"search",searchParams.get('addUser'))
-    if (searchParams.get("addUser")) {
-      setIsOpen(false);
-      setAddUserPanel(true);
-    } else {
-      // setIsOpen(false)
-      setAddUserPanel(false);
-    }
-  }, [searchParams?.get("addUser")]);
-
-  useEffect(() => {
-    //  console.log(searchParams,"search",searchParams.get('addUser'))
-    if (searchParams.get("editUser")) {
-      setIsOpen(false);
-      setEditUserPanel(true);
-    } else {
-      setEditUserPanel(false);
-    }
-  }, [searchParams?.get("editUser")]);
-
-  useEffect(() => {
-    //  console.log(searchParams,"search",searchParams.get('addUser'))
-    if (searchParams.get("addUserMessage")) {
-      setIsOpen(true);
-      // setEditUserPanel(true)
-    }
-  }, [searchParams?.get("addUserMessage")]);
-
-  useEffect(() => {
-    if (searchParams.get("tearSheet")) {
-      setIsOpen(true);
-    }
-  }, [searchParams?.get("tearSheet")]);
-
-  useEffect(() => {
-    const userIdToBeDeleted = searchParams.get('userIdToBeDeleted')
-    const userNameToBeDeleted = searchParams.get('userNameToBeDeleted')
-    if (userIdToBeDeleted && userNameToBeDeleted) {
-      setDeleteModalProps({
-        body: `Deleting ${userNameToBeDeleted} will permanently delete the user. This action cannot be undone.`,
-        className: 'remove-modal-test',
-        title: 'Confirm delete',
-        iconDescription: 'close',
-        inputInvalidText: 'A valid value is required',
-        inputLabelText: `Type ${userNameToBeDeleted} to confirm`,
-        inputPlaceholderText: userNameToBeDeleted,
-        open: true,
-        onClose: () => setIsOpen(false),
-        primaryButtonText: 'Delete',
-        resourceName: userNameToBeDeleted,
-        secondaryButtonText: 'Close',
-        label: `Delete ${userNameToBeDeleted}`,
-        textConfirmation: true,
-        onRequestSubmit: async () => {
-          try {
-            // todo: refactor to show error
-            const response = await fetch(`${BaseURL}/user`, {
-              method: "DELETE",
-              body: JSON.stringify({ accountIDs: [parseInt(userIdToBeDeleted)] }),
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + token,
-              },
-            })
-          } catch (error) {
-
-          }
-          finally {
-            setSearchParams({
-              tearSheet: true
-            })
-          }
-        }
-      })
-      setIsOpen(false);
-    }
-  }, [searchParams.get('userIdToBeDeleted'), searchParams.get('userNameToBeDeleted')])
+  const {isUserListOpen, setIsUserListOpen} = useMemo(() => ({
+    isUserListOpen: searchParams.get('isUserListOpen') === 'true', 
+    setIsUserListOpen: (shouldOpen) => setSearchParams({isUserListOpen: shouldOpen})
+  }), [searchParams.get('isUserListOpen')])
 
   return (
     <>
@@ -231,7 +149,7 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
               {showButton && (
                 <HeaderGlobalAction
                   aria-label="Users"
-                  onClick={handleOpenModalClick}
+                  onClick={() => setIsUserListOpen(true)}
                 >
                   <img
                     src={"../../../images/user-list.svg"}
@@ -285,11 +203,11 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
           openLanguageModel={openLanguageModel}
           setLanguageModelOpen={setLanguageModelOpen}
         />
-        <TearSheets setIsOpen={setIsOpen} isOpen={isOpen} />
-        {showButton && addUserPanel && <SidePanels />}
-        {showButton && editUserPanel && <SidePanels />}
-        {deleteModalProps && <RemoveModal {...deleteModalProps} />}
+        
+        
       </div>
+
+      {isUserListOpen && <TearSheets setIsOpen={setIsUserListOpen} isOpen={true} />}
     </>
   );
 };
