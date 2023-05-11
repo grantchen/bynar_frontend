@@ -12,69 +12,37 @@ const HeaderTab = () => {
     tab,
     handleAddTab,
     handleRemoveTab,
-    setStartIndex,
-    setEndIndex,
-    startIndex,
-    endIndex,
     activeTab,
     setActiveTab,
-    maxTab,
-    setMaxTab,
   } = useContext(TabContext);
-  const [showLeftArrow, setShowLeftArrow] = useState(false);
-  const [showRightArrow, setShowRightArrow] = useState(false);
   const carouselRef = useRef(null);
   const tabRef = useRef(null);
   const { t } = useTranslation();
   const handleLeftScroll = () => {
-    if (startIndex > 0) {
-      setStartIndex(startIndex - 1);
-      setEndIndex(endIndex - 1);
-      if (tab.length > maxTab) {
-        setShowRightArrow(true);
-      } else {
-        setShowRightArrow(false);
-      }
+    if(!carouselRef.current){
+      return
     }
-    if (startIndex === 0) {
-      setShowLeftArrow(false);
-    }
+    console.log('test1')
+    carouselRef.current.scrollTo({
+      left: carouselRef.current.scrollLeft - 102,
+      behavior: "smooth",
+    })
   };
 
   const handleRightScroll = () => {
-    const l = tab.slice(startIndex, endIndex).length;
-    if (l < maxTab) {
-      setShowRightArrow(false);
-      setShowLeftArrow(true);
-    } else {
-      setStartIndex(startIndex + 1);
-      setEndIndex(endIndex + 1);
+    if(!carouselRef.current){
+      return
     }
+    console.log('test2')
+    carouselRef.current.scrollTo({
+      left: carouselRef.current.scrollLeft + 102,
+      behavior: "smooth",
+    })
   };
 
   const removeTab = (idToRemove, index) => {
     handleRemoveTab(idToRemove, index);
   };
-
-  useEffect(() => {
-    setShowLeftArrow(startIndex > 0 ? true : false);
-    setShowRightArrow(tab.length > maxTab && maxTab > 0 ? true : false);
-  }, [tab]);
-
-  const handleWindowSizeChange = () => {
-    const width = window.innerWidth - 360;
-    const res = (width - 150) / 130;
-    if (res < 0) {
-      setMaxTab(7);
-      setEndIndex(7);
-    } else {
-      setMaxTab(Math.floor(res));
-      setEndIndex(Math.floor(res));
-    }
-  };
-  useEffect(() => {
-    handleWindowSizeChange();
-  }, []);
 
   
   const shouldShowTabScroll = ((window.innerWidth - SHOW_SCROLL_BUTTON_WIDTH) / 100) < tab.length
@@ -126,6 +94,12 @@ const HeaderTab = () => {
               }}
               onClick={() => {
                 handleAddTab();
+                setTimeout(() => {
+                  carouselRef.current.scrollTo({
+                    left: carouselRef.current.scrollLeft + 200,
+                    behavior: "smooth",
+                  })
+                }, 50);
               }}
             >
               <p>{t("add-new-tab")}</p>
