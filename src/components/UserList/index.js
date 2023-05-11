@@ -205,7 +205,6 @@ export const UserList = () => {
                     <TableToolbarSearch
                         size="xl"
                         id="columnSearch"
-                        persistent
                         placeHolderText={"Search here"}
                         onChange={(e) => setSearchText(e.target.value)}
                     />

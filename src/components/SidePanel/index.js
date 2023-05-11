@@ -22,6 +22,7 @@ import {
     PhoneNumberUtil,
     PhoneNumberFormat as PNF,
 } from "google-libphonenumber";
+import { InlineLoading } from "carbon-components";
 export const SidePanels = () => {
     const phoneUtil = PhoneNumberUtil.getInstance();
     const [open, setOpen] = useState(true);
@@ -267,6 +268,9 @@ export const SidePanels = () => {
         Object.keys(postalCodeErrorNotification).length != 0;
 
     const handleAccountInformationFormSubmit = () => {
+        setServerErrorNotification({
+        });
+        setServerNotification(false);
         const error = {};
         postalCodeValidation(postalCode);
         error.fullName = fullName.trim().length == 0;
@@ -311,6 +315,9 @@ export const SidePanels = () => {
         addressLine1.trim().length == 0 ||
         Object.keys(postalCodeErrorNotification).length != 0;
     const handleEditInformationFormSubmit = () => {
+        setServerErrorNotification({
+        });
+        setServerNotification(false);
         const error = {};
         postalCodeValidation(postalCode);
         error.fullName = fullName.trim().length == 0;
@@ -373,7 +380,7 @@ export const SidePanels = () => {
                 isAgreementSigned: false,
                 cognitoUserGroup: role,
             };
-            addUser({ userDetails: data });
+            await addUser({ userDetails: data });
         } catch (e) {
             setServerErrorNotification({ message: e.message, status: "error" });
             setServerNotification(true);
@@ -397,7 +404,7 @@ export const SidePanels = () => {
                 state: state,
                 phoneNumber: phoneNumber,
             };
-            await updateUser({ userDetails: data });
+            await updateUser({ userDetails: data });         
         } catch (e) {
             setServerErrorNotification({
                 message: e.message,
@@ -411,7 +418,7 @@ export const SidePanels = () => {
 
     const getUserList = async (userid) => {
         try {
-            setLoading(true);
+             setLoading(true);
             const { result } = await getUserById(userid);
             setFullName(result?.fullName);
             setUserName(result?.username);
@@ -462,7 +469,6 @@ export const SidePanels = () => {
             );
         }
     };
-
     return (
         <div className="main--content">
             <SidePanel
@@ -481,6 +487,7 @@ export const SidePanels = () => {
                                 : handleAccountInformationFormSubmit();
                         },
                         kind: "primary",
+                        loading:loading?true:false
                     },
                     {
                         label: "Cancel",
@@ -495,6 +502,11 @@ export const SidePanels = () => {
                             className="error-notification-box"
                             iconDescription="describes the close button"
                             subtitle={serverErrorNotification?.message}
+                            onCloseButtonClick={() => {
+                                setServerErrorNotification({
+                                });
+                                setServerNotification(false);
+                              }}
                             timeout={0}
                             title={""}
                             kind={serverErrorNotification?.status}

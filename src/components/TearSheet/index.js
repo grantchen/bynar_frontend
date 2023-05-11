@@ -12,9 +12,7 @@ export const TearSheets = ({ setIsOpen, isOpen }) => {
   return (
     <>
       <Tearsheet
-        actions={[
-          { kind: "secondary", label: "Close", onClick: handleCloseModal },
-        ]}
+        hasCloseIcon
         closeIconDescription="Close the tearsheet"
         label=""
         onClose={handleCloseModal}
