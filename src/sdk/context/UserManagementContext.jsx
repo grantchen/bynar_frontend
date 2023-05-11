@@ -160,8 +160,8 @@ const UserManagementProvider = ({ children }) => {
                 title: "Confirm delete",
                 iconDescription: "close",
                 inputInvalidText: "A valid value is required",
-                inputLabelText: `Type ${userNameToBeDeleted} to confirm`,
-                inputPlaceholderText: userNameToBeDeleted,
+                inputLabelText: `Type "delete" to confirm`,
+                inputPlaceholderText: "delete",
                 open: true,
                 onClose: () => {
                     setDeleteModalProps(null);
@@ -171,7 +171,7 @@ const UserManagementProvider = ({ children }) => {
                     });
                 },
                 primaryButtonText: "Delete",
-                resourceName: userNameToBeDeleted,
+                resourceName: "delete",
                 secondaryButtonText: "Close",
                 label: `Delete ${userNameToBeDeleted}`,
                 textConfirmation: true,
@@ -222,8 +222,8 @@ const UserManagementProvider = ({ children }) => {
                 title: "Confirm delete",
                 iconDescription: "close",
                 inputInvalidText: "A valid value is required",
-                inputLabelText: `Type "delete users" to confirm`,
-                inputPlaceholderText: "delete users",
+                inputLabelText: `Type "delete" to confirm`,
+                inputPlaceholderText: "delete",
                 open: true,
                 onClose: () => {
                     setDeleteModalProps(null);
@@ -233,7 +233,7 @@ const UserManagementProvider = ({ children }) => {
                     });
                 },
                 primaryButtonText: "Delete",
-                resourceName: "delete users",
+                resourceName: "delete",
                 secondaryButtonText: "Close",
                 label: `Delete Users`,
                 textConfirmation: true,
