@@ -36,21 +36,20 @@ export const AuthProvider = ({ children }) => {
                 }
             } catch (e) {
                 // todo remove this fucking hack
-                const token = localStorage.getItem("token")
-                if(token){
+                const token = localStorage.getItem("token");
+                if (token) {
                     const response = await fetch(`${BaseURL}/user`, {
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json",
                             Authorization: "Bearer " + token,
                         },
-                    })
-                    if(response.status === 401){
-                        localStorage.clear()
-                    }
-                    else if(response.ok){
-                        setState({token})
-                        return
+                    });
+                    if (response.status === 401) {
+                        localStorage.clear();
+                    } else if (response.ok) {
+                        setState({ token });
+                        return;
                     }
                 }
                 setState({ token: null });
@@ -93,9 +92,11 @@ export const AuthProvider = ({ children }) => {
                 return;
             case null:
                 if (
-                    !(location.pathname === "/signin" ||
-                    location.pathname === "/forgotpassword" ||
-                    location.pathname === "/signup")
+                    !(
+                        location.pathname === "/signin" ||
+                        location.pathname === "/forgotpassword" ||
+                        location.pathname === "/signup"
+                    )
                 ) {
                     navigate("/signin");
                 }
@@ -120,7 +121,7 @@ export const AuthProvider = ({ children }) => {
                     const user = await Auth.currentSession();
                     token = user?.accessToken?.jwtToken;
                 } catch (error) {
-                    return new Promise()
+                    return new Promise();
                 }
             }
             let res = await fetch(url, {
@@ -135,10 +136,9 @@ export const AuthProvider = ({ children }) => {
                 try {
                     const user = await Auth.currentSession();
                     token = user?.accessToken?.jwtToken;
-                }
-                catch (error) {
+                } catch (error) {
                     signout();
-                    return new Promise()
+                    return new Promise();
                 }
                 if (token) {
                     setState({ token });
@@ -150,9 +150,9 @@ export const AuthProvider = ({ children }) => {
                             Authorization: "Bearer " + token,
                         },
                     });
-                    if(res.status === 401){
+                    if (res.status === 401) {
                         signout();
-                        return new Promise()
+                        return new Promise();
                     }
                 } else {
                     signout();
@@ -172,13 +172,13 @@ export const AuthProvider = ({ children }) => {
                 token: null,
             });
             // todo remove this fucking hack
-            localStorage.clear()
+            localStorage.clear();
         } catch (e) {
             console.log(e);
         }
     }, []);
 
-    const refreshPostSignIn = useCallback(async() => {
+    const refreshPostSignIn = useCallback(async () => {
         try {
             const res = await Auth.currentSession();
             if (res?.accessToken?.jwtToken) {
@@ -189,12 +189,45 @@ export const AuthProvider = ({ children }) => {
         } catch (e) {
             setState({ token: null });
         }
-    }, [])
+    }, []);
     // todo remove this fucking hack
     const hackPatchToken = useCallback((token) => {
-        localStorage.setItem('token', token)
-        setState({token})
-    }, [])
+        localStorage.setItem("token", token);
+        setState({ token });
+    }, []);
+
+    const updateUserLanguagePreference = useCallback(
+        async ({ languagePreference }) => {
+            if (!state?.user) {
+                return;
+            }
+            const updateUserLanguage = {
+                ...state?.user,
+                languagePreference,
+            };
+
+            const response = await authFetch(`${BaseURL}/user`, {
+                method: "PUT",
+                body: JSON.stringify(updateUserLanguage),
+            });
+
+            const res = await response.json();
+
+            if (response.ok) {
+                setState({
+                    user: {
+                        ...state.user,
+                        languagePreference,
+                    },
+                });
+            } else if (response.status === 500) {
+                throw { message: res.error, type: "error" };
+            } else {
+                throw { message: "Error updating user", type: "error" };
+            }
+        },
+        [state?.user, authFetch]
+    );
 
     const providerValue = useMemo(
         () => ({
@@ -202,9 +235,17 @@ export const AuthProvider = ({ children }) => {
             signout,
             authFetch,
             refreshPostSignIn,
-            hackPatchToken
+            hackPatchToken,
+            updateUserLanguagePreference,
         }),
-        [state, signout, authFetch, refreshPostSignIn, hackPatchToken]
+        [
+            state,
+            signout,
+            authFetch,
+            refreshPostSignIn,
+            hackPatchToken,
+            updateUserLanguagePreference,
+        ]
     );
     return <Provider value={providerValue}>{children}</Provider>;
 };

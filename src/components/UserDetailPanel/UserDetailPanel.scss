@@ -16,5 +16,12 @@
     padding-left: var(--cds-spacing-03, 0.5rem);
 }
 
-
-
+.loading-container{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    .cds--inline-loading{
+        width: auto !important;
+    }
+}

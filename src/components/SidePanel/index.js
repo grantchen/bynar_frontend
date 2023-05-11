@@ -470,6 +470,7 @@ export const SidePanels = () => {
     return (
         <div className="main--content">
             <SidePanel
+                preventCloseOnClickOutside
                 includeOverlay
                 className="test"
                 open={open}

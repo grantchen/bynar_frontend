@@ -2,6 +2,7 @@ import { useState, useRef, useContext, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { BaseURL, useUserManagement } from "../../sdk";
 import { SidePanel } from "@carbon/ibm-products";
+import { InlineLoading } from "@carbon/react";
 import "./UserDetailPanel.scss";
 
 const userDetailkey = {
@@ -31,17 +32,19 @@ export const UserDetailPanel = () => {
         (async () => {
             try {
                 setIsLoading(true);
-                const userDetails = await getUserById(parseInt(searchParams?.get("userIdToShowDetails")));
+                const userDetails = await getUserById(
+                    parseInt(searchParams?.get("userIdToShowDetails"))
+                );
                 setUserDetail({
                     ...userDetails.result,
                     address: `${userDetails.result.addressLine} ${userDetails.result.addressLine2}`,
-                    phoneNumber: `+${userDetails.result.phoneNumber}`
-                })
+                    phoneNumber: `+${userDetails.result.phoneNumber}`,
+                });
             } catch (e) {
             } finally {
                 setIsLoading(false);
             }
-        })()
+        })();
     }, []);
 
     return (
@@ -52,24 +55,31 @@ export const UserDetailPanel = () => {
                 onRequestClose={closeModalAndGoBackToUserList}
                 title={"User Detail"}
                 subtitle=""
+                preventCloseOnClickOutside
             >
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                    {Object?.entries(userDetailkey)
-                        .filter(([_, v]) => v != null)
-                        ?.map(([key, value]) => {
-                            return (
-                                <div
-                                    style={{ display: "flex", gap: "8px" }}
-                                    key={key}
-                                >
-                                    <p className="list-users">{`${userDetailkey[key]}  :`}</p>
-                                    <p className="list-user-detail">
-                                        {" "}
-                                        {`${userDetail[key]}`}
-                                    </p>
-                                </div>
-                            );
-                        })}
+                    {isLoading ? (
+                        <div className="loading-container">
+                            <InlineLoading />
+                        </div>
+                    ) : (
+                        Object?.entries(userDetailkey)
+                            .filter(([_, v]) => v != null)
+                            ?.map(([key, value]) => {
+                                return (
+                                    <div
+                                        style={{ display: "flex", gap: "8px" }}
+                                        key={key}
+                                    >
+                                        <p className="list-users">{`${userDetailkey[key]}  :`}</p>
+                                        <p className="list-user-detail">
+                                            {" "}
+                                            {`${userDetail[key]}`}
+                                        </p>
+                                    </div>
+                                );
+                            })
+                    )}
                 </div>
             </SidePanel>
         </div>
