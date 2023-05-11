@@ -268,8 +268,7 @@ export const SidePanels = () => {
         Object.keys(postalCodeErrorNotification).length != 0;
 
     const handleAccountInformationFormSubmit = () => {
-        setServerErrorNotification({
-        });
+        setServerErrorNotification({});
         setServerNotification(false);
         const error = {};
         postalCodeValidation(postalCode);
@@ -315,8 +314,7 @@ export const SidePanels = () => {
         addressLine1.trim().length == 0 ||
         Object.keys(postalCodeErrorNotification).length != 0;
     const handleEditInformationFormSubmit = () => {
-        setServerErrorNotification({
-        });
+        setServerErrorNotification({});
         setServerNotification(false);
         const error = {};
         postalCodeValidation(postalCode);
@@ -404,7 +402,7 @@ export const SidePanels = () => {
                 state: state,
                 phoneNumber: phoneNumber,
             };
-            await updateUser({ userDetails: data });         
+            await updateUser({ userDetails: data });
         } catch (e) {
             setServerErrorNotification({
                 message: e.message,
@@ -418,7 +416,7 @@ export const SidePanels = () => {
 
     const getUserList = async (userid) => {
         try {
-             setLoading(true);
+            setLoading(true);
             const { result } = await getUserById(userid);
             setFullName(result?.fullName);
             setUserName(result?.username);
@@ -487,7 +485,7 @@ export const SidePanels = () => {
                                 : handleAccountInformationFormSubmit();
                         },
                         kind: "primary",
-                        loading:loading?true:false
+                        loading
                     },
                     {
                         label: "Cancel",
@@ -503,10 +501,9 @@ export const SidePanels = () => {
                             iconDescription="describes the close button"
                             subtitle={serverErrorNotification?.message}
                             onCloseButtonClick={() => {
-                                setServerErrorNotification({
-                                });
+                                setServerErrorNotification({});
                                 setServerNotification(false);
-                              }}
+                            }}
                             timeout={0}
                             title={""}
                             kind={serverErrorNotification?.status}

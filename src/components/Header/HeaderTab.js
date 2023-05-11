@@ -5,6 +5,8 @@ import "./HeaderTab.scss";
 import { TabContext } from "../../sdk";
 import { useTranslation } from "react-i18next";
 
+
+const SHOW_SCROLL_BUTTON_WIDTH = 405
 const HeaderTab = () => {
   const {
     tab,
@@ -70,14 +72,16 @@ const HeaderTab = () => {
       setEndIndex(Math.floor(res));
     }
   };
-
   useEffect(() => {
     handleWindowSizeChange();
   }, []);
+
+  
+  const shouldShowTabScroll = ((window.innerWidth - SHOW_SCROLL_BUTTON_WIDTH) / 100) < tab.length
   return (
     <>
       <div className="tab" ref={tabRef}>
-        {showLeftArrow && startIndex > 0 && (
+        {shouldShowTabScroll && (
           <IconButton className="left-arrow" onClick={handleLeftScroll}>
             <img
               src={"../../../images/left-arrow.svg"}
@@ -87,9 +91,9 @@ const HeaderTab = () => {
           </IconButton>
         )}
 
-        <div style={{ overflowX: "hidden" }} ref={carouselRef}>
+        <div style={{ overflowX: "auto" }} ref={carouselRef}>
           <div style={{ display: "flex", whiteSpace: "nowrap" }}>
-            {tab.slice(startIndex, endIndex).map((item, index) => {
+            {tab.map((item, index) => {
               return (
                 <Button
                   kind="ghost"
@@ -128,7 +132,7 @@ const HeaderTab = () => {
             </Button>
           </div>
         </div>
-        {showRightArrow ? (
+        {shouldShowTabScroll ? (
           <IconButton className="left-arrow" onClick={handleRightScroll}>
             <img
               src={"../../images/right-arrow.svg"}

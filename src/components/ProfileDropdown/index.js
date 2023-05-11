@@ -14,7 +14,7 @@ const ProfileDropdown = React.memo(
     setLanguageModelOpen,
   }) => {
     const [t, i18n] = useTranslation();
-    const {signout} = useAuth();
+    const {signout, user} = useAuth();
     const theme = useContext(ThemeContext);
     const handleLogout = async (e) => {
       e.preventDefault();
@@ -34,13 +34,13 @@ const ProfileDropdown = React.memo(
       <div>
         <Tile className={"tile"}>
           <div className="bynar-profile-info-wrapper">
-            <h4 style={{ color: "#161616" }}>Evin Lewis</h4>
+            <h4 style={{ color: "#161616" }}>{user?.fullName}</h4>
             <div className="profile-info-image">
               <UserProfileImage
                 backgroundColor={"light-cyan"}
                 size={"xlg"}
-                initials={"Evin Lewis"}
-                tooltipText={"Evin Lewis"}
+                initials={user?.fullName ?? '...'}
+                tooltipText={user?.fullName ?? '...'}
                 theme={
                   theme?.state?.currentTheme?.value === "carbon-theme--g90"
                     ? "dark"
