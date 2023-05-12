@@ -68,7 +68,6 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
   }, [wrapperRef]);
 
   const [openLanguageModel, setLanguageModelOpen] = useState(false);
-  const [openThemeModel, setThemeModelOpen] = useState(false);
 
   const {isUserListOpen, setIsUserListOpen} = useMemo(() => ({
     isUserListOpen: searchParams.get('isUserListOpen') === 'true', 
@@ -140,8 +139,6 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
                     </HeaderGlobalAction>
                     <PopoverContent>
                       <ProfileDropdown
-                        openThemeModel={openThemeModel}
-                        setThemeModelOpen={setThemeModelOpen}
                         openLanguageModel={openLanguageModel}
                         setLanguageModelOpen={setLanguageModelOpen}
                       />
@@ -155,10 +152,6 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
         </Header>
         <Outlet />
 
-        <ThemeModel
-          openModel={openThemeModel}
-          setModelOpen={setThemeModelOpen}
-        />
         <LanguageModel
           openLanguageModel={openLanguageModel}
           setLanguageModelOpen={setLanguageModelOpen}

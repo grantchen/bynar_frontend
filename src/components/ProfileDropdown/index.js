@@ -1,21 +1,19 @@
 import { UserProfileImage } from "@carbon/ibm-products";
 import { Link, Tile } from "@carbon/react";
 import { ArrowRight } from "@carbon/react/icons";
-import React, { useContext, useState } from "react";
-import { ThemeContext, useAuth } from "../../sdk";
+import React from "react";
+import { useAuth, useThemePreference } from "../../sdk";
 
 import { useTranslation } from "react-i18next";
 import "./profileDropdown.scss";
 const ProfileDropdown = React.memo(
   ({
-    openThemeModel,
-    setThemeModelOpen,
     openLanguageModel,
     setLanguageModelOpen,
   }) => {
     const [t, i18n] = useTranslation();
     const {signout, user} = useAuth();
-    const theme = useContext(ThemeContext);
+    const { openThemeChangeModal, theme } = useThemePreference();
     const handleLogout = async (e) => {
       e.preventDefault();
       await signout();
@@ -25,10 +23,6 @@ const ProfileDropdown = React.memo(
       setLanguageModelOpen(!openLanguageModel);
     };
 
-    const handleThemeChange = (e) => {
-      e.preventDefault();
-      setThemeModelOpen(!openThemeModel);
-    };
 
     return (
       <div>
@@ -42,7 +36,7 @@ const ProfileDropdown = React.memo(
                 initials={user?.fullName ?? '...'}
                 tooltipText={user?.fullName ?? '...'}
                 theme={
-                  theme?.state?.currentTheme?.value === "carbon-theme--g90"
+                  theme === "g90"
                     ? "dark"
                     : "light"
                 }
@@ -55,7 +49,7 @@ const ProfileDropdown = React.memo(
             <Link style={{ cursor: "pointer" }} onClick={handleLanguageChange}>
               {t("change-language")}
             </Link>
-            <Link style={{ cursor: "pointer" }} onClick={handleThemeChange}>
+            <Link style={{ cursor: "pointer" }} onClick={() => openThemeChangeModal(true)}>
               {t("change-theme")}
             </Link>
             <Link

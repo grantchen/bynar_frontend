@@ -171,6 +171,7 @@ export const AuthProvider = ({ children }) => {
                 ...initialState,
                 token: null,
             });
+            navigate("/signin");
             // todo remove this fucking hack
             localStorage.clear();
         } catch (e) {

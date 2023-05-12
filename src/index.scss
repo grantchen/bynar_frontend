@@ -1,10 +1,23 @@
-@use '@carbon/react';
+@use "@carbon/react";
 
-.skiptranslate{
+.skiptranslate {
     display: none;
 }
 
-#root{
+#root {
     width: 100vw;
     height: 100vh;
+}
+
+body {
+    background: react.$background;
+    color: react.$text-primary;
+}
+
+:root {
+    @include react.theme(react.$g10);
+}
+
+[data-carbon-theme="g90"] {
+    @include react.theme(react.$g90);
 }
