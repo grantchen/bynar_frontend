@@ -96,5 +96,9 @@
     "address": "Adresse",
     "postal-code-text": "Code postal",
     "phone-number-text": "Numéro de téléphone",
-    "user-detail":"Détails de l'utilisateur"
+    "user-detail":"Détails de l'utilisateur",
+    "user-load-failed": "Impossible de charger les données des utilisateurs",
+    "user-deleted-successfully": "Utilisateur supprimé avec succès",
+    "error-deleting-user": "Erreur lors de la suppression de l'utilisateur",
+    "error-updating-user": "Erreur lors de la mise à jour de l'utilisateur"
 }

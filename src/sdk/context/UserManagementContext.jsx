@@ -72,12 +72,12 @@ const UserManagementProvider = ({ children }) => {
         } catch (error) {
             setNotification({
                 type: "error",
-                message: "Failed to load users data",
+                message: t('user-load-failed'),
             });
         } finally {
             setLoading(false);
         }
-    }, [authFetch]);
+    }, [authFetch, t]);
 
     const deleteUser = useCallback(
         async (ids) => {
@@ -89,20 +89,20 @@ const UserManagementProvider = ({ children }) => {
                 });
                 if (response.ok) {
                     setNotification({
-                        message: "User deleted sucessfully",
+                        message: t('user-deleted-successfully'),
                         type: "success",
                     });
                     await getUserList();
                 } else if (response.status === 500) {
                     setNotification({
-                        message: "Error deleting user",
+                        message: t('error-deleting-user'),
                         type: "error",
                     });
                 }
             } catch (error) {
                 setNotification({
                     type: "error",
-                    message: "Error deleting user",
+                    message: t('error-deleting-user'),
                 });
             } finally {
                 setLoading(false);
@@ -140,7 +140,7 @@ const UserManagementProvider = ({ children }) => {
         } else if (response.status === 500) {
             throw { message: res.error, type: "error" };
         } else {
-            throw { message: "Error updating user", type: "error" };
+            throw { message: t('error-updating-user'), type: "error" };
         }
     }, [authFetch]);
 
@@ -188,7 +188,7 @@ const UserManagementProvider = ({ children }) => {
                         if (response.ok) {
                             setNotification({
                                 type: "success",
-                                message: "User deleted successfully.",
+                                message: t('user-deleted-successfully'),
                             });
                         } else {
                             throw "error";
@@ -196,7 +196,7 @@ const UserManagementProvider = ({ children }) => {
                     } catch (error) {
                         setNotification({
                             type: "error",
-                            message: "Error deleting user.",
+                            message: t('error-deleting-user'),
                         });
                     } finally {
                         setDeleteModalProps(null);
@@ -250,7 +250,7 @@ const UserManagementProvider = ({ children }) => {
                         if (response.ok) {
                             setNotification({
                                 type: "success",
-                                message: "User deleted successfully.",
+                                message: t('user-deleted-successfully'),
                             });
                         } else {
                             throw "error";
@@ -258,7 +258,7 @@ const UserManagementProvider = ({ children }) => {
                     } catch (error) {
                         setNotification({
                             type: "error",
-                            message: "Error deleting user.",
+                            message: t('error-deleting-user'),
                         });
                     } finally {
                         setDeleteModalProps(null);
