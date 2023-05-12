@@ -2,8 +2,10 @@ import React, { useState, useContext } from 'react';
 import { Close } from '@carbon/react/icons'
 import { TabContext } from '../../sdk';
 import './HeaderTab.scss'
+import { useTranslation } from 'react-i18next';
 const HeaderTabComponents = () => {
 
+    const {t}=useTranslation();
     const { tab, handleAddTab, handleRemoveTab, setStartIndex, setEndIndex, startIndex, endIndex, activeTab, setActiveTab, maxTab, setMaxTab } = useContext(TabContext);
     const [showLeftArrow, setShowLeftArrow] = useState(false);
 
@@ -21,7 +23,7 @@ const HeaderTabComponents = () => {
                 {/* <button className="button-dashboard" onClick={handleAddTab}>{'add-new-tab'}</button> */}
                 <div className="box-container" >
                     <div className="tab-new">
-                        <p>{'Platform'}</p>
+                        <p>{t('Platform')}</p>
                     </div>
                 </div>
                 {tab.map((item, index) => {
@@ -39,7 +41,7 @@ const HeaderTabComponents = () => {
                         </div>
                     )
                 })}
-                <button className='button-tab' onClick={addTab}>{'Add-new-tab'}</button>
+                <button className='button-tab' onClick={addTab}>{t('add-new-tab')}</button>
             </div>
         </>
     )

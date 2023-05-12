@@ -13,11 +13,13 @@ import { RemoveModal } from "@carbon/ibm-products";
 import { SidePanels } from "../../components/SidePanel";
 import { UserDetailPanel } from "../../components/UserDetailPanel";
 import { useAuth } from "../AuthContext";
+import { useTranslation } from "react-i18next";
 
 const UserManagementContext = createContext();
 
 const UserManagementProvider = ({ children }) => {
     const { user, authFetch } = useAuth();
+    const {t} = useTranslation();
     /**render aware states */
     const [userListData, setUserListData] = useState({
         userAccountDetails: [],
@@ -155,12 +157,12 @@ const UserManagementProvider = ({ children }) => {
             setUserListParams(mergeQueryParams(searchParams, {}));
             setSearchParams({ userIdToBeDeleted, userNameToBeDeleted });
             setDeleteModalProps({
-                body: `Deleting ${userNameToBeDeleted} will permanently delete the user. This action cannot be undone.`,
+                body: `${t('delete-modal-heading-1')} ${userNameToBeDeleted} ${t('delete-modal-heading-2')}`,
                 className: "remove-modal-test",
-                title: "Confirm delete",
-                iconDescription: "close",
-                inputInvalidText: "A valid value is required",
-                inputLabelText: `Type "delete" to confirm`,
+                title: t('delete-modal-title'),
+                iconDescription: t('delete-modal-icon'),
+                inputInvalidText: t('delete-modal-invalid-input-text'),
+                inputLabelText: `${t('delete-modal-input-label-text-1')} "delete" ${t('delete-modal-input-label-text-2')}`,
                 inputPlaceholderText: "delete",
                 open: true,
                 onClose: () => {
@@ -170,10 +172,10 @@ const UserManagementProvider = ({ children }) => {
                         return {};
                     });
                 },
-                primaryButtonText: "Delete",
+                primaryButtonText: t('delete'),
                 resourceName: "delete",
-                secondaryButtonText: "Close",
-                label: `Delete ${userNameToBeDeleted}`,
+                secondaryButtonText: t('close'),
+                label: `${t('delete')} ${userNameToBeDeleted}`,
                 textConfirmation: true,
                 onRequestSubmit: async () => {
                     try {
@@ -217,12 +219,12 @@ const UserManagementProvider = ({ children }) => {
             setUserListParams(mergeQueryParams(searchParams, {}));
             setSearchParams({ userIdsToBeDeleted });
             setDeleteModalProps({
-                body: `Confirming will permanently delete the users. This action cannot be undone.`,
+                body: t('delete-modal-bulk-heading'),
                 className: "remove-modal-test",
-                title: "Confirm delete",
-                iconDescription: "close",
-                inputInvalidText: "A valid value is required",
-                inputLabelText: `Type "delete" to confirm`,
+                title: t('delete-modal-title'),
+                iconDescription: t('delete-modal-icon'),
+                inputInvalidText: t('delete-modal-invalid-input-text'),
+                inputLabelText: `${t('delete-modal-input-label-text-1')} "delete" ${t('delete-modal-input-label-text-2')}`,
                 inputPlaceholderText: "delete",
                 open: true,
                 onClose: () => {
@@ -232,10 +234,10 @@ const UserManagementProvider = ({ children }) => {
                         return {};
                     });
                 },
-                primaryButtonText: "Delete",
+                primaryButtonText: t('delete'),
                 resourceName: "delete",
-                secondaryButtonText: "Close",
-                label: `Delete Users`,
+                secondaryButtonText: t('close'),
+                label: t('delete-users'),
                 textConfirmation: true,
                 onRequestSubmit: async () => {
                     try {

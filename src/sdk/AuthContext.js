@@ -9,6 +9,7 @@ import {
 } from "react";
 import { BaseURL } from "./constant";
 import { Auth } from "aws-amplify";
+import { useTranslation } from "react-i18next";
 const initialState = {
     user: null,
     token: "loading",
@@ -24,6 +25,7 @@ export const AuthProvider = ({ children }) => {
 
     const navigate = useNavigate();
     const location = useLocation();
+    const {i18n} = useTranslation();
 
     useEffect(() => {
         (async () => {
@@ -73,6 +75,8 @@ export const AuthProvider = ({ children }) => {
             if (response.ok) {
                 const res = await response.json();
                 setState({ user: res.result });
+                localStorage.setItem('lang',res?.result?.languagePreference)
+                await i18n.changeLanguage(res?.result?.languagePreference);
             } else {
                 await Auth.signOut();
                 navigate("/signin");
@@ -220,6 +224,8 @@ export const AuthProvider = ({ children }) => {
                         languagePreference,
                     },
                 });
+                localStorage.setItem('lang',languagePreference)
+                await i18n.changeLanguage(languagePreference);
             } else if (response.status === 500) {
                 throw { message: res.error, type: "error" };
             } else {

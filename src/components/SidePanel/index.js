@@ -23,7 +23,9 @@ import {
     PhoneNumberFormat as PNF,
 } from "google-libphonenumber";
 import { InlineLoading } from "carbon-components";
+import { useTranslation } from "react-i18next";
 export const SidePanels = () => {
+    const {t} = useTranslation()
     const phoneUtil = PhoneNumberUtil.getInstance();
     const [open, setOpen] = useState(true);
     const [accountInfoErrors, setAccountInfoErrors] = useState({
@@ -130,10 +132,10 @@ export const SidePanels = () => {
     const validateEmail = (email) => {
         const errors = {};
         if (email.trim() === "") {
-            errors.userName = "Email is required";
+            errors.userName = t("email-required");
         } else if (email.length > 0) {
             if (!checkEmailValid(email.trim())) {
-                errors.userName = "Suggested format (name@company.com)";
+                errors.userName = t("email-format-error");
             }
         }
 
@@ -184,7 +186,7 @@ export const SidePanels = () => {
 
     const validatePhoneNumber = (value, dialCode, country) => {
         if (value == dialCode) {
-            setErrorMessage("Enter valid phone number");
+            setErrorMessage(t("phone-number-validation"));
             setIsPhoneNumberValid(false);
             return false;
         } else {
@@ -192,11 +194,11 @@ export const SidePanels = () => {
                 .toString()
                 .replace(dialCode, "");
             if (phoneNumberWithoutDialCode.length == 0) {
-                setErrorMessage("Phone number is required");
+                setErrorMessage(t("phone-number-required"));
                 setIsPhoneNumberValid(false);
                 return false;
             } else if (phoneNumberWithoutDialCode == value) {
-                setErrorMessage("Enter valid phone number");
+                setErrorMessage(t("phone-number-validation"));
                 setIsPhoneNumberValid(false);
                 return false;
             } else {
@@ -207,7 +209,7 @@ export const SidePanels = () => {
                     );
                     const isValid = phoneUtil.isValidNumber(number);
                     if (!isValid) {
-                        setErrorMessage("Enter valid phone number");
+                        setErrorMessage(t("phone-number-validation"));
                         setIsPhoneNumberValid(false);
                         return false;
                     } else {
@@ -216,7 +218,7 @@ export const SidePanels = () => {
                         return true;
                     }
                 } catch (e) {
-                    setErrorMessage("Enter valid phone number");
+                    setErrorMessage(t("phone-number-validation"));
                     setIsPhoneNumberValid(false);
                     return false;
                 }
@@ -232,11 +234,11 @@ export const SidePanels = () => {
     const postalCodeValidation = (value) => {
         if (value.length === 0) {
             setPostalCodeErrorNotification({
-                title: "Postal code is required",
+                title: t("postal-code-required"),
             });
         } else if (!/^\d+$/.test(value)) {
             setPostalCodeErrorNotification({
-                title: "Postal code should be integer",
+                title: t("postal-code-validation"),
             });
         } else {
             setPostalCodeErrorNotification({});
@@ -329,7 +331,7 @@ export const SidePanels = () => {
         setAccountInfoErrors(error);
         let phoneNumberValidCheck = phoneNumberValid;
         if (phoneNumber.length == 0) {
-            setErrorMessage("Phone number is required");
+            setErrorMessage(t("phone-number-required"));
             setIsPhoneNumberValid(false);
             phoneNumberValidCheck = false;
         } else {
@@ -475,11 +477,11 @@ export const SidePanels = () => {
                 className="test"
                 open={open}
                 onRequestClose={handleClose}
-                title={isUserEdit ? "Edit User" : "Add User"}
+                title={isUserEdit ? t("edit-user") : t("add-user")}
                 subtitle=""
                 actions={[
                     {
-                        label: isUserEdit ? "Update" : "Submit",
+                        label: isUserEdit ? t("update") : t("submit"),
                         onClick: () => {
                             isUserEdit
                                 ? handleEditInformationFormSubmit()
@@ -489,7 +491,7 @@ export const SidePanels = () => {
                         loading
                     },
                     {
-                        label: "Cancel",
+                        label: t('cancel'),
                         onClick: handleClose,
                         kind: "secondary",
                     },
@@ -517,7 +519,7 @@ export const SidePanels = () => {
                             type="text"
                             id="username"
                             className={`story__text-input`}
-                            labelText="User Name *"
+                            labelText={`${t('user-name-label')} *`}
                             value={userName}
                             onChange={handleEmailChange}
                             invalid={!!errors.userName}
@@ -529,12 +531,12 @@ export const SidePanels = () => {
                             type="text"
                             name="fullName"
                             id="fullname"
-                            labelText="Full Name *"
+                            labelText={`${t('full-name-label')} *`}
                             className={`story__text-input`}
                             value={fullName}
                             onChange={handleFullName}
                             invalid={accountInfoErrors.fullName}
-                            invalidText={"Full name is required"}
+                            invalidText={t('full-name-validation')}
                         />
                     </div>
                     <div className={`story__text-inputs`}>
@@ -544,7 +546,7 @@ export const SidePanels = () => {
                                 name="role"
                                 value={role}
                                 id="country-ci"
-                                labelText="Role *"
+                                labelText={`${t('role')} *`}
                                 onChange={handleRoleChange}
                                 invalid={accountInfoErrors.role}
                                 invalidText={"User role is required"}
@@ -563,7 +565,7 @@ export const SidePanels = () => {
                             className={`story__text-input`}
                             value={country}
                             id="country-ci"
-                            labelText="Country or region of residence*"
+                            labelText={`${t('country-label')} *`}
                             onChange={handleCountryChange}
                         >
                             {COUNTRIES.map((countryObject, countryIndex) => (
@@ -581,17 +583,17 @@ export const SidePanels = () => {
                             name="addressLine1"
                             id="addressline"
                             className={`story__text-input`}
-                            labelText="Address line 1 *"
+                            labelText={`${t('address-line1')} *`}
                             value={addressLine1}
                             onChange={handleAddressLine1}
                             invalid={accountInfoErrors.addressLine1}
-                            invalidText={"Address line1 is required"}
+                            invalidText={t('address-line1-validation')}
                         />
                         <TextInput
                             type="text"
                             id="addressline1"
                             className={`story__text-input`}
-                            labelText="Address line 2 (optional)"
+                            labelText={`${t('address-line2')} *`}
                             value={addressLine2}
                             onChange={(e) => setAddressLine2(e.target.value)}
                         />
@@ -601,23 +603,23 @@ export const SidePanels = () => {
                             type="text"
                             id="city"
                             name="city"
-                            labelText="City *"
+                            labelText={`${t('city')} *`}
                             className={`story__text-input`}
                             value={city}
                             onChange={handleCity}
                             invalid={accountInfoErrors.city}
-                            invalidText={"City name is required"}
+                            invalidText={t('city-validation')}
                         />
                         <TextInput
                             type="text"
                             id="state"
                             name="state"
-                            labelText="State *"
+                            labelText={`${t('state')} *`}
                             className={`story__text-input`}
                             value={state}
                             onChange={handleState}
                             invalid={accountInfoErrors.state}
-                            invalidText={"State is required"}
+                            invalidText={t('state-validation')}
                         />
                     </div>
                     <div className={`story__text-inputs`}>
@@ -625,7 +627,7 @@ export const SidePanels = () => {
                             type="text"
                             id="postalcode"
                             name="postalCode"
-                            labelText="Postal Code *"
+                            labelText={`${t('postal-code-label')} *`}
                             className={`story__text-inputs`}
                             value={postalCode}
                             onChange={handlePostalCode}
@@ -644,7 +646,7 @@ export const SidePanels = () => {
                         />
                         <div>
                             <div className="phone-label-wrapper">
-                                <p className="phone-label">Phone Number *</p>
+                                <p className="phone-label">{t('phone-number-label')}</p>
                             </div>
                             <PhoneInput
                                 className="phone-input-sidepanel"

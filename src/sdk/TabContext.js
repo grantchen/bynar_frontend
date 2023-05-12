@@ -1,6 +1,7 @@
 import { Heading } from "@carbon/react";
 import React, { createContext, useState } from "react";
 import DashboardContainer from "./../components/Dashboard/DashboardContainer";
+import { useTranslation } from "react-i18next";
 
 const TabContext = createContext();
 const EmptyTab = ({ id, label }) => {
@@ -34,11 +35,12 @@ const EmptyTab = ({ id, label }) => {
   );
 };
 const TabContextProvider = ({ children }) => {
+  const {t} =useTranslation();
   const [tab, setTab] = useState([
     {
       content: <DashboardContainer />,
       id: 0,
-      label: "Dashboard",
+      label: t('title'),
       isDelted: false,
     },
   ]);
@@ -61,8 +63,8 @@ const TabContextProvider = ({ children }) => {
     // console.log(maxId+1,"id is  ","active",tab.length+1)
     const newTab = {
       id: maxId + 1,
-      label: `Tab ${maxId + 1}`,
-      content: <EmptyTab label={`Tab ${maxId + 1}`} id={maxId + 1} />,
+      label: `${t('tab')} ${maxId + 1}`,
+      content: <EmptyTab label={`${t('tab')} ${maxId + 1}`} id={maxId + 1} />,
       isDelted: true,
     };
     setTab([...tab, newTab]);

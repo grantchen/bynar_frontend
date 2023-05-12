@@ -108,7 +108,7 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
             <HeaderGlobalBar className="header-tab">
               {isUserManagementAllowed && (
                 <HeaderGlobalAction
-                  aria-label="Users"
+                  aria-label={t('user')}
                   onClick={() => setIsUserListOpen(true)}
                 >
                   <img
@@ -117,7 +117,7 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
                   />
                 </HeaderGlobalAction>
               )}
-              <HeaderGlobalAction aria-label="Search" onClick={() => { }}>
+              <HeaderGlobalAction aria-label={t('search')} onClick={() => { }}>
                 <Search20 />
               </HeaderGlobalAction>
               {/* <HeaderGlobalAction aria-label="Notifications" onClick={() => setOpen(!open)}>
@@ -133,7 +133,7 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
                   >
                     <HeaderGlobalAction
                       className="header-tab"
-                      aria-label="User"
+                      aria-label={t('user')}
                       onClick={handleDropDown}
                     >
                       <UserAvatar20 />

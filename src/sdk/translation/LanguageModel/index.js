@@ -9,33 +9,42 @@ import { ToastNotification } from 'carbon-components-react';
 export const LanguageModel = ({ openLanguageModel, setLanguageModelOpen }) => {
 
   const { updateUserLanguagePreference, user } = useAuth();
-  const [t, i18n] = useTranslation();
+  const [t, i18n, ready] = useTranslation();
+
+  console.log(ready, i18n)
   const languageData = [
     {
-      text: 'English',
+      text: t('english'),
       value: 'en',
     },
     {
-      text: 'German',
+      text: t('german'),
       value: 'de',
     },
     {
-      text: 'French',
+      text: t('french'),
       value: 'fr',
+    },
+    {
+      text: t('spanish'),
+      value: 'es',
     }
   ];
 
-  const [selectedItem, setItem] = useState({text: 'English', value: 'en'});
+  
+
+  const [selectedItem, setItem] = useState(languageData[0]);
   const [serverErrorNotification, setServerErrorNotification] = useState({});
   const [serverNotification, setServerNotification] = useState(false);
 
   useEffect(() => {
     const userLanguage = languageData.filter((data)=> data.value === user?.languagePreference)
+    console.log(userLanguage,"api",userLanguage[0])
     setItem(userLanguage[0])
   }, [user?.languagePreference])
 
+
   const handleLanguageChange = async () => {
-    setItem(selectedItem);
     try {
       await updateUserLanguagePreference({ languagePreference: selectedItem?.value });
       setLanguageModelOpen(false);
@@ -44,6 +53,7 @@ export const LanguageModel = ({ openLanguageModel, setLanguageModelOpen }) => {
       setServerNotification(true);
     }  
   }
+
 
   const closeLanguageModal = () => {
     setLanguageModelOpen(false);
@@ -57,8 +67,8 @@ export const LanguageModel = ({ openLanguageModel, setLanguageModelOpen }) => {
 
   return (
     <Modal
-      primaryButtonText={('submit')}
-      secondaryButtonText={('cancel')}
+      primaryButtonText={t('submit')}
+      secondaryButtonText={t('cancel')}
       open={openLanguageModel}
       onRequestClose={() => closeLanguageModal()}
       onRequestSubmit={() => handleLanguageChange()}
@@ -87,8 +97,8 @@ export const LanguageModel = ({ openLanguageModel, setLanguageModelOpen }) => {
           itemToString={(item) => ( item.text)}
           onChange={(event) => setLanguage(event.selectedItem)}
           selectedItem={selectedItem}
-          label={'select-language'}
-          titleText={'select-language'}
+          label={t('select-language')}
+          titleText={t('select-language')}
         />
       </div>
     </Modal>
