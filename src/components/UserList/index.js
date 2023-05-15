@@ -31,7 +31,7 @@ pkg.component.Datagrid = true;
 // pkg.feature.Datagrid = true
 // pkg.feature['Datagrid.useActionsColumn'] = true
 
-export const UserList = () => {
+export const UserList = ({isOpen}) => {
     const {
         getUserList,
         userListData,
@@ -132,15 +132,19 @@ export const UserList = () => {
     }, [searchParams]);
 
     useEffect(() => {
+        if(!isOpen){
+            return
+        }
         (async () => {
             await getUserList(getUserAPIQuery());
         })();
-    }, [searchParams, getUserAPIQuery]);
+    }, [searchParams, getUserAPIQuery, isOpen]);
 
     useEffect(() => {
-        console.log('executed')
+        if(!isOpen){
+            return
+        }
         if (!skipOnMount.current) {
-            console.log('not skipped')
             const timeoutId = setTimeout(() => {
                 (async () => {
                     if (searchText) {
@@ -153,11 +157,8 @@ export const UserList = () => {
             }, 300);
             return () => clearTimeout(timeoutId);
         }
-        else{
-            console.log('skipped')
-        }
         skipOnMount.current = false
-    }, [searchText]);
+    }, [searchText, isOpen]);
     const handleSort = useCallback((val1, val2, sortConfig) => {
         setSearchParams((prev) => ({
             ...prev,

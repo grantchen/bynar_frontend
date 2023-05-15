@@ -7,7 +7,7 @@ import "./UserDetailPanel.scss";
 import { useTranslation } from "react-i18next";
 
 
-export const UserDetailPanel = () => {
+export const UserDetailPanel = ({open}) => {
     const [searchParams] = useSearchParams();
     const {t} = useTranslation()
     const userDetailkey = {
@@ -32,6 +32,9 @@ export const UserDetailPanel = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        if(!open){
+            return
+        }
         (async () => {
             try {
                 setIsLoading(true);
@@ -48,13 +51,13 @@ export const UserDetailPanel = () => {
                 setIsLoading(false);
             }
         })();
-    }, []);
+    }, [open]);
 
     return (
         <div className="main--content">
             <SidePanel
                 includeOverlay
-                open={true}
+                open={open}
                 onRequestClose={closeModalAndGoBackToUserList}
                 title={t("user-detail")}
                 subtitle=""

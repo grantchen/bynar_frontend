@@ -167,7 +167,7 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
         
       </div>
 
-      {isUserListOpen && <TearSheets setIsOpen={setIsUserListOpen} isOpen={true} />}
+      <TearSheets setIsOpen={setIsUserListOpen} isOpen={isUserListOpen} />
     </>
   );
 };

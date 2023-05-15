@@ -358,9 +358,9 @@ const UserManagementProvider = ({ children }) => {
         <>
             <UserManagementContext.Provider value={value}>
                 {children}
-                {isUserManagementAllowed && editUserPanelOpen && <SidePanels />}
-                {isUserManagementAllowed && addUserPanelOpen && <SidePanels />}
-                {isUserManagementAllowed && userDetailsOpen && <UserDetailPanel />}
+                {isUserManagementAllowed && <SidePanels open={editUserPanelOpen}/>}
+                {isUserManagementAllowed && <SidePanels open={addUserPanelOpen}/>}
+                {isUserManagementAllowed && <UserDetailPanel open={userDetailsOpen}/>}
             </UserManagementContext.Provider>
             {deleteModalProps && <RemoveModal {...deleteModalProps} />}
         </>
