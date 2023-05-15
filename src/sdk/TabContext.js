@@ -1,6 +1,8 @@
 import { Heading } from "@carbon/react";
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import DashboardContainer from "./../components/Dashboard/DashboardContainer";
+import { useTranslation } from "react-i18next";
+import { useAuth } from "./AuthContext";
 
 const TabContext = createContext();
 const EmptyTab = ({ id, label }) => {
@@ -34,11 +36,12 @@ const EmptyTab = ({ id, label }) => {
   );
 };
 const TabContextProvider = ({ children }) => {
+  const {t} =useTranslation();
   const [tab, setTab] = useState([
     {
       content: <DashboardContainer />,
       id: 0,
-      label: "Dashboard",
+      label: t('title'),
       isDelted: false,
     },
   ]);
@@ -46,6 +49,18 @@ const TabContextProvider = ({ children }) => {
   const [startIndex, setStartIndex] = useState(0);
   const [endIndex, setEndIndex] = useState(0);
   const [maxTab, setMaxTab] = useState(0);
+  const {user} = useAuth()
+
+  useEffect(() => {
+    setTab(prev => prev.map((val, idx) => {
+      if(idx === 0){
+        return {...val, label: t('title')}
+      }
+      const tabNumber = val.label.split(' ')[1]
+      return {...val, label: t('tab') + ' ' + tabNumber}
+    }))
+  }, [user?.languagePreference, t]);
+
   const handleRemoveTab = (idToRemove, index) => {
     const updatedTabs = tab.filter((tab) => tab.id !== idToRemove);
     // const res = updatedTabs.map((data,index)=>data.id=index+1 && data.id!=1)
@@ -61,8 +76,8 @@ const TabContextProvider = ({ children }) => {
     // console.log(maxId+1,"id is  ","active",tab.length+1)
     const newTab = {
       id: maxId + 1,
-      label: `Tab ${maxId + 1}`,
-      content: <EmptyTab label={`Tab ${maxId + 1}`} id={maxId + 1} />,
+      label: `${t('tab')} ${maxId + 1}`,
+      content: <EmptyTab label={`${t('tab')} ${maxId + 1}`} id={maxId + 1} />,
       isDelted: true,
     };
     setTab([...tab, newTab]);

@@ -13,6 +13,7 @@ import {
     useStickyColumn,
     useSelectRows,
     useOnRowClick,
+    useDisableSelectRows,
     Datagrid,
     pkg,
 } from "@carbon/ibm-products";
@@ -25,6 +26,7 @@ import {
 import { useSearchParams } from "react-router-dom";
 import { Restart16, Activity16, Add16, TrashCan16 } from "@carbon/icons-react";
 import "./UserList.scss";
+import { useTranslation } from "react-i18next";
 pkg.component.Datagrid = true;
 // pkg.feature.Datagrid = true
 // pkg.feature['Datagrid.useActionsColumn'] = true
@@ -42,6 +44,7 @@ export const UserList = () => {
         openBulkDeleteConfirmModal,
     } = useUserManagement();
 
+    const {t} = useTranslation()
     const [searchParams, setSearchParams] = useSearchParams();
 
     const [searchText, setSearchText] = useState(
@@ -49,6 +52,58 @@ export const UserList = () => {
     );
 
     const skipOnMount = useRef(true);
+
+    const getColumns = (rows) => {
+        return [
+            {
+                Header: t("username"),
+                accessor: "username",
+                width: getAutoSizedColumnWidth(rows, "username", "Username"),
+            },
+            {
+                Header: t("fullname"),
+                accessor: "fullName",
+                width: getAutoSizedColumnWidth(rows, "fullName", "Fullname"),
+            },
+            {
+                Header: t("country"),
+                accessor: "country",
+                width: getAutoSizedColumnWidth(rows, "country", "Country"),
+            },
+            {
+                Header: t("city"),
+                accessor: "city",
+                width: getAutoSizedColumnWidth(rows, "city", "City"),
+            },
+            {
+                Header: t("postal-code"),
+                accessor: "postalCode",
+                width: getAutoSizedColumnWidth(rows, "postalCode", "PostalCode"),
+            },
+            {
+                Header: t("state"),
+                accessor: "state",
+                width: getAutoSizedColumnWidth(rows, "state", "State"),
+            },
+            {
+                Header: t("phone-number"),
+                accessor: "phoneNumber",
+                width: getAutoSizedColumnWidth(rows, "phoneNumber", "Phonenumber"),
+            },
+            {
+                Header: t("roles"),
+                accessor: "cognitoUserGroups",
+                width: getAutoSizedColumnWidth(rows, "cognitoUserGroups", "Roles"),
+            },
+            {
+                Header: "",
+                accessor: "actions",
+                isAction: true,
+                sticky: "right",
+            },
+        ];
+    };
+    
 
     const { page, pageLimit } = useMemo(() => {
         let values = {
@@ -119,7 +174,9 @@ export const UserList = () => {
             columns,
             data: userListData.userAccountDetails,
             isFetching: loading,
-            onRowSelect: (row, event) => console.log(row, event),
+            endPlugins: [useDisableSelectRows],
+            onRowSelect: (row, event) => {},
+            shouldDisableSelectRow: (row) => !row?.original?.canDelete,
             // onSort: (sortByColumn, sortByOrder) => {
             //     if(sortByOrder === 'none'){
             //         const {sortByColumn: sBC, sortByOrder: sBO, ...rest} = searchParams
@@ -135,7 +192,7 @@ export const UserList = () => {
             rowActions: [
                 {
                     id: "edit",
-                    itemText: "Edit",
+                    itemText: t('edit'),
                     onClick: (_, { original }) =>
                         openEditPanel({
                             userIdToBeEdited: original.id,
@@ -151,7 +208,7 @@ export const UserList = () => {
                 },
                 {
                     id: "delete",
-                    itemText: "Delete",
+                    itemText: t('delete'),
                     hasDivider: true,
                     isDelete: true,
                     shouldDisableMenuItem: ({ original }) =>
@@ -213,7 +270,7 @@ export const UserList = () => {
                         hasIconOnly
                         tooltipPosition="bottom"
                         renderIcon={Restart16}
-                        iconDescription={"Refresh"}
+                        iconDescription={t('refresh')}
                         onClick={() => getUserList(getUserAPIQuery())}
                     />
                     <Button
@@ -222,14 +279,14 @@ export const UserList = () => {
                         kind="primary"
                         style={{ cursor: "pointer" }}
                     >
-                        Add new user
+                        {t('add-new-user')}
                     </Button>
                 </TableToolbarContent>
             ),
             batchActions: true,
             toolbarBatchActions: [
                 {
-                    label: "Delete",
+                    label: t("delete"),
                     renderIcon: TrashCan16,
                     onClick: () => {
                         const idsToDelete = datagridState.selectedFlatRows.map(
@@ -247,7 +304,7 @@ export const UserList = () => {
         useStickyColumn,
         useActionsColumn,
         useSelectRows,
-        useOnRowClick
+        useOnRowClick,
         // useSortableColumns
     );
 
@@ -272,53 +329,3 @@ export const UserList = () => {
     );
 };
 
-const getColumns = (rows) => {
-    return [
-        {
-            Header: "Username",
-            accessor: "username",
-            width: getAutoSizedColumnWidth(rows, "username", "Username"),
-        },
-        {
-            Header: "Fullname",
-            accessor: "fullName",
-            width: getAutoSizedColumnWidth(rows, "fullName", "Fullname"),
-        },
-        {
-            Header: "Country",
-            accessor: "country",
-            width: getAutoSizedColumnWidth(rows, "country", "Country"),
-        },
-        {
-            Header: "City",
-            accessor: "city",
-            width: getAutoSizedColumnWidth(rows, "city", "City"),
-        },
-        {
-            Header: "PostalCode",
-            accessor: "postalCode",
-            width: getAutoSizedColumnWidth(rows, "postalCode", "PostalCode"),
-        },
-        {
-            Header: "State",
-            accessor: "state",
-            width: getAutoSizedColumnWidth(rows, "state", "State"),
-        },
-        {
-            Header: "Phonenumber",
-            accessor: "phoneNumber",
-            width: getAutoSizedColumnWidth(rows, "phoneNumber", "Phonenumber"),
-        },
-        {
-            Header: "Roles",
-            accessor: "cognitoUserGroups",
-            width: getAutoSizedColumnWidth(rows, "cognitoUserGroups", "Roles"),
-        },
-        {
-            Header: "",
-            accessor: "actions",
-            isAction: true,
-            sticky: "right",
-        },
-    ];
-};

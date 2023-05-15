@@ -4,18 +4,21 @@ import { BaseURL, useUserManagement } from "../../sdk";
 import { SidePanel } from "@carbon/ibm-products";
 import { InlineLoading } from "@carbon/react";
 import "./UserDetailPanel.scss";
+import { useTranslation } from "react-i18next";
 
-const userDetailkey = {
-    fullName: "Full Name",
-    username: "User Name",
-    country: "Country",
-    address: "Address",
-    city: "City",
-    postalCode: "Postal Code",
-    phoneNumber: "Phone Number",
-};
+
 export const UserDetailPanel = () => {
     const [searchParams] = useSearchParams();
+    const {t} = useTranslation()
+    const userDetailkey = {
+        fullName: t('full-name-text'),
+        username: t('user-name-text'),
+        country: t('country'),
+        address: t('address'),
+        city: t('city'),
+        postalCode: t('postal-code-text'),
+        phoneNumber: t('phone-number-text'),
+    };
     const { getUserById, closeModalAndGoBackToUserList } = useUserManagement();
     const [userDetail, setUserDetail] = useState({
         fullName: "",
@@ -53,7 +56,7 @@ export const UserDetailPanel = () => {
                 includeOverlay
                 open={true}
                 onRequestClose={closeModalAndGoBackToUserList}
-                title={"User Detail"}
+                title={t("user-detail")}
                 subtitle=""
                 preventCloseOnClickOutside
             >
