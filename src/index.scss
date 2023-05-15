@@ -21,13 +21,13 @@ body {
 }
 
 :root {
-    @include react.theme(react.$g10);
+    @include react.theme(react.$white);
 }
 
-[data-carbon-theme="g90"] {
-    @include react.theme(react.$g90);
+[data-carbon-theme="g100"] {
+    @include react.theme(react.$g100);
 
-    @include carbon--theme($carbon--theme--g90, true);
+    @include carbon--theme($carbon--theme--g100, true);
     background-color: var(--cds-ui-background);
     color: var(--cds-text-01);
 }

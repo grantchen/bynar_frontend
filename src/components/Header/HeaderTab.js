@@ -82,6 +82,7 @@ const HeaderTab = () => {
             })}
             <Button
               kind="ghost"
+              className="custom-tab"
               onClick={() => {
                 handleAddTab();
                 setTimeout(() => {

@@ -9,7 +9,7 @@ function useThemePreference() {
 }
 
 function ThemePreferenceProvider({ children }) {
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme-preference') ?? 'g10');
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme-preference') ?? 'white');
 
   const [isThemeChangeModalOpen, openThemeChangeModal] = useState(false);
 

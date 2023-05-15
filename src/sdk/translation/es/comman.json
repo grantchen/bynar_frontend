@@ -101,5 +101,6 @@
     "user-deleted-successfully": "Usuario eliminado correctamente",
     "error-deleting-user": "Error al eliminar usuario",
     "error-updating-user": "Error al actualizar usuario",
-    "error-adding-user": "Error al agregar usuario"
+    "error-adding-user": "Error al agregar usuario",
+    "dark": "Oscura"
 }

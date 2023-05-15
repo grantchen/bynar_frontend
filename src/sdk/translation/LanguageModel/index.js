@@ -14,9 +14,8 @@ import { ToastNotification } from "carbon-components-react";
 import './LanguageModal.scss'
 export const LanguageModel = ({ openLanguageModel, setLanguageModelOpen }) => {
   const { updateUserLanguagePreference, user } = useAuth();
-  const [t, i18n, ready] = useTranslation();
+  const [t] = useTranslation();
 
-  console.log(ready, i18n);
   const languageData = [
       {
           text: t("english"),

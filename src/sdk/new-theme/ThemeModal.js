@@ -2,26 +2,40 @@ import { Modal, Dropdown } from "@carbon/react";
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useThemePreference } from "../new-theme";
+import { useAuth } from "../AuthContext";
 
 export const ThemeModal = React.memo(() => {
     const { t } = useTranslation();
 
-    const themeOptions = useRef([
+    const [themeOptions, setThemeOptions] = useState([
         {
             text: t("white"),
-            value: "g10",
+            value: "white",
         },
         {
-            text: t("gray"),
-            value: "g90",
+            text: t("dark"),
+            value: "g100",
         },
-    ])
-    const { theme, setTheme, changeThemeManually, isThemeChangeModalOpen, openThemeChangeModal } = useThemePreference();
+    ]);
 
-    const [selectedTheme, setSelectedTheme] = useState(() => themeOptions.current.find((option) => option.value === theme) ?? themeOptions.current[0]);
+    const { user } = useAuth();
+
+    const {
+        theme,
+        setTheme,
+        changeThemeManually,
+        isThemeChangeModalOpen,
+        openThemeChangeModal,
+    } = useThemePreference();
+
+    const [selectedTheme, setSelectedTheme] = useState(
+        () =>
+            themeOptions.find((option) => option.value === theme) ??
+            themeOptions[0]
+    );
 
     const handleChange = useCallback(
-        ({selectedItem}) => {
+        ({ selectedItem }) => {
             setSelectedTheme(selectedItem);
             changeThemeManually(selectedItem.value);
         },
@@ -30,19 +44,39 @@ export const ThemeModal = React.memo(() => {
 
     const handleClose = useCallback(() => {
         changeThemeManually(theme);
-        setSelectedTheme(themeOptions.current.find((option) => option.value === theme));
-        openThemeChangeModal(false)
+        setSelectedTheme(themeOptions.find((option) => option.value === theme));
+        openThemeChangeModal(false);
     }, [theme]);
 
     const handleSubmit = useCallback(() => {
         setTheme(selectedTheme.value);
-        openThemeChangeModal(false)
+        openThemeChangeModal(false);
     }, [selectedTheme]);
 
     useEffect(() => {
-        setSelectedTheme(themeOptions.current.find((option) => option.value === theme));
-    }, [theme])
+        setSelectedTheme(themeOptions.find((option) => option.value === theme));
+    }, [theme]);
 
+    useEffect(() => {
+        if (!user?.languagePreference) {
+            return;
+        }
+        setThemeOptions([
+            {
+                text: t("white"),
+                value: "white",
+            },
+            {
+                text: t("dark"),
+                value: "g100",
+            },
+        ]);
+        const _selectedTheme = themeOptions.find((option) => option.value === theme)
+        setSelectedTheme({
+            ..._selectedTheme,
+            text: t(_selectedTheme.text)
+        })
+    }, [user?.languagePreference, t]);
 
     return (
         <Modal
@@ -51,12 +85,13 @@ export const ThemeModal = React.memo(() => {
             open={isThemeChangeModalOpen}
             onRequestClose={handleClose}
             onRequestSubmit={handleSubmit}
+            size="sm"
         >
             <div className="carbon-theme-dropdown">
                 <Dropdown
                     ariaLabel="Theme dropdown"
                     id="theme-dropdown"
-                    items={themeOptions.current}
+                    items={themeOptions}
                     selectedItem={selectedTheme}
                     itemToString={(item) => (item ? item.text : "")}
                     onChange={handleChange}

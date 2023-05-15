@@ -91,6 +91,9 @@ export const AuthProvider = ({ children }) => {
     }, [getUser]);
 
     useEffect(() => {
+        if(location.pathname === "/"){
+            return
+        }
         switch (state.token) {
             case "loading":
                 return;
@@ -178,7 +181,7 @@ export const AuthProvider = ({ children }) => {
             navigate("/signin");
             // todo remove this fucking hack
             localStorage.clear();
-            document.documentElement.setAttribute('data-carbon-theme', 'g10')
+            document.documentElement.setAttribute('data-carbon-theme', 'white')
         } catch (e) {
             console.log(e);
         }
@@ -220,14 +223,14 @@ export const AuthProvider = ({ children }) => {
             const res = await response.json();
 
             if (response.ok) {
+                localStorage.setItem('lang',languagePreference)
+                await i18n.changeLanguage(languagePreference);
                 setState({
                     user: {
                         ...state.user,
                         languagePreference,
                     },
                 });
-                localStorage.setItem('lang',languagePreference)
-                await i18n.changeLanguage(languagePreference);
             } else if (response.status === 500) {
                 throw { message: res.error, type: "error" };
             } else {
