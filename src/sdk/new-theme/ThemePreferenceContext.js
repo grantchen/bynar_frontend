@@ -9,7 +9,7 @@ function useThemePreference() {
 }
 
 function ThemePreferenceProvider({ children }) {
-  const [theme, setTheme] = useState('g10');
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme-preference') ?? 'g10');
 
   const [isThemeChangeModalOpen, openThemeChangeModal] = useState(false);
 
@@ -19,6 +19,7 @@ function ThemePreferenceProvider({ children }) {
 
   useEffect(() => {
     document.documentElement.setAttribute('data-carbon-theme', theme);
+    localStorage.setItem('theme-preference', theme)
   }, [theme]);
 
   const value = {

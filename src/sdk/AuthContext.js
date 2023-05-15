@@ -178,6 +178,7 @@ export const AuthProvider = ({ children }) => {
             navigate("/signin");
             // todo remove this fucking hack
             localStorage.clear();
+            document.documentElement.setAttribute('data-carbon-theme', 'g10')
         } catch (e) {
             console.log(e);
         }

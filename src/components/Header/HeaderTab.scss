@@ -1,3 +1,108 @@
+.header-container{
+  background: var(--cds-ui-02, #ffffff);
+}
+
+.header-box-dashboard {
+  background: var(--cds-background,#fff);
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.heading-content {
+  width: 94px;
+  padding: 0px 16px !important;
+  height: 48px !important;
+  color: var(--cds-text-01, #161616);
+}
+
+.heading-content:hover {
+  background-color: var(--cds-field-01, #e5e5e5) !important;
+}
+
+.heading-content-new {
+  width: 100px;
+  padding: 0px 16px !important;
+  height: 48px !important;
+  color: var(--cds-text-01, #161616);
+}
+.heading-content-new:hover {
+  background-color: var(--cds-field-01, #e5e5e5) !important;
+}
+
+.custom-tab {
+  display: flex;
+  gap: 0.2rem;
+  border-width: 2px;
+  border-bottom: 2px solid var(--cds-field-03, #efefef);
+  color: var(--cds-text-01, #161616);
+  &:hover {
+    background-color: var(--cds-field-01, #e5e5e5) !important;
+    border-bottom: 2px solid #525252;
+  }
+  &.active {
+    font-weight: bold;
+    border-bottom: 2px solid #0f62fe;
+  }
+}
+
+.left-arrow {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 40px;
+  justify-content: center;
+  color: var(--cds-text-01, #161616);
+}
+
+.left-arrow:hover {
+  background-color: var(--cds-field-01, #e5e5e5);
+  color: var(--cds-text-01, #161616);
+  cursor: pointer;
+}
+
+.right-arrow {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 40px;
+  justify-content: center;
+  color: var(--cds-text-01, #161616);
+}
+
+.right-arrow:hover {
+  background-color: var(--cds-field-01, #e5e5e5);
+  color: var(--cds-text-01, #161616);
+  cursor: pointer;
+}
+
+//remove focus border
+
+.custom-tab.active:focus{
+  border-color: transparent;
+  box-shadow: none;
+  border-bottom: 2px solid #0f62fe;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .tab {
   display: flex;
   width: 100%;
@@ -7,6 +112,7 @@
 
 .header-tab {
   position: relative;
+  color: var(--cds-text-01, #161616);
 }
 
 .modified-tabs {
@@ -40,38 +146,8 @@
   cursor: pointer;
 }
 
-.left-arrow {
-  border: none;
-  background: #ffffff;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  width: 40px;
-  justify-content: center;
-}
-
-.left-arrow:hover {
-  background-color: #e5e5e5;
-  cursor: pointer;
-  justify-content: center;
-}
-
-.right-arrow {
-  border: none;
-  background: #ffffff;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  width: 40px;
-}
-
-.right-arrow:hover {
-  background-color: #e5e5e5;
-  cursor: pointer;
-}
-
 .button-tab {
-  background: #ffffff;
+  color: var(--cds-text-01, #161616);
   width: 150px;
   cursor: pointer;
 
@@ -81,13 +157,12 @@
   letter-spacing: var(--cds-body-short-02-letter-spacing, 0);
   border: none;
   padding: 0.8125rem var(--cds-spacing-05, 1rem);
-  color: #525252;
   white-space: nowrap;
   height: 46px;
 }
 
 .button-tab:hover {
-  background-color: #e5e5e5;
+  background-color: var(--cds-field-01, #e5e5e5);
   cursor: pointer;
 }
 
@@ -302,35 +377,7 @@
 a.cds--header__name,
 a.cds--header__name:hover {
   /* color: #F4F4F4; */
-  color: #161616 !important;
   font-weight: 600 !important;
-}
-.heading-content {
-  width: 94px;
-  padding: 0px 16px !important;
-  height: 48px !important;
-  // border-right: 1px solid #CACACA !important;
-  // height: 35px !important;
-}
-.heading-content-new {
-  width: 100px;
-  padding: 0px 16px !important;
-  height: 48px !important;
-  // border-right: 1px solid #CACACA !important;
-  // height: 35px !important;
-}
-.heading-content-new:hover {
-  background-color: #e5e5e5 !important;
-  // cursor: pointer;
-}
-.heading-content:hover {
-  background-color: #e5e5e5 !important;
-  // cursor: pointer;
-}
-.border-outline {
-  background: #cacaca !important;
-  width: 1px;
-  height: 35px;
 }
 .header-tab {
   svg {
@@ -344,12 +391,6 @@ a.cds--header__name:hover {
   }
 }
 .header-container-box {
-  background-color: #ffffff;
-  width: 100%;
-  display: flex;
-  align-items: center;
-}
-.header-box-dashboard {
   background-color: #ffffff;
   width: 100%;
   display: flex;
@@ -400,21 +441,4 @@ a.cds--header__name:hover {
     pointer-events: none;
   }
   //background-color: rgba(22, 22, 22, 0.5);
-}
-.custom-tab {
-  display: flex;
-  gap: 0.2rem;
-  border-width: 2px;
-  border-bottom: 2px solid #efefef;
-  &:hover {
-    background-color: transparent;
-    border-bottom: 2px solid #525252;
-  }
-  &.active {
-    font-weight: bold;
-    border-bottom: 2px solid #0f62fe;
-    &:hover {
-      background-color: transparent;
-    }
-  }
 }

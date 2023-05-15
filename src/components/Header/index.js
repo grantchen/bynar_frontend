@@ -9,7 +9,7 @@ import {
   Popover,
   PopoverContent,
 } from "@carbon/react";
-import { Search20, UserAvatar20 } from "@carbon/icons-react";
+import { Search20, UserAvatar20, UserData20 } from "@carbon/icons-react";
 import { Navbar } from "../Navbar";
 import { Outlet } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -76,10 +76,9 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
 
   return (
     <>
-      <div>
         <Header
-          aria-label="IBM Platform Name"
-          style={{ backgroundColor: "#FFFFFF" }}
+          aria-label="Bynar"
+          className="header-container"
         >
           <HeaderMenuButton
             aria-label="Open menu"
@@ -97,12 +96,10 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
             <HeaderName className="heading-content" prefix={t("")}>
               {t("Bynar")}
             </HeaderName>
-            <div className="border-outline"></div>
             <HeaderName className="heading-content-new" prefix={t("")}>
               {t("platform")}
             </HeaderName>
             <HeaderTab />
-            <div className="border-outline"></div>
             {/* <button style={{ cursor: 'pointer' }} onClick={handleOpenModalClick}>user</button> */}
             <HeaderGlobalBar className="header-tab">
               {isUserManagementAllowed && (
@@ -110,10 +107,7 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
                   aria-label={t('user')}
                   onClick={() => setIsUserListOpen(true)}
                 >
-                  <img
-                    src={"../../../images/user-list.svg"}
-                    style={{ height: "20px", width: "20px" }}
-                  />
+                  <UserData20/>
                 </HeaderGlobalAction>
               )}
               <HeaderGlobalAction aria-label={t('search')} onClick={() => { }}>
@@ -156,9 +150,6 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
           openLanguageModel={openLanguageModel}
           setLanguageModelOpen={setLanguageModelOpen}
         />
-        
-        
-      </div>
 
       <TearSheets setIsOpen={setIsUserListOpen} isOpen={isUserListOpen} />
     </>

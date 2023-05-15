@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { TabContext } from "../../sdk";
+import './Dashboard.scss'
 
 export const Dashboard = () => {
   const { tab, activeTab } = useContext(TabContext);
   const tabContent = tab?.[activeTab]?.content;
   return (
     <div
-      style={{ paddingTop: "6rem", paddingLeft: "4rem", paddingRight: "4rem" }}
+      className="dashboard-container"
     >
       {tabContent}
     </div>

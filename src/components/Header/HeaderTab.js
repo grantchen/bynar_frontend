@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
-import { Close } from "@carbon/react/icons";
+import { Close, ChevronLeft, ChevronRight } from "@carbon/react/icons";
 import { Button, IconButton, Tab } from "@carbon/react";
 import "./HeaderTab.scss";
 import { TabContext } from "../../sdk";
@@ -51,11 +51,7 @@ const HeaderTab = () => {
       <div className="tab" ref={tabRef}>
         {shouldShowTabScroll && (
           <IconButton className="left-arrow" onClick={handleLeftScroll}>
-            <img
-              src={"../../../images/left-arrow.svg"}
-              style={{ width: "15px", height: "15px" }}
-              alt="left arrow"
-            />
+            <ChevronLeft/>
           </IconButton>
         )}
 
@@ -66,9 +62,6 @@ const HeaderTab = () => {
                 <Button
                   kind="ghost"
                   key={index}
-                  style={{
-                    color: "#525252",
-                  }}
                   onClick={() => {
                     setActiveTab(item?.id);
                   }}
@@ -89,9 +82,6 @@ const HeaderTab = () => {
             })}
             <Button
               kind="ghost"
-              style={{
-                color: "#525252",
-              }}
               onClick={() => {
                 handleAddTab();
                 setTimeout(() => {
@@ -108,11 +98,7 @@ const HeaderTab = () => {
         </div>
         {shouldShowTabScroll ? (
           <IconButton className="left-arrow" onClick={handleRightScroll}>
-            <img
-              src={"../../images/right-arrow.svg"}
-              style={{ width: "12px", height: "100%" }}
-              alt="right arrow"
-            />
+            <ChevronRight/>
           </IconButton>
         ) : null}
       </div>
