@@ -124,7 +124,7 @@ const UserManagementProvider = ({ children }) => {
         } else if (response.status === 500) {
             throw { message: res.error, type: "error" };
         } else {
-            throw { message: "Error updating user", type: "error" };
+            throw { message: t('error-updating-user'), type: "error" };
         }
     }, [authFetch]);
     const addUser = useCallback(async ({ userDetails }) => {
@@ -140,7 +140,7 @@ const UserManagementProvider = ({ children }) => {
         } else if (response.status === 500) {
             throw { message: res.error, type: "error" };
         } else {
-            throw { message: t('error-updating-user'), type: "error" };
+            throw { message: t('error-adding-user'), type: "error" };
         }
     }, [authFetch]);
 
