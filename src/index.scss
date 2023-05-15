@@ -1,4 +1,10 @@
+$feature-flags: (
+    enable-css-custom-properties: true,
+    grid-columns-16: true,
+);
+$prefix: "cds";
 @use "@carbon/react";
+@import "../node_modules/carbon-components/scss/globals/scss/vars";
 
 .skiptranslate {
     display: none;
@@ -20,4 +26,8 @@ body {
 
 [data-carbon-theme="g90"] {
     @include react.theme(react.$g90);
+
+    @include carbon--theme($carbon--theme--g90, true);
+    background-color: var(--cds-ui-background);
+    color: var(--cds-text-01);
 }
