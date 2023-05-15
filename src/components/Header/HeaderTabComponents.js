@@ -3,11 +3,10 @@ import { Close } from '@carbon/react/icons'
 import { TabContext } from '../../sdk';
 import './HeaderTab.scss'
 import { useTranslation } from 'react-i18next';
-const HeaderTabComponents = () => {
+const HeaderTabComponents = ({onClickSideNavExpand}) => {
 
     const {t}=useTranslation();
-    const { tab, handleAddTab, handleRemoveTab, setStartIndex, setEndIndex, startIndex, endIndex, activeTab, setActiveTab, maxTab, setMaxTab } = useContext(TabContext);
-    const [showLeftArrow, setShowLeftArrow] = useState(false);
+    const { tab, handleAddTab, handleRemoveTab, activeTab, setActiveTab, } = useContext(TabContext);
 
     const removeTab = (idToRemove, index) => {
         handleRemoveTab(idToRemove, index)
@@ -29,7 +28,10 @@ const HeaderTabComponents = () => {
                 {tab.map((item, index) => {
                     return (
                         <div key={index} className="tab-container" >
-                            <div className={activeTab === index + 1 ? "active-tab-new1" : "inactive-tab-new"} onClick={() => { setActiveTab(index + 1) }}>
+                            <div className={activeTab === index + 1 ? "active-tab-new1" : "inactive-tab-new"} onClick={() => { 
+                                setActiveTab(index)
+                                onClickSideNavExpand()
+                                 }}>
                                 <p>{item.label}</p>
                                 {item.isDelted && <div className="close-icon">
                                     <Close size={12} onClick={() => removeTab(item.id, index)} />

@@ -142,7 +142,7 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
               </div>
             </HeaderGlobalBar>
           </div>
-          <Navbar isSideNavExpanded={isSideNavExpanded} />
+          <Navbar isSideNavExpanded={isSideNavExpanded} onClickSideNavExpand={onClickSideNavExpand}/>
         </Header>
         <Outlet />
 

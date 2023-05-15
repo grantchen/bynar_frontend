@@ -159,7 +159,6 @@
 }
 
 .tabs:hover {
-  background-color: #e5e5e5;
   cursor: pointer;
 }
 
@@ -169,7 +168,6 @@
 }
 
 .tab-container:hover {
-  background-color: #e5e5e5;
   cursor: pointer;
 }
 
@@ -306,7 +304,7 @@
         letter-spacing: var(--cds-body-short-02-letter-spacing, 0);
         border: none;
         padding: 0;
-        color: #161616;
+        color: var(--cds-text-01, #161616);
         white-space: nowrap;
       }
     }
@@ -335,7 +333,7 @@
       letter-spacing: var(--cds-body-short-02-letter-spacing, 0);
       border: none;
       padding: 0;
-      color: var(--cds-text-02, #525252);
+      color: var(--cds-text-01, #161616);
       white-space: nowrap;
     }
 
@@ -363,7 +361,7 @@
       letter-spacing: var(--cds-body-short-02-letter-spacing, 0);
       border: none;
       padding: 0;
-      color: var(--cds-text-02, #525252);
+      color: var(--cds-text-01, #161616);
       white-space: nowrap;
     }
 
@@ -374,7 +372,7 @@
   }
 
   .button-tab {
-    background: #ffffff;
+    background: var(--cds-background,#fff);
     width: 100%;
     cursor: pointer;
     font-size: var(--cds-body-short-02-font-size, 1rem);
@@ -427,7 +425,7 @@ a.cds--header__name:hover {
   .cds--header__menu-toggle {
     display: flex !important;
     svg {
-      fill: #161616 !important;
+      fill: var(--cds-text-01, #161616) !important;
     }
   }
   .cds--side-nav__navigation {
@@ -440,13 +438,6 @@ a.cds--header__name:hover {
     /* width: 24rem; */
     width: 100% !important;
   }
-  //   .cds--side-nav__navigation {
-  //     display: flex;
-  //     height: 100%;
-  //     flex-direction: column;
-  //     max-width: 100% !important;
-  //     width: 100% !important;
-  // }
   .cds--side-nav {
     // width: 16rem;
     max-width: 100% !important;
@@ -456,9 +447,6 @@ a.cds--header__name:hover {
   }
   .border-outline {
     display: none !important;
-  }
-  .cds--header__action:hover {
-    background-color: #ffffff !important;
   }
   .header-container-box {
     background-color: rgba(22, 22, 22, 0.5);

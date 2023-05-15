@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./Navbar.scss";
 import { useTranslation } from "react-i18next";
 import HeaderTabComponents from "../Header/HeaderTabComponents";
-export const Navbar = ({ isSideNavExpanded }) => {
+export const Navbar = ({ isSideNavExpanded, onClickSideNavExpand }) => {
   let navigate = useNavigate();
   const { t } = useTranslation();
   const Fade16 = () => (
@@ -27,7 +27,7 @@ export const Navbar = ({ isSideNavExpanded }) => {
               </SideNavItems> */}
         <SideNavItems className="side-nav">
           {/* <HeaderName className="heading-content-new" prefix={t('')}>{t('platform')}</HeaderName> */}
-          <HeaderTabComponents />
+          <HeaderTabComponents onClickSideNavExpand={onClickSideNavExpand}/>
         </SideNavItems>
       </SideNav>
     </div>
