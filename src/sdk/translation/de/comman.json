@@ -100,5 +100,6 @@
     "user-load-failed": "Benutzerdaten konnten nicht geladen werden",
     "user-deleted-successfully": "Benutzer erfolgreich gelöscht",
     "error-deleting-user": "Fehler beim Löschen des Benutzers",
-    "error-updating-user": "Fehler beim Aktualisieren des Benutzers"
+    "error-updating-user": "Fehler beim Aktualisieren des Benutzers",
+    "error-adding-user": "Fehler beim Hinzufügen des Benutzers"
 }

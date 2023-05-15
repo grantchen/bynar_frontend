@@ -24,10 +24,9 @@ import {
 } from "google-libphonenumber";
 import { InlineLoading } from "carbon-components";
 import { useTranslation } from "react-i18next";
-export const SidePanels = () => {
+export const SidePanels = ({open}) => {
     const {t} = useTranslation()
     const phoneUtil = PhoneNumberUtil.getInstance();
-    const [open, setOpen] = useState(true);
     const [accountInfoErrors, setAccountInfoErrors] = useState({
         userName: false,
         password: false,
@@ -448,6 +447,9 @@ export const SidePanels = () => {
     };
 
     useEffect(() => {
+        if(!open){
+            return
+        }
         setUserId(parseInt(searchParams?.get("userIdToBeEdited")));
         if (parseInt(searchParams?.get("userIdToBeEdited")) > 0) {
             getUserList(parseInt(searchParams?.get("userIdToBeEdited")));

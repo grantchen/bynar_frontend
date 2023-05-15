@@ -100,5 +100,6 @@
     "user-load-failed": "Failed to load users data",
     "user-deleted-successfully": "User deleted successfully",
     "error-deleting-user": "Error deleting user",
-    "error-updating-user": "Error updating user"
+    "error-updating-user": "Error updating user",
+    "error-adding-user": "Error adding user"
 }
