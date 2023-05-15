@@ -6,6 +6,7 @@ import { ThemeContext, useAuth } from "../../sdk";
 
 import { useTranslation } from "react-i18next";
 import "./profileDropdown.scss";
+import { useSearchParams } from "react-router-dom";
 const ProfileDropdown = React.memo(
   ({
     openThemeModel,
@@ -15,6 +16,7 @@ const ProfileDropdown = React.memo(
   }) => {
     const [t, i18n] = useTranslation();
     const {signout, user} = useAuth();
+    const [_, setSearchParams] = useSearchParams()
     const theme = useContext(ThemeContext);
     const handleLogout = async (e) => {
       e.preventDefault();
@@ -50,7 +52,7 @@ const ProfileDropdown = React.memo(
             </div>
           </div>
           <div className="link-list" style={{ marginTop: "1rem" }}>
-            <Link>{t("profile")}</Link>
+            <Link onClick={() => setSearchParams({userIdToBeEdited: user?.id})}>{t("profile")}</Link>
             <Link>{t("privacy")}</Link>
             <Link style={{ cursor: "pointer" }} onClick={handleLanguageChange}>
               {t("change-language")}
