@@ -8,3 +8,19 @@
     width: 100vw;
     height: 100vh;
 }
+
+
+
+/*
+    ***DANGER ZONE***
+
+    carbon internal class overrides to fix issues that are broken within the lib
+*/
+
+.cds--modal-container{
+    overflow: visible;
+}
+
+.cds--modal-content{
+    overflow-y: visible;
+}
