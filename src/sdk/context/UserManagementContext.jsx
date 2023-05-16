@@ -33,9 +33,9 @@ const UserManagementProvider = ({ children }) => {
     const [userListParams, setUserListParams] = useState({});
     const [deleteModalProps, setDeleteModalProps] = useState(null);
 
-    const editUserPanelOpen = searchParams.get("userIdToBeEdited");
-    const addUserPanelOpen = searchParams.get("openAddUserPanel");
-    const userDetailsOpen = searchParams.get("userIdToShowDetails");
+    const editUserPanelOpen = searchParams.get("userIdToBeEdited") ?? false;
+    const addUserPanelOpen = searchParams.get("openAddUserPanel") ?? false;
+    const userDetailsOpen = searchParams.get("userIdToShowDetails") ?? false;
 
     const isUserManagementAllowed = useMemo(
         () =>

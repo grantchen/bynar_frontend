@@ -32,12 +32,19 @@ body {
     color: var(--cds-text-01);
 }
 
+.disable-focus{
+    &:focus{
+        outline: none;
+        box-shadow: none;
+    }
+}
 
 /*
     ***DANGER ZONE***
 
     carbon internal class overrides to fix issues that are broken within the lib
 */
+
 
 .cds--modal-container{
     overflow: visible;

@@ -1,0 +1,11 @@
+.header-sort-btn{
+    padding: 0;
+    &:hover{
+        background: var(--cds-hover-selected-ui, #cacaca)
+    }
+}
+th:hover{
+    .header-sort-btn{
+        background: var(--cds-hover-selected-ui, #cacaca)
+    }
+}

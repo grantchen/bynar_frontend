@@ -75,12 +75,21 @@ export function mergeQueryParams(prevPrams, newParams) {
         newQueryParams[key] = prevPrams.get(key);
     }
     newQueryParams = {
-      ...newQueryParams,
-      ...newParams
-    }
-    return newQueryParams
+        ...newQueryParams,
+        ...newParams,
+    };
+    return newQueryParams;
 }
 
+export function omitQueryParams(prevParams, omitKeys) {
+    let newQueryParams = {};
+    for (let key of prevParams.keys()) {
+        if (!omitKeys.includes(key)) {
+            newQueryParams[key] = prevParams.get(key);
+        }
+    }
+    return newQueryParams;
+}
 
 export const getAutoSizedColumnWidth = (rows, accessor, headerText) => {
     const maxWidth = 400;

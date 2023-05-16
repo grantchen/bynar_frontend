@@ -85,6 +85,7 @@ export const SidePanels = ({ open }) => {
     const [countryCode, setCountryCode] = useState("IN");
     const [countryDialCode, setCountryDialCode] = useState("91");
 
+    const [userDetails, setUserDetails] = useState({});
     const isUserEdit = searchParams.get("userIdToBeEdited");
 
     const { closeModalAndGoBackToUserList, updateUser, addUser, getUserById } =
@@ -124,11 +125,6 @@ export const SidePanels = ({ open }) => {
                 passwordInput.current.focus();
             }
         }
-    };
-
-    const handlePasswordChange = (e) => {
-        setPassword(e.target.value);
-        validatePassword(e.target.value);
     };
 
     const validateEmail = (email) => {
@@ -422,6 +418,7 @@ export const SidePanels = ({ open }) => {
         try {
             setLoadingData(true);
             const { result } = await getUserById(userid);
+            setUserDetails(result);
             setFullName(result?.fullName);
             setUserName(result?.username);
             setCountry(result?.country);
@@ -484,7 +481,7 @@ export const SidePanels = ({ open }) => {
                 onRequestClose={handleClose}
                 title={isUserEdit ? t("edit-user") : t("add-user")}
                 subtitle=""
-                actions={[
+                actions={userDetails.canUpdate ? [
                     {
                         label: isUserEdit ? t("update") : t("submit"),
                         onClick: () => {
@@ -500,7 +497,7 @@ export const SidePanels = ({ open }) => {
                         onClick: handleClose,
                         kind: "secondary",
                     },
-                ]}
+                ] : []}
             >
                 {loadingData ? (
                     <>

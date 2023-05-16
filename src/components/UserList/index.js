@@ -22,16 +22,21 @@ import {
     useUserManagement,
     mergeQueryParams,
     getAutoSizedColumnWidth,
+    useSortableColumnsFork,
+    SORTABLE_ORDERING,
+    omitQueryParams,
 } from "../../sdk";
 import { useSearchParams } from "react-router-dom";
 import { Restart16, Activity16, Add16, TrashCan16 } from "@carbon/icons-react";
+
 import "./UserList.scss";
 import { useTranslation } from "react-i18next";
+
 pkg.component.Datagrid = true;
 // pkg.feature.Datagrid = true
 // pkg.feature['Datagrid.useActionsColumn'] = true
 
-export const UserList = ({isOpen}) => {
+export const UserList = ({ isOpen }) => {
     const {
         getUserList,
         userListData,
@@ -44,7 +49,7 @@ export const UserList = ({isOpen}) => {
         openBulkDeleteConfirmModal,
     } = useUserManagement();
 
-    const {t} = useTranslation()
+    const { t } = useTranslation();
     const [searchParams, setSearchParams] = useSearchParams();
 
     const [searchText, setSearchText] = useState(
@@ -52,58 +57,6 @@ export const UserList = ({isOpen}) => {
     );
 
     const skipOnMount = useRef(true);
-
-    const getColumns = (rows) => {
-        return [
-            {
-                Header: t("username"),
-                accessor: "username",
-                width: getAutoSizedColumnWidth(rows, "username", "Username"),
-            },
-            {
-                Header: t("fullname"),
-                accessor: "fullName",
-                width: getAutoSizedColumnWidth(rows, "fullName", "Fullname"),
-            },
-            {
-                Header: t("country"),
-                accessor: "country",
-                width: getAutoSizedColumnWidth(rows, "country", "Country"),
-            },
-            {
-                Header: t("city"),
-                accessor: "city",
-                width: getAutoSizedColumnWidth(rows, "city", "City"),
-            },
-            {
-                Header: t("postal-code"),
-                accessor: "postalCode",
-                width: getAutoSizedColumnWidth(rows, "postalCode", "PostalCode"),
-            },
-            {
-                Header: t("state"),
-                accessor: "state",
-                width: getAutoSizedColumnWidth(rows, "state", "State"),
-            },
-            {
-                Header: t("phone-number"),
-                accessor: "phoneNumber",
-                width: getAutoSizedColumnWidth(rows, "phoneNumber", "Phonenumber"),
-            },
-            {
-                Header: t("roles"),
-                accessor: "cognitoUserGroups",
-                width: getAutoSizedColumnWidth(rows, "cognitoUserGroups", "Roles"),
-            },
-            {
-                Header: "",
-                accessor: "actions",
-                isAction: true,
-                sticky: "right",
-            },
-        ];
-    };
-    
 
     const { page, pageLimit } = useMemo(() => {
         let values = {
@@ -132,8 +85,8 @@ export const UserList = ({isOpen}) => {
     }, [searchParams]);
 
     useEffect(() => {
-        if(!isOpen){
-            return
+        if (!isOpen) {
+            return;
         }
         (async () => {
             await getUserList(getUserAPIQuery());
@@ -141,8 +94,8 @@ export const UserList = ({isOpen}) => {
     }, [searchParams, getUserAPIQuery, isOpen]);
 
     useEffect(() => {
-        if(!isOpen){
-            return
+        if (!isOpen) {
+            return;
         }
         if (!skipOnMount.current) {
             const timeoutId = setTimeout(() => {
@@ -157,7 +110,7 @@ export const UserList = ({isOpen}) => {
             }, 300);
             return () => clearTimeout(timeoutId);
         }
-        skipOnMount.current = false
+        skipOnMount.current = false;
     }, [searchText, isOpen]);
     const handleSort = useCallback((val1, val2, sortConfig) => {
         setSearchParams((prev) => ({
@@ -167,7 +120,7 @@ export const UserList = ({isOpen}) => {
         }));
     }, []);
     const columns = useMemo(
-        () => getColumns(userListData.userAccountDetails),
+        () => getColumns(userListData.userAccountDetails, t),
         [userListData.userAccountDetails]
     );
     const datagridState = useDatagrid(
@@ -178,15 +131,20 @@ export const UserList = ({isOpen}) => {
             endPlugins: [useDisableSelectRows],
             onRowSelect: (row, event) => {},
             shouldDisableSelectRow: (row) => !row?.original?.canDelete,
-            // onSort: (sortByColumn, sortByOrder) => {
-            //     if(sortByOrder === 'none'){
-            //         const {sortByColumn: sBC, sortByOrder: sBO, ...rest} = searchParams
-            //         setSearchParams(rest)
-            //     }
-            //     else{
-            //         setSearchParams({...searchParams, sortByColumn, sortByOrder})
-            //     }
-            // },
+            onSort: (sortByColumn, sortByOrder) => {
+                if (sortByOrder === SORTABLE_ORDERING.NONE) {
+                    setSearchParams((prev) =>
+                        omitQueryParams(prev, ["sortByColumn", "sortByOrder"])
+                    );
+                } else {
+                    setSearchParams((prev) =>
+                        mergeQueryParams(prev, {
+                            sortByColumn,
+                            sortByOrder,
+                        })
+                    );
+                }
+            },
             onRowClick: ({ original }) => {
                 openEditPanel({
                     userIdToBeEdited: original.id,
@@ -195,7 +153,7 @@ export const UserList = ({isOpen}) => {
             rowActions: [
                 {
                     id: "edit",
-                    itemText: t('edit'),
+                    itemText: t("edit"),
                     onClick: (_, { original }) =>
                         openEditPanel({
                             userIdToBeEdited: original.id,
@@ -211,7 +169,7 @@ export const UserList = ({isOpen}) => {
                 },
                 {
                     id: "delete",
-                    itemText: t('delete'),
+                    itemText: t("delete"),
                     hasDivider: true,
                     isDelete: true,
                     shouldDisableMenuItem: ({ original }) =>
@@ -262,14 +220,6 @@ export const UserList = ({isOpen}) => {
             },
             DatagridActions: () => (
                 <TableToolbarContent>
-                    <Button
-                        kind="ghost"
-                        hasIconOnly
-                        tooltipPosition="bottom"
-                        renderIcon={Restart16}
-                        iconDescription={t('refresh')}
-                        onClick={() => getUserList(getUserAPIQuery())}
-                    />
                     <TableToolbarSearch
                         size="xl"
                         id="columnSearch"
@@ -278,12 +228,20 @@ export const UserList = ({isOpen}) => {
                         onChange={(e) => setSearchText(e.target.value)}
                     />
                     <Button
+                        kind="ghost"
+                        hasIconOnly
+                        tooltipPosition="bottom"
+                        renderIcon={Restart16}
+                        iconDescription={t("refresh")}
+                        onClick={() => getUserList(getUserAPIQuery())}
+                    />
+                    <Button
                         onClick={openAddUserModel}
                         size="sm"
                         kind="primary"
                         style={{ cursor: "pointer" }}
                     >
-                        {t('add-new-user')}
+                        {t("add-new-user")}
                     </Button>
                 </TableToolbarContent>
             ),
@@ -309,7 +267,7 @@ export const UserList = ({isOpen}) => {
         useActionsColumn,
         useSelectRows,
         useOnRowClick,
-        // useSortableColumns
+        useSortableColumnsFork
     );
 
     return (
@@ -333,3 +291,69 @@ export const UserList = ({isOpen}) => {
     );
 };
 
+
+
+
+const getColumns = (rows, t) => {
+    return [
+        {
+            Header: t("username"),
+            accessor: "username",
+            width: getAutoSizedColumnWidth(rows, "username", "Username"),
+        },
+        {
+            Header: t("fullname"),
+            accessor: "fullName",
+            width: getAutoSizedColumnWidth(rows, "fullName", "Fullname"),
+        },
+        {
+            Header: t("country"),
+            accessor: "country",
+            width: getAutoSizedColumnWidth(rows, "country", "Country"),
+        },
+        {
+            Header: t("city"),
+            accessor: "city",
+            width: getAutoSizedColumnWidth(rows, "city", "City"),
+        },
+        {
+            Header: t("postal-code"),
+            accessor: "postalCode",
+            width: getAutoSizedColumnWidth(
+                rows,
+                "postalCode",
+                "PostalCode"
+            ),
+        },
+        {
+            Header: t("state"),
+            accessor: "state",
+            width: getAutoSizedColumnWidth(rows, "state", "State"),
+        },
+        {
+            Header: t("phone-number"),
+            accessor: "phoneNumber",
+            width: getAutoSizedColumnWidth(
+                rows,
+                "phoneNumber",
+                "Phonenumber"
+            ),
+        },
+        {
+            Header: t("roles"),
+            accessor: "cognitoUserGroups",
+            width: getAutoSizedColumnWidth(
+                rows,
+                "cognitoUserGroups",
+                "Roles"
+            ),
+        },
+        {
+            Header: "",
+            accessor: "actions",
+            isAction: true,
+            sticky: "right",
+            disableSortBy: true
+        },
+    ];
+};
