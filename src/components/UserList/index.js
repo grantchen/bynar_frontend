@@ -151,8 +151,8 @@ export const UserList = ({ isOpen }) => {
                 }
             },
             onRowClick: ({ original }) => {
-                openEditPanel({
-                    userIdToBeEdited: original.id,
+                openUserDetails({
+                    userIdToShowDetails: original.id,
                 });
             },
             rowActions: [

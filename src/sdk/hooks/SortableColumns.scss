@@ -9,3 +9,9 @@ th:hover{
         background: var(--cds-hover-selected-ui, #cacaca)
     }
 }
+
+th[class$=__isSorted]{
+    .header-sort-btn{
+        background-color: var(--cds-hover-selected-ui, #cacaca);
+    }
+}

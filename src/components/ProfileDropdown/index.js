@@ -46,7 +46,7 @@ const ProfileDropdown = React.memo(
             </div>
           </div>
           <div className="link-list" style={{ marginTop: "1rem" }}>
-            <Link onClick={() => setSearchParams({userIdToBeEdited: user?.id})}>{t("profile")}</Link>
+            <Link onClick={() => setSearchParams({userIdToShowDetails: user?.id})}>{t("profile")}</Link>
             <Link>{t("privacy")}</Link>
             <Link style={{ cursor: "pointer" }} onClick={handleLanguageChange}>
               {t("change-language")}

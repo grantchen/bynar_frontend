@@ -96,7 +96,7 @@
     "address":"Address",
     "postal-code-text":"Postal Code",
     "phone-number-text":"Phone Number",
-    "user-detail":"User Detail",
+    "user-detail":"User Details",
     "user-load-failed": "Failed to load users data",
     "user-deleted-successfully": "User deleted successfully",
     "error-deleting-user": "Error deleting user",
