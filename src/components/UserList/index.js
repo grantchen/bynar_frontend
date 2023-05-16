@@ -56,7 +56,7 @@ export const UserList = ({ isOpen }) => {
         searchParams.get("search") ?? ""
     );
 
-    const skipOnMount = useRef(true);
+    const [isSearchBarExpanded, setIsSearchBarExpanded] = useState(false);
 
     const { page, pageLimit } = useMemo(() => {
         let values = {
@@ -91,27 +91,32 @@ export const UserList = ({ isOpen }) => {
         (async () => {
             await getUserList(getUserAPIQuery());
         })();
-    }, [searchParams, getUserAPIQuery, isOpen]);
+    }, [getUserAPIQuery, isOpen]);
 
     useEffect(() => {
         if (!isOpen) {
+            setIsSearchBarExpanded(false);
             return;
         }
-        if (!skipOnMount.current) {
-            const timeoutId = setTimeout(() => {
-                (async () => {
-                    if (searchText) {
-                        setSearchParams({ isUserListOpen: true });
-                        await getUserList({ search: searchText });
-                    } else {
-                        await getUserList({});
-                    }
-                })();
-            }, 300);
-            return () => clearTimeout(timeoutId);
-        }
-        skipOnMount.current = false;
+        const timeoutId = setTimeout(() => {
+            (async () => {
+                if (searchText) {
+                    setSearchParams((prev) =>
+                        mergeQueryParams(prev, { search: searchText })
+                    );
+                } else {
+                    setSearchParams((prev) =>
+                        omitQueryParams(prev, ["search"])
+                    );
+                }
+            })();
+        }, 300);
+        return () => clearTimeout(timeoutId);
     }, [searchText, isOpen]);
+    useEffect(() => {
+        setSearchText(searchParams.get("search") ?? "");
+    }, [searchParams.get("search")]);
+
     const handleSort = useCallback((val1, val2, sortConfig) => {
         setSearchParams((prev) => ({
             ...prev,
@@ -226,6 +231,10 @@ export const UserList = ({ isOpen }) => {
                         className="search-input"
                         placeHolderText={"Search here"}
                         onChange={(e) => setSearchText(e.target.value)}
+                        value={searchText ?? null}
+                        onExpand={(_, value) => setIsSearchBarExpanded(value)}
+                        expanded={isSearchBarExpanded || searchText}
+                        onClear={() => setSearchText("")}
                     />
                     <Button
                         kind="ghost"
@@ -291,9 +300,6 @@ export const UserList = ({ isOpen }) => {
     );
 };
 
-
-
-
 const getColumns = (rows, t) => {
     return [
         {
@@ -319,11 +325,7 @@ const getColumns = (rows, t) => {
         {
             Header: t("postal-code"),
             accessor: "postalCode",
-            width: getAutoSizedColumnWidth(
-                rows,
-                "postalCode",
-                "PostalCode"
-            ),
+            width: getAutoSizedColumnWidth(rows, "postalCode", "PostalCode"),
         },
         {
             Header: t("state"),
@@ -333,27 +335,19 @@ const getColumns = (rows, t) => {
         {
             Header: t("phone-number"),
             accessor: "phoneNumber",
-            width: getAutoSizedColumnWidth(
-                rows,
-                "phoneNumber",
-                "Phonenumber"
-            ),
+            width: getAutoSizedColumnWidth(rows, "phoneNumber", "Phonenumber"),
         },
         {
             Header: t("roles"),
             accessor: "cognitoUserGroups",
-            width: getAutoSizedColumnWidth(
-                rows,
-                "cognitoUserGroups",
-                "Roles"
-            ),
+            width: getAutoSizedColumnWidth(rows, "cognitoUserGroups", "Roles"),
         },
         {
             Header: "",
             accessor: "actions",
             isAction: true,
             sticky: "right",
-            disableSortBy: true
+            disableSortBy: true,
         },
     ];
 };

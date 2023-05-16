@@ -33,9 +33,9 @@ const UserManagementProvider = ({ children }) => {
     const [userListParams, setUserListParams] = useState({});
     const [deleteModalProps, setDeleteModalProps] = useState(null);
 
-    const editUserPanelOpen = searchParams.get("userIdToBeEdited") ?? false;
-    const addUserPanelOpen = searchParams.get("openAddUserPanel") ?? false;
-    const userDetailsOpen = searchParams.get("userIdToShowDetails") ?? false;
+    const editUserPanelOpen = Boolean(searchParams.get("userIdToBeEdited"))
+    const addUserPanelOpen = Boolean(searchParams.get("openAddUserPanel"))
+    const userDetailsOpen = Boolean(searchParams.get("userIdToShowDetails"))
 
     const isUserManagementAllowed = useMemo(
         () =>
@@ -47,6 +47,10 @@ const UserManagementProvider = ({ children }) => {
 
     const getUserList = useCallback(async (queryParams = {}) => {
         setLoading(true);
+        setUserListData({
+            userAccountDetails: [],
+            totalCount: 5
+        })
         try {
             const searchQueryParams = new URLSearchParams(
                 removeNullEntries(queryParams)
