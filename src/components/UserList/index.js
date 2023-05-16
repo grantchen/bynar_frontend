@@ -188,7 +188,9 @@ export const UserList = ({isOpen}) => {
             //     }
             // },
             onRowClick: ({ original }) => {
-                openUserDetails({ userIdToShowDetails: original.id });
+                openEditPanel({
+                    userIdToBeEdited: original.id,
+                });
             },
             rowActions: [
                 {
@@ -260,12 +262,6 @@ export const UserList = ({isOpen}) => {
             },
             DatagridActions: () => (
                 <TableToolbarContent>
-                    <TableToolbarSearch
-                        size="xl"
-                        id="columnSearch"
-                        placeHolderText={"Search here"}
-                        onChange={(e) => setSearchText(e.target.value)}
-                    />
                     <Button
                         kind="ghost"
                         hasIconOnly
@@ -273,6 +269,13 @@ export const UserList = ({isOpen}) => {
                         renderIcon={Restart16}
                         iconDescription={t('refresh')}
                         onClick={() => getUserList(getUserAPIQuery())}
+                    />
+                    <TableToolbarSearch
+                        size="xl"
+                        id="columnSearch"
+                        className="search-input"
+                        placeHolderText={"Search here"}
+                        onChange={(e) => setSearchText(e.target.value)}
                     />
                     <Button
                         onClick={openAddUserModel}

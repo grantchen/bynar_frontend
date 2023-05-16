@@ -1,18 +1,29 @@
 .userdata-table {
-  width: calc(100% - 0px);
-  overflow-x: auto;
-  position: absolute;
+    width: calc(100% - 0px);
+    overflow-x: auto;
+    position: absolute;
 }
-.bx--body--with-modal-open .c4p--datagrid__grid-container{
-  height: auto !important;
+.bx--body--with-modal-open .c4p--datagrid__grid-container {
+    height: auto !important;
+}
+
+.search-input{
+    width: 100%;
+    .cds--search-magnifier {
+        svg {
+            width: 1rem !important;
+            height: 1rem !important;
+            padding: 0 !important;
+        }
+    }
 }
 
 @media screen and (max-width: 600px) {
-  .userdata-table {
-    width: calc(100% - 20px);
-    margin: 15px;
-    margin-top: 16px;
-    overflow-x: auto;
-    position: absolute;
-  }
+    .userdata-table {
+        width: calc(100% - 20px);
+        margin: 15px;
+        margin-top: 16px;
+        overflow-x: auto;
+        position: absolute;
+    }
 }
