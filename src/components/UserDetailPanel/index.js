@@ -147,7 +147,7 @@ export const UserDetailPanel = ({ open }) => {
                     {serverNotification && (
                         <ToastNotification
                             className="error-notification-box"
-                            iconDescription="describes the close button"
+                            iconDescription="Close Notification"
                             subtitle={serverErrorNotification?.message}
                             onCloseButtonClick={() => {
                                 setServerErrorNotification({});

@@ -20,6 +20,10 @@
     margin: 16px 0px;
   }
 
+  .bx--label{
+    margin-bottom: 6px;
+  }
+
   // .c4p--side-panel__container .bx--btn.c4p--side-panel__close-button {
   //   display: none;
   //   svg {
@@ -57,6 +61,10 @@
     /* border: 1px solid #cacaca; */
     /* border-radius: 3px 0 0 3px; */
     border-bottom: 1px solid var(--cds-ui-04, #8d8d8d);
+}
+
+.skeleton-loading{
+  margin: 16px 0px;
 }
 }
 

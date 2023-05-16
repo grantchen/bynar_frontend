@@ -24,7 +24,11 @@ import {
 } from "google-libphonenumber";
 import { InlineLoading } from "carbon-components";
 import { useTranslation } from "react-i18next";
-import { SkeletonText, CodeSnippetSkeleton } from "@carbon/react";
+import {
+    SkeletonText,
+    CodeSnippetSkeleton,
+    TextInputSkeleton,
+} from "@carbon/react";
 
 export const SidePanels = ({ open }) => {
     const { t } = useTranslation();
@@ -481,34 +485,43 @@ export const SidePanels = ({ open }) => {
                 onRequestClose={handleClose}
                 title={isUserEdit ? t("edit-user") : t("add-user")}
                 subtitle=""
-                actions={userDetails.canUpdate ? [
-                    {
-                        label: isUserEdit ? t("update") : t("submit"),
-                        onClick: () => {
-                            isUserEdit
-                                ? handleEditInformationFormSubmit()
-                                : handleAccountInformationFormSubmit();
-                        },
-                        kind: "primary",
-                        loading: savingData,
-                    },
-                    {
-                        label: t("cancel"),
-                        onClick: handleClose,
-                        kind: "secondary",
-                    },
-                ] : []}
+                actions={
+                    userDetails.canUpdate
+                        ? [
+                              {
+                                  label: isUserEdit ? t("update") : t("submit"),
+                                  onClick: () => {
+                                      isUserEdit
+                                          ? handleEditInformationFormSubmit()
+                                          : handleAccountInformationFormSubmit();
+                                  },
+                                  kind: "primary",
+                                  loading: savingData,
+                              },
+                              {
+                                  label: t("cancel"),
+                                  onClick: handleClose,
+                                  kind: "secondary",
+                              },
+                          ]
+                        : []
+                }
             >
-                {loadingData ? (
+                {false ? (
                     <>
-                        <SkeletonText heading={true} lineCount={20} paragraph width="100%" />
+                        <SkeletonText
+                            heading={true}
+                            lineCount={20}
+                            paragraph
+                            width="100%"
+                        />
                     </>
                 ) : (
                     <div className={`story__body-content`}>
                         {serverNotification && (
                             <ToastNotification
                                 className="error-notification-box"
-                                iconDescription="describes the close button"
+                                iconDescription="Close Notification"
                                 subtitle={serverErrorNotification?.message}
                                 onCloseButtonClick={() => {
                                     setServerErrorNotification({});
@@ -520,173 +533,215 @@ export const SidePanels = ({ open }) => {
                             />
                         )}
                         <div className={`story__text-inputs`}>
-                            <TextInput
-                                ref={emailInput}
-                                name="userName"
-                                type="text"
-                                id="username"
-                                className={`story__text-input`}
-                                labelText={`${t("user-name-label")} *`}
-                                value={userName}
-                                onChange={handleEmailChange}
-                                invalid={!!errors.userName}
-                                invalidText={errors.userName}
-                            />
-                            <TextInput
-                                ref={fullNameInput}
-                                type="text"
-                                name="fullName"
-                                id="fullname"
-                                labelText={`${t("full-name-label")} *`}
-                                className={`story__text-input`}
-                                value={fullName}
-                                onChange={handleFullName}
-                                invalid={accountInfoErrors.fullName}
-                                invalidText={t("full-name-validation")}
-                            />
+                            {loadingData ? (
+                                <TextInputSkeleton className="skeleton-loading" />
+                            ) : (
+                                <TextInput
+                                    ref={emailInput}
+                                    name="userName"
+                                    type="text"
+                                    id="username"
+                                    className={`story__text-input`}
+                                    labelText={`${t("user-name-label")} *`}
+                                    value={userName}
+                                    onChange={handleEmailChange}
+                                    invalid={!!errors.userName}
+                                    invalidText={errors.userName}
+                                />
+                            )}
+                            {loadingData ? (
+                                <TextInputSkeleton className="skeleton-loading" />
+                            ) : (
+                                <TextInput
+                                    ref={fullNameInput}
+                                    type="text"
+                                    name="fullName"
+                                    id="fullname"
+                                    labelText={`${t("full-name-label")} *`}
+                                    className={`story__text-input`}
+                                    value={fullName}
+                                    onChange={handleFullName}
+                                    invalid={accountInfoErrors.fullName}
+                                    invalidText={t("full-name-validation")}
+                                />
+                            )}
                         </div>
                         <div className={`story__text-inputs`}>
-                            {!isUserEdit && (
+                            {loadingData ? (
+                                <TextInputSkeleton className="skeleton-loading" />
+                            ) : (
+                                !isUserEdit && (
+                                    <Select
+                                        className={`story__text-input`}
+                                        name="role"
+                                        value={role}
+                                        id="country-ci"
+                                        labelText={`${t("role")} *`}
+                                        onChange={handleRoleChange}
+                                        invalid={accountInfoErrors.role}
+                                        invalidText={"User role is required"}
+                                        // defaultValue={''}
+                                    >
+                                        {roleslist.map(
+                                            (rolesObject, rolesIndex) => (
+                                                <SelectItem
+                                                    text={rolesObject.name}
+                                                    value={rolesObject.name}
+                                                    key={rolesIndex}
+                                                />
+                                            )
+                                        )}
+                                    </Select>
+                                )
+                            )}
+                            {loadingData ? (
+                                <TextInputSkeleton className="skeleton-loading" />
+                            ) : (
                                 <Select
                                     className={`story__text-input`}
-                                    name="role"
-                                    value={role}
+                                    value={country}
                                     id="country-ci"
-                                    labelText={`${t("role")} *`}
-                                    onChange={handleRoleChange}
-                                    invalid={accountInfoErrors.role}
-                                    invalidText={"User role is required"}
-                                    // defaultValue={''}
+                                    labelText={`${t("country-label")} *`}
+                                    onChange={handleCountryChange}
                                 >
-                                    {roleslist.map(
-                                        (rolesObject, rolesIndex) => (
+                                    {COUNTRIES.map(
+                                        (countryObject, countryIndex) => (
                                             <SelectItem
-                                                text={rolesObject.name}
-                                                value={rolesObject.name}
-                                                key={rolesIndex}
+                                                text={countryObject.name}
+                                                value={countryObject.name}
+                                                key={countryIndex}
                                             />
                                         )
                                     )}
                                 </Select>
                             )}
-                            <Select
-                                className={`story__text-input`}
-                                value={country}
-                                id="country-ci"
-                                labelText={`${t("country-label")} *`}
-                                onChange={handleCountryChange}
-                            >
-                                {COUNTRIES.map(
-                                    (countryObject, countryIndex) => (
-                                        <SelectItem
-                                            text={countryObject.name}
-                                            value={countryObject.name}
-                                            key={countryIndex}
-                                        />
-                                    )
-                                )}
-                            </Select>
                         </div>
                         <div className={`story__text-inputs`}>
-                            <TextInput
-                                type="text"
-                                name="addressLine1"
-                                id="addressline"
-                                className={`story__text-input`}
-                                labelText={`${t("address-line1")} *`}
-                                value={addressLine1}
-                                onChange={handleAddressLine1}
-                                invalid={accountInfoErrors.addressLine1}
-                                invalidText={t("address-line1-validation")}
-                            />
-                            <TextInput
-                                type="text"
-                                id="addressline1"
-                                className={`story__text-input`}
-                                labelText={`${t("address-line2")} *`}
-                                value={addressLine2}
-                                onChange={(e) =>
-                                    setAddressLine2(e.target.value)
-                                }
-                            />
-                        </div>
-                        <div className={`story__text-inputs`}>
-                            <TextInput
-                                type="text"
-                                id="city"
-                                name="city"
-                                labelText={`${t("city")} *`}
-                                className={`story__text-input`}
-                                value={city}
-                                onChange={handleCity}
-                                invalid={accountInfoErrors.city}
-                                invalidText={t("city-validation")}
-                            />
-                            <TextInput
-                                type="text"
-                                id="state"
-                                name="state"
-                                labelText={`${t("state")} *`}
-                                className={`story__text-input`}
-                                value={state}
-                                onChange={handleState}
-                                invalid={accountInfoErrors.state}
-                                invalidText={t("state-validation")}
-                            />
-                        </div>
-                        <div className={`story__text-inputs`}>
-                            <TextInput
-                                type="text"
-                                id="postalcode"
-                                name="postalCode"
-                                labelText={`${t("postal-code-label")} *`}
-                                className={`story__text-inputs`}
-                                value={postalCode}
-                                onChange={handlePostalCode}
-                                invalid={
-                                    typeof postalCodeErrorNotification ==
-                                        "object" &&
-                                    Object.keys(postalCodeErrorNotification)
-                                        .length !== 0
-                                }
-                                invalidText={
-                                    postalCodeErrorNotification &&
-                                    postalCodeErrorNotification.title
-                                        ? postalCodeErrorNotification.title
-                                        : ""
-                                }
-                            />
-                            <div>
-                                <div className="phone-label-wrapper">
-                                    <p className="phone-label">
-                                        {t("phone-number-label")}
-                                    </p>
-                                </div>
-                                <PhoneInput
-                                    className="phone-input-sidepanel"
-                                    // defaultCountry="in"
-                                    style={{
-                                        border:
-                                            !phoneNumberValid &&
-                                            errorMessage.length > 0
-                                                ? "2px solid red"
-                                                : 0,
-                                    }}
-                                    name="phoneNumber"
-                                    country={"IN"}
-                                    value={phoneNumber}
-                                    onChange={(
-                                        value,
-                                        country,
-                                        formattedValue
-                                    ) =>
-                                        handlePhoneNumber(
-                                            value,
-                                            country,
-                                            formattedValue
-                                        )
+                            {loadingData ? (
+                                <TextInputSkeleton className="skeleton-loading" />
+                            ) : (
+                                <TextInput
+                                    type="text"
+                                    name="addressLine1"
+                                    id="addressline"
+                                    className={`story__text-input`}
+                                    labelText={`${t("address-line1")} *`}
+                                    value={addressLine1}
+                                    onChange={handleAddressLine1}
+                                    invalid={accountInfoErrors.addressLine1}
+                                    invalidText={t("address-line1-validation")}
+                                />
+                            )}
+                            {loadingData ? (
+                                <TextInputSkeleton className="skeleton-loading" />
+                            ) : (
+                                <TextInput
+                                    type="text"
+                                    id="addressline1"
+                                    className={`story__text-input`}
+                                    labelText={`${t("address-line2")} *`}
+                                    value={addressLine2}
+                                    onChange={(e) =>
+                                        setAddressLine2(e.target.value)
                                     }
                                 />
+                            )}
+                        </div>
+                        <div className={`story__text-inputs`}>
+                            {loadingData ? (
+                                <TextInputSkeleton className="skeleton-loading" />
+                            ) : (
+                                <TextInput
+                                    type="text"
+                                    id="city"
+                                    name="city"
+                                    labelText={`${t("city")} *`}
+                                    className={`story__text-input`}
+                                    value={city}
+                                    onChange={handleCity}
+                                    invalid={accountInfoErrors.city}
+                                    invalidText={t("city-validation")}
+                                />
+                            )}
+                            {loadingData ? (
+                                <TextInputSkeleton className="skeleton-loading" />
+                            ) : (
+                                <TextInput
+                                    type="text"
+                                    id="state"
+                                    name="state"
+                                    labelText={`${t("state")} *`}
+                                    className={`story__text-input`}
+                                    value={state}
+                                    onChange={handleState}
+                                    invalid={accountInfoErrors.state}
+                                    invalidText={t("state-validation")}
+                                />
+                            )}
+                        </div>
+                        <div className={`story__text-inputs`}>
+                            {loadingData ? (
+                                <TextInputSkeleton className="skeleton-loading" />
+                            ) : (
+                                <TextInput
+                                    type="text"
+                                    id="postalcode"
+                                    name="postalCode"
+                                    labelText={`${t("postal-code-label")} *`}
+                                    className={`story__text-inputs`}
+                                    value={postalCode}
+                                    onChange={handlePostalCode}
+                                    invalid={
+                                        typeof postalCodeErrorNotification ==
+                                            "object" &&
+                                        Object.keys(postalCodeErrorNotification)
+                                            .length !== 0
+                                    }
+                                    invalidText={
+                                        postalCodeErrorNotification &&
+                                        postalCodeErrorNotification.title
+                                            ? postalCodeErrorNotification.title
+                                            : ""
+                                    }
+                                />
+                            )}
+                            <div>
+                                {loadingData ? (
+                                    <TextInputSkeleton className="skeleton-loading" />
+                                ) : (
+                                    <>
+                                        <div className="phone-label-wrapper">
+                                            <p className="phone-label">
+                                                {t("phone-number-label")}
+                                            </p>
+                                        </div>
+                                        <PhoneInput
+                                            className="phone-input-sidepanel"
+                                            // defaultCountry="in"
+                                            style={{
+                                                border:
+                                                    !phoneNumberValid &&
+                                                    errorMessage.length > 0
+                                                        ? "2px solid red"
+                                                        : 0,
+                                            }}
+                                            name="phoneNumber"
+                                            country={"IN"}
+                                            value={phoneNumber}
+                                            onChange={(
+                                                value,
+                                                country,
+                                                formattedValue
+                                            ) =>
+                                                handlePhoneNumber(
+                                                    value,
+                                                    country,
+                                                    formattedValue
+                                                )
+                                            }
+                                        />
+                                    </>
+                                )}
                                 {!phoneNumberValid &&
                                     errorMessage.length > 0 && (
                                         <p
