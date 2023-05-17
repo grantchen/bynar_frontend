@@ -108,5 +108,7 @@
     "light": "Light",
     "confirm": "Confirm",
     "languages": "Languages",
-    "view": "View"
+    "view": "View",
+    "no-users": "No Users Found",
+    "no-users-action-description": "There are no users matching your filter. Try changing the search term."
 }

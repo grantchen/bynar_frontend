@@ -108,5 +108,7 @@
     "light": "Licht",
     "confirm": "Bestätigen",
     "languages": "Sprachen",
-    "view": "Ansicht"
+    "view": "Ansicht",
+    "no-users": "Keine Benutzer gefunden",
+    "no-users-action-description": "Es gibt keine Benutzer, die Ihren Filterkriterien entsprechen. Versuchen Sie, den Suchbegriff zu ändern."
 }

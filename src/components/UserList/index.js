@@ -132,13 +132,6 @@ export const UserList = ({ isOpen }) => {
         return () => clearTimeout(timeoutId);
     }, [searchText, isOpen]);
 
-    const handleSort = useCallback((val1, val2, sortConfig) => {
-        setSearchParams((prev) => ({
-            ...prev,
-            sortByColumn: sortConfig.key,
-            sortByOrder: sortConfig.sortDirection,
-        }));
-    }, []);
     const columns = useMemo(
         () => getColumns(userListData.userAccountDetails, t),
         [userListData.userAccountDetails]
@@ -150,11 +143,11 @@ export const UserList = ({ isOpen }) => {
             data: userListData.userAccountDetails,
             isFetching: loading,
             endPlugins: [useDisableSelectRows],
-            emptyStateTitle: "No User Found",
-            emptyStateDescription: "There are no users matching your filter.\nTry changing search term.",
+            emptyStateTitle: t("no-users"),
+            emptyStateDescription: t("no-users-action-description"),
             emptyStateSize: "lg",
             emptyStateAction: {
-                text: 'Add new user',
+                text: t("add-new-user"),
                 onClick: openAddUserModel,
                 renderIcon: Add,
                 iconDescription: 'Add icon',

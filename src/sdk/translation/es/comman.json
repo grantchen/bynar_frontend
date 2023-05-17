@@ -108,5 +108,7 @@
     "light": "Luz",
     "confirm": "Confirmar",
     "languages": "Idiomas",
-    "view": "Vista"
+    "view": "Vista",
+    "no-users": "No se encontraron usuarios",
+    "no-users-action-description": "No hay usuarios que coincidan con tu filtro. Intenta cambiar el término de búsqueda."
 }
