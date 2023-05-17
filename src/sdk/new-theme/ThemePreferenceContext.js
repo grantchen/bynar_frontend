@@ -54,7 +54,7 @@ function ThemePreferenceProvider({ children }) {
     }, [user, isSystemThemeDark]);
 
     useEffect(() => {
-        if(!theme){
+        if(!theme || !user){
             return
         }
         document.documentElement.setAttribute(
