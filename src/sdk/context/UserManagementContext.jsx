@@ -19,7 +19,7 @@ const UserManagementContext = createContext();
 
 const UserManagementProvider = ({ children }) => {
     const { user, authFetch } = useAuth();
-    const {t} = useTranslation();
+    const { t } = useTranslation();
     /**render aware states */
     const [userListData, setUserListData] = useState({
         userAccountDetails: [],
@@ -33,55 +33,60 @@ const UserManagementProvider = ({ children }) => {
     const [userListParams, setUserListParams] = useState({});
     const [deleteModalProps, setDeleteModalProps] = useState(null);
 
-    const editUserPanelOpen = Boolean(searchParams.get("userIdToBeEdited"))
-    const addUserPanelOpen = Boolean(searchParams.get("openAddUserPanel"))
-    const userDetailsOpen = Boolean(searchParams.get("userIdToShowDetails"))
+    const editUserPanelOpen = Boolean(searchParams.get("userIdToBeEdited"));
+    const addUserPanelOpen = Boolean(searchParams.get("openAddUserPanel"));
+    const userDetailsOpen = Boolean(searchParams.get("userIdToShowDetails"));
 
     const isUserManagementAllowed = useMemo(
         () =>
-        user && !(user?.cognitoUserGroups === "Users" ||
-            user?.cognitoUserGroups?.length === 0),
+            user &&
+            !(
+                user?.cognitoUserGroups === "Users" ||
+                user?.cognitoUserGroups?.length === 0
+            ),
         [user]
     );
-    
 
-    const getUserList = useCallback(async (queryParams = {}) => {
-        setLoading(true);
-        setUserListData({
-            userAccountDetails: [],
-            totalCount: 5
-        })
-        try {
-            const searchQueryParams = new URLSearchParams(
-                removeNullEntries(queryParams)
-            ).toString();
+    const getUserList = useCallback(
+        async (queryParams = {}) => {
+            setLoading(true);
+            setUserListData((prev) => ({
+                ...prev,
+                userAccountDetails: [],
+            }));
+            try {
+                const searchQueryParams = new URLSearchParams(
+                    removeNullEntries(queryParams)
+                ).toString();
 
-            const response = await authFetch(
-                `${BaseURL}/list-users?${searchQueryParams}`
-            );
-            if (response.ok) {
-                const res = await response.json();
-                const result = {
-                    ...res?.result,
-                    userAccountDetails: res?.result?.userAccountDetails.map(
-                        (value, index) => ({
-                            ...value,
-                            disabled: !value?.canDelete,
-                            isEditable: value?.canUpdate,
-                        })
-                    ),
-                };
-                setUserListData(result);
+                const response = await authFetch(
+                    `${BaseURL}/list-users?${searchQueryParams}`
+                );
+                if (response.ok) {
+                    const res = await response.json();
+                    const result = {
+                        ...res?.result,
+                        userAccountDetails: res?.result?.userAccountDetails.map(
+                            (value, index) => ({
+                                ...value,
+                                disabled: !value?.canDelete,
+                                isEditable: value?.canUpdate,
+                            })
+                        ),
+                    };
+                    setUserListData(result);
+                }
+            } catch (error) {
+                setNotification({
+                    type: "error",
+                    message: t("user-load-failed"),
+                });
+            } finally {
+                setLoading(false);
             }
-        } catch (error) {
-            setNotification({
-                type: "error",
-                message: t('user-load-failed'),
-            });
-        } finally {
-            setLoading(false);
-        }
-    }, [authFetch, t]);
+        },
+        [authFetch, t]
+    );
 
     const deleteUser = useCallback(
         async (ids) => {
@@ -89,24 +94,24 @@ const UserManagementProvider = ({ children }) => {
             try {
                 const response = await authFetch(`${BaseURL}/user`, {
                     method: "DELETE",
-                    body: JSON.stringify({ accountIDs: [...ids] })
+                    body: JSON.stringify({ accountIDs: [...ids] }),
                 });
                 if (response.ok) {
                     setNotification({
-                        message: t('user-deleted-successfully'),
+                        message: t("user-deleted-successfully"),
                         type: "success",
                     });
                     await getUserList();
                 } else if (response.status === 500) {
                     setNotification({
-                        message: t('error-deleting-user'),
+                        message: t("error-deleting-user"),
                         type: "error",
                     });
                 }
             } catch (error) {
                 setNotification({
                     type: "error",
-                    message: t('error-deleting-user'),
+                    message: t("error-deleting-user"),
                 });
             } finally {
                 setLoading(false);
@@ -115,43 +120,54 @@ const UserManagementProvider = ({ children }) => {
         [getUserList, authFetch]
     );
 
-    const updateUser = useCallback(async ({ userDetails }) => {
-        const response = await authFetch(`${BaseURL}/user`, {
-            method: "PUT",
-            body: JSON.stringify(userDetails)
-        });
+    const updateUser = useCallback(
+        async ({ userDetails }) => {
+            const response = await authFetch(`${BaseURL}/user`, {
+                method: "PUT",
+                body: JSON.stringify(userDetails),
+            });
 
-        const res = await response.json();
+            const res = await response.json();
 
-        if (response.ok) {
-            closeModalAndGoBackToUserList();
-        } else if (response.status === 500) {
-            throw { message: res.error, type: "error" };
-        } else {
-            throw { message: t('error-updating-user'), type: "error" };
-        }
-    }, [authFetch]);
-    const addUser = useCallback(async ({ userDetails }) => {
-        const response = await authFetch(`${BaseURL}/user`, {
-            method: "POST",
-            body: JSON.stringify(userDetails)
-        });
+            if (response.ok) {
+                closeModalAndGoBackToUserList();
+            } else if (response.status === 500) {
+                throw { message: res.error, type: "error" };
+            } else {
+                throw { message: t("error-updating-user"), type: "error" };
+            }
+        },
+        [authFetch]
+    );
+    const addUser = useCallback(
+        async ({ userDetails }) => {
+            const response = await authFetch(`${BaseURL}/user`, {
+                method: "POST",
+                body: JSON.stringify(userDetails),
+            });
 
-        const res = await response.json();
+            const res = await response.json();
 
-        if (response.ok) {
-            closeModalAndGoBackToUserList();
-        } else if (response.status === 500) {
-            throw { message: res.error, type: "error" };
-        } else {
-            throw { message: t('error-adding-user'), type: "error" };
-        }
-    }, [authFetch]);
+            if (response.ok) {
+                closeModalAndGoBackToUserList();
+            } else if (response.status === 500) {
+                throw { message: res.error, type: "error" };
+            } else {
+                throw { message: t("error-adding-user"), type: "error" };
+            }
+        },
+        [authFetch]
+    );
 
-    const getUserById = useCallback(async (id) => {
-        const response = await authFetch(`${BaseURL}/user/${id}`).then((res) => res.json());
-        return response;
-    }, [authFetch]);
+    const getUserById = useCallback(
+        async (id) => {
+            const response = await authFetch(`${BaseURL}/user/${id}`).then(
+                (res) => res.json()
+            );
+            return response;
+        },
+        [authFetch]
+    );
 
     const openDeleteModal = useCallback(
         ({ userIdToBeDeleted, userNameToBeDeleted }) => {
@@ -161,12 +177,16 @@ const UserManagementProvider = ({ children }) => {
             setUserListParams(mergeQueryParams(searchParams, {}));
             setSearchParams({ userIdToBeDeleted, userNameToBeDeleted });
             setDeleteModalProps({
-                body: `${t('delete-modal-heading-1')} ${userNameToBeDeleted} ${t('delete-modal-heading-2')}`,
+                body: `${t(
+                    "delete-modal-heading-1"
+                )} ${userNameToBeDeleted} ${t("delete-modal-heading-2")}`,
                 className: "remove-modal-test",
-                title: t('delete-modal-title'),
-                iconDescription: t('delete-modal-icon'),
-                inputInvalidText: t('delete-modal-invalid-input-text'),
-                inputLabelText: `${t('delete-modal-input-label-text-1')} "delete" ${t('delete-modal-input-label-text-2')}`,
+                title: t("delete-modal-title"),
+                iconDescription: t("delete-modal-icon"),
+                inputInvalidText: t("delete-modal-invalid-input-text"),
+                inputLabelText: `${t(
+                    "delete-modal-input-label-text-1"
+                )} "delete" ${t("delete-modal-input-label-text-2")}`,
                 inputPlaceholderText: "delete",
                 open: true,
                 onClose: () => {
@@ -176,10 +196,10 @@ const UserManagementProvider = ({ children }) => {
                         return {};
                     });
                 },
-                primaryButtonText: t('delete'),
+                primaryButtonText: t("delete"),
                 resourceName: "delete",
-                secondaryButtonText: t('close'),
-                label: `${t('delete')} ${userNameToBeDeleted}`,
+                secondaryButtonText: t("close"),
+                label: `${t("delete")} ${userNameToBeDeleted}`,
                 textConfirmation: true,
                 onRequestSubmit: async () => {
                     try {
@@ -187,12 +207,12 @@ const UserManagementProvider = ({ children }) => {
                             method: "DELETE",
                             body: JSON.stringify({
                                 accountIDs: [parseInt(userIdToBeDeleted)],
-                            })
+                            }),
                         });
                         if (response.ok) {
                             setNotification({
                                 type: "success",
-                                message: t('user-deleted-successfully'),
+                                message: t("user-deleted-successfully"),
                             });
                         } else {
                             throw "error";
@@ -200,7 +220,7 @@ const UserManagementProvider = ({ children }) => {
                     } catch (error) {
                         setNotification({
                             type: "error",
-                            message: t('error-deleting-user'),
+                            message: t("error-deleting-user"),
                         });
                     } finally {
                         setDeleteModalProps(null);
@@ -223,12 +243,14 @@ const UserManagementProvider = ({ children }) => {
             setUserListParams(mergeQueryParams(searchParams, {}));
             setSearchParams({ userIdsToBeDeleted });
             setDeleteModalProps({
-                body: t('delete-modal-bulk-heading'),
+                body: t("delete-modal-bulk-heading"),
                 className: "remove-modal-test",
-                title: t('delete-modal-title'),
-                iconDescription: t('delete-modal-icon'),
-                inputInvalidText: t('delete-modal-invalid-input-text'),
-                inputLabelText: `${t('delete-modal-input-label-text-1')} "delete" ${t('delete-modal-input-label-text-2')}`,
+                title: t("delete-modal-title"),
+                iconDescription: t("delete-modal-icon"),
+                inputInvalidText: t("delete-modal-invalid-input-text"),
+                inputLabelText: `${t(
+                    "delete-modal-input-label-text-1"
+                )} "delete" ${t("delete-modal-input-label-text-2")}`,
                 inputPlaceholderText: "delete",
                 open: true,
                 onClose: () => {
@@ -238,10 +260,10 @@ const UserManagementProvider = ({ children }) => {
                         return {};
                     });
                 },
-                primaryButtonText: t('delete'),
+                primaryButtonText: t("delete"),
                 resourceName: "delete",
-                secondaryButtonText: t('close'),
-                label: t('delete-users'),
+                secondaryButtonText: t("close"),
+                label: t("delete-users"),
                 textConfirmation: true,
                 onRequestSubmit: async () => {
                     try {
@@ -249,12 +271,12 @@ const UserManagementProvider = ({ children }) => {
                             method: "DELETE",
                             body: JSON.stringify({
                                 accountIDs: userIdsToBeDeleted,
-                            })
+                            }),
                         });
                         if (response.ok) {
                             setNotification({
                                 type: "success",
-                                message: t('user-deleted-successfully'),
+                                message: t("user-deleted-successfully"),
                             });
                         } else {
                             throw "error";
@@ -262,7 +284,7 @@ const UserManagementProvider = ({ children }) => {
                     } catch (error) {
                         setNotification({
                             type: "error",
-                            message: t('error-deleting-user'),
+                            message: t("error-deleting-user"),
                         });
                     } finally {
                         setDeleteModalProps(null);
@@ -313,7 +335,7 @@ const UserManagementProvider = ({ children }) => {
         //     }
         //     return {};
         // });
-        setUserListParams(prev => setSearchParams(prev))
+        setUserListParams((prev) => setSearchParams(prev));
     }, []);
 
     useEffect(() => {
@@ -362,9 +384,15 @@ const UserManagementProvider = ({ children }) => {
         <>
             <UserManagementContext.Provider value={value}>
                 {children}
-                {isUserManagementAllowed && <SidePanels open={editUserPanelOpen}/>}
-                {isUserManagementAllowed && <SidePanels open={addUserPanelOpen}/>}
-                {isUserManagementAllowed && <UserDetailPanel open={userDetailsOpen}/>}
+                {isUserManagementAllowed && (
+                    <SidePanels open={editUserPanelOpen} />
+                )}
+                {isUserManagementAllowed && (
+                    <SidePanels open={addUserPanelOpen} />
+                )}
+                {isUserManagementAllowed && (
+                    <UserDetailPanel open={userDetailsOpen} />
+                )}
             </UserManagementContext.Provider>
             {deleteModalProps && <RemoveModal {...deleteModalProps} />}
         </>

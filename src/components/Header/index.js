@@ -16,8 +16,7 @@ import { useTranslation } from "react-i18next";
 import ProfileDropdown from "../ProfileDropdown";
 import HeaderTab from "./HeaderTab";
 import {
-  ThemeModel,
-  LanguageModel,
+  LanguageModal,
   useUserManagement,
 } from "../../sdk";
 import { TearSheets } from "../TearSheet";
@@ -67,7 +66,7 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
     };
   }, [wrapperRef]);
 
-  const [openLanguageModel, setLanguageModelOpen] = useState(false);
+  const [openLanguageModal, setLanguageModalOpen] = useState(false);
 
   const {isUserListOpen, setIsUserListOpen} = useMemo(() => ({
     isUserListOpen: searchParams.get('isUserListOpen') === 'true', 
@@ -133,8 +132,8 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
                     </HeaderGlobalAction>
                     <PopoverContent>
                       <ProfileDropdown
-                        openLanguageModel={openLanguageModel}
-                        setLanguageModelOpen={setLanguageModelOpen}
+                        openLanguageModal={openLanguageModal}
+                        setLanguageModalOpen={setLanguageModalOpen}
                       />
                     </PopoverContent>
                   </Popover>
@@ -146,9 +145,9 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
         </Header>
         <Outlet />
 
-        <LanguageModel
-          openLanguageModel={openLanguageModel}
-          setLanguageModelOpen={setLanguageModelOpen}
+        <LanguageModal
+          openLanguageModal={openLanguageModal}
+          setLanguageModalOpen={setLanguageModalOpen}
         />
 
       <TearSheets setIsOpen={setIsUserListOpen} isOpen={isUserListOpen} />

@@ -9,8 +9,8 @@ import "./profileDropdown.scss";
 import { useSearchParams } from "react-router-dom";
 const ProfileDropdown = React.memo(
   ({
-    openLanguageModel,
-    setLanguageModelOpen,
+    openLanguageModal,
+    setLanguageModalOpen,
   }) => {
     const [t, i18n] = useTranslation();
     const {signout, user} = useAuth();
@@ -22,7 +22,7 @@ const ProfileDropdown = React.memo(
     };
     const handleLanguageChange = (e) => {
       e.preventDefault();
-      setLanguageModelOpen(!openLanguageModel);
+      setLanguageModalOpen(!openLanguageModal);
     };
 
 
