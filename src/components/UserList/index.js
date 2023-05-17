@@ -86,6 +86,12 @@ export const UserList = ({ isOpen }) => {
     }, [searchParams]);
 
     useEffect(() => {
+        if (isOpen) {
+            searchTextChangedByEffectOnMount.current = true;
+            setSearchText(searchParams.get("search") ?? "");
+        }
+    }, [isOpen]);
+    useEffect(() => {
         if (!isOpen) {
             return;
         }
@@ -125,10 +131,6 @@ export const UserList = ({ isOpen }) => {
         }, 300);
         return () => clearTimeout(timeoutId);
     }, [searchText, isOpen]);
-    useEffect(() => {
-        searchTextChangedByEffectOnMount.current = true;
-        setSearchText(searchParams.get("search") ?? "");
-    }, [searchParams.get("search")]);
 
     const handleSort = useCallback((val1, val2, sortConfig) => {
         setSearchParams((prev) => ({
