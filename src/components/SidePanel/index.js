@@ -30,20 +30,23 @@ import {
     TextInputSkeleton,
 } from "@carbon/react";
 
+const AccountInfoErrorsInitialState = {
+    userName: false,
+    password: false,
+    fullName: false,
+    addressLine1: false,
+    city: false,
+    state: false,
+    postalCode: false,
+    phoneNumber: false,
+    role: false,
+};
 export const SidePanels = ({ open }) => {
     const { t } = useTranslation();
     const phoneUtil = PhoneNumberUtil.getInstance();
-    const [accountInfoErrors, setAccountInfoErrors] = useState({
-        userName: false,
-        password: false,
-        fullName: false,
-        addressLine1: false,
-        city: false,
-        state: false,
-        postalCode: false,
-        phoneNumber: false,
-        role: false,
-    });
+    const [accountInfoErrors, setAccountInfoErrors] = useState(
+        AccountInfoErrorsInitialState
+    );
     const [country, setCountry] = useState("India");
     const [addressLine1, setAddressLine1] = useState("");
     const [addressLine2, setAddressLine2] = useState("");
@@ -452,6 +455,30 @@ export const SidePanels = ({ open }) => {
 
     useEffect(() => {
         if (!open) {
+            setAccountInfoErrors(AccountInfoErrorsInitialState);
+            setCountry("India");
+            setAddressLine1("");
+            setAddressLine2("");
+            setCity("");
+            setState("");
+            setPostalCode("");
+            setPhoneNumber("");
+            setFullName("");
+            setUserName("");
+            setRole("Users");
+
+            setSavingData(false);
+            setLoadingData(false);
+
+            setPostalCodeErrorNotification({});
+            setErrorMessage("");
+            setIsPhoneNumberValid(false);
+            setErrors({});
+            setServerErrorNotification({});
+            setServerNotification(false);
+            setOrganizationId(0)
+            setCountryCode("IN")
+            setCountryDialCode("91")
             return;
         }
         setUserId(parseInt(searchParams?.get("userIdToBeEdited")));
@@ -485,25 +512,23 @@ export const SidePanels = ({ open }) => {
                 onRequestClose={handleClose}
                 title={isUserEdit ? t("edit-user") : t("add-user")}
                 subtitle=""
-                actions={
-                    [
-                        {
-                            label: isUserEdit ? t("update") : t("submit"),
-                            onClick: () => {
-                                isUserEdit
-                                    ? handleEditInformationFormSubmit()
-                                    : handleAccountInformationFormSubmit();
-                            },
-                            kind: "primary",
-                            loading: savingData,
+                actions={[
+                    {
+                        label: isUserEdit ? t("update") : t("submit"),
+                        onClick: () => {
+                            isUserEdit
+                                ? handleEditInformationFormSubmit()
+                                : handleAccountInformationFormSubmit();
                         },
-                        {
-                            label: t("cancel"),
-                            onClick: handleClose,
-                            kind: "secondary",
-                        },
-                    ]
-                }
+                        kind: "primary",
+                        loading: savingData,
+                    },
+                    {
+                        label: t("cancel"),
+                        onClick: handleClose,
+                        kind: "secondary",
+                    },
+                ]}
             >
                 {false ? (
                     <>

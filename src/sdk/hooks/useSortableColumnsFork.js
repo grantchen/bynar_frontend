@@ -10,7 +10,7 @@ const carbon = {
     get themes() {
         return themes;
     },
-    prefix: "cds",
+    prefix: "bx",
 };
 
 export const SORTABLE_ORDERING = {

@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.1140fbae.css",
-    "main.js": "/static/js/main.298b776b.js",
+    "main.css": "/static/css/main.c7fb19fb.css",
+    "main.js": "/static/js/main.f9741c91.js",
     "static/js/787.276c7de9.chunk.js": "/static/js/787.276c7de9.chunk.js",
     "static/media/ibmid_bkg.svg": "/static/media/ibmid_bkg.a4d71da5111f608d7a19.svg",
     "static/media/IBMPlexSerif-SemiBoldItalic-Cyrillic.woff": "/static/media/IBMPlexSerif-SemiBoldItalic-Cyrillic.d96e5a614e96c351c453.woff",
@@ -185,12 +185,12 @@
     "static/media/IBMPlexMono-Light-Latin3.woff2": "/static/media/IBMPlexMono-Light-Latin3.8a014da16bb5df1e9830.woff2",
     "static/media/IBMPlexMono-Regular-Latin3.woff2": "/static/media/IBMPlexMono-Regular-Latin3.cacfd1d7dbd14067b970.woff2",
     "index.html": "/index.html",
-    "main.1140fbae.css.map": "/static/css/main.1140fbae.css.map",
-    "main.298b776b.js.map": "/static/js/main.298b776b.js.map",
+    "main.c7fb19fb.css.map": "/static/css/main.c7fb19fb.css.map",
+    "main.f9741c91.js.map": "/static/js/main.f9741c91.js.map",
     "787.276c7de9.chunk.js.map": "/static/js/787.276c7de9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1140fbae.css",
-    "static/js/main.298b776b.js"
+    "static/css/main.c7fb19fb.css",
+    "static/js/main.f9741c91.js"
   ]
 }
