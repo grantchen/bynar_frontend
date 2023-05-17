@@ -7,7 +7,7 @@ import {
     Button,
     Pagination,
 } from "@carbon/react";
-import { Edit, TrashCan, DataViewAlt } from "@carbon/react/icons";
+import { Edit, TrashCan, DataViewAlt, Add } from "@carbon/react/icons";
 import {
     useDatagrid,
     useActionsColumn,
@@ -150,27 +150,15 @@ export const UserList = ({ isOpen }) => {
             data: userListData.userAccountDetails,
             isFetching: loading,
             endPlugins: [useDisableSelectRows],
-            onRowSelect: (row, event) => {},
-            shouldDisableSelectRow: (row) => !row?.original?.canDelete,
-            onSort: (sortByColumn, sortByOrder) => {
-                if (sortByOrder === SORTABLE_ORDERING.NONE) {
-                    setSearchParams((prev) =>
-                        omitQueryParams(prev, ["sortByColumn", "sortByOrder"])
-                    );
-                } else {
-                    setSearchParams((prev) =>
-                        mergeQueryParams(prev, {
-                            sortByColumn,
-                            sortByOrder,
-                        })
-                    );
-                }
-            },
-            onRowClick: ({ original }) => {
-                openUserDetails({
-                    userIdToShowDetails: original.id,
-                });
-            },
+            emptyStateTitle: "No User Found",
+            emptyStateDescription: "There are no users matching your filter.\nTry changing search term.",
+            emptyStateSize: "lg",
+            emptyStateAction: {
+                text: 'Add new user',
+                onClick: openAddUserModel,
+                renderIcon: Add,
+                iconDescription: 'Add icon',
+              },    
             rowActions: [
                 {
                     id: "view",
@@ -216,6 +204,27 @@ export const UserList = ({ isOpen }) => {
                         }),
                 },
             ],
+            onRowSelect: (row, event) => {},
+            shouldDisableSelectRow: (row) => !row?.original?.canDelete,
+            onSort: (sortByColumn, sortByOrder) => {
+                if (sortByOrder === SORTABLE_ORDERING.NONE) {
+                    setSearchParams((prev) =>
+                        omitQueryParams(prev, ["sortByColumn", "sortByOrder"])
+                    );
+                } else {
+                    setSearchParams((prev) =>
+                        mergeQueryParams(prev, {
+                            sortByColumn,
+                            sortByOrder,
+                        })
+                    );
+                }
+            },
+            onRowClick: ({ original }) => {
+                openUserDetails({
+                    userIdToShowDetails: original.id,
+                });
+            },
             DatagridPagination: ({ state, setPageSize, gotoPage }) => (
                 <Pagination
                     page={page + 1}
