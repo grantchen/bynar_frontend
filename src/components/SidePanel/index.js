@@ -486,25 +486,23 @@ export const SidePanels = ({ open }) => {
                 title={isUserEdit ? t("edit-user") : t("add-user")}
                 subtitle=""
                 actions={
-                    userDetails.canUpdate
-                        ? [
-                              {
-                                  label: isUserEdit ? t("update") : t("submit"),
-                                  onClick: () => {
-                                      isUserEdit
-                                          ? handleEditInformationFormSubmit()
-                                          : handleAccountInformationFormSubmit();
-                                  },
-                                  kind: "primary",
-                                  loading: savingData,
-                              },
-                              {
-                                  label: t("cancel"),
-                                  onClick: handleClose,
-                                  kind: "secondary",
-                              },
-                          ]
-                        : []
+                    [
+                        {
+                            label: isUserEdit ? t("update") : t("submit"),
+                            onClick: () => {
+                                isUserEdit
+                                    ? handleEditInformationFormSubmit()
+                                    : handleAccountInformationFormSubmit();
+                            },
+                            kind: "primary",
+                            loading: savingData,
+                        },
+                        {
+                            label: t("cancel"),
+                            onClick: handleClose,
+                            kind: "secondary",
+                        },
+                    ]
                 }
             >
                 {false ? (

@@ -54,7 +54,7 @@ export function LanguageModal({ openLanguageModal, setLanguageModalOpen }){
             size="xs"
             onClose={handleClose}
         >
-            <ModalHeader title={t("change-theme")} />
+            <ModalHeader title={t("change-language")} />
             <ModalBody className="theme-modal-body">
                 {toastNotification && (
                     <ToastNotification
@@ -70,8 +70,8 @@ export function LanguageModal({ openLanguageModal, setLanguageModalOpen }){
                     />
                 )}
                 <TileGroup
-                    legend={t("themes")}
-                    name="theme"
+                    legend={t("languages")}
+                    name="language"
                     onChange={(val) => setSelectedLanguage(val)}
                     valueSelected={selectedLanguage}
                 >

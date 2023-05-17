@@ -93,16 +93,28 @@ export const UserList = ({ isOpen }) => {
         })();
     }, [getUserAPIQuery, isOpen]);
 
+
+    const searchTextChangedByEffectOnMount = useRef(false)
     useEffect(() => {
         if (!isOpen) {
             setIsSearchBarExpanded(false);
             return;
         }
+        if(searchTextChangedByEffectOnMount.current){
+            searchTextChangedByEffectOnMount.current = false
+            return
+        }
         const timeoutId = setTimeout(() => {
             (async () => {
                 if (searchText) {
-                    setSearchParams((prev) =>
-                        mergeQueryParams(prev, { search: searchText })
+                    
+                    setSearchParams((prev) => {
+                        const paramsWithoutPageFilters = omitQueryParams(prev, ['page'])
+                        return {
+                            ...paramsWithoutPageFilters,
+                            search: searchText
+                        }
+                    }
                     );
                 } else {
                     setSearchParams((prev) =>
@@ -114,6 +126,7 @@ export const UserList = ({ isOpen }) => {
         return () => clearTimeout(timeoutId);
     }, [searchText, isOpen]);
     useEffect(() => {
+        searchTextChangedByEffectOnMount.current = true
         setSearchText(searchParams.get("search") ?? "");
     }, [searchParams.get("search")]);
 

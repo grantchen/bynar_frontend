@@ -327,15 +327,10 @@ const UserManagementProvider = ({ children }) => {
     );
 
     const closeModalAndGoBackToUserList = useCallback(() => {
-        // setUserListParams((prev) => {
-        //     if (prev.isUserListOpen !== "true" && prev.openSidePanel !== 'false') {
-        //         setSearchParams({ isUserListOpen: true });
-        //     } else {
-        //         setSearchParams(prev);
-        //     }
-        //     return {};
-        // });
-        setUserListParams((prev) => setSearchParams(prev));
+        setUserListParams((prev) => {
+            setSearchParams(prev)
+            return {}
+        });
     }, []);
 
     useEffect(() => {
