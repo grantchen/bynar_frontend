@@ -78,8 +78,7 @@ export const AuthProvider = ({ children }) => {
                 localStorage.setItem('lang',res?.result?.languagePreference)
                 await i18n.changeLanguage(res?.result?.languagePreference);
             } else {
-                await Auth.signOut();
-                navigate("/signin");
+                signout()
             }
         } catch (e) {
             console.log("Error signing out!");

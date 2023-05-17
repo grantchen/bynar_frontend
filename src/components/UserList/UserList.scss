@@ -18,6 +18,13 @@
     }
 }
 
+.row-action-renderer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
 @media screen and (max-width: 600px) {
     .userdata-table {
         width: calc(100% - 20px);

@@ -7,6 +7,7 @@ import {
     Button,
     Pagination,
 } from "@carbon/react";
+import { Edit, TrashCan, DataViewAlt } from "@carbon/react/icons";
 import {
     useDatagrid,
     useActionsColumn,
@@ -93,29 +94,28 @@ export const UserList = ({ isOpen }) => {
         })();
     }, [getUserAPIQuery, isOpen]);
 
-
-    const searchTextChangedByEffectOnMount = useRef(false)
+    const searchTextChangedByEffectOnMount = useRef(false);
     useEffect(() => {
         if (!isOpen) {
             setIsSearchBarExpanded(false);
             return;
         }
-        if(searchTextChangedByEffectOnMount.current){
-            searchTextChangedByEffectOnMount.current = false
-            return
+        if (searchTextChangedByEffectOnMount.current) {
+            searchTextChangedByEffectOnMount.current = false;
+            return;
         }
         const timeoutId = setTimeout(() => {
             (async () => {
                 if (searchText) {
-                    
                     setSearchParams((prev) => {
-                        const paramsWithoutPageFilters = omitQueryParams(prev, ['page'])
+                        const paramsWithoutPageFilters = omitQueryParams(prev, [
+                            "page",
+                        ]);
                         return {
                             ...paramsWithoutPageFilters,
-                            search: searchText
-                        }
-                    }
-                    );
+                            search: searchText,
+                        };
+                    });
                 } else {
                     setSearchParams((prev) =>
                         omitQueryParams(prev, ["search"])
@@ -126,7 +126,7 @@ export const UserList = ({ isOpen }) => {
         return () => clearTimeout(timeoutId);
     }, [searchText, isOpen]);
     useEffect(() => {
-        searchTextChangedByEffectOnMount.current = true
+        searchTextChangedByEffectOnMount.current = true;
         setSearchText(searchParams.get("search") ?? "");
     }, [searchParams.get("search")]);
 
@@ -141,6 +141,7 @@ export const UserList = ({ isOpen }) => {
         () => getColumns(userListData.userAccountDetails, t),
         [userListData.userAccountDetails]
     );
+
     const datagridState = useDatagrid(
         {
             columns,
@@ -170,8 +171,24 @@ export const UserList = ({ isOpen }) => {
             },
             rowActions: [
                 {
+                    id: "view",
+                    itemText: (
+                        <div className="row-action-renderer">
+                            {t("view")} <DataViewAlt />
+                        </div>
+                    ),
+                    onClick: (_, { original }) =>
+                        openUserDetails({
+                            userIdToShowDetails: original.id,
+                        }),
+                },
+                {
                     id: "edit",
-                    itemText: t("edit"),
+                    itemText: (
+                        <div className="row-action-renderer">
+                            {t("edit")} <Edit />
+                        </div>
+                    ),
                     onClick: (_, { original }) =>
                         openEditPanel({
                             userIdToBeEdited: original.id,
@@ -180,14 +197,12 @@ export const UserList = ({ isOpen }) => {
                         !original.canUpdate,
                 },
                 {
-                    id: "hidden",
-                    itemText: "Hidden item",
-                    onClick: () => {},
-                    shouldHideMenuItem: () => true,
-                },
-                {
                     id: "delete",
-                    itemText: t("delete"),
+                    itemText: (
+                        <div className="row-action-renderer">
+                            {t("delete")} <TrashCan />
+                        </div>
+                    ),
                     hasDivider: true,
                     isDelete: true,
                     shouldDisableMenuItem: ({ original }) =>
