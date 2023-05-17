@@ -19,6 +19,7 @@
     "privacy": "Privacidad",
     "change-language": "Cambiar idioma",
     "change-theme": "Cambiar tema",
+    "themes": "Temas",
     "logout": "Cerrar sesión",
     "data-table": "Tabla de datos",
     "category": "Título de la categoría",
@@ -102,5 +103,8 @@
     "error-deleting-user": "Error al eliminar usuario",
     "error-updating-user": "Error al actualizar usuario",
     "error-adding-user": "Error al agregar usuario",
-    "dark": "Oscura"
+    "dark": "Oscura",
+    "system": "Sistema",
+    "light": "Luz",
+    "confirm": "Confirmar"
 }

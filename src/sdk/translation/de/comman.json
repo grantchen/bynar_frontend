@@ -19,6 +19,7 @@
     "privacy": "Privatsphäre",
     "change-language": "Sprache ändern",
     "change-theme": "Thema wechseln",
+    "themes": "Themen",
     "logout": "Ausloggen",
     "data-table": "Datentabelle",
     "category": "Titel der Kategorie",
@@ -102,5 +103,8 @@
     "error-deleting-user": "Fehler beim Löschen des Benutzers",
     "error-updating-user": "Fehler beim Aktualisieren des Benutzers",
     "error-adding-user": "Fehler beim Hinzufügen des Benutzers",
-    "dark": "Dunkel"
+    "dark": "Dunkel",
+    "system": "System",
+    "light": "Licht",
+    "confirm": "Bestätigen"
 }

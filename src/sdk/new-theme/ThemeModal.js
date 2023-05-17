@@ -1,25 +1,20 @@
-import { Modal, Dropdown } from "@carbon/react";
-import React, { useState, useRef, useCallback, useEffect } from "react";
+import {
+    ComposedModal,
+    ModalHeader,
+    ModalBody,
+    TileGroup,
+    RadioTile,
+    ModalFooter,
+    Button,
+} from "@carbon/react";
+import { Devices, Asleep, Light } from "@carbon/react/icons";
+import React, { useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useThemePreference } from "../new-theme";
-import { useAuth } from "../AuthContext";
+import { useThemePreference } from ".";
+import "./ThemeModal.scss";
 
 export const ThemeModal = React.memo(() => {
     const { t } = useTranslation();
-
-    const [themeOptions, setThemeOptions] = useState([
-        {
-            text: t("white"),
-            value: "white",
-        },
-        {
-            text: t("dark"),
-            value: "g100",
-        },
-    ]);
-
-    const { user } = useAuth();
-
     const {
         theme,
         setTheme,
@@ -28,77 +23,68 @@ export const ThemeModal = React.memo(() => {
         openThemeChangeModal,
     } = useThemePreference();
 
-    const [selectedTheme, setSelectedTheme] = useState(
-        () =>
-            themeOptions.find((option) => option.value === theme) ??
-            themeOptions[0]
-    );
+    const [selectedTheme, setSelectedTheme] = useState(theme);
 
     const handleChange = useCallback(
-        ({ selectedItem }) => {
-            setSelectedTheme(selectedItem);
-            changeThemeManually(selectedItem.value);
+        (value) => {
+            setSelectedTheme(value);
         },
         [theme]
     );
 
     const handleClose = useCallback(() => {
         changeThemeManually(theme);
-        setSelectedTheme(themeOptions.find((option) => option.value === theme));
+        setSelectedTheme(theme);
         openThemeChangeModal(false);
     }, [theme]);
 
     const handleSubmit = useCallback(() => {
-        setTheme(selectedTheme.value);
+        setTheme(selectedTheme);
         openThemeChangeModal(false);
     }, [selectedTheme]);
 
     useEffect(() => {
-        setSelectedTheme(themeOptions.find((option) => option.value === theme));
+        setSelectedTheme(theme);
     }, [theme]);
 
     useEffect(() => {
-        if (!user?.languagePreference) {
-            return;
-        }
-        setThemeOptions([
-            {
-                text: t("white"),
-                value: "white",
-            },
-            {
-                text: t("dark"),
-                value: "g100",
-            },
-        ]);
-        const _selectedTheme = themeOptions.find((option) => option.value === theme)
-        setSelectedTheme({
-            ..._selectedTheme,
-            text: t(_selectedTheme.text)
-        })
-    }, [user?.languagePreference, t]);
+        changeThemeManually(selectedTheme);
+    }, [selectedTheme]);
 
     return (
-        <Modal
-            primaryButtonText={t("submit")}
-            secondaryButtonText={t("cancel")}
+        <ComposedModal
             open={isThemeChangeModalOpen}
-            onRequestClose={handleClose}
-            onRequestSubmit={handleSubmit}
-            size="sm"
+            size="xs"
+            onClose={handleClose}
         >
-            <div className="carbon-theme-dropdown">
-                <Dropdown
-                    ariaLabel="Theme dropdown"
-                    id="theme-dropdown"
-                    items={themeOptions}
-                    selectedItem={selectedTheme}
-                    itemToString={(item) => (item ? item.text : "")}
+            <ModalHeader title={t("change-theme")} />
+            <ModalBody className="theme-modal-body">
+                <TileGroup
+                    legend={t("themes")}
+                    name="theme"
                     onChange={handleChange}
-                    label={t("select-theme")}
-                    titleText={t("select-theme")}
-                />
-            </div>
-        </Modal>
+                    valueSelected={selectedTheme}
+                >
+                    <RadioTile light value="system">
+                        <Devices />
+                        {t("system")}
+                    </RadioTile>
+                    <RadioTile light value="dark">
+                        <Asleep /> {t("dark")}
+                    </RadioTile>
+                    <RadioTile light value="light">
+                        <Light /> {t("light")}
+                    </RadioTile>
+                </TileGroup>
+            </ModalBody>
+            <ModalFooter>
+                <Button kind="secondary" onClick={handleClose}>
+                    {t("cancel")}
+                </Button>
+                <Button kind="primary" onClick={handleSubmit}>
+                    {t("confirm")}
+                </Button>
+            </ModalFooter>
+        </ComposedModal>
     );
 });

@@ -27,8 +27,8 @@ function App() {
                 }
             >
                 <BrowserRouter>
-                    <ThemePreferenceProvider>
-                        <AuthProvider>
+                    <AuthProvider>
+                        <ThemePreferenceProvider>
                             <TabContextProvider>
                                 <UserManagementProvider>
                                     <Routes>
@@ -72,8 +72,8 @@ function App() {
             <Route exact path="/forgotpassword" element={<ForgotPassword />} />
             <Route exact path="/adduser" element={<AddUser />} />
           </Routes> */}
-                        </AuthProvider>
-                    </ThemePreferenceProvider>
+                        </ThemePreferenceProvider>
+                    </AuthProvider>
                 </BrowserRouter>
             </Suspense>
         </>

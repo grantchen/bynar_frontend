@@ -19,6 +19,7 @@
     "privacy": "Confidentialité",
     "change-language": "Changer de langue",
     "change-theme": "Changer de thème",
+    "themes": "Thèmes",
     "logout": "Se déconnecter",
     "data-table": "Tableau de données",
     "category": "Titre de catégorie",
@@ -102,5 +103,8 @@
     "error-deleting-user": "Erreur lors de la suppression de l'utilisateur",
     "error-updating-user": "Erreur lors de la mise à jour de l'utilisateur",
     "error-adding-user": "Erreur lors de l'ajout de l'utilisateur",
-    "dark": "Sombre"
+    "dark": "Sombre",
+    "system": "Système",
+    "light": "Lumière",
+    "confirm": "Confirmer"
 }
