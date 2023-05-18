@@ -406,13 +406,7 @@ a.cds--header__name:hover {
 }
 .header-tab {
   svg {
-    fill: #525252 !important;
-  }
-  .cds--header__action:hover {
-    background-color: #ffffff !important;
-    // height: 48px !important;
-    border-bottom: 1px solid red !important;
-    border: none !important;
+    fill: var(--cds-text-01, #161616) !important;
   }
 }
 .header-container-box {
