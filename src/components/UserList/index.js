@@ -225,6 +225,7 @@ export const UserList = ({ isOpen }) => {
                     pageSizes={[2, 5, 10, 25, 50]}
                     totalItems={userListData?.totalCount}
                     onChange={({ page, pageSize }) => {
+                        setPageSize(pageSize)
                         setSearchParams((prev) => {
                             return mergeQueryParams(prev, {
                                 page: page - 1,
