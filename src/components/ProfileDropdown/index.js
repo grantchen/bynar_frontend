@@ -38,7 +38,7 @@ const ProfileDropdown = React.memo(
                 initials={user?.fullName ?? '...'}
                 tooltipText={user?.fullName ?? '...'}
                 theme={
-                  theme === "g100"
+                  theme === "g90"
                     ? "dark"
                     : "light"
                 }

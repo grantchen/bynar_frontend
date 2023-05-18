@@ -82,16 +82,18 @@ function ThemePreferenceProvider({ children }) {
 function mapCarbonThemeFromThemePreference(preference) {
     switch (preference) {
         case "g100":
-            return "g100";
+            return "g90";
+        case "g90":
+            return "g90";
         case "dark":
-            return "g100";
+            return "g90";
         case "white":
             return "white";
         case "light":
             return "white";
         case "system":
             return window.matchMedia("(prefers-color-scheme: dark)").matches
-                ? "g100"
+                ? "g90"
                 : "white";
         default:
             return "white";
