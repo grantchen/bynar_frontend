@@ -54,7 +54,7 @@
     "users": "Benutzer",
     "search": "Suchen",
     "email-required": "E-Mail ist erforderlich",
-    "email-format-error": "Suggested format (name@company.com)",
+    "email-format-error": "Vorgeschlagenes format (name@company.com)",
     "phone-number-required": "Telefonnummer ist erforderlich",
     "phone-number-validation": "Geben Sie eine gültige Telefonnummer ein",
     "postal-code-required": "Postleitzahl ist erforderlich",
