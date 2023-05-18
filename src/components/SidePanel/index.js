@@ -241,10 +241,6 @@ export const SidePanels = ({ open }) => {
             setPostalCodeErrorNotification({
                 title: t("postal-code-required"),
             });
-        } else if (!/^\d+$/.test(value)) {
-            setPostalCodeErrorNotification({
-                title: t("postal-code-validation"),
-            });
         } else {
             setPostalCodeErrorNotification({});
         }
