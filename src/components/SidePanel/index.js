@@ -236,6 +236,10 @@ export const SidePanels = ({ open }) => {
 
     const handlePhoneNumber = (value, country, formattedValue) => {
         setPhoneNumber(value);
+        setCountryCode(country?.countryCode);
+        setCountryDialCode(
+            country?.dialCode.toString().replace("+", "")
+        );
         validatePhoneNumber(value, country.dialCode, country?.countryCode);
     };
 
