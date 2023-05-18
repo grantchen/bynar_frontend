@@ -21,6 +21,7 @@ import { AuthContext, COUNTRIES, useUserManagement } from "../../sdk";
 import {
     PhoneNumberUtil,
     PhoneNumberFormat as PNF,
+    parsePhoneNumberFromString
 } from "google-libphonenumber";
 import { InlineLoading } from "carbon-components";
 import { useTranslation } from "react-i18next";
@@ -439,14 +440,28 @@ export const SidePanels = ({ open }) => {
             setPostalCode(result?.postalCode);
             setPhoneNumber(result?.phoneNumber);
             setOrganizationId(result?.organisationID);
-            const selectedItem = COUNTRIES.find(
+            const selectedCountry = COUNTRIES.find(
                 (item) => item.name === result?.country
             );
-            setCountryCode(selectedItem?.code);
-            setCountryDialCode(
-                selectedItem?.dial_code.toString().replace("+", "")
+            const phone = "+" + result?.phoneNumber;
+            const number = phoneUtil.parse(phone, "");
+            const countryDialCode = "+"+number.getCountryCode();
+            const countryBasedOnPhoneNumber = COUNTRIES.find(
+                (item) => item.dial_code === countryDialCode
             );
+            if (countryBasedOnPhoneNumber) {
+                setCountryCode(countryBasedOnPhoneNumber?.code);
+                setCountryDialCode(
+                    countryBasedOnPhoneNumber?.dial_code.toString().replace("+", "")
+                );
+            } else {
+                setCountryCode(selectedCountry?.code);
+                setCountryDialCode(
+                    selectedCountry?.dial_code.toString().replace("+", "")
+                );
+            }
         } catch (e) {
+            console.log("setting user", e)
         } finally {
             setLoadingData(false);
         }
@@ -606,7 +621,7 @@ export const SidePanels = ({ open }) => {
                                         onChange={handleRoleChange}
                                         invalid={accountInfoErrors.role}
                                         invalidText={"User role is required"}
-                                        // defaultValue={''}
+                                    // defaultValue={''}
                                     >
                                         {roleslist.map(
                                             (rolesObject, rolesIndex) => (
@@ -719,13 +734,13 @@ export const SidePanels = ({ open }) => {
                                     onChange={handlePostalCode}
                                     invalid={
                                         typeof postalCodeErrorNotification ==
-                                            "object" &&
+                                        "object" &&
                                         Object.keys(postalCodeErrorNotification)
                                             .length !== 0
                                     }
                                     invalidText={
                                         postalCodeErrorNotification &&
-                                        postalCodeErrorNotification.title
+                                            postalCodeErrorNotification.title
                                             ? postalCodeErrorNotification.title
                                             : ""
                                     }
@@ -747,7 +762,7 @@ export const SidePanels = ({ open }) => {
                                             style={{
                                                 border:
                                                     !phoneNumberValid &&
-                                                    errorMessage.length > 0
+                                                        errorMessage.length > 0
                                                         ? "2px solid red"
                                                         : 0,
                                             }}
