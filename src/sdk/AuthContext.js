@@ -8,8 +8,18 @@ import {
     useCallback,
 } from "react";
 import { BaseURL } from "./constant";
-import { Auth } from "aws-amplify";
+import { Auth, Amplify } from "aws-amplify";
 import { useTranslation } from "react-i18next";
+
+Amplify.configure({
+    Auth: {
+        region: "eu-central-1",
+        userPoolId: "eu-central-1_IWbh7BLrz",
+        userPoolWebClientId: "1bmp66b2352s3c0bsll8c5qfd9",
+    },
+});
+
+
 const initialState = {
     user: null,
     token: "loading",
@@ -54,7 +64,7 @@ export const AuthProvider = ({ children }) => {
                         return;
                     }
                 }
-                setState({ token: null });
+                setState({ token: null, user: null });
             }
         })();
     }, []);
@@ -82,6 +92,8 @@ export const AuthProvider = ({ children }) => {
             }
         } catch (e) {
             console.log("Error signing out!");
+            localStorage.clear()
+            document.documentElement.setAttribute('data-carbon-theme', 'white')
             navigate("/signin");
         }
     }, [state.token]);

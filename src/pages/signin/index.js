@@ -6,14 +6,6 @@ import { Auth } from "aws-amplify";
 import Login from "../../components/Login";
 import MagicLinkValidation from "../../components/MagicLInkValidation";
 
-import { Amplify } from "aws-amplify";
-Amplify.configure({
-    Auth: {
-        region: "eu-central-1",
-        userPoolId: "eu-central-1_IWbh7BLrz",
-        userPoolWebClientId: "1bmp66b2352s3c0bsll8c5qfd9",
-    },
-});
 const Signin = () => {
     const navigate = useNavigate();
     const authContext = useContext(AuthContext);
