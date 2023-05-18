@@ -157,7 +157,7 @@ export const UserList = ({ isOpen }) => {
                     id: "view",
                     itemText: (
                         <div className="row-action-renderer">
-                            {t("view")} <DataViewAlt />
+                            <DataViewAlt /> {t("view")}
                         </div>
                     ),
                     onClick: (_, { original }) =>
@@ -169,7 +169,7 @@ export const UserList = ({ isOpen }) => {
                     id: "edit",
                     itemText: (
                         <div className="row-action-renderer">
-                            {t("edit")} <Edit />
+                          <Edit /> {t("edit")}
                         </div>
                     ),
                     onClick: (_, { original }) =>
@@ -183,7 +183,7 @@ export const UserList = ({ isOpen }) => {
                     id: "delete",
                     itemText: (
                         <div className="row-action-renderer">
-                            {t("delete")} <TrashCan />
+                            <TrashCan /> {t("delete")}
                         </div>
                     ),
                     hasDivider: true,
@@ -281,6 +281,7 @@ export const UserList = ({ isOpen }) => {
                         size="sm"
                         kind="primary"
                         style={{ cursor: "pointer" }}
+                        renderIcon={Add}
                     >
                         {t("add-new-user")}
                     </Button>
