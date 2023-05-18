@@ -190,6 +190,10 @@ const Signup = () => {
 
   const handlePhoneNumber = (value, country, formattedValue) => {
     setPhoneNumber(value)
+    setCountryCode(country?.countryCode);
+    setCountryDialCode(
+        country?.dialCode.toString().replace("+", "")
+    );
     validatePhoneNumber(value, country.dialCode, country?.countryCode);
 
   }
@@ -432,7 +436,7 @@ const Signup = () => {
           addressLine: addressLine1,
           addressLine2: addressLine2,
           city: city,
-          postalCode: parseInt(postalCode),
+          postalCode: postalCode,
           state: state,
           phoneNumber: phoneNumber,
           organizationName: organizationName,
@@ -521,10 +525,6 @@ const Signup = () => {
   const postalCodeValidation = (value) => {
     if (value.length === 0) {
       setPostalCodeErrorNotification({ title: "Postal code is required" });
-    } else if (!/^\d+$/.test(value)) {
-      setPostalCodeErrorNotification({
-        title: "Postal code should be integer",
-      });
     } else {
       setPostalCodeErrorNotification({});
     }
