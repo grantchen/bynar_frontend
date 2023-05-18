@@ -30,6 +30,9 @@ import {
     TextInputSkeleton,
 } from "@carbon/react";
 
+const defaultCountry = 'India'
+const defaultContryCode = '91'
+
 const AccountInfoErrorsInitialState = {
     userName: false,
     password: false,
@@ -47,13 +50,13 @@ export const SidePanels = ({ open }) => {
     const [accountInfoErrors, setAccountInfoErrors] = useState(
         AccountInfoErrorsInitialState
     );
-    const [country, setCountry] = useState("India");
+    const [country, setCountry] = useState(defaultCountry);
     const [addressLine1, setAddressLine1] = useState("");
     const [addressLine2, setAddressLine2] = useState("");
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [postalCode, setPostalCode] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("91");
+    const [phoneNumber, setPhoneNumber] = useState(defaultContryCode);
     const [fullName, setFullName] = useState("");
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
@@ -90,7 +93,7 @@ export const SidePanels = ({ open }) => {
         { name: "Users" },
     ];
     const [countryCode, setCountryCode] = useState("IN");
-    const [countryDialCode, setCountryDialCode] = useState("91");
+    const [countryDialCode, setCountryDialCode] = useState(defaultContryCode);
 
     const [userDetails, setUserDetails] = useState({});
     const isUserEdit = searchParams.get("userIdToBeEdited");
@@ -456,13 +459,13 @@ export const SidePanels = ({ open }) => {
     useEffect(() => {
         if (!open) {
             setAccountInfoErrors(AccountInfoErrorsInitialState);
-            setCountry("India");
+            setCountry(defaultCountry);
             setAddressLine1("");
             setAddressLine2("");
             setCity("");
             setState("");
             setPostalCode("");
-            setPhoneNumber("");
+            setPhoneNumber(defaultContryCode);
             setFullName("");
             setUserName("");
             setRole("Users");
@@ -660,9 +663,9 @@ export const SidePanels = ({ open }) => {
                             ) : (
                                 <TextInput
                                     type="text"
-                                    id="addressline1"
+                                    id="addressline2"
                                     className={`story__text-input`}
-                                    labelText={`${t("address-line2")} *`}
+                                    labelText={`${t("address-line2")} `}
                                     value={addressLine2}
                                     onChange={(e) =>
                                         setAddressLine2(e.target.value)
