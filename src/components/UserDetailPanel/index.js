@@ -294,7 +294,10 @@ export const UserDetailPanel = ({ open }) => {
                                     </div>
                                     <PhoneInput
                                         className="phone-input-sidepanel"
-                                        // defaultCountry="in"
+                                        inputProps={{
+                                            disabled: true,
+                                          }}
+                                        disableDropdown={true}
                                         style={{
                                             border:
                                                 !phoneNumberValid &&
