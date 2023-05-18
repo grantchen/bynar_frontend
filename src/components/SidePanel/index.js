@@ -443,25 +443,25 @@ export const SidePanels = ({ open }) => {
             const selectedCountry = COUNTRIES.find(
                 (item) => item.name === result?.country
             );
-                const phone = "+" + result?.phoneNumber;
-                const number = phoneUtil.parse(phone, "");
-                const countrydialCode = "+"+number.getCountryCode();
-                const countryList = COUNTRIES.find(
-                    (item) => item.dial_code === countrydialCode
-                ); 
-                if (countrydialCode != selectedCountry?.dial_code) {
-                    setCountryCode(countryList?.code);
-                    setCountryDialCode(
-                        countryList?.dial_code.toString().replace("+", "")
-                    );
-                }
-                else {
-                    setCountryCode(selectedCountry?.code);
-                    setCountryDialCode(
-                        selectedCountry?.dial_code.toString().replace("+", "")
-                    );
-                }
+            const phone = "+" + result?.phoneNumber;
+            const number = phoneUtil.parse(phone, "");
+            const countryDialCode = "+"+number.getCountryCode();
+            const countryBasedOnPhoneNumber = COUNTRIES.find(
+                (item) => item.dial_code === countryDialCode
+            );
+            if (countryBasedOnPhoneNumber) {
+                setCountryCode(countryBasedOnPhoneNumber?.code);
+                setCountryDialCode(
+                    countryBasedOnPhoneNumber?.dial_code.toString().replace("+", "")
+                );
+            } else {
+                setCountryCode(selectedCountry?.code);
+                setCountryDialCode(
+                    selectedCountry?.dial_code.toString().replace("+", "")
+                );
+            }
         } catch (e) {
+            console.log("setting user", e)
         } finally {
             setLoadingData(false);
         }
