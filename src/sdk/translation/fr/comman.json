@@ -110,5 +110,7 @@
     "languages": "Langues",
     "view": "Vue",
     "no-users": "Aucun utilisateur trouvé",
-    "no-users-action-description": "Aucun utilisateur ne correspond à votre filtre. Essayez de changer le terme de recherche."
+    "no-users-action-description": "Aucun utilisateur ne correspond à votre filtre. Essayez de changer le terme de recherche.",
+    "location-language-available": "Cette page est disponible dans les emplacements et langues suivants.",
+    "location-language-unavailable": "Cette page n'est pas disponible dans votre emplacement ou votre langue préférée."
 }

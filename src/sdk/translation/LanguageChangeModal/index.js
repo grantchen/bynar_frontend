@@ -104,8 +104,7 @@ export function LanguageChangeModal({
                     onChange={(e) => setSearchText(e.target.value)}
                 />
                 <p className="list-description">
-                    This page is available in the following locations and
-                    languages
+                    {languageOptions.length ? t('location-language-available') : t('location-language-unavailable')}
                 </p>
                 {/* <Test/> */}
                 <StructuredListWrapper

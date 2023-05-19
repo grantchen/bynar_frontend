@@ -110,5 +110,7 @@
     "languages": "Languages",
     "view": "View",
     "no-users": "No Users Found",
-    "no-users-action-description": "There are no users matching your filter. Try changing the search term."
+    "no-users-action-description": "There are no users matching your filter. Try changing the search term.",
+    "location-language-available": "This page is available in the following locations and languages",
+    "location-language-unavailable": "This page is unavailable in your preferred location or language"
 }

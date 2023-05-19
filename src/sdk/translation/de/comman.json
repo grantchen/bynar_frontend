@@ -110,5 +110,7 @@
     "languages": "Sprachen",
     "view": "Ansicht",
     "no-users": "Keine Benutzer gefunden",
-    "no-users-action-description": "Es gibt keine Benutzer, die Ihren Filterkriterien entsprechen. Versuchen Sie, den Suchbegriff zu ändern."
+    "no-users-action-description": "Es gibt keine Benutzer, die Ihren Filterkriterien entsprechen. Versuchen Sie, den Suchbegriff zu ändern.",
+    "location-language-available": "Diese Seite ist in den folgenden Standorten und Sprachen verfügbar.",
+    "location-language-unavailable": "Diese Seite ist in Ihrem bevorzugten Standort oder Ihrer bevorzugten Sprache nicht verfügbar."
 }
