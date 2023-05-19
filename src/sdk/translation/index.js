@@ -1,3 +1,3 @@
 
 export * from './i18nextConfig'
-export * from './LanguageModal'
+export * from './LanguageChangeModal'
