@@ -380,7 +380,7 @@ export const SidePanels = ({ open }) => {
                 addressLine: addressLine1,
                 addressLine2: addressLine2,
                 city: city,
-                postalCode: parseInt(postalCode),
+                postalCode: postalCode,
                 state: state,
                 phoneNumber: phoneNumber,
                 organizationName: "",
@@ -409,7 +409,7 @@ export const SidePanels = ({ open }) => {
                 addressLine: addressLine1,
                 addressLine2: addressLine2,
                 city: city,
-                postalCode: parseInt(postalCode),
+                postalCode: postalCode,
                 state: state,
                 phoneNumber: phoneNumber,
             };
