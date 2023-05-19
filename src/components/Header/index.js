@@ -38,7 +38,7 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
   //todo for Suyash: get token from auth context
 
   const [profileDropdown, setProfileDropdown] = useState(false);
-  const {theme } = useThemePreference();
+  const {theme} = useThemePreference();
 
   const {user} = useAuth();
 
@@ -134,17 +134,17 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
                     aria-label={t('user')}
                     onClick={handleDropDown}
                   >
-                    <UserProfileImage
-                      backgroundColor={"light-cyan"}
-                      size={"md"}
-                      initials={user?.fullName}
-                      tooltipText={user?.fullName }
-                      theme={
-                        theme === "g90"
-                          ? "dark"
-                          : "light"
-                      }
-                    />
+                      <UserProfileImage
+                        backgroundColor={"light-cyan"}
+                        size={"md"}
+                        initials={user?.fullName ?? '...'}
+                        tooltipText={user?.fullName ?? '...'}
+                        theme={
+                          theme === "g90"
+                            ? "dark"
+                            : "light"
+                        }
+                      />
                   </HeaderGlobalAction>
                   <PopoverContent>
                     <ProfileDropdown
