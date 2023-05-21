@@ -2,8 +2,9 @@ import React, { useState, useRef, useEffect, useContext } from "react";
 import { Close, ChevronLeft, ChevronRight } from "@carbon/react/icons";
 import { Button, IconButton, Tab } from "@carbon/react";
 import "./HeaderTab.scss";
-import { TabContext } from "../../sdk";
+import { TabContext, useUserManagement } from "../../sdk";
 import { useTranslation } from "react-i18next";
+import { useMemo } from "react";
 
 
 const SHOW_SCROLL_BUTTON_WIDTH = 405
@@ -18,6 +19,7 @@ const HeaderTab = () => {
   const carouselRef = useRef(null);
   const tabRef = useRef(null);
   const { t } = useTranslation();
+  const { isUserManagementAllowed } = useUserManagement();
   const handleLeftScroll = () => {
     if(!carouselRef.current){
       return
@@ -44,11 +46,23 @@ const HeaderTab = () => {
     handleRemoveTab(idToRemove, index);
   };
 
+  const totalCarbonButtonsOnHeader = useMemo(() => {
+    /**
+     * buttons - hamburger + Bynar [Platform] + user list + search + user profile dropdown
+     * user list counts as 2 buttons, becasue of the search absolute positioning
+     * this is hacky, if you're not sure what are you doing here. Ask Ritik first
+     */
+    if(isUserManagementAllowed){
+      return 5
+    }
+    return 3
+  }, [isUserManagementAllowed])
+
   
   const shouldShowTabScroll = ((window.innerWidth - SHOW_SCROLL_BUTTON_WIDTH) / 100) < tab.length
   return (
     <>
-      <div className="tab" ref={tabRef}>
+      <div className="tab" ref={tabRef} style={{width: `calc(100vw -  ${totalCarbonButtonsOnHeader * 3}rem - /*text width Bynar[Platform]*/ 108px)`}}>
         {shouldShowTabScroll && (
           <IconButton className="left-arrow" onClick={handleLeftScroll}>
             <ChevronLeft/>
@@ -93,7 +107,7 @@ const HeaderTab = () => {
                 }, 50);
               }}
             >
-              <p>{t("add-new-tab")}</p>
+              {t("add-new-tab")}
             </Button>
           </div>
         </div>

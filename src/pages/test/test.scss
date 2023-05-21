@@ -1,0 +1,44 @@
+.main-header-container{
+    .bx--header{
+        position: relative;
+        background: var(--cds-ui-02, #ffffff);
+        border-bottom: 1px solid var(--cds-border-subtle);
+    }
+    .user-list-nav-button{
+        margin-right: 3rem;
+    }
+}
+
+
+
+/*
+ css overrides for header button and search nav on top of synamic tabs
+
+*/
+@media (min-width: 66rem) {
+    .cds--header__menu-toggle__hidden, .bx--header__menu-toggle__hidden {
+        display: flex !important;
+    }
+}
+
+.search-container.cds--search--md.cds--search--expandable {
+    display: flex;
+    align-items: center;
+
+    position: absolute;
+    color: white;
+    right: 3rem;
+    height: 3rem;
+    max-width: calc(100vw - 303px);
+    width: 3rem;
+    &.cds--search--expanded .cds--search-input{
+        height: 3rem;
+    }
+    button, .cds--search-magnifier{
+        height: 3rem;
+        width: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

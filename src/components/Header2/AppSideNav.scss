@@ -1,0 +1,10 @@
+.side-nav-item-with-action .bx--side-nav__link-text{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    .delete-btn{
+        padding: 5px;
+        
+    }
+}

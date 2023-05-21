@@ -17,7 +17,7 @@ const DashboardContainer = () => {
         <Heading className="heading">{t("header")}</Heading>
         <Button renderIcon={Add20}>{t("create-resource-button")}</Button>
       </div>
-      <div className="container">
+      <div className="dashboard-container">
         <NewsInfoCard />
         <ViewUsageCard />
         <SupportCard />

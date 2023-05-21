@@ -84,7 +84,7 @@ export function LanguageChangeModal({
         >
             <ModalHeader title={t("languages")} />
             <ModalBody className="language-modal-body">
-                {loading && <Loading />}
+                {loading && <Loading small/>}
                 {toastNotification && (
                     <ToastNotification
                         className="error-notification-box"

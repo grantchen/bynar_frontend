@@ -3,7 +3,7 @@ import React, { Suspense } from "react";
 import "./App.scss";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { CommonHeader } from "./components/Header";
+// import { CommonHeader } from "./components/Header";
 import { Dashboard } from "./pages/Dashboard/Dashboard";
 import Home from "./pages/Home";
 import Signin from "./pages/signin";
@@ -15,6 +15,7 @@ import {
     ThemePreferenceProvider,
     UserManagementProvider,
 } from "./sdk";
+import AuthenticatedAppHeader from "./components/Header2";
 
 function App() {
     return (
@@ -49,7 +50,7 @@ function App() {
                                         />
                                         <Route
                                             path="/home/"
-                                            element={<CommonHeader />}
+                                            element={<AuthenticatedAppHeader />}
                                         >
                                             <Route
                                                 exact
