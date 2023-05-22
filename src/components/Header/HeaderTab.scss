@@ -99,7 +99,12 @@
 
   box-shadow: none;
 }
-
+.tab-buttons-list{
+  overflow-x: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
 
 
 
@@ -134,7 +139,6 @@
   display: flex;
   width: 100%;
   align-items: center;
-  width: calc(100vw - 340px);
 }
 
 .header-tab {
@@ -271,10 +275,6 @@
   }
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
-
 .close-icon {
   display: flex;
   align-items: center;
@@ -391,14 +391,7 @@
   }
 }
 
-.cds--header__menu-toggle {
-  display: none !important;
-}
-.cds--side-nav__navigation {
-  display: none !important;
-}
-.header-text {
-}
+
 a.cds--header__name,
 a.cds--header__name:hover {
   /* color: #F4F4F4; */

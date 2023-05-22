@@ -1,6 +1,6 @@
 .dashboard-container{
-    padding: 6rem 4rem;
-    height: 100vh;
+    padding: 3rem 4rem;
+    height: calc(100vh - 50px);
     overflow-y: auto;
     background: var(--cds-field-01, #ffffff);
     color: var(--cds-text-01, #161616);
