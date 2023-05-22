@@ -99,7 +99,12 @@
 
   box-shadow: none;
 }
-
+.tab-buttons-list{
+  overflow-x: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
 
 
 
@@ -268,10 +273,6 @@
     display: none;
     /* Safari and Chrome */
   }
-}
-
-::-webkit-scrollbar {
-  display: none;
 }
 
 .close-icon {

@@ -4,12 +4,13 @@ import {
     ExpandableSearch,
     Search,
     SideNav,
+} from "carbon-components-react";
+import { Fade, Close } from "@carbon/react/icons";
+import { 
     SideNavItems,
     SideNavLink,
     SideNavMenu,
-    SideNavMenuItem,
-} from "carbon-components-react";
-import { Fade, Close } from "@carbon/react/icons";
+    SideNavMenuItem, } from "@carbon/react";
 import { useTranslation } from "react-i18next";
 import "./AppSideNav.scss";
 import { Button } from "@carbon/react";
@@ -32,10 +33,11 @@ export function AppSideNav({ isSideNavExpanded, onClickSideNavExpand }) {
             expanded={isSideNavExpanded}
             isFixedNav
             isRail
+            className="sidenav-container"
         >
             <SideNavItems>
                 {isMobile && <Search size="md" />}
-
+                
                 <SideNavMenu renderIcon={Fade} title="Category title">
                     <SideNavMenuItem href="#">Link</SideNavMenuItem>
                     <SideNavMenuItem href="#">Link</SideNavMenuItem>
@@ -56,6 +58,7 @@ export function AppSideNav({ isSideNavExpanded, onClickSideNavExpand }) {
                     <SideNavMenu renderIcon={Fade} title="Dynamic Tabs">
                         {tabs.map((tab, index) => (
                             <SideNavMenuItem
+                                key={index}
                                 className="side-nav-item-with-action"
                                 aria-current={
                                     index === activeTabIndex ? "page" : "link"

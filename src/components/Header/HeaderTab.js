@@ -69,7 +69,7 @@ const HeaderTab = () => {
           </IconButton>
         )}
 
-        <div style={{ overflowX: "auto" }} ref={carouselRef}>
+        <div className="tab-buttons-list" ref={carouselRef}>
           <div style={{ display: "flex", whiteSpace: "nowrap" }}>
             {tab.map((item, index) => {
               return (

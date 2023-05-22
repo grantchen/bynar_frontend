@@ -43,6 +43,9 @@
         }
     }
 
+    ul.cds--side-nav__items .cds--search,
+    ul.cds--side-nav__items .bx--search,
+    ul.bx--side-nav__items .cds--search,
     ul.bx--side-nav__items .bx--search {
         position: relative;
         display: flex;
