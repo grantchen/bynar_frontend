@@ -1,3 +1,8 @@
+.dashboard-box {
+  display: flex;
+  flex-direction: column;
+}
+
 .bynar-dashboard {
   // height: 100vh;
   // background-color: var(--cds-field-01,#fff);
@@ -16,11 +21,13 @@
   display: flex;
   justify-content: space-between;
 }
+
 .heading {
   font-size: 1.75rem;
   line-height: normal;
   color: inherit;
 }
+
 .button-dashboard {
   border-width: 1px;
   border-style: solid;
@@ -38,12 +45,15 @@
   width: fit-content;
   overflow-x: auto;
 }
-.dashboard-container {
+
+.dashboard-container-box {
   display: flex;
   justify-content: space-between;
   justify-content: flex-start;
   gap: 24px;
+  margin-top: 16px
 }
+
 @media screen and (min-width: 320px) {
   .pal--page-header {
     padding-left: 0.75rem !important;
@@ -57,9 +67,10 @@
     padding-right: 0 !important;
   }
 }
+
 @media screen and (min-width: 42rem) {
   .pal--page-header {
-    padding: var(--cds-spacing-05, 1rem) var(--cds-spacing-07, 2rem)
+    padding: var(--cds-spacing-05, 1rem) var(--cds-spacing-07, 2rem) 
       var(--cds-spacing-07, 2rem);
   }
 }
@@ -69,8 +80,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: var(--cds-spacing-05, 1rem) var(--cds-spacing-05, 1rem)
-    var(--cds-spacing-07, 2rem);
+  padding: var(--cds-spacing-05, 1rem) var(--cds-spacing-05, 1rem) var(--cds-spacing-07, 2rem);
   width: 100%;
 }
 
@@ -98,6 +108,7 @@
     display: flex;
     flex-direction: column;
   }
+
   .container {
     padding-left: 0 !important;
     padding-right: 1.75rem !important;
@@ -113,5 +124,9 @@
     height: calc(100vh - 72px);
     overflow-y: auto;
     padding-bottom: 40px;
+  }
+
+  .dashboard-container-box {
+   flex-direction: column;
   }
 }

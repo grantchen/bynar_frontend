@@ -12,17 +12,17 @@ import { Add20 } from "@carbon/icons-react";
 const DashboardContainer = () => {
   const { t } = useTranslation();
   return (
-    <>
+    <div className="dashboard-box">
       <div className="bynar-heading">
         <Heading className="heading">{t("header")}</Heading>
         <Button renderIcon={Add20}>{t("create-resource-button")}</Button>
       </div>
-      <div className="dashboard-container">
+      <div className="dashboard-container-box">
         <NewsInfoCard />
         <ViewUsageCard />
         <SupportCard />
       </div>
-    </>
+    </div>
   );
 };
 
