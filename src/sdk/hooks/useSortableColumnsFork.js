@@ -1,9 +1,10 @@
 import { themes } from "@carbon/themes";
 import cx from "classnames";
-import { ArrowUp, ArrowDown, ArrowsVertical } from "@carbon/react/icons";
+import { ArrowUp, ArrowsVertical } from "@carbon/react/icons";
 import { pkg } from "@carbon/ibm-products";
 import { Button } from "@carbon/react";
 import "./SortableColumns.scss";
+import { useState } from "react";
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const carbon = {
@@ -28,37 +29,18 @@ export const useSortableColumnsFork = (hooks) => {
             if (onSort) {
                 onSort(key, newOrder);
             }
-            instance.toggleSortBy(key, newSortDesc, false);
+            instance.toggleSortBy(key, newSortDesc, false); 
         };
         const sortableColumns = visibleColumns.map((column) => {
             const icon = (col, props) => {
                 if (col?.isSorted) {
-                    switch (col.isSortedDesc) {
-                        case false:
-                            return (
-                                <ArrowUp
-                                    size={16}
-                                    {...props}
-                                    className={`${blockClass}__sortable-icon ${carbon.prefix}--btn__icon`}
-                                />
-                            );
-                        case true:
-                            return (
-                                <ArrowDown
-                                    size={16}
-                                    {...props}
-                                    className={`${blockClass}__sortable-icon ${carbon.prefix}--btn__icon`}
-                                />
-                            );
-                        default:
-                            return (
-                                <ArrowsVertical
-                                    size={16}
-                                    {...props}
-                                    className={`${blockClass}__sortable-icon ${carbon.prefix}--btn__icon`}
-                                />
-                            );
-                    }
+                    return (
+                        <ArrowUp
+                            size={16}
+                            {...props}
+                            className={`${blockClass}__sortable-icon ${carbon.prefix}--btn__icon`}
+                        />
+                    );
                 }
                 return (
                     <ArrowsVertical

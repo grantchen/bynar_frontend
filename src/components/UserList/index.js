@@ -15,6 +15,8 @@ import {
     useSelectRows,
     useOnRowClick,
     useDisableSelectRows,
+    useCustomizeColumns,
+    useColumnOrder,
     Datagrid,
     pkg,
 } from "@carbon/ibm-products";
@@ -32,6 +34,7 @@ import { Restart16, Activity16, Add16, TrashCan16 } from "@carbon/icons-react";
 
 import "./UserList.scss";
 import { useTranslation } from "react-i18next";
+import { useInfiniteScroll } from "@carbon/ibm-products/lib/components";
 
 pkg.component.Datagrid = true;
 // pkg.feature.Datagrid = true
@@ -150,8 +153,20 @@ export const UserList = ({ isOpen }) => {
                 text: t("add-new-user"),
                 onClick: openAddUserModel,
                 renderIcon: Add,
-                iconDescription: 'Add icon',
-              },    
+                iconDescription: "Add icon",
+            },
+            fetchMoreData: (...args) => console.log(args),
+            virtualHeight: window.innerHeight -318,
+            initialState: {
+                hiddenColumns: ['username'],
+                columnOrder: [],
+            },
+            // customizeColumnsProps: {
+            //     onSaveColumnPrefs: (newColDefs) => {
+            //         console.log(newColDefs);
+            //     },
+            //     columns
+            // },
             rowActions: [
                 {
                     id: "view",
@@ -169,7 +184,7 @@ export const UserList = ({ isOpen }) => {
                     id: "edit",
                     itemText: (
                         <div className="row-action-renderer">
-                          <Edit /> {t("edit")}
+                            <Edit /> {t("edit")}
                         </div>
                     ),
                     onClick: (_, { original }) =>
@@ -225,7 +240,7 @@ export const UserList = ({ isOpen }) => {
                     pageSizes={[2, 5, 10, 25, 50]}
                     totalItems={userListData?.totalCount}
                     onChange={({ page, pageSize }) => {
-                        setPageSize(pageSize)
+                        setPageSize(pageSize);
                         setSearchParams((prev) => {
                             return mergeQueryParams(prev, {
                                 page: page - 1,
@@ -256,7 +271,9 @@ export const UserList = ({ isOpen }) => {
                     </TableBatchActions>
                 );
             },
-            DatagridActions: () => (
+            DatagridActions: (dgState) => {
+                console.log(dgState)
+                return (
                 <TableToolbarContent>
                     <TableToolbarSearch
                         size="xl"
@@ -277,6 +294,7 @@ export const UserList = ({ isOpen }) => {
                         iconDescription={t("refresh")}
                         onClick={() => getUserList(getUserAPIQuery())}
                     />
+                    {/* <dgState.CustomizeColumnsButton /> */}
                     <Button
                         onClick={openAddUserModel}
                         size="sm"
@@ -287,7 +305,7 @@ export const UserList = ({ isOpen }) => {
                         {t("add-new-user")}
                     </Button>
                 </TableToolbarContent>
-            ),
+            )},
             batchActions: true,
             toolbarBatchActions: [
                 {
@@ -310,7 +328,10 @@ export const UserList = ({ isOpen }) => {
         useActionsColumn,
         useSelectRows,
         useOnRowClick,
-        useSortableColumnsFork
+        useSortableColumnsFork,
+        // useCustomizeColumns,
+        useColumnOrder,
+        useInfiniteScroll
     );
 
     return (

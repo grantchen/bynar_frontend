@@ -24,7 +24,6 @@ const HeaderTab = () => {
     if(!carouselRef.current){
       return
     }
-    console.log('test1')
     carouselRef.current.scrollTo({
       left: carouselRef.current.scrollLeft - 102,
       behavior: "smooth",
@@ -35,7 +34,6 @@ const HeaderTab = () => {
     if(!carouselRef.current){
       return
     }
-    console.log('test2')
     carouselRef.current.scrollTo({
       left: carouselRef.current.scrollLeft + 102,
       behavior: "smooth",
