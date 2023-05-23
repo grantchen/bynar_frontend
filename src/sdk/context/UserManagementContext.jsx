@@ -9,12 +9,12 @@ import React, {
 import { BaseURL } from "../constant";
 import { useSearchParams } from "react-router-dom";
 import { mergeQueryParams, removeNullEntries } from "../util";
-import { RemoveModal } from "@carbon/ibm-products";
+// import { RemoveModal } from "@carbon/ibm-products";
 import { SidePanels } from "../../components/SidePanel";
 import { UserDetailPanel } from "../../components/UserDetailPanel";
 import { useAuth } from "../AuthContext";
 import { useTranslation } from "react-i18next";
-
+import RemoveModal from "../remove-modal";
 const UserManagementContext = createContext();
 
 const UserManagementProvider = ({ children }) => {
@@ -197,6 +197,7 @@ const UserManagementProvider = ({ children }) => {
                     });
                 },
                 primaryButtonText: t("delete"),
+                primaryButtonDisabled: false,
                 resourceName: `${userNameToBeDeleted}`,
                 secondaryButtonText: t("close"),
                 label: `${t("delete")} ${userNameToBeDeleted}`,
@@ -261,6 +262,7 @@ const UserManagementProvider = ({ children }) => {
                     });
                 },
                 primaryButtonText: t("delete"),
+                primaryButtonDisabled: false,
                 resourceName: "delete all",
                 secondaryButtonText: t("close"),
                 label: t("delete-users"),
@@ -389,6 +391,7 @@ const UserManagementProvider = ({ children }) => {
                     <UserDetailPanel open={userDetailsOpen} />
                 )}
             </UserManagementContext.Provider>
+            {/* {deleteModalProps && <RemoveModal {...deleteModalProps} />} */}
             {deleteModalProps && <RemoveModal {...deleteModalProps} />}
         </>
     );
