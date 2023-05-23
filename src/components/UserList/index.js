@@ -158,7 +158,7 @@ export const UserList = ({ isOpen }) => {
             fetchMoreData: (...args) => console.log(args),
             virtualHeight: window.innerHeight -318,
             initialState: {
-                hiddenColumns: ['username'],
+                hiddenColumns: [],
                 columnOrder: [],
             },
             // customizeColumnsProps: {
