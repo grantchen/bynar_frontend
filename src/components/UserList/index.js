@@ -28,6 +28,7 @@ import {
     useSortableColumnsFork,
     SORTABLE_ORDERING,
     omitQueryParams,
+    useMobile
 } from "../../sdk";
 import { useSearchParams } from "react-router-dom";
 import { Restart16, Activity16, Add16, TrashCan16 } from "@carbon/icons-react";
@@ -53,6 +54,7 @@ export const UserList = ({ isOpen }) => {
         openBulkDeleteConfirmModal,
     } = useUserManagement();
 
+    const isMobile = useMobile()
     const { t } = useTranslation();
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -297,10 +299,13 @@ export const UserList = ({ isOpen }) => {
                     {/* <dgState.CustomizeColumnsButton /> */}
                     <Button
                         onClick={openAddUserModel}
-                        size="sm"
+                        hasIconOnly={isMobile ? true : false}
+                        size={isMobile? "lg":"sm"}
                         kind="primary"
                         style={{ cursor: "pointer" }}
                         renderIcon={Add}
+                        tooltipPosition="bottom"
+                        iconDescription={t("add-new-user")}
                     >
                         {t("add-new-user")}
                     </Button>
