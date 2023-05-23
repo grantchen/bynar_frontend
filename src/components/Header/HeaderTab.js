@@ -46,8 +46,7 @@ const HeaderTab = () => {
 
   const totalCarbonButtonsOnHeader = useMemo(() => {
     /**
-     * buttons - hamburger + Bynar [Platform] + user list + search + user profile dropdown
-     * user list counts as 2 buttons, becasue of the search absolute positioning
+     * buttons - hamburger + user list + search + user profile dropdown
      * this is hacky, if you're not sure what are you doing here. Ask Ritik first
      */
     if(isUserManagementAllowed){

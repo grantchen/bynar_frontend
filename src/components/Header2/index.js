@@ -88,7 +88,7 @@ export default function AuthenticatedAppHeader() {
                             <HeaderGlobalBar>
                                 <HeaderTab />
                                 {
-                                    <ExpandableSearch className="search-container" />
+                                    <ExpandableSearch className="search-container" labelText="Enter search term"/>
                                 }
                                 {isUserManagementAllowed && (
                                     <HeaderGlobalAction

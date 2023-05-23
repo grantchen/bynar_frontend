@@ -16,7 +16,7 @@ import {
     useOnRowClick,
     useDisableSelectRows,
     // useCustomizeColumns,
-    useColumnOrder,
+    // useColumnOrder,
     Datagrid,
     // useInfiniteScroll,
     pkg,
@@ -334,7 +334,7 @@ export const UserList = ({ isOpen }) => {
         useOnRowClick,
         useSortableColumnsFork,
         // useCustomizeColumns,
-        useColumnOrder,
+        // useColumnOrder,
         // useInfiniteScroll
     );
 
