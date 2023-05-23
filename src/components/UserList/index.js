@@ -272,7 +272,6 @@ export const UserList = ({ isOpen }) => {
                 );
             },
             DatagridActions: (dgState) => {
-                console.log(dgState)
                 return (
                 <TableToolbarContent>
                     <TableToolbarSearch
