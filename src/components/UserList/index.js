@@ -15,10 +15,10 @@ import {
     useSelectRows,
     useOnRowClick,
     useDisableSelectRows,
-    useCustomizeColumns,
+    // useCustomizeColumns,
     useColumnOrder,
     Datagrid,
-    useInfiniteScroll,
+    // useInfiniteScroll,
     pkg,
 } from "@carbon/ibm-products";
 import { useEffect, useState, useCallback, useMemo, useRef } from "react";
@@ -37,9 +37,8 @@ import { Restart16, Activity16, Add16, TrashCan16 } from "@carbon/icons-react";
 import "./UserList.scss";
 import { useTranslation } from "react-i18next";
 
-pkg.component.Datagrid = true;
-// pkg.feature.Datagrid = true
-// pkg.feature['Datagrid.useActionsColumn'] = true
+pkg.setAllComponents(true);
+pkg.setAllFeatures(true);
 
 export const UserList = ({ isOpen }) => {
     const {
@@ -157,8 +156,8 @@ export const UserList = ({ isOpen }) => {
                 renderIcon: Add,
                 iconDescription: "Add icon",
             },
-            fetchMoreData: (...args) => console.log(args),
-            virtualHeight: window.innerHeight -318,
+            // fetchMoreData: (...args) => console.log(args),
+            // virtualHeight: window.innerHeight -318,
             // initialState: {
             //     hiddenColumns: [],
             //     columnOrder: [],
@@ -336,7 +335,7 @@ export const UserList = ({ isOpen }) => {
         useSortableColumnsFork,
         // useCustomizeColumns,
         useColumnOrder,
-        useInfiniteScroll
+        // useInfiniteScroll
     );
 
     return (

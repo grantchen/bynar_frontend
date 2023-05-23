@@ -36,19 +36,19 @@
     }
 }
 
-.userdata-table {
-    .c4p--datagrid__empty-state {
-        tbody{
-            height: calc(100vh - 225px);
-        }
-        tr,
-        td {
-            &:hover {
-                background: transparent;
-            }
-        }
-        td {
-            padding: var(--cds-spacing-11, 5rem);
-        }
-    }
-}
+// .userdata-table {
+//     .c4p--datagrid__empty-state {
+//         tbody{
+//             height: calc(100vh - 225px);
+//         }
+//         tr,
+//         td {
+//             &:hover {
+//                 background: transparent;
+//             }
+//         }
+//         td {
+//             padding: var(--cds-spacing-11, 5rem);
+//         }
+//     }
+// }
