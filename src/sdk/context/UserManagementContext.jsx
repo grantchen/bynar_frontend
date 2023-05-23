@@ -14,7 +14,8 @@ import { SidePanels } from "../../components/SidePanel";
 import { UserDetailPanel } from "../../components/UserDetailPanel";
 import { useAuth } from "../AuthContext";
 import { useTranslation } from "react-i18next";
-import RemoveModal from "../remove-modal";
+import { RemoveModal } from "../RemoveModal";
+// import RemoveModal from "../remove-modal";
 const UserManagementContext = createContext();
 
 const UserManagementProvider = ({ children }) => {
@@ -32,6 +33,7 @@ const UserManagementProvider = ({ children }) => {
     /**render unaware states */
     const [userListParams, setUserListParams] = useState({});
     const [deleteModalProps, setDeleteModalProps] = useState(null);
+    const [deleteModalLoading,setDeleteModalLoading] = useState(false);
 
     const editUserPanelOpen = Boolean(searchParams.get("userIdToBeEdited"));
     const addUserPanelOpen = Boolean(searchParams.get("openAddUserPanel"));
@@ -204,6 +206,7 @@ const UserManagementProvider = ({ children }) => {
                 textConfirmation: true,
                 onRequestSubmit: async () => {
                     try {
+                        setDeleteModalLoading(true);
                         const response = await authFetch(`${BaseURL}/user`, {
                             method: "DELETE",
                             body: JSON.stringify({
@@ -224,6 +227,7 @@ const UserManagementProvider = ({ children }) => {
                             message: t("error-deleting-user"),
                         });
                     } finally {
+                        setDeleteModalLoading(false);
                         setDeleteModalProps(null);
                         setUserListParams((prev) => {
                             setSearchParams(prev);
@@ -269,6 +273,7 @@ const UserManagementProvider = ({ children }) => {
                 textConfirmation: true,
                 onRequestSubmit: async () => {
                     try {
+                        setDeleteModalLoading(true);
                         const response = await authFetch(`${BaseURL}/user`, {
                             method: "DELETE",
                             body: JSON.stringify({
@@ -289,6 +294,7 @@ const UserManagementProvider = ({ children }) => {
                             message: t("error-deleting-user"),
                         });
                     } finally {
+                        setDeleteModalLoading(false);
                         setDeleteModalProps(null);
                         setUserListParams((prev) => {
                             setSearchParams(prev);
@@ -391,8 +397,7 @@ const UserManagementProvider = ({ children }) => {
                     <UserDetailPanel open={userDetailsOpen} />
                 )}
             </UserManagementContext.Provider>
-            {/* {deleteModalProps && <RemoveModal {...deleteModalProps} />} */}
-            {deleteModalProps && <RemoveModal {...deleteModalProps} />}
+            {deleteModalProps && <RemoveModal deleteModalProps={deleteModalProps} loading={deleteModalLoading} />}
         </>
     );
 };
