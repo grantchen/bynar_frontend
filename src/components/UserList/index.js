@@ -305,6 +305,7 @@ export const UserList = ({ isOpen }) => {
                         style={{ cursor: "pointer" }}
                         renderIcon={Add}
                         tooltipPosition="bottom"
+                        tooltipAlignment="end"
                         iconDescription={t("add-new-user")}
                     >
                         {t("add-new-user")}
