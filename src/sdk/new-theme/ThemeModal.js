@@ -56,6 +56,7 @@ export const ThemeModal = React.memo(() => {
             open={isThemeChangeModalOpen}
             size="xs"
             onClose={handleClose}
+            className="theme-change-modal"
         >
             <ModalHeader title={t("change-theme")} />
             <ModalBody className="theme-modal-body">

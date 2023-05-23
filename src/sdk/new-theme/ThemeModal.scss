@@ -17,3 +17,10 @@
         top: calc(50% - 0.5rem);
     }
 }
+
+
+.theme-change-modal {
+    .cds--modal-container--xs {
+        min-height: 400px
+    }
+}

@@ -6,20 +6,20 @@ import {
     StructuredListBody,
     StructuredListInput,
     ToastNotification,
-    InlineLoading
+    InlineLoading,
 } from "carbon-components-react";
 import {
     ComposedModal,
     ModalHeader,
     ModalBody,
     ModalFooter,
+    Button,
 } from "@carbon/react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { CheckmarkFilled } from "@carbon/react/icons";
 import { useTranslation } from "react-i18next";
 import "./LanguageChangeModal.scss";
 import { useAuth } from "../../AuthContext";
-import { Button } from "@carbon/react";
 
 const prefix = "bx";
 export function LanguageChangeModal({
@@ -43,28 +43,25 @@ export function LanguageChangeModal({
         setSelectedLanguage(user?.languagePreference);
     }, [user?.languagePreference, isLanguageChangeModalOpen]);
 
-    const handleSubmit = useCallback(
-        async () => {
-            try {
-                setLoading(true);
-                await updateUserLanguagePreference({
-                    languagePreference: selectedLanguage,
-                });
-                openLanguageChangeModal(false);
-            } catch (e) {
-                setToastNotification({ message: e.message, type: "error" });
-            } finally {
-                setLoading(false);
-            }
-        },
-        [selectedLanguage, updateUserLanguagePreference]
-    );
+    const handleSubmit = useCallback(async () => {
+        try {
+            setLoading(true);
+            await updateUserLanguagePreference({
+                languagePreference: selectedLanguage,
+            });
+            openLanguageChangeModal(false);
+        } catch (e) {
+            setToastNotification({ message: e.message, type: "error" });
+        } finally {
+            setLoading(false);
+        }
+    }, [selectedLanguage, updateUserLanguagePreference]);
 
     const handleClose = useCallback(() => {
         openLanguageChangeModal(false);
         setToastNotification(null);
         setLoading(false);
-    }, []);
+    }, [user?.languagePreference]);
 
     const languageOptions = useMemo(() => {
         if (searchText === "") {
@@ -82,8 +79,9 @@ export function LanguageChangeModal({
     return (
         <ComposedModal
             open={isLanguageChangeModalOpen}
-            size="md"
+            size="sm"
             onClose={handleClose}
+            className="language-change-modal"
         >
             <ModalHeader title={t("languages")} />
             <ModalBody className="language-modal-body">
@@ -106,7 +104,9 @@ export function LanguageChangeModal({
                     onChange={(e) => setSearchText(e.target.value)}
                 />
                 <p className="list-description">
-                    {languageOptions.length ? t('location-language-available') : t('location-language-unavailable')}
+                    {languageOptions.length
+                        ? t("location-language-available")
+                        : t("location-language-unavailable")}
                 </p>
 
                 <StructuredListWrapper
@@ -160,9 +160,11 @@ export function LanguageChangeModal({
                     disabled={loading}
                 >
                     {t("submit")}
-                    {loading && (<div><InlineLoading/></div>
+                    {loading && (
+                        <InlineLoading className="inline-loading-within-btn" />
                     )}
                 </Button>
+
             </ModalFooter>
         </ComposedModal>
     );
