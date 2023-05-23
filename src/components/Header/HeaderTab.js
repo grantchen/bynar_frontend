@@ -51,7 +51,7 @@ const HeaderTab = () => {
      * this is hacky, if you're not sure what are you doing here. Ask Ritik first
      */
     if(isUserManagementAllowed){
-      return 5
+      return 4
     }
     return 3
   }, [isUserManagementAllowed])
