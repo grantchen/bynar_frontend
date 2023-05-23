@@ -86,6 +86,10 @@
     background-color: var(--cds-field-02, #ffffff) !important;
   }
 
+  .react-tel-input .country-list .country:hover {
+    background-color: var(--cds-field-02, #ffffff) !important;
+  }
+
   .skeleton-loading {
     margin: 16px 0px;
   }
