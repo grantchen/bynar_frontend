@@ -186,8 +186,8 @@ const UserManagementProvider = ({ children }) => {
                 inputInvalidText: t("delete-modal-invalid-input-text"),
                 inputLabelText: `${t(
                     "delete-modal-input-label-text-1"
-                )} "delete" ${t("delete-modal-input-label-text-2")}`,
-                inputPlaceholderText: "delete",
+                )} "${userNameToBeDeleted}" ${t("delete-modal-input-label-text-2")}`,
+                inputPlaceholderText: `${userNameToBeDeleted}`,
                 open: true,
                 onClose: () => {
                     setDeleteModalProps(null);
@@ -197,7 +197,7 @@ const UserManagementProvider = ({ children }) => {
                     });
                 },
                 primaryButtonText: t("delete"),
-                resourceName: "delete",
+                resourceName: `${userNameToBeDeleted}`,
                 secondaryButtonText: t("close"),
                 label: `${t("delete")} ${userNameToBeDeleted}`,
                 textConfirmation: true,
@@ -250,8 +250,8 @@ const UserManagementProvider = ({ children }) => {
                 inputInvalidText: t("delete-modal-invalid-input-text"),
                 inputLabelText: `${t(
                     "delete-modal-input-label-text-1"
-                )} "delete" ${t("delete-modal-input-label-text-2")}`,
-                inputPlaceholderText: "delete",
+                )} "delete all" ${t("delete-modal-input-label-text-2")}`,
+                inputPlaceholderText: "delete all",
                 open: true,
                 onClose: () => {
                     setDeleteModalProps(null);
@@ -261,7 +261,7 @@ const UserManagementProvider = ({ children }) => {
                     });
                 },
                 primaryButtonText: t("delete"),
-                resourceName: "delete",
+                resourceName: "delete all",
                 secondaryButtonText: t("close"),
                 label: t("delete-users"),
                 textConfirmation: true,
