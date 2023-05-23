@@ -1,21 +1,25 @@
 import {
     Search,
-    ComposedModal,
     StructuredListWrapper,
     StructuredListRow,
     StructuredListCell,
     StructuredListBody,
     StructuredListInput,
+    ToastNotification,
+    InlineLoading
+} from "carbon-components-react";
+import {
+    ComposedModal,
     ModalHeader,
     ModalBody,
-    ToastNotification,
-    Loading,
-} from "carbon-components-react";
+    ModalFooter,
+} from "@carbon/react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { CheckmarkFilled } from "@carbon/react/icons";
 import { useTranslation } from "react-i18next";
 import "./LanguageChangeModal.scss";
 import { useAuth } from "../../AuthContext";
+import { Button } from "@carbon/react";
 
 const prefix = "bx";
 export function LanguageChangeModal({
@@ -40,12 +44,11 @@ export function LanguageChangeModal({
     }, [user?.languagePreference, isLanguageChangeModalOpen]);
 
     const handleSubmit = useCallback(
-        async (languageCode) => {
+        async () => {
             try {
-                setSelectedLanguage(languageCode);
                 setLoading(true);
                 await updateUserLanguagePreference({
-                    languagePreference: languageCode,
+                    languagePreference: selectedLanguage,
                 });
                 openLanguageChangeModal(false);
             } catch (e) {
@@ -84,7 +87,6 @@ export function LanguageChangeModal({
         >
             <ModalHeader title={t("languages")} />
             <ModalBody className="language-modal-body">
-                {loading && <Loading small/>}
                 {toastNotification && (
                     <ToastNotification
                         className="error-notification-box"
@@ -106,10 +108,10 @@ export function LanguageChangeModal({
                 <p className="list-description">
                     {languageOptions.length ? t('location-language-available') : t('location-language-unavailable')}
                 </p>
-                {/* <Test/> */}
+
                 <StructuredListWrapper
                     selection
-                    onChange={(e) => handleSubmit(e.target.id)}
+                    onChange={(e) => setSelectedLanguage(e.target.id)}
                     value={user?.languagePreference}
                     name="selected-language"
                 >
@@ -147,6 +149,21 @@ export function LanguageChangeModal({
                     </StructuredListBody>
                 </StructuredListWrapper>
             </ModalBody>
+            <ModalFooter>
+                <Button kind="secondary" onClick={handleClose}>
+                    {t("cancel")}
+                </Button>
+                <Button
+                    kind="primary"
+                    onClick={handleSubmit}
+                    className="button-with-loading"
+                    disabled={loading}
+                >
+                    {t("submit")}
+                    {loading && (<div><InlineLoading/></div>
+                    )}
+                </Button>
+            </ModalFooter>
         </ComposedModal>
     );
 }
