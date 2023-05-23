@@ -31,13 +31,10 @@ export function AppSideNav({ isSideNavExpanded, onClickSideNavExpand }) {
         <SideNav
             aria-label="Side navigation"
             expanded={isSideNavExpanded}
-            isFixedNav
-            isRail
+            isPersistent={false}
             className="sidenav-container"
         >
             <SideNavItems>
-                {isMobile && <Search size="md" />}
-                
                 <SideNavMenu renderIcon={Fade} title="Category title">
                     <SideNavMenuItem href="#">Link</SideNavMenuItem>
                     <SideNavMenuItem href="#">Link</SideNavMenuItem>

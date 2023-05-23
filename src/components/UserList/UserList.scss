@@ -7,7 +7,7 @@
     height: auto !important;
 }
 
-.search-input{
+.search-input {
     width: 100%;
     .cds--search-magnifier {
         svg {
@@ -18,7 +18,7 @@
     }
 }
 
-.row-action-renderer{
+.row-action-renderer {
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -35,3 +35,20 @@
         position: absolute;
     }
 }
+
+// .userdata-table {
+//     .c4p--datagrid__empty-state {
+//         tbody{
+//             height: calc(100vh - 225px);
+//         }
+//         tr,
+//         td {
+//             &:hover {
+//                 background: transparent;
+//             }
+//         }
+//         td {
+//             padding: var(--cds-spacing-11, 5rem);
+//         }
+//     }
+// }

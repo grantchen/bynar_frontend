@@ -87,18 +87,17 @@ export default function AuthenticatedAppHeader() {
                             </HeaderName>
                             <HeaderGlobalBar>
                                 <HeaderTab />
+                                {
+                                    <ExpandableSearch className="search-container" labelText="Enter search term"/>
+                                }
                                 {isUserManagementAllowed && (
                                     <HeaderGlobalAction
                                         aria-label={t("user")}
                                         onClick={() => setIsUserListOpen(true)}
-                                        style={{marginRight: isMobile ? '0' : '3rem'}}
                                     >
                                         <UserData20 />
                                     </HeaderGlobalAction>
                                 )}
-                                {
-                                    !isMobile && <ExpandableSearch className="search-container" />
-                                }
                                 <Popover
                                     open={isProfileDropdownOpen}
                                     isTabTip
