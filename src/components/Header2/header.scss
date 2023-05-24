@@ -1,14 +1,17 @@
 .main-header-container {
+
     .bx--header,
     .cds--header {
         position: relative;
         background: var(--cds-ui-02, #ffffff);
         border-bottom: 1px solid var(--cds-border-subtle);
     }
+
     .bx--header__global,
     .cds--header__global {
         position: relative;
     }
+
     .user-list-nav-button {
         margin-right: 3rem;
     }
@@ -24,10 +27,12 @@
         height: 3rem;
         max-width: calc(100vw - 9rem);
         width: 3rem;
+
         &.cds--search--expanded .cds--search-input,
         &.bx--search--expanded .bx--search-input {
             height: 3rem;
         }
+
         button,
         .cds--search-magnifier,
         .bx--search-magnifier {
@@ -37,15 +42,18 @@
             align-items: center;
             justify-content: center;
         }
+
         .bx--search-input:focus {
             outline: none;
             outline-offset: 0;
         }
     }
+
     .search-container {
         &.bx--search--expandable.bx--search--expanded {
             width: 100vw;
         }
+
         .bx--search-close {
             &:hover {
                 border: 2px solid var(--cds-focus, #0f62fe);
@@ -66,24 +74,35 @@
         width: 100%;
         margin: 0 0 1rem 0;
         max-width: -webkit-fill-available;
+
         &.cds--search--expanded .cds--search-input,
         &.bx--search--expanded .bx--search-input {
             height: 2rem;
         }
+
         .cds--search-magnifier,
         .bx--search-magnifier {
             height: 2rem;
             width: auto;
         }
+
         button {
             height: 2rem;
             width: 2rem;
+
             &:focus {
                 outline: none;
             }
         }
+
         .bx--search-input {
             height: 2.5rem;
+        }
+    }
+
+    .popover-dropdown {
+        .cds--tooltip-content {
+            display: none !important;
         }
     }
 }
@@ -93,6 +112,7 @@
 
 */
 @media (min-width: 66rem) {
+
     .cds--header__menu-toggle__hidden,
     .bx--header__menu-toggle__hidden {
         display: flex !important;

@@ -102,6 +102,7 @@ export default function AuthenticatedAppHeader() {
                                     open={isProfileDropdownOpen}
                                     isTabTip
                                     align="bottom-right"
+                                    className="popover-dropdown"
                                 >
                                     <HeaderGlobalAction
                                         aria-label={user?.fullName ?? t("user")}
