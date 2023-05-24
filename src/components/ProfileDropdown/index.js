@@ -55,7 +55,7 @@ const ProfileDropdown = React.memo(
               {t("change-theme")}
             </Link>
             <Link
-              style={{ cursor: "pointer"}}
+              style={{ cursor: "pointer",alignItems:'center'}}
               onClick={handleLogout}
             >
               {t("logout")}
