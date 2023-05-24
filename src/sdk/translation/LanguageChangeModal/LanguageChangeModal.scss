@@ -18,4 +18,8 @@ button.button-with-loading {
     .cds--modal-container--sm {
         min-height: 72%;
     }
+
+    .bx--structured-list--selection .bx--structured-list-row:hover:not(.bx--structured-list-row--header-row)>.bx--structured-list-td {
+        border-top: 0px;
+    }
 }
