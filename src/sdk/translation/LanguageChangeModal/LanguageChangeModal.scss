@@ -31,8 +31,16 @@ button.button-with-loading {
         margin-bottom: 0;
     }
 
+    .cds--modal-content {
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
     .language-list-wrapper {
         height: 250px;
+        max-height: 250px;
         overflow: auto;
+        flex: 1;
     }
 }
