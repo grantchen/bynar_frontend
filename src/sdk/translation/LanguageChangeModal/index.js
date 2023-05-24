@@ -108,46 +108,47 @@ export function LanguageChangeModal({
                         ? t("location-language-available")
                         : t("location-language-unavailable")}
                 </p>
-
-                <StructuredListWrapper
-                    selection
-                    onChange={(e) => setSelectedLanguage(e.target.id)}
-                    value={user?.languagePreference}
-                    name="selected-language"
-                >
-                    <StructuredListBody name="selected-language">
-                        {languageOptions.map((option) => (
-                            <StructuredListRow
-                                label
-                                key={option.languageCode}
-                                id={option.languageCode}
-                            >
-                                <StructuredListCell>
-                                    {option.country}
-                                </StructuredListCell>
-                                <StructuredListCell>
-                                    {option.language}
-                                </StructuredListCell>
-                                <StructuredListInput
+                <div className="language-list-wrapper">
+                    <StructuredListWrapper
+                        selection
+                        onChange={(e) => setSelectedLanguage(e.target.id)}
+                        value={user?.languagePreference}
+                        name="selected-language"
+                    >
+                        <StructuredListBody name="selected-language">
+                            {languageOptions.map((option) => (
+                                <StructuredListRow
+                                    label
+                                    key={option.languageCode}
                                     id={option.languageCode}
-                                    title={option.languageCode}
-                                    name="selected-language"
-                                    checked={
-                                        option.languageCode === selectedLanguage
-                                    }
-                                />
-                                <StructuredListCell>
-                                    <CheckmarkFilled
-                                        className={`${prefix}--structured-list-svg`}
-                                        aria-label="select an option"
-                                    >
-                                        <title>select an option</title>
-                                    </CheckmarkFilled>
-                                </StructuredListCell>
-                            </StructuredListRow>
-                        ))}
-                    </StructuredListBody>
-                </StructuredListWrapper>
+                                >
+                                    <StructuredListCell>
+                                        {option.country}
+                                    </StructuredListCell>
+                                    <StructuredListCell>
+                                        {option.language}
+                                    </StructuredListCell>
+                                    <StructuredListInput
+                                        id={option.languageCode}
+                                        title={option.languageCode}
+                                        name="selected-language"
+                                        checked={
+                                            option.languageCode === selectedLanguage
+                                        }
+                                    />
+                                    <StructuredListCell>
+                                        <CheckmarkFilled
+                                            className={`${prefix}--structured-list-svg`}
+                                            aria-label="select an option"
+                                        >
+                                            <title>select an option</title>
+                                        </CheckmarkFilled>
+                                    </StructuredListCell>
+                                </StructuredListRow>
+                            ))}
+                        </StructuredListBody>
+                    </StructuredListWrapper>
+                </div>
             </ModalBody>
             <ModalFooter>
                 <Button kind="secondary" onClick={handleClose}>
