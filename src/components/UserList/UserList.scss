@@ -36,4 +36,8 @@
     .bx--data-table {
         max-height: calc(100% - 3rem) !important;
     }
+
+    .c4p--datagrid__empty-state-body tr td {
+        border-bottom: 0;
+    }
 }
