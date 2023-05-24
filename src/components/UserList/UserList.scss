@@ -25,3 +25,15 @@
     width: 100%;
     gap: 16px;
 }
+
+.userdata-table {
+    height: 100%;
+    overflow: hidden;
+    .c4p--datagrid, .c4p--datagrid__table-container, .c4p--datagrid__table-container-inner {
+        height: 100%;
+    }
+
+    .bx--data-table {
+        max-height: calc(100% - 3rem) !important;
+    }
+}
