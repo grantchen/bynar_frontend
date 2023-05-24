@@ -27,10 +27,10 @@ const ProfileDropdown = React.memo(
 
 
     return (
-      <div>
+      <div className="user-profile-dropdown">
         <Tile className={"tile"}>
           <div className="bynar-profile-info-wrapper">
-            <h4 style={{ color: "#161616" }}>{user?.fullName}</h4>
+            <h4 className="user-name">{user?.fullName}</h4>
             <div className="profile-info-image">
               <UserProfileImage
                 backgroundColor={"light-cyan"}
@@ -45,7 +45,7 @@ const ProfileDropdown = React.memo(
               />
             </div>
           </div>
-          <div className="link-list" style={{ marginTop: "1rem" }}>
+          <div className="link-list">
             <Link onClick={() => setSearchParams({userIdToShowDetails: user?.id})}>{t("profile")}</Link>
             <Link>{t("privacy")}</Link>
             <Link style={{ cursor: "pointer" }} onClick={handleLanguageChange}>
@@ -55,7 +55,7 @@ const ProfileDropdown = React.memo(
               {t("change-theme")}
             </Link>
             <Link
-              style={{ cursor: "pointer", color: "#525252" }}
+              style={{ cursor: "pointer"}}
               onClick={handleLogout}
             >
               {t("logout")}
