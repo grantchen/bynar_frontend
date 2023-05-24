@@ -109,6 +109,14 @@
     flex-direction: column;
   }
 
+  @media screen and (max-width: 600px) {
+    .bynar-heading {
+      flex-direction: row;
+      padding-right: 0 !important;
+      align-items: center;
+    }
+  }
+
   .container {
     padding-left: 0 !important;
     padding-right: 1.75rem !important;

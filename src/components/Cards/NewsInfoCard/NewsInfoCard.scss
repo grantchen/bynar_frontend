@@ -8,6 +8,12 @@
   font-weight: 600;
   padding: 16px;
 }
+
+@media screen and (max-width: 600px) {
+  .newsinfocard {
+    width: 100%;
+  }
+}
 .newsinfocard_heading {
   display: flex;
   justify-content: space-between;
