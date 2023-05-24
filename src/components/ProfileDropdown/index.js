@@ -11,9 +11,11 @@ const ProfileDropdown = React.memo(
   ({
     openLanguageModal,
     setLanguageModalOpen,
+    openUploadProfileModal,
+    setUploadProfileModalOpen
   }) => {
     const [t, i18n] = useTranslation();
-    const {signout, user} = useAuth();
+    const { signout, user } = useAuth();
     const { openThemeChangeModal, theme } = useThemePreference();
     const [_, setSearchParams] = useSearchParams()
     const handleLogout = async (e) => {
@@ -25,6 +27,10 @@ const ProfileDropdown = React.memo(
       setLanguageModalOpen(!openLanguageModal);
     };
 
+    const handleImageUploadChange = (e) => {
+      e.preventDefault();
+      setUploadProfileModalOpen(!openUploadProfileModal);
+    };
 
     return (
       <div>
@@ -42,11 +48,12 @@ const ProfileDropdown = React.memo(
                     ? "dark"
                     : "light"
                 }
+                onClick={handleImageUploadChange}
               />
             </div>
           </div>
           <div className="link-list" style={{ marginTop: "1rem" }}>
-            <Link onClick={() => setSearchParams({userIdToShowDetails: user?.id})}>{t("profile")}</Link>
+            <Link onClick={() => setSearchParams({ userIdToShowDetails: user?.id })}>{t("profile")}</Link>
             <Link>{t("privacy")}</Link>
             <Link style={{ cursor: "pointer" }} onClick={handleLanguageChange}>
               {t("change-language")}

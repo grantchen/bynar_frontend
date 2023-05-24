@@ -34,6 +34,7 @@ import { useRef } from "react";
 import { useEffect } from "react";
 import ProfileDropdown from "../ProfileDropdown";
 import { AppSideNav } from "./AppSideNav";
+import UploadProfileImageModal from "../../sdk/uploadprofileimage";
 
 export default function AuthenticatedAppHeader() {
     const { user } = useAuth();
@@ -45,6 +46,7 @@ export default function AuthenticatedAppHeader() {
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
     const [isLanguageChangeModalOpen, openLanguageChangeModal] =
         useState(false);
+    const [isUploadProfileImageModalOpen,openUploadProfileImageModal] = useState(false);
     const { isUserListOpen, setIsUserListOpen } = useMemo(
         () => ({
             isUserListOpen: searchParams.get("isUserListOpen") === "true",
@@ -130,6 +132,12 @@ export default function AuthenticatedAppHeader() {
                                             setLanguageModalOpen={
                                                 openLanguageChangeModal
                                             }
+                                            openUploadProfileModal={
+                                                isUploadProfileImageModalOpen
+                                            }
+                                            setUploadProfileModalOpen={
+                                                openUploadProfileImageModal
+                                            }
                                         />
                                     </PopoverContent>
                                 </Popover>
@@ -148,6 +156,10 @@ export default function AuthenticatedAppHeader() {
             <LanguageChangeModal
                 isLanguageChangeModalOpen={isLanguageChangeModalOpen}
                 openLanguageChangeModal={openLanguageChangeModal}
+            />
+            <UploadProfileImageModal 
+              isUploadProfileImageModalOpen={isUploadProfileImageModalOpen}
+              openUploadProfileImageModal={openUploadProfileImageModal}
             />
         </>
     );
