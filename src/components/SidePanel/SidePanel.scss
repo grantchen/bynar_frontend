@@ -93,6 +93,14 @@
   .skeleton-loading {
     margin: 16px 0px;
   }
+
+  .react-tel-input .selected-flag .arrow {
+    border-top: 4px solid var(--cds-text-01,#161616);
+  }
+
+  .react-tel-input .selected-flag .arrow.up {
+    border-bottom: 4px solid var(--cds-text-01,#161616);
+}
 }
 
 

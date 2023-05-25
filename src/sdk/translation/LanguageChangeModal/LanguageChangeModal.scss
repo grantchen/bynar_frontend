@@ -22,4 +22,29 @@ button.button-with-loading {
     .bx--structured-list--selection .bx--structured-list-row:hover:not(.bx--structured-list-row--header-row)>.bx--structured-list-td {
         border-top: 0px;
     }
+
+    .cds--modal-container{
+      background-color: var(--cds-background,#fff) !important;
+    }
+
+    .bx--structured-list {
+        margin-bottom: 0;
+    }
+
+    .cds--modal-content {
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .language-list-wrapper {
+        height: 250px;
+        max-height: 250px;
+        overflow: auto;
+        flex: 1;
+    }
+
+    .bx--structured-list--selection .bx--structured-list-td, .bx--structured-list--selection .bx--structured-list-th {
+        padding: 1.25rem 1rem 1.25rem 1rem;
+    }
 }

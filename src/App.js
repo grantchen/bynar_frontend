@@ -1,31 +1,28 @@
-import { InlineLoading } from "@carbon/react";
-import React, { Suspense } from "react";
+import { Loading } from "@carbon/react";
+import React, { Suspense, lazy } from "react";
 import "./App.scss";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-// import { CommonHeader } from "./components/Header";
-import { Dashboard } from "./pages/Dashboard/Dashboard";
-import Home from "./pages/Home";
-import Signin from "./pages/signin";
-import Signup from "./pages/signup";
-import Test from "./pages/test";
+
 import {
     AuthProvider,
     TabContextProvider,
     ThemePreferenceProvider,
     UserManagementProvider,
 } from "./sdk";
-import AuthenticatedAppHeader from "./components/Header2";
+
+const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard"));
+const Home = lazy(() => import("./pages/Home"));
+const Signin = lazy(() => import("./pages/signin"));
+const Signup = lazy(() => import("./pages/signup"));
+const Test = lazy(() => import("./pages/test"));
+const AuthenticatedAppHeader = lazy(() => import("./components/Header2"));
 
 function App() {
     return (
         <>
             <Suspense
-                fallback={
-                    <div className="loader-page">
-                        <InlineLoading description="Loading..." />
-                    </div>
-                }
+                fallback={<Loading small/>}
             >
                 <BrowserRouter>
                     <AuthProvider>
@@ -61,18 +58,6 @@ function App() {
                                     </Routes>
                                 </UserManagementProvider>
                             </TabContextProvider>
-                            {/* <Routes>
-            <Route path="/" element={<Home />} />
-            <Route exact path="/signup" element={<Signup />} />
-            <Route path="/home/" element={<CommonHeader />}>
-              <Route exact path="dashboard" element={<Dashboard />} />
-              <Route exact path="datatable" element={<DataTables />} />
-              <Route exact path="userlist" element={<UserList />} />
-            </Route>
-            <Route exact path="/signin" element={<Signin />} />
-            <Route exact path="/forgotpassword" element={<ForgotPassword />} />
-            <Route exact path="/adduser" element={<AddUser />} />
-          </Routes> */}
                         </ThemePreferenceProvider>
                     </AuthProvider>
                 </BrowserRouter>

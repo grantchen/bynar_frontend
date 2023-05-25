@@ -29,10 +29,10 @@ import {
     useSortableColumnsFork,
     SORTABLE_ORDERING,
     omitQueryParams,
-    useMobile
+    useMobile,
 } from "../../sdk";
 import { useSearchParams } from "react-router-dom";
-import { Restart16, Activity16, Add16, TrashCan16 } from "@carbon/icons-react";
+import { Restart16, Activity16, TrashCan16 } from "@carbon/icons-react";
 
 import "./UserList.scss";
 import { useTranslation } from "react-i18next";
@@ -53,7 +53,7 @@ export const UserList = ({ isOpen }) => {
         openBulkDeleteConfirmModal,
     } = useUserManagement();
 
-    const isMobile = useMobile()
+    const isMobile = useMobile();
     const { t } = useTranslation();
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -234,14 +234,13 @@ export const UserList = ({ isOpen }) => {
                     userIdToShowDetails: original.id,
                 });
             },
-            DatagridPagination: ({ state, setPageSize, gotoPage }) => (
+            DatagridPagination: () => (
                 <Pagination
                     page={page + 1}
                     pageSize={pageLimit}
                     pageSizes={[2, 5, 10, 25, 50]}
                     totalItems={userListData?.totalCount}
                     onChange={({ page, pageSize }) => {
-                        setPageSize(pageSize);
                         setSearchParams((prev) => {
                             return mergeQueryParams(prev, {
                                 page: page - 1,
@@ -274,42 +273,45 @@ export const UserList = ({ isOpen }) => {
             },
             DatagridActions: (dgState) => {
                 return (
-                <TableToolbarContent>
-                    <TableToolbarSearch
-                        size="xl"
-                        id="columnSearch"
-                        className="search-input"
-                        placeHolderText={"Search here"}
-                        onChange={(e) => setSearchText(e.target.value)}
-                        value={searchText ?? null}
-                        onExpand={(_, value) => setIsSearchBarExpanded(value)}
-                        expanded={isSearchBarExpanded || searchText}
-                        onClear={() => setSearchText("")}
-                    />
-                    <Button
-                        kind="ghost"
-                        hasIconOnly
-                        tooltipPosition="bottom"
-                        renderIcon={Restart16}
-                        iconDescription={t("refresh")}
-                        onClick={() => getUserList(getUserAPIQuery())}
-                    />
-                    {/* <dgState.CustomizeColumnsButton /> */}
-                    <Button
-                        onClick={openAddUserModel}
-                        hasIconOnly={isMobile ? true : false}
-                        size={isMobile? "lg":"sm"}
-                        kind="primary"
-                        style={{ cursor: "pointer" }}
-                        renderIcon={Add}
-                        tooltipPosition="bottom"
-                        tooltipAlignment="end"
-                        iconDescription={t("add-new-user")}
-                    >
-                        {t("add-new-user")}
-                    </Button>
-                </TableToolbarContent>
-            )},
+                    <TableToolbarContent>
+                        <TableToolbarSearch
+                            size="xl"
+                            id="columnSearch"
+                            className="search-input"
+                            placeHolderText={"Search here"}
+                            onChange={(e) => setSearchText(e.target.value)}
+                            value={searchText ?? null}
+                            onExpand={(_, value) =>
+                                setIsSearchBarExpanded(value)
+                            }
+                            expanded={isSearchBarExpanded || searchText}
+                            onClear={() => setSearchText("")}
+                        />
+                        <Button
+                            kind="ghost"
+                            hasIconOnly
+                            tooltipPosition="bottom"
+                            renderIcon={Restart16}
+                            iconDescription={t("refresh")}
+                            onClick={() => getUserList(getUserAPIQuery())}
+                        />
+                        {/* <dgState.CustomizeColumnsButton /> */}
+                        <Button
+                            onClick={openAddUserModel}
+                            hasIconOnly={isMobile ? true : false}
+                            size={isMobile ? "lg" : "sm"}
+                            kind="primary"
+                            style={{ cursor: "pointer" }}
+                            renderIcon={Add}
+                            tooltipPosition="bottom"
+                            tooltipAlignment="end"
+                            iconDescription={t("add-new-user")}
+                        >
+                            {t("add-new-user")}
+                        </Button>
+                    </TableToolbarContent>
+                );
+            },
             batchActions: true,
             toolbarBatchActions: [
                 {
@@ -332,11 +334,44 @@ export const UserList = ({ isOpen }) => {
         useActionsColumn,
         useSelectRows,
         useOnRowClick,
-        useSortableColumnsFork,
+        useSortableColumnsFork
         // useCustomizeColumns,
         // useColumnOrder,
         // useInfiniteScroll
     );
+
+    /**
+     * effect to set/reset datagrid states on params / tearsheet open state changes
+     */
+    useEffect(() => {
+        if(!isOpen){
+            return
+        }
+        datagridState.setPageSize(pageLimit);
+    }, [pageLimit, isOpen]);
+
+    useEffect(() => {
+        if (!isOpen) {
+            return;
+        }
+        const sortByColumn = searchParams.get("sortByColumn");
+        const sortByOrder = searchParams.get("sortByColumn");
+        if (sortByColumn && sortByOrder) {
+            datagridState.setSortBy([
+                {
+                    id: searchParams.get("sortByColumn"),
+                    desc: searchParams.get("sortByOrder") === "DESC",
+                },
+            ]);
+        }
+        else{
+            datagridState.setSortBy([]);
+        }
+    }, [
+        isOpen,
+        searchParams.get("sortByColumn"),
+        searchParams.get("sortByOrder"),
+    ]);
 
     return (
         <>

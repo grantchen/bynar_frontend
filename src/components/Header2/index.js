@@ -1,6 +1,4 @@
-import {
-    ExpandableSearch,
-} from "carbon-components-react";
+import { ExpandableSearch } from "carbon-components-react";
 
 import {
     HeaderContainer,
@@ -17,6 +15,7 @@ import {
 import { UserData20 } from "@carbon/icons-react";
 import {
     LanguageChangeModal,
+    omitQueryParams,
     useAuth,
     useMobile,
     useThemePreference,
@@ -42,7 +41,7 @@ export default function AuthenticatedAppHeader() {
     const { theme } = useThemePreference();
     const { isUserManagementAllowed } = useUserManagement();
     const [searchParams, setSearchParams] = useSearchParams();
-    const isMobile = useMobile()
+    const isMobile = useMobile();
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
     const [isLanguageChangeModalOpen, openLanguageChangeModal] =
         useState(false);
@@ -90,7 +89,10 @@ export default function AuthenticatedAppHeader() {
                             <HeaderGlobalBar>
                                 <HeaderTab />
                                 {
-                                    <ExpandableSearch className="search-container" labelText="Enter search term"/>
+                                    <ExpandableSearch
+                                        className="search-container"
+                                        labelText="Enter search term"
+                                    />
                                 }
                                 {isUserManagementAllowed && (
                                     <HeaderGlobalAction
@@ -108,9 +110,16 @@ export default function AuthenticatedAppHeader() {
                                 >
                                     <HeaderGlobalAction
                                         aria-label={user?.fullName ?? t("user")}
-                                        onClick={() =>
-                                            setIsProfileDropdownOpen(true)
-                                        }
+                                        onClick={() => {
+                                            setIsProfileDropdownOpen(true);
+                                            setSearchParams((prev) =>
+                                                omitQueryParams(prev, [
+                                                    "userIdToShowDetails",
+                                                    "openAddUserPanel",
+                                                    "userIdToBeEdited"
+                                                ])
+                                            );
+                                        }}
                                     >
                                         <UserProfileImage
                                             backgroundColor={"light-cyan"}
@@ -124,9 +133,12 @@ export default function AuthenticatedAppHeader() {
                                             }
                                         />
                                     </HeaderGlobalAction>
-                                    <PopoverContent
-                                        ref={wrapperRef}>
+                                    <PopoverContent ref={wrapperRef}>
                                         <ProfileDropdown
+                                            onProfileOptionClick={() => {
+                                                setSearchParams({userIdToShowDetails: user?.id})
+                                                setIsProfileDropdownOpen(false)
+                                            }}
                                             openLanguageModal={
                                                 isLanguageChangeModalOpen
                                             }
@@ -143,7 +155,10 @@ export default function AuthenticatedAppHeader() {
                                     </PopoverContent>
                                 </Popover>
                             </HeaderGlobalBar>
-                            <AppSideNav isSideNavExpanded={isSideNavExpanded} onClickSideNavExpand={onClickSideNavExpand}/>
+                            <AppSideNav
+                                isSideNavExpanded={isSideNavExpanded}
+                                onClickSideNavExpand={onClickSideNavExpand}
+                            />
                         </Header>
                     )}
                 />
@@ -152,7 +167,7 @@ export default function AuthenticatedAppHeader() {
                     isOpen={isUserListOpen}
                 />
             </div>
-            
+
             <Outlet />
             <LanguageChangeModal
                 isLanguageChangeModalOpen={isLanguageChangeModalOpen}

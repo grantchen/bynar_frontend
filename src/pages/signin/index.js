@@ -156,9 +156,6 @@ const Signin = () => {
     return (
         <>
             <div style={{ display: "flex", flexDirection: "column" }}>
-                <div className="signin-header">
-                    <p>Bynar</p>
-                </div>
                 {signInPhaseOne ? (
                     <Login
                         heading={"Log in to Bynar"}

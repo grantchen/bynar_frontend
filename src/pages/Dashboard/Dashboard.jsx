@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { TabContext } from "../../sdk";
 import './Dashboard.scss'
 
-export const Dashboard = () => {
+const Dashboard = () => {
   const { tab, activeTab } = useContext(TabContext);
   const tabContent = tab?.[activeTab]?.content;
   return (
@@ -13,3 +13,4 @@ export const Dashboard = () => {
     </div>
   );
 };
+export default Dashboard
