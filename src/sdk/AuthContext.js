@@ -142,19 +142,12 @@ export const AuthProvider = ({children}) => {
                     return new Promise();
                 }
             }
-            let contentType = options.contentType
-            contentType = contentType ? contentType : "application/json"
-            const headers = {
-                ...options.headers,
-                "Content-Type": contentType,
-                Authorization: "Bearer " + token,
-            }
-            if (contentType === "multipart/form-data") {
-                delete headers["Content-Type"]
-            }
             let res = await fetch(url, {
                 ...options,
-                headers: headers,
+                headers: {
+                    ...options.headers,
+                    Authorization: "Bearer " + token,
+                },
             });
             if (res.status === 401) {
                 try {
@@ -165,12 +158,11 @@ export const AuthProvider = ({children}) => {
                     return new Promise();
                 }
                 if (token) {
-                    setState({token});
+                    setState({ token });
                     res = await fetch(url, {
                         ...options,
                         headers: {
                             ...options.headers,
-                            "Content-Type": "application/json",
                             Authorization: "Bearer " + token,
                         },
                     });

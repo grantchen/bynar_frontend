@@ -1,69 +1,101 @@
-import React, {useState} from "react";
-import {useAuth} from "../AuthContext";
-import {BaseURL} from "../constant";
-import {ImportModal} from "@carbon/ibm-products";
+import React, {
+    useEffect,
+    useState,
+} from "react";
+import { useAuth } from "../AuthContext";
+import { BaseURL } from "../constant";
+import { ImportModal } from "@carbon/ibm-products";
+import "./UploadProfileImage.scss"
+import { useTranslation } from "react-i18next";
 
 const UploadProfileImageModal = ({
-                                     isUploadProfileImageModalOpen,
-                                     openUploadProfileImageModal,
-                                 }) => {
-    const {authFetch,user} = useAuth()
+    isUploadProfileImageModalOpen,
+    openUploadProfileImageModal,
+}) => {
+    const { authFetch } = useAuth();
+    const [loading, setLoading] = useState(false);
+    const {t} = useTranslation()
+    /**
+     * the modal does not reset it's state after submit
+     * verified from source code - https://github.com/carbon-design-system/ibm-products/blob/main/packages/ibm-products/src/components/ImportModal/ImportModal.js
+     *
+     * on modal close, toggle a internal state variable to destroy and re-attach modal to dom in order to both
+     * - reset state
+     * - preserve animation on open/close
+     */
+    const [hackResetState, setHackResetState] = useState(false);
+    useEffect(() => {
+        if (!isUploadProfileImageModalOpen) {
+            const timeoutId = setTimeout(() => setHackResetState(true), 500);
+            return () => clearTimeout(timeoutId);
+        }
+    }, [isUploadProfileImageModalOpen]);
+
+    useEffect(() => {
+        if (hackResetState) {
+            setHackResetState(false);
+        }
+    }, [hackResetState]);
+
+    if (hackResetState) {
+        return null;
+    }
+
     const props = {
+        title: t("import"),
         accept: ["image/jpeg", "image/png"],
-        className: "test-class",
-        defaultErrorBody: "Select a new file and try again.",
-        defaultErrorHeader: "Import failed",
+        defaultErrorBody: t("select-new-file-try-again"),
+        defaultErrorHeader: t("import-failed"),
         description:
-            "You can specify a file to import by either dragging it into the drag and drop area or by specifying a URL. (Maximum file size of 500KB; .jpg and .png file extensions only.)",
-        fetchErrorBody: "Unable to fetch URL.",
-        fetchErrorHeader: "Import failed",
-        fileDropHeader: "Add files using drag and drop",
-        fileDropLabel: "Drag and drop files here or click to upload",
-        fileUploadLabel: "files uploaded",
-        inputButtonText: "Add file",
-        inputId: "test-id",
-        inputLabel: "Add a file by specifying a URL",
-        inputPlaceholder: "URL",
-        invalidFileTypeErrorBody: "Invalid file type.",
-        invalidFileTypeErrorHeader: "Import failed",
-        invalidIconDescription: "Delete",
-        maxFileSize: 500000,
+            t("import-description"),
+        fetchErrorBody: t("unable-fetch-url"),
+        fetchErrorHeader: t("import-failed"),
+        fileDropHeader: t("file-drop-header"),
+        fileDropLabel: t("file-drop-label"),
+        fileUploadLabel: t("file-upload-label"),
+        inputButtonText: t("add-file"),
+        inputLabel: t("add-file-specify-url"),
+        inputPlaceholder: t("URL"),
+        invalidFileTypeErrorBody: t("invalid-file-type"),
+        invalidFileTypeErrorHeader: t("import-failed"),
+        invalidIconDescription: t("delete"),
+        maxFileSize: 500 * 1024,
         maxFileSizeErrorBody:
-            "500kb max file size. Select a new file and try again.",
-        maxFileSizeErrorHeader: "Import failed",
+            t("max-file-size-error-500"),
+        maxFileSizeErrorHeader: t("import-failed"),
+        open: isUploadProfileImageModalOpen,
+        primaryButtonText: t("import"),
+        secondaryButtonText: t("cancel"),
         onClose: () => openUploadProfileImageModal(false),
         onRequestSubmit: async (e) => {
+            setLoading(true);
             try {
                 const formData = new FormData();
-                formData.append(
-                    "file",
-                    e[0].fileData,
-                );
+                formData.append("file", e[0].fileData);
                 const response = await authFetch(`${BaseURL}/upload`, {
                     method: "POST",
-                    contentType: "multipart/form-data",
                     body: formData,
                 });
                 if (response.ok) {
-                     openUploadProfileImageModal(false)
+                    openUploadProfileImageModal(false);
                     // getUser();
                 } else {
                     throw "error";
                 }
             } catch (error) {
             } finally {
+                setLoading(false);
             }
         },
-        open: isUploadProfileImageModalOpen,
-        primaryButtonText: "Import",
-        secondaryButtonText: "Cancel",
-        title: "Import"
     };
 
     return (
         <>
-            <ImportModal {...props} />
+            <ImportModal
+                {...props}
+                className={`image-import ${loading ? "is-loading" : ""}`}
+            />
         </>
     );
 };
-export default UploadProfileImageModal
+export default UploadProfileImageModal;

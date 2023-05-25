@@ -112,5 +112,18 @@
     "no-users": "Keine Benutzer gefunden",
     "no-users-action-description": "Es gibt keine Benutzer, die Ihren Filterkriterien entsprechen. Versuchen Sie, den Suchbegriff zu ändern.",
     "location-language-available": "Diese Seite ist in den folgenden Standorten und Sprachen verfügbar.",
-    "location-language-unavailable": "Diese Seite ist in Ihrem bevorzugten Standort oder Ihrer bevorzugten Sprache nicht verfügbar."
+    "location-language-unavailable": "Diese Seite ist in Ihrem bevorzugten Standort oder Ihrer bevorzugten Sprache nicht verfügbar.",
+    "import": "Importieren",
+    "select-new-file-try-again": "Wählen Sie eine neue Datei aus und versuchen Sie es erneut.",
+    "import-failed": "Import fehlgeschlagen",
+    "import-description": "Sie können eine Datei zum Importieren entweder durch Ziehen in den Drag-and-Drop-Bereich oder durch Angabe einer URL angeben. (Maximale Dateigröße von 500 KB; nur .jpg- und .png-Dateierweiterungen erlaubt.)",
+    "unable-fetch-url": "URL konnte nicht abgerufen werden.",
+    "file-drop-header": "Dateien per Drag & Drop hinzufügen",
+    "file-drop-label": "Dateien hier ablegen oder klicken, um hochzuladen",
+    "file-upload-label": "Dateien hochgeladen",
+    "add-file": "Datei hinzufügen",
+    "add-file-specify-url": "Eine Datei durch Angabe einer URL hinzufügen",
+    "URL": "URL",
+    "invalid-file-type": "Ungültiger Dateityp.",
+    "max-file-size-error-500": "Maximale Dateigröße: 500 KB. Wählen Sie eine neue Datei und versuchen Sie es erneut."
 }

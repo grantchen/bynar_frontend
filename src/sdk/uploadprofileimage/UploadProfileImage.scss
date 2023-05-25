@@ -1,0 +1,11 @@
+.image-import {
+    &.is-loading {
+        .bx--btn--primary {
+            border-color: var(--cds-disabled-02, #c6c6c6);
+            background: var(--cds-disabled-02, #c6c6c6);
+            box-shadow: none;
+            color: var(--cds-disabled-03, #8d8d8d);
+            cursor: not-allowed;
+        }
+    }
+}

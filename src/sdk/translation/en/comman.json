@@ -112,5 +112,18 @@
     "no-users": "No Users Found",
     "no-users-action-description": "There are no users matching your filter. Try changing the search term.",
     "location-language-available": "This page is available in the following locations and languages",
-    "location-language-unavailable": "This page is unavailable in your preferred location or language"
+    "location-language-unavailable": "This page is unavailable in your preferred location or language",
+    "import": "Import",
+    "select-new-file-try-again": "Select a new file and try again.",
+    "import-failed": "Import failed",
+    "import-description": "You can specify a file to import by either dragging it into the drag and drop area or by specifying a URL. (Maximum file size of 500KB; .jpg and .png file extensions only.)",
+    "unable-fetch-url": "Unable to fetch URL.",
+    "file-drop-header": "Add files using drag and drop",
+    "file-drop-label": "Drag and drop files here or click to upload",
+    "file-upload-label": "files uploaded",
+    "add-file": "Add file",
+    "add-file-specify-url": "Add a file by specifying a URL",
+    "URL": "URL",
+    "invalid-file-type": "Invalid file type.",
+    "max-file-size-error-500": "500kb max file size. Select a new file and try again."
 }

@@ -1,33 +1,25 @@
 import { SidePanel } from "@carbon/ibm-products";
 import {
-    Button,
     TextInput,
-    PasswordInput,
     Select,
     SelectItem,
     ToastNotification,
 } from "carbon-components-react";
 import "./SidePanel.scss";
-import { useState, useRef, useContext, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
-import { BaseURL } from "../../sdk/constant";
 import PhoneInput from "react-phone-input-2";
 // import { countries } from 'react-phone-input-2/countries';
 // import 'react-phone-input-2/dist/style.css'
 import "react-phone-input-2/lib/style.css";
 // import './AddUser.scss';
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { AuthContext, COUNTRIES, useUserManagement } from "../../sdk";
+import { useSearchParams } from "react-router-dom";
+import { COUNTRIES, useUserManagement } from "../../sdk";
 import {
-    PhoneNumberUtil,
-    PhoneNumberFormat as PNF,
-    parsePhoneNumberFromString
-} from "google-libphonenumber";
-import { InlineLoading } from "carbon-components";
+    PhoneNumberUtil} from "google-libphonenumber";
 import { useTranslation } from "react-i18next";
 import {
     SkeletonText,
-    CodeSnippetSkeleton,
     TextInputSkeleton,
 } from "@carbon/react";
 

@@ -112,5 +112,18 @@
     "no-users": "Aucun utilisateur trouvé",
     "no-users-action-description": "Aucun utilisateur ne correspond à votre filtre. Essayez de changer le terme de recherche.",
     "location-language-available": "Cette page est disponible dans les emplacements et langues suivants.",
-    "location-language-unavailable": "Cette page n'est pas disponible dans votre emplacement ou votre langue préférée."
+    "location-language-unavailable": "Cette page n'est pas disponible dans votre emplacement ou votre langue préférée.",
+    "import": "Importer",
+    "select-new-file-try-again": "Sélectionnez un nouveau fichier et réessayez.",
+    "import-failed": "Échec de l'importation",
+    "import-description": "Vous pouvez spécifier un fichier à importer en le faisant glisser dans la zone de glisser-déposer ou en spécifiant une URL. (Taille de fichier maximale de 500 Ko ; extensions de fichier .jpg et .png uniquement.)",
+    "unable-fetch-url": "Impossible de récupérer l'URL.",
+    "file-drop-header": "Ajoutez des fichiers par glisser-déposer",
+    "file-drop-label": "Glissez et déposez les fichiers ici ou cliquez pour télécharger",
+    "file-upload-label": "fichiers téléchargés",
+    "add-file": "Ajouter un fichier",
+    "add-file-specify-url": "Ajouter un fichier en spécifiant une URL",
+    "URL": "URL",
+    "invalid-file-type": "Type de fichier non valide.",
+    "max-file-size-error-500": "Taille maximale du fichier : 500 Ko. Sélectionnez un nouveau fichier et réessayez."
 }

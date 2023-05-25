@@ -112,5 +112,18 @@
     "no-users": "No se encontraron usuarios",
     "no-users-action-description": "No hay usuarios que coincidan con tu filtro. Intenta cambiar el término de búsqueda.",
     "location-language-available": "Esta página está disponible en las siguientes ubicaciones e idiomas.",
-    "location-language-unavailable": "Esta página no está disponible en su ubicación o idioma preferido."
+    "location-language-unavailable": "Esta página no está disponible en su ubicación o idioma preferido.",
+    "import": "Importar",
+    "select-new-file-try-again": "Seleccione un nuevo archivo e intente de nuevo.",
+    "import-failed": "Importación fallida",
+    "import-description": "Puede especificar un archivo para importar arrastrándolo y soltándolo en el área designada o especificando una URL. (Tamaño máximo de archivo de 500KB; solo se permiten extensiones de archivo .jpg y .png.)",
+    "unable-fetch-url": "No se pudo obtener la URL.",
+    "file-drop-header": "Agregar archivos arrastrándolos y soltándolos",
+    "file-drop-label": "Arrastra y suelta archivos aquí o haz clic para subirlos",
+    "file-upload-label": "archivos subidos",
+    "add-file": "Agregar archivo",
+    "add-file-specify-url": "Agregar un archivo especificando una URL",
+    "URL": "URL",
+    "invalid-file-type": "Tipo de archivo inválido.",
+    "max-file-size-error-500": "Tamaño máximo del archivo: 500 KB. Seleccione un archivo nuevo e intente nuevamente."
 }
