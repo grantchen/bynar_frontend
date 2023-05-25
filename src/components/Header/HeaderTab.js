@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useContext } from "react";
 import { Close, ChevronLeft, ChevronRight } from "@carbon/react/icons";
 import { Button, IconButton, Tab } from "@carbon/react";
 import "./HeaderTab.scss";
-import { TabContext, useUserManagement } from "../../sdk";
+import { TabContext, useMobile, useUserManagement } from "../../sdk";
 import { useTranslation } from "react-i18next";
 import { useMemo } from "react";
 
@@ -20,6 +20,7 @@ const HeaderTab = () => {
   const tabRef = useRef(null);
   const { t } = useTranslation();
   const { isUserManagementAllowed } = useUserManagement();
+  const isMobile = useMobile()
   const handleLeftScroll = () => {
     if(!carouselRef.current){
       return
@@ -54,6 +55,10 @@ const HeaderTab = () => {
     }
     return 3
   }, [isUserManagementAllowed])
+
+  if(isMobile){
+    return null
+  }
 
   
   const shouldShowTabScroll = ((window.innerWidth - SHOW_SCROLL_BUTTON_WIDTH) / 100) < tab.length
