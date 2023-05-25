@@ -43,4 +43,8 @@ button.button-with-loading {
         overflow: auto;
         flex: 1;
     }
+
+    .bx--structured-list--selection .bx--structured-list-td, .bx--structured-list--selection .bx--structured-list-th {
+        padding: 1.25rem 1rem 1.25rem 1rem;
+    }
 }
