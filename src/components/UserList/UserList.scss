@@ -40,4 +40,8 @@
     .c4p--datagrid__empty-state-body tr td {
         border-bottom: 0;
     }
+
+    .c4p--datagrid__sticky.c4p--datagrid__simple-body {
+        height: 100vh;
+    }
 }
