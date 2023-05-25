@@ -116,6 +116,7 @@ export default function AuthenticatedAppHeader() {
                                             backgroundColor={"light-cyan"}
                                             size={"md"}
                                             initials={user?.fullName ?? "..."}
+                                            image={user?.profileURL ?? ""}
                                             theme={
                                                 theme === "g90"
                                                     ? "dark"

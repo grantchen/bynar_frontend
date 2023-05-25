@@ -42,6 +42,7 @@ const ProfileDropdown = React.memo(
                 backgroundColor={"light-cyan"}
                 size={"xlg"}
                 initials={user?.fullName ?? '...'}
+                image={user?.profileURL ?? ""}
                 tooltipText={user?.fullName ?? '...'}
                 theme={
                   theme === "g90"

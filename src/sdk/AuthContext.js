@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import {useNavigate, useLocation} from "react-router-dom";
 import {
     useEffect,
     useReducer,
@@ -7,9 +7,9 @@ import {
     useContext,
     useCallback,
 } from "react";
-import { BaseURL } from "./constant";
-import { Auth, Amplify } from "aws-amplify";
-import { useTranslation } from "react-i18next";
+import {BaseURL} from "./constant";
+import {Auth, Amplify} from "aws-amplify";
+import {useTranslation} from "react-i18next";
 
 Amplify.configure({
     Auth: {
@@ -27,10 +27,10 @@ const initialState = {
     lang: null,
 };
 export const AuthContext = createContext(initialState);
-const { Provider, Consumer } = AuthContext;
-const simpleReducer = (state, payload) => ({ ...state, ...payload });
+const {Provider, Consumer} = AuthContext;
+const simpleReducer = (state, payload) => ({...state, ...payload});
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = ({children}) => {
     const [state, setState] = useReducer(simpleReducer, initialState);
 
     const navigate = useNavigate();
@@ -42,9 +42,9 @@ export const AuthProvider = ({ children }) => {
             try {
                 const res = await Auth.currentSession();
                 if (res?.accessToken?.jwtToken) {
-                    setState({ token: res?.accessToken?.jwtToken });
+                    setState({token: res?.accessToken?.jwtToken});
                 } else {
-                    setState({ token: null });
+                    setState({token: null});
                 }
             } catch (e) {
                 // todo remove this fucking hack
@@ -60,11 +60,11 @@ export const AuthProvider = ({ children }) => {
                     if (response.status === 401) {
                         localStorage.clear();
                     } else if (response.ok) {
-                        setState({ token });
+                        setState({token});
                         return;
                     }
                 }
-                setState({ token: null, user: null });
+                setState({token: null, user: null});
             }
         })();
     }, []);
@@ -84,8 +84,8 @@ export const AuthProvider = ({ children }) => {
 
             if (response.ok) {
                 const res = await response.json();
-                setState({ user: res.result });
-                localStorage.setItem('lang',res?.result?.languagePreference)
+                setState({user: res.result});
+                localStorage.setItem('lang', res?.result?.languagePreference)
                 await i18n.changeLanguage(res?.result?.languagePreference);
             } else {
                 signout()
@@ -102,7 +102,7 @@ export const AuthProvider = ({ children }) => {
     }, [getUser]);
 
     useEffect(() => {
-        if(location.pathname === "/"){
+        if (location.pathname === "/") {
             return
         }
         switch (state.token) {
@@ -142,13 +142,19 @@ export const AuthProvider = ({ children }) => {
                     return new Promise();
                 }
             }
+            let contentType = options.contentType
+            contentType = contentType ? contentType : "application/json"
+            const headers = {
+                ...options.headers,
+                "Content-Type": contentType,
+                Authorization: "Bearer " + token,
+            }
+            if (contentType === "multipart/form-data") {
+                delete headers["Content-Type"]
+            }
             let res = await fetch(url, {
                 ...options,
-                headers: {
-                    ...options.headers,
-                    "Content-Type": "application/json",
-                    Authorization: "Bearer " + token,
-                },
+                headers: headers,
             });
             if (res.status === 401) {
                 try {
@@ -159,7 +165,7 @@ export const AuthProvider = ({ children }) => {
                     return new Promise();
                 }
                 if (token) {
-                    setState({ token });
+                    setState({token});
                     res = await fetch(url, {
                         ...options,
                         headers: {
@@ -202,22 +208,22 @@ export const AuthProvider = ({ children }) => {
         try {
             const res = await Auth.currentSession();
             if (res?.accessToken?.jwtToken) {
-                setState({ token: res?.accessToken?.jwtToken });
+                setState({token: res?.accessToken?.jwtToken});
             } else {
-                setState({ token: null });
+                setState({token: null});
             }
         } catch (e) {
-            setState({ token: null });
+            setState({token: null});
         }
     }, []);
     // todo remove this fucking hack
     const hackPatchToken = useCallback((token) => {
         localStorage.setItem("token", token);
-        setState({ token });
+        setState({token});
     }, []);
 
     const updateUserLanguagePreference = useCallback(
-        async ({ languagePreference }) => {
+        async ({languagePreference}) => {
             if (!state?.user) {
                 return;
             }
@@ -234,7 +240,7 @@ export const AuthProvider = ({ children }) => {
             const res = await response.json();
 
             if (response.ok) {
-                localStorage.setItem('lang',languagePreference)
+                localStorage.setItem('lang', languagePreference)
                 await i18n.changeLanguage(languagePreference);
                 setState({
                     user: {
@@ -243,9 +249,9 @@ export const AuthProvider = ({ children }) => {
                     },
                 });
             } else if (response.status === 500) {
-                throw { message: res.error, type: "error" };
+                throw {message: res.error, type: "error"};
             } else {
-                throw { message: "Error updating user", type: "error" };
+                throw {message: "Error updating user", type: "error"};
             }
         },
         [state?.user, authFetch]
