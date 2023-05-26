@@ -51,11 +51,10 @@ const Signin = () => {
                 setSignInPhaseOne(false);
                 setLoadingSucess(false);
                 setVerificationCode("");
-                if (!signInPhaseOne)
-                    setServerErrorNotification({
+                setServerErrorNotification({
                         title: `security code sent to ${email}`,
                         status: "success",
-                    });
+                });
             } catch (e) {
                 console.log(e);
                 setLoadingSucess(false);
