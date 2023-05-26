@@ -15,7 +15,6 @@ const UploadProfileImageModal = ({
     const { user,getUser,authFetch } = useAuth();
     const [loading, setLoading] = useState(false);
     const {t} = useTranslation()
-    // console.log(user.profileU)
     /**
      * the modal does not reset it's state after submit
      * verified from source code - https://github.com/carbon-design-system/ibm-products/blob/main/packages/ibm-products/src/components/ImportModal/ImportModal.js

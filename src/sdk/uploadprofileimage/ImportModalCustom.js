@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from 'react';
+import React, { useState, forwardRef, useEffect } from 'react';
 import { Add } from '@carbon/react/icons';
 import {
   ComposedModal,
@@ -64,10 +64,16 @@ export let ImportModal = forwardRef(
     ref
   ) => {
     const { user } = useAuth();
-    console.log(user?.profileURL,"url")
     const carbonPrefix = usePrefix();
     const [files, setFiles] = useState([]);
-    const [importUrl, setImportUrl] = useState(user?.profileURL ?? '');
+    const [importUrl, setImportUrl] = useState();
+    useEffect(() => {
+      if (!open) return
+      if (!user?.profileURL) return
+      setImportUrl(user?.profileURL ?? '')
+      fetchFile(undefined, user?.profileURL)
+
+    }, [user?.profileURL, open])
 
     const isInvalidFileType = (file) => {
       const acceptSet = new Set(accept);
@@ -116,10 +122,10 @@ export let ImportModal = forwardRef(
       setFiles(finalFiles);
     };
 
-    const fetchFile = async (evt) => {
-      evt.preventDefault();
-      const fileName = importUrl
-        .substring(importUrl.lastIndexOf('/') + 1)
+    const fetchFile = async (evt, url) => {
+      evt?.preventDefault();
+      const fileName = url ?? importUrl
+        .substring(url ?? importUrl.lastIndexOf('/') + 1)
         .split('?')[0];
       const pendingFile = {
         name: fileName,
@@ -128,7 +134,7 @@ export let ImportModal = forwardRef(
       };
       setFiles([pendingFile]);
       try {
-        const response = await fetch(importUrl);
+        const response = await fetch(url ?? importUrl);
         if (!response.ok || response.status !== 200) {
           throw new Error(response.status);
         }
@@ -166,7 +172,7 @@ export let ImportModal = forwardRef(
 
     const numberOfFiles = files.length;
     const numberOfValidFiles = files.filter((f) => !f.invalid).length;
-    const hasFiles = numberOfFiles > 0 ;
+    const hasFiles = numberOfFiles > 0;
     const primaryButtonDisabled = !hasFiles || !(numberOfValidFiles > 0);
     const importButtonDisabled = !importUrl || hasFiles;
     const fileStatusString = `${numberOfValidFiles} / ${numberOfFiles} ${fileUploadLabel}`;
