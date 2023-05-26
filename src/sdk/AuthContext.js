@@ -256,7 +256,9 @@ export const AuthProvider = ({children}) => {
             authFetch,
             refreshPostSignIn,
             hackPatchToken,
-            updateUserLanguagePreference,
+            updateUserLanguagePreference, 
+            getUser,
+
         }),
         [
             state,
@@ -265,6 +267,7 @@ export const AuthProvider = ({children}) => {
             refreshPostSignIn,
             hackPatchToken,
             updateUserLanguagePreference,
+            getUser,
         ]
     );
     return <Provider value={providerValue}>{children}</Provider>;

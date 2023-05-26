@@ -4,7 +4,7 @@ import React, {
 } from "react";
 import { useAuth } from "../AuthContext";
 import { BaseURL } from "../constant";
-import { ImportModal } from "@carbon/ibm-products";
+import { ImportModal } from "./ImportModalCustom";
 import "./UploadProfileImage.scss"
 import { useTranslation } from "react-i18next";
 
@@ -12,9 +12,10 @@ const UploadProfileImageModal = ({
     isUploadProfileImageModalOpen,
     openUploadProfileImageModal,
 }) => {
-    const { authFetch } = useAuth();
+    const { user,getUser,authFetch } = useAuth();
     const [loading, setLoading] = useState(false);
     const {t} = useTranslation()
+    // console.log(user.profileU)
     /**
      * the modal does not reset it's state after submit
      * verified from source code - https://github.com/carbon-design-system/ibm-products/blob/main/packages/ibm-products/src/components/ImportModal/ImportModal.js
@@ -23,23 +24,23 @@ const UploadProfileImageModal = ({
      * - reset state
      * - preserve animation on open/close
      */
-    const [hackResetState, setHackResetState] = useState(false);
-    useEffect(() => {
-        if (!isUploadProfileImageModalOpen) {
-            const timeoutId = setTimeout(() => setHackResetState(true), 500);
-            return () => clearTimeout(timeoutId);
-        }
-    }, [isUploadProfileImageModalOpen]);
+    // const [hackResetState, setHackResetState] = useState(false);
+    // useEffect(() => {
+    //     if (!isUploadProfileImageModalOpen) {
+    //         const timeoutId = setTimeout(() => setHackResetState(true), 500);
+    //         return () => clearTimeout(timeoutId);
+    //     }
+    // }, [isUploadProfileImageModalOpen]);
 
-    useEffect(() => {
-        if (hackResetState) {
-            setHackResetState(false);
-        }
-    }, [hackResetState]);
+    // useEffect(() => {
+    //     if (hackResetState) {
+    //         setHackResetState(false);
+    //     }
+    // }, [hackResetState]);
 
-    if (hackResetState) {
-        return null;
-    }
+    // if (hackResetState) {
+    //     return null;
+    // }
 
     const props = {
         title: t("import"),
@@ -78,7 +79,7 @@ const UploadProfileImageModal = ({
                 });
                 if (response.ok) {
                     openUploadProfileImageModal(false);
-                    // getUser();
+                    await getUser();
                 } else {
                     throw "error";
                 }
@@ -93,9 +94,9 @@ const UploadProfileImageModal = ({
         <>
             <ImportModal
                 {...props}
-                className={`image-import ${loading ? "is-loading" : ""}`}
             />
         </>
     );
 };
+
 export default UploadProfileImageModal;
