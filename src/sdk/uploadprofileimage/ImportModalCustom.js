@@ -14,10 +14,12 @@ import {
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { useAuth } from '../AuthContext';
+import { BaseURL } from "../constant";
 
 import { uuidv4 } from '../util';
 
 import { pkg } from '@carbon/ibm-products';
+import { async } from '@carbon/themes';
 const componentName = 'ImportModal';
 
 // Default values for props
@@ -63,10 +65,11 @@ export let ImportModal = forwardRef(
     },
     ref
   ) => {
-    const { user } = useAuth();
+    const { user, getUser, authFetch } = useAuth();
     const carbonPrefix = usePrefix();
     const [files, setFiles] = useState([]);
     const [importUrl, setImportUrl] = useState();
+    const [fileChanged, setFileChange] = useState(false)
     useEffect(() => {
       if (!open) return
       if (!user?.profileURL) return
@@ -164,13 +167,33 @@ export let ImportModal = forwardRef(
     };
 
     const onRemoveFile = (uuid) => {
+      setFileChange(true)
       const updatedFiles = files.filter((f) => f.uuid !== uuid);
       setFiles(updatedFiles);
+
       setImportUrl('')
     };
 
-    const onSubmitHandler = () => {
-      onRequestSubmit(files);
+    const onSubmitHandler = async () => {
+      if (files?.length > 0) {
+        onRequestSubmit(files);
+      } else {
+        if (user?.profileURL) {
+          try {
+            const response = await authFetch(`${BaseURL}/profile-image`, {
+              method: "DELETE",
+            });
+            if (response.ok) {
+              await getUser();
+              onClose();
+            } else {
+              throw "error";
+            }
+          } catch (error) {
+          } finally {
+          }
+        }
+      }
     };
 
     const inputHandler = (evt) => {
@@ -180,8 +203,8 @@ export let ImportModal = forwardRef(
     const numberOfFiles = files.length;
     const numberOfValidFiles = files.filter((f) => !f.invalid).length;
     const hasFiles = numberOfFiles > 0;
-    const primaryButtonDisabled = !hasFiles || !(numberOfValidFiles > 0);
-    const importButtonDisabled = !importUrl || hasFiles;
+    const primaryButtonDisabled = (user?.profileURL) ? !fileChanged : !hasFiles || !(numberOfValidFiles > 0);
+    const importButtonDisabled =  (!importUrl || hasFiles);
     const fileStatusString = `${numberOfValidFiles} / ${numberOfFiles} ${fileUploadLabel}`;
     const blockClass = `${pkg.prefix}--import-modal`;
 

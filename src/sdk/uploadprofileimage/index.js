@@ -64,7 +64,7 @@ const UploadProfileImageModal = ({
             t("max-file-size-error-500"),
         maxFileSizeErrorHeader: t("import-failed"),
         open: isUploadProfileImageModalOpen,
-        primaryButtonText: t("import"),
+        primaryButtonText: t("Save"),
         secondaryButtonText: t("cancel"),
         onClose: () => openUploadProfileImageModal(false),
         onRequestSubmit: async (e) => {
