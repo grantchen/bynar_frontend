@@ -9,3 +9,25 @@
         }
     }
 }
+
+.c4p--import-modal .cds--file {
+    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.cds--file-browse-btn--disabled {
+    border: 1px dashed var(--cds-disabled-02,#c6c6c6);
+}
+
+button.c4p--import-modal__import-button.cds--btn.cds--btn--sm.cds--btn--primary.cds--btn {
+    margin-left: var(--cds-spacing-03,.5rem);
+}
+
+.cds--file__selected-file {
+    max-width: 100%;
+    background: var(--cds-ui-02,#fff);
+}
+
+.cds--file-container.c4p--import-modal__file-container {
+    margin-top: 0rem;
+}
