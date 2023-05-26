@@ -70,8 +70,14 @@ export let ImportModal = forwardRef(
     useEffect(() => {
       if (!open) return
       if (!user?.profileURL) return
+      if (user?.profileURL) {
+        const blob = new Blob([])
+        const fetchedFile = new File([blob], user?.profileURL, { type: blob.type });
+        fetchedFile.status = 'edit'
+        setFiles([fetchedFile])
+      }
       setImportUrl(user?.profileURL ?? '')
-      fetchFile(undefined, user?.profileURL)
+      // fetchFile(undefined, user?.profileURL)
 
     }, [user?.profileURL, open])
 
@@ -160,6 +166,7 @@ export let ImportModal = forwardRef(
     const onRemoveFile = (uuid) => {
       const updatedFiles = files.filter((f) => f.uuid !== uuid);
       setFiles(updatedFiles);
+      setImportUrl('')
     };
 
     const onSubmitHandler = () => {
