@@ -39,7 +39,7 @@ export default function AuthenticatedAppHeader() {
     const { user } = useAuth();
     const { t } = useTranslation();
     const { theme } = useThemePreference();
-    const { isUserManagementAllowed } = useUserManagement();
+    const { isUserManagementAllowed ,openCardManagementSidePanel} = useUserManagement();
     const [searchParams, setSearchParams] = useSearchParams();
     const isMobile = useMobile();
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
@@ -98,6 +98,14 @@ export default function AuthenticatedAppHeader() {
                                     <HeaderGlobalAction
                                         aria-label={t("user")}
                                         onClick={() => setIsUserListOpen(true)}
+                                    >
+                                        <UserData20 />
+                                    </HeaderGlobalAction>
+                                )}
+                                 {(
+                                    <HeaderGlobalAction
+                                        aria-label={"cardd"}
+                                        onClick={() =>  openCardManagementSidePanel()}
                                     >
                                         <UserData20 />
                                     </HeaderGlobalAction>

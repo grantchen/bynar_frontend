@@ -14,6 +14,7 @@ import { UserDetailPanel } from "../../components/UserDetailPanel";
 import { useAuth } from "../AuthContext";
 import { useTranslation } from "react-i18next";
 import { RemoveModalWithLoading } from "../RemoveModalWithLoading";
+import UserCardManagement from "../../components/UserCardManagement";
 const UserManagementContext = createContext();
 
 const UserManagementProvider = ({ children }) => {
@@ -35,6 +36,7 @@ const UserManagementProvider = ({ children }) => {
     const editUserPanelOpen = Boolean(searchParams.get("userIdToBeEdited"));
     const addUserPanelOpen = Boolean(searchParams.get("openAddUserPanel"));
     const userDetailsOpen = Boolean(searchParams.get("userIdToShowDetails"));
+    const cardManagementSidePanelOpen = Boolean(searchParams.get("openCardMangementPanel"));
 
     const isUserManagementAllowed = useMemo(
         () =>
@@ -338,6 +340,14 @@ const UserManagementProvider = ({ children }) => {
         });
     }, []);
 
+    const openCardManagementSidePanel= useCallback(
+        () => {
+            setUserListParams(mergeQueryParams(searchParams, {}));
+            setSearchParams({ openCardMangementPanel: true })
+        },
+    [searchParams]);
+
+
     useEffect(() => {
         if (!searchParams.get("isUserListOpen")) {
             setNotification(null);
@@ -361,6 +371,7 @@ const UserManagementProvider = ({ children }) => {
             openUserDetails,
             getUserById,
             openBulkDeleteConfirmModal,
+            openCardManagementSidePanel,
         }),
         [
             userListData,
@@ -378,6 +389,7 @@ const UserManagementProvider = ({ children }) => {
             openUserDetails,
             getUserById,
             openBulkDeleteConfirmModal,
+            openCardManagementSidePanel,
         ]
     );
     return (
@@ -393,6 +405,7 @@ const UserManagementProvider = ({ children }) => {
                 {isUserManagementAllowed && (
                     <UserDetailPanel open={userDetailsOpen} />
                 )}
+                <UserCardManagement open={cardManagementSidePanelOpen}/>              
             </UserManagementContext.Provider>
             {deleteModalProps && <RemoveModalWithLoading deleteModalProps={deleteModalProps} loading={loading} />}
         </>
