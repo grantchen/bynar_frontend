@@ -197,7 +197,7 @@ export const UserDetailPanel = ({ open }) => {
                                 name="role"
                                 // defaultValue={role}
                                 value={role}
-                                id="country-ci"
+                                id="role"
                                 labelText={`${t("role")} *`}
                                 disabled={true}
                             ></TextInput>

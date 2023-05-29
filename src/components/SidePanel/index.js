@@ -608,7 +608,7 @@ export const SidePanels = ({ open }) => {
                                         className={`story__text-input`}
                                         name="role"
                                         value={role}
-                                        id="country-ci"
+                                        id="role"
                                         labelText={`${t("role")} *`}
                                         onChange={handleRoleChange}
                                         invalid={accountInfoErrors.role}
