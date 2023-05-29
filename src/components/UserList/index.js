@@ -6,7 +6,6 @@ import {
     ToastNotification,
     Button,
     Pagination,
-    Theme,
 } from "@carbon/react";
 import { Edit, TrashCan, DataViewAlt, Add } from "@carbon/react/icons";
 import {
@@ -31,7 +30,6 @@ import {
     SORTABLE_ORDERING,
     omitQueryParams,
     useMobile,
-    useThemePreference,
 } from "../../sdk";
 import { useSearchParams } from "react-router-dom";
 import { Restart16, Activity16, TrashCan16 } from "@carbon/icons-react";
@@ -54,8 +52,6 @@ export const UserList = ({ isOpen }) => {
         openUserDetails,
         openBulkDeleteConfirmModal,
     } = useUserManagement();
-
-    const { theme } = useThemePreference();
 
     const isMobile = useMobile();
     const { t } = useTranslation();
@@ -348,8 +344,8 @@ export const UserList = ({ isOpen }) => {
      * effect to set/reset datagrid states on params / tearsheet open state changes
      */
     useEffect(() => {
-        if (!isOpen) {
-            return;
+        if(!isOpen){
+            return
         }
         datagridState.setPageSize(pageLimit);
     }, [pageLimit, isOpen]);
@@ -367,7 +363,8 @@ export const UserList = ({ isOpen }) => {
                     desc: searchParams.get("sortByOrder") === "DESC",
                 },
             ]);
-        } else {
+        }
+        else{
             datagridState.setSortBy([]);
         }
     }, [
@@ -376,35 +373,24 @@ export const UserList = ({ isOpen }) => {
         searchParams.get("sortByOrder"),
     ]);
 
-    const themeToApply = useMemo(() => {
-        switch (theme) {
-            case "light":
-                return "white";
-            case "dark":
-                return theme;
-            case "system":
-                return window.matchMedia("(prefers-color-scheme: dark)").matches
-                    ? "g90"
-                    : "white";
-        }
-    }, [theme]);
-
     return (
-        <Theme theme={themeToApply}>
-            {notification && (
-                <ToastNotification
-                    className="error-notification-box"
-                    iconDescription="close notification"
-                    subtitle={notification?.message}
-                    timeout={0}
-                    title={""}
-                    kind={notification.type}
-                />
-            )}
-            <div className="userdata-table">
-                <Datagrid datagridState={datagridState} />
-            </div>
-        </Theme>
+        <>
+            <>
+                {notification && (
+                    <ToastNotification
+                        className="error-notification-box"
+                        iconDescription="close notification"
+                        subtitle={notification?.message}
+                        timeout={0}
+                        title={""}
+                        kind={notification.type}
+                    />
+                )}
+                <div className="userdata-table">
+                    <Datagrid datagridState={datagridState} />
+                </div>
+            </>
+        </>
     );
 };
 

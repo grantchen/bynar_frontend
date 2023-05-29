@@ -88,15 +88,15 @@ function mapCarbonThemeFromThemePreference(preference) {
         case "dark":
             return "g90";
         case "white":
-            return "g10";
+            return "white";
         case "light":
-            return "g10";
+            return "white";
         case "system":
             return window.matchMedia("(prefers-color-scheme: dark)").matches
                 ? "g90"
-                : "g10";
+                : "white";
         default:
-            return "g10";
+            return "white";
     }
 }
 
