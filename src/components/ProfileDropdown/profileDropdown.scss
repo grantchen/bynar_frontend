@@ -2,7 +2,7 @@
   .bynar-profile-info-wrapper {
     display: flex;
     align-items: center;
-    border-bottom: 1px solid var(--cds-text-02,#cacaca);
+    border-bottom: 1px solid var(--cds-text-02, #cacaca);
     padding: 0.5rem 1rem;
 
     >h4 {
@@ -34,7 +34,30 @@
     }
   }
 
-  .user-name{
+  .user-name {
     color: var(--cds-text-01, #161616);
+  }
+
+  .profile-info-image{
+    position: relative;
+    .edit-overlay {
+      position: absolute;
+      top: 0;
+      width: var(--cds-spacing-10, 4rem);
+      height: var(--cds-spacing-10, 4rem);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #00000080;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  }
+  
+  .edit-overlay svg {
+    color: white;
+    width: 24px;
+    height: 24px;
   }
 }
