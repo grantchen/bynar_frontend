@@ -2,7 +2,7 @@ import { UserProfileImage } from "@carbon/ibm-products";
 import { Link, Tile, Tooltip } from "@carbon/react";
 import { ArrowRight, Camera } from "@carbon/react/icons";
 import React from "react";
-import { useAuth, useThemePreference } from "../../sdk";
+import { useAuth, useInvoices, useThemePreference } from "../../sdk";
 
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
@@ -19,6 +19,7 @@ const ProfileDropdown = React.memo(
     const { signout, user } = useAuth();
     const [isHovered, setIsHovered] = useState(false);
     const { openThemeChangeModal, theme } = useThemePreference();
+    const {handleOpenInvoiceList} = useInvoices()
     const handleLogout = async (e) => {
       e.preventDefault();
       await signout();
@@ -62,6 +63,8 @@ const ProfileDropdown = React.memo(
           <div className="link-list">
             <Link onClick={onProfileOptionClick}>{t("profile")}</Link>
             <Link>{t("privacy")}</Link>
+            {/* todo */}
+            <Link onClick={handleOpenInvoiceList}>Invoices</Link>
             <Link style={{ cursor: "pointer" }} onClick={handleLanguageChange}>
               {t("change-language")}
             </Link>
