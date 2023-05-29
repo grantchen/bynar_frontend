@@ -38,32 +38,23 @@
     color: var(--cds-text-01, #161616);
   }
 
-  .edit-overlay {
-    position: absolute;
-    top: 8px;
-    width: var(--cds-spacing-10, 4rem);
-    height: var(--cds-spacing-10, 4rem);
-    font-size: var(--cds-productive-heading-04-font-size, 1.75rem);
-    font-weight: var(--cds-productive-heading-04-font-weight, 400);
-    line-height: var(--cds-productive-heading-04-line-height, 1.28572);
-    letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 100%;
-    background-color: #00000080;
-    background-position: center center;
-    background-repeat: no-repeat;
-    border-radius: 50%;
-    overflow: hidden;
-    z-index: 1;
-    cursor: pointer;
+  .profile-info-image{
+    position: relative;
+    .edit-overlay {
+      position: absolute;
+      top: 0;
+      width: var(--cds-spacing-10, 4rem);
+      height: var(--cds-spacing-10, 4rem);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #00000080;
+      border-radius: 50%;
+      cursor: pointer;
+    }
   }
-
-  // .edit-overlay:hover {
-  //   opacity: 1;
-  // }
+  
   .edit-overlay svg {
     color: white;
     width: 24px;

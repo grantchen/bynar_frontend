@@ -38,7 +38,7 @@ const ProfileDropdown = React.memo(
         <Tile className={"tile"}>
           <div className="bynar-profile-info-wrapper">
             <h4 className="user-name">{user?.fullName}</h4>
-            <div className="profile-info-image">
+            <div className="profile-info-image" onClick={handleImageUploadChange}>
               <UserProfileImage
                 backgroundColor={"light-cyan"}
                 size={"xlg"}
@@ -53,7 +53,7 @@ const ProfileDropdown = React.memo(
                 onMouseEnter={() => setIsHovered(true)}
               />
               {isHovered && (
-                <div className="edit-overlay" onMouseLeave={() => setIsHovered(false)} onClick={handleImageUploadChange}>
+                <div className="edit-overlay" onMouseLeave={() => setIsHovered(false)}>
                     <Camera />
                 </div>
               )}
