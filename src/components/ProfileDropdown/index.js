@@ -1,10 +1,11 @@
 import { UserProfileImage } from "@carbon/ibm-products";
-import { Link, Tile } from "@carbon/react";
-import { ArrowRight } from "@carbon/react/icons";
+import { Link, Tile, Tooltip } from "@carbon/react";
+import { ArrowRight, Camera } from "@carbon/react/icons";
 import React from "react";
 import { useAuth, useThemePreference } from "../../sdk";
 
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
 import "./profileDropdown.scss";
 const ProfileDropdown = React.memo(
   ({
@@ -16,6 +17,7 @@ const ProfileDropdown = React.memo(
   }) => {
     const [t, i18n] = useTranslation();
     const { signout, user } = useAuth();
+    const [isHovered, setIsHovered] = useState(false);
     const { openThemeChangeModal, theme } = useThemePreference();
     const handleLogout = async (e) => {
       e.preventDefault();
@@ -42,14 +44,19 @@ const ProfileDropdown = React.memo(
                 size={"xlg"}
                 initials={user?.fullName ?? '...'}
                 image={user?.profileURL ?? ""}
-                tooltipText={user?.fullName ?? '...'}
+                // tooltipText={user?.fullName ?? '...'}
                 theme={
                   theme === "g90"
                     ? "dark"
                     : "light"
                 }
-                onClick={handleImageUploadChange}
+                onMouseEnter={() => setIsHovered(true)}
               />
+              {isHovered && (
+                <div className="edit-overlay" onMouseLeave={() => setIsHovered(false)} onClick={handleImageUploadChange}>
+                    <Camera />
+                </div>
+              )}
             </div>
           </div>
           <div className="link-list">
@@ -62,7 +69,7 @@ const ProfileDropdown = React.memo(
               {t("change-theme")}
             </Link>
             <Link
-              style={{ cursor: "pointer",alignItems:'center'}}
+              style={{ cursor: "pointer", alignItems: 'center' }}
               onClick={handleLogout}
             >
               {t("logout")}

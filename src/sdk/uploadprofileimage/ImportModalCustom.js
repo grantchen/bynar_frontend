@@ -20,6 +20,7 @@ import { uuidv4 } from '../util';
 
 import { pkg } from '@carbon/ibm-products';
 import { async } from '@carbon/themes';
+import { InlineLoading } from 'carbon-components-react';
 const componentName = 'ImportModal';
 
 // Default values for props
@@ -70,6 +71,7 @@ export let ImportModal = forwardRef(
     const [files, setFiles] = useState([]);
     const [importUrl, setImportUrl] = useState();
     const [fileChanged, setFileChange] = useState(false)
+    const [loading,setLoading] = useState(false);
     useEffect(() => {
       if (!open) return
       if (!user?.profileURL) return
@@ -180,6 +182,7 @@ export let ImportModal = forwardRef(
       } else {
         if (user?.profileURL) {
           try {
+            setLoading(true);
             const response = await authFetch(`${BaseURL}/profile-image`, {
               method: "DELETE",
             });
@@ -191,6 +194,7 @@ export let ImportModal = forwardRef(
             }
           } catch (error) {
           } finally {
+            setLoading(false);
           }
         }
       }
@@ -289,8 +293,10 @@ export let ImportModal = forwardRef(
             kind="primary"
             onClick={onSubmitHandler}
             disabled={primaryButtonDisabled}
+            className="button-with-loading"
           >
             {primaryButtonText}
+            {loading && (<InlineLoading className="inline-loading-within-btn"/> )}
           </Button>
         </ModalFooter>
       </ComposedModal>
