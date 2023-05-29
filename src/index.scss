@@ -22,7 +22,7 @@ body {
 }
 
 :root {
-    @include react.theme(react.$white);
+    @include react.theme(react.$g10);
 }
 
 [data-carbon-theme="g90"] {

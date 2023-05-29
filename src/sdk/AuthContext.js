@@ -93,7 +93,7 @@ export const AuthProvider = ({children}) => {
         } catch (e) {
             console.log("Error signing out!");
             localStorage.clear()
-            document.documentElement.setAttribute('data-carbon-theme', 'white')
+            document.documentElement.setAttribute('data-carbon-theme', 'g10')
             navigate("/signin");
         }
     }, [state.token]);
@@ -190,7 +190,7 @@ export const AuthProvider = ({children}) => {
             navigate("/signin");
             // todo remove this fucking hack
             localStorage.clear();
-            document.documentElement.setAttribute('data-carbon-theme', 'white')
+            document.documentElement.setAttribute('data-carbon-theme', 'g10')
         } catch (e) {
             console.log(e);
         }
