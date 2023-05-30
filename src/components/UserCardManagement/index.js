@@ -63,13 +63,13 @@ const UserCardManagement = ({ open }) => {
                                     renderIcon={Add20}
                                     tooltipPosition="left"
                                     onClick={openUserCardManagementModal}
-                                    // onClick={() => {
-                                    //     console.log("test delete");
-                                    //     openUserCardDeleteModal({
-                                    //         cardIdToBeDeleted: "src_g3xwcvhcljfebhi5pjsspcyqja",
-                                    //         userName: "s1@yopmail.com",
-                                    //     });
-                                    // }}
+                                // onClick={() => {
+                                //     console.log("test delete");
+                                //     openUserCardDeleteModal({
+                                //         cardIdToBeDeleted: "src_g3xwcvhcljfebhi5pjsspcyqja",
+                                //         userName: "s1@yopmail.com",
+                                //     });
+                                // }}
                                 />
                             }>
                             {cardList?.instruments?.map((listItem, key) => (
@@ -89,16 +89,22 @@ const UserCardManagement = ({ open }) => {
                                         </OverflowMenu>
                                     }
                                     key={key}
-                                    >
-                                    <div className="card-box">
+                                >
+                                    {/* <div className="card-box">
                                     <p>{listItem?.scheme}</p>                                   
                                     <p>{"...."}{listItem?.last4}</p>
                                     <p>{cardList?.name}</p>
                                     <p>{listItem?.expiry_month}/{listItem?.expiry_year}</p>
-                                    </div>
+                                    </div> */}
+                                    <Grid>
+                                        <Column lg={4}>{listItem?.scheme}</Column>
+                                        <Column lg={4}>{"...."}{listItem?.last4}</Column>
+                                        <Column lg={4}>{cardList?.name}</Column>
+                                        <Column lg={4}>{listItem?.expiry_month}/{listItem?.expiry_year}</Column>
+                                    </Grid>
                                 </ContainedListItem>
                             ))}
-                           
+
                         </ContainedList>
                     </div>
                 </SidePanel>

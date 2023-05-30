@@ -271,7 +271,7 @@ export const UserList = ({ isOpen }) => {
                     </TableBatchActions>
                 );
             },
-            DatagridActions: (dgState) => {
+            DatagridActions: () => {
                 return (
                     <TableToolbarContent>
                         <TableToolbarSearch

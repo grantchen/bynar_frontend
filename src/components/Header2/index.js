@@ -14,6 +14,7 @@ import {
 
 import { UserData20 } from "@carbon/icons-react";
 import {
+    InvoicesProvider,
     LanguageChangeModal,
     omitQueryParams,
     useAuth,
@@ -35,7 +36,7 @@ import ProfileDropdown from "../ProfileDropdown";
 import { AppSideNav } from "./AppSideNav";
 import UploadProfileImageModal from "../../sdk/uploadprofileimage";
 
-export default function AuthenticatedAppHeader() {
+function _AuthenticatedAppHeader() {
     const { user } = useAuth();
     const { t } = useTranslation();
     const { theme } = useThemePreference();
@@ -45,7 +46,8 @@ export default function AuthenticatedAppHeader() {
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
     const [isLanguageChangeModalOpen, openLanguageChangeModal] =
         useState(false);
-    const [isUploadProfileImageModalOpen,openUploadProfileImageModal] = useState(false);
+    const [isUploadProfileImageModalOpen, openUploadProfileImageModal] =
+        useState(false);
     const { isUserListOpen, setIsUserListOpen } = useMemo(
         () => ({
             isUserListOpen: searchParams.get("isUserListOpen") === "true",
@@ -116,7 +118,7 @@ export default function AuthenticatedAppHeader() {
                                                 omitQueryParams(prev, [
                                                     "userIdToShowDetails",
                                                     "openAddUserPanel",
-                                                    "userIdToBeEdited"
+                                                    "userIdToBeEdited",
                                                 ])
                                             );
                                         }}
@@ -136,8 +138,11 @@ export default function AuthenticatedAppHeader() {
                                     <PopoverContent ref={wrapperRef}>
                                         <ProfileDropdown
                                             onProfileOptionClick={() => {
-                                                setSearchParams({userIdToShowDetails: user?.id})
-                                                setIsProfileDropdownOpen(false)
+                                                setSearchParams({
+                                                    userIdToShowDetails:
+                                                        user?.id,
+                                                });
+                                                setIsProfileDropdownOpen(false);
                                             }}
                                             openLanguageModal={
                                                 isLanguageChangeModalOpen
@@ -173,10 +178,18 @@ export default function AuthenticatedAppHeader() {
                 isLanguageChangeModalOpen={isLanguageChangeModalOpen}
                 openLanguageChangeModal={openLanguageChangeModal}
             />
-            <UploadProfileImageModal 
-              isUploadProfileImageModalOpen={isUploadProfileImageModalOpen}
-              openUploadProfileImageModal={openUploadProfileImageModal}
+            <UploadProfileImageModal
+                isUploadProfileImageModalOpen={isUploadProfileImageModalOpen}
+                openUploadProfileImageModal={openUploadProfileImageModal}
             />
         </>
+    );
+}
+
+export default function AuthenticatedAppHeader(props) {
+    return (
+        <InvoicesProvider>
+            <_AuthenticatedAppHeader {...props} />
+        </InvoicesProvider>
     );
 }
