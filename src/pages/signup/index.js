@@ -1107,34 +1107,8 @@ const Signup = () => {
                         ref={cardElement}
                       >
                         <div
-                          style={{
-                            backgroundColor: "white",
-                            display: "flex",
-                            flexDirection: "column",
-                            padding: "0px 16px",
-                          }}
+                          className="card-input-container"
                         >
-                          {/* <div >
-                                                        <div>
-                                                            <p className='input-heading'>Card number</p>
-                                                        </div>
-                                                        <CardNumber id="card-number" className='card-number' />
-                                                    </div>
-
-                                                    <div className="date-and-code">
-                                                        <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                                            <div>
-                                                                <p className='input-heading'>Expiration Date</p>
-                                                            </div>
-                                                            <ExpiryDate className='expiry-date' />
-                                                        </div>
-                                                        <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                                            <div>
-                                                                <p className='input-heading'>Security Code</p>
-                                                            </div>
-                                                            <Cvv className='security-code' />
-                                                        </div>
-                                                    </div> */}
                           <div>
                             <p className="input-heading">Card details</p>
                           </div>
@@ -1148,18 +1122,15 @@ const Signup = () => {
                                 description={"verifying card details..."}
                                 className="submit-button-loading"
                               />
-                              {/* <p style={{ color: '#161616' }}>{"verifying card details"}</p> */}
                             </div>
                           ) : (
-                            <div className="create-account">
-                              <div className="create-account">
+                            <div className="create-account">                           
                                 <Button
                                   className="submit-button"
                                   onClick={handleVerifyCardDetails}
                                 >
                                   Verify card
                                 </Button>
-                              </div>
                             </div>
                           )}
                         </div>
