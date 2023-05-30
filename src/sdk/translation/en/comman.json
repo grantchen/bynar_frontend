@@ -134,5 +134,6 @@
     "error-adding-user-card":"error adding user card",
     "card-details":"Card details",
     "card-deleted-successfully":"Card deleted successfully",
-    "error-deleting-card":"Error deleting card"
+    "error-deleting-card":"Error deleting card",
+    "delete-card-modal-heading-2":"will permanently delete the card. This action cannot be undone."
 }

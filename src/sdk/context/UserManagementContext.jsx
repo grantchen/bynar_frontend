@@ -329,7 +329,7 @@ const UserManagementProvider = ({ children }) => {
             setDeleteModalProps({
                 body: `${t(
                     "delete-modal-heading-1"
-                )} ${userName} ${t("delete-modal-heading-2")}`,
+                )} ${userName} ${t("delete-card-modal-heading-2")}`,
                 className: "remove-modal-test",
                 title: t("delete-modal-title"),
                 iconDescription: t("delete-modal-icon"),
