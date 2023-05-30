@@ -1,16 +1,17 @@
 import { SidePanel } from "@carbon/ibm-products";
-import { ContainedList, Button, ContainedListItem, OverflowMenu, OverflowMenuItem ,Grid,Column} from '@carbon/react';
+import { ContainedList, Button, ContainedListItem, OverflowMenu, OverflowMenuItem, Grid, Column, SkeletonText } from '@carbon/react';
 import { useState, useRef, useEffect } from "react";
-import { Add20 } from "@carbon/icons-react";
+import { Add20, CheckmarkFilled16 } from "@carbon/icons-react";
 import {
+    SkeletonPlaceholder,
     ToastNotification,
 } from "carbon-components-react";
 import './UserCardManagement.scss'
+import { TextInputSkeleton } from "@carbon/react";
 
 import { useUserManagement } from "../../sdk";
 import { notificationTokens } from "@carbon/themes";
 import { Delete16 } from "@carbon/icons-react";
-import '../../styles/paymentform.scss'
 const UserCardManagement = ({ open }) => {
     const { closeModalAndGoBackToUserList, getUserCardList, openUserCardManagementModal, notification, openUserCardDeleteModal } = useUserManagement();
     const [cardList, setCardList] = useState([]);
@@ -28,6 +29,7 @@ const UserCardManagement = ({ open }) => {
             setSavingData(true);
             const data = await getUserCardList();
             setCardList(data?.result);
+            setSavingData(false)
         })();
     }, [open]);
 
@@ -54,7 +56,7 @@ const UserCardManagement = ({ open }) => {
                             />
                         )}
                         <ContainedList
-                            label="List title"
+                            label="Payment method"
                             kind="on-page"
                             action={
                                 <Button
@@ -63,6 +65,7 @@ const UserCardManagement = ({ open }) => {
                                     renderIcon={Add20}
                                     tooltipPosition="left"
                                     onClick={openUserCardManagementModal}
+                                    disabled={cardList?.instruments.length > 10 ? true : false}
                                 // onClick={() => {
                                 //     console.log("test delete");
                                 //     openUserCardDeleteModal({
@@ -76,8 +79,8 @@ const UserCardManagement = ({ open }) => {
                                 <ContainedListItem
                                     action={
                                         <OverflowMenu floatingMenu flipped size="lg" ariaLabel="List item options">
-                                            <OverflowMenuItem itemText="View details" />
-                                            <OverflowMenuItem itemText="Remove" isDelete hasDivider
+                                            <OverflowMenuItem itemText="Default payment method" />
+                                            <OverflowMenuItem itemText="Remove payment method" isDelete hasDivider
                                                 onClick={() => {
                                                     console.log("test delete");
                                                     openUserCardDeleteModal({
@@ -90,18 +93,25 @@ const UserCardManagement = ({ open }) => {
                                     }
                                     key={key}
                                 >
-                                    {/* <div className="card-box">
-                                    <p>{listItem?.scheme}</p>                                   
-                                    <p>{"...."}{listItem?.last4}</p>
-                                    <p>{cardList?.name}</p>
-                                    <p>{listItem?.expiry_month}/{listItem?.expiry_year}</p>
-                                    </div> */}
-                                    <Grid>
-                                        <Column lg={4}>{listItem?.scheme}</Column>
-                                        <Column lg={4}>{"...."}{listItem?.last4}</Column>
-                                        <Column lg={4}>{cardList?.name}</Column>
-                                        <Column lg={4}>{listItem?.expiry_month}/{listItem?.expiry_year}</Column>
-                                    </Grid>
+                                   {savingData?(
+                                     <SkeletonText heading={true} className="skeleton-loading" />
+                                   ):( <div className="card-box">
+                                        <div>
+                                            <div style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: 10
+                                            }}>
+                                                {listItem?.scheme}
+                                                {listItem?.id === cardList?.default ? <CheckmarkFilled16 /> : <div style={{
+                                                    width:'16px'
+                                                }}></div>}
+                                            </div>
+                                        </div>
+                                        <p>{"...."}{listItem?.last4}</p>
+                                        <p>{cardList?.name}</p>
+                                        <p>{listItem?.expiry_month}/{listItem?.expiry_year}</p>
+                                    </div>)}
                                 </ContainedListItem>
                             ))}
 

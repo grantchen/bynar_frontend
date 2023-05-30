@@ -6,4 +6,8 @@
     ul.cds--overflow-menu-options.cds--overflow-menu--flip.cds--overflow-menu-options--open.cds--overflow-menu-options--lg {
         z-index: 9200;
     }
+    .card-box{
+        display: flex;
+        justify-content: space-between;
+    }
 }

@@ -51,6 +51,15 @@ const UserManagementProvider = ({ children }) => {
         [user]
     );
 
+    const isUserCardManagementAllowed = useMemo(
+        () =>
+            user &&
+            (
+                user?.cognitoUserGroups === "PrimaryOwner"
+            ),
+        [user]
+    );
+
     const getUserList = useCallback(
         async (queryParams = {}) => {
             setLoading(true);
@@ -499,6 +508,7 @@ const UserManagementProvider = ({ children }) => {
             openUserCardManagementModal,
             handleVerifyCard,
             openUserCardDeleteModal,
+            isUserCardManagementAllowed,
         }),
         [
             userListData,
@@ -521,6 +531,7 @@ const UserManagementProvider = ({ children }) => {
             openUserCardManagementModal,
             handleVerifyCard,
             openUserCardDeleteModal,
+            isUserCardManagementAllowed
         ]
     );
     return (
@@ -536,8 +547,8 @@ const UserManagementProvider = ({ children }) => {
                 {isUserManagementAllowed && (
                     <UserDetailPanel open={userDetailsOpen} />
                 )}
-                <UserCardManagement open={cardManagementSidePanelOpen}/> 
-                <UserCardModal open={userCardModalOpen}/>             
+                {isUserCardManagementAllowed && <UserCardManagement open={cardManagementSidePanelOpen}/>}
+                {isUserCardManagementAllowed && <UserCardModal open={userCardModalOpen}/>}           
             </UserManagementContext.Provider>
             {deleteModalProps && <RemoveModalWithLoading deleteModalProps={deleteModalProps} loading={loading} />}
 
