@@ -16,7 +16,7 @@ import { useTranslation } from "react-i18next";
 import { RemoveModalWithLoading } from "../RemoveModalWithLoading";
 import { Tearsheet } from "@carbon/ibm-products";
 import InvoicesTable from "../../components/InvoicesTable";
-import { format } from 'date-fns'
+import { format } from "date-fns";
 
 const InvoicesContext = createContext();
 
@@ -35,11 +35,11 @@ const InvoicesProvider = ({ children }) => {
     const [notification, setNotification] = useState(null);
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const {isInvoiceListOpen, setIsInvoiceListOpen} = useMemo(() => {
+    const { isInvoiceListOpen, setIsInvoiceListOpen } = useMemo(() => {
         return {
-            isInvoiceListOpen: searchParams.get(
-                INVOICESHEET_CONSTANTS.isInvoiceListOpen
-            ) === "true",
+            isInvoiceListOpen:
+                searchParams.get(INVOICESHEET_CONSTANTS.isInvoiceListOpen) ===
+                "true",
             setIsInvoiceListOpen: (isOpen) =>
                 setSearchParams({
                     [INVOICESHEET_CONSTANTS.isInvoiceListOpen]: isOpen,
@@ -86,8 +86,14 @@ const InvoicesProvider = ({ children }) => {
                         ...res?.result,
                         invoices: res?.result?.invoice.map((value) => ({
                             ...value,
-                            invoiceDate: format(new Date(value.invoiceDate), 'MM/dd/yyyy'),
-                            billingPeriod: format(new Date(value.billingPeriod), 'MM/dd/yyyy'),
+                            invoiceDate: format(
+                                new Date(value.invoiceDate),
+                                "MM/dd/yyyy"
+                            ),
+                            billingPeriod: format(
+                                new Date(value.billingPeriod),
+                                "MM/dd/yyyy"
+                            ),
                             // disabled: !value?.canDelete,
                             // isEditable: value?.canUpdate,
                         })),
@@ -97,7 +103,7 @@ const InvoicesProvider = ({ children }) => {
             } catch (error) {
                 setNotification({
                     type: "error",
-                    message: t("user-load-failed"), //todo
+                    message: t("invoices-load-failed"),
                 });
             } finally {
                 setLoading(false);
@@ -105,23 +111,46 @@ const InvoicesProvider = ({ children }) => {
         },
         [authFetch, t]
     );
-    const payNow = useCallback(async () => {
-        alert("payment not integrated yet");
-    }, [authFetch]);
+    const payNow = useCallback(
+        async (id) => {
+            try {
+                const response = await authFetch(
+                    `${BaseURL}/invoice/${id}/pay`,
+                    {
+                        method: 'POST'
+                    }
+                );
+                if (response.ok) {
+                    setNotification({
+                        message: t("payment-successful"),
+                        type: "success",
+                    });
+                    return;
+                }
+                throw "";
+            } catch (error) {
+                setNotification({
+                    message: t("payment-failed"),
+                    type: "error",
+                });
+            }
+        },
+        [authFetch]
+    );
 
     const downloadReceipts = useCallback(
         async (id) => {
-            alert("api not ready")
+            alert("api not ready");
         },
         [authFetch]
     );
     const downloadInvoice = useCallback(
         async (id) => {
-            const {url} = await authFetch(
+            const { url } = await authFetch(
                 `${BaseURL}/invoice/${id}/download`
-            ).then(res => res.json())
+            ).then((res) => res.json());
 
-            window.open(url)
+            window.open(url);
         },
         [authFetch]
     );
@@ -143,7 +172,7 @@ const InvoicesProvider = ({ children }) => {
             downloadInvoice,
             isInvoiceListOpen,
             payNow,
-            downloadReceipts
+            downloadReceipts,
         }),
         [
             invoicesListData,
@@ -155,7 +184,7 @@ const InvoicesProvider = ({ children }) => {
             downloadInvoice,
             isInvoiceListOpen,
             payNow,
-            downloadReceipts
+            downloadReceipts,
         ]
     );
     return (
@@ -170,18 +199,15 @@ const InvoicesProvider = ({ children }) => {
                     open={isInvoiceListOpen}
                     preventCloseOnClickOutside
                     // title={t("user-list")} // todo
-                    title={t('invoices')}
+                    title={t("invoices")}
                 >
-                    <InvoicesTable/>
+                    <InvoicesTable />
                 </Tearsheet>
             </InvoicesContext.Provider>
         </>
     );
 };
 
-export {
-    InvoicesContext,
-    InvoicesProvider,
-};
+export { InvoicesContext, InvoicesProvider };
 
 export const useInvoices = () => useContext(InvoicesContext);

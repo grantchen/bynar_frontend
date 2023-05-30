@@ -136,5 +136,8 @@
     "total": "Gesamt",
     "billing-peroid": "Abrechnungszeitraum",
     "provider": "Anbieter",
-    "payment-status": "Zahlungsstatus"
+    "payment-status": "Zahlungsstatus",
+    "payment-failed": "Zahlung fehlgeschlagen",
+    "payment-successful": "Zahlung erfolgreich",
+    "invoices-load-failed": "Fehler beim Laden der Rechnungen"
 }

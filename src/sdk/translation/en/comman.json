@@ -136,5 +136,8 @@
     "total":"Total",
     "billing-peroid":"Billing Period",
     "provider":"Provider",
-    "payment-status":"Payment Status"
+    "payment-status":"Payment Status",
+    "payment-failed": "Payment Failed",
+    "payment-successful": "Payment Successful",
+    "invoices-load-failed": "Failed to load invoices"
 }

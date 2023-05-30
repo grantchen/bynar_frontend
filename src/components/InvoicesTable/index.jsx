@@ -9,8 +9,18 @@ import {
     useMobile,
 } from "../../sdk";
 import { useSearchParams } from "react-router-dom";
-import { TableToolbarContent, Button, Pagination } from "@carbon/react";
-import { DocumentDownload, Receipt, IbmBluepay, Add } from "@carbon/react/icons";
+import {
+    TableToolbarContent,
+    Button,
+    Pagination,
+    Loading,
+} from "@carbon/react";
+import {
+    DocumentDownload,
+    Receipt,
+    IbmBluepay,
+    Add,
+} from "@carbon/react/icons";
 import {
     useDatagrid,
     useActionsColumn,
@@ -24,15 +34,27 @@ import {
     Datagrid,
     pkg,
 } from "@carbon/ibm-products";
-import { useEffect, useCallback, useMemo } from "react";
+import { useEffect, useCallback, useMemo, useState } from "react";
 import { Restart16, Activity16, TrashCan16 } from "@carbon/icons-react";
+import "./invoices-table.scss";
+import { ToastNotification } from "carbon-components-react";
 
 pkg.setAllComponents(true);
 pkg.setAllFeatures(true);
 
 export default function InvoicesTable() {
-    const { invoicesListData, isInvoiceListOpen, getInvoicesList, loading, payNow, downloadReceipts, downloadInvoice } =
-        useInvoices();
+    const {
+        invoicesListData,
+        isInvoiceListOpen,
+        getInvoicesList,
+        loading,
+        payNow,
+        downloadReceipts,
+        downloadInvoice,
+        notification,
+    } = useInvoices();
+
+    const [actionsLoading, setActionsLoading] = useState(false);
     const isMobile = useMobile();
     const { t } = useTranslation();
 
@@ -89,29 +111,37 @@ export default function InvoicesTable() {
             emptyStateSize: "lg",
             rowActions: [
                 {
-                    id: "view",
+                    id: "pay",
                     itemText: (
                         <div className="row-action-renderer">
                             <IbmBluepay />
                             {t("pay")}
                         </div>
                     ),
-                    onClick: (_, { original }) => payNow(original),
+                    onClick: async (_, { original }) => {
+                        setActionsLoading(true);
+                        await payNow(original.id);
+                        setActionsLoading(false);
+                    },
+                    shouldDisableMenuItem: ({ original }) => original.paid,
                 },
                 {
-                    id: "edit",
+                    id: "download-invoice",
                     itemText: (
                         <div className="row-action-renderer">
                             <DocumentDownload />
                             {t("invoice")}
                         </div>
                     ),
-                    onClick: (_, { original }) => downloadInvoice(original.id),
-                    shouldDisableMenuItem: ({ original }) =>
-                        !original.paid,
+                    onClick: async (_, { original }) => {
+                        setActionsLoading(true);
+                        await downloadInvoice(original.id);
+                        setActionsLoading(false);
+                    },
+                    shouldDisableMenuItem: ({ original }) => !original.paid,
                 },
                 {
-                    id: "delete",
+                    id: "download-receipt",
                     itemText: (
                         <div className="row-action-renderer">
                             <Receipt />
@@ -119,9 +149,9 @@ export default function InvoicesTable() {
                         </div>
                     ),
                     hasDivider: true,
-                    shouldDisableMenuItem: ({ original }) =>
-                    !original.paid,
+                    shouldDisableMenuItem: ({ original }) => !original.paid,
                     onClick: (_, { original }) => downloadReceipts(original),
+                    shouldHideMenuItem: () => true,
                 },
             ],
             onSort: (sortByColumn, sortByOrder) => {
@@ -167,26 +197,13 @@ export default function InvoicesTable() {
                                 getInvoicesList(getInvoicesAPIQuery())
                             }
                         />
-                        {/* <dgState.CustomizeColumnsButton /> */}
-                        {/* <Button
-                            // onClick={openAddUserModel}
-                            hasIconOnly={isMobile ? true : false}
-                            size={isMobile ? "lg" : "sm"}
-                            kind="primary"
-                            style={{ cursor: "pointer" }}
-                            renderIcon={Add}
-                            tooltipPosition="bottom"
-                            tooltipAlignment="end"
-                            iconDescription={t("add-new-user")}
-                        >
-                            {t("add-new-user")}
-                        </Button> */}
                     </TableToolbarContent>
                 );
             },
         },
         useStickyColumn,
-        useActionsColumn
+        useActionsColumn,
+        useSortableColumnsFork
     );
     /**
      * effect to set/reset datagrid states on params / tearsheet open state changes
@@ -222,9 +239,20 @@ export default function InvoicesTable() {
 
     return (
         <>
+            {notification && (
+                <ToastNotification
+                    className="error-notification-box"
+                    iconDescription="close notification"
+                    subtitle={notification?.message}
+                    timeout={0}
+                    title={""}
+                    kind={notification.type}
+                />
+            )}
             <div className="invoices-table">
                 <Datagrid datagridState={datagridState} />
             </div>
+            {actionsLoading && <Loading />}
         </>
     );
 }

@@ -2,7 +2,6 @@
     width: calc(100% - 0px);
     overflow-x: auto;
     position: absolute;
-    max-width: 87.5vw; //todo remove this, debug what's happening here
 }
 
 .bx--body--with-modal-open .c4p--datagrid__grid-container {
@@ -32,9 +31,6 @@
 .invoices-table {
     height: 100%;
     overflow: hidden;
-    .c4p--tearsheet__right{
-        width: 100%;
-    }
     .c4p--datagrid, .c4p--datagrid__table-container, .c4p--datagrid__table-container-inner {
         height: 100%;
     }

@@ -136,5 +136,8 @@
     "total": "Total",
     "billing-peroid": "Período de facturación",
     "provider": "Proveedor",
-    "payment-status": "Estado de pago"
+    "payment-status": "Estado de pago",
+    "payment-failed": "Pago fallido",
+    "payment-successful": "Pago exitoso",
+    "invoices-load-failed": "Error al cargar las facturas"
 }
