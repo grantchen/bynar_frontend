@@ -64,7 +64,7 @@ const ProfileDropdown = React.memo(
             <Link onClick={onProfileOptionClick}>{t("profile")}</Link>
             <Link>{t("privacy")}</Link>
             {/* todo */}
-            <Link onClick={handleOpenInvoiceList}>Invoices</Link>
+            <Link onClick={handleOpenInvoiceList}>{t("invoices")}</Link>
             <Link style={{ cursor: "pointer" }} onClick={handleLanguageChange}>
               {t("change-language")}
             </Link>

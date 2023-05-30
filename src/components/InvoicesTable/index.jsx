@@ -92,8 +92,8 @@ export default function InvoicesTable() {
                     id: "view",
                     itemText: (
                         <div className="row-action-renderer">
-                            <IbmBluepay /> Pay
-                            {/* {t("view")} */}
+                            <IbmBluepay />
+                            {t("pay")}
                         </div>
                     ),
                     onClick: (_, { original }) => payNow(original),
@@ -102,8 +102,8 @@ export default function InvoicesTable() {
                     id: "edit",
                     itemText: (
                         <div className="row-action-renderer">
-                            <DocumentDownload /> Invoice
-                            {/* {t("edit")} */}
+                            <DocumentDownload />
+                            {t("invoice")}
                         </div>
                     ),
                     onClick: (_, { original }) => downloadInvoice(original.id),
@@ -114,8 +114,8 @@ export default function InvoicesTable() {
                     id: "delete",
                     itemText: (
                         <div className="row-action-renderer">
-                            <Receipt /> Receipt
-                            {/* {t("delete")} */}
+                            <Receipt />
+                            {t("receipt")}
                         </div>
                     ),
                     hasDivider: true,
@@ -229,12 +229,10 @@ export default function InvoicesTable() {
     );
 }
 
-//Transaction date, Invoice id, Currency, Total, Billing period, Provider, Payment Status.
-
 function getColumns(rows, t) {
     return [
         {
-            Header: "Transaction Date", //t("username"),
+            Header: t("transaction-date"),
             accessor: "invoiceDate",
             width: getAutoSizedColumnWidth(
                 rows,
@@ -243,22 +241,22 @@ function getColumns(rows, t) {
             ),
         },
         {
-            Header: "Invoice#", //t("fullname"),
+            Header: t("invoice"),
             accessor: "invoiceNumber",
             width: getAutoSizedColumnWidth(rows, "invoiceNumber", "Invoice#"),
         },
         {
-            Header: "Currency", //t("country"),
+            Header: t("currency"),
             accessor: "currency",
             width: getAutoSizedColumnWidth(rows, "currency", "Currency"),
         },
         {
-            Header: "Total", //t("city"),
+            Header: t("total"),
             accessor: "total",
             width: getAutoSizedColumnWidth(rows, "total", "Total"),
         },
         {
-            Header: "Billing Period", //t("postal-code"),
+            Header: t("billing-peroid"),
             accessor: "billingPeriod",
             width: getAutoSizedColumnWidth(
                 rows,
@@ -267,12 +265,12 @@ function getColumns(rows, t) {
             ),
         },
         {
-            Header: "Provider", //t("state"),
+            Header: t("provider"),
             accessor: "providerID",
             width: getAutoSizedColumnWidth(rows, "providerID", "Provider"),
         },
         {
-            Header: "Payment Status", //t("phone-number"),
+            Header: t("payment-status"),
             accessor: (row) => {
                 return row.paid ? (
                     <StatusIcon

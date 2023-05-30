@@ -125,5 +125,15 @@
     "add-file-specify-url": "Agregar un archivo especificando una URL",
     "URL": "URL",
     "invalid-file-type": "Tipo de archivo inválido.",
-    "max-file-size-error-500": "Tamaño máximo del archivo: 500 KB. Seleccione un archivo nuevo e intente nuevamente."
+    "max-file-size-error-500": "Tamaño máximo del archivo: 500 KB. Seleccione un archivo nuevo e intente nuevamente.",
+    "invoices": "Facturas",
+    "pay": "Pagar",
+    "invoice": "Factura#",
+    "receipt": "Recibo",
+    "transaction-date": "Fecha de transacción",
+    "currency": "Moneda",
+    "total": "Total",
+    "billing-peroid": "Período de facturación",
+    "provider": "Proveedor",
+    "payment-status": "Estado de pago"
 }

@@ -170,7 +170,7 @@ const InvoicesProvider = ({ children }) => {
                     open={isInvoiceListOpen}
                     preventCloseOnClickOutside
                     // title={t("user-list")} // todo
-                    title={'Invoices'}
+                    title={t('invoices')}
                 >
                     <InvoicesTable/>
                 </Tearsheet>
