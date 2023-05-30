@@ -241,7 +241,7 @@ function getColumns(rows, t) {
             ),
         },
         {
-            Header: t("invoice"),
+            Header: t("invoice_number"),
             accessor: "invoiceNumber",
             width: getAutoSizedColumnWidth(rows, "invoiceNumber", "Invoice#"),
         },
