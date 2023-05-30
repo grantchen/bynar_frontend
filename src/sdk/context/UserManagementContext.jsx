@@ -361,7 +361,7 @@ const UserManagementProvider = ({ children }) => {
                         if (response.ok) {
                             setNotification({
                                 type: "success",
-                                message: t("user-deleted-successfully"),
+                                message: t("card-deleted-successfully"),
                             });
                         } else {
                             throw "error";
@@ -369,7 +369,7 @@ const UserManagementProvider = ({ children }) => {
                     } catch (error) {
                         setNotification({
                             type: "error",
-                            message: t("error-deleting-user"),
+                            message: t("error-deleting-card"),
                         });
                     } finally {
                         setLoading(false);
@@ -441,7 +441,7 @@ const UserManagementProvider = ({ children }) => {
             } catch (error) {
                 setNotification({
                     type: "error",
-                    message: t("error-deleting-user"),
+                    message: t("error-deleting-card"),
                 });
             } finally {
             }
@@ -474,7 +474,7 @@ const UserManagementProvider = ({ children }) => {
             } else if (response.status === 500) {
                 throw { message: res.error, type: "error" };
             } else {
-                throw { message: "error-adding-user-card", type: "error" };
+                throw { message: t("error-adding-user-card"), type: "error" };
             }
         },
         [authFetch]

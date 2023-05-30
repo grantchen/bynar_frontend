@@ -28,7 +28,7 @@ const UserCardModal = ({ open }) => {
                 const res = await Frames.submitCard();
                 await handleVerifyCard(res?.token);
             } catch (e) {
-                throw { message: "error-adding-user-card", type: "error" };
+                throw { message: t("error-adding-user-card"), type: "error" };
             }
             finally {
                 Frames.init("pk_sbox_u4jn2iacxvzosov4twmtl2yzlqe");
@@ -55,7 +55,7 @@ const UserCardModal = ({ open }) => {
             onClose={handleClose}
             className="theme-change-modal"
         >
-            <ModalHeader title={"Add new card"} />
+            <ModalHeader title={t("add-new-card")} />
             <ModalBody>
                 <Frames
                     config={{
@@ -64,7 +64,7 @@ const UserCardModal = ({ open }) => {
                 >
                     <div>
                         <div>
-                            <p className="input-heading">Card details</p>
+                            <p className="input-heading">{t("card-details")}</p>
                         </div>
                         <div>
                             <CardFrame className="card-number" />

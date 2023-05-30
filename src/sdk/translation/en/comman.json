@@ -125,5 +125,14 @@
     "add-file-specify-url": "Add a file by specifying a URL",
     "URL": "URL",
     "invalid-file-type": "Invalid file type.",
-    "max-file-size-error-500": "500kb max file size. Select a new file and try again."
+    "max-file-size-error-500": "500kb max file size. Select a new file and try again.",
+    "card-management":"Card management",
+    "payment-method":"Payment method",
+    "add-new-card":"Add new card",
+    "default-payment-method":"Default payment method",
+    "remove-payment-method":"Remove payment method",
+    "error-adding-user-card":"error adding user card",
+    "card-details":"Card details",
+    "card-deleted-successfully":"Card deleted successfully",
+    "error-deleting-card":"Error deleting card"
 }

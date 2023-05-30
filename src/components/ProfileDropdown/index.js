@@ -64,7 +64,7 @@ const ProfileDropdown = React.memo(
           <div className="link-list">
             <Link onClick={onProfileOptionClick}>{t("profile")}</Link>
             {isUserCardManagementAllowed &&
-              <Link onClick={openCardManagementSidePanel}>Card management</Link>}
+              <Link onClick={openCardManagementSidePanel}>{t("card-management")}</Link>}
             <Link>{t("privacy")}</Link>
             {/* todo */}
             <Link onClick={handleOpenInvoiceList}>Invoices</Link>

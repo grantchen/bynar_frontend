@@ -12,10 +12,12 @@ import { TextInputSkeleton } from "@carbon/react";
 import { useUserManagement } from "../../sdk";
 import { notificationTokens } from "@carbon/themes";
 import { Delete16 } from "@carbon/icons-react";
+import { useTranslation } from "react-i18next";
 const UserCardManagement = ({ open }) => {
     const { closeModalAndGoBackToUserList, getUserCardList, openUserCardManagementModal, notification, openUserCardDeleteModal } = useUserManagement();
     const [cardList, setCardList] = useState([]);
     const [savingData, setSavingData] = useState(false);
+    const {t} = useTranslation();
 
     const handleClose = () => {
         closeModalAndGoBackToUserList();
@@ -56,16 +58,16 @@ const UserCardManagement = ({ open }) => {
                             />
                         )}
                         <ContainedList
-                            label="Payment method"
+                            label={t("payment-method")}
                             kind="on-page"
                             action={
                                 <Button
                                     hasIconOnly
-                                    iconDescription="Add"
+                                    iconDescription={t("add-new-card")}
                                     renderIcon={Add20}
                                     tooltipPosition="left"
                                     onClick={openUserCardManagementModal}
-                                    disabled={cardList?.instruments.length > 10 ? true : false}
+                                    disabled={cardList?.instruments?.length > 10 ? true : false}
                                 // onClick={() => {
                                 //     console.log("test delete");
                                 //     openUserCardDeleteModal({
@@ -79,10 +81,9 @@ const UserCardManagement = ({ open }) => {
                                 <ContainedListItem
                                     action={
                                         <OverflowMenu floatingMenu flipped size="lg" ariaLabel="List item options">
-                                            <OverflowMenuItem itemText="Default payment method" />
-                                            <OverflowMenuItem itemText="Remove payment method" isDelete hasDivider
+                                            <OverflowMenuItem itemText={t("default-payment-method")}/>
+                                            <OverflowMenuItem itemText={t("remove-payment-method")} isDelete hasDivider
                                                 onClick={() => {
-                                                    console.log("test delete");
                                                     openUserCardDeleteModal({
                                                         cardIdToBeDeleted: listItem?.id,
                                                         userName: cardList?.email,

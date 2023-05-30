@@ -125,5 +125,14 @@
     "add-file-specify-url": "Ajouter un fichier en spécifiant une URL",
     "URL": "URL",
     "invalid-file-type": "Type de fichier non valide.",
-    "max-file-size-error-500": "Taille maximale du fichier : 500 Ko. Sélectionnez un nouveau fichier et réessayez."
+    "max-file-size-error-500": "Taille maximale du fichier : 500 Ko. Sélectionnez un nouveau fichier et réessayez.",
+    "card-management": "Gestion des cartes",
+    "payment-method": "Moyen de paiement",
+    "add-new-card": "Ajouter une nouvelle carte",
+    "default-payment-method": "Moyen de paiement par défaut",
+    "remove-payment-method": "Supprimer le moyen de paiement",
+    "error-adding-user-card": "Erreur lors de l'ajout de la carte utilisateur",
+    "card-details": "Détails de la carte",
+    "card-deleted-successfully": "Carte supprimée avec succès",
+    "error-deleting-card": "Erreur lors de la suppression de la carte"
 }
