@@ -135,5 +135,7 @@
     "card-details": "Détails de la carte",
     "card-deleted-successfully": "Carte supprimée avec succès",
     "error-deleting-card": "Erreur lors de la suppression de la carte",
-    "delete-card-modal-heading-2": "supprimera définitivement la carte. Cette action ne peut pas être annulée."
+    "delete-card-modal-heading-2": "supprimera définitivement la carte. Cette action ne peut pas être annulée.",
+    "type-last-four-digit": "Saisissez les 4 derniers chiffres pour confirmer",
+    "card": "Carte"
 }

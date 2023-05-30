@@ -13,10 +13,13 @@ import { CardFrame, Frames } from "frames-react";
 import { useCallback, useState, useRef, useEffect } from "react";
 import { useAuth } from "../AuthContext";
 import './UserCardModal.scss'
+import { useThemePreference } from "../new-theme";
 const UserCardModal = ({ open }) => {
     const [loading, setLoading] = useState();
+    const modalBodyRef = useRef(null)
     const { authFetch } = useAuth();
     const { closeModalAndGoBackToUserList, handleVerifyCard } = useUserManagement();
+    const {theme} = useThemePreference()
     const { t } = useTranslation();
     const handleClose = useCallback(() => {
         closeModalAndGoBackToUserList();
@@ -29,9 +32,6 @@ const UserCardModal = ({ open }) => {
                 await handleVerifyCard(res?.token);
             } catch (e) {
                 throw { message: t("error-adding-user-card"), type: "error" };
-            }
-            finally {
-                Frames.init("pk_sbox_u4jn2iacxvzosov4twmtl2yzlqe");
             }
         },
         [authFetch]
@@ -48,18 +48,42 @@ const UserCardModal = ({ open }) => {
         }
     }, []);
 
+    useEffect(() => {
+        if(!open){
+            Frames.init("pk_sbox_u4jn2iacxvzosov4twmtl2yzlqe");
+        }
+    }, [open])
+
+    // useEffect(() => {
+    //     if(!modalBodyRef){
+    //         return
+    //     }
+    //     const iFrame = modalBodyRef.current.querySelector('iframe')
+    //     iFrame.addEventListener( "load", function(e) {
+
+    //         // this.style.backgroundColor = "red";
+    //         this.classList.add('my-test-frame')
+        
+    //     } )
+    // }, [])
+
     return (
         <ComposedModal
             open={open}
-            size="xs"
+            size="md"
             onClose={handleClose}
-            className="theme-change-modal"
+            className="add-card-modal"
         >
             <ModalHeader title={t("add-new-card")} />
-            <ModalBody>
+            <ModalBody ref={modalBodyRef}>
                 <Frames
                     config={{
                         publicKey: "pk_sbox_u4jn2iacxvzosov4twmtl2yzlqe",
+                        style: {
+                            base: {
+                                color: theme === 'dark' ? '#ffffff' : '#161616'
+                            },
+                        }
                     }}
                 >
                     <div>
@@ -67,7 +91,7 @@ const UserCardModal = ({ open }) => {
                             <p className="input-heading">{t("card-details")}</p>
                         </div>
                         <div>
-                            <CardFrame className="card-number" />
+                            <CardFrame className="card-number"/>
                         </div>
                     </div>
                 </Frames>

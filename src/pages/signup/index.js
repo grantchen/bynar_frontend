@@ -46,7 +46,7 @@ const Signup = () => {
   const [passwordStrengthWidth, setpaswordStrengthWidth] = useState(0);
   const [passwordIsValid, setPasswordIsValid] = useState(true);
   const [emailIsValid, setEmailValid] = useState(true);
-  const [activeStep, setActiveStep] = useState(5);
+  const [activeStep, setActiveStep] = useState(1);
   const [verificationCode, setVerificationCode] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");

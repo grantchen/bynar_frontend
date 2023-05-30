@@ -1,13 +1,19 @@
 .card-list{
-    margin-top: 60px;
-    // .cds--overflow-menu-options{
-    //    z-index: 9001 !important;
-    // }
-    ul.cds--overflow-menu-options.cds--overflow-menu--flip.cds--overflow-menu-options--open.cds--overflow-menu-options--lg {
-        z-index: 9200;
-    }
+    margin-top: 50px;
     .card-box{
         display: flex;
         justify-content: space-between;
+    }
+}
+.card-row-popover{
+    top: 0.4rem;
+    &.cds--popover--open, .card-popver-content{
+        box-shadow: 0 2px 6px var(--cds-shadow,rgba(0,0,0,0.3));
+    }
+    .cds--tooltip-content, .cds--popover-caret {
+        display: none !important;
+    }
+    .cds--overflow-menu-options__btn{
+        max-width: max-content;
     }
 }

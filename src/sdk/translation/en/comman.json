@@ -135,5 +135,7 @@
     "card-details":"Card details",
     "card-deleted-successfully":"Card deleted successfully",
     "error-deleting-card":"Error deleting card",
-    "delete-card-modal-heading-2":"will permanently delete the card. This action cannot be undone."
+    "delete-card-modal-heading-2":"will permanently delete the card. This action cannot be undone.",
+    "type-last-four-digit": "Type last 4 digit to confirm",
+    "card": "Card"
 }

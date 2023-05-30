@@ -135,5 +135,7 @@
     "card-details": "Detalles de la tarjeta",
     "card-deleted-successfully": "Tarjeta eliminada correctamente",
     "error-deleting-card": "Error al eliminar la tarjeta",
-    "delete-card-modal-heading-2": "eliminará la tarjeta de forma permanente. Esta acción no se puede deshacer."
+    "delete-card-modal-heading-2": "eliminará la tarjeta de forma permanente. Esta acción no se puede deshacer.",
+    "type-last-four-digit": "Ingrese los últimos 4 dígitos para confirmar",
+    "card": "Tarjeta"
 }

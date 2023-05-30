@@ -119,6 +119,7 @@ function _AuthenticatedAppHeader() {
                                                     "userIdToShowDetails",
                                                     "openAddUserPanel",
                                                     "userIdToBeEdited",
+                                                    "openCardMangementPanel"
                                                 ])
                                             );
                                         }}

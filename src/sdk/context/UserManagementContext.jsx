@@ -319,25 +319,21 @@ const UserManagementProvider = ({ children }) => {
     );
 
     const openUserCardDeleteModal = useCallback(
-        ({ cardIdToBeDeleted, userName }) => {
-            console.log(cardIdToBeDeleted,userName,"opennnnn")
-            if (!cardIdToBeDeleted || !userName) {
+        ({ cardIdToBeDeleted, last4Digit }) => {
+            if (!cardIdToBeDeleted || !last4Digit) {
                 return;
             }
             setUserListParams(mergeQueryParams(searchParams, {}));
-            setSearchParams({ cardIdToBeDeleted, userName });
+            setSearchParams({ cardIdToBeDeleted });
             setDeleteModalProps({
                 body: `${t(
                     "delete-modal-heading-1"
-                )} ${userName} ${t("delete-card-modal-heading-2")}`,
-                className: "remove-modal-test",
+                )} ${t("delete-card-modal-heading-2")}`,
                 title: t("delete-modal-title"),
                 iconDescription: t("delete-modal-icon"),
                 inputInvalidText: t("delete-modal-invalid-input-text"),
-                inputLabelText: `${t(
-                    "delete-modal-input-label-text-1"
-                )} "${userName}" ${t("delete-modal-input-label-text-2")}`,
-                inputPlaceholderText: `${userName}`,
+                inputLabelText: t("type-last-four-digit"),
+                inputPlaceholderText: last4Digit,
                 open: true,
                 onClose: () => {
                     setDeleteModalProps(null);
@@ -348,9 +344,9 @@ const UserManagementProvider = ({ children }) => {
                 },
                 primaryButtonText: t("delete"),
                 primaryButtonDisabled: false,
-                resourceName: `${userName}`,
+                resourceName: last4Digit,
                 secondaryButtonText: t("close"),
-                label: `${t("delete")} ${userName}`,
+                label: `${t("delete")} ${t("card")}`,
                 textConfirmation: true,
                 onRequestSubmit: async () => {
                     try {

@@ -5,3 +5,51 @@ button.button-with-loading {
         min-height: auto;
     }
 }
+
+.add-card-modal{
+    .bx--modal-content{
+        .container{
+            height: auto;
+        }
+    }
+}
+
+
+.card-number {
+  width: 100%;
+  height: 40px;
+  padding: 0px;
+  border: none !important;
+  border-bottom: 1px solid var(--cds-ui-04, #8d8d8d) !important;
+  background-color: var(--cds-field-01, #f4f4f4) !important;
+  color: var(--cds-text-01, #161616) !important;
+  transition: background-color 70ms cubic-bezier(0.2, 0, 0.38, 0.9), outline 70ms cubic-bezier(0.2, 0, 0.38, 0.9);
+}
+
+[class$="--invalid"] {
+  color: red !important;
+  -webkit-text-fill-color: red !important;
+}
+
+
+@media screen and (max-width:600px) {
+  .card-input-container {
+    padding: 0px 10px;
+  }
+}
+
+
+.my-test-frame{
+    background-color: red;
+
+.card-number {
+    width: 100%;
+    height: 40px;
+    padding: 0px;
+    border: none !important;
+    border-bottom: 1px solid var(--cds-ui-04, #8d8d8d) !important;
+    background-color: var(--cds-field-01, #f4f4f4) !important;
+    color: var(--cds-text-01, #161616) !important;
+    transition: background-color 70ms cubic-bezier(0.2, 0, 0.38, 0.9), outline 70ms cubic-bezier(0.2, 0, 0.38, 0.9);
+  }
+}
