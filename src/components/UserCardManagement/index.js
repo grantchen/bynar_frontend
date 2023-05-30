@@ -10,6 +10,7 @@ import './UserCardManagement.scss'
 import { useUserManagement } from "../../sdk";
 import { notificationTokens } from "@carbon/themes";
 import { Delete16 } from "@carbon/icons-react";
+import '../../styles/paymentform.scss'
 const UserCardManagement = ({ open }) => {
     const { closeModalAndGoBackToUserList, getUserCardList, openUserCardManagementModal, notification, openUserCardDeleteModal } = useUserManagement();
     const [cardList, setCardList] = useState([]);
@@ -29,8 +30,6 @@ const UserCardManagement = ({ open }) => {
             setCardList(data?.result);
         })();
     }, [open]);
-
-    console.log(cardList, "testtt", cardList?.instruments)
 
     return (
         <>
@@ -63,14 +62,14 @@ const UserCardManagement = ({ open }) => {
                                     iconDescription="Add"
                                     renderIcon={Add20}
                                     tooltipPosition="left"
-                                    // onClick={openUserCardManagementModal}
-                                    onClick={() => {
-                                        console.log("test delete");
-                                        openUserCardDeleteModal({
-                                            cardIdToBeDeleted: "src_g3xwcvhcljfebhi5pjsspcyqja",
-                                            userName: "s1@yopmail.com",
-                                        });
-                                    }}
+                                    onClick={openUserCardManagementModal}
+                                    // onClick={() => {
+                                    //     console.log("test delete");
+                                    //     openUserCardDeleteModal({
+                                    //         cardIdToBeDeleted: "src_g3xwcvhcljfebhi5pjsspcyqja",
+                                    //         userName: "s1@yopmail.com",
+                                    //     });
+                                    // }}
                                 />
                             }>
                             {cardList?.instruments?.map((listItem, key) => (
@@ -88,12 +87,15 @@ const UserCardManagement = ({ open }) => {
                                                 }}
                                             />
                                         </OverflowMenu>
-                                    }>
-                                    {listItem?.scheme}
-                                    {"...."}{listItem?.last4}
-                                    {cardList?.name}
-                                    {listItem?.expiry_month}/
-                                    {listItem?.expiry_year}
+                                    }
+                                    key={key}
+                                    >
+                                    <div className="card-box">
+                                    <p>{listItem?.scheme}</p>                                   
+                                    <p>{"...."}{listItem?.last4}</p>
+                                    <p>{cardList?.name}</p>
+                                    <p>{listItem?.expiry_month}/{listItem?.expiry_year}</p>
+                                    </div>
                                 </ContainedListItem>
                             ))}
                            
