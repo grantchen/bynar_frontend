@@ -1,0 +1,112 @@
+import {
+    InlineLoading,
+    ComposedModal,
+    ModalHeader,
+    ModalBody,
+    ModalFooter,
+    TextInput,
+    Button,
+} from "carbon-components-react";
+import { useTranslation } from "react-i18next";
+import { useUserManagement } from "../context";
+import { CardFrame, Frames } from "frames-react";
+import { useCallback, useState, useRef, useEffect } from "react";
+import { useAuth } from "../AuthContext";
+import './UserCardModal.scss'
+import { useThemePreference } from "../new-theme";
+const UserCardModal = ({ open }) => {
+    const [loading, setLoading] = useState();
+    const modalBodyRef = useRef(null)
+    const { authFetch } = useAuth();
+    const { closeModalAndGoBackToUserList, handleVerifyCard } = useUserManagement();
+    const {theme} = useThemePreference()
+    const { t } = useTranslation();
+    const handleClose = useCallback(() => {
+        closeModalAndGoBackToUserList();
+    }, []);
+
+    const verifyUserCardDetails = useCallback(
+        async () => {
+            try {
+                const res = await Frames.submitCard();
+                await handleVerifyCard(res?.token);
+            } catch (e) {
+                throw { message: t("error-adding-user-card"), type: "error" };
+            }
+        },
+        [authFetch]
+    );
+
+    const handleSubmit = useCallback(async () => {
+        try {
+            setLoading(true);
+            await verifyUserCardDetails();
+        } catch (e) {
+            console.log("adding card", e)
+        } finally {
+            setLoading(false);
+        }
+    }, []);
+
+    useEffect(() => {
+        if(!open){
+            Frames.init("pk_sbox_u4jn2iacxvzosov4twmtl2yzlqe");
+        }
+    }, [open])
+
+    // useEffect(() => {
+    //     if(!modalBodyRef){
+    //         return
+    //     }
+    //     const iFrame = modalBodyRef.current.querySelector('iframe')
+    //     iFrame.addEventListener( "load", function(e) {
+
+    //         // this.style.backgroundColor = "red";
+    //         this.classList.add('my-test-frame')
+        
+    //     } )
+    // }, [])
+
+    return (
+        <ComposedModal
+            open={open}
+            size="md"
+            onClose={handleClose}
+            className="add-card-modal"
+        >
+            <ModalHeader title={t("add-new-card")} />
+            <ModalBody ref={modalBodyRef}>
+                <Frames
+                    config={{
+                        publicKey: "pk_sbox_u4jn2iacxvzosov4twmtl2yzlqe",
+                        style: {
+                            base: {
+                                color: theme === 'dark' ? '#ffffff' : '#161616'
+                            },
+                        }
+                    }}
+                >
+                    <div>
+                        <div>
+                            <p className="input-heading">{t("card-details")}</p>
+                        </div>
+                        <div>
+                            <CardFrame className="card-number"/>
+                        </div>
+                    </div>
+                </Frames>
+            </ModalBody>
+            <ModalFooter>
+                <Button kind="secondary" onClick={handleClose}>
+                    {t("cancel")}
+                </Button>
+                <Button kind="primary" onClick={handleSubmit} className="button-with-loading">
+                    {t("confirm")}
+                    {loading && (
+                        <InlineLoading className="inline-loading-within-btn" />
+                    )}
+                </Button>
+            </ModalFooter>
+        </ComposedModal>)
+}
+export default UserCardModal;

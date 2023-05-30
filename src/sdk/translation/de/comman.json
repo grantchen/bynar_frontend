@@ -139,5 +139,17 @@
     "payment-status": "Zahlungsstatus",
     "payment-failed": "Zahlung fehlgeschlagen",
     "payment-successful": "Zahlung erfolgreich",
-    "invoices-load-failed": "Fehler beim Laden der Rechnungen"
+    "invoices-load-failed": "Fehler beim Laden der Rechnungen",
+    "card-management": "Kartenverwaltung",
+    "payment-method": "Zahlungsmethode",
+    "add-new-card": "Neue Karte hinzufügen",
+    "default-payment-method": "Standardzahlungsmethode",
+    "remove-payment-method": "Zahlungsmethode entfernen",
+    "error-adding-user-card": "Fehler beim Hinzufügen der Benutzerkarte",
+    "card-details": "Kartendetails",
+    "card-deleted-successfully": "Karte erfolgreich gelöscht",
+    "error-deleting-card": "Fehler beim Löschen der Karte",
+    "delete-card-modal-heading-2": "wird die Karte dauerhaft löschen. Diese Aktion kann nicht rückgängig gemacht werden.",
+    "type-last-four-digit": "Geben Sie die letzten 4 Ziffern ein, um zu bestätigen",
+    "card": "Karte"
 }

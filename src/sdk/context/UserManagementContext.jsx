@@ -14,6 +14,9 @@ import { UserDetailPanel } from "../../components/UserDetailPanel";
 import { useAuth } from "../AuthContext";
 import { useTranslation } from "react-i18next";
 import { RemoveModalWithLoading } from "../RemoveModalWithLoading";
+import UserCardManagement from "../../components/UserCardManagement";
+import UserCardModal from "../UserCardModal";
+import { Frames } from "frames-react";
 const UserManagementContext = createContext();
 
 const UserManagementProvider = ({ children }) => {
@@ -35,6 +38,8 @@ const UserManagementProvider = ({ children }) => {
     const editUserPanelOpen = Boolean(searchParams.get("userIdToBeEdited"));
     const addUserPanelOpen = Boolean(searchParams.get("openAddUserPanel"));
     const userDetailsOpen = Boolean(searchParams.get("userIdToShowDetails"));
+    const cardManagementSidePanelOpen = Boolean(searchParams.get("openCardMangementPanel"));
+    const userCardModalOpen = Boolean(searchParams.get("userCardModalOpen"));
 
     const isUserManagementAllowed = useMemo(
         () =>
@@ -42,6 +47,15 @@ const UserManagementProvider = ({ children }) => {
             !(
                 user?.cognitoUserGroups === "Users" ||
                 user?.cognitoUserGroups?.length === 0
+            ),
+        [user]
+    );
+
+    const isUserCardManagementAllowed = useMemo(
+        () =>
+            user &&
+            (
+                user?.cognitoUserGroups === "PrimaryOwner"
             ),
         [user]
     );
@@ -304,6 +318,69 @@ const UserManagementProvider = ({ children }) => {
         [searchParams, authFetch]
     );
 
+    const openUserCardDeleteModal = useCallback(
+        ({ cardIdToBeDeleted, last4Digit }) => {
+            if (!cardIdToBeDeleted || !last4Digit) {
+                return;
+            }
+            setUserListParams(mergeQueryParams(searchParams, {}));
+            setSearchParams({ cardIdToBeDeleted });
+            setDeleteModalProps({
+                body: `${t(
+                    "delete-modal-heading-1"
+                )} ${t("delete-card-modal-heading-2")}`,
+                title: t("delete-modal-title"),
+                iconDescription: t("delete-modal-icon"),
+                inputInvalidText: t("delete-modal-invalid-input-text"),
+                inputLabelText: t("type-last-four-digit"),
+                inputPlaceholderText: last4Digit,
+                open: true,
+                onClose: () => {
+                    setDeleteModalProps(null);
+                    setUserListParams((prev) => {
+                        setSearchParams(prev);
+                        return {};
+                    });
+                },
+                primaryButtonText: t("delete"),
+                primaryButtonDisabled: false,
+                resourceName: last4Digit,
+                secondaryButtonText: t("close"),
+                label: `${t("delete")} ${t("card")}`,
+                textConfirmation: true,
+                onRequestSubmit: async () => {
+                    try {
+                        setLoading(true);
+                        const response = await authFetch(`${BaseURL}/card/${cardIdToBeDeleted}`, {
+                            method: "DELETE",
+                        });
+                        if (response.ok) {
+                            setNotification({
+                                type: "success",
+                                message: t("card-deleted-successfully"),
+                            });
+                        } else {
+                            throw "error";
+                        }
+                    } catch (error) {
+                        setNotification({
+                            type: "error",
+                            message: t("error-deleting-card"),
+                        });
+                    } finally {
+                        setLoading(false);
+                        setDeleteModalProps(null);
+                        setUserListParams((prev) => {
+                            setSearchParams(prev);
+                            return {};
+                        });
+                    }
+                },
+            });
+        },
+        [searchParams, authFetch]
+    );
+
     const openEditPanel = useCallback(
         ({ userIdToBeEdited }) => {
             if (!userIdToBeEdited) {
@@ -338,6 +415,67 @@ const UserManagementProvider = ({ children }) => {
         });
     }, []);
 
+    const openCardManagementSidePanel= useCallback(
+        () => {
+            setUserListParams(mergeQueryParams(searchParams, {}));
+            setSearchParams({ openCardMangementPanel: true })
+        },
+    [searchParams]);
+
+    const getUserCardList= useCallback(
+        async () => {
+            try {
+                const response = await authFetch(`${BaseURL}/card`, {
+                    method: "GET",
+                });
+                if (response.ok) {
+                    const res = await response.json();
+                    return res;
+                } else {
+                    throw "error";
+                }
+            } catch (error) {
+                setNotification({
+                    type: "error",
+                    message: t("error-deleting-card"),
+                });
+            } finally {
+            }
+        },
+        [authFetch]
+    );
+
+    const openUserCardManagementModal= useCallback(
+        () => {
+            setUserListParams(mergeQueryParams(searchParams, {}));
+            setSearchParams({ userCardModalOpen: true })
+        },
+    [searchParams]);
+
+    const handleVerifyCard= useCallback(
+        async (token) => {
+            console.log("token",token)
+            const data = {
+               token:token
+              };
+            const response = await authFetch(`${BaseURL}/verify-card`, {
+                method: "POST",
+                body: JSON.stringify(data),
+            });
+
+            const res = await response.json();
+
+            if (response.ok) {
+                closeModalAndGoBackToUserList();
+            } else if (response.status === 500) {
+                throw { message: res.error, type: "error" };
+            } else {
+                throw { message: t("error-adding-user-card"), type: "error" };
+            }
+        },
+        [authFetch]
+    );
+
     useEffect(() => {
         if (!searchParams.get("isUserListOpen")) {
             setNotification(null);
@@ -361,6 +499,12 @@ const UserManagementProvider = ({ children }) => {
             openUserDetails,
             getUserById,
             openBulkDeleteConfirmModal,
+            openCardManagementSidePanel,
+            getUserCardList,
+            openUserCardManagementModal,
+            handleVerifyCard,
+            openUserCardDeleteModal,
+            isUserCardManagementAllowed,
         }),
         [
             userListData,
@@ -378,6 +522,12 @@ const UserManagementProvider = ({ children }) => {
             openUserDetails,
             getUserById,
             openBulkDeleteConfirmModal,
+            openCardManagementSidePanel,
+            getUserCardList,
+            openUserCardManagementModal,
+            handleVerifyCard,
+            openUserCardDeleteModal,
+            isUserCardManagementAllowed
         ]
     );
     return (
@@ -393,8 +543,11 @@ const UserManagementProvider = ({ children }) => {
                 {isUserManagementAllowed && (
                     <UserDetailPanel open={userDetailsOpen} />
                 )}
+                {isUserCardManagementAllowed && <UserCardManagement open={cardManagementSidePanelOpen}/>}
+                {isUserCardManagementAllowed && <UserCardModal open={userCardModalOpen}/>}           
             </UserManagementContext.Provider>
             {deleteModalProps && <RemoveModalWithLoading deleteModalProps={deleteModalProps} loading={loading} />}
+
         </>
     );
 };

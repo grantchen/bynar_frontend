@@ -139,5 +139,17 @@
     "payment-status": "Estado de pago",
     "payment-failed": "Pago fallido",
     "payment-successful": "Pago exitoso",
-    "invoices-load-failed": "Error al cargar las facturas"
+    "invoices-load-failed": "Error al cargar las facturas",
+    "card-management": "Gestión de tarjetas",
+    "payment-method": "Método de pago",
+    "add-new-card": "Agregar nueva tarjeta",
+    "default-payment-method": "Método de pago predeterminado",
+    "remove-payment-method": "Eliminar método de pago",
+    "error-adding-user-card": "Error al agregar la tarjeta del usuario",
+    "card-details": "Detalles de la tarjeta",
+    "card-deleted-successfully": "Tarjeta eliminada correctamente",
+    "error-deleting-card": "Error al eliminar la tarjeta",
+    "delete-card-modal-heading-2": "eliminará la tarjeta de forma permanente. Esta acción no se puede deshacer.",
+    "type-last-four-digit": "Ingrese los últimos 4 dígitos para confirmar",
+    "card": "Tarjeta"
 }

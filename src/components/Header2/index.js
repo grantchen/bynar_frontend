@@ -40,7 +40,7 @@ function _AuthenticatedAppHeader() {
     const { user } = useAuth();
     const { t } = useTranslation();
     const { theme } = useThemePreference();
-    const { isUserManagementAllowed } = useUserManagement();
+    const { isUserManagementAllowed} = useUserManagement();
     const [searchParams, setSearchParams] = useSearchParams();
     const isMobile = useMobile();
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
@@ -119,6 +119,7 @@ function _AuthenticatedAppHeader() {
                                                     "userIdToShowDetails",
                                                     "openAddUserPanel",
                                                     "userIdToBeEdited",
+                                                    "openCardMangementPanel"
                                                 ])
                                             );
                                         }}

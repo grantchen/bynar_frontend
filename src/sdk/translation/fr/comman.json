@@ -139,5 +139,17 @@
     "payment-status": "Statut de paiement",
     "payment-failed": "Paiement échoué",
     "payment-successful": "Paiement réussi",
-    "invoices-load-failed": "Échec du chargement des factures"
+    "invoices-load-failed": "Échec du chargement des factures",
+    "card-management": "Gestion des cartes",
+    "payment-method": "Moyen de paiement",
+    "add-new-card": "Ajouter une nouvelle carte",
+    "default-payment-method": "Moyen de paiement par défaut",
+    "remove-payment-method": "Supprimer le moyen de paiement",
+    "error-adding-user-card": "Erreur lors de l'ajout de la carte utilisateur",
+    "card-details": "Détails de la carte",
+    "card-deleted-successfully": "Carte supprimée avec succès",
+    "error-deleting-card": "Erreur lors de la suppression de la carte",
+    "delete-card-modal-heading-2": "supprimera définitivement la carte. Cette action ne peut pas être annulée.",
+    "type-last-four-digit": "Saisissez les 4 derniers chiffres pour confirmer",
+    "card": "Carte"
 }
