@@ -486,6 +486,13 @@ const UserManagementProvider = ({ children }) => {
         }
     }, [searchParams.get("isUserListOpen")]);
 
+    useEffect(() => {
+        if (!searchParams.get("openCardMangementPanel")) {
+            setNotification(null);
+        }
+       
+    }, [searchParams.get("openCardMangementPanel")]);
+
     const value = useMemo(
         () => ({
             userListData,
