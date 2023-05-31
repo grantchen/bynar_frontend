@@ -11,7 +11,7 @@ import { useCardManagement } from "../context";
 import { CardFrame, Frames } from "frames-react";
 import { useCallback, useState, useRef, useEffect } from "react";
 import { useAuth } from "../AuthContext";
-import './UserCardModal.scss'
+import './AddCardModal.scss'
 import { useThemePreference } from "../new-theme";
 import { useNavigate } from "react-router-dom";
 const AddCardModal = ({ open }) => {
