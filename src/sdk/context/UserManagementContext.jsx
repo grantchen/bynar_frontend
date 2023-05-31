@@ -466,6 +466,10 @@ const UserManagementProvider = ({ children }) => {
             const res = await response.json();
 
             if (response.ok) {
+                setNotification({
+                    type: "success",
+                    message: t("card-added-successfully"),
+                });
                 closeModalAndGoBackToUserList();
             } else if (response.status === 500) {
                 throw { message: res.error, type: "error" };
