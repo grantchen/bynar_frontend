@@ -6,6 +6,7 @@ import {
     ModalFooter,
     TextInput,
     Button,
+    ToastNotification
 } from "carbon-components-react";
 import { useTranslation } from "react-i18next";
 import { useUserManagement } from "../context";
@@ -19,9 +20,11 @@ const UserCardModal = ({ open }) => {
     const modalBodyRef = useRef(null)
     const { authFetch } = useAuth();
     const { closeModalAndGoBackToUserList, handleVerifyCard } = useUserManagement();
+    const [toastNotification, setToastNotification] = useState(null);
     const {theme} = useThemePreference()
     const { t } = useTranslation();
     const handleClose = useCallback(() => {
+        setToastNotification(null)
         closeModalAndGoBackToUserList();
     }, []);
 
@@ -31,7 +34,12 @@ const UserCardModal = ({ open }) => {
                 const res = await Frames.submitCard();
                 await handleVerifyCard(res?.token);
             } catch (e) {
-                throw { message: t("error-adding-user-card"), type: "error" };
+                console.log(e)
+                throw {
+                    message: e === "Card form invalid"
+                        ? t("invalid-card-details")
+                        : t("error-adding-user-card"), type: "error"
+                };
             }
         },
         [authFetch]
@@ -42,6 +50,7 @@ const UserCardModal = ({ open }) => {
             setLoading(true);
             await verifyUserCardDetails();
         } catch (e) {
+            setToastNotification({ message: e.message, type: "error" });
             console.log("adding card", e)
         } finally {
             setLoading(false);
@@ -76,6 +85,19 @@ const UserCardModal = ({ open }) => {
         >
             <ModalHeader title={t("add-new-card")} />
             <ModalBody ref={modalBodyRef}>
+            {toastNotification && (
+                    <ToastNotification
+                        className="error-notification-box"
+                        iconDescription="Clear Notification"
+                        subtitle={toastNotification?.message}
+                        onCloseButtonClick={() => {
+                            setToastNotification(null);
+                        }}
+                        timeout={0}
+                        title=""
+                        kind={toastNotification?.type}
+                    />
+                )}
                 <Frames
                     config={{
                         publicKey: "pk_sbox_u4jn2iacxvzosov4twmtl2yzlqe",
