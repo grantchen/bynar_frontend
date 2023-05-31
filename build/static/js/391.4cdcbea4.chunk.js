@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkbynar=self.webpackChunkbynar||[]).push([[391],{70391:function(n,a,e){e.r(a),e.d(a,{default:function(){return c}});var t=e(72791),r=e(7762),u=e(80184),c=function(){var n,a=(0,t.useContext)(r.q5),e=a.tab,c=a.activeTab,i=null===e||void 0===e||null===(n=e[c])||void 0===n?void 0:n.content;return(0,u.jsx)("div",{className:"dashboard-container",children:i})}}}]);
-//# sourceMappingURL=391.4cdcbea4.chunk.js.map
