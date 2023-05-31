@@ -4,25 +4,27 @@ import {
     ModalHeader,
     ModalBody,
     ModalFooter,
-    TextInput,
     Button,
 } from "carbon-components-react";
 import { useTranslation } from "react-i18next";
-import { useUserManagement } from "../context";
+import { useCardManagement } from "../context";
 import { CardFrame, Frames } from "frames-react";
 import { useCallback, useState, useRef, useEffect } from "react";
 import { useAuth } from "../AuthContext";
 import './UserCardModal.scss'
 import { useThemePreference } from "../new-theme";
-const UserCardModal = ({ open }) => {
+import { useNavigate } from "react-router-dom";
+const AddCardModal = ({ open }) => {
+    console.log(open)
     const [loading, setLoading] = useState();
     const modalBodyRef = useRef(null)
     const { authFetch } = useAuth();
-    const { closeModalAndGoBackToUserList, handleVerifyCard } = useUserManagement();
+    const navigate = useNavigate()
+    const { handleVerifyCard } = useCardManagement();
     const {theme} = useThemePreference()
     const { t } = useTranslation();
     const handleClose = useCallback(() => {
-        closeModalAndGoBackToUserList();
+        navigate(-1)
     }, []);
 
     const verifyUserCardDetails = useCallback(
@@ -109,4 +111,4 @@ const UserCardModal = ({ open }) => {
             </ModalFooter>
         </ComposedModal>)
 }
-export default UserCardModal;
+export default AddCardModal;

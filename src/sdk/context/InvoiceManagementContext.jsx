@@ -8,12 +8,9 @@ import React, {
 } from "react";
 import { BaseURL } from "../constant";
 import { useSearchParams } from "react-router-dom";
-import { mergeQueryParams, removeNullEntries } from "../util";
-import { SidePanels } from "../../components/SidePanel";
-import { UserDetailPanel } from "../../components/UserDetailPanel";
+import { downloadFile, removeNullEntries } from "../util";
 import { useAuth } from "../AuthContext";
 import { useTranslation } from "react-i18next";
-import { RemoveModalWithLoading } from "../RemoveModalWithLoading";
 import { Tearsheet } from "@carbon/ibm-products";
 import InvoicesTable from "../../components/InvoicesTable";
 import { format } from "date-fns";
@@ -149,8 +146,7 @@ const InvoicesProvider = ({ children }) => {
             const { url } = await authFetch(
                 `${BaseURL}/invoice/${id}/download`
             ).then((res) => res.json());
-
-            window.open(url);
+            downloadFile(url, `invoice-${id}.pdf`)
         },
         [authFetch]
     );

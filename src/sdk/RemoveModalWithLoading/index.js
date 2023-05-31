@@ -33,8 +33,6 @@ export const RemoveModalWithLoading = ({ deleteModalProps, loading }) => {
     }, [deleteModalProps, userInput]);
 
     const blockClass = `${pkg.prefix}--remove-modal`;
-
-    Boolean(deleteModalProps)
     return (
         <>
             <ComposedModal

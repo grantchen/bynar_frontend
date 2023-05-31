@@ -138,7 +138,7 @@ export default function InvoicesTable() {
                         await downloadInvoice(original.id);
                         setActionsLoading(false);
                     },
-                    shouldDisableMenuItem: ({ original }) => !original.paid,
+                    shouldDisableMenuItem: ({ original }) => false,
                 },
                 {
                     id: "download-receipt",

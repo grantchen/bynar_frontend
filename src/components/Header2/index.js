@@ -14,6 +14,7 @@ import {
 
 import { UserData20 } from "@carbon/icons-react";
 import {
+    CardManagementProvider,
     InvoicesProvider,
     LanguageChangeModal,
     omitQueryParams,
@@ -40,7 +41,7 @@ function _AuthenticatedAppHeader() {
     const { user } = useAuth();
     const { t } = useTranslation();
     const { theme } = useThemePreference();
-    const { isUserManagementAllowed} = useUserManagement();
+    const { isUserManagementAllowed } = useUserManagement();
     const [searchParams, setSearchParams] = useSearchParams();
     const isMobile = useMobile();
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
@@ -119,7 +120,7 @@ function _AuthenticatedAppHeader() {
                                                     "userIdToShowDetails",
                                                     "openAddUserPanel",
                                                     "userIdToBeEdited",
-                                                    "openCardMangementPanel"
+                                                    "openCardMangementPanel",
                                                 ])
                                             );
                                         }}
@@ -189,8 +190,10 @@ function _AuthenticatedAppHeader() {
 
 export default function AuthenticatedAppHeader(props) {
     return (
-        <InvoicesProvider>
-            <_AuthenticatedAppHeader {...props} />
-        </InvoicesProvider>
+        <CardManagementProvider>
+            <InvoicesProvider>
+                <_AuthenticatedAppHeader {...props} />
+            </InvoicesProvider>
+        </CardManagementProvider>
     );
 }
