@@ -1,19 +1,69 @@
-.card-list{
+.card-list {
     margin-top: 50px;
-    .card-box{
+
+    .card-box {
         display: flex;
         justify-content: space-between;
+
+        .card-logo{
+            width: 80px;
+        }
+
+        .card-logo-with-checkicon{
+            display: flex;
+            justify-content:flex-start;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .card-holder-name {
+            // overflow-wrap: break-word;
+            width:100px;
+            padding: 0px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
     }
 }
-.card-row-popover{
+
+.card-row-popover {
     top: 0.4rem;
-    &.cds--popover--open, .card-popver-content{
-        box-shadow: 0 2px 6px var(--cds-shadow,rgba(0,0,0,0.3));
+
+    &.cds--popover--open,
+    .card-popver-content {
+        box-shadow: 0 2px 6px var(--cds-shadow, rgba(0, 0, 0, 0.3));
     }
-    .cds--tooltip-content, .cds--popover-caret {
+
+    .cds--tooltip-content,
+    .cds--popover-caret {
         display: none !important;
     }
-    .cds--overflow-menu-options__btn{
+
+    .cds--overflow-menu-options__btn {
         max-width: max-content;
     }
 }
+
+@media (max-width: 600px) {
+    .card-list {  
+        .cds--contained-list-item--with-action .cds--contained-list-item__content {
+            padding-inline-end: 3rem;
+        }
+        .card-box {
+            .card-logo{
+                width: 70px;
+            }
+
+            .card-logo-with-checkicon{
+                gap: 8px;
+            }
+
+            .card-holder-name {
+                padding: 0px 12px;
+                width:88px;
+            }
+        }
+    }
+}
+

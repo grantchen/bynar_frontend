@@ -12,7 +12,7 @@ import {
     PopoverContent,
     IconButton,
 } from "@carbon/react";
-import { OverflowMenuVertical } from "@carbon/react/icons";
+import { OverflowMenuVertical, TrashCan } from "@carbon/react/icons";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Add20, CheckmarkFilled16 } from "@carbon/icons-react";
 import {
@@ -130,13 +130,13 @@ const UserCardManagement = ({ open }) => {
                                             ? true
                                             : false
                                     }
-                                    // onClick={() => {
-                                    //     console.log("test delete");
-                                    //     openUserCardDeleteModal({
-                                    //         cardIdToBeDeleted: "src_g3xwcvhcljfebhi5pjsspcyqja",
-                                    //         userName: "s1@yopmail.com",
-                                    //     });
-                                    // }}
+                                // onClick={() => {
+                                //     console.log("test delete");
+                                //     openUserCardDeleteModal({
+                                //         cardIdToBeDeleted: "src_g3xwcvhcljfebhi5pjsspcyqja",
+                                //         userName: "s1@yopmail.com",
+                                //     });
+                                // }}
                                 />
                             }
                         >
@@ -170,9 +170,11 @@ const UserCardManagement = ({ open }) => {
                                                     >
                                                         <OverflowMenuItem
                                                             className="test"
-                                                            itemText={t(
-                                                                "default-payment-method"
-                                                            )}
+                                                            itemText={
+                                                                (<div className="row-action-renderer">
+                                                                    <CheckmarkFilled16 /> {t("default-payment-method")}
+                                                                </div>)
+                                                            }
                                                             onClick={() =>
                                                                 handleDefaultCardOptionClick(
                                                                     listItem?.id
@@ -181,9 +183,11 @@ const UserCardManagement = ({ open }) => {
                                                             disabled={listItem?.id === cardList?.default}
                                                         />
                                                         <OverflowMenuItem
-                                                            itemText={t(
-                                                                "remove-payment-method"
-                                                            )}
+                                                            itemText={
+                                                                (<div className="row-action-renderer">
+                                                                    <TrashCan /> {t("remove-payment-method")}
+                                                                </div>)
+                                                            }
                                                             isDelete
                                                             hasDivider
                                                             disabled={listItem?.id === cardList?.default}
@@ -200,7 +204,8 @@ const UserCardManagement = ({ open }) => {
                                                                     -1
                                                                 );
                                                             }}
-                                                        />
+                                                        >
+                                                        </OverflowMenuItem>
                                                     </PopoverContent>
                                                 )}
                                             </Popover>
@@ -214,33 +219,23 @@ const UserCardManagement = ({ open }) => {
                                             />
                                         ) : (
                                             <div className="card-box">
-                                                <div>
-                                                    <div
-                                                        style={{
-                                                            display: "flex",
-                                                            alignItems:
-                                                                "center",
-                                                            gap: 20,
-                                                        }}
+                                                <div className="card-logo">
+                                                    <div className="card-logo-with-checkicon"
                                                     >
-                                                        {listItem?.scheme}
+                                                        <p>
+                                                            {listItem?.scheme}
+                                                        </p>
                                                         {listItem?.id ===
-                                                        cardList?.default ? (
+                                                            cardList?.default &&
                                                             <CheckmarkFilled16 />
-                                                        ) : (
-                                                            <div
-                                                                style={{
-                                                                    width: "16px",
-                                                                }}
-                                                            ></div>
-                                                        )}
+                                                        }
                                                     </div>
                                                 </div>
                                                 <p>
                                                     {"...."}
                                                     {listItem?.last4}
                                                 </p>
-                                                <p>{cardList?.name}</p>
+                                                <p className="card-holder-name">{cardList?.name}</p>
                                                 <p>
                                                     {format(date, 'MM/yyyy')}
                                                 </p>
