@@ -4,28 +4,28 @@ import {
     ModalHeader,
     ModalBody,
     ModalFooter,
-    TextInput,
     Button,
     ToastNotification
 } from "carbon-components-react";
 import { useTranslation } from "react-i18next";
-import { useUserManagement } from "../context";
+import { useCardManagement } from "../context";
 import { CardFrame, Frames } from "frames-react";
 import { useCallback, useState, useRef, useEffect } from "react";
 import { useAuth } from "../AuthContext";
-import './UserCardModal.scss'
+import './AddCardModal.scss'
 import { useThemePreference } from "../new-theme";
-const UserCardModal = ({ open }) => {
+import { useNavigate } from "react-router-dom";
+const AddCardModal = ({ open }) => {
+    console.log(open)
     const [loading, setLoading] = useState();
     const modalBodyRef = useRef(null)
     const { authFetch } = useAuth();
-    const { closeModalAndGoBackToUserList, handleVerifyCard } = useUserManagement();
-    const [toastNotification, setToastNotification] = useState(null);
+    const navigate = useNavigate()
+    const { handleVerifyCard, notification, setNotification } = useCardManagement();
     const {theme} = useThemePreference()
     const { t } = useTranslation();
     const handleClose = useCallback(() => {
-        setToastNotification(null)
-        closeModalAndGoBackToUserList();
+        navigate(-1)
     }, []);
 
     const verifyUserCardDetails = useCallback(
@@ -50,7 +50,7 @@ const UserCardModal = ({ open }) => {
             setLoading(true);
             await verifyUserCardDetails();
         } catch (e) {
-            setToastNotification({ message: e.message, type: "error" });
+            setNotification({ message: e.message, type: "error" });
             console.log("adding card", e)
         } finally {
             setLoading(false);
@@ -85,17 +85,17 @@ const UserCardModal = ({ open }) => {
         >
             <ModalHeader title={t("add-new-card")} />
             <ModalBody ref={modalBodyRef}>
-            {toastNotification && (
+            {notification && (
                     <ToastNotification
                         className="error-notification-box"
                         iconDescription="Clear Notification"
-                        subtitle={toastNotification?.message}
+                        subtitle={notification?.message}
                         onCloseButtonClick={() => {
-                            setToastNotification(null);
+                            setNotification(null);
                         }}
                         timeout={0}
                         title=""
-                        kind={toastNotification?.type}
+                        kind={notification?.type}
                     />
                 )}
                 <Frames
@@ -131,4 +131,4 @@ const UserCardModal = ({ open }) => {
             </ModalFooter>
         </ComposedModal>)
 }
-export default UserCardModal;
+export default AddCardModal;
