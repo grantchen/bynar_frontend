@@ -375,7 +375,7 @@ export const UserList = ({ isOpen }) => {
 
     return (
         <>
-            <>
+            <div className="user-list">
                 {notification && (
                     <ToastNotification
                         className="error-notification-box"
@@ -383,13 +383,13 @@ export const UserList = ({ isOpen }) => {
                         subtitle={notification?.message}
                         timeout={0}
                         title={""}
-                        kind={notification.type}
+                        kind={notification?.type}
                     />
                 )}
                 <div className="userdata-table">
                     <Datagrid datagridState={datagridState} />
                 </div>
-            </>
+            </div>
         </>
     );
 };

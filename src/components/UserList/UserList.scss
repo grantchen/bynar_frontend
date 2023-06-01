@@ -45,3 +45,24 @@
         height: 100vh;
     }
 }
+
+.user-list {
+    .error-notification-box {
+        width: 100% !important;
+        align-items: center;
+
+        >div {
+            display: flex;
+            flex: 1;
+            align-items: center;
+
+            >div {
+                margin: 0;
+            }
+        }
+
+        > svg {
+            margin: 0px 12px 0px;         
+          }
+    }
+}
