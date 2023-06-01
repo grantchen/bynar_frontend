@@ -36,6 +36,9 @@
 
   .user-name {
     color: var(--cds-text-01, #161616);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 50px;
   }
 
   .profile-info-image{
