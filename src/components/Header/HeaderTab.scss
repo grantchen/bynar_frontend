@@ -104,6 +104,20 @@
   &::-webkit-scrollbar {
     display: none;
   }
+
+  .close-icon-button{
+    min-height: 16px;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding: 2px 4px;
+    // background-color: var(--cds-field-01, #e5e5e5);
+    background-color: transparent;
+  }
+
+  button.close-icon-button.cds--btn.cds--btn--primary:hover {
+    background-color: var(--cds-background-hover,rgba(141,141,141,0.12));
+}
+
 }
 
 

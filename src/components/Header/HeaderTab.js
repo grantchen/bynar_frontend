@@ -81,17 +81,14 @@ const HeaderTab = () => {
                   onClick={() => {
                     setActiveTab(item?.id);
                   }}
-                  className={`custom-tab ${
-                    activeTab === item?.id ? "active" : ""
-                  }`}
+                  className={`custom-tab ${activeTab === item?.id ? "active" : ""
+                    }`}
                 >
                   {item.label}
                   {item.isDelted && (
-                    <Close
-                      size={20}
-                      style={{ cursor: "pointer" }}
-                      onClick={() => removeTab(item.id, index)}
-                    />
+                    <Button className="close-icon-button" onClick={() => removeTab(item.id, index)}>
+                      <Close/>
+                    </Button>
                   )}
                 </Button>
               );
