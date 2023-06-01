@@ -152,5 +152,6 @@
     "delete-card-modal-heading-2": "supprimera définitivement la carte. Cette action ne peut pas être annulée.",
     "type-last-four-digit": "Saisissez les 4 derniers chiffres pour confirmer",
     "card": "Carte",
-    "card-added-successfully": "Carte ajoutée avec succès"
+    "card-added-successfully": "Carte ajoutée avec succès",
+    "invalid-card-details": "Détails de carte invalides"
 }
