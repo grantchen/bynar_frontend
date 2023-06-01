@@ -121,6 +121,7 @@ function _AuthenticatedAppHeader() {
                                                     "openAddUserPanel",
                                                     "userIdToBeEdited",
                                                     "openCardMangementPanel",
+                                                    "isInvoiceListOpen"
                                                 ])
                                             );
                                         }}
