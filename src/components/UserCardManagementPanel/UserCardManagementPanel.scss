@@ -12,8 +12,14 @@
         .card-logo-with-checkicon{
             display: flex;
             justify-content:flex-start;
-            gap: 16px;
+            gap: 0px;
             align-items: center;
+
+            .card-type{
+                width: 60px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
         }
 
         .card-holder-name {
@@ -56,7 +62,10 @@
             }
 
             .card-logo-with-checkicon{
-                gap: 8px;
+                gap: 2px;
+                .card-type{
+                    width: 42px;
+                }
             }
 
             .card-holder-name {
