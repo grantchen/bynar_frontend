@@ -227,7 +227,7 @@ const UserCardManagementPanel = ({ open }) => {
                                                   <div className="card-box">
                                                       <div className="card-logo">
                                                           <div className="card-logo-with-checkicon">
-                                                              <p>
+                                                              <p className="card-type">
                                                                   {
                                                                       listItem?.scheme
                                                                   }
