@@ -7,6 +7,7 @@ import {
     SORTABLE_ORDERING,
     omitQueryParams,
     useMobile,
+    INVOICESHEET_CONSTANTS,
 } from "../../sdk";
 import { useSearchParams } from "react-router-dom";
 import {
@@ -14,6 +15,8 @@ import {
     Button,
     Pagination,
     Loading,
+    TextInputSkeleton,
+    SkeletonText,
 } from "@carbon/react";
 import {
     DocumentDownload,
@@ -25,6 +28,7 @@ import {
     useDatagrid,
     useActionsColumn,
     useStickyColumn,
+    useFiltering,
     // useDisableSelectRows,
     // useSelectRows,
     //     useOnRowClick,
@@ -38,6 +42,8 @@ import { useEffect, useCallback, useMemo, useState } from "react";
 import { Restart16, Activity16, TrashCan16 } from "@carbon/icons-react";
 import "./invoices-table.scss";
 import { ToastNotification } from "carbon-components-react";
+import { restrictNumeric } from "payment";
+import { format } from "date-fns";
 
 pkg.setAllComponents(true);
 pkg.setAllFeatures(true);
@@ -55,14 +61,15 @@ export default function InvoicesTable() {
     } = useInvoices();
 
     const [actionsLoading, setActionsLoading] = useState(false);
+    const [tableFilters, setTableFilters] = useState([]);
     const isMobile = useMobile();
     const { t } = useTranslation();
 
     const [searchParams, setSearchParams] = useSearchParams();
 
     const columns = useMemo(
-        () => getColumns(invoicesListData.invoices, t),
-        [invoicesListData.invoices]
+        () => getColumns(invoicesListData.invoices, t, loading),
+        [invoicesListData.invoices, loading]
     );
 
     const { page, pageLimit } = useMemo(() => {
@@ -88,27 +95,94 @@ export default function InvoicesTable() {
             search: searchParams.get("search") ?? "",
             sortByColumn: searchParams.get("sortByColumn"),
             sortByOrder: searchParams.get("sortByOrder"),
+            transactionStartDate: searchParams.get("transactionStartDate"),
+            transactionEndDate: searchParams.get("transactionEndDate"),
+            billingStartDate: searchParams.get("billingStartDate"),
+            billingEndDate: searchParams.get("billingEndDate"),
+            paid: searchParams.get("paid"),
         };
     }, [searchParams]);
+
+    const handleTableFilters = useCallback((filters) => {
+        if(tableFilters.length === 0 && filters.length === 0){
+            return
+        }
+        setTableFilters(filters);
+    }, [tableFilters]);
+
+    const refresh = useCallback(async () => {
+        await getInvoicesList(getInvoicesAPIQuery());
+        datagridState.setAllFilters(tableFilters);
+    }, [tableFilters, getInvoicesList, getInvoicesAPIQuery]);
+
+    useEffect(() => {
+        if (!isInvoiceListOpen) {
+            datagridState.setAllFilters([]);
+            setTableFilters([]);
+            return;
+        }
+    }, [isInvoiceListOpen]);
 
     useEffect(() => {
         if (!isInvoiceListOpen) {
             return;
         }
-        (async () => {
-            await getInvoicesList(getInvoicesAPIQuery());
-        })();
-    }, [getInvoicesAPIQuery, isInvoiceListOpen]);
+        // datagridState.setAllFilters([])
+        const timeoutId = setTimeout(async () => {
+            await refresh();
+        }, 400);
+        return () => clearTimeout(timeoutId);
+    }, [refresh, isInvoiceListOpen]);
+
+    useEffect(() => {
+        if (!isInvoiceListOpen) {
+            return;
+        }
+        let searchParamsMap = {
+            [INVOICESHEET_CONSTANTS.isInvoiceListOpen]: true,
+        };
+        tableFilters.forEach((filter) => {
+            switch (filter.id) {
+                case "invoiceDate":
+                    searchParamsMap.transactionStartDate =
+                        filter.value[0].toISOString();
+                    searchParamsMap.transactionEndDate =
+                        filter.value[1].toISOString();
+                    break;
+                case "billingPeriod":
+                    searchParamsMap.billingStartDate =
+                        filter.value[0].toISOString();
+                    searchParamsMap.billingEndDate =
+                        filter.value[1].toISOString();
+                    break;
+                case "paid":
+                    searchParamsMap.paid = filter.value;
+                    break;
+                default:
+                    break;
+            }
+        });
+        setSearchParams(searchParamsMap);
+    }, [tableFilters, isInvoiceListOpen]);
 
     const datagridState = useDatagrid(
         {
             columns,
             data: invoicesListData.invoices,
-            isFetching: loading,
+            isFetching: false,
             endPlugins: [],
             emptyStateTitle: t("no-users"),
             emptyStateDescription: t("no-users-action-description"),
             emptyStateSize: "lg",
+            filterProps: {
+                variation: "flyout", // default
+                updateMethod: "batch", // default
+                primaryActionLabel: "Apply", // default
+                secondaryActionLabel: "Cancel", // default
+                flyoutIconDescription: "Open filters", // default
+                shouldClickOutsideToClose: false, // default
+                filters: getFilters(t),
+            },
             rowActions: [
                 {
                     id: "pay",
@@ -184,18 +258,35 @@ export default function InvoicesTable() {
                     }}
                 />
             ),
-            DatagridActions: () => {
+            DatagridActions: (dgState) => {
+                const { FilterFlyout, getFilterFlyoutProps } = dgState;
+                const { setAllFilters, ...rest } = getFilterFlyoutProps();
+                if (loading) {
+                    return (
+                        <SkeletonText
+                            heading={true}
+                            className="skeleton-loading"
+                        />
+                    );
+                }
                 return (
                     <TableToolbarContent>
+                        <FilterFlyout
+                            {...rest}
+                            setAllFilters={(...args) => {
+                                setAllFilters(...args);
+                                handleTableFilters(...args);
+                            }}
+                        />
+                        {/* <FilterFlyout {...getFilterFlyoutProps()} onApply={() => console.log(dgState)}/> */}
+                        {/* {renderFilterFlyout()} */}
                         <Button
                             kind="ghost"
                             hasIconOnly
                             tooltipPosition="bottom"
                             renderIcon={Restart16}
                             iconDescription={t("refresh")}
-                            onClick={() =>
-                                getInvoicesList(getInvoicesAPIQuery())
-                            }
+                            onClick={refresh}
                         />
                     </TableToolbarContent>
                 );
@@ -203,7 +294,8 @@ export default function InvoicesTable() {
         },
         useStickyColumn,
         useActionsColumn,
-        useSortableColumnsFork
+        useSortableColumnsFork,
+        useFiltering
     );
     /**
      * effect to set/reset datagrid states on params / tearsheet open state changes
@@ -236,7 +328,6 @@ export default function InvoicesTable() {
         searchParams.get("sortByColumn"),
         searchParams.get("sortByOrder"),
     ]);
-
     return (
         <>
             {notification && (
@@ -257,7 +348,7 @@ export default function InvoicesTable() {
     );
 }
 
-function getColumns(rows, t) {
+function getColumns(rows, t, loading = false) {
     return [
         {
             Header: t("transaction-date"),
@@ -267,21 +358,46 @@ function getColumns(rows, t) {
                 "invoiceDate",
                 "Transaction date"
             ),
+            filter: "date",
+            Cell: ({ cell: { value } }) =>
+                loading ? (
+                    <SkeletonText heading={true} className="skeleton-loading" />
+                ) : (
+                    <>{format(value, "MM/dd/yyyy")}</>
+                ),
         },
         {
             Header: t("invoice_number"),
             accessor: "invoiceNumber",
             width: getAutoSizedColumnWidth(rows, "invoiceNumber", "Invoice#"),
+            Cell: ({ cell: { value } }) =>
+                loading ? (
+                    <SkeletonText heading={true} className="skeleton-loading" />
+                ) : (
+                    <>{value}</>
+                ),
         },
         {
             Header: t("currency"),
             accessor: "currency",
             width: getAutoSizedColumnWidth(rows, "currency", "Currency"),
+            Cell: ({ cell: { value } }) =>
+                loading ? (
+                    <SkeletonText heading={true} className="skeleton-loading" />
+                ) : (
+                    <>{value}</>
+                ),
         },
         {
             Header: t("total"),
             accessor: "total",
             width: getAutoSizedColumnWidth(rows, "total", "Total"),
+            Cell: ({ cell: { value } }) =>
+                loading ? (
+                    <SkeletonText heading={true} className="skeleton-loading" />
+                ) : (
+                    <>{value}</>
+                ),
         },
         {
             Header: t("billing-peroid"),
@@ -291,16 +407,34 @@ function getColumns(rows, t) {
                 "billingPeriod",
                 "Billing Period"
             ),
+            filter: "date",
+            Cell: ({ cell: { value } }) =>
+                loading ? (
+                    <SkeletonText heading={true} className="skeleton-loading" />
+                ) : (
+                    <>{format(value, "MM/dd/yyyy")}</>
+                ),
         },
         {
             Header: t("provider"),
             accessor: "providerID",
             width: getAutoSizedColumnWidth(rows, "providerID", "Provider"),
+            Cell: ({ cell: { value } }) =>
+                loading ? (
+                    <SkeletonText heading={true} className="skeleton-loading" />
+                ) : (
+                    <>{value}</>
+                ),
         },
         {
             Header: t("payment-status"),
-            accessor: (row) => {
-                return row.paid ? (
+            accessor: "paid",
+            width: getAutoSizedColumnWidth(rows, "paid", "Payment Status"),
+            filter: "radio",
+            Cell: ({ cell: { value } }) =>
+                loading ? (
+                    <SkeletonText heading={true} className="skeleton-loading" />
+                ) : value ? (
                     <StatusIcon
                         iconDescription="Paid"
                         kind="normal"
@@ -314,9 +448,7 @@ function getColumns(rows, t) {
                         size="md"
                         theme="light"
                     />
-                );
-            },
-            width: getAutoSizedColumnWidth(rows, "phoneNumber", "Phonenumber"),
+                ),
         },
         {
             Header: "",
@@ -327,3 +459,210 @@ function getColumns(rows, t) {
         },
     ];
 }
+
+function getFilters(t) {
+    return [
+        {
+            type: "date",
+            column: "invoiceDate",
+            props: {
+                DatePicker: {
+                    datePickerType: "range",
+                    // Add any other Carbon DatePicker props here
+                },
+                DatePickerInput: {
+                    start: {
+                        id: "date-picker-invoiceDate-start",
+                        placeholder: "mm/dd/yyyy",
+                        labelText: "Invoice Date Start",
+                        // Add any other Carbon DatePickerInput props here
+                    },
+                    end: {
+                        id: "date-picker-invoiceDate-end",
+                        placeholder: "mm/dd/yyyy",
+                        labelText: "Invoice Date End",
+                        // Add any other Carbon DatePickerInput props here
+                    },
+                },
+            },
+        },
+        {
+            type: "date",
+            column: "billingPeriod",
+            props: {
+                DatePicker: {
+                    datePickerType: "range",
+                    // Add any other Carbon DatePicker props here
+                },
+                DatePickerInput: {
+                    start: {
+                        id: "date-picker-billingPeriod-start",
+                        placeholder: "mm/dd/yyyy",
+                        labelText: "Billing Period Start",
+                        // Add any other Carbon DatePickerInput props here
+                    },
+                    end: {
+                        id: "date-picker-billingPeriod-end",
+                        placeholder: "mm/dd/yyyy",
+                        labelText: "Billing Period End",
+                        // Add any other Carbon DatePickerInput props here
+                    },
+                },
+            },
+        },
+        {
+            type: "radio",
+            column: "paid",
+            props: {
+                FormGroup: {
+                    legendText: "Payment Status",
+                    // Add any other Carbon FormGroup props here
+                },
+                RadioButtonGroup: {
+                    orientation: "vertical",
+                    legend: "Payment Status legend",
+                    name: "payment-status-radio-button-group",
+                    // Add any other Carbon RadioButtonGroup props here
+                },
+                RadioButton: [
+                    {
+                        id: "paid",
+                        labelText: "Paid",
+                        value: "true",
+                        // Add any other Carbon RadioButton props here
+                    },
+                    {
+                        id: "unpaid",
+                        labelText: "Unpaid",
+                        value: "false",
+                        // Add any other Carbon RadioButton props here
+                    },
+                ],
+            },
+        },
+    ];
+}
+
+/**
+ * 
+ * 
+ * 
+        {
+            type: "dropdown",
+            column: "paid",
+            props: {
+                Dropdown: {
+                    id: "payment-status-dropdown",
+                    ariaLabel: "Payment status dropdown",
+                    items: ["paid", "not paid"],
+                    label: "Payment status",
+                    titleText: "Payment status",
+                    // Add any other Carbon Dropdown props here
+                },
+            },
+        },
+        {
+            type: "date",
+            column: "joined",
+            props: {
+                DatePicker: {
+                    datePickerType: "range",
+                    // Add any other Carbon DatePicker props here
+                },
+                DatePickerInput: {
+                    start: {
+                        id: "date-picker-input-id-start",
+                        placeholder: "mm/dd/yyyy",
+                        labelText: "Joined start date",
+                        // Add any other Carbon DatePickerInput props here
+                    },
+                    end: {
+                        id: "date-picker-input-id-end",
+                        placeholder: "mm/dd/yyyy",
+                        labelText: "Joined end date",
+                        // Add any other Carbon DatePickerInput props here
+                    },
+                },
+            },
+        },
+        {
+            type: "number",
+            column: "visits",
+            props: {
+                NumberInput: {
+                    min: 0,
+                    id: "visits-number-input",
+                    invalidText: "A valid value is required",
+                    label: "Visits",
+                    placeholder: "Type a number amount of visits",
+                    // Add any other Carbon NumberInput props here
+                },
+            },
+        },
+        {
+            type: "checkbox",
+            column: "passwordStrength",
+            props: {
+                FormGroup: {
+                    legendText: "Password strength",
+                    // Add any other Carbon FormGroup props here
+                },
+                Checkbox: [
+                    {
+                        id: "normal",
+                        labelText: "Normal",
+                        value: "normal",
+                        // Add any other Carbon Checkbox props here
+                    },
+                    {
+                        id: "minor-warning",
+                        labelText: "Minor warning",
+                        value: "minor-warning",
+                        // Add any other Carbon Checkbox props here
+                    },
+                    {
+                        id: "critical",
+                        labelText: "Critical",
+                        value: "critical",
+                        // Add any other Carbon Checkbox props here
+                    },
+                ],
+            },
+        },
+        {
+            type: "radio",
+            column: "role",
+            props: {
+                FormGroup: {
+                    legendText: "Role",
+                    // Add any other Carbon FormGroup props here
+                },
+                RadioButtonGroup: {
+                    orientation: "vertical",
+                    legend: "Role legend",
+                    name: "role-radio-button-group",
+                    // Add any other Carbon RadioButtonGroup props here
+                },
+                RadioButton: [
+                    {
+                        id: "developer",
+                        labelText: "Developer",
+                        value: "developer",
+                        // Add any other Carbon RadioButton props here
+                    },
+                    {
+                        id: "designer",
+                        labelText: "Designer",
+                        value: "designer",
+                        // Add any other Carbon RadioButton props here
+                    },
+                    {
+                        id: "researcher",
+                        labelText: "Researcher",
+                        value: "researcher",
+                        // Add any other Carbon RadioButton props here
+                    },
+                ],
+            },
+        },
+ */
