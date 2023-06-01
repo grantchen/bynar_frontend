@@ -29,12 +29,22 @@
 .heading-content-new:hover {
   background-color: var(--cds-field-01, #e5e5e5) !important;
 }
-
+.add-new-tab{
+  color: var(--cds-text-01, #161616);
+  &:hover {
+    background-color: var(--cds-field-01, #e5e5e5);
+    color: var(--cds-text-01, #161616);
+  }
+}
 .custom-tab {
   display: flex;
   gap: 0.2rem;
   border-width: 2px;
   color: var(--cds-text-01, #161616);
+  padding: 0 0 0 1rem;
+  &.dashboard-btn{
+    padding: 0 1rem;
+  }
   &:hover {
     background-color: var(--cds-field-01, #e5e5e5);
     color: var(--cds-text-01, #161616);
@@ -106,13 +116,7 @@
   }
 
   .close-button{
-    min-height: 16px;
-    padding-top: 0;
-    padding-bottom: 0;
-    padding: 2px 4px;
-    // background-color: var(--cds-field-01, #e5e5e5);
-    background-color: transparent;
-    outline: none !important;
+    margin-left: 1rem;
   }
 
   .cds--tooltip-content,

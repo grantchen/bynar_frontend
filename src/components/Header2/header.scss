@@ -12,7 +12,7 @@
     }
 
     .user-list-nav-button {
-        margin-right: 3rem;
+        margin-left: 3rem;
     }
 
     .search-container.cds--search--md.cds--search--expandable,
@@ -20,7 +20,7 @@
     .bx--search {
         display: flex;
         align-items: center;
-
+        z-index: 1;
         position: absolute;
         right: 6rem;
         height: 3rem;
