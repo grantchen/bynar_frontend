@@ -17,7 +17,7 @@ import { format } from "date-fns";
 
 const InvoicesContext = createContext();
 
-const INVOICESHEET_CONSTANTS = {
+export const INVOICESHEET_CONSTANTS = {
     isInvoiceListOpen: "isInvoiceListOpen",
 };
 const InvoicesProvider = ({ children }) => {
@@ -31,6 +31,7 @@ const InvoicesProvider = ({ children }) => {
     const [loading, setLoading] = useState(false);
     const [notification, setNotification] = useState(null);
     const [searchParams, setSearchParams] = useSearchParams();
+    
 
     const { isInvoiceListOpen, setIsInvoiceListOpen } = useMemo(() => {
         return {
@@ -65,10 +66,6 @@ const InvoicesProvider = ({ children }) => {
     const getInvoicesList = useCallback(
         async (queryParams = {}) => {
             setLoading(true);
-            setInvoicesListData((prev) => ({
-                ...prev,
-                invoices: [],
-            }));
             try {
                 const searchQueryParams = new URLSearchParams(
                     removeNullEntries(queryParams)
@@ -83,16 +80,8 @@ const InvoicesProvider = ({ children }) => {
                         ...res?.result,
                         invoices: res?.result?.invoice.map((value) => ({
                             ...value,
-                            invoiceDate: format(
-                                new Date(value.invoiceDate),
-                                "MM/dd/yyyy"
-                            ),
-                            billingPeriod: format(
-                                new Date(value.billingPeriod),
-                                "MM/dd/yyyy"
-                            ),
-                            // disabled: !value?.canDelete,
-                            // isEditable: value?.canUpdate,
+                            invoiceDate: new Date(value.invoiceDate),
+                            billingPeriod: new Date(value.billingPeriod),
                         })),
                     };
                     setInvoicesListData(result);
@@ -108,6 +97,7 @@ const InvoicesProvider = ({ children }) => {
         },
         [authFetch, t]
     );
+
     const payNow = useCallback(
         async (id) => {
             try {
@@ -151,11 +141,12 @@ const InvoicesProvider = ({ children }) => {
         [authFetch]
     );
 
+
     useEffect(() => {
-        if (!searchParams.get(INVOICESHEET_CONSTANTS.isInvoiceListOpen)) {
+        if (!isInvoiceListOpen) {
             setNotification(null);
         }
-    }, [searchParams.get(INVOICESHEET_CONSTANTS.isInvoiceListOpen)]);
+    }, [isInvoiceListOpen]);
 
     const value = useMemo(
         () => ({

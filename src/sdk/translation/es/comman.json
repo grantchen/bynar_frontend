@@ -152,5 +152,6 @@
     "delete-card-modal-heading-2": "eliminará la tarjeta de forma permanente. Esta acción no se puede deshacer.",
     "type-last-four-digit": "Ingrese los últimos 4 dígitos para confirmar",
     "card": "Tarjeta",
-    "card-added-successfully": "Tarjeta agregada exitosamente"
+    "card-added-successfully": "Tarjeta agregada exitosamente",
+    "invalid-card-details": "Detalles de tarjeta inválidos"
 }

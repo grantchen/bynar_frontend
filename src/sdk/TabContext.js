@@ -1,5 +1,5 @@
 import { Heading } from "@carbon/react";
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useCallback, useEffect, useState } from "react";
 import DashboardContainer from "./../components/Dashboard/DashboardContainer";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "./AuthContext";
@@ -61,19 +61,23 @@ const TabContextProvider = ({ children }) => {
     }))
   }, [user?.languagePreference, t]);
 
-  const handleRemoveTab = (idToRemove, index) => {
-    const updatedTabs = tab.filter((tab) => tab.id !== idToRemove);
-    // const res = updatedTabs.map((data,index)=>data.id=index+1 && data.id!=1)
+  const handleRemoveTab =useCallback( (idToRemove, index) => {
+    const updatedTabs = tab.filter((tab) => tab.id !== idToRemove); 
     setTab(updatedTabs);
-    // console.log(idToRemove,"id to remove",index,tab[index].label,updatedTabs,activeTab)
-    setActiveTab(index);
-  };
+    if(updatedTabs.length === index){
+      setActiveTab(index-1);
+    }
+    else
+    {
+      setActiveTab(index);
+    }
+
+  },[tab, setActiveTab, activeTab, setTab]);
 
   const handleAddTab = () => {
     const maxId = tab.reduce((max, item) => {
       return item.id > max ? item.id : max;
     }, 0);
-    // console.log(maxId+1,"id is  ","active",tab.length+1)
     const newTab = {
       id: maxId + 1,
       label: `${t('tab')} ${maxId + 1}`,
@@ -81,14 +85,14 @@ const TabContextProvider = ({ children }) => {
       isDelted: true,
     };
     setTab([...tab, newTab]);
-    // console.log(tab.length+1,"test")
-    setActiveTab(maxId + 1);
+    setActiveTab(tab.length);
 
     if (tab.length >= maxTab && maxTab > 0) {
       setStartIndex(startIndex + 1);
       setEndIndex(endIndex + 1);
     }
   };
+
   return (
     <TabContext.Provider
       value={{

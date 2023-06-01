@@ -100,6 +100,7 @@ function _AuthenticatedAppHeader() {
                                 {isUserManagementAllowed && (
                                     <HeaderGlobalAction
                                         aria-label={t("user")}
+                                        className="user-list-nav-button"
                                         onClick={() => setIsUserListOpen(true)}
                                     >
                                         <UserData20 />
@@ -121,6 +122,7 @@ function _AuthenticatedAppHeader() {
                                                     "openAddUserPanel",
                                                     "userIdToBeEdited",
                                                     "openCardMangementPanel",
+                                                    "isInvoiceListOpen"
                                                 ])
                                             );
                                         }}

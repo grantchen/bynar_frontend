@@ -152,5 +152,6 @@
     "delete-card-modal-heading-2":"will permanently delete the card. This action cannot be undone.",
     "type-last-four-digit": "Type last 4 digit to confirm",
     "card": "Card",
-    "card-added-successfully":"Card added successfully"
+    "card-added-successfully":"Card added successfully",
+    "invalid-card-details":"Invalid card details"
 }

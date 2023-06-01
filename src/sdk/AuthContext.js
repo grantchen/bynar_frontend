@@ -102,7 +102,7 @@ export const AuthProvider = ({children}) => {
     }, [getUser]);
 
     useEffect(() => {
-        if (location.pathname === "/") {
+        if (location.pathname === "/" || location.pathname === "/test") {
             return
         }
         switch (state.token) {

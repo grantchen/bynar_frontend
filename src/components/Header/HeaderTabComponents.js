@@ -34,7 +34,10 @@ const HeaderTabComponents = ({onClickSideNavExpand}) => {
                                  }}>
                                 <p>{item.label}</p>
                                 {item.isDelted && <div className="close-icon">
-                                    <Close size={12} onClick={() => removeTab(item.id, index)} />
+                                    <Close size={12} onClick={(e) => {
+                                        e.preventDefault()
+                                        e.stopPropagation()
+                                        removeTab(item.id, index)}} />
                                 </div>}
                             </div>
                             {/* {item.isDelted && <div className="close-icon">
