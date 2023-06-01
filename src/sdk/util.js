@@ -91,12 +91,13 @@ export function omitQueryParams(prevParams, omitKeys) {
     return newQueryParams;
 }
 
-export const getAutoSizedColumnWidth = (rows, accessor, headerText) => {
+export const getAutoSizedColumnWidth = (rows, accessor, headerText, overrideRowValueMaxLength = 0) => {
     const maxWidth = 400;
     const minWidth = 58;
     const letterSpacing = 10;
+    const maxValQueue = overrideRowValueMaxLength ? [overrideRowValueMaxLength] : rows.map((row) => (`${row[accessor]}` || "").length)
     const cellLength = Math.max(
-        ...rows.map((row) => (`${row[accessor]}` || "").length),
+        ...maxValQueue,
         headerText.length,
         10
     );

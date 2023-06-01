@@ -126,6 +126,8 @@
     "URL": "URL",
     "invalid-file-type": "Tipo de archivo inválido.",
     "max-file-size-error-500": "Tamaño máximo del archivo: 500 KB. Seleccione un archivo nuevo e intente nuevamente.",
+    "no-invoices": "No se encontraron facturas",
+    "no-invoices-action-description": "No hay facturas que coincidan con sus filtros. Intente cambiar los filtros.",
     "invoices": "Facturas",
     "pay": "Pagar",
     "invoice": "Factura",

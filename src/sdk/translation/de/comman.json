@@ -126,6 +126,8 @@
     "URL": "URL",
     "invalid-file-type": "Ungültiger Dateityp.",
     "max-file-size-error-500": "Maximale Dateigröße: 500 KB. Wählen Sie eine neue Datei und versuchen Sie es erneut.",
+    "no-invoices": "Keine Rechnungen gefunden",
+    "no-invoices-action-description": "Es wurden keine Rechnungen gefunden, die Ihren Filtern entsprechen. Versuchen Sie, die Filter zu ändern.",
     "invoices": "Rechnungen",
     "pay": "Bezahlen",
     "invoice": "Rechnung",

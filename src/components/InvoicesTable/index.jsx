@@ -171,8 +171,8 @@ export default function InvoicesTable() {
             data: invoicesListData.invoices,
             isFetching: false,
             endPlugins: [],
-            emptyStateTitle: t("no-users"),
-            emptyStateDescription: t("no-users-action-description"),
+            emptyStateTitle: t("no-invoices"),
+            emptyStateDescription: t("no-invoices-action-description"),
             emptyStateSize: "lg",
             filterProps: {
                 variation: "flyout", // default
@@ -356,7 +356,8 @@ function getColumns(rows, t, loading = false) {
             width: getAutoSizedColumnWidth(
                 rows,
                 "invoiceDate",
-                "Transaction date"
+                "Transaction date",
+                "MM/dd/yyyy".length
             ),
             filter: "date",
             Cell: ({ cell: { value } }) =>
@@ -405,7 +406,8 @@ function getColumns(rows, t, loading = false) {
             width: getAutoSizedColumnWidth(
                 rows,
                 "billingPeriod",
-                "Billing Period"
+                "Billing Period",
+                "MM/dd/yyyy".length
             ),
             filter: "date",
             Cell: ({ cell: { value } }) =>
