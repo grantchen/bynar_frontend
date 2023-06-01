@@ -152,5 +152,6 @@
     "delete-card-modal-heading-2": "wird die Karte dauerhaft löschen. Diese Aktion kann nicht rückgängig gemacht werden.",
     "type-last-four-digit": "Geben Sie die letzten 4 Ziffern ein, um zu bestätigen",
     "card": "Karte",
-    "card-added-successfully": "Karte erfolgreich hinzugefügt"    
+    "card-added-successfully": "Karte erfolgreich hinzugefügt",
+    "invalid-card-details": "Ungültige Kartendetails"    
 }
