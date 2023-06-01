@@ -79,16 +79,20 @@ const HeaderTab = () => {
                   kind="ghost"
                   key={index}
                   onClick={() => {
-                    setActiveTab(item?.id);
+                    setActiveTab(index);
                   }}
-                  className={`custom-tab ${activeTab === item?.id ? "active" : ""
+                  className={`custom-tab ${activeTab === index ? "active" : ""
                     }`}
                 >
                   {item.label}
                   {item.isDelted && (
-                    <Button className="close-icon-button" onClick={() => removeTab(item.id, index)}>
+                    <IconButton className="close-button" onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      removeTab(item.id, index)
+                      }}>
                       <Close/>
-                    </Button>
+                    </IconButton>
                   )}
                 </Button>
               );

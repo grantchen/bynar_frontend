@@ -105,18 +105,25 @@
     display: none;
   }
 
-  .close-icon-button{
+  .close-button{
     min-height: 16px;
     padding-top: 0;
     padding-bottom: 0;
     padding: 2px 4px;
     // background-color: var(--cds-field-01, #e5e5e5);
     background-color: transparent;
+    outline: none !important;
   }
 
-  button.close-icon-button.cds--btn.cds--btn--primary:hover {
-    background-color: var(--cds-background-hover,rgba(141,141,141,0.12));
-}
+  .cds--tooltip-content,
+    .cds--popover-caret {
+        display: none !important;
+    }
+
+    .cds--btn--primary:focus{
+      border: 0;
+      box-shadow: none;
+    }
 
 }
 
