@@ -87,6 +87,13 @@ export let ImportModal = forwardRef(
             // fetchFile(undefined, user?.profileURL)
         }, [user?.profileURL, open]);
 
+        useEffect(() => {
+            if(!open){
+                setFiles([])
+                setFileChange(false)
+            }
+        },[open])
+
         const isInvalidFileType = (file) => {
             const acceptSet = new Set(accept);
             const name = file.name;
