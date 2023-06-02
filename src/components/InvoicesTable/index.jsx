@@ -165,10 +165,15 @@ export default function InvoicesTable() {
         setSearchParams(searchParamsMap);
     }, [tableFilters, isInvoiceListOpen]);
 
+
+    const data = useMemo(() => {
+        return getFakeOrRealDataBasedOnLoading(invoicesListData.invoices, true)
+    }, [loading, invoicesListData])
+
     const datagridState = useDatagrid(
         {
             columns,
-            data: invoicesListData.invoices,
+            data,
             isFetching: false,
             endPlugins: [],
             emptyStateTitle: t("no-invoices"),
@@ -261,25 +266,17 @@ export default function InvoicesTable() {
             DatagridActions: (dgState) => {
                 const { FilterFlyout, getFilterFlyoutProps } = dgState;
                 const { setAllFilters, ...rest } = getFilterFlyoutProps();
-                if (loading) {
-                    return (
-                        <SkeletonText
-                            heading={true}
-                            className="skeleton-loading"
-                        />
-                    );
-                }
                 return (
                     <TableToolbarContent>
                         <FilterFlyout
                             {...rest}
                             setAllFilters={(...args) => {
-                                setAllFilters(...args);
+                                setTimeout(() => {
+                                    setAllFilters(...args);
+                                }, 1000)
                                 handleTableFilters(...args);
                             }}
                         />
-                        {/* <FilterFlyout {...getFilterFlyoutProps()} onApply={() => console.log(dgState)}/> */}
-                        {/* {renderFilterFlyout()} */}
                         <Button
                             kind="ghost"
                             hasIconOnly
@@ -346,6 +343,25 @@ export default function InvoicesTable() {
             {actionsLoading && <Loading />}
         </>
     );
+}
+
+
+function getFakeOrRealDataBasedOnLoading(data, loading = false){
+    if(loading){
+        return Array(4).fill(null).map((_, idx) => {
+            return {
+                billingPeriod: new Date(),
+                currency: "EUR",
+                id: idx,
+                invoiceDate: new Date(),
+                invoiceNumber: "Inv-0003",
+                paid: false,
+                providerID: 1,
+                total: 700
+            }
+        })
+    }
+    return data
 }
 
 function getColumns(rows, t, loading = false) {
