@@ -100,11 +100,6 @@ const HeaderTab = () => {
                                                 removeTab(item.id, index);
                                             }}
                                             kind="ghost"
-                                            style={{
-                                                padding: 4,
-                                                minHeight: 8,
-                                                marginLeft: 0
-                                            }}
                                         >
                                             <Close />
                                         </IconButton>
