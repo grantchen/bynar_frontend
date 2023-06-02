@@ -58,6 +58,7 @@ export default function InvoicesTable() {
         downloadReceipts,
         downloadInvoice,
         notification,
+        setLoading
     } = useInvoices();
 
     const [actionsLoading, setActionsLoading] = useState(false);
@@ -119,6 +120,7 @@ export default function InvoicesTable() {
         if (!isInvoiceListOpen) {
             datagridState.setAllFilters([]);
             setTableFilters([]);
+            setLoading(true)
             return;
         }
     }, [isInvoiceListOpen]);
@@ -167,7 +169,7 @@ export default function InvoicesTable() {
 
 
     const data = useMemo(() => {
-        return getFakeOrRealDataBasedOnLoading(invoicesListData.invoices, true)
+        return getFakeOrRealDataBasedOnLoading(invoicesListData.invoices, loading)
     }, [loading, invoicesListData])
 
     const datagridState = useDatagrid(

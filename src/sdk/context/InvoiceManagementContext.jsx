@@ -28,7 +28,7 @@ const InvoicesProvider = ({ children }) => {
         invoices: [],
         totalCount: 0,
     });
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [notification, setNotification] = useState(null);
     const [searchParams, setSearchParams] = useSearchParams();
     
@@ -160,6 +160,7 @@ const InvoicesProvider = ({ children }) => {
             isInvoiceListOpen,
             payNow,
             downloadReceipts,
+            setLoading
         }),
         [
             invoicesListData,
@@ -172,6 +173,7 @@ const InvoicesProvider = ({ children }) => {
             isInvoiceListOpen,
             payNow,
             downloadReceipts,
+            setLoading
         ]
     );
     return (
