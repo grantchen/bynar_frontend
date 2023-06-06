@@ -53,17 +53,17 @@ const Signup = () => {
   const [fullName, setFullName] = useState("");
   const [isProfileInfoUpdated, setIsProfileInfoUpdated] = useState(false);
   const [isAccountInfoUpdated, setIsAccountInfoUpdated] = useState(false);
-  const [country, setCountry] = useState("India");
+  const [country, setCountry] = useState("Albania");
   const [addressLine1, setAddressLine1] = useState("");
   const [addressLine2, setAddressLine2] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [postalCode, setPostalCode] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("91");
+  const [phoneNumber, setPhoneNumber] = useState("0355");
   const [isTaxInfoUpdated, setIsTaxInfoUpdated] = useState(false);
   const [vatNumber, setVatNumber] = useState("");
   const [organizationName, setOrganizationName] = useState("");
-  const [organizationCountry, setCountryName] = useState("India");
+  const [organizationCountry, setCountryName] = useState("Albania");
   const [isGstValid, setGstValid] = useState(true);
   const [cardNumber, setCardNumber] = useState("");
   const [cardExpiryDate, setCardExpiryDate] = useState("");
@@ -96,8 +96,8 @@ const Signup = () => {
     organizationName: false,
     organizationNumber: false,
   });
-  const [countryCode, setCountryCode] = useState('IN');
-  const [countryDialCode, setCountryDialCode] = useState('91');
+  const [countryCode, setCountryCode] = useState('AL');
+  const [countryDialCode, setCountryDialCode] = useState('0355');
 
   const {hackPatchToken} = useAuth()
 
