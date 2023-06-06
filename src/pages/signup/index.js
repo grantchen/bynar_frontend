@@ -59,7 +59,7 @@ const Signup = () => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [postalCode, setPostalCode] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("0355");
+  const [phoneNumber, setPhoneNumber] = useState("355");
   const [isTaxInfoUpdated, setIsTaxInfoUpdated] = useState(false);
   const [vatNumber, setVatNumber] = useState("");
   const [organizationName, setOrganizationName] = useState("");
@@ -97,7 +97,7 @@ const Signup = () => {
     organizationNumber: false,
   });
   const [countryCode, setCountryCode] = useState('AL');
-  const [countryDialCode, setCountryDialCode] = useState('0355');
+  const [countryDialCode, setCountryDialCode] = useState('355');
 
   const {hackPatchToken} = useAuth()
 
