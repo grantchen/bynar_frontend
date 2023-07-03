@@ -22,7 +22,7 @@ function App() {
     return (
         <>
             <Suspense
-                fallback={<Loading small/>}
+                fallback={<Loading small />}
             >
                 <BrowserRouter>
                     <AuthProvider>
@@ -30,7 +30,10 @@ function App() {
                             <TabContextProvider>
                                 <UserManagementProvider>
                                     <Routes>
-                                        <Route path="/" element={<Home />} />
+                                        <Route
+                                            path="/"
+                                            element={<Home />}
+                                        />
                                         <Route
                                             path="/test"
                                             element={<Test />}

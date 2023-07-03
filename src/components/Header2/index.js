@@ -1,5 +1,4 @@
 import { ExpandableSearch } from "carbon-components-react";
-
 import {
     HeaderContainer,
     Header,
@@ -11,7 +10,6 @@ import {
     Popover,
     PopoverContent,
 } from "@carbon/react";
-
 import { UserData20 } from "@carbon/icons-react";
 import {
     CardManagementProvider,
@@ -36,6 +34,9 @@ import { useEffect } from "react";
 import ProfileDropdown from "../ProfileDropdown";
 import { AppSideNav } from "./AppSideNav";
 import UploadProfileImageModal from "../../sdk/uploadprofileimage";
+
+import { Switcher } from "@carbon/react/icons";
+import ibmLogo from '../media/IBM_logo.svg.png'
 
 function _AuthenticatedAppHeader() {
     const { user } = useAuth();
@@ -81,14 +82,39 @@ function _AuthenticatedAppHeader() {
                     render={({ isSideNavExpanded, onClickSideNavExpand }) => (
                         <Header aria-label="Bynar">
                             <SkipToContent />
-                            <HeaderMenuButton
+                            {/* previous code for hamburger icon*/}
+                            {/* <HeaderMenuButton
                                 aria-label="Open menu"
                                 onClick={onClickSideNavExpand}
                                 isActive={isSideNavExpanded}
-                            />
-                            <HeaderName href="#" prefix="Bynar">
-                                [Platform]
+                            /> */}
+                            {/* added code for waffle icon */}
+                            <HeaderGlobalAction
+                                aria-label={
+                                    isSideNavExpanded ? 'Close switcher' : 'Open switcher'
+                                }
+                                aria-expanded={isSideNavExpanded}
+                                isActive={isSideNavExpanded}
+                                onClick={onClickSideNavExpand}
+                                tooltipAlignment="end"
+                                id="switcher-button">
+                                <Switcher size="35" style={{ color: "cornflowerblue" }} />
+                            </HeaderGlobalAction>
+
+                            <img src={ibmLogo} alt="ibm_logo" className="ibmLogo" />
+
+                            <HeaderName className="seperatorHead" href="#" prefix="">
+                                <div className="logoSeperator" />
                             </HeaderName>
+
+                            <HeaderName className="orgName" href="#" prefix="">
+                                Bynar
+                            </HeaderName>
+
+                            {/* <HeaderName href="#" prefix="Bynar">
+                                [Platform]
+                            </HeaderName> */}
+
                             <HeaderGlobalBar>
                                 <HeaderTab />
                                 {

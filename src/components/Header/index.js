@@ -26,6 +26,7 @@ import {
 import { TearSheets } from "../TearSheet";
 import { useSearchParams } from "react-router-dom";
 
+
 export const CommonHeader = () => {
     return (
         <div>
@@ -123,9 +124,11 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
                         )}
                         <HeaderGlobalAction
                             aria-label={t("search")}
-                            onClick={() => {}}
+                            onClick={() => { }}
                         >
                             <Search20 />
+
+
                         </HeaderGlobalAction>
                         {/* <HeaderGlobalAction aria-label="Notifications" onClick={() => setOpen(!open)}>
             <Notification20 />
