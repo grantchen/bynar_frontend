@@ -33,4 +33,4 @@ phases:
 artifacts:
   files:
     - template-export.yml
-    - template-configuration.json
+    # template-configuration.json
