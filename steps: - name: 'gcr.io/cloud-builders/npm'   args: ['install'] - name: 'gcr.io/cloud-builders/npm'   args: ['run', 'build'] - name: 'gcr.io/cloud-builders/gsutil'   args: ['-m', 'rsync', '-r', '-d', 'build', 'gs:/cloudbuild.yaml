@@ -4,4 +4,4 @@ steps:
 - name: 'gcr.io/cloud-builders/npm'
   args: ['run', 'build']
 - name: 'gcr.io/cloud-builders/gsutil'
-  args: ['-m', 'rsync', '-r', '-d', 'build', 'gs://my-bucket-name']
+  args: ['-m', 'rsync', '-r', '-d', 'build', 'gs:bynar-website']
