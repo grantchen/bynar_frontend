@@ -231,6 +231,7 @@ const Signup = () => {
       setEmailVerificationTimeStamp(urlTimestamp)
       setEmailVerificationSignature(urlSignature)
       setActiveStep(2)
+      handleVerifyEmail(urlEmail, urlTimestamp, urlSignature)
     }
   };
 
@@ -289,7 +290,7 @@ const Signup = () => {
    if email is verified successfully then proceed to next step ,
    otherwise in case of error show error in signup page
   */
-  const handleVerifyEmail = () => {
+  const handleVerifyEmail = (email, timestamp, signature) => {
     const fetchData = async () => {
       setErrorNotification({});
       setIsError(false);
@@ -297,8 +298,8 @@ const Signup = () => {
         setVerifyEmailLoading(true);
         const data = {
           email: email,
-          timestamp: emailVerificationTimeStamp,
-          signature: emailVerificationSignature,
+          timestamp: timestamp,
+          signature: signature,
         };
         const response = await fetch(`${BaseURL}/confirm-email`, {
           method: "POST",
@@ -353,7 +354,7 @@ const Signup = () => {
         const res = await response.json();
 
         if (response.ok) {
-          handleCreateAccount();
+          handleCreateAccount(res.customerID, res.sourceID, token);
         } else if (response.status === 500) {
           setIsError(true);
           setErrorNotification({
@@ -371,7 +372,7 @@ const Signup = () => {
   };
 
   /* Function to create user account ,if account created sucessfully then navigate to signin page ,otherwise in case of error show error in signup page */
-  const handleCreateAccount = () => {
+  const handleCreateAccount = (customerID, sourceID, token) => {
     const fetchData = async () => {
       try {
         setLoadingSuccess(true);
@@ -389,11 +390,11 @@ const Signup = () => {
           VAT: vatNumber,
           organisationCountry: organizationCountry,
           isAgreementSigned: true,
-          token: validationToken,
+          token: token,
           timestamp: emailVerificationTimeStamp,
           signature: emailVerificationSignature,
-          customerID: validationToken,
-          sourceID: validationToken,
+          customerID: customerID,
+          sourceID: sourceID,
         };
         const response = await fetch(`${BaseURL}/create-user`, {
           method: "POST",
@@ -403,13 +404,13 @@ const Signup = () => {
           },
         });
 
+        const res = await response.json();
         if (response.ok) {
-          const res = await response.json();
           hackPatchToken(res.token)
         } else if (response.status === 500) {
           setIsError(true);
           setErrorNotification({
-            title: "error occured while creating user account",
+            title: res.error,
             status: "error",
           });
           setVerificationCode("");
@@ -522,13 +523,6 @@ const Signup = () => {
     // get custom signature from url on page load
     handleEmailLinkRedirect()
   }, [])
-
-  useEffect(() => {
-    // verify email and signature when signature changed
-    if (emailVerificationSignature) {
-      handleVerifyEmail();
-    }
-  }, [emailVerificationSignature])
 
   const validateOrganizationForm = (email) => {
     const errors = {};
@@ -1021,7 +1015,7 @@ const Signup = () => {
                       </div>
                       <Frames
                         config={{
-                          publicKey: "pk_sbox_u4jn2iacxvzosov4twmtl2yzlqe",
+                          publicKey: CheckoutPublicKey,
                         }}
                         ref={cardElement}
                       >
