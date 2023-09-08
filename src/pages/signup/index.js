@@ -17,19 +17,18 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   BaseURL,
   COUNTRIES,
-  formatCVC,
-  formatCreditCardNumber,
-  formatExpirationDate,
+  CheckoutPublicKey,
   useAuth,
 } from "./../../sdk";
 
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import "./../../styles/paymentform.scss";
 import "./signup.scss";
 import {
-  PhoneNumberUtil} from "google-libphonenumber";
+  PhoneNumberUtil,
+} from "google-libphonenumber";
 
 const Signup = () => {
   const phoneUtil = PhoneNumberUtil.getInstance();
@@ -41,18 +40,15 @@ const Signup = () => {
   const [loadingSuccess, setLoadingSuccess] = useState(false);
   const [password, setPassword] = useState("");
   const [email, setEmailAddress] = useState("");
+  const [emailVerificationTimeStamp, setEmailVerificationTimeStamp] = useState("");
+  const [emailVerificationSignature, setEmailVerificationSignature] = useState("");
+  const [isEmailVerified, setIsEmailVerified] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [passwordArray, setPasswordArray] = useState(Array(6).fill(false));
   const [passwordStrengthWidth, setpaswordStrengthWidth] = useState(0);
-  const [passwordIsValid, setPasswordIsValid] = useState(true);
-  const [emailIsValid, setEmailValid] = useState(true);
   const [activeStep, setActiveStep] = useState(1);
   const [verificationCode, setVerificationCode] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
   const [fullName, setFullName] = useState("");
   const [isProfileInfoUpdated, setIsProfileInfoUpdated] = useState(false);
-  const [isAccountInfoUpdated, setIsAccountInfoUpdated] = useState(false);
   const [country, setCountry] = useState("Albania");
   const [addressLine1, setAddressLine1] = useState("");
   const [addressLine2, setAddressLine2] = useState("");
@@ -65,19 +61,12 @@ const Signup = () => {
   const [organizationName, setOrganizationName] = useState("");
   const [organizationCountry, setCountryName] = useState("Albania");
   const [isGstValid, setGstValid] = useState(true);
-  const [cardNumber, setCardNumber] = useState("");
-  const [cardExpiryDate, setCardExpiryDate] = useState("");
-  const [cardCVV, setCardCVV] = useState("");
   const [isChecked, setIsChecked] = useState(true);
-  const [isCardInfoUpdated, setCardInfoUpdated] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isAccountInfoError, setIsAccountInfoError] = useState(false);
   const [isVerifyEmailInfoError, setIsVerifyEmailError] = useState(false);
   const [postalCodeErrorNotification, setPostalCodeErrorNotification] =
     useState({});
-  const [isCreateAccountError, setIsCreateAccountError] = useState(false);
-  const [userId, setUserId] = useState();
-  const [message, setMessage] = useState("creating account ...");
   const [validationToken, setValidationToken] = useState("");
   const ref = useRef(null);
   const [loadingCardSuccess, setLoadingCardSuccess] = useState(false);
@@ -99,11 +88,9 @@ const Signup = () => {
   const [countryCode, setCountryCode] = useState('AL');
   const [countryDialCode, setCountryDialCode] = useState('355');
 
-  const {hackPatchToken} = useAuth()
+  const { hackPatchToken } = useAuth()
+  const [searchParams, setSearchParams] = useSearchParams();
 
-
-  const accountInfoButtonDisabled =
-    !emailIsValid || email.length === 0 || isAccountInfoError;
   const personalInfoButtonDisabled =
     fullName.trim().length === 0 ||
     city.trim().length === 0 ||
@@ -111,9 +98,7 @@ const Signup = () => {
     postalCode.trim().length === 0 ||
     !phoneNumberValid ||
     addressLine1.trim().length === 0 ||
-    Object.keys(postalCodeErrorNotification).length != 0;
-  const verificationEmailButtonDisabled =
-    verificationCode.length === 0 || isVerifyEmailInfoError;
+    Object.keys(postalCodeErrorNotification).length !== 0;
 
   const handleFullName = (e) => {
     const { name, value } = e.target;
@@ -152,21 +137,18 @@ const Signup = () => {
   };
 
   const validatePhoneNumber = (value, dialCode, country) => {
-    if (value == dialCode) {
+    if (value === dialCode) {
       setErrorMessage("Enter valid phone number")
       setIsPhoneNumberValid(false)
-    }
-    else {
-      const phoneNumberWithoutDialCode = value.toString().replace(dialCode, '');
-      if (phoneNumberWithoutDialCode.length == 0) {
+    } else {
+      const phoneNumberWithoutDialCode = value.toString().replace(dialCode, "");
+      if (phoneNumberWithoutDialCode.length === 0) {
         setErrorMessage("Phone number is required")
         setIsPhoneNumberValid(false)
-      }
-      else if (phoneNumberWithoutDialCode == value) {
+      } else if (phoneNumberWithoutDialCode === value) {
         setErrorMessage("Enter valid phone number")
         setIsPhoneNumberValid(false)
-      }
-      else {
+      } else {
 
         try {
           const number = phoneUtil.parse(phoneNumberWithoutDialCode, country);
@@ -174,13 +156,11 @@ const Signup = () => {
           if (!isValid) {
             setErrorMessage("Enter valid phone number")
             setIsPhoneNumberValid(false)
-          }
-          else {
+          } else {
             setErrorMessage("")
             setIsPhoneNumberValid(true)
           }
-        }
-        catch (e) {
+        } catch (e) {
           setErrorMessage("Enter valid phone number")
           setIsPhoneNumberValid(false)
         }
@@ -192,21 +172,10 @@ const Signup = () => {
     setPhoneNumber(value)
     setCountryCode(country?.countryCode);
     setCountryDialCode(
-        country?.dialCode.toString().replace("+", "")
+      country?.dialCode.toString().replace("+", "")
     );
     validatePhoneNumber(value, country.dialCode, country?.countryCode);
-
   }
-
-
-  const handleVerificationCodeChange = (value) => {
-    setErrorNotification({});
-    setVerificationCode(value);
-    setIsError(false);
-    setIsVerifyEmailError(false);
-    const errors = validateVerifyEmailForm(value);
-    setErrors(errors);
-  };
 
   useLayoutEffect(() => {
     handlePasswordStrengthLength(password);
@@ -252,36 +221,18 @@ const Signup = () => {
     // setEmailValid(checkEmailValid(value));
   };
 
-  const handlePasswordChange = (value) => {
-    setErrorNotification({});
-    setIsError(false);
-    setIsAccountInfoError(false);
-    setPassword(value);
-    const lengthRegex = /^.{8,}$/;
-    const uppercaseRegex = /[A-Z]/;
-    const lowercaseRegex = /[a-z]/;
-    const numberRegex = /[0-9]/;
-    const specialcharacterRegex = /[-!$%^&*()_+|~=`{}\[\]:\/;<>?,.@#]/;
-    const tempArray = [
-      lengthRegex.test(value.trim()),
-      uppercaseRegex.test(value),
-      lowercaseRegex.test(value),
-      numberRegex.test(value),
-      specialcharacterRegex.test(value),
-      value.length === value.trim().length,
-    ];
-    setPasswordArray(tempArray);
-    setpaswordStrengthWidth(
-      (tempArray.filter((i) => i === true).length * ref?.current?.offsetWidth) /
-      6
-    );
-    setPasswordIsValid(
-      lengthRegex.test(value.trim()) &&
-      uppercaseRegex.test(value) &&
-      lowercaseRegex.test(value) &&
-      numberRegex.test(value) &&
-      specialcharacterRegex.test(value)
-    );
+  // handle magic link redirection from email
+  const handleEmailLinkRedirect = () => {
+    const urlEmail = searchParams.get("email")
+    const urlTimestamp = searchParams.get("timestamp")
+    const urlSignature = searchParams.get("signature")
+    if (urlEmail && urlTimestamp && urlSignature) {
+      setEmailAddress(urlEmail)
+      setEmailVerificationTimeStamp(urlTimestamp)
+      setEmailVerificationSignature(urlSignature)
+      setActiveStep(2)
+      handleVerifyEmail(urlEmail, urlTimestamp, urlSignature)
+    }
   };
 
   /* Function to send email as payload  ,if api response is 200 then proceed with email verification,otherwise in case of error show error in signup page*/
@@ -294,7 +245,6 @@ const Signup = () => {
       try {
         const data = {
           email: email.trim(),
-          // password: password,
         };
         const response = await fetch(`${BaseURL}/signup`, {
           method: "POST",
@@ -336,13 +286,11 @@ const Signup = () => {
     fetchData();
   };
 
-  const handleEditClick = (value) => {
-    setActiveStep(value);
-    setIsAccountInfoUpdated(true);
-  };
-
-  /* Function to verify user email during signup process , if email is verified sucessfully then proceed to next step ,otherwise in case of error show error in signup page*/
-  const handleVerifyEmail = () => {
+  /* Function to verify user email during signup process ,
+   if email is verified successfully then proceed to next step ,
+   otherwise in case of error show error in signup page
+  */
+  const handleVerifyEmail = (email, timestamp, signature) => {
     const fetchData = async () => {
       setErrorNotification({});
       setIsError(false);
@@ -350,11 +298,9 @@ const Signup = () => {
         setVerifyEmailLoading(true);
         const data = {
           email: email,
-          code: verificationCode,
+          timestamp: timestamp,
+          signature: signature,
         };
-        // debugger
-        // await Auth.confirmSignUp(email, verificationCode);
-        // debugger
         const response = await fetch(`${BaseURL}/confirm-email`, {
           method: "POST",
           body: JSON.stringify(data),
@@ -364,18 +310,21 @@ const Signup = () => {
         });
         const res = await response.json();
         if (response.ok) {
-          setActiveStep(3);
           setIsError(false);
           setIsVerifyEmailError(false);
-          setUserId(res?.accountID);
+          setIsEmailVerified(true);
+          setErrorNotification({
+            title: `email verified successfully `,
+            status: "success",
+          });
         } else if (response.status === 500) {
           setIsError(true);
           setIsVerifyEmailError(true);
+          setIsEmailVerified(false);
           setErrorNotification({
-            title: "Enter valid confirmation email code",
+            title: res.error,
             status: "error",
           });
-          setVerificationCode("");
         }
         setVerifyEmailLoading(false);
       } catch (e) {
@@ -391,7 +340,6 @@ const Signup = () => {
       try {
         // setLoadingCardSuccess(true)
         const data = {
-          id: userId,
           token: token,
           email: email,
           name: fullName,
@@ -406,11 +354,11 @@ const Signup = () => {
         const res = await response.json();
 
         if (response.ok) {
-          handleCreateAccount();
+          handleCreateAccount(res.customerID, res.sourceID, token);
         } else if (response.status === 500) {
           setIsError(true);
           setErrorNotification({
-            title: "error occured while validating card",
+            title: "error occurred while validating card",
             status: "error",
           });
         }
@@ -424,12 +372,11 @@ const Signup = () => {
   };
 
   /* Function to create user account ,if account created sucessfully then navigate to signin page ,otherwise in case of error show error in signup page */
-  const handleCreateAccount = () => {
+  const handleCreateAccount = (customerID, sourceID, token) => {
     const fetchData = async () => {
       try {
         setLoadingSuccess(true);
         const data = {
-          id: userId,
           username: email,
           fullName: fullName,
           country: country,
@@ -443,6 +390,11 @@ const Signup = () => {
           VAT: vatNumber,
           organisationCountry: organizationCountry,
           isAgreementSigned: true,
+          token: token,
+          timestamp: emailVerificationTimeStamp,
+          signature: emailVerificationSignature,
+          customerID: customerID,
+          sourceID: sourceID,
         };
         const response = await fetch(`${BaseURL}/create-user`, {
           method: "POST",
@@ -452,13 +404,13 @@ const Signup = () => {
           },
         });
 
+        const res = await response.json();
         if (response.ok) {
-          const res = await response.json();
           hackPatchToken(res.token)
         } else if (response.status === 500) {
           setIsError(true);
           setErrorNotification({
-            title: "error occured while creating user account",
+            title: res.error,
             status: "error",
           });
           setVerificationCode("");
@@ -504,24 +456,6 @@ const Signup = () => {
     setActiveStep(5);
   };
 
-  const handleCardInfo = () => {
-    setCardInfoUpdated(true);
-    setActiveStep(6);
-  };
-
-  const handleInputChange = ({ target }) => {
-    if (target.name === "number") {
-      target.value = formatCreditCardNumber(target.value);
-      setCardNumber(target.value);
-    } else if (target.name === "expiry") {
-      target.value = formatExpirationDate(target.value);
-      setCardExpiryDate(target.value);
-    } else if (target.name === "cvc") {
-      target.value = formatCVC(target.value);
-      setCardCVV(target.value);
-    }
-  };
-
   const postalCodeValidation = (value) => {
     if (value.length === 0) {
       setPostalCodeErrorNotification({ title: "Postal code is required" });
@@ -556,13 +490,8 @@ const Signup = () => {
 
       console.log(e);
     }
-    Frames.init("pk_sbox_u4jn2iacxvzosov4twmtl2yzlqe");
+    Frames.init(CheckoutPublicKey);
   };
-
-  const creditCardButtonDisabled =
-    cardCVV.length === 0 ||
-    cardExpiryDate.length === 0 ||
-    cardNumber.length === 0;
 
   const taxInfoButtonDisabled =
     organizationName.length === 0 || vatNumber.length === 0;
@@ -578,7 +507,7 @@ const Signup = () => {
   useEffect(() => {
     // 👇️ scroll to top on page load
 
-    if (isError && activeStep != 1 && activeStep != 5 && activeStep != 4) {
+    if (isError && activeStep !== 1 && activeStep !== 5 && activeStep !== 4) {
       const currentWidth = containerRef.current
         ? containerRef.current.offsetWidth
         : 0;
@@ -590,6 +519,11 @@ const Signup = () => {
     }
   }, [isError]);
 
+  useEffect(() => {
+    // get custom signature from url on page load
+    handleEmailLinkRedirect()
+  }, [])
+
   const validateOrganizationForm = (email) => {
     const errors = {};
     if (email.trim() === "") {
@@ -597,19 +531,6 @@ const Signup = () => {
     } else if (email.length > 0) {
       if (!checkEmailValid(email.trim())) {
         errors.email = "Suggested format (name@company.com)";
-      }
-    }
-
-    return errors;
-  };
-
-  const validateVerifyEmailForm = (verificationCode) => {
-    const errors = {};
-    if (verificationCode.trim() == "") {
-      errors.verificationCode = "A verification code is required";
-    } else if (verificationCode.length > 0) {
-      if (verificationCode.trim().length != 6) {
-        errors.verificationCode = "Code should be 6 digit long";
       }
     }
 
@@ -626,12 +547,14 @@ const Signup = () => {
   };
 
   const handleVerifyEmailFormSubmit = () => {
-    const errors = validateVerifyEmailForm(verificationCode);
-    setErrors(errors);
-    if (Object.keys(errors).length === 0) {
-      handleVerifyEmail();
+    if (isEmailVerified) {
+      setErrorNotification({});
+      setActiveStep(3);
     } else {
-      setIsError(true);
+      setErrorNotification({
+        title: "email not verified",
+        status: "error",
+      });
     }
   };
 
@@ -645,11 +568,10 @@ const Signup = () => {
     error.state = state.trim().length === 0;
     error.phoneNumber = phoneNumber.length === 0;
     setAccountInfoErrors(error);
-    if (phoneNumber.length == 0) {
+    if (phoneNumber.length === 0) {
       setErrorMessage('Phone number is required')
       setIsPhoneNumberValid(false)
-    }
-    else {
+    } else {
       validatePhoneNumber(phoneNumber, countryDialCode, countryCode)
     }
 
@@ -676,10 +598,9 @@ const Signup = () => {
 
   const handleCountryChange = (e) => {
     const selectedItem = COUNTRIES.find((item) => item.name === e.target.value);
-    if (Object.keys(selectedItem).length == 0) {
+    if (Object.keys(selectedItem).length === 0) {
       setPhoneNumber('')
-    }
-    else {
+    } else {
       setCountry(e.target.value)
       setPhoneNumber(selectedItem?.dial_code.toString())
       setCountryCode(selectedItem?.code)
@@ -752,7 +673,7 @@ const Signup = () => {
                   <hr className="underline" />
                 </Content>
                 {typeof errorNotification === "object" &&
-                  Object.keys(errorNotification).length !== 0 ? (
+                Object.keys(errorNotification).length !== 0 ? (
                   <div>
                     <ToastNotification
                       className="error-notification-box"
@@ -812,113 +733,105 @@ const Signup = () => {
                       <div className="account-heading">
                         <p className="heading">2. Verify email</p>
                       </div>
-                      <div className="verification-box">
-                        <TextInput
-                          type="text"
-                          className="verification-text-input"
-                          id="verification code"
-                          labelText="Verification token"
-                          placeholder="6 digit code"
-                          value={verificationCode}
-                          onChange={(e) =>
-                            handleVerificationCodeChange(e.target.value)
-                          }
-                          invalid={!!errors.verificationCode}
-                          invalidText={errors.verificationCode}
-                          disabled={loading ? true : false}
-                        />
-                      </div>
-                      <div>
-                        <p className="email-text">
-                          Didn’t receive the email? Check your spam filter for
-                          an email from noreply@bynar.al.
-                        </p>
-                      </div>
-                      <div>
-                        {resendCodeLoading ? (
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "flex-start",
-                              alignItems: "center",
-                              gap: "8px",
-                            }}
-                          >
-                            <InlineLoading
-                              description={"re-sending confirmation-code"}
-                              className="submit-button-loading"
-                            />
-                            {/* <p className='email-text'>re-sending confirmation-code </p> */}
+
+                      {isEmailVerified ? (
+                        <div>
+                          <div>
+                            <p className="verify-email-text">
+                              Bynar may use my contact data to keep me informed of
+                              products, services and offerings:
+                            </p>
                           </div>
-                        ) : (
-                          <p
-                            className="resend-code"
-                            onClick={handleSignupRequest}
-                          >
-                            Resend code
-                          </p>
-                        )}
-                      </div>
-                      <hr className="underline-border" />
-                      <div>
-                        <p className="verify-email-text">
-                          Bynar may use my contact data to keep me informed of
-                          products, services and offerings:
-                        </p>
-                      </div>
-                      <div style={{ display: "flex", alignItems: "center" }}>
-                        <Checkbox
-                          labelText="by email"
-                          checked={isChecked}
-                          id="checkbox-label-1"
-                          onChange={(_, { checked }) => {
-                            setIsChecked(checked);
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <p className="verify-email-text">
-                          You can withdraw your marketing consent at any time by
-                          submitting an{" "}
-                          <Link href="/signup">opt-out request</Link>. Also you
-                          may unsubscribe from receiving marketing emails by
-                          clicking the unsubscribe link in each email.
-                        </p>
-                      </div>
-                      <div>
-                        <p className="verify-email-text">
-                          More information on our processing can be found in the{" "}
-                          <Link href="/signup">Bynar Privacy Statement.</Link>{" "}
-                          By submitting this form, I acknowledge that I have
-                          read and understand the Bynar Privacy Statement.
-                        </p>
-                      </div>
-                      <div>
-                        <p className="verify-email-text">
-                          I accept the product{" "}
-                          <Link href="/signup">Terms and Conditions</Link> of
-                          this registration form.
-                        </p>
-                      </div>
-                      {verifyEmailLoading ? (
-                        <div style={{ marginTop: "32px" }}>
-                          <InlineLoading
-                            description={""}
-                            className="submit-button-loading"
-                          />
+                          <div style={{ display: "flex", alignItems: "center" }}>
+                            <Checkbox
+                                labelText="by email"
+                                checked={isChecked}
+                                id="checkbox-label-1"
+                                onChange={(_, { checked }) => {
+                                  setIsChecked(checked);
+                                }}
+                            />
+                          </div>
+                          <div>
+                            <p className="verify-email-text">
+                              You can withdraw your marketing consent at any time by
+                              submitting an{" "}
+                              <Link href="/signup">opt-out request</Link>. Also you
+                              may unsubscribe from receiving marketing emails by
+                              clicking the unsubscribe link in each email.
+                            </p>
+                          </div>
+                          <div>
+                            <p className="verify-email-text">
+                              More information on our processing can be found in the{" "}
+                              <Link href="/signup">Bynar Privacy Statement.</Link>{" "}
+                              By submitting this form, I acknowledge that I have
+                              read and understand the Bynar Privacy Statement.
+                            </p>
+                          </div>
+                          <div>
+                            <p className="verify-email-text">
+                              I accept the product{" "}
+                              <Link href="/signup">Terms and Conditions</Link> of
+                              this registration form.
+                            </p>
+                          </div>
                         </div>
                       ) : (
-                        <div
-                          style={{ marginTop: "32px", marginBottom: "16px" }}
-                        >
-                          <Button
-                            kind="tertiary"
-                            onClick={() => handleVerifyEmailFormSubmit()}
-                          >
-                            Verify Email
-                          </Button>
-                          <hr className="underline-border" />
+                        <div>
+                          <div>
+                            <p className="email-text">
+                              Didn’t receive the email? Check your spam filter for
+                              an email from noreply@bynar.al.
+                            </p>
+                          </div>
+                          <div>
+                            {resendCodeLoading ? (
+                                <div
+                                    style={{
+                                      display: "flex",
+                                      justifyContent: "flex-start",
+                                      alignItems: "center",
+                                      gap: "8px",
+                                    }}
+                                >
+                                  <InlineLoading
+                                      description={"re-sending confirmation email"}
+                                      className="submit-button-loading"
+                                  />
+                                  {/* <p className='email-text'>re-sending confirmation-code </p> */}
+                                </div>
+                            ) : (
+                                <p
+                                    className="resend-code"
+                                    onClick={handleSignupRequest}
+                                >
+                                  Resend confirmation email
+                                </p>
+                            )}
+                          </div>
                         </div>
+                      )}
+
+                      {verifyEmailLoading ? (
+                          <div style={{ marginTop: "32px" }}>
+                            <InlineLoading
+                                description={""}
+                                className="submit-button-loading"
+                            />
+                          </div>
+                      ) : (
+                          <div
+                              style={{ marginTop: "32px", marginBottom: "16px" }}
+                          >
+                            <Button
+                                kind="tertiary"
+                                disabled={!isEmailVerified}
+                                onClick={() => handleVerifyEmailFormSubmit()}
+                            >
+                              Next
+                            </Button>
+                          </div>
                       )}
                     </div>
                   )}
@@ -1025,7 +938,7 @@ const Signup = () => {
                         className="phone-input-signup"
                         ref={(el) => (inputRefs.current[5] = el)}
                         style={{
-                          border: !phoneNumberValid && errorMessage.length>0 ? "2px solid red" : 0,
+                          border: !phoneNumberValid && errorMessage.length > 0 ? "2px solid red" : 0,
                         }}
                         name="phoneNumber"
                         country={""}
@@ -1034,7 +947,7 @@ const Signup = () => {
                           handlePhoneNumber(value, country, formattedValue)
                         }
                       />
-                      {!phoneNumberValid && errorMessage.length>0 && (
+                      {!phoneNumberValid && errorMessage.length > 0 && (
                         <p
                           style={{
                             marginTop: "4px",
@@ -1102,7 +1015,7 @@ const Signup = () => {
                       </div>
                       <Frames
                         config={{
-                          publicKey: "pk_sbox_u4jn2iacxvzosov4twmtl2yzlqe",
+                          publicKey: CheckoutPublicKey,
                         }}
                         ref={cardElement}
                       >
@@ -1124,13 +1037,13 @@ const Signup = () => {
                               />
                             </div>
                           ) : (
-                            <div className="create-account">                           
-                                <Button
-                                  className="submit-button"
-                                  onClick={handleVerifyCardDetails}
-                                >
-                                  Verify card
-                                </Button>
+                            <div className="create-account">
+                              <Button
+                                className="submit-button"
+                                onClick={handleVerifyCardDetails}
+                              >
+                                Verify card
+                              </Button>
                             </div>
                           )}
                         </div>

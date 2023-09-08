@@ -1,4 +1,5 @@
-export const BaseURL="https://7mz10vfch8.execute-api.eu-central-1.amazonaws.com/awscodGetEvnfbFeDdO1oAy";
+export const BaseURL=process.env.REACT_APP_BASE_URL;
+export const CheckoutPublicKey=process.env.REACT_APP_CHECKOUT_PUBLIC_KEY;
 
 export const COUNTRIES = [
     {
@@ -1289,4 +1290,3 @@ export const COUNTRIES = [
        {},
     }
   ];
-  

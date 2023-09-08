@@ -1,7 +1,7 @@
 import React, { useState, useRef, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./signin.scss";
-import { AuthContext } from "../../sdk";
+import {AuthContext, BaseURL} from "../../sdk";
 import { Auth } from "aws-amplify";
 import Login from "../../components/Login";
 import MagicLinkValidation from "../../components/MagicLInkValidation";
@@ -45,16 +45,33 @@ const Signin = () => {
             setServerErrorNotification({});
             setLoadingSucess(true);
             try {
-                cognitoUser.current = await Auth.signIn({
-                    username: email.trim(),
+                const data = {
+                    email: email.trim(),
+                };
+                const response = await fetch(`${BaseURL}/signin-email`, {
+                    method: "POST",
+                    body: JSON.stringify(data),
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
                 });
-                setSignInPhaseOne(false);
-                setLoadingSucess(false);
-                setVerificationCode("");
-                setServerErrorNotification({
+                const res = await response.json();
+                if (response.ok) {
+                    setSignInPhaseOne(false);
+                    setLoadingSucess(false);
+                    setVerificationCode("");
+                    setServerErrorNotification({
                         title: `security code sent to ${email}`,
                         status: "success",
-                });
+                    });
+                } else if (response.status === 500) {
+                    setLoadingSucess(false);
+                    setVerificationCode("");
+                    setServerErrorNotification({
+                        title: res.error,
+                        status: "success",
+                    });
+                }
             } catch (e) {
                 console.log(e);
                 setLoadingSucess(false);
