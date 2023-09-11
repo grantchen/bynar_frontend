@@ -1,24 +1,22 @@
 import React, { useState, useRef, useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import "./signin.scss";
-import {AuthContext, BaseURL} from "../../sdk";
-import { Auth } from "aws-amplify";
+import { AuthContext, BaseURL, useAuth } from "../../sdk";
 import Login from "../../components/Login";
 import MagicLinkValidation from "../../components/MagicLInkValidation";
 
 const Signin = () => {
     const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
     const authContext = useContext(AuthContext);
     const [signInPhaseOne, setSignInPhaseOne] = useState(true); // state to store signInPhase ,initially set to true to show initial login component
     const [loading, setLoading] = useState(false);
     const [errorNotification, setErrorNotification] = useState({});
     const [serverErrorNotification, setServerErrorNotification] = useState({});
     const [email, setEmail] = useState("");
-    const [verificationCode, setVerificationCode] = useState("");
-    const [password, setPassword] = useState("");
-    const [isPasswordLessSignin, setPasswordLessSignin] = useState(true);
-    const cognitoUser = useRef(null);
     const [loadingSucess, setLoadingSucess] = useState(false);
+    const { signin } = useAuth();
+
 
     /** function to validate email address. */
     const validateEmail = (email) => {
@@ -59,14 +57,12 @@ const Signin = () => {
                 if (response.ok) {
                     setSignInPhaseOne(false);
                     setLoadingSucess(false);
-                    setVerificationCode("");
                     setServerErrorNotification({
-                        title: `security code sent to ${email}`,
+                        title: `Login link sent to ${email}`,
                         status: "success",
                     });
                 } else if (response.status === 500) {
                     setLoadingSucess(false);
-                    setVerificationCode("");
                     setServerErrorNotification({
                         title: res.error,
                         status: "success",
@@ -75,7 +71,6 @@ const Signin = () => {
             } catch (e) {
                 console.log(e);
                 setLoadingSucess(false);
-                setVerificationCode("");
                 setServerErrorNotification({
                     title: "Email address not verified",
                     status: "error",
@@ -84,90 +79,44 @@ const Signin = () => {
         }
     };
 
-    /** Function to perform action in case of sigin using password ,if any validation process failed then show error , otherwise enable user to sign in */
-    const handleFormSubmit = (e) => {
-        e.preventDefault();
+    /** Function to perform action in case of sigin using magic link ,if any validation process failed then show error , otherwise enable user to sign in  */
+    const verifyMagicLink = async (email) => {
         setLoading(true);
-        if (password.length === 0) {
-            setErrorNotification({
-                title: "Password should not be blank",
-            });
+        setSignInPhaseOne(false)
+        setServerErrorNotification({});
+        try {
+            signin(email, window.location.href)
             setLoading(false);
-        } else {
-            setErrorNotification({});
-            const fetchData = async () => {
-                try {
-                    const data = {
-                        email: email,
-                        password: password,
-                    };
-                    const response = await authContext.signin(data, false);
-
-                    if (response?.error) {
-                        setServerErrorNotification({
-                            title: "Wrong email or password",
-                        });
-
-                        setSignInPhaseOne(true);
-                    }
-                    setLoading(false);
-                } catch (e) {
-                    console.log("error");
-                    setLoading(false);
-                }
-            };
-            fetchData();
+        } catch (err) {
+            console.log(err);
+            setServerErrorNotification({
+                title: "Login failed",
+                status: "error",
+            });
+            // setSignInPhaseOne(true)
+            setLoading(false);
         }
     };
 
-    /** Function to perform action in case of sigin using magic link ,if any validation process failed then show error , otherwise enable user to sign in  */
-    const verifyMagicLink = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        setServerErrorNotification({});
-        if (verificationCode.trim().length === 0) {
-            setErrorNotification({
-                title: "Security code should not be blank",
-            });
-            setLoading(false);
-            setVerificationCode("");
-        } else {
-            try {
-                await Auth.sendCustomChallengeAnswer(
-                    cognitoUser.current,
-                    verificationCode
-                );
-                await authContext.refreshPostSignIn();
-
-                setLoading(false);
-            } catch (err) {
-                console.log(err);
-                if (
-                    err ===
-                    "NotAuthorizedException: Invalid session for the user."
-                ) {
-                    setServerErrorNotification({
-                        title: "Maximum attempts reached , please login using new code",
-                        status: "error",
-                    });
-                } else
-                    setServerErrorNotification({
-                        title: "Enter correct security code",
-                        status: "error",
-                    });
-                // setSignInPhaseOne(true)
-                setLoading(false);
-                setVerificationCode("");
-            }
+    // handle magic link redirection from email
+    const handleEmailLinkRedirect = () => {
+        const urlEmail = searchParams.get("email")
+        if (urlEmail) {
+            setEmail(urlEmail)
+            verifyMagicLink(urlEmail).then(r => {})
         }
     };
 
     useEffect(() => {
         if (signInPhaseOne) {
             setErrorNotification({});
-            setVerificationCode("");
         }
     }, [signInPhaseOne]);
+
+    useEffect(() => {
+        // get login info from url on page load
+        handleEmailLinkRedirect()
+    }, []);
 
     return (
         <>
@@ -196,7 +145,7 @@ const Signin = () => {
                         subtitle={"Not you?"}
                         setSignInPhaseOne={setSignInPhaseOne}
                     />
-                ) : isPasswordLessSignin ? (
+                ) : (
                     /* isPaswordLessSignin if true then sign in using magic link based on otp validation */
                     <MagicLinkValidation
                         heading={"Log in to Bynar"}
@@ -204,9 +153,6 @@ const Signin = () => {
                         loadingSucess={loadingSucess}
                         handleFormSubmit={verifyMagicLink}
                         errorNotification={errorNotification}
-                        labelText={"Security code"}
-                        labelValue={verificationCode}
-                        setFormLabelState={setVerificationCode}
                         buttonText={"Login"}
                         text={`Logging in as ${email}`}
                         subtitle={"Not you?"}
@@ -220,31 +166,6 @@ const Signin = () => {
                         setServerErrorNotification={setServerErrorNotification}
                         serverErrorNotification={serverErrorNotification}
                         handleEmailFormSubmit={handleEmailFormSubmit}
-                    />
-                ) : (
-                    /* isPaswordLessSignin if false then sign in using password */
-                    <Login
-                        heading={"Login"}
-                        loading={loading}
-                        handleFormSubmit={handleFormSubmit}
-                        setErrorNotification={setErrorNotification}
-                        setServerErrorNotification={setServerErrorNotification}
-                        serverErrorNotification={serverErrorNotification}
-                        errorNotification={errorNotification}
-                        showCreateAccount={false}
-                        createAccoutText={""}
-                        navigationUrl={"/signup"}
-                        navigationUrlText={""}
-                        labelText={"Password"}
-                        labelValue={password}
-                        setFormLabelState={setPassword}
-                        buttonText={"Login"}
-                        enableForgotPassword={false}
-                        placeholderText={"Password"}
-                        navigateToLogin={true}
-                        text={`Logging in as ${email}`}
-                        subtitle={"Not you?"}
-                        setSignInPhaseOne={setSignInPhaseOne}
                     />
                 )}
             </div>

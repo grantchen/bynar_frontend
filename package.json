@@ -24,6 +24,7 @@
     "carbon-icons": "^7.0.7",
     "carbon-web-components": "^1.21.0",
     "date-fns": "^2.30.0",
+    "firebase": "^10.3.1",
     "frames-react": "^1.1.0",
     "google-libphonenumber": "^3.2.32",
     "i18next": "^22.4.13",

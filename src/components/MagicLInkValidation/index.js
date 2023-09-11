@@ -17,9 +17,6 @@ const MagicLinkValidation = ({
   loadingSucess,
   handleFormSubmit,
   errorNotification,
-  labelText,
-  labelValue,
-  setFormLabelState,
   buttonText,
   text,
   subtitle,
@@ -80,39 +77,11 @@ const MagicLinkValidation = ({
                 <div></div>
               )}
               <div className="login-input-wrapper">
-                <FormLabel className="input-label">{labelText}</FormLabel>
-                <TextInput
-                  id="security-code"
-                  className="login-form-input"
-                  hideLabel={true}
-                  invalid={
-                    typeof errorNotification === "object" &&
-                    Object.keys(errorNotification).length !== 0
-                  }
-                  labelText=""
-                  invalidText={
-                    errorNotification && errorNotification.title
-                      ? errorNotification.title
-                      : ""
-                  }
-                  placeholder={placeholderText}
-                  disabled={loading ? true : false}
-                  value={labelValue}
-                  onChange={(e) => {
-                    setFormLabelState(e.target.value);
-                    if (
-                      typeof errorNotification === "object" &&
-                      Object.keys(errorNotification).length !== 0
-                    )
-                      setErrorNotification({});
-                    setServerErrorNotification({});
-                  }}
-                />
                 <div className="resend-code">
                   {loadingSucess ? (
                     <div>
                       <InlineLoading
-                        description={"resending security code..."}
+                        description={"resending login link..."}
                         className="submit-button-loading"
                       />
                     </div>
@@ -121,28 +90,20 @@ const MagicLinkValidation = ({
                       className="resend-code-text"
                       onClick={handleEmailFormSubmit}
                     >
-                      Resend security code
+                      Resend login email
                     </p>
                   )}
                 </div>
               </div>
             </div>
             <div className="fields-container">
-              {loading ? (
+              {loading && (
                 <div className="loader-signin">
                   <InlineLoading
                     description={"Please wait..."}
                     className="submit-button-loading"
                   />
                 </div>
-              ) : (
-                <Button
-                  renderIcon={ArrowRight}
-                  type="submit"
-                  iconDescription={""}
-                >
-                  {buttonText}
-                </Button>
               )}
             </div>
             <div className="footer-container">
