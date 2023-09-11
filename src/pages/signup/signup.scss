@@ -203,40 +203,6 @@
   }
 }
 
-.submit-button {
-  border-width: 1px;
-  border-style: solid;
-  border-color: #0f62fe;
-  background-color: #ffffff;
-  color: #0f62fe;
-  // width: 140px;
-  height: 40px;
-  min-height: 40px;
-  cursor: pointer;
-  min-width: 120px;
-  max-width: 60%;
-  padding: 0px 12px;
-  display: flex;
-  justify-content: flex-start;
-}
-
-.submit-button-disabled {
-  border-width: 1px;
-  border-style: solid;
-  border-color: #0f62fe;
-  background-color: #ffffff;
-  color: #0f62fe;
-  // width: 140px;
-  height: 40px;
-  min-height: 40px;
-  min-width: 120px;
-  max-width: 60%;
-  padding: 0px 12px;
-  display: flex;
-  justify-content: flex-start;
-  cursor: not-allowed;
-}
-
 label[for="password-input"] {
   color: white;
   margin-top: 12px;
