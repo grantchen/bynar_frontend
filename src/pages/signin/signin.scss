@@ -23,8 +23,7 @@
 
     .cds--form {
       width: 100%;
-      padding: 16px 0px 0px 16px;
-      min-height: 320px;
+      padding: 16px 0 0 16px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -74,11 +73,10 @@
 
   .fields-container {
     width: 100%;
-
-    width: 100%;
-
     display: flex;
     justify-content: flex-start;
+    margin-top: 38px;
+    margin-bottom: 38px;
 
       // button {
       //   border-width: 1px;
@@ -158,11 +156,12 @@
   width: calc(100% - 40px);
   display: flex;
   justify-content: flex-start;
-  padding-left: 0px;
+  padding-left: 0;
 }
 
 .resend-code {
-  margin-top: 8px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .resend-code-text {

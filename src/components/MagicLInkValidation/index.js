@@ -1,15 +1,11 @@
 import "../../pages/signin/signin.scss";
 import {
   Form,
-  Button,
   Heading,
-  FormLabel,
-  TextInput,
   InlineLoading,
   ToastNotification,
   Link,
 } from "@carbon/react";
-import { ArrowRight, ArrowLeft } from "@carbon/react/icons";
 import { useNavigate } from "react-router-dom";
 const MagicLinkValidation = ({
   heading,
@@ -96,7 +92,7 @@ const MagicLinkValidation = ({
                 </div>
               </div>
             </div>
-            <div className="fields-container">
+            <div>
               {loading && (
                 <div className="loader-signin">
                   <InlineLoading

@@ -7,7 +7,7 @@ import {
     useContext,
     useCallback,
 } from "react";
-import { BaseURL, FireBaseAPPID, FireBaseProjectID } from "./constant";
+import { BaseURL, FireBaseAPIKey, FireBaseAPPID, FireBaseProjectID } from "./constant";
 import { useTranslation } from "react-i18next";
 import { initializeApp } from "firebase/app";
 import { getAuth, isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
@@ -17,7 +17,7 @@ const firebaseConfig = {
     projectId: FireBaseProjectID,
     appId: FireBaseAPPID,
 };
-const app = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 const initialState = {
     user: null,
@@ -40,11 +40,12 @@ export const AuthProvider = ({ children }) => {
         (async () => {
             try {
                 const auth = getAuth();
-                const token = auth.currentUser?.getIdToken()
-                if (token) {
-                    setState({ token: token });
+                await auth.authStateReady()
+                if (auth.currentUser) {
+                    const token  = await auth.currentUser?.getIdToken()
+                    setState({ user: auth.currentUser, token: token });
                 } else {
-                    setState({ token: null });
+                    setState({ token: null, user: null });
                 }
             } catch (e) {
                 setState({ token: null, user: null });
@@ -75,9 +76,8 @@ export const AuthProvider = ({ children }) => {
             }
         } catch (e) {
             console.log("Error signing out!");
-            localStorage.clear()
-            document.documentElement.setAttribute('data-carbon-theme', 'white')
-            navigate("/signin");
+            // TODO api of /user incomplete
+            // signout()
         }
     }, [state.token]);
     useEffect(() => {
@@ -120,7 +120,7 @@ export const AuthProvider = ({ children }) => {
             if (token === "loading") {
                 try {
                     const auth = getAuth();
-                    token = auth.currentUser?.getIdToken()
+                    token = await auth.currentUser?.getIdToken()
                 } catch (error) {
                     return new Promise();
                 }
@@ -135,7 +135,7 @@ export const AuthProvider = ({ children }) => {
             if (res.status === 401) {
                 try {
                     const auth = getAuth();
-                    token = auth.currentUser?.getIdToken(true)
+                    token = await auth.currentUser?.getIdToken(true)
                 } catch (error) {
                     signout();
                     return new Promise();
@@ -166,22 +166,19 @@ export const AuthProvider = ({ children }) => {
         try {
             const auth = getAuth();
             if (isSignInWithEmailLink(auth, href)) {
-                // The client SDK will parse the code from the link for you.
-                signInWithEmailLink(auth, email, location.href)
-                    .then((result) => {
-                        setState({ user: result.user });
-                        debugger
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                        setState({ user: null });
-                        debugger
-                    })
+                // signs in using an email and sign-in email link.
+                const result = await signInWithEmailLink(auth, email, location.href)
+                await auth.updateCurrentUser(result.user)
+                const token = await result.user?.getIdToken()
+                setState({ user: result.user, token: token });
+                return result
             }
         } catch (e) {
-            console.log(e);
-            debugger
+            setState({ user: null, token: null });
+            throw e
         }
+
+        throw new Error('sign in failed')
     }, []);
 
     const signout = useCallback(async () => {
@@ -194,7 +191,6 @@ export const AuthProvider = ({ children }) => {
                 token: null,
             });
             navigate("/signin");
-            // todo remove this fucking hack
             localStorage.clear();
             document.documentElement.setAttribute('data-carbon-theme', 'white')
         } catch (e) {
@@ -205,7 +201,7 @@ export const AuthProvider = ({ children }) => {
     const refreshPostSignIn = useCallback(async () => {
         try {
             const auth = getAuth();
-            const token = auth.currentUser?.getIdToken();
+            const token = await auth.currentUser?.getIdToken();
             if (token) {
                 setState({ token: token });
             } else {

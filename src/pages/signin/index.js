@@ -85,15 +85,15 @@ const Signin = () => {
         setSignInPhaseOne(false)
         setServerErrorNotification({});
         try {
-            signin(email, window.location.href)
+            await signin(email, window.location.href)
             setLoading(false);
+            navigate("/home/dashboard");
         } catch (err) {
             console.log(err);
             setServerErrorNotification({
                 title: "Login failed",
                 status: "error",
             });
-            // setSignInPhaseOne(true)
             setLoading(false);
         }
     };
