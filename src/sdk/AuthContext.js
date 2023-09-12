@@ -72,7 +72,9 @@ export const AuthProvider = ({ children }) => {
                 localStorage.setItem('lang', res?.result?.languagePreference)
                 await i18n.changeLanguage(res?.result?.languagePreference);
             } else {
-                signout()
+                // TODO api of /user incomplete
+                debugger
+                // signout()
             }
         } catch (e) {
             console.log("Error signing out!");
@@ -201,7 +203,7 @@ export const AuthProvider = ({ children }) => {
     const refreshPostSignIn = useCallback(async () => {
         try {
             const auth = getAuth();
-            const token = await auth.currentUser?.getIdToken();
+            const token = await auth.currentUser?.getIdToken(true);
             if (token) {
                 setState({ token: token });
             } else {
