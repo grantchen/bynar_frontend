@@ -1,4 +1,4 @@
-import {useNavigate, useLocation} from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
     useEffect,
     useReducer,
@@ -7,18 +7,16 @@ import {
     useContext,
     useCallback,
 } from "react";
-import {BaseURL} from "./constant";
-import {Auth, Amplify} from "aws-amplify";
-import {useTranslation} from "react-i18next";
+import { BaseURL, FireBaseAPIKey, FireBaseAuthDomain } from "./constant";
+import { useTranslation } from "react-i18next";
+import { initializeApp } from "firebase/app";
+import { getAuth, isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
 
-Amplify.configure({
-    Auth: {
-        region: "eu-central-1",
-        userPoolId: "eu-central-1_IWbh7BLrz",
-        userPoolWebClientId: "1bmp66b2352s3c0bsll8c5qfd9",
-    },
-});
-
+const firebaseConfig = {
+    apiKey: FireBaseAPIKey,
+    authDomain: FireBaseAuthDomain,
+};
+initializeApp(firebaseConfig);
 
 const initialState = {
     user: null,
@@ -27,44 +25,29 @@ const initialState = {
     lang: null,
 };
 export const AuthContext = createContext(initialState);
-const {Provider, Consumer} = AuthContext;
-const simpleReducer = (state, payload) => ({...state, ...payload});
+const { Provider, Consumer } = AuthContext;
+const simpleReducer = (state, payload) => ({ ...state, ...payload });
 
-export const AuthProvider = ({children}) => {
+export const AuthProvider = ({ children }) => {
     const [state, setState] = useReducer(simpleReducer, initialState);
 
     const navigate = useNavigate();
     const location = useLocation();
-    const {i18n} = useTranslation();
+    const { i18n } = useTranslation();
 
     useEffect(() => {
         (async () => {
             try {
-                const res = await Auth.currentSession();
-                if (res?.accessToken?.jwtToken) {
-                    setState({token: res?.accessToken?.jwtToken});
+                const auth = getAuth();
+                await auth.authStateReady()
+                if (auth.currentUser) {
+                    const token  = await auth.currentUser?.getIdToken()
+                    setState({ user: auth.currentUser, token: token });
                 } else {
-                    setState({token: null});
+                    setState({ token: null, user: null });
                 }
             } catch (e) {
-                // todo remove this fucking hack
-                const token = localStorage.getItem("token");
-                if (token) {
-                    const response = await fetch(`${BaseURL}/user`, {
-                        method: "GET",
-                        headers: {
-                            "Content-Type": "application/json",
-                            Authorization: "Bearer " + token,
-                        },
-                    });
-                    if (response.status === 401) {
-                        localStorage.clear();
-                    } else if (response.ok) {
-                        setState({token});
-                        return;
-                    }
-                }
-                setState({token: null, user: null});
+                setState({ token: null, user: null });
             }
         })();
     }, []);
@@ -84,17 +67,18 @@ export const AuthProvider = ({children}) => {
 
             if (response.ok) {
                 const res = await response.json();
-                setState({user: res.result});
+                setState({ user: res.result });
                 localStorage.setItem('lang', res?.result?.languagePreference)
                 await i18n.changeLanguage(res?.result?.languagePreference);
             } else {
-                signout()
+                // TODO api of /user incomplete
+                debugger
+                // signout()
             }
         } catch (e) {
             console.log("Error signing out!");
-            localStorage.clear()
-            document.documentElement.setAttribute('data-carbon-theme', 'white')
-            navigate("/signin");
+            // TODO api of /user incomplete
+            // signout()
         }
     }, [state.token]);
     useEffect(() => {
@@ -136,8 +120,8 @@ export const AuthProvider = ({children}) => {
             let token = state.token;
             if (token === "loading") {
                 try {
-                    const user = await Auth.currentSession();
-                    token = user?.accessToken?.jwtToken;
+                    const auth = getAuth();
+                    token = await auth.currentUser?.getIdToken()
                 } catch (error) {
                     return new Promise();
                 }
@@ -151,8 +135,8 @@ export const AuthProvider = ({children}) => {
             });
             if (res.status === 401) {
                 try {
-                    const user = await Auth.currentSession();
-                    token = user?.accessToken?.jwtToken;
+                    const auth = getAuth();
+                    token = await auth.currentUser?.getIdToken(true)
                 } catch (error) {
                     signout();
                     return new Promise();
@@ -179,16 +163,35 @@ export const AuthProvider = ({children}) => {
         [state.token]
     );
 
+    const signin = useCallback(async (email, href) => {
+        try {
+            const auth = getAuth();
+            if (isSignInWithEmailLink(auth, href)) {
+                // signs in using an email and sign-in email link.
+                const result = await signInWithEmailLink(auth, email, location.href)
+                await auth.updateCurrentUser(result.user)
+                const token = await result.user?.getIdToken()
+                setState({ user: result.user, token: token });
+                return result
+            }
+        } catch (e) {
+            setState({ user: null, token: null });
+            throw e
+        }
+
+        throw new Error('sign in failed')
+    }, []);
+
     const signout = useCallback(async () => {
         try {
-            await Auth.signOut();
+            const auth = getAuth();
+            await auth.signOut();
             navigate("/signin");
             setState({
                 ...initialState,
                 token: null,
             });
             navigate("/signin");
-            // todo remove this fucking hack
             localStorage.clear();
             document.documentElement.setAttribute('data-carbon-theme', 'white')
         } catch (e) {
@@ -198,24 +201,20 @@ export const AuthProvider = ({children}) => {
 
     const refreshPostSignIn = useCallback(async () => {
         try {
-            const res = await Auth.currentSession();
-            if (res?.accessToken?.jwtToken) {
-                setState({token: res?.accessToken?.jwtToken});
+            const auth = getAuth();
+            const token = await auth.currentUser?.getIdToken(true);
+            if (token) {
+                setState({ token: token });
             } else {
-                setState({token: null});
+                setState({ token: null });
             }
         } catch (e) {
-            setState({token: null});
+            setState({ token: null });
         }
-    }, []);
-    // todo remove this fucking hack
-    const hackPatchToken = useCallback((token) => {
-        localStorage.setItem("token", token);
-        setState({token});
     }, []);
 
     const updateUserLanguagePreference = useCallback(
-        async ({languagePreference}) => {
+        async ({ languagePreference }) => {
             if (!state?.user) {
                 return;
             }
@@ -241,9 +240,9 @@ export const AuthProvider = ({children}) => {
                     },
                 });
             } else if (response.status === 500) {
-                throw {message: res.error, type: "error"};
+                throw { message: res.error, type: "error" };
             } else {
-                throw {message: "Error updating user", type: "error"};
+                throw { message: "Error updating user", type: "error" };
             }
         },
         [state?.user, authFetch]
@@ -252,20 +251,19 @@ export const AuthProvider = ({children}) => {
     const providerValue = useMemo(
         () => ({
             ...state,
+            signin,
             signout,
             authFetch,
             refreshPostSignIn,
-            hackPatchToken,
-            updateUserLanguagePreference, 
+            updateUserLanguagePreference,
             getUser,
-
         }),
         [
             state,
+            signin,
             signout,
             authFetch,
             refreshPostSignIn,
-            hackPatchToken,
             updateUserLanguagePreference,
             getUser,
         ]

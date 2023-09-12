@@ -371,7 +371,7 @@ const Signup = () => {
     fetchData();
   };
 
-  /* Function to create user account ,if account created sucessfully then navigate to signin page ,otherwise in case of error show error in signup page */
+  /* Function to create user account ,if account created successfully then navigate to signin page ,otherwise in case of error show error in signup page */
   const handleCreateAccount = (customerID, sourceID, token) => {
     const fetchData = async () => {
       try {
@@ -735,7 +735,7 @@ const Signup = () => {
                       </div>
 
                       {isEmailVerified ? (
-                        <div>
+                        <>
                           <div>
                             <p className="verify-email-text">
                               Bynar may use my contact data to keep me informed of
@@ -776,9 +776,9 @@ const Signup = () => {
                               this registration form.
                             </p>
                           </div>
-                        </div>
+                        </>
                       ) : (
-                        <div>
+                        <>
                           <div>
                             <p className="email-text">
                               Didn’t receive the email? Check your spam filter for
@@ -810,7 +810,7 @@ const Signup = () => {
                                 </p>
                             )}
                           </div>
-                        </div>
+                        </>
                       )}
 
                       {verifyEmailLoading ? (
@@ -960,7 +960,7 @@ const Signup = () => {
                       )}
                       <div style={{ marginTop: "32px", marginBottom: "16px" }}>
                         <Button
-                          className={"submit-button"}
+                          kind="tertiary"
                           onClick={handleAccountInformationFormSubmit}
                         >
                           Next
@@ -998,7 +998,7 @@ const Signup = () => {
                       />
                       <div style={{ marginTop: "32px", marginBottom: "16px" }}>
                         <Button
-                          className={"submit-button"}
+                          kind="tertiary"
                           onClick={handleOrganizationInformationFormSubmit}
                         >
                           Next
@@ -1039,7 +1039,7 @@ const Signup = () => {
                           ) : (
                             <div className="create-account">
                               <Button
-                                className="submit-button"
+                                kind="tertiary"
                                 onClick={handleVerifyCardDetails}
                               >
                                 Verify card
