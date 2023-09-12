@@ -7,15 +7,14 @@ import {
     useContext,
     useCallback,
 } from "react";
-import { BaseURL, FireBaseAPIKey, FireBaseAPPID, FireBaseProjectID } from "./constant";
+import { BaseURL, FireBaseAPIKey, FireBaseAuthDomain } from "./constant";
 import { useTranslation } from "react-i18next";
 import { initializeApp } from "firebase/app";
 import { getAuth, isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: FireBaseAPIKey,
-    projectId: FireBaseProjectID,
-    appId: FireBaseAPPID,
+    authDomain: FireBaseAuthDomain,
 };
 initializeApp(firebaseConfig);
 
