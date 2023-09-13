@@ -19,6 +19,7 @@ import {
   COUNTRIES,
   CheckoutPublicKey,
   getQueryVariable,
+  useAuth,
 } from "./../../sdk";
 
 import PhoneInput from "react-phone-input-2";
@@ -87,6 +88,8 @@ const Signup = () => {
   });
   const [countryCode, setCountryCode] = useState('AL');
   const [countryDialCode, setCountryDialCode] = useState('355');
+
+  const { signinWithCustomToken } = useAuth()
 
   const personalInfoButtonDisabled =
     fullName.trim().length === 0 ||
@@ -403,6 +406,9 @@ const Signup = () => {
 
         const res = await response.json();
         if (response.ok) {
+          await signinWithCustomToken(res.token)
+          navigate('/home/dashboard');
+          return
         } else if (response.status === 500) {
           setIsError(true);
           setErrorNotification({

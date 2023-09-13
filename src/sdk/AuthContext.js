@@ -10,7 +10,7 @@ import {
 import { BaseURL, FireBaseAPIKey, FireBaseAuthDomain } from "./constant";
 import { useTranslation } from "react-i18next";
 import { initializeApp } from "firebase/app";
-import { getAuth, isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
+import { getAuth, isSignInWithEmailLink, signInWithEmailLink, signInWithCustomToken } from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: FireBaseAPIKey,
@@ -182,6 +182,23 @@ export const AuthProvider = ({ children }) => {
         throw new Error('sign in failed')
     }, []);
 
+    // signinWithCustomToken is used to sign in with custom token
+    const signinWithCustomToken = useCallback(async (customToken) => {
+        try {
+            const auth = getAuth();
+            const result = await signInWithCustomToken(auth, customToken)
+            await auth.updateCurrentUser(result.user)
+            const token = await result.user?.getIdToken()
+            setState({ user: result.user, token: token });
+            return result
+        } catch (e) {
+            setState({ user: null, token: null });
+            throw e
+        }
+
+        throw new Error('sign in failed')
+    }, []);
+
     const signout = useCallback(async () => {
         try {
             const auth = getAuth();
@@ -252,6 +269,7 @@ export const AuthProvider = ({ children }) => {
         () => ({
             ...state,
             signin,
+            signinWithCustomToken,
             signout,
             authFetch,
             refreshPostSignIn,
@@ -261,6 +279,7 @@ export const AuthProvider = ({ children }) => {
         [
             state,
             signin,
+            signinWithCustomToken,
             signout,
             authFetch,
             refreshPostSignIn,
