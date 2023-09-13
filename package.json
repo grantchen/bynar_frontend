@@ -23,6 +23,7 @@
     "carbon-components-react": "^7",
     "carbon-icons": "^7.0.7",
     "carbon-web-components": "^1.21.0",
+    "compression-webpack-plugin": "^10.0.0",
     "date-fns": "^2.30.0",
     "firebase": "^10.3.1",
     "frames-react": "^1.1.0",
