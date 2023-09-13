@@ -14,6 +14,6 @@ module.exports={
             deleteOriginalAssets: process.env.NODE_ENV === 'production' // Remove source files when building production packages
           })
         ]
-      },
+      }
     }
   }
