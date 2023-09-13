@@ -11,7 +11,7 @@ module.exports={
           new CompressionPlugin({
             test:/\.js$|\.html$|.\css/, // Type of file to compress
             threshold: 10240, // Compress data over 10k
-            deleteOriginalAssets: process.env.NODE_ENV === 'production' // Remove source files when building production packages
+            // deleteOriginalAssets: process.env.NODE_ENV === 'production' // Remove source files when building production packages
           })
         ]
       },
