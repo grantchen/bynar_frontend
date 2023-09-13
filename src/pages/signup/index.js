@@ -18,12 +18,12 @@ import {
   BaseURL,
   COUNTRIES,
   CheckoutPublicKey,
-  useAuth,
+  getQueryVariable,
 } from "./../../sdk";
 
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./../../styles/paymentform.scss";
 import "./signup.scss";
 import {
@@ -87,9 +87,6 @@ const Signup = () => {
   });
   const [countryCode, setCountryCode] = useState('AL');
   const [countryDialCode, setCountryDialCode] = useState('355');
-
-  const { hackPatchToken } = useAuth()
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const personalInfoButtonDisabled =
     fullName.trim().length === 0 ||
@@ -223,9 +220,9 @@ const Signup = () => {
 
   // handle magic link redirection from email
   const handleEmailLinkRedirect = () => {
-    const urlEmail = searchParams.get("email")
-    const urlTimestamp = searchParams.get("timestamp")
-    const urlSignature = searchParams.get("signature")
+    const urlEmail = getQueryVariable(window.location.href, "email")
+    const urlTimestamp = getQueryVariable(window.location.href, "timestamp")
+    const urlSignature = getQueryVariable(window.location.href, "signature")
     if (urlEmail && urlTimestamp && urlSignature) {
       setEmailAddress(urlEmail)
       setEmailVerificationTimeStamp(urlTimestamp)
@@ -406,7 +403,6 @@ const Signup = () => {
 
         const res = await response.json();
         if (response.ok) {
-          hackPatchToken(res.token)
         } else if (response.status === 500) {
           setIsError(true);
           setErrorNotification({

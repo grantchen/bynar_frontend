@@ -1,14 +1,12 @@
-import React, { useState, useRef, useContext, useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./signin.scss";
-import { AuthContext, BaseURL, useAuth } from "../../sdk";
+import { BaseURL, getQueryVariable, useAuth } from "../../sdk";
 import Login from "../../components/Login";
 import MagicLinkValidation from "../../components/MagicLInkValidation";
 
 const Signin = () => {
     const navigate = useNavigate();
-    const [searchParams, setSearchParams] = useSearchParams();
-    const authContext = useContext(AuthContext);
     const [signInPhaseOne, setSignInPhaseOne] = useState(true); // state to store signInPhase ,initially set to true to show initial login component
     const [loading, setLoading] = useState(false);
     const [errorNotification, setErrorNotification] = useState({});
@@ -100,7 +98,7 @@ const Signin = () => {
 
     // handle magic link redirection from email
     const handleEmailLinkRedirect = () => {
-        const urlEmail = searchParams.get("email")
+        const urlEmail = getQueryVariable(window.location.href, "email")
         if (urlEmail) {
             setEmail(urlEmail)
             verifyMagicLink(urlEmail).then(r => {})

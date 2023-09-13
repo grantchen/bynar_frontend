@@ -129,7 +129,7 @@ export const downloadFile = (url, filename = '') => {
         type: 'application/pdf',
       });
       debugger
-  
+
       const isIE = false || !!document.documentMode;
       if (isIE) {
         window.navigator.msSaveBlob(blob, filename);
@@ -146,4 +146,17 @@ export const downloadFile = (url, filename = '') => {
     };
     req.send();
   };
-  
+
+
+// getQueryVariable is a function to get the query variable from the url(handle url containing '+', '=')
+export function getQueryVariable(url, variable) {
+  const u = new URL(url)
+  const query = u.search.substring(1);
+  const vars = query.split('&');
+  for (let i = 0; i < vars.length; i++) {
+    const pair = vars[i].split(/=(.*)/s);
+    if (decodeURIComponent(pair[0]) === variable) {
+      return decodeURIComponent(pair[1]);
+    }
+  }
+}
