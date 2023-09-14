@@ -2,7 +2,6 @@
   "name": "bynar",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/bynar-website",
   "engines": {
     "node": "12.22.12"
   },
