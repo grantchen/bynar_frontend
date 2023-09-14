@@ -41,10 +41,10 @@ export const AuthProvider = ({ children }) => {
                 const auth = getAuth();
                 await auth.authStateReady()
                 if (auth.currentUser) {
-                    const token  = await auth.currentUser?.getIdToken()
-                    setState({ user: auth.currentUser, token: token });
+                    const token  = await auth.currentUser.getIdToken()
+                    setState({ token: token });
                 } else {
-                    setState({ token: null, user: null });
+                    setState({ token: null });
                 }
             } catch (e) {
                 setState({ token: null, user: null });
@@ -67,9 +67,9 @@ export const AuthProvider = ({ children }) => {
 
             if (response.ok) {
                 const res = await response.json();
-                setState({ user: res.result });
-                localStorage.setItem('lang', res?.result?.languagePreference)
-                await i18n.changeLanguage(res?.result?.languagePreference);
+                setState({ user: res });
+                localStorage.setItem('lang', res?.languagePreference)
+                await i18n.changeLanguage(res?.languagePreference);
             } else {
                 // TODO api of /user incomplete
                 debugger
@@ -171,7 +171,7 @@ export const AuthProvider = ({ children }) => {
                 const result = await signInWithEmailLink(auth, email, location.href)
                 await auth.updateCurrentUser(result.user)
                 const token = await result.user?.getIdToken()
-                setState({ user: result.user, token: token });
+                setState({ token: token });
                 return result
             }
         } catch (e) {
@@ -189,7 +189,7 @@ export const AuthProvider = ({ children }) => {
             const result = await signInWithCustomToken(auth, customToken)
             await auth.updateCurrentUser(result.user)
             const token = await result.user?.getIdToken()
-            setState({ user: result.user, token: token });
+            setState({ token: token });
             return result
         } catch (e) {
             setState({ user: null, token: null });
