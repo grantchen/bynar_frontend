@@ -260,7 +260,7 @@ const Signup = () => {
           setIsAccountInfoError(false);
           if (activeStep === 2) {
             setErrorNotification({
-              title: `verification code re-send to ${email}`,
+              title: `verification email re-send to ${email}`,
               status: "success",
             });
             setIsError(true);
@@ -544,7 +544,13 @@ const Signup = () => {
     setErrors(errors);
 
     if (Object.keys(errors).length === 0) {
-      handleSignupRequest();
+      if (isEmailVerified) {
+        setActiveStep(2);
+        setIsError(false);
+        setIsAccountInfoError(false);
+      } else {
+        handleSignupRequest();
+      }
     }
   };
 
