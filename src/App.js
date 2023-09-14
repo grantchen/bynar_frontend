@@ -24,7 +24,7 @@ function App() {
             <Suspense
                 fallback={<Loading small />}
             >
-                <BrowserRouter>
+                <BrowserRouter basename="/bynar-website">
                     <AuthProvider>
                         <ThemePreferenceProvider>
                             <TabContextProvider>
