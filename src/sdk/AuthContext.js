@@ -36,13 +36,21 @@ export const AuthProvider = ({ children }) => {
     const { i18n } = useTranslation();
 
     useEffect(() => {
+        let unsubscribeIdTokenChanged;
         (async () => {
             try {
                 const auth = getAuth();
                 await auth.authStateReady()
                 if (auth.currentUser) {
-                    const token  = await auth.currentUser.getIdToken()
+                    const token = await auth.currentUser.getIdToken()
                     setState({ token: token });
+
+                    unsubscribeIdTokenChanged = auth.onIdTokenChanged(async (user) => {
+                        const token = await user.getIdToken()
+                        if (token !== state.token) {
+                            setState({ token: token });
+                        }
+                    })
                 } else {
                     setState({ token: null });
                 }
@@ -50,6 +58,12 @@ export const AuthProvider = ({ children }) => {
                 setState({ token: null, user: null });
             }
         })();
+
+        return () => {
+            if (unsubscribeIdTokenChanged) {
+                unsubscribeIdTokenChanged()
+            }
+        }
     }, []);
 
     const getUser = useCallback(async () => {
@@ -57,7 +71,7 @@ export const AuthProvider = ({ children }) => {
             return;
         }
         try {
-            const response = await fetch(`${BaseURL}/user`, {
+            const response = await fetch(`${ BaseURL }/user`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -136,7 +150,7 @@ export const AuthProvider = ({ children }) => {
             if (res.status === 401) {
                 try {
                     const auth = getAuth();
-                    token = await auth.currentUser?.getIdToken(true)
+                    token = await auth.currentUser?.getIdToken()
                 } catch (error) {
                     signout();
                     return new Promise();
@@ -168,7 +182,7 @@ export const AuthProvider = ({ children }) => {
             const auth = getAuth();
             if (isSignInWithEmailLink(auth, href)) {
                 // signs in using an email and sign-in email link.
-                const result = await signInWithEmailLink(auth, email, location.href)
+                const result = await signInWithEmailLink(auth, email, href)
                 await auth.updateCurrentUser(result.user)
                 const token = await result.user?.getIdToken()
                 setState({ token: token });
@@ -239,7 +253,7 @@ export const AuthProvider = ({ children }) => {
                 languagePreference,
             };
 
-            const response = await authFetch(`${BaseURL}/update-user-language-preference`, {
+            const response = await authFetch(`${ BaseURL }/update-user-language-preference`, {
                 method: "PUT",
                 body: JSON.stringify(updateUserLanguage),
             });
@@ -264,6 +278,14 @@ export const AuthProvider = ({ children }) => {
         [state?.user, authFetch]
     );
 
+    // get request authorization token
+    const getAuthorizationToken = useCallback(async () => {
+        const auth = getAuth();
+        await auth.authStateReady()
+        const token = await auth.currentUser.getIdToken()
+        return "Bearer " + token
+    }, []);
+
     const providerValue = useMemo(
         () => ({
             ...state,
@@ -274,6 +296,7 @@ export const AuthProvider = ({ children }) => {
             refreshPostSignIn,
             updateUserLanguagePreference,
             getUser,
+            getAuthorizationToken,
         }),
         [
             state,
@@ -284,9 +307,10 @@ export const AuthProvider = ({ children }) => {
             refreshPostSignIn,
             updateUserLanguagePreference,
             getUser,
+            getAuthorizationToken,
         ]
     );
-    return <Provider value={providerValue}>{children}</Provider>;
+    return <Provider value={ providerValue }>{ children }</Provider>;
 };
 
 export const useAuth = () => useContext(AuthContext);
