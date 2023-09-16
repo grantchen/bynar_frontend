@@ -82,11 +82,13 @@ export const TreeGrid = ({ table, config = {} }) => {
           console.log(config)
         }
 
-        treeGrid = window.TreeGrid(
-          config,
-          ref.current.id,
-          { Component: this }
-        );
+        if (ref.current) {
+          treeGrid = window.TreeGrid(
+              config,
+              ref.current?.id,
+              { Component: this }
+          );
+        }
       }
     }
 
