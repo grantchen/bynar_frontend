@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import {
   WebStaticBaseURL,
   BaseURL,
-  useAuth,
+  useAuth, uuidv4,
 } from "../../sdk";
 import { InlineLoading } from "@carbon/react";
+import "./TreeGrid.scss";
 
+// get web static source url
 function getWebStaticSourceURL(url) {
   if (!url) {
     return url
@@ -18,6 +20,7 @@ function getWebStaticSourceURL(url) {
   }
 }
 
+// get api request url
 function getAPIRequestURL(url) {
   if (!url) {
     return url
@@ -32,8 +35,7 @@ function getAPIRequestURL(url) {
 
 export const TreeGrid = ({ table, config = {} }) => {
   let treeGrid = null;
-  const mainTagId = `mainTag${ table }`;
-  const treeGridTagId = `tree${ table }`;
+  const ref = useRef(null);
 
   const { getAuthorizationToken } = useAuth()
 
@@ -43,7 +45,7 @@ export const TreeGrid = ({ table, config = {} }) => {
       if (token) {
         const defaultConfig = {
           Debug: '', // check, info
-          id: treeGridTagId,
+          id: `treeGrid_${uuidv4()}`,
           Layout: { Url: `/${ table }.xml` },
           Data: {
             Url: `/${ table }/data`,
@@ -82,7 +84,7 @@ export const TreeGrid = ({ table, config = {} }) => {
 
         treeGrid = window.TreeGrid(
           config,
-          mainTagId,
+          ref.current.id,
           { Component: this }
         );
       }
@@ -98,8 +100,9 @@ export const TreeGrid = ({ table, config = {} }) => {
   return (
     <>
       <div
-        id={ mainTagId }
-        style={ { width: '100%', height: '100%' } }
+          ref={ref}
+          id={ `treeGridMainTag_${uuidv4()}` }
+          style={ { width: '100%', height: '100%' } }
       >
         <div style={ { display: "flex" } }>
           <InlineLoading />

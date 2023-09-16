@@ -1,0 +1,27 @@
+/* overwrite StandardGrid.css */
+
+// menu popup
+.TBMenuMain,
+.TMMenuMain,
+.TSMenuMain,
+.TTMenuMain,
+.TWMenuMain,
+.CBMenuMain,
+.CCMenuMain,
+.CEMenuMain,
+.CGMenuMain,
+.CLMenuMain,
+.COMenuMain,
+.CPMenuMain,
+.CQMenuMain,
+.CFMenuMain,
+.CRMenuMain,
+.CSMenuMain,
+.CLMenuMain {
+  z-index: 99000; // greater than IBM carbon modal z-index
+}
+
+// debug window
+.GridDebugTag, .GridDebugTagMax, .GridDebugButtons, .GridDebugButtonsMax {
+  z-index: 99000; // greater than IBM carbon modal z-index
+}
