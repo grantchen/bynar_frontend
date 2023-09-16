@@ -26,7 +26,7 @@ export function LanguageChangeModal({
     isLanguageChangeModalOpen,
     openLanguageChangeModal,
 }) {
-    const { user, updateUserLanguagePreference } = useAuth();
+    const { user, refreshPostSignIn, updateUserLanguagePreference } = useAuth();
     const { t } = useTranslation();
 
     const [searchText, setSearchText] = useState("");
@@ -49,13 +49,14 @@ export function LanguageChangeModal({
             await updateUserLanguagePreference({
                 languagePreference: selectedLanguage,
             });
+            await refreshPostSignIn();
             openLanguageChangeModal(false);
         } catch (e) {
             setToastNotification({ message: e.message, type: "error" });
         } finally {
             setLoading(false);
         }
-    }, [selectedLanguage, updateUserLanguagePreference]);
+    }, [selectedLanguage, refreshPostSignIn, updateUserLanguagePreference]);
 
     const handleClose = useCallback(() => {
         openLanguageChangeModal(false);
