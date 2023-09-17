@@ -236,11 +236,10 @@ export const AuthProvider = ({ children }) => {
                 return;
             }
             const updateUserLanguage = {
-                ...state?.user,
                 languagePreference,
             };
 
-            const response = await authFetch(`${BaseURL}/user`, {
+            const response = await authFetch(`${BaseURL}/update-user-language-preference`, {
                 method: "PUT",
                 body: JSON.stringify(updateUserLanguage),
             });
