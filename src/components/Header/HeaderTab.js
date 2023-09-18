@@ -61,11 +61,12 @@ const HeaderTab = () => {
             <div
                 className="tab"
                 ref={tabRef}
-                style={{
-                    width: `calc(100vw -  ${
-                        totalCarbonButtonsOnHeader * 3
-                    }rem - /*text width Bynar[Platform]*/ 108px)`,
-                }}
+                // header right not display
+                // style={{
+                //     width: `calc(100vw -  ${
+                //         totalCarbonButtonsOnHeader * 3
+                //     }rem - /*text width Bynar[Platform]*/ 108px)`,
+                // }}
             >
                 {shouldShowTabScroll && (
                     <IconButton

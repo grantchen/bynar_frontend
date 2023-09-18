@@ -9,7 +9,7 @@ export const TearSheets = ({ setIsOpen, isOpen }) => {
     setIsOpen(false);
     navigate('/home/dashboard');
   };
-  
+
   const {t} = useTranslation()
     return (
     <>
