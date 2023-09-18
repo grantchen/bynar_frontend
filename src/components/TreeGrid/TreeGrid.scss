@@ -28,7 +28,7 @@
 
 .GridMain {
   // overwrite `vertical-align: baseline` of td in IBM carbon css, to fix the issue of vertical alignment of cursor border
-  td:not(
+  td:not([valign]):not(
     .TBCellBase, .TBVScrollNormal, .TBRowSpace, .TBCellSpaceBase, .TBHeaderGroupCustom, .TBCellSpaceButton, .TBHScrollNormal,
     .TMCellBase, .TMVScrollNormal, .TMRowSpace, .TMCellSpaceBase, .TMHeaderGroupCustom, .TMCellSpaceButton, .TMHScrollNormal,
     .TSCellBase, .TSVScrollNormal, .TSRowSpace, .TSCellSpaceBase, .TSHeaderGroupCustom, .TSCellSpaceButton, .TSHScrollNormal,
@@ -48,5 +48,21 @@
     .CLCellBase, .CLVScrollNormal, .CLRowSpace, .CLCellSpaceBase, .CLHeaderGroupCustom, .CLCellSpaceButton, .CLHScrollNormal
   ) {
     vertical-align: middle;
+  }
+
+  td[valign="top"] {
+    vertical-align: top;
+  }
+
+  td[valign="middle"] {
+    vertical-align: middle;
+  }
+
+  td[valign="bottom"] {
+    vertical-align: bottom;
+  }
+
+  td[valign="baseline"] {
+    vertical-align: baseline;
   }
 }
