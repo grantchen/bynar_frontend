@@ -342,7 +342,7 @@ const UserManagementProvider = ({ children }) => {
             setNotification(null);
         }
     }, [searchParams.get("isUserListOpen")]);
-    
+
 
     const value = useMemo(
         () => ({
@@ -392,7 +392,7 @@ const UserManagementProvider = ({ children }) => {
                 )}
                 {isUserManagementAllowed && (
                     <UserDetailPanel open={userDetailsOpen} />
-                )}    
+                )}
             </UserManagementContext.Provider>
             {deleteModalProps && <RemoveModalWithLoading deleteModalProps={deleteModalProps} loading={loading} />}
 
