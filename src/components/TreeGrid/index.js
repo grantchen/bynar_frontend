@@ -1,24 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import {
-  WebStaticBaseURL,
   BaseURL,
   useAuth, uuidv4,
 } from "../../sdk";
 import { InlineLoading } from "@carbon/react";
 import "./TreeGrid.scss";
-
-// get web static source url
-function getWebStaticSourceURL(url) {
-  if (!url) {
-    return url
-  }
-
-  if (url.startsWith('http')) {
-    return url
-  } else {
-    return `${ WebStaticBaseURL }/static${ url }`
-  }
-}
 
 // get api request url
 function getAPIRequestURL(url) {
@@ -46,7 +32,7 @@ export const TreeGrid = ({ table, config = {} }) => {
         const defaultConfig = {
           Debug: '', // check, info
           id: `treeGrid_${uuidv4()}`,
-          Layout: { Url: `/${ table }.xml` },
+          Layout: { Url: `/Layouts/${ table }.xml` },
           Data: {
             Url: `/${ table }/data`,
             Format: 'Json',
@@ -71,7 +57,6 @@ export const TreeGrid = ({ table, config = {} }) => {
         }
 
         config = { ...defaultConfig, ...config }
-        config.Layout.Url = getWebStaticSourceURL(config.Layout.Url)
         config.Data.Url = getAPIRequestURL(config.Data.Url)
         config.Page.Url = getAPIRequestURL(config.Page.Url)
         config.Upload.Url = getAPIRequestURL(config.Upload.Url)

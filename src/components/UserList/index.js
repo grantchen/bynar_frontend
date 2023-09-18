@@ -16,10 +16,9 @@ export const UserList = ({ isOpen }) => {
           <div className="user-list">
             <TreeGrid
               table={ "user_list" }
-              config={ {
+              config={{
                 Debug: '',
-                Layout: { Url: "/users.xml" },
-              } }
+              }}
             ></TreeGrid>
           </div>
         )
