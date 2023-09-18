@@ -39,19 +39,10 @@ function ThemePreferenceProvider({ children }) {
     }, []);
 
     useEffect(() => {
-        if (!user) {
-            setTheme('light')
-            return;
+        if (user) {
+            setTheme(user.themePreference === "" ? "light" : user.themePreference)
         }
-        const preExistingThemeValue = localStorage.getItem("theme-preference")
-        const idealThemeValue = "system"
-        if(preExistingThemeValue){
-          setTheme(preExistingThemeValue)
-        }
-        else{
-          setTheme(idealThemeValue)
-        }
-    }, [user, isSystemThemeDark]);
+    }, [user]);
 
     useEffect(() => {
         if(!theme || !user){
