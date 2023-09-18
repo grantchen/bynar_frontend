@@ -264,6 +264,39 @@ export const AuthProvider = ({ children }) => {
         [state?.user, authFetch]
     );
 
+    const updateUserThemePreference = useCallback(
+        async ({ themePreference }) => {
+            if (!state?.user) {
+                return;
+            }
+            const updateUserTheme = {
+                themePreference,
+            };
+
+            const response = await authFetch(`${BaseURL}/update-user-theme-preference`, {
+                method: "PUT",
+                body: JSON.stringify(updateUserTheme),
+            });
+
+            const res = await response.json();
+
+            if (response.ok) {
+                localStorage.setItem("theme-preference", themePreference)
+                setState({
+                    user: {
+                        ...state.user,
+                        themePreference,
+                    },
+                });
+            } else if (response.status === 500) {
+                throw { message: res.error, type: "error" };
+            } else {
+                throw { message: "Error updating user", type: "error" };
+            }
+        },
+        [state?.user, authFetch]
+    );
+
     const providerValue = useMemo(
         () => ({
             ...state,
@@ -273,6 +306,7 @@ export const AuthProvider = ({ children }) => {
             authFetch,
             refreshPostSignIn,
             updateUserLanguagePreference,
+            updateUserThemePreference,
             getUser,
         }),
         [
@@ -283,6 +317,7 @@ export const AuthProvider = ({ children }) => {
             authFetch,
             refreshPostSignIn,
             updateUserLanguagePreference,
+            updateUserThemePreference,
             getUser,
         ]
     );

@@ -12,18 +12,22 @@ import React, { useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useThemePreference } from ".";
 import "./ThemeModal.scss";
+import {InlineLoading} from "carbon-components-react";
+import {useAuth} from "../AuthContext";
 
 export const ThemeModal = React.memo(() => {
+    const { updateUserThemePreference } = useAuth();
     const { t } = useTranslation();
     const {
         theme,
-        setTheme,
         changeThemeManually,
         isThemeChangeModalOpen,
         openThemeChangeModal,
     } = useThemePreference();
 
     const [selectedTheme, setSelectedTheme] = useState(theme);
+    const [loading, setLoading] = useState(false);
+    const [setToastNotification] = useState(null);
 
     const handleChange = useCallback(
         (value) => {
@@ -38,10 +42,19 @@ export const ThemeModal = React.memo(() => {
         openThemeChangeModal(false);
     }, [theme]);
 
-    const handleSubmit = useCallback(() => {
-        setTheme(selectedTheme);
-        openThemeChangeModal(false);
-    }, [selectedTheme]);
+    const handleSubmit = useCallback(async () => {
+        try {
+            setLoading(true);
+            await updateUserThemePreference({
+                themePreference: selectedTheme,
+            });
+            openThemeChangeModal(false);
+        } catch (e) {
+            setToastNotification({ message: e.message, type: "error" });
+        } finally {
+            setLoading(false);
+        }
+    }, [selectedTheme, updateUserThemePreference]);
 
     useEffect(() => {
         setSelectedTheme(theme);
@@ -82,8 +95,16 @@ export const ThemeModal = React.memo(() => {
                 <Button kind="secondary" onClick={handleClose}>
                     {t("cancel")}
                 </Button>
-                <Button kind="primary" onClick={handleSubmit}>
-                    {t("confirm")}
+                <Button
+                  kind="primary"
+                  onClick={handleSubmit}
+                  className="button-with-loading"
+                  disabled={loading}
+                >
+                  {t("submit")}
+                  {loading && (
+                    <InlineLoading className="inline-loading-within-btn" />
+                  )}
                 </Button>
             </ModalFooter>
         </ComposedModal>
