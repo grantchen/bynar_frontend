@@ -14,6 +14,7 @@ import {
 const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard"));
 const MagicLinkAuth = lazy(() => import("./components/Auth/MagicLinkAuth"));
 const Home = lazy(() => import("./pages/Home"));
+const Home2 = lazy(() => import("./pages/Home2"));
 const Signin = lazy(() => import("./pages/signin"));
 const Signup = lazy(() => import("./pages/signup"));
 const Test = lazy(() => import("./pages/test"));
@@ -33,7 +34,8 @@ function App() {
                                     <Routes>
                                         <Route
                                             path="/"
-                                            element={<Home />}
+                                            // TODO
+                                            element={<Home2 />}
                                         />
                                         <Route
                                             path="/auth/magic-link"
