@@ -42,8 +42,8 @@ const Login = ({
       <div className="outer">
         <div className="middle">
           <div className="inner">
-            <div className="bx--masthead ">
-              <div className="bx--masthead__l0 main-header">
+            <div className="bx--masthead">
+              <div className="bx--masthead__l0 main-header bx--grid">
                 <header
                   aria-label="Bynar"
                   data-autoid="dds--masthead"
