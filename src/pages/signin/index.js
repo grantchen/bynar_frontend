@@ -85,6 +85,9 @@ const Signin = () => {
         try {
             await signin(email, window.location.href)
             setLoading(false);
+            window.localStorage.setItem('signin-verification', JSON.stringify({
+                email: email,
+            }));
             navigate("/home/dashboard");
         } catch (err) {
             console.log(err);
@@ -101,11 +104,7 @@ const Signin = () => {
         const urlEmail = getQueryVariable(window.location.href, "email")
         if (urlEmail) {
             setEmail(urlEmail)
-            verifyMagicLink(urlEmail).then(r => {
-                window.localStorage.setItem('signin-verification', JSON.stringify({
-                    email: urlEmail,
-                }));
-            })
+            verifyMagicLink(urlEmail).then(r => {})
         }
     };
 
@@ -135,7 +134,7 @@ const Signin = () => {
             console.log('[Storage I] receive message:', data);
             if (data?.email) {
                 window.localStorage.setItem('signin-close-tab', String(+(new Date)))
-                navigate("/home/dashboard")
+                window.location.href = "/home/dashboard"
             }
         } else if (e.key === 'signin-close-tab') {
             console.log('[Storage I] receive message:', e.newValue);
