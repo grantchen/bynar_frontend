@@ -12,7 +12,7 @@ const Signin = () => {
     const [errorNotification, setErrorNotification] = useState({});
     const [serverErrorNotification, setServerErrorNotification] = useState({});
     const [email, setEmail] = useState("");
-    const [loadingSucess, setLoadingSucess] = useState(false);
+    const [loadingSuccess, setLoadingSuccess] = useState(false);
     const { signin } = useAuth();
 
 
@@ -39,7 +39,7 @@ const Signin = () => {
         } else {
             setErrorNotification({});
             setServerErrorNotification({});
-            setLoadingSucess(true);
+            setLoadingSuccess(true);
             try {
                 const data = {
                     email: email.trim(),
@@ -54,13 +54,13 @@ const Signin = () => {
                 const res = await response.json();
                 if (response.ok) {
                     setSignInPhaseOne(false);
-                    setLoadingSucess(false);
+                    setLoadingSuccess(false);
                     setServerErrorNotification({
                         title: `Login link sent to ${email}`,
                         status: "success",
                     });
                 } else if (response.status === 500) {
-                    setLoadingSucess(false);
+                    setLoadingSuccess(false);
                     setServerErrorNotification({
                         title: res.error,
                         status: "success",
@@ -68,7 +68,7 @@ const Signin = () => {
                 }
             } catch (e) {
                 console.log(e);
-                setLoadingSucess(false);
+                setLoadingSuccess(false);
                 setServerErrorNotification({
                     title: "Email address not verified",
                     status: "error",
@@ -118,18 +118,18 @@ const Signin = () => {
 
     return (
         <>
-            <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ height:"100%" }}>
                 {signInPhaseOne ? (
                     <Login
                         heading={"Log in to Bynar"}
-                        loading={loadingSucess}
+                        loading={loadingSuccess}
                         handleFormSubmit={handleEmailFormSubmit}
                         setErrorNotification={setErrorNotification}
                         setServerErrorNotification={setServerErrorNotification}
                         serverErrorNotification={serverErrorNotification}
                         errorNotification={errorNotification}
                         showCreateAccount={true}
-                        createAccoutText={"Don't have an account?"}
+                        createAccountText={"Don't have an account?"}
                         navigationUrl={"/signup"}
                         navigationUrlText={"Create an Bynar account"}
                         labelText={"E-mail"}
@@ -148,7 +148,7 @@ const Signin = () => {
                     <MagicLinkValidation
                         heading={"Log in to Bynar"}
                         loading={loading}
-                        loadingSucess={loadingSucess}
+                        loadingSucess={loadingSuccess}
                         handleFormSubmit={verifyMagicLink}
                         errorNotification={errorNotification}
                         buttonText={"Login"}
@@ -156,7 +156,7 @@ const Signin = () => {
                         subtitle={"Not you?"}
                         setSignInPhaseOne={setSignInPhaseOne}
                         showCreateAccount={true}
-                        createAccoutText={"Don't have an account?"}
+                        createAccountText={"Don't have an account?"}
                         navigationUrl={"/signup"}
                         navigationUrlText={"Create an Bynar account"}
                         placeholderText={""}
