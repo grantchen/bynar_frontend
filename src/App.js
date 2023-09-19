@@ -12,6 +12,7 @@ import {
 } from "./sdk";
 
 const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard"));
+const MagicLinkAuth = lazy(() => import("./components/Auth/MagicLinkAuth"));
 const Home = lazy(() => import("./pages/Home"));
 const Signin = lazy(() => import("./pages/signin"));
 const Signup = lazy(() => import("./pages/signup"));
@@ -33,6 +34,10 @@ function App() {
                                         <Route
                                             path="/"
                                             element={<Home />}
+                                        />
+                                        <Route
+                                            path="/auth/magic-link"
+                                            element={<MagicLinkAuth />}
                                         />
                                         <Route
                                             path="/test"

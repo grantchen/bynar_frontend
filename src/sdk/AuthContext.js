@@ -100,7 +100,9 @@ export const AuthProvider = ({ children }) => {
     }, [getUser]);
 
     useEffect(() => {
-        if (location.pathname === "/" || location.pathname === "/test") {
+        if (location.pathname === "/" ||
+            location.pathname === "/test" ||
+            location.pathname === "/auth/magic-link") {
             return
         }
         switch (state.token) {
