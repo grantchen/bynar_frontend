@@ -227,6 +227,12 @@ const Signup = () => {
     const urlTimestamp = getQueryVariable(window.location.href, "timestamp")
     const urlSignature = getQueryVariable(window.location.href, "signature")
     if (urlEmail && urlTimestamp && urlSignature) {
+      window.localStorage.setItem('signup-verification', JSON.stringify({
+        email: urlEmail,
+        timestamp: urlTimestamp,
+        signature: urlSignature,
+      }));
+
       setEmailAddress(urlEmail)
       setEmailVerificationTimeStamp(urlTimestamp)
       setEmailVerificationSignature(urlSignature)
@@ -258,6 +264,7 @@ const Signup = () => {
           setActiveStep(2);
           setIsError(false);
           setIsAccountInfoError(false);
+
           if (activeStep === 2) {
             setErrorNotification({
               title: `verification email re-send to ${email}`,
@@ -522,9 +529,38 @@ const Signup = () => {
   }, [isError]);
 
   useEffect(() => {
+    window.localStorage.removeItem('signup-verification');
+    window.addEventListener('storage', checkOtherTabVerification);
+
+    return () => {
+      window.removeEventListener('storage', checkOtherTabVerification);
+    }
+  }, [])
+
+  useEffect(() => {
     // get custom signature from url on page load
     handleEmailLinkRedirect()
   }, [])
+
+  const checkOtherTabVerification = (e) => {
+    if (e.key === 'signup-verification') {
+      const data = JSON.parse(e.newValue);
+      console.log('[Storage I] receive message:', data);
+      if (data?.email) {
+        window.localStorage.setItem('signup-close-tab', String(+(new Date)))
+        setEmailAddress(data.email)
+        setEmailVerificationTimeStamp(data.timestamp)
+        setEmailVerificationSignature(data.signature)
+        setActiveStep(2)
+        console.log(data);
+        handleVerifyEmail(data.email, data.timestamp, data.signature)
+      }
+    } else if (e.key === 'signup-close-tab') {
+      console.log('[Storage I] receive message:', e.newValue);
+      // TODO Scripts may close only the windows that were opened by them.
+      window.close()
+    }
+  }
 
   const validateOrganizationForm = (email) => {
     const errors = {};

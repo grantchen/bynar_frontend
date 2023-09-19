@@ -101,7 +101,11 @@ const Signin = () => {
         const urlEmail = getQueryVariable(window.location.href, "email")
         if (urlEmail) {
             setEmail(urlEmail)
-            verifyMagicLink(urlEmail).then(r => {})
+            verifyMagicLink(urlEmail).then(r => {
+                window.localStorage.setItem('signin-verification', JSON.stringify({
+                    email: urlEmail,
+                }));
+            })
         }
     };
 
@@ -115,6 +119,30 @@ const Signin = () => {
         // get login info from url on page load
         handleEmailLinkRedirect()
     }, []);
+
+    useEffect(() => {
+        window.localStorage.removeItem('signin-verification');
+        window.addEventListener('storage', checkOtherTabVerification);
+
+        return () => {
+            window.removeEventListener('storage', checkOtherTabVerification);
+        }
+    }, [])
+
+    const checkOtherTabVerification = (e) => {
+        if (e.key === 'signin-verification') {
+            const data = JSON.parse(e.newValue);
+            console.log('[Storage I] receive message:', data);
+            if (data?.email) {
+                window.localStorage.setItem('signin-close-tab', String(+(new Date)))
+                navigate("/home/dashboard")
+            }
+        } else if (e.key === 'signin-close-tab') {
+            console.log('[Storage I] receive message:', e.newValue);
+            // TODO Scripts may close only the windows that were opened by them.
+            window.close()
+        }
+    }
 
     return (
         <>
