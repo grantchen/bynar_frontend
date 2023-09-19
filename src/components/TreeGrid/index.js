@@ -69,11 +69,13 @@ export const TreeGrid = ({ table, config = {} }) => {
 
         // TODO
         setTimeout(() => {
-          treeGrid = window.TreeGrid(
-            config,
-            ref.current?.id,
-            { Component: this }
-          );
+          if (ref.current) {
+            treeGrid = window.TreeGrid(
+                config,
+                ref.current?.id,
+                { Component: this }
+            );
+          }
         }, 0)
       }
     }
