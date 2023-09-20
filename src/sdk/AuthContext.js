@@ -125,7 +125,7 @@ export const AuthProvider = ({ children }) => {
                     location.pathname === "/forgotpassword" ||
                     location.pathname === "/signup"
                 ) {
-                    // navigate("/home/dashboard");
+                  navigate("/home/dashboard");
                 }
                 break;
         }
