@@ -302,13 +302,8 @@
 
 }
 
-.main-header::after {
-  content: "";
-  position: absolute;
-  width: 100vw;
-  height: 1px;
-  left: 0;
-  background-color: #e0e0e0;
+.main-header-bottom{
+  border-bottom: #e0e0e0 solid 1px;
 }
 
 .register-text {
