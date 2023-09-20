@@ -46,10 +46,14 @@ export const AuthProvider = ({ children }) => {
                     setState({ token: token });
 
                     unsubscribeIdTokenChanged = auth.onIdTokenChanged(async (user) => {
+                      if (user) {
                         const token = await user.getIdToken()
                         if (token !== state.token) {
-                            setState({ token: token });
+                          setState({ token: token });
                         }
+                      }else{
+                        setState({ token: null, user: null });
+                      }
                     })
                 } else {
                     setState({ token: null });
@@ -125,7 +129,7 @@ export const AuthProvider = ({ children }) => {
                     location.pathname === "/forgotpassword" ||
                     location.pathname === "/signup"
                 ) {
-                    navigate("/home/dashboard");
+                    // navigate("/home/dashboard");
                 }
                 break;
         }
