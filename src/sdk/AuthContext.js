@@ -293,6 +293,14 @@ export const AuthProvider = ({ children }) => {
         return "Bearer " + token
     }, []);
 
+    // check if user has permission
+    const hasPermission = useCallback(async (permission) => {
+        if (!state?.user) {
+            return false;
+        }
+        return state.user.permissions && state.user.permissions[permission] === 1
+    }, [state.user]);
+
     const updateUserThemePreference = useCallback(
         async ({ themePreference }) => {
             if (!state?.user) {
@@ -338,6 +346,7 @@ export const AuthProvider = ({ children }) => {
             updateUserThemePreference,
             getUser,
             getAuthorizationToken,
+            hasPermission,
         }),
         [
             state,
@@ -350,6 +359,7 @@ export const AuthProvider = ({ children }) => {
             updateUserThemePreference,
             getUser,
             getAuthorizationToken,
+            hasPermission,
         ]
     );
     return <Provider value={ providerValue }>{ children }</Provider>;

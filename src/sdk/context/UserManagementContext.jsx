@@ -17,7 +17,7 @@ import { RemoveModalWithLoading } from "../RemoveModalWithLoading";
 const UserManagementContext = createContext();
 
 const UserManagementProvider = ({ children }) => {
-    const { user, authFetch } = useAuth();
+    const { authFetch, hasPermission } = useAuth();
     const { t } = useTranslation();
     /**render aware states */
     const [userListData, setUserListData] = useState({
@@ -37,13 +37,8 @@ const UserManagementProvider = ({ children }) => {
     const userDetailsOpen = Boolean(searchParams.get("userIdToShowDetails"));
 
     const isUserManagementAllowed = useMemo(
-        () =>
-            user &&
-            !(
-                user?.cognitoUserGroups === "Users" ||
-                user?.cognitoUserGroups?.length === 0
-            ),
-        [user]
+        () => hasPermission("user_list"),
+        [hasPermission]
     );
 
     const getUserList = useCallback(
