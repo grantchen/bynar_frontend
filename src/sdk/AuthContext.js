@@ -89,14 +89,10 @@ export const AuthProvider = ({ children }) => {
                 localStorage.setItem('lang', res?.languagePreference)
                 await i18n.changeLanguage(res?.languagePreference);
             } else {
-                // TODO api of /user incomplete
-                debugger
-                // signout()
+                signout()
             }
         } catch (e) {
-            console.log("Error signing out!");
-            // TODO api of /user incomplete
-            // signout()
+            signout()
         }
     }, [state.token]);
     useEffect(() => {

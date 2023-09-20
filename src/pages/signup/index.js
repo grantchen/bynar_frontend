@@ -30,6 +30,13 @@ import "./signup.scss";
 import {
   PhoneNumberUtil,
 } from "google-libphonenumber";
+import {
+  parseTabMessage,
+  sendCloseTabMessage,
+  sendTabMessage,
+  SubscribeCloseTabMessage,
+  SubscribeTabMessage
+} from "../../sdk/tabMessage";
 
 const Signup = () => {
   const phoneUtil = PhoneNumberUtil.getInstance();
@@ -227,11 +234,11 @@ const Signup = () => {
     const urlTimestamp = getQueryVariable(window.location.href, "timestamp")
     const urlSignature = getQueryVariable(window.location.href, "signature")
     if (urlEmail && urlTimestamp && urlSignature) {
-      window.localStorage.setItem('signup-verification', JSON.stringify({
+      sendTabMessage('signup-verification', {
         email: urlEmail,
         timestamp: urlTimestamp,
         signature: urlSignature,
-      }));
+      })
 
       setEmailAddress(urlEmail)
       setEmailVerificationTimeStamp(urlTimestamp)
@@ -529,37 +536,23 @@ const Signup = () => {
   }, [isError]);
 
   useEffect(() => {
-    window.localStorage.removeItem('signup-verification');
-    window.addEventListener('storage', checkOtherTabVerification);
-
-    return () => {
-      window.removeEventListener('storage', checkOtherTabVerification);
-    }
-  }, [])
-
-  useEffect(() => {
     // get custom signature from url on page load
     handleEmailLinkRedirect()
   }, [])
 
+  // verify email and close other tab
   const checkOtherTabVerification = (e) => {
-    if (e.key === 'signup-verification') {
-      const data = JSON.parse(e.newValue);
-      console.log('[Storage I] receive message:', data);
-      if (data?.email) {
-        window.localStorage.setItem('signup-close-tab', String(+(new Date)))
-        setEmailAddress(data.email)
-        setEmailVerificationTimeStamp(data.timestamp)
-        setEmailVerificationSignature(data.signature)
+    parseTabMessage(e, 'signup-verification', (data, e) => {
+      if (data?.message?.email) {
+        sendCloseTabMessage(data?.from)
+        window.focus()
+        setEmailAddress(data.message.email)
+        setEmailVerificationTimeStamp(data.message.timestamp)
+        setEmailVerificationSignature(data.message.signature)
         setActiveStep(2)
-        console.log(data);
-        handleVerifyEmail(data.email, data.timestamp, data.signature)
+        handleVerifyEmail(data.message.email, data.message.timestamp, data.message.signature)
       }
-    } else if (e.key === 'signup-close-tab') {
-      console.log('[Storage I] receive message:', e.newValue);
-      // TODO Scripts may close only the windows that were opened by them.
-      window.close()
-    }
+    })
   }
 
   const validateOrganizationForm = (email) => {
@@ -654,6 +647,10 @@ const Signup = () => {
 
   return (
     <>
+      <SubscribeCloseTabMessage></SubscribeCloseTabMessage>
+      <SubscribeTabMessage
+        subscribe={ checkOtherTabVerification }>
+      </SubscribeTabMessage>
       {loadingSuccess ? (
         <>
           <div className="loader-page">
