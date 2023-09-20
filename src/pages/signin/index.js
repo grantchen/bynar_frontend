@@ -4,6 +4,13 @@ import "./signin.scss";
 import { BaseURL, getQueryVariable, useAuth } from "../../sdk";
 import Login from "../../components/Login";
 import MagicLinkValidation from "../../components/MagicLInkValidation";
+import {
+    parseMessage,
+    sendCloseTabMessage,
+    sendTabMessage,
+    SubscribeCloseTabMessage,
+    SubscribeTabMessage
+} from "../../sdk/tabMessage";
 
 const Signin = () => {
     const navigate = useNavigate();
@@ -84,11 +91,12 @@ const Signin = () => {
         setServerErrorNotification({});
         try {
             await signin(email, window.location.href)
-            setLoading(false);
-            window.localStorage.setItem('signin-verification', JSON.stringify({
-                email: email,
-            }));
-            navigate("/home/dashboard");
+            sendTabMessage('signin-verification', { email: email })
+            // close tab before 300ms, it cannot be closed after navigating to other page
+            setTimeout(() => {
+                setLoading(false);
+                navigate("/home/dashboard");
+            }, 300)
         } catch (err) {
             console.log(err);
             setServerErrorNotification({
@@ -119,32 +127,23 @@ const Signin = () => {
         handleEmailLinkRedirect()
     }, []);
 
-    useEffect(() => {
-        window.localStorage.removeItem('signin-verification');
-        window.addEventListener('storage', checkOtherTabVerification);
-
-        return () => {
-            window.removeEventListener('storage', checkOtherTabVerification);
-        }
-    }, [])
-
+    // check if other tab is open and user is trying to login
     const checkOtherTabVerification = (e) => {
-        if (e.key === 'signin-verification') {
-            const data = JSON.parse(e.newValue);
-            console.log('[Storage I] receive message:', data);
-            if (data?.email) {
-                window.localStorage.setItem('signin-close-tab', String(+(new Date)))
+        parseMessage(e, 'signin-verification', (data, e) => {
+            if (data?.message?.email) {
+                sendCloseTabMessage(data?.from)
+                window.focus()
                 window.location.href = "/home/dashboard"
             }
-        } else if (e.key === 'signin-close-tab') {
-            console.log('[Storage I] receive message:', e.newValue);
-            // TODO Scripts may close only the windows that were opened by them.
-            window.close()
-        }
+        })
     }
 
     return (
         <>
+            <SubscribeCloseTabMessage></SubscribeCloseTabMessage>
+            <SubscribeTabMessage
+              subscribe={ checkOtherTabVerification }>
+            </SubscribeTabMessage>
             <div style={{ height:"100%" }}>
                 {signInPhaseOne ? (
                     <Login
