@@ -51,14 +51,17 @@ export const AuthProvider = ({ children }) => {
                         if (token !== state.token) {
                           setState({ token: token });
                         }
-                      }else{
+                      } else {
+                        console.log('clear token, id token changed')
                         setState({ token: null, user: null });
                       }
                     })
                 } else {
+                    console.log('clear token, no currentUser')
                     setState({ token: null });
                 }
             } catch (e) {
+                console.log(e, 'clear token, error in auth state ready')
                 setState({ token: null, user: null });
             }
         })();
@@ -89,9 +92,11 @@ export const AuthProvider = ({ children }) => {
                 localStorage.setItem('lang', res?.languagePreference)
                 await i18n.changeLanguage(res?.languagePreference);
             } else {
+                console.log('clear token, error response in get user')
                 signout()
             }
         } catch (e) {
+            console.log(e, 'clear token, error in get user')
             signout()
         }
     }, [state.token]);
