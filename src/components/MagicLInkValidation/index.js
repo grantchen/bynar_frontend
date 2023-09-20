@@ -35,8 +35,8 @@ const MagicLinkValidation = ({
         <div className="outer">
           <div className="middle">
             <div className="inner">
-              <div className="bx--masthead ">
-                <div className="bx--masthead__l0 main-header bx--grid">
+              <div className="bx--masthead main-header-bottom">
+                <div className="bx--masthead__l0 bx--grid">
                   <header
                     aria-label="Bynar"
                     data-autoid="dds--masthead"
