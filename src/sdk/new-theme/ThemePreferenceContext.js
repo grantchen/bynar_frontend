@@ -71,6 +71,11 @@ function ThemePreferenceProvider({ children }) {
 }
 
 function mapCarbonThemeFromThemePreference(preference) {
+    // home and signin page, use "light" theme
+    if (["/", "/signin"].includes(window.location.pathname)) {
+        return "white"
+    }
+
     switch (preference) {
         case "g100":
             return "g90";
