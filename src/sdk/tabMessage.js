@@ -19,7 +19,7 @@ export const sendCloseTabMessage = (to) => {
 }
 
 // parse message
-export const parseMessage = (e, key, subscribe) => {
+export const parseTabMessage = (e, key, subscribe) => {
   if (e.key !== key) {
     return
   }
@@ -54,7 +54,7 @@ export const SubscribeTabMessage = ({subscribe}) => {
 // subscribe close tab message
 export const SubscribeCloseTabMessage = () => {
   const subscribe = (e) => {
-    parseMessage(e, closeTabKey, (data, e) => {
+    parseTabMessage(e, closeTabKey, (data, e) => {
       // should close current tab
       if (data?.to === window.name) {
         // Scripts may close only the windows that were opened by them.

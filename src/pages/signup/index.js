@@ -31,7 +31,7 @@ import {
   PhoneNumberUtil,
 } from "google-libphonenumber";
 import {
-  parseMessage,
+  parseTabMessage,
   sendCloseTabMessage,
   sendTabMessage,
   SubscribeCloseTabMessage,
@@ -540,8 +540,9 @@ const Signup = () => {
     handleEmailLinkRedirect()
   }, [])
 
+  // verify email and close other tab
   const checkOtherTabVerification = (e) => {
-    parseMessage(e, 'signup-verification', (data, e) => {
+    parseTabMessage(e, 'signup-verification', (data, e) => {
       if (data?.message?.email) {
         sendCloseTabMessage(data?.from)
         window.focus()

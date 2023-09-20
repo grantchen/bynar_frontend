@@ -5,7 +5,7 @@ import { BaseURL, getQueryVariable, useAuth } from "../../sdk";
 import Login from "../../components/Login";
 import MagicLinkValidation from "../../components/MagicLInkValidation";
 import {
-    parseMessage,
+    parseTabMessage,
     sendCloseTabMessage,
     sendTabMessage,
     SubscribeCloseTabMessage,
@@ -129,7 +129,7 @@ const Signin = () => {
 
     // check if other tab is open and user is trying to login
     const checkOtherTabVerification = (e) => {
-        parseMessage(e, 'signin-verification', (data, e) => {
+        parseTabMessage(e, 'signin-verification', (data, e) => {
             if (data?.message?.email) {
                 sendCloseTabMessage(data?.from)
                 window.focus()
