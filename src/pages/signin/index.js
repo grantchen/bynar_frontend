@@ -174,7 +174,7 @@ const Signin = () => {
                     <MagicLinkValidation
                         heading={"Log in to Bynar"}
                         loading={loading}
-                        loadingSucess={loadingSuccess}
+                        loadingSuccess={loadingSuccess}
                         handleFormSubmit={verifyMagicLink}
                         errorNotification={errorNotification}
                         buttonText={"Login"}

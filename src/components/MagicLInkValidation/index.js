@@ -1,13 +1,11 @@
 import "../../pages/signin/signin.scss";
 import {
   Form,
-  Button,
   Heading,
   InlineLoading,
   ToastNotification,
   Link,
 } from "@carbon/react";
-import {ArrowRight} from "@carbon/react/icons";
 import {useNavigate} from "react-router-dom";
 
 const MagicLinkValidation = ({
@@ -15,7 +13,6 @@ const MagicLinkValidation = ({
   loading,
   loadingSuccess,
   handleFormSubmit,
-  buttonText,
   text,
   subtitle,
   setSignInPhaseOne,
@@ -46,7 +43,7 @@ const MagicLinkValidation = ({
                       <a
                         aria-label="Bynar"
                         data-autoid="dds--masthead-alt__l0-logo"
-                        href="http://www.ibm.com"
+                        href="http://bynar.tajansoft.com/"
                       >
                         <svg
                           width="58"
@@ -102,8 +99,15 @@ const MagicLinkValidation = ({
                                 )}
                                 <div className="login-input-wrapper">
                                   <div className="resend-code">
-                                    {loadingSuccess ? (
-                                      <div>
+                                    {loading ? (
+                                      <div className="loader-signin">
+                                        <InlineLoading
+                                          description={"Please wait..."}
+                                          className="submit-button-loading"
+                                        />
+                                      </div>
+                                    ) : loadingSuccess ? (
+                                      <div className="loader-signin">
                                         <InlineLoading
                                           description={"resending login link..."}
                                           className="submit-button-loading"
@@ -140,25 +144,6 @@ const MagicLinkValidation = ({
                                       </Link>
                                     </p>
                                   </div>
-                                </div>
-                                <div className="fields-container">
-                                  {loading ? (
-                                    <div className="loader-signin">
-                                      <InlineLoading
-                                        description={"Please wait..."}
-                                        className="submit-button-loading"
-                                      />
-                                    </div>
-                                  ) : (
-                                    <Button
-                                      renderIcon={ArrowRight}
-                                      type="submit"
-                                      iconDescription={""}
-                                      className="login-submit-button bx--btn bx--btn--primary"
-                                    >
-                                      {buttonText}
-                                    </Button>
-                                  )}
                                 </div>
                                 <div className="footer-container">
                                   {showCreateAccount && (
