@@ -197,10 +197,11 @@ export const AuthProvider = ({ children }) => {
             }
         } catch (e) {
             setState({ user: null, token: null });
-            throw e
+            console.log(e)
+            throw new Error('Login failed, link expired or invalid')
         }
 
-        throw new Error('sign in failed')
+        throw new Error('Login failed, invalid link')
     }, []);
 
     // signinWithCustomToken is used to sign in with custom token
@@ -216,8 +217,6 @@ export const AuthProvider = ({ children }) => {
             setState({ user: null, token: null });
             throw e
         }
-
-        throw new Error('sign in failed')
     }, []);
 
     const signout = useCallback(async () => {

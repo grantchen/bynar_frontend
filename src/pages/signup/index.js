@@ -13,11 +13,12 @@ import {
   ToastNotification,
 } from "@carbon/react";
 import { CardFrame, Frames } from "frames-react";
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   BaseURL,
   COUNTRIES,
   CheckoutPublicKey,
+  DATA_SOVEREIGNTY_REGION_NAMES,
   getQueryVariable,
   useAuth,
 } from "./../../sdk";
@@ -46,15 +47,11 @@ const Signup = () => {
   const [resendCodeLoading, setResendCodeLoading] = useState(false);
   const [verifyEmailLoading, setVerifyEmailLoading] = useState(false);
   const [loadingSuccess, setLoadingSuccess] = useState(false);
-  const [password, setPassword] = useState("");
   const [email, setEmailAddress] = useState("");
   const [emailVerificationTimeStamp, setEmailVerificationTimeStamp] = useState("");
   const [emailVerificationSignature, setEmailVerificationSignature] = useState("");
   const [isEmailVerified, setIsEmailVerified] = useState(false);
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [passwordStrengthWidth, setpaswordStrengthWidth] = useState(0);
   const [activeStep, setActiveStep] = useState(1);
-  const [verificationCode, setVerificationCode] = useState("");
   const [fullName, setFullName] = useState("");
   const [isProfileInfoUpdated, setIsProfileInfoUpdated] = useState(false);
   const [country, setCountry] = useState("Albania");
@@ -67,16 +64,19 @@ const Signup = () => {
   const [isTaxInfoUpdated, setIsTaxInfoUpdated] = useState(false);
   const [vatNumber, setVatNumber] = useState("");
   const [organizationName, setOrganizationName] = useState("");
-  const [organizationCountry, setCountryName] = useState("Albania");
+  const [organizationCountry, setOrganizationCountry] = useState("Albania");
   const [isGstValid, setGstValid] = useState(true);
-  const [isChecked, setIsChecked] = useState(true);
+  const [isByEmailChecked, setIsByEmailChecked] = useState(true);
+  const [isAgreementSigned, setIsAgreementSigned] = useState(false);
+  const [dataSovereignty, setDataSovereignty] = useState("us-east-1");
   const [isError, setIsError] = useState(false);
   const [isAccountInfoError, setIsAccountInfoError] = useState(false);
   const [isVerifyEmailInfoError, setIsVerifyEmailError] = useState(false);
   const [postalCodeErrorNotification, setPostalCodeErrorNotification] =
     useState({});
-  const [validationToken, setValidationToken] = useState("");
-  const ref = useRef(null);
+  const [cardValidationToken, setCardValidationToken] = useState("");
+  const [cardCustomerID, setCardCustomerID] = useState("");
+  const [cardSourceID, setCardSourceID] = useState("");
   const [loadingCardSuccess, setLoadingCardSuccess] = useState(false);
   const [errors, setErrors] = useState({});
   const [phoneNumberValid, setIsPhoneNumberValid] = useState(false);
@@ -92,6 +92,7 @@ const Signup = () => {
   const [organizationInfoErrors, setOrganizationInfoErrors] = useState({
     organizationName: false,
     organizationNumber: false,
+    organizationCountry: false,
   });
   const [countryCode, setCountryCode] = useState('AL');
   const [countryDialCode, setCountryDialCode] = useState('355');
@@ -184,30 +185,6 @@ const Signup = () => {
     validatePhoneNumber(value, country.dialCode, country?.countryCode);
   }
 
-  useLayoutEffect(() => {
-    handlePasswordStrengthLength(password);
-  }, [isPasswordVisible]);
-
-  const handlePasswordStrengthLength = (value) => {
-    const lengthRegex = /^.{8,}$/;
-    const uppercaseRegex = /[A-Z]/;
-    const lowercaseRegex = /[a-z]/;
-    const numberRegex = /[0-9]/;
-    const specialcharacterRegex = /[-!$%^&*()_+|~=`{}\[\]:\/;<>?,.@#]/;
-    const tempArray = [
-      lengthRegex.test(value.trim()),
-      uppercaseRegex.test(value),
-      lowercaseRegex.test(value),
-      numberRegex.test(value),
-      specialcharacterRegex.test(value),
-      value.length === value.trim().length,
-    ];
-    setpaswordStrengthWidth(
-      (tempArray.filter((i) => i === true).length * ref?.current?.offsetWidth) /
-      6
-    );
-  };
-
   /* Function to check if email address is valid or not */
   const checkEmailValid = (value) => {
     return String(value)
@@ -252,6 +229,7 @@ const Signup = () => {
   const handleSignupRequest = () => {
     const fetchData = async () => {
       setLoading(true);
+      setIsEmailVerified(false)
       setResendCodeLoading(true);
       setErrorNotification({});
       setIsError(false);
@@ -286,7 +264,7 @@ const Signup = () => {
             title:
               res.error === "username already exist" || "email is not valid"
                 ? res.error
-                : "Some error occured, please try after some time",
+                : "Some error occurred, please try after some time",
             status: "error",
           });
         }
@@ -366,9 +344,10 @@ const Signup = () => {
           },
         });
         const res = await response.json();
-
         if (response.ok) {
-          handleCreateAccount(res.customerID, res.sourceID, token);
+          setCardCustomerID(res.customerID);
+          setCardSourceID(res.sourceID);
+          setActiveStep(6);
         } else if (response.status === 500) {
           setIsError(true);
           setErrorNotification({
@@ -386,7 +365,7 @@ const Signup = () => {
   };
 
   /* Function to create user account ,if account created successfully then navigate to signin page ,otherwise in case of error show error in signup page */
-  const handleCreateAccount = (customerID, sourceID, token) => {
+  const handleCreateAccount = () => {
     const fetchData = async () => {
       try {
         setLoadingSuccess(true);
@@ -403,12 +382,13 @@ const Signup = () => {
           organizationName: organizationName,
           VAT: vatNumber,
           organisationCountry: organizationCountry,
-          isAgreementSigned: true,
-          token: token,
+          isAgreementSigned: isAgreementSigned,
+          token: cardValidationToken,
           timestamp: emailVerificationTimeStamp,
           signature: emailVerificationSignature,
-          customerID: customerID,
-          sourceID: sourceID,
+          customerID: cardCustomerID,
+          sourceID: cardSourceID,
+          tenantCode: dataSovereignty,
         };
         const response = await fetch(`${BaseURL}/create-user`, {
           method: "POST",
@@ -429,13 +409,16 @@ const Signup = () => {
             title: res.error,
             status: "error",
           });
-          setVerificationCode("");
-          setIsChecked(false);
           setActiveStep(1);
         }
         setLoadingSuccess(false);
       } catch (e) {
         setLoadingSuccess(false);
+        setIsError(true);
+        setErrorNotification({
+          title: 'error occurred while creating environment',
+          status: "error",
+        });
         console.log(e);
       }
     };
@@ -467,6 +450,20 @@ const Signup = () => {
     });
   };
 
+  const handleOrganizationCountryChange = (e) => {
+    const { name, value } = e.target;
+    setOrganizationCountry(value);
+    setOrganizationInfoErrors({
+      ...organizationInfoErrors,
+      [name]: value.trim().length === 0,
+    });
+  };
+
+  const handleDataSovereigntyChange = (e) => {
+    const { name, value } = e.target;
+    setDataSovereignty(value);
+  }
+
   const handleTaxInfo = () => {
     setIsTaxInfoUpdated(true);
     setActiveStep(5);
@@ -491,7 +488,7 @@ const Signup = () => {
     setLoadingCardSuccess(true);
     try {
       const res = await Frames.submitCard();
-      setValidationToken(res.token);
+      setCardValidationToken(res.token);
       handleVerifyCard(res.token);
     } catch (e) {
       setLoadingCardSuccess(false);
@@ -500,13 +497,17 @@ const Signup = () => {
         title:
           e === "Card form invalid"
             ? "Invalid card details"
-            : "error occured while creating user account",
+            : "error occurred while creating user account",
         status: "error",
       });
 
       console.log(e);
     }
-    Frames.init(CheckoutPublicKey);
+  };
+
+  const handleCreateEnvironment = async (e) => {
+    e.preventDefault();
+    handleCreateAccount();
   };
 
   const taxInfoButtonDisabled =
@@ -530,7 +531,7 @@ const Signup = () => {
       if (currentWidth >= 1055) {
         document.getElementById("scroller").scroll(0, 0);
       } else {
-        selectedTab.current.scrollIntoView();
+        selectedTab.current?.scrollIntoView();
       }
     }
   }, [isError]);
@@ -574,6 +575,7 @@ const Signup = () => {
 
     if (Object.keys(errors).length === 0) {
       if (isEmailVerified) {
+        setErrorNotification({});
         setActiveStep(2);
         setIsError(false);
         setIsAccountInfoError(false);
@@ -775,84 +777,45 @@ const Signup = () => {
                         <p className="heading">2. Verify email</p>
                       </div>
 
-                      {isEmailVerified ? (
-                        <>
-                          <div>
-                            <p className="verify-email-text">
-                              Bynar may use my contact data to keep me informed of
-                              products, services and offerings:
-                            </p>
-                          </div>
-                          <div style={{ display: "flex", alignItems: "center" }}>
-                            <Checkbox
-                                labelText="by email"
-                                checked={isChecked}
-                                id="checkbox-label-1"
-                                onChange={(_, { checked }) => {
-                                  setIsChecked(checked);
-                                }}
-                            />
-                          </div>
-                          <div>
-                            <p className="verify-email-text">
-                              You can withdraw your marketing consent at any time by
-                              submitting an{" "}
-                              <Link href="/signup">opt-out request</Link>. Also you
-                              may unsubscribe from receiving marketing emails by
-                              clicking the unsubscribe link in each email.
-                            </p>
-                          </div>
-                          <div>
-                            <p className="verify-email-text">
-                              More information on our processing can be found in the{" "}
-                              <Link href="/signup">Bynar Privacy Statement.</Link>{" "}
-                              By submitting this form, I acknowledge that I have
-                              read and understand the Bynar Privacy Statement.
-                            </p>
-                          </div>
-                          <div>
-                            <p className="verify-email-text">
-                              I accept the product{" "}
-                              <Link href="/signup">Terms and Conditions</Link> of
-                              this registration form.
-                            </p>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <div>
-                            <p className="email-text">
+                      <div>
+                        <p className="email-text">
+                          {isEmailVerified ? (
+                            <>
+                              Email has been verified.
+                            </>
+                          ) : (
+                            <>
                               Didn’t receive the email? Check your spam filter for
                               an email from noreply@bynar.al.
-                            </p>
+                            </>
+                          ) }
+                        </p>
+                      </div>
+                      <div>
+                        {resendCodeLoading ? (
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "flex-start",
+                              alignItems: "center",
+                              gap: "8px",
+                            }}
+                          >
+                            <InlineLoading
+                              description={"re-sending confirmation email"}
+                              className="submit-button-loading"
+                            />
+                            {/* <p className='email-text'>re-sending confirmation-code </p> */}
                           </div>
-                          <div>
-                            {resendCodeLoading ? (
-                                <div
-                                    style={{
-                                      display: "flex",
-                                      justifyContent: "flex-start",
-                                      alignItems: "center",
-                                      gap: "8px",
-                                    }}
-                                >
-                                  <InlineLoading
-                                      description={"re-sending confirmation email"}
-                                      className="submit-button-loading"
-                                  />
-                                  {/* <p className='email-text'>re-sending confirmation-code </p> */}
-                                </div>
-                            ) : (
-                                <p
-                                    className="resend-code"
-                                    onClick={handleSignupRequest}
-                                >
-                                  Resend confirmation email
-                                </p>
-                            )}
-                          </div>
-                        </>
-                      )}
+                        ) : (
+                          <p
+                            className="resend-code"
+                            onClick={handleSignupRequest}
+                          >
+                            Resend confirmation email
+                          </p>
+                        )}
+                      </div>
 
                       {verifyEmailLoading ? (
                           <div style={{ marginTop: "32px" }}>
@@ -1020,7 +983,7 @@ const Signup = () => {
                         name="organizationName"
                         className="email-form-input"
                         id="Organization Name"
-                        labelText="Organization Name"
+                        labelText="Organization Name *"
                         value={organizationName}
                         onChange={handleOrganizationNameChange}
                         invalid={organizationInfoErrors.organizationName}
@@ -1031,12 +994,29 @@ const Signup = () => {
                         name="organizationNumber"
                         className="email-form-input"
                         id="VAT/GST/Tax Number"
-                        labelText="Organization Number"
+                        labelText="Organization Number *"
                         value={vatNumber}
                         onChange={handleVatNumberChange}
                         invalid={organizationInfoErrors.organizationNumber}
                         invalidText={"Organization number is required"}
                       />
+                      <Select
+                        name="organizationCountry"
+                        className="country-select"
+                        value={organizationCountry}
+                        id="organization-country-ci"
+                        labelText="Organization Country or region *"
+                        onChange={handleOrganizationCountryChange}
+                        invalid={organizationInfoErrors.organizationCountry}
+                      >
+                        {COUNTRIES.map((countryObject, countryIndex) => (
+                          <SelectItem
+                            text={countryObject.name}
+                            value={countryObject.name}
+                            key={countryIndex}
+                          />
+                        ))}
+                      </Select>
                       <div style={{ marginTop: "32px", marginBottom: "16px" }}>
                         <Button
                           kind="tertiary"
@@ -1089,6 +1069,91 @@ const Signup = () => {
                           )}
                         </div>
                       </Frames>
+                    </>
+                  )}
+                  {activeStep === 6 && (
+                    <>
+                      <div className="account-info-box">
+                        <div className="account-heading">
+                          <p className="heading">6. Account notice</p>
+                        </div>
+
+                        <Select
+                          className="country-select"
+                          value={dataSovereignty}
+                          id="data-sovereignty"
+                          labelText="Data Sovereignty *"
+                          onChange={handleDataSovereigntyChange}
+                        >
+                          {Object.keys(DATA_SOVEREIGNTY_REGION_NAMES).map((regionCode, index) => (
+                            <SelectItem
+                              text={DATA_SOVEREIGNTY_REGION_NAMES[regionCode]}
+                              value={regionCode}
+                              key={index}
+                            />
+                          ))}
+                        </Select>
+
+                        <div>
+                          <p className="account-notice-text">
+                            Bynar may use my contact data to keep me informed of
+                            products, services and offerings:
+                          </p>
+                        </div>
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                          <Checkbox
+                              labelText="by email"
+                              checked={isByEmailChecked}
+                              id="by-email"
+                              onChange={(_, { checked }) => {
+                                setIsByEmailChecked(checked);
+                              }}
+                          />
+                        </div>
+                        <div>
+                          <p className="account-notice-text">
+                            You can withdraw your marketing consent at any time by
+                            submitting an{" "}
+                            <Link href="/signup">opt-out request</Link>. Also you
+                            may unsubscribe from receiving marketing emails by
+                            clicking the unsubscribe link in each email.
+                          </p>
+                        </div>
+                        <div>
+                          <p className="account-notice-text">
+                            More information on our processing can be found in the{" "}
+                            <Link href="/signup">Bynar Privacy Statement.</Link>{" "}
+                            By submitting this form, I acknowledge that I have
+                            read and understand the Bynar Privacy Statement.
+                          </p>
+                        </div>
+                        <div>
+                          <p className="account-notice-text">
+                            <Checkbox
+                              labelText={<>
+                                I accept the product{" "}
+                                <Link href="/signup">Terms and Conditions</Link> of
+                                this registration form.
+                              </>}
+                              checked={isAgreementSigned}
+                              id="is-accept-agreement"
+                              onChange={(_, { checked }) => {
+                                setIsAgreementSigned(checked);
+                              }}
+                            />
+                          </p>
+                        </div>
+
+                        <div className="create-account">
+                          <Button
+                            kind="tertiary"
+                            onClick={handleCreateEnvironment}
+                            disabled={!isAgreementSigned}
+                          >
+                            Create environment
+                          </Button>
+                        </div>
+                      </div>
                     </>
                   )}
                 </div>
