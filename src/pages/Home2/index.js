@@ -1,3 +1,4 @@
+import {useCallback, useState} from "react";
 import {
     Header,
     HeaderName,
@@ -7,62 +8,78 @@ import {
     Link,
 } from "@carbon/react";
 import { ArrowRight } from "@carbon/react/icons";
+import ibmLogo from "../../components/media/IBM_logo_black.svg";
+import ibmHomepageVideo from "../../components/media/IBM_homepage_video.mp4";
 
 const Home = () => {
+    const [showVideo, setShowVideo] = useState(false);
+    const [videoBackgroundColor, setVideoBackgroundColor] = useState("white");
+
+    const handleShowVideo = useCallback(() => {
+        setShowVideo(true);
+        setVideoBackgroundColor("black");
+    }, []);
+
     return (
         <div>
             <Header>
-                <HeaderName href="#" prefix="IBM" />
+                <HeaderName href="http://bynar.tajansoft.com" prefix="">
+                    <img src={ibmLogo} style={{marginLeft: 1 + "rem"}} />
+                </HeaderName>
             </Header>
 
             <Grid>
                 <Column sm={4} md={8} lg={6}>
-                    <div style={{fontSize: 3.7 + "rem", marginTop: 7.4 +"rem"}}>Multiply the</div>
-                    <div style={{fontSize: 3.7 + "rem"}}>power of AI</div>
-                    <div style={{fontSize: 3.7 + "rem"}}>
+                    <div style={{fontSize: 3.7 + "rem", lineHeight: 1.15, marginTop: 7 +"rem"}}>Multiply the</div>
+                    <div style={{fontSize: 3.7 + "rem", lineHeight: 1.15}}>power of AI</div>
+                    <div style={{fontSize: 3.7 + "rem", lineHeight: 1.15}}>
                         with
                         <strong> watson</strong>
                         <strong style={{color: "blue"}}>x</strong>
                     </div>
-                    <div style={{fontSize: 1.4 + "rem", marginTop: 18 + "rem"}}>IBM’s next-generation AI and data platform is now available for free trial</div>
-                    <Button renderIcon={ArrowRight} style={{marginTop: 2 + "rem"}}>Contac us</Button>
+                    <div style={{fontSize: 1.45 + "rem", lineHeight: 1.4, marginTop: 23.3 + "rem"}}>IBM’s next-generation AI and data platform is now available for free trial</div>
+                    <Button renderIcon={ArrowRight} style={{fontSize: 1 + "rem", marginTop: 2 + "rem"}}>Contac us</Button>
                 </Column>
 
                 <Column sm={4} md={8} lg={8}>
-                    <div style={{marginTop: 7.4 + "rem"}}>
-                        <video src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" controls style={{width: 100 + "%", height: 100 + "%"}} />
+                    <div onClick={handleShowVideo} style={{marginTop: 7 + "rem", backgroundColor: videoBackgroundColor}}>
+                        {showVideo ? (
+                            <video src={ibmHomepageVideo} width="100%" height="722" controls autoPlay />
+                        ) : (
+                            <img src="https://1.dam.s81c.com/p/0c9c5faa18c5c7cf/watsonx-overview-leadspace-super-hybrid-ui-homepage.png.global.xl_1x1.jpg" style={{width: 100 + "%"}} />
+                        )}
                     </div>
                 </Column>
 
                 <Column sm={4} md={8} lg={2}>
-                    <div style={{fontSize: 3.7 + "rem", marginTop: 7.4 + "rem"}}>
+                    <div style={{marginTop: 7 + "rem"}}>
                         <Link href="#" inline="true">
-                            <p style={{color: "gray"}}>What’s new</p>
-                            <p>The CEO’s Guide to Generative AI</p>
+                            <p style={{fontSize: 0.9 + "rem", color: "gray"}}>What’s new</p>
+                            <p style={{fontSize: 1 + "rem"}}>The CEO’s Guide to Generative AI</p>
                             <div style={{marginTop: 1.6 + "rem"}}><ArrowRight size={25} /></div>
                         </Link>
 
-                        <div style={{borderBottom: "1px solid lightgray", marginTop: 1.3 + "rem", marginBottom: 1.3 + "rem"}} />
+                        <div style={{borderBottom: "1px solid lightgray", marginTop: 1 + "rem", marginBottom: 1.3 + "rem"}} />
 
                         <Link href="#" inline="true">
-                            <p style={{color: "gray"}}>Free download</p>
-                            <p>The data quality, AI performance report</p>
+                            <p style={{fontSize: 0.9 + "rem", color: "gray"}}>Free download</p>
+                            <p style={{fontSize: 1 + "rem"}}>The data quality, AI performance report</p>
                             <div style={{marginTop: 1.6 + "rem"}}><ArrowRight size={25} /></div>
                         </Link>
 
-                        <div style={{borderBottom: "1px solid lightgray", marginTop: 1.3 + "rem", marginBottom: 1.3 + "rem"}} />
+                        <div style={{borderBottom: "1px solid lightgray", marginTop: 1 + "rem", marginBottom: 1.3 + "rem"}} />
 
                         <Link href="#" inline="true">
-                            <p style={{color: "gray"}}>Free download</p>
-                            <p>The data quality, AI performance report</p>
+                            <p style={{fontSize: 0.9 + "rem", color: "gray"}}>Free download</p>
+                            <p style={{fontSize: 1 + "rem"}}>The data quality, AI performance report</p>
                             <div style={{marginTop: 1.6 + "rem"}}><ArrowRight size={25} /></div>
                         </Link>
 
-                        <div style={{borderBottom: "1px solid lightgray", marginTop: 1.3 + "rem", marginBottom: 1.3 + "rem"}} />
+                        <div style={{borderBottom: "1px solid lightgray", marginTop: 1 + "rem", marginBottom: 1.3 + "rem"}} />
 
                         <Link href="#" inline="true">
-                            <p style={{color: "gray"}}>Free download</p>
-                            <p>The data quality, AI performance report</p>
+                            <p style={{fontSize: 0.9 + "rem", color: "gray"}}>Free download</p>
+                            <p style={{fontSize: 1 + "rem"}}>The data quality, AI performance report</p>
                             <div style={{marginTop: 1.6 + "rem"}}><ArrowRight size={25} /></div>
                         </Link>
                     </div>
