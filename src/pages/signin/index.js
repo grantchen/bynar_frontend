@@ -102,8 +102,8 @@ const Signin = () => {
         } catch (err) {
             console.log(err);
             let title = "Login fail"
-            if (err?.code){
-              title = title + ":" + err?.code
+            if (err?.message){
+              title = err?.message
             }
             setServerErrorNotification({
                 title: title,
