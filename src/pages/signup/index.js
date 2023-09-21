@@ -371,8 +371,12 @@ const Signup = () => {
           handleCreateAccount(res.customerID, res.sourceID, token);
         } else if (response.status === 500) {
           setIsError(true);
+          let title = "error occurred while validating card"
+          if (res?.error){
+            title = res?.error
+          }
           setErrorNotification({
-            title: "error occurred while validating card",
+            title: title,
             status: "error",
           });
         }
