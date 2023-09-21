@@ -103,7 +103,7 @@ const Signin = () => {
             console.log(err);
             let title = "Login fail"
             if (err?.message){
-              title = title + ":" + err?.message
+              title = err?.message
             }
             setServerErrorNotification({
                 title: title,
