@@ -294,7 +294,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     // check if user has permission
-    const hasPermission = useCallback(async (permission) => {
+    const hasPermission = useCallback((permission) => {
         if (!state?.user) {
             return false;
         }
