@@ -102,7 +102,7 @@ const Signin = () => {
         } catch (err) {
             console.log(err);
             setServerErrorNotification({
-                title: "Login failed",
+                title: err.message,
                 status: "error",
             });
             setLoading(false);
