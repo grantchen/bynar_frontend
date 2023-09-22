@@ -32,11 +32,11 @@ import { TearSheets } from "../TearSheet";
 import { useRef } from "react";
 import { useEffect } from "react";
 import ProfileDropdown from "../ProfileDropdown";
-import { AppSideNav } from "./AppSideNav";
 import UploadProfileImageModal from "../../sdk/uploadprofileimage";
 
 import { Switcher } from "@carbon/react/icons";
 import ibmLogo from '../media/IBM_logo.svg.png'
+import { CustomSideNavMenu } from "./CustomSideNavMenu";
 
 function _AuthenticatedAppHeader() {
     const { user } = useAuth();
@@ -60,6 +60,13 @@ function _AuthenticatedAppHeader() {
     );
 
     const wrapperRef = useRef(null);
+
+    const [expandSideNav, setExpandSideNav] = useState(false)
+
+    const handleSideNavExpand = () => {
+        setExpandSideNav(!expandSideNav)
+    }
+
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (
@@ -98,7 +105,7 @@ function _AuthenticatedAppHeader() {
                                 onClick={onClickSideNavExpand}
                                 tooltipAlignment="end"
                                 id="switcher-button">
-                                <Switcher size="35" style={{ color: "cornflowerblue" }} />
+                                <Switcher size="25" onClick={() => { handleSideNavExpand() }} style={{ color: "cornflowerblue" }} />
                             </HeaderGlobalAction>
 
                             <img src={ibmLogo} alt="ibm_logo" className="ibmLogo" />
@@ -190,10 +197,6 @@ function _AuthenticatedAppHeader() {
                                     </PopoverContent>
                                 </Popover>
                             </HeaderGlobalBar>
-                            <AppSideNav
-                                isSideNavExpanded={isSideNavExpanded}
-                                onClickSideNavExpand={onClickSideNavExpand}
-                            />
                         </Header>
                     )}
                 />
@@ -201,6 +204,12 @@ function _AuthenticatedAppHeader() {
                     setIsOpen={setIsUserListOpen}
                     isOpen={isUserListOpen}
                 />
+            </div>
+
+            <div>
+                {
+                    expandSideNav && <CustomSideNavMenu />
+                }
             </div>
 
             <Outlet />
