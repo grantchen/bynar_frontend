@@ -18,7 +18,7 @@ const Home2 = lazy(() => import("./pages/Home2"));
 const Signin = lazy(() => import("./pages/signin"));
 const Signup = lazy(() => import("./pages/signup"));
 const Test = lazy(() => import("./pages/test"));
-const AuthenticatedAppHeader = lazy(() => import("./components/Header2"));
+const AuthenticatedAppHeader = lazy(() => import("./components/HeaderAuthenticated"));
 
 function App() {
     return (
