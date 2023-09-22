@@ -7,12 +7,12 @@ const Dashboard = () => {
   const { tab, activeTab } = useContext(TabContext);
 
   return (
-  <div> 
-      <div  className={'active-tab'}>
+  <div>
+      <div className={'active-tab'}>
          {tab[activeTab-1]?.content}
        </div>
   </div>
-  
+
   );
 }
 

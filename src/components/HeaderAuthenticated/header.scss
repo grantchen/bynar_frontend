@@ -10,10 +10,9 @@
     .bx--header__global,
     .cds--header__global {
         position: relative;
-    }
-
-    .user-list-nav-button {
-        margin-left: 3rem;
+        overflow: hidden;
+        align-items: center;
+        height: 100%; // 1px for search input bottom border, due to overflow hidden
     }
 
     .search-container.cds--search--md.cds--search--expandable,
@@ -22,10 +21,8 @@
         display: flex;
         align-items: center;
         z-index: 1;
-        position: absolute;
-        right: 6rem;
         height: 3rem;
-        max-width: calc(100vw - 11rem - 125px);
+        max-width: 100%;
         width: 3rem;
 
         &.cds--search--expanded .cds--search-input,
@@ -52,6 +49,7 @@
     .search-container {
         &.bx--search--expandable.bx--search--expanded {
             width: 100vw;
+            position: absolute;
         }
 
         .bx--search-close {

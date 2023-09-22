@@ -32,11 +32,11 @@ import { TearSheets } from "../TearSheet";
 import { useRef } from "react";
 import { useEffect } from "react";
 import ProfileDropdown from "../ProfileDropdown";
-import { AppSideNav } from "./AppSideNav";
 import UploadProfileImageModal from "../../sdk/uploadprofileimage";
 
 import { Switcher } from "@carbon/react/icons";
 import ibmLogo from '../media/IBM_logo.svg.png'
+import { CustomSideNavMenu } from "./CustomSideNavMenu";
 
 function _AuthenticatedAppHeader() {
     const { user } = useAuth();
@@ -60,6 +60,18 @@ function _AuthenticatedAppHeader() {
     );
 
     const wrapperRef = useRef(null);
+
+    const [expandSideNav, setExpandSideNav] = useState(false)
+    const [expandSearchBar, setExpandSearchBar] = useState(false)
+
+    const handleSideNavExpand = () => {
+        setExpandSideNav(!expandSideNav)
+    }
+
+    const handleSearchClear=()=>{
+        setExpandSearchBar(data=>!data)
+    }
+
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (
@@ -98,7 +110,7 @@ function _AuthenticatedAppHeader() {
                                 onClick={onClickSideNavExpand}
                                 tooltipAlignment="end"
                                 id="switcher-button">
-                                <Switcher size="35" style={{ color: "cornflowerblue" }} />
+                                <Switcher size="25" onClick={() => { handleSideNavExpand() }} style={{ color: "cornflowerblue" }} />
                             </HeaderGlobalAction>
 
                             <img src={ibmLogo} alt="ibm_logo" className="ibmLogo" />
@@ -121,79 +133,80 @@ function _AuthenticatedAppHeader() {
                                     <ExpandableSearch
                                         className="search-container"
                                         labelText="Enter search term"
+                                        isExpanded={expandSearchBar}
+                                        placeholder="Search all of Bynar"
+                                        onClear={handleSearchClear}
                                     />
                                 }
-                                {isUserManagementAllowed && (
-                                    <HeaderGlobalAction
-                                        aria-label={t("user")}
-                                        className="user-list-nav-button"
-                                        onClick={() => setIsUserListOpen(true)}
-                                    >
-                                        <UserData20 />
-                                    </HeaderGlobalAction>
-                                )}
-                                <Popover
-                                    open={isProfileDropdownOpen}
-                                    isTabTip
-                                    align="bottom-right"
-                                    className="popover-dropdown"
-                                >
-                                    <HeaderGlobalAction
-                                        aria-label={user?.fullName ?? t("user")}
-                                        onClick={() => {
-                                            setIsProfileDropdownOpen(true);
-                                            setSearchParams((prev) =>
-                                                omitQueryParams(prev, [
-                                                    "userIdToShowDetails",
-                                                    "openAddUserPanel",
-                                                    "userIdToBeEdited",
-                                                    "openCardMangementPanel",
-                                                    "isInvoiceListOpen"
-                                                ])
-                                            );
-                                        }}
-                                    >
-                                        <UserProfileImage
-                                            backgroundColor={"light-cyan"}
-                                            size={"md"}
-                                            initials={user?.fullName ?? "..."}
-                                            image={user?.profileURL ?? ""}
-                                            theme={
-                                                theme === "g90"
-                                                    ? "dark"
-                                                    : "light"
-                                            }
-                                        />
-                                    </HeaderGlobalAction>
-                                    <PopoverContent ref={wrapperRef}>
-                                        <ProfileDropdown
-                                            onProfileOptionClick={() => {
-                                                setSearchParams({
-                                                    userIdToShowDetails:
-                                                        user?.id,
-                                                });
-                                                setIsProfileDropdownOpen(false);
-                                            }}
-                                            openLanguageModal={
-                                                isLanguageChangeModalOpen
-                                            }
-                                            setLanguageModalOpen={
-                                                openLanguageChangeModal
-                                            }
-                                            openUploadProfileModal={
-                                                isUploadProfileImageModalOpen
-                                            }
-                                            setUploadProfileModalOpen={
-                                                openUploadProfileImageModal
-                                            }
-                                        />
-                                    </PopoverContent>
-                                </Popover>
                             </HeaderGlobalBar>
-                            <AppSideNav
-                                isSideNavExpanded={isSideNavExpanded}
-                                onClickSideNavExpand={onClickSideNavExpand}
-                            />
+
+                            {isUserManagementAllowed && (
+                                <HeaderGlobalAction
+                                    aria-label={t("user")}
+                                    className="user-list-nav-button"
+                                    onClick={() => setIsUserListOpen(true)}
+                                >
+                                    <UserData20 />
+                                </HeaderGlobalAction>
+                            )}
+
+                            <Popover
+                                open={isProfileDropdownOpen}
+                                isTabTip
+                                align="bottom-right"
+                                className="popover-dropdown"
+                            >
+                                <HeaderGlobalAction
+                                    aria-label={user?.fullName ?? t("user")}
+                                    onClick={() => {
+                                        setIsProfileDropdownOpen(true);
+                                        setSearchParams((prev) =>
+                                            omitQueryParams(prev, [
+                                                "userIdToShowDetails",
+                                                "openAddUserPanel",
+                                                "userIdToBeEdited",
+                                                "openCardMangementPanel",
+                                                "isInvoiceListOpen"
+                                            ])
+                                        );
+                                    }}
+                                >
+                                    <UserProfileImage
+                                        backgroundColor={"light-cyan"}
+                                        size={"md"}
+                                        initials={user?.fullName ?? "..."}
+                                        image={user?.profileURL ?? ""}
+                                        theme={
+                                            theme === "g90"
+                                                ? "dark"
+                                                : "light"
+                                        }
+                                    />
+                                </HeaderGlobalAction>
+                                <PopoverContent ref={wrapperRef}>
+                                    <ProfileDropdown
+                                        onProfileOptionClick={() => {
+                                            setSearchParams({
+                                                userIdToShowDetails:
+                                                user?.id,
+                                            });
+                                            setIsProfileDropdownOpen(false);
+                                        }}
+                                        openLanguageModal={
+                                            isLanguageChangeModalOpen
+                                        }
+                                        setLanguageModalOpen={
+                                            openLanguageChangeModal
+                                        }
+                                        openUploadProfileModal={
+                                            isUploadProfileImageModalOpen
+                                        }
+                                        setUploadProfileModalOpen={
+                                            openUploadProfileImageModal
+                                        }
+                                    />
+                                </PopoverContent>
+                            </Popover>
                         </Header>
                     )}
                 />
@@ -201,6 +214,12 @@ function _AuthenticatedAppHeader() {
                     setIsOpen={setIsUserListOpen}
                     isOpen={isUserListOpen}
                 />
+            </div>
+
+            <div>
+                {
+                    expandSideNav && <CustomSideNavMenu />
+                }
             </div>
 
             <Outlet />
