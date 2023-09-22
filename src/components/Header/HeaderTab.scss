@@ -38,6 +38,7 @@
 }
 .custom-tab {
   display: flex;
+  align-items: center;
   gap: 0.2rem;
   border-width: 2px;
 
@@ -53,9 +54,15 @@
     color: var(--cds-text-primary,#161616)
   }
   &.active {
-    font-weight: bold;
-    border-bottom: 2px solid #0f62fe;
-    background-color: transparent;
+    &::after {
+      position: absolute;
+      background-color: var(--cds-border-interactive,#0f62fe);
+      block-size: 3px;
+      content: "";
+      inline-size: calc(100% + 4px);
+      inset-block-end: -2px;
+      inset-inline-start: -2px;
+    }
     //background-color: var(--cds-field-01, #e5e5e5);
   }
 }
@@ -80,6 +87,7 @@
   width: 40px;
   justify-content: center;
   color: var(--cds-text-01, #161616);
+  padding: 0;
 }
 
 .left-arrow:hover {
@@ -97,6 +105,7 @@
   width: 40px;
   justify-content: center;
   color: var(--cds-text-01, #161616);
+  padding: 0;
 }
 
 .right-arrow:hover {
@@ -106,23 +115,30 @@
 }
 
 //remove focus border
-.custom-tab:focus{
+.custom-tab:focus {
   border-left-color: transparent;
   border-right-color: transparent;
   border-top-color: transparent;
 
   box-shadow: none;
 }
-.tab-buttons-list{
+
+.tab-buttons-list {
   overflow-x: auto;
   &::-webkit-scrollbar {
     display: none;
   }
 
   .close-button{
-    padding: 4px;
-    min-height: 8px;
-    margin-left: 0;
+    display: flex;
+    width: 48px;
+    height: calc(100% + 4px);
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: var(--cds-field-01, #e5e5e5);
+    }
   }
 
   .cds--tooltip-content,
@@ -169,6 +185,7 @@
 .tab {
   display: flex;
   width: 100%;
+  overflow: hidden;
   align-items: center;
 }
 
