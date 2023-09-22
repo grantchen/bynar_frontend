@@ -5,7 +5,12 @@
 .bold {
   font-weight: bold;
 }
-
+.toast-notification{
+  padding: 0 16px
+}
+.signup-container{
+  padding: 0 16px
+}
 .error-notification-box {
   display: flex;
   background: #525252;
@@ -593,7 +598,7 @@ label[for="password-input"] {
 }
 
 .heading-container {
-  padding: 0 1rem 2rem;
+  padding: 0 0 2rem;
   border-bottom: solid 1px #e0e0e0;
   .form-mainHeading {
     font-size: 2rem;

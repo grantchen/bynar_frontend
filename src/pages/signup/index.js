@@ -655,7 +655,7 @@ const Signup = () => {
           >
             <Grid fullWidth className={"signup-grid"}>
               <Column sm={{span: 2,offset:1}} lg={{span: 6,offset:5}} md={{span:4,offset:2}} id="scroller">
-                <Content className={"signup-container"} style={{padding: 0}}>
+                <Content className={"signup-container"}>
                   <div className="heading-container">
                     <Heading className={"form-mainHeading"}>
                       Sign up for an Bynar account
@@ -670,7 +670,7 @@ const Signup = () => {
                 </Content>
                 {(typeof errorNotification === "object" &&
                 Object.keys(errorNotification).length !== 0) && (
-                  <div>
+                  <div className={"toast-notification"}>
                     <ToastNotification
                       className="error-notification-box"
                       iconDescription="describes the close button"
@@ -1024,7 +1024,7 @@ const Signup = () => {
                           id="data-sovereignty"
                           labelText="Data Sovereignty *"
                           onChange={handleDataSovereigntyChange}
-                          disabled={!isAgreementSigned}
+                          disabled={!isAgreementSigned || loadingSuccess}
                         >
                           {Object.keys(DATA_SOVEREIGNTY_REGION_NAMES).map((regionCode, index) => (
                             <SelectItem
