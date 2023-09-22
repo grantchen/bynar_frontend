@@ -71,8 +71,8 @@ function ThemePreferenceProvider({ children }) {
 }
 
 function mapCarbonThemeFromThemePreference(preference) {
-    // home and signin page, use "light" theme
-    if (["/", "/signin"].includes(window.location.pathname)) {
+    // home, signup, signin, forgotpassword page, use "light" theme
+    if (["/", "/signup", "/signin", "/forgotpassword"].includes(window.location.pathname)) {
         return "white"
     }
 
