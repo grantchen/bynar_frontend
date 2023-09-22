@@ -6,7 +6,6 @@ import Login from "../../components/Login";
 import MagicLinkValidation from "../../components/MagicLInkValidation";
 import {
     parseTabMessage,
-    sendCloseTabMessage,
     sendTabMessage,
     SubscribeCloseTabMessage,
     SubscribeTabMessage
