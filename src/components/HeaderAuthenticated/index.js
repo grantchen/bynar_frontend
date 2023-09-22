@@ -62,9 +62,14 @@ function _AuthenticatedAppHeader() {
     const wrapperRef = useRef(null);
 
     const [expandSideNav, setExpandSideNav] = useState(false)
+    const [expandSearchBar, setExpandSearchBar] = useState(false)
 
     const handleSideNavExpand = () => {
         setExpandSideNav(!expandSideNav)
+    }
+
+    const handleSearchClear=()=>{
+        setExpandSearchBar(data=>!data)
     }
 
     useEffect(() => {
@@ -128,6 +133,9 @@ function _AuthenticatedAppHeader() {
                                     <ExpandableSearch
                                         className="search-container"
                                         labelText="Enter search term"
+                                        isExpanded={expandSearchBar}
+                                        placeholder="Search all of Bynar"
+                                        onClear={handleSearchClear}
                                     />
                                 }
                                 {isUserManagementAllowed && (

@@ -26,7 +26,7 @@
         position: absolute;
         right: 6rem;
         height: 3rem;
-        max-width: calc(100vw - 11rem - 125px);
+        max-width: calc(100% - 6rem);
         width: 3rem;
 
         &.cds--search--expanded .cds--search-input,
