@@ -38,6 +38,7 @@ import {
   SubscribeCloseTabMessage,
   SubscribeTabMessage
 } from "../../sdk/tabMessage";
+import SignHeader from "../../components/SignHeader";
 
 const Signup = () => {
   const phoneUtil = PhoneNumberUtil.getInstance();
@@ -51,9 +52,9 @@ const Signup = () => {
   const [emailVerificationTimeStamp, setEmailVerificationTimeStamp] = useState("");
   const [emailVerificationSignature, setEmailVerificationSignature] = useState("");
   const [isEmailVerified, setIsEmailVerified] = useState(false);
+  const [emailVerified, setEmailVerified] = useState("");
   const [activeStep, setActiveStep] = useState(1);
   const [fullName, setFullName] = useState("");
-  const [isProfileInfoUpdated, setIsProfileInfoUpdated] = useState(false);
   const [country, setCountry] = useState("Albania");
   const [addressLine1, setAddressLine1] = useState("");
   const [addressLine2, setAddressLine2] = useState("");
@@ -61,17 +62,13 @@ const Signup = () => {
   const [state, setState] = useState("");
   const [postalCode, setPostalCode] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("355");
-  const [isTaxInfoUpdated, setIsTaxInfoUpdated] = useState(false);
   const [vatNumber, setVatNumber] = useState("");
   const [organizationName, setOrganizationName] = useState("");
   const [organizationCountry, setOrganizationCountry] = useState("Albania");
-  const [isGstValid, setGstValid] = useState(true);
   const [isByEmailChecked, setIsByEmailChecked] = useState(true);
   const [isAgreementSigned, setIsAgreementSigned] = useState(false);
   const [dataSovereignty, setDataSovereignty] = useState("us-east-1");
   const [isError, setIsError] = useState(false);
-  const [isAccountInfoError, setIsAccountInfoError] = useState(false);
-  const [isVerifyEmailInfoError, setIsVerifyEmailError] = useState(false);
   const [postalCodeErrorNotification, setPostalCodeErrorNotification] =
     useState({});
   const [cardValidationToken, setCardValidationToken] = useState("");
@@ -176,7 +173,7 @@ const Signup = () => {
     }
   }
 
-  const handlePhoneNumber = (value, country, formattedValue) => {
+  const handlePhoneNumber = (value, country) => {
     setPhoneNumber(value)
     setCountryCode(country?.countryCode);
     setCountryDialCode(
@@ -198,11 +195,10 @@ const Signup = () => {
   const handleEmailChange = (value) => {
     setErrorNotification({});
     setIsError(false);
-    setIsAccountInfoError(false);
     setEmailAddress(value);
     const errors = validateOrganizationForm(value);
     setErrors(errors);
-    // setEmailValid(checkEmailValid(value));
+    // change email needs to verify again
   };
 
   // handle magic link redirection from email
@@ -248,7 +244,6 @@ const Signup = () => {
         if (response.ok) {
           setActiveStep(2);
           setIsError(false);
-          setIsAccountInfoError(false);
 
           if (activeStep === 2) {
             setErrorNotification({
@@ -303,16 +298,14 @@ const Signup = () => {
         const res = await response.json();
         if (response.ok) {
           setIsError(false);
-          setIsVerifyEmailError(false);
           setIsEmailVerified(true);
-          setErrorNotification({
-            title: `email verified successfully `,
-            status: "success",
-          });
+          // record verified email
+          setEmailVerified(email);
+          setActiveStep(3);
         } else if (response.status === 500) {
           setIsError(true);
-          setIsVerifyEmailError(true);
           setIsEmailVerified(false);
+          setEmailVerified("");
           setErrorNotification({
             title: res.error,
             status: "error",
@@ -330,7 +323,6 @@ const Signup = () => {
   const handleVerifyCard = (token) => {
     const fetchData = async () => {
       try {
-        // setLoadingCardSuccess(true)
         const data = {
           token: token,
           email: email,
@@ -430,7 +422,6 @@ const Signup = () => {
   };
 
   const handlePersonalInfo = () => {
-    setIsProfileInfoUpdated(true);
     setActiveStep(4);
   };
 
@@ -441,8 +432,6 @@ const Signup = () => {
       ...organizationInfoErrors,
       [name]: value.trim().length === 0,
     });
-    // const gstRegex = /[0-9]{2}[A-Z]{3}[ABCFGHLJPTF]{1}[A-Z]{1}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}/;
-    setGstValid(value.length > 0);
   };
 
   const handleOrganizationNameChange = (e) => {
@@ -469,7 +458,6 @@ const Signup = () => {
   }
 
   const handleTaxInfo = () => {
-    setIsTaxInfoUpdated(true);
     setActiveStep(5);
   };
 
@@ -490,6 +478,8 @@ const Signup = () => {
   const handleVerifyCardDetails = async (e) => {
     e.preventDefault();
     setLoadingCardSuccess(true);
+    setIsError(false);
+    setErrorNotification({})
     try {
       const res = await Frames.submitCard();
       setCardValidationToken(res.token);
@@ -573,22 +563,22 @@ const Signup = () => {
     return errors;
   };
 
+  // sign up first step submit
   const handleOrganizationFormSubmit = () => {
     const errors = validateOrganizationForm(email);
     setErrors(errors);
 
     if (Object.keys(errors).length === 0) {
-      if (isEmailVerified) {
+      if (isEmailVerified && emailVerified === email) {
         setErrorNotification({});
         setActiveStep(2);
         setIsError(false);
-        setIsAccountInfoError(false);
       } else {
         handleSignupRequest();
       }
     }
   };
-
+  // sign up second step submit
   const handleVerifyEmailFormSubmit = () => {
     if (isEmailVerified) {
       setErrorNotification({});
@@ -652,75 +642,34 @@ const Signup = () => {
   }
 
   return (
-    <>
+    <div>
       <SubscribeCloseTabMessage></SubscribeCloseTabMessage>
       <SubscribeTabMessage
         subscribe={ checkOtherTabVerification }>
       </SubscribeTabMessage>
-      {loadingSuccess ? (
-        <>
-          <div className="loader-page">
-            <InlineLoading description="Creating Account" />
-          </div>
-        </>
-      ) : (
-        <div
-          style={{ display: "flex", flexDirection: "column" }}
-          ref={containerRef}
-        >
-          <Grid className={"signup-grid"}>
-            <Column className={"right-column"}>
-              <Content className="right-content">
-                <div className="signup-heading-text-wrapper">
-                  <span>
-                    <Heading prefix="" className="signup-heading-text bold">
-                      Create your
-                    </Heading>
-                    <span style={{ display: "flex" }}>
-                      <Heading prefix="" className="signup-heading-text ">
-                        Bynar&nbsp;
-                      </Heading>
-                      <Heading
-                        prefix="Bynar"
-                        className="signup-heading-text bold"
-                      >
-                        account
-                      </Heading>
-                    </span>
-                  </span>
-                  <div className="signup-text">
-                    <p className="content">
-                      Access to trials, demos, starter kits, services and APIs
-                    </p>
-                  </div>
-                </div>
-              </Content>
-            </Column>
-            <div className="form-container" ref={selectedTab}>
-              <Column className={"left-column"} id="scroller">
-                <Content className={"signup-container"} style={{ padding: 0 }}>
+      {(
+        <div style={{ height:"100%" }}>
+          <SignHeader></SignHeader>
+          <div
+            ref={containerRef}
+          >
+            <Grid fullWidth className={"signup-grid"}>
+              <Column sm={{span: 2,offset:1}} lg={{span: 6,offset:5}} md={{span:4,offset:2}} id="scroller">
+                <Content className={"signup-container"} style={{padding: 0}}>
                   <div className="heading-container">
+                    <Heading className={"form-mainHeading"}>
+                      Sign up for an Bynar account
+                    </Heading>
                     <div
                       className="login-link"
-                      style={{ marginBottom: "1.5rem" }}
                     >
                       Already have an BYNAR account?{" "}
                       <Link href="/signin">Log in</Link>
                     </div>
-                    <Heading
-                      style={{
-                        fontSize: "28px",
-                        fontWeight: "400",
-                        marginBottom: "16px",
-                      }}
-                    >
-                      Sign up for an Bynar account
-                    </Heading>
                   </div>
-                  <hr className="underline" />
                 </Content>
-                {typeof errorNotification === "object" &&
-                Object.keys(errorNotification).length !== 0 ? (
+                {(typeof errorNotification === "object" &&
+                Object.keys(errorNotification).length !== 0) && (
                   <div>
                     <ToastNotification
                       className="error-notification-box"
@@ -735,8 +684,6 @@ const Signup = () => {
                       }}
                     />
                   </div>
-                ) : (
-                  <div></div>
                 )}
 
                 <div className="signup-form">
@@ -748,7 +695,6 @@ const Signup = () => {
                       <TextInput
                         id="email"
                         className="email-form-input"
-                        // hideLabel={true}
                         value={email}
                         labelText="E-mail"
                         onChange={(e) => handleEmailChange(e.target.value)}
@@ -757,17 +703,18 @@ const Signup = () => {
                         disabled={loading ? true : false}
                       />
                       {loading ? (
-                        <div style={{ marginTop: "32px" }}>
+                        <div style={{marginTop: "32px"}}>
                           <InlineLoading
-                            description={""}
+                            description={"sending confirmation email"}
                             className="submit-button-loading"
                           />
                         </div>
                       ) : (
-                        <div style={{ marginTop: "32px" }}>
+                        <div style={{marginTop: "32px"}}>
                           <Button
                             kind="tertiary"
                             onClick={handleOrganizationFormSubmit}
+                            className={"sign-button"}
                           >
                             {"Next"}
                           </Button>
@@ -780,7 +727,6 @@ const Signup = () => {
                       <div className="account-heading">
                         <p className="heading">2. Verify email</p>
                       </div>
-
                       <div>
                         <p className="email-text">
                           {isEmailVerified ? (
@@ -792,26 +738,20 @@ const Signup = () => {
                               Didn’t receive the email? Check your spam filter for
                               an email from noreply@bynar.al.
                             </>
-                          ) }
+                          )}
                         </p>
                       </div>
                       <div>
-                        {resendCodeLoading ? (
+                        {(resendCodeLoading || verifyEmailLoading) ? (
                           <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "flex-start",
-                              alignItems: "center",
-                              gap: "8px",
-                            }}
+                            style={{marginTop: "32px"}}
                           >
                             <InlineLoading
-                              description={"re-sending confirmation email"}
+                              description={ resendCodeLoading ? "re-sending confirmation email" : ""}
                               className="submit-button-loading"
                             />
-                            {/* <p className='email-text'>re-sending confirmation-code </p> */}
                           </div>
-                        ) : (
+                        ) : !isEmailVerified && (
                           <p
                             className="resend-code"
                             onClick={handleSignupRequest}
@@ -820,20 +760,13 @@ const Signup = () => {
                           </p>
                         )}
                       </div>
-
-                      {verifyEmailLoading ? (
-                          <div style={{ marginTop: "32px" }}>
-                            <InlineLoading
-                                description={""}
-                                className="submit-button-loading"
-                            />
-                          </div>
-                      ) : (
+                      {isEmailVerified && (
                           <div
                               style={{ marginTop: "32px", marginBottom: "16px" }}
                           >
                             <Button
                                 kind="tertiary"
+                                className={"sign-button"}
                                 disabled={!isEmailVerified}
                                 onClick={() => handleVerifyEmailFormSubmit()}
                             >
@@ -934,12 +867,12 @@ const Signup = () => {
                         }
                         invalidText={
                           postalCodeErrorNotification &&
-                            postalCodeErrorNotification.title
+                          postalCodeErrorNotification.title
                             ? postalCodeErrorNotification.title
                             : ""
                         }
                       />
-                      <div style={{ marginTop: "6px" }}>
+                      <div style={{marginTop: "6px"}}>
                         <p className="input-heading">Phone number *</p>
                       </div>
                       <PhoneInput
@@ -952,7 +885,7 @@ const Signup = () => {
                         country={""}
                         value={phoneNumber}
                         onChange={(value, country, formattedValue) =>
-                          handlePhoneNumber(value, country, formattedValue)
+                          handlePhoneNumber(value, country)
                         }
                       />
                       {!phoneNumberValid && errorMessage.length > 0 && (
@@ -966,14 +899,15 @@ const Signup = () => {
                           {errorMessage}
                         </p>
                       )}
-                      <div style={{ marginTop: "32px", marginBottom: "16px" }}>
+                      <div style={{marginTop: "32px", marginBottom: "16px"}}>
                         <Button
                           kind="tertiary"
+                          className={"sign-button"}
                           onClick={handleAccountInformationFormSubmit}
                         >
                           Next
                         </Button>
-                        <hr class="underline-border"></hr>
+                        <hr className="underline-border"></hr>
                       </div>
                     </div>
                   )}
@@ -1021,9 +955,10 @@ const Signup = () => {
                           />
                         ))}
                       </Select>
-                      <div style={{ marginTop: "32px", marginBottom: "16px" }}>
+                      <div style={{marginTop: "32px", marginBottom: "16px"}}>
                         <Button
                           kind="tertiary"
+                          className={"sign-button"}
                           onClick={handleOrganizationInformationFormSubmit}
                         >
                           Next
@@ -1051,7 +986,7 @@ const Signup = () => {
                             <p className="input-heading">Card details</p>
                           </div>
                           <div>
-                            <CardFrame className="card-number" />
+                            <CardFrame className="card-number"/>
                           </div>
 
                           {loadingCardSuccess ? (
@@ -1065,6 +1000,7 @@ const Signup = () => {
                             <div className="create-account">
                               <Button
                                 kind="tertiary"
+                                className={"sign-button"}
                                 onClick={handleVerifyCardDetails}
                               >
                                 Verify card
@@ -1088,6 +1024,7 @@ const Signup = () => {
                           id="data-sovereignty"
                           labelText="Data Sovereignty *"
                           onChange={handleDataSovereigntyChange}
+                          disabled={!isAgreementSigned}
                         >
                           {Object.keys(DATA_SOVEREIGNTY_REGION_NAMES).map((regionCode, index) => (
                             <SelectItem
@@ -1104,14 +1041,15 @@ const Signup = () => {
                             products, services and offerings:
                           </p>
                         </div>
-                        <div style={{ display: "flex", alignItems: "center" }}>
+                        <div style={{display: "flex", alignItems: "center"}}>
                           <Checkbox
-                              labelText="by email"
-                              checked={isByEmailChecked}
-                              id="by-email"
-                              onChange={(_, { checked }) => {
-                                setIsByEmailChecked(checked);
-                              }}
+                            labelText="by email"
+                            checked={isByEmailChecked}
+                            id="by-email"
+                            onChange={(_, {checked}) => {
+                              setIsByEmailChecked(checked);
+                            }}
+                            disabled={loadingSuccess}
                           />
                         </div>
                         <div>
@@ -1140,52 +1078,61 @@ const Signup = () => {
                                 this registration form.
                               </>}
                               checked={isAgreementSigned}
+                              disabled={loadingSuccess}
                               id="is-accept-agreement"
-                              onChange={(_, { checked }) => {
+                              onChange={(_, {checked}) => {
                                 setIsAgreementSigned(checked);
                               }}
                             />
                           </p>
                         </div>
-
-                        <div className="create-account">
-                          <Button
-                            kind="tertiary"
-                            onClick={handleCreateEnvironment}
-                            disabled={!isAgreementSigned}
-                          >
-                            Create environment
-                          </Button>
-                        </div>
+                        {loadingSuccess ? (
+                        <>
+                          <div style={{marginTop: "32px"}}>
+                            <InlineLoading description="Creating Account" />
+                          </div>
+                        </>
+                        ): (
+                          <div className="create-account">
+                            <Button
+                              kind="tertiary"
+                              className={"sign-button"}
+                              onClick={handleCreateEnvironment}
+                              disabled={!isAgreementSigned}
+                            >
+                              Create environment
+                            </Button>
+                          </div>
+                        )}
                       </div>
                     </>
                   )}
                 </div>
               </Column>
-            </div>
-          </Grid>
-          <footer
-            className="carbon-footer"
-            role="contentinfo"
-            aria-label="BYNAR"
-          >
-            <div className="footer-nav-container">
-              <ul className="list">
-                <li className="ui-list">
-                  <Link href="#">Contact</Link>
-                </li>
-                <li className="ui-list">
-                  <Link href="#">Privacy</Link>
-                </li>
-                <li className="ui-list" style={{ width: "400px" }}>
-                  <Link href="#">Terms Of Use</Link>
-                </li>
-              </ul>
-            </div>
-          </footer>
+            </Grid>
+            <footer
+              className="carbon-footer"
+              role="contentinfo"
+              aria-label="BYNAR"
+            >
+              <div className="footer-nav-container">
+                <ul className="list">
+                  <li className="ui-list">
+                    <Link href="#">Contact</Link>
+                  </li>
+                  <li className="ui-list">
+                    <Link href="#">Privacy</Link>
+                  </li>
+                  <li className="ui-list" style={{width: "400px"}}>
+                    <Link href="#">Terms Of Use</Link>
+                  </li>
+                </ul>
+              </div>
+            </footer>
+          </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
