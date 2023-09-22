@@ -197,10 +197,11 @@ export const AuthProvider = ({ children }) => {
             }
         } catch (e) {
             setState({ user: null, token: null });
-            throw e
+            console.log(e)
+            throw new Error('Login failed, link expired or invalid')
         }
 
-        throw new Error('sign in failed')
+        throw new Error('Login failed, invalid link')
     }, []);
 
     // signinWithCustomToken is used to sign in with custom token
@@ -216,8 +217,6 @@ export const AuthProvider = ({ children }) => {
             setState({ user: null, token: null });
             throw e
         }
-
-        throw new Error('sign in failed')
     }, []);
 
     const signout = useCallback(async () => {
@@ -293,6 +292,14 @@ export const AuthProvider = ({ children }) => {
         return "Bearer " + token
     }, []);
 
+    // check if user has permission
+    const hasPermission = useCallback((permission) => {
+        if (!state?.user) {
+            return false;
+        }
+        return state.user.permissions && state.user.permissions[permission] === 1
+    }, [state.user]);
+
     const updateUserThemePreference = useCallback(
         async ({ themePreference }) => {
             if (!state?.user) {
@@ -338,6 +345,7 @@ export const AuthProvider = ({ children }) => {
             updateUserThemePreference,
             getUser,
             getAuthorizationToken,
+            hasPermission,
         }),
         [
             state,
@@ -350,6 +358,7 @@ export const AuthProvider = ({ children }) => {
             updateUserThemePreference,
             getUser,
             getAuthorizationToken,
+            hasPermission,
         ]
     );
     return <Provider value={ providerValue }>{ children }</Provider>;

@@ -101,8 +101,12 @@ const Signin = () => {
             navigate("/home/dashboard");
         } catch (err) {
             console.log(err);
+            let title = "Login fail"
+            if (err?.message){
+              title = err?.message
+            }
             setServerErrorNotification({
-                title: "Login failed",
+                title: title,
                 status: "error",
             });
             setLoading(false);
