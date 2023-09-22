@@ -138,73 +138,75 @@ function _AuthenticatedAppHeader() {
                                         onClear={handleSearchClear}
                                     />
                                 }
-                                {isUserManagementAllowed && (
-                                    <HeaderGlobalAction
-                                        aria-label={t("user")}
-                                        className="user-list-nav-button"
-                                        onClick={() => setIsUserListOpen(true)}
-                                    >
-                                        <UserData20 />
-                                    </HeaderGlobalAction>
-                                )}
-                                <Popover
-                                    open={isProfileDropdownOpen}
-                                    isTabTip
-                                    align="bottom-right"
-                                    className="popover-dropdown"
-                                >
-                                    <HeaderGlobalAction
-                                        aria-label={user?.fullName ?? t("user")}
-                                        onClick={() => {
-                                            setIsProfileDropdownOpen(true);
-                                            setSearchParams((prev) =>
-                                                omitQueryParams(prev, [
-                                                    "userIdToShowDetails",
-                                                    "openAddUserPanel",
-                                                    "userIdToBeEdited",
-                                                    "openCardMangementPanel",
-                                                    "isInvoiceListOpen"
-                                                ])
-                                            );
-                                        }}
-                                    >
-                                        <UserProfileImage
-                                            backgroundColor={"light-cyan"}
-                                            size={"md"}
-                                            initials={user?.fullName ?? "..."}
-                                            image={user?.profileURL ?? ""}
-                                            theme={
-                                                theme === "g90"
-                                                    ? "dark"
-                                                    : "light"
-                                            }
-                                        />
-                                    </HeaderGlobalAction>
-                                    <PopoverContent ref={wrapperRef}>
-                                        <ProfileDropdown
-                                            onProfileOptionClick={() => {
-                                                setSearchParams({
-                                                    userIdToShowDetails:
-                                                        user?.id,
-                                                });
-                                                setIsProfileDropdownOpen(false);
-                                            }}
-                                            openLanguageModal={
-                                                isLanguageChangeModalOpen
-                                            }
-                                            setLanguageModalOpen={
-                                                openLanguageChangeModal
-                                            }
-                                            openUploadProfileModal={
-                                                isUploadProfileImageModalOpen
-                                            }
-                                            setUploadProfileModalOpen={
-                                                openUploadProfileImageModal
-                                            }
-                                        />
-                                    </PopoverContent>
-                                </Popover>
                             </HeaderGlobalBar>
+
+                            {isUserManagementAllowed && (
+                                <HeaderGlobalAction
+                                    aria-label={t("user")}
+                                    className="user-list-nav-button"
+                                    onClick={() => setIsUserListOpen(true)}
+                                >
+                                    <UserData20 />
+                                </HeaderGlobalAction>
+                            )}
+
+                            <Popover
+                                open={isProfileDropdownOpen}
+                                isTabTip
+                                align="bottom-right"
+                                className="popover-dropdown"
+                            >
+                                <HeaderGlobalAction
+                                    aria-label={user?.fullName ?? t("user")}
+                                    onClick={() => {
+                                        setIsProfileDropdownOpen(true);
+                                        setSearchParams((prev) =>
+                                            omitQueryParams(prev, [
+                                                "userIdToShowDetails",
+                                                "openAddUserPanel",
+                                                "userIdToBeEdited",
+                                                "openCardMangementPanel",
+                                                "isInvoiceListOpen"
+                                            ])
+                                        );
+                                    }}
+                                >
+                                    <UserProfileImage
+                                        backgroundColor={"light-cyan"}
+                                        size={"md"}
+                                        initials={user?.fullName ?? "..."}
+                                        image={user?.profileURL ?? ""}
+                                        theme={
+                                            theme === "g90"
+                                                ? "dark"
+                                                : "light"
+                                        }
+                                    />
+                                </HeaderGlobalAction>
+                                <PopoverContent ref={wrapperRef}>
+                                    <ProfileDropdown
+                                        onProfileOptionClick={() => {
+                                            setSearchParams({
+                                                userIdToShowDetails:
+                                                user?.id,
+                                            });
+                                            setIsProfileDropdownOpen(false);
+                                        }}
+                                        openLanguageModal={
+                                            isLanguageChangeModalOpen
+                                        }
+                                        setLanguageModalOpen={
+                                            openLanguageChangeModal
+                                        }
+                                        openUploadProfileModal={
+                                            isUploadProfileImageModalOpen
+                                        }
+                                        setUploadProfileModalOpen={
+                                            openUploadProfileImageModal
+                                        }
+                                    />
+                                </PopoverContent>
+                            </Popover>
                         </Header>
                     )}
                 />
