@@ -131,15 +131,13 @@ function _AuthenticatedAppHeader() {
 
                             <HeaderGlobalBar>
                                 <HeaderTab />
-                                {
-                                    <ExpandableSearch
-                                        className="search-container"
-                                        labelText="Enter search term"
-                                        isExpanded={expandSearchBar}
-                                        placeholder="Search all of Bynar"
-                                        onClear={handleSearchClear}
-                                    />
-                                }
+                                <ExpandableSearch
+                                    className="search-container"
+                                    labelText="Enter search term"
+                                    isExpanded={expandSearchBar}
+                                    placeholder="Search all of Bynar"
+                                    onClear={handleSearchClear}
+                                />
                             </HeaderGlobalBar>
 
                             {isUserManagementAllowed && (

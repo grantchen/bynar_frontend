@@ -1,5 +1,6 @@
 import React, {useRef, useContext} from "react";
 import {Button, TabList, Tabs, Tab} from "@carbon/react";
+import { Add20 } from '@carbon/icons-react';
 import "./HeaderTab.scss";
 import {TabContext, useMobile} from "../../sdk";
 import {useTranslation} from "react-i18next";
@@ -19,15 +20,11 @@ const HeaderTab = () => {
         handleRemoveTab(tab[index].id, index);
     };
 
-    if (isMobile) {
-        return null;
-    }
-
     return (
         <>
             <div className="tab">
                 <div className="tab-buttons-list" ref={carouselRef}>
-                    <div style={{display: "flex", whiteSpace: "nowrap"}}>
+                    <div style={{display: "flex", whiteSpace: "nowrap", height: "100%"}}>
                         <Tabs selectedIndex={activeTab} onChange={handleTabChange} dismissable onTabCloseRequest={removeTab}>
                             <TabList aria-label="List of tabs">
                                 {tab.map((item, index) =>
@@ -36,17 +33,17 @@ const HeaderTab = () => {
                                     </Tab>)}
                             </TabList>
                         </Tabs>
-
-                        <Button
-                            kind="ghost"
-                            className="add-new-tab"
-                            onClick={handleAddTab}
-                        >
-                            {t("add-new-tab")}
-                        </Button>
                     </div>
                 </div>
 
+                <Button
+                    kind="ghost"
+                    className="add-new-tab"
+                    hasIconOnly
+                    onClick={handleAddTab}
+                >
+                    <Add20 aria-label="Add" />
+                </Button>
             </div>
         </>
     );

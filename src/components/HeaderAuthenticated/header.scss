@@ -12,7 +12,7 @@
         position: relative;
         overflow: hidden;
         align-items: center;
-        height: 100%; // 1px for search input bottom border, due to overflow hidden
+        height: 100%;
     }
 
     .search-container.cds--search--md.cds--search--expandable,
@@ -50,12 +50,25 @@
         &.bx--search--expandable.bx--search--expanded {
             width: 100vw;
             position: absolute;
-        }
 
-        .bx--search-close {
-            &:hover {
-                border: 2px solid var(--cds-focus, #0f62fe);
-                outline-offset: -2px;
+            .bx--search-input {
+                border-bottom: 2px solid var(--cds-interactive-01,#0f62fe);
+            }
+
+            .bx--search-close {
+                // always show close button
+                opacity: 1;
+                visibility: visible;
+
+                &:hover {
+                    border: 2px solid var(--cds-focus, #0f62fe);
+                    outline-offset: -2px;
+                }
+
+                // set width to 0, due to overlap with close button left border
+                &::before {
+                    width: 0;
+                }
             }
         }
     }
@@ -143,32 +156,9 @@
     }
 }
 
-// .ibmLogo {
-//     width: 60px;
-//     height: auto;
-//     // margin-left: 0.5rem;
-// }
-
-// .logoSeperator {
-
-//     // content: "";
-//     // display: block;
-//     // position: absolute;
-//     // right: -0.1875rem;
-//     // top: 50%;
-//     // transform: translateY(-50%);
-//     // height: 1.5rem;
-//     // width: 0.0625rem;
-//     // background-color: var(--cds-ui-03,#e0e0e0);
-
-//     height: 1.6rem;
-//     width: 0.0625rem;
-//     background-color: var(--cds-ui-03, #656464);
-// }
-
 .ibmLogo {
-    width: 5%;
-    height: auto;
+    width: auto;
+    height: 23px;
     padding-left: 0.5rem;
     // padding-right: 0.5rem;
 }

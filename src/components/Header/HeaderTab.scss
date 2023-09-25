@@ -30,68 +30,48 @@
   background-color: var(--cds-field-01, #e5e5e5) !important;
 }
 
-.add-new-tab {
-  color: var(--cds-text-01, #161616);
-  &:hover {
-    background-color: var(--cds-field-01, #e5e5e5);
-    color: var(--cds-text-01, #161616);
-  }
-}
-
-.custom-tab {
-  // hide tab bottom border color
-  &.cds--tabs__nav-link:not(.cds--tabs__nav-item--selected) {
-    border-bottom-color: transparent;
-  }
-
-  &.tab-stable {
-    .cds--tabs__nav-item--icon {
-      display: none;
-    }
-  }
-}
-
-.tab-buttons-list {
-  overflow-x: auto;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .tab {
   display: flex;
   width: 100%;
   overflow: hidden;
-  align-items: center;
+  align-items: stretch;
+
+
+  .tab-buttons-list {
+    overflow-x: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    // remove gap between tabs
+    .cds--tabs .cds--tabs__nav-item + .cds--tabs__nav-item {
+      margin-left: 0;
+    }
+
+    // previous icon should be on top of tabs
+    .cds--tabs .cds--tab--overflow-nav-button--previous {
+      z-index: 1;
+    }
+
+    .custom-tab {
+      // hide tab bottom border color
+      &.cds--tabs__nav-link:not(.cds--tabs__nav-item--selected) {
+        border-bottom-color: transparent;
+      }
+
+      &.tab-stable {
+        .cds--tabs__nav-item--icon {
+          display: none;
+        }
+      }
+    }
+  }
+
+
+  .add-new-tab {
+    align-items: center;
+    padding: 0;
+  }
 }
 
 .header-tab {
@@ -234,9 +214,9 @@
 }
 
 @media screen and (max-width: 600px) {
-  .tab {
-    display: none;
-  }
+  //.tab {
+  //  display: none;
+  //}
 
   .box-container {
     .tab-new {
