@@ -2,9 +2,9 @@
   "mastheadNav": {
     "links": [
       {
-        "title": "Products & Solutions",
-        "titleEnglish": "Products & Solutions",
-        "description": "Blend cloud and on-premises resources for flexibility and balance",
+        "title": "Featured",
+        "titleEnglish": "Featured",
+        "description": "",
         "url": "",
         "hasMenu": true,
         "hasMegapanel": true,
@@ -329,10 +329,10 @@
         ]
       },
       {
-        "title": "Consulting & Services",
-        "titleEnglish": "Consulting & Services",
+        "title": "AI & Machine learning",
+        "titleEnglish": "AI & Machine learning",
         "description": "Blend cloud and on-premises resources for flexibility and balance",
-        "url": "",
+        "url": "https://www.ibm.com/artificial-intelligence?lnk=flathl",
         "hasMenu": true,
         "hasMegapanel": true,
         "menuSections": [
@@ -1387,7 +1387,7 @@
   },
   "footerMenu": [
     {
-      "title": "Products & Solutions",
+      "title": "Featured",
       "links": [
         {
           "title": "Top products & platforms",

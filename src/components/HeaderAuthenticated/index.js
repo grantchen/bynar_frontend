@@ -44,7 +44,6 @@ function _AuthenticatedAppHeader() {
     const { theme } = useThemePreference();
     const { isUserManagementAllowed } = useUserManagement();
     const [searchParams, setSearchParams] = useSearchParams();
-    const isMobile = useMobile();
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
     const [isLanguageChangeModalOpen, openLanguageChangeModal] =
         useState(false);
@@ -61,15 +60,15 @@ function _AuthenticatedAppHeader() {
 
     const wrapperRef = useRef(null);
 
-    const [expandSideNav, setExpandSideNav] = useState(false)
+    const [expandWideMenu, setExpandWideMenu] = useState(false)
     const [expandSearchBar, setExpandSearchBar] = useState(false)
 
-    const handleSideNavExpand = () => {
-        setExpandSideNav(!expandSideNav)
+    const handleWideMenuExpand = () => {
+        setExpandWideMenu(!expandWideMenu)
     }
 
-    const handleSearchClear=()=>{
-        setExpandSearchBar(data=>!data)
+    const handleSearchClear = () => {
+        setExpandSearchBar(data => !data)
     }
 
     useEffect(() => {
@@ -91,26 +90,28 @@ function _AuthenticatedAppHeader() {
         <>
             <div className="main-header-container">
                 <HeaderContainer
-                    render={({ isSideNavExpanded, onClickSideNavExpand }) => (
+                    render={ ({ isSideNavExpanded, onClickSideNavExpand }) => (
                         <Header aria-label="Bynar">
                             <SkipToContent />
-                            {/* previous code for hamburger icon*/}
+                            {/* previous code for hamburger icon*/ }
                             {/* <HeaderMenuButton
                                 aria-label="Open menu"
                                 onClick={onClickSideNavExpand}
                                 isActive={isSideNavExpanded}
-                            /> */}
-                            {/* added code for waffle icon */}
+                            /> */ }
+                            {/* added code for waffle icon */ }
                             <HeaderGlobalAction
                                 aria-label={
-                                    isSideNavExpanded ? 'Close switcher' : 'Open switcher'
+                                    isSideNavExpanded ? 'Close' : 'Open'
                                 }
-                                aria-expanded={isSideNavExpanded}
-                                isActive={isSideNavExpanded}
-                                onClick={onClickSideNavExpand}
+                                aria-expanded={ isSideNavExpanded }
+                                isActive={ isSideNavExpanded }
+                                onClick={ onClickSideNavExpand }
                                 tooltipAlignment="end"
                                 id="switcher-button">
-                                <Switcher size="25" onClick={() => { handleSideNavExpand() }} style={{ color: "cornflowerblue" }} />
+                                <Switcher size="25" onClick={ () => {
+                                    handleWideMenuExpand()
+                                } } style={ { color: "cornflowerblue" } } />
                             </HeaderGlobalAction>
 
                             <HeaderName href="#" prefix="">
@@ -127,38 +128,38 @@ function _AuthenticatedAppHeader() {
 
                             {/* <HeaderName href="#" prefix="Bynar">
                                 [Platform]
-                            </HeaderName> */}
+                            </HeaderName> */ }
 
                             <HeaderGlobalBar>
                                 <HeaderTab />
                                 <ExpandableSearch
                                     className="search-container"
                                     labelText="Enter search term"
-                                    isExpanded={expandSearchBar}
+                                    isExpanded={ expandSearchBar }
                                     placeholder="Search all of Bynar"
-                                    onClear={handleSearchClear}
+                                    onClear={ handleSearchClear }
                                 />
                             </HeaderGlobalBar>
 
-                            {isUserManagementAllowed && (
+                            { isUserManagementAllowed && (
                                 <HeaderGlobalAction
-                                    aria-label={t("user")}
+                                    aria-label={ t("user") }
                                     className="user-list-nav-button"
-                                    onClick={() => setIsUserListOpen(true)}
+                                    onClick={ () => setIsUserListOpen(true) }
                                 >
                                     <UserData20 />
                                 </HeaderGlobalAction>
-                            )}
+                            ) }
 
                             <Popover
-                                open={isProfileDropdownOpen}
+                                open={ isProfileDropdownOpen }
                                 isTabTip
                                 align="bottom-right"
                                 className="popover-dropdown"
                             >
                                 <HeaderGlobalAction
-                                    aria-label={user?.fullName ?? t("user")}
-                                    onClick={() => {
+                                    aria-label={ user?.fullName ?? t("user") }
+                                    onClick={ () => {
                                         setIsProfileDropdownOpen(true);
                                         setSearchParams((prev) =>
                                             omitQueryParams(prev, [
@@ -169,13 +170,13 @@ function _AuthenticatedAppHeader() {
                                                 "isInvoiceListOpen"
                                             ])
                                         );
-                                    }}
+                                    } }
                                 >
                                     <UserProfileImage
-                                        backgroundColor={"light-cyan"}
-                                        size={"md"}
-                                        initials={user?.fullName ?? "..."}
-                                        image={user?.profileURL ?? ""}
+                                        backgroundColor={ "light-cyan" }
+                                        size={ "md" }
+                                        initials={ user?.fullName ?? "..." }
+                                        image={ user?.profileURL ?? "" }
                                         theme={
                                             theme === "g90"
                                                 ? "dark"
@@ -183,15 +184,15 @@ function _AuthenticatedAppHeader() {
                                         }
                                     />
                                 </HeaderGlobalAction>
-                                <PopoverContent ref={wrapperRef}>
+                                <PopoverContent ref={ wrapperRef }>
                                     <ProfileDropdown
-                                        onProfileOptionClick={() => {
+                                        onProfileOptionClick={ () => {
                                             setSearchParams({
                                                 userIdToShowDetails:
                                                 user?.id,
                                             });
                                             setIsProfileDropdownOpen(false);
-                                        }}
+                                        } }
                                         openLanguageModal={
                                             isLanguageChangeModalOpen
                                         }
@@ -208,28 +209,28 @@ function _AuthenticatedAppHeader() {
                                 </PopoverContent>
                             </Popover>
                         </Header>
-                    )}
+                    ) }
                 />
                 <TearSheets
-                    setIsOpen={setIsUserListOpen}
-                    isOpen={isUserListOpen}
+                    setIsOpen={ setIsUserListOpen }
+                    isOpen={ isUserListOpen }
                 />
             </div>
 
             <div>
                 {
-                    expandSideNav && <CustomSideNavMenu />
+                    <CustomSideNavMenu isShow={expandWideMenu} />
                 }
             </div>
 
             <Outlet />
             <LanguageChangeModal
-                isLanguageChangeModalOpen={isLanguageChangeModalOpen}
-                openLanguageChangeModal={openLanguageChangeModal}
+                isLanguageChangeModalOpen={ isLanguageChangeModalOpen }
+                openLanguageChangeModal={ openLanguageChangeModal }
             />
             <UploadProfileImageModal
-                isUploadProfileImageModalOpen={isUploadProfileImageModalOpen}
-                openUploadProfileImageModal={openUploadProfileImageModal}
+                isUploadProfileImageModalOpen={ isUploadProfileImageModalOpen }
+                openUploadProfileImageModal={ openUploadProfileImageModal }
             />
         </>
     );
@@ -239,7 +240,7 @@ export default function AuthenticatedAppHeader(props) {
     return (
         <CardManagementProvider>
             <InvoicesProvider>
-                <_AuthenticatedAppHeader {...props} />
+                <_AuthenticatedAppHeader { ...props } />
             </InvoicesProvider>
         </CardManagementProvider>
     );

@@ -7,6 +7,13 @@
   background-color: rgb(226, 222, 222);
   justify-content: left;
   z-index: 1;
+  transition: all 0.24s cubic-bezier(0.4, 0.14, 0.3, 1);
+  max-height: 0;
+  overflow: hidden;
+
+  &.wide-menu-expanded {
+    max-height: 100%;
+  }
 }
 
 .flex-container-desc>div {

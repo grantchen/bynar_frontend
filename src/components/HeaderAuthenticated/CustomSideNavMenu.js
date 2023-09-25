@@ -7,7 +7,7 @@ import { ArrowRight, ArrowLeft } from "@carbon/react/icons";
 
 import "./CustomSideNav.scss";
 
-export function CustomSideNavMenu() {
+export function CustomSideNavMenu({isShow}) {
 
     const [activeTitle, setActiveTitle] = useState(jsonData.mastheadNav.links[0]?.title);
     const handleClick = (title) => {
@@ -27,7 +27,7 @@ export function CustomSideNavMenu() {
     }, [activeTitle]);
 
     return (
-        <div className="flex-container-desc">
+        <div className={`flex-container-desc ${isShow ? 'wide-menu-expanded' : ''}`}>
             <div className="head-title" style={{ textAlign: 'left' }}>
                 {
                     jsonData.mastheadNav.links.map((ele) => {
@@ -70,7 +70,14 @@ export function CustomSideNavMenu() {
                         if (ele.menuSections.length && ele.title === activeTitle) {
                             return (
                                 <div key={ele.title}>
-                                    <h4 className="sub-menu-description">{ele.title} <ArrowRight size={28}  /> </h4>
+                                    {
+                                      ele.url !== '' ? (
+
+                                        <a> <h4 className="sub-menu-description">{ele.title}</h4> <ArrowRight size={28} /></a>
+                                      ) : (
+                                        <h4 className="sub-menu-description">{ele.title} </h4>
+                                      )
+                                    }
                                     <p className="menu-description">{ele.description}</p>
                                     <div className="grid-container">
                                         {
