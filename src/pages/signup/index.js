@@ -670,7 +670,7 @@ const Signup = () => {
                 </Content>
                 {(typeof errorNotification === "object" &&
                 Object.keys(errorNotification).length !== 0) && (
-                  <div className={"toast-notification"}>
+                  <div style={{paddingLeft: 16,paddingRight: 16}}>
                     <ToastNotification
                       className="error-notification-box"
                       iconDescription="describes the close button"
