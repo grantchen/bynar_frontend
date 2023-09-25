@@ -35,7 +35,7 @@ import ProfileDropdown from "../ProfileDropdown";
 import UploadProfileImageModal from "../../sdk/uploadprofileimage";
 
 import { Switcher } from "@carbon/react/icons";
-import ibmLogo from '../media/IBM_logo.svg.png'
+import ibmLogo from '../media/IBM_logo_black.svg'
 import { CustomSideNavMenu } from "./CustomSideNavMenu";
 
 function _AuthenticatedAppHeader() {
@@ -113,7 +113,9 @@ function _AuthenticatedAppHeader() {
                                 <Switcher size="25" onClick={() => { handleSideNavExpand() }} style={{ color: "cornflowerblue" }} />
                             </HeaderGlobalAction>
 
-                            <img src={ibmLogo} alt="ibm_logo" className="ibmLogo" />
+                            <HeaderName href="#" prefix="">
+                                <img src={ibmLogo} alt="ibm_logo" />
+                            </HeaderName>
 
                             <HeaderName className="seperatorHead" href="#" prefix="">
                                 <div className="logoSeperator" />

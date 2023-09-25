@@ -654,7 +654,7 @@ const Signup = () => {
             ref={containerRef}
           >
             <Grid fullWidth className={"signup-grid"}>
-              <Column sm={{span: 2,offset:1}} lg={{span: 6,offset:5}} md={{span:4,offset:2}} id="scroller">
+              <Column sm={{span:4}} lg={{span: 6,offset:5}} md={{span:5,offset:2}} id="scroller">
                 <Content className={"signup-container"}>
                   <div className="heading-container">
                     <Heading className={"form-mainHeading"}>
@@ -670,7 +670,7 @@ const Signup = () => {
                 </Content>
                 {(typeof errorNotification === "object" &&
                 Object.keys(errorNotification).length !== 0) && (
-                  <div className={"toast-notification"}>
+                  <div style={{paddingLeft: 16,paddingRight: 16}}>
                     <ToastNotification
                       className="error-notification-box"
                       iconDescription="describes the close button"
@@ -714,7 +714,6 @@ const Signup = () => {
                           <Button
                             kind="tertiary"
                             onClick={handleOrganizationFormSubmit}
-                            className={"sign-button"}
                           >
                             {"Next"}
                           </Button>
@@ -766,7 +765,6 @@ const Signup = () => {
                           >
                             <Button
                                 kind="tertiary"
-                                className={"sign-button"}
                                 disabled={!isEmailVerified}
                                 onClick={() => handleVerifyEmailFormSubmit()}
                             >
@@ -902,7 +900,6 @@ const Signup = () => {
                       <div style={{marginTop: "32px", marginBottom: "16px"}}>
                         <Button
                           kind="tertiary"
-                          className={"sign-button"}
                           onClick={handleAccountInformationFormSubmit}
                         >
                           Next
@@ -958,7 +955,6 @@ const Signup = () => {
                       <div style={{marginTop: "32px", marginBottom: "16px"}}>
                         <Button
                           kind="tertiary"
-                          className={"sign-button"}
                           onClick={handleOrganizationInformationFormSubmit}
                         >
                           Next
@@ -1000,7 +996,6 @@ const Signup = () => {
                             <div className="create-account">
                               <Button
                                 kind="tertiary"
-                                className={"sign-button"}
                                 onClick={handleVerifyCardDetails}
                               >
                                 Verify card
@@ -1096,7 +1091,6 @@ const Signup = () => {
                           <div className="create-account">
                             <Button
                               kind="tertiary"
-                              className={"sign-button"}
                               onClick={handleCreateEnvironment}
                               disabled={!isAgreementSigned}
                             >
@@ -1116,17 +1110,17 @@ const Signup = () => {
               aria-label="BYNAR"
             >
               <div className="footer-nav-container">
-                <ul className="list">
-                  <li className="ui-list">
-                    <Link href="#">Contact</Link>
-                  </li>
-                  <li className="ui-list">
-                    <Link href="#">Privacy</Link>
-                  </li>
-                  <li className="ui-list" style={{width: "400px"}}>
-                    <Link href="#">Terms Of Use</Link>
-                  </li>
-                </ul>
+                  <Grid>
+                      <Column sm={1} lg={2} md={1}>
+                          <Link href="#">Contact</Link>
+                      </Column>
+                      <Column sm={1} lg={2} md={1}>
+                          <Link href="#">Privacy</Link>
+                      </Column>
+                      <Column sm={2} lg={2} md={2}>
+                          <Link href="#">Terms Of Use</Link>
+                      </Column>
+                  </Grid>
               </div>
             </footer>
           </div>
