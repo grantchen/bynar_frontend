@@ -1117,7 +1117,7 @@ const Signup = () => {
                       <Column sm={1} lg={2} md={1}>
                           <Link href="#">Privacy</Link>
                       </Column>
-                      <Column sm={1} lg={2} md={2}>
+                      <Column sm={2} lg={2} md={2}>
                           <Link href="#">Terms Of Use</Link>
                       </Column>
                   </Grid>
