@@ -714,7 +714,6 @@ const Signup = () => {
                           <Button
                             kind="tertiary"
                             onClick={handleOrganizationFormSubmit}
-                            className={"sign-button"}
                           >
                             {"Next"}
                           </Button>
@@ -766,7 +765,6 @@ const Signup = () => {
                           >
                             <Button
                                 kind="tertiary"
-                                className={"sign-button"}
                                 disabled={!isEmailVerified}
                                 onClick={() => handleVerifyEmailFormSubmit()}
                             >
@@ -902,7 +900,6 @@ const Signup = () => {
                       <div style={{marginTop: "32px", marginBottom: "16px"}}>
                         <Button
                           kind="tertiary"
-                          className={"sign-button"}
                           onClick={handleAccountInformationFormSubmit}
                         >
                           Next
@@ -958,7 +955,6 @@ const Signup = () => {
                       <div style={{marginTop: "32px", marginBottom: "16px"}}>
                         <Button
                           kind="tertiary"
-                          className={"sign-button"}
                           onClick={handleOrganizationInformationFormSubmit}
                         >
                           Next
@@ -1000,7 +996,6 @@ const Signup = () => {
                             <div className="create-account">
                               <Button
                                 kind="tertiary"
-                                className={"sign-button"}
                                 onClick={handleVerifyCardDetails}
                               >
                                 Verify card
@@ -1096,7 +1091,6 @@ const Signup = () => {
                           <div className="create-account">
                             <Button
                               kind="tertiary"
-                              className={"sign-button"}
                               onClick={handleCreateEnvironment}
                               disabled={!isAgreementSigned}
                             >
