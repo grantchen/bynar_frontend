@@ -654,7 +654,7 @@ const Signup = () => {
             ref={containerRef}
           >
             <Grid fullWidth className={"signup-grid"}>
-              <Column sm={{span: 2,offset:1}} lg={{span: 6,offset:5}} md={{span:4,offset:2}} id="scroller">
+              <Column sm={{span:4}} lg={{span: 6,offset:5}} md={{span:5,offset:2}} id="scroller">
                 <Content className={"signup-container"}>
                   <div className="heading-container">
                     <Heading className={"form-mainHeading"}>
@@ -1110,17 +1110,17 @@ const Signup = () => {
               aria-label="BYNAR"
             >
               <div className="footer-nav-container">
-                <ul className="list">
-                  <li className="ui-list">
-                    <Link href="#">Contact</Link>
-                  </li>
-                  <li className="ui-list">
-                    <Link href="#">Privacy</Link>
-                  </li>
-                  <li className="ui-list" style={{width: "400px"}}>
-                    <Link href="#">Terms Of Use</Link>
-                  </li>
-                </ul>
+                  <Grid>
+                      <Column sm={1} lg={2} md={1}>
+                          <Link href="#">Contact</Link>
+                      </Column>
+                      <Column sm={1} lg={2} md={1}>
+                          <Link href="#">Privacy</Link>
+                      </Column>
+                      <Column sm={1} lg={2} md={2}>
+                          <Link href="#">Terms Of Use</Link>
+                      </Column>
+                  </Grid>
               </div>
             </footer>
           </div>
