@@ -37,7 +37,7 @@ const UserManagementProvider = ({ children }) => {
     const userDetailsOpen = Boolean(searchParams.get("userIdToShowDetails"));
 
     const isUserManagementAllowed = useMemo(
-        () => hasPermission("user_list"),
+        () => hasPermission("user_list", "list"),
         [hasPermission]
     );
 
