@@ -115,15 +115,15 @@ function _AuthenticatedAppHeader() {
                                 <Switcher size="25" style={ { color: "cornflowerblue" } } />
                             </HeaderGlobalAction>
 
-                            <HeaderName href="#" prefix="">
+                            <HeaderName href="/" prefix="">
                                 <img src={ibmLogo} alt="ibm_logo" />
                             </HeaderName>
 
-                            <HeaderName className="seperatorHead" href="#" prefix="">
+                            <HeaderName className="seperatorHead" prefix="">
                                 <div className="logoSeperator" />
                             </HeaderName>
 
-                            <HeaderName className="orgName" href="#" prefix="">
+                            <HeaderName className="orgName" prefix="">
                                 Bynar
                             </HeaderName>
 
