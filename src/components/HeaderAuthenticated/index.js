@@ -106,12 +106,13 @@ function _AuthenticatedAppHeader() {
                                 }
                                 aria-expanded={ isSideNavExpanded }
                                 isActive={ isSideNavExpanded }
-                                onClick={ onClickSideNavExpand }
+                                onClick={() => {
+                                    handleWideMenuExpand()
+                                    onClickSideNavExpand()
+                                }}
                                 tooltipAlignment="end"
                                 id="switcher-button">
-                                <Switcher size="25" onClick={ () => {
-                                    handleWideMenuExpand()
-                                } } style={ { color: "cornflowerblue" } } />
+                                <Switcher size="25" style={ { color: "cornflowerblue" } } />
                             </HeaderGlobalAction>
 
                             <HeaderName href="#" prefix="">
