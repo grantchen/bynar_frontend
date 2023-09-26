@@ -3,7 +3,7 @@
 
     .c4p--side-panel__container .c4p--side-panel__inner-content {
         overflow: auto;
-        height: calc(100vh - 80px) !important;
+        //height: calc(100vh - 80px) !important;
         margin-top: calc(var(--c4p--side-panel--title-text-height) + var(--c4p--side-panel--subtitle-container-height) + var(--c4p--side-panel--action-bar-container-height) + var(--c4p--side-panel--label-text-height));
         overflow-x: hidden;
     }

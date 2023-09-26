@@ -63,6 +63,7 @@
     "add-user":"Add User",
     "update":"Update",
     "user-name-label":"User Name",
+    "email-label": "Email",
     "full-name-label":"Full Name",
     "role":"Role",
     "address-line1":"Address line 1",
