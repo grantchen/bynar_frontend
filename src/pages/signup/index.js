@@ -1114,6 +1114,19 @@ const Signup = () => {
                 <Footer
                     type="micro"
                     disableLocaleButton={true}
+                    navigation={
+                        {
+                            footerThin: [{
+                                title: "Contact",
+                                url: "#"
+                            },{
+                                title: "Privacy",
+                                url: "#"
+                            },{
+                                title: "Terms Of Use",
+                                url: "#"
+                            }]
+                        }}
                 />
             </div>
         </div>
