@@ -32,7 +32,7 @@ export function CustomSideNavMenu({ expanded }) {
         } else {
             leftNavRef.current.removeAttribute("expanded");
         }
-    }, [expanded]);
+    }, [expanded, isMobile]);
 
     useEffect(() => {
         if (isMobile) {
@@ -45,7 +45,7 @@ export function CustomSideNavMenu({ expanded }) {
             return [];
         });
         setViewAllArray(filteredItems);
-    }, [activeTitle]);
+    }, [activeTitle, isMobile]);
 
     return (
         <>
