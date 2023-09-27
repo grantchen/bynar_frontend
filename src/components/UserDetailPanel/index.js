@@ -107,6 +107,8 @@ export const UserDetailPanel = ({ open }) => {
 
     const getUserList = async (userid) => {
         try {
+            setServerErrorNotification({});
+            setServerNotification(false);
             setDataLoading(true);
             const response = await authFetch(`${BaseURL}/user/${userid}`,{
                 method: "GET",
