@@ -158,5 +158,6 @@
     "type-last-four-digit": "Type last 4 digit to confirm",
     "card": "Card",
     "card-added-successfully":"Card added successfully",
-    "invalid-card-details":"Invalid card details"
+    "invalid-card-details":"Invalid card details",
+    "save": "Guardar"
 }

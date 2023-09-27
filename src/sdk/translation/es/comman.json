@@ -158,5 +158,6 @@
     "type-last-four-digit": "Ingrese los últimos 4 dígitos para confirmar",
     "card": "Tarjeta",
     "card-added-successfully": "Tarjeta agregada exitosamente",
-    "invalid-card-details": "Detalles de tarjeta inválidos"
+    "invalid-card-details": "Detalles de tarjeta inválidos",
+    "save": "save"
 }

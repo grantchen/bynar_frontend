@@ -238,8 +238,8 @@ export const UserDetailPanel = ({ open }) => {
                 title={t("user-detail")}
                 subtitle=""
                 actions={[]}
-                primaryButtonText='save'
-                secondaryButtonText='cancel'
+                primaryButtonText={t("save")}
+                secondaryButtonText={t("cancel")}
                 onRequestSubmit={handleUpdateProfile}
                 disableSubmit={disable}
             >
@@ -294,7 +294,7 @@ export const UserDetailPanel = ({ open }) => {
                             <>
                                 <div className="phone-label-wrapper">
                                     <p className="phone-label">
-                                        {t("phone-number-label")}
+                                        {`t("phone-number-label") *`}
                                     </p>
                                 </div>
                                 <PhoneInput
