@@ -159,5 +159,6 @@
     "card": "Card",
     "card-added-successfully":"Card added successfully",
     "invalid-card-details":"Invalid card details",
-    "save": "save"
+    "save": "save",
+    "theme": "Theme"
 }

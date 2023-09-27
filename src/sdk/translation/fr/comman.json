@@ -159,5 +159,6 @@
     "card": "Carte",
     "card-added-successfully": "Carte ajoutée avec succès",
     "invalid-card-details": "Détails de carte invalides",
-    "save": "Sauvegarder"
+    "save": "Sauvegarder",
+    "theme": "Thème"
 }

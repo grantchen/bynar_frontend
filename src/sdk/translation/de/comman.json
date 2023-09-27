@@ -159,5 +159,6 @@
     "card": "Karte",
     "card-added-successfully": "Karte erfolgreich hinzugefügt",
     "invalid-card-details": "Ungültige Kartendetails",
-    "save": "Sparen"
+    "save": "Sparen",
+    "theme": "Thema"
 }

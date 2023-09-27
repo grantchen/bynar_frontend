@@ -363,7 +363,7 @@ export const UserDetailPanel = ({ open }) => {
                                 <Select
                                     value={language}
                                     id="language-ci"
-                                    labelText={t('language')}
+                                    labelText={t('languages')}
                                     onChange={handleLanguageChange}
                                 >
                                     {Languages.map((object, index) => (
