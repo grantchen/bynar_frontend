@@ -296,7 +296,7 @@ export const UserDetailPanel = ({ open }) => {
                             <>
                                 <div className="phone-label-wrapper">
                                     <p className="phone-label">
-                                        {`t("phone-number-label") *`}
+                                        {`${t("phone-number-label")} *`}
                                     </p>
                                 </div>
                                 <PhoneInput
