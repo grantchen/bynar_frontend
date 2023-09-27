@@ -60,12 +60,7 @@ function _AuthenticatedAppHeader() {
 
     const wrapperRef = useRef(null);
 
-    const [expandWideMenu, setExpandWideMenu] = useState(false)
     const [expandSearchBar, setExpandSearchBar] = useState(false)
-
-    const handleWideMenuExpand = () => {
-        setExpandWideMenu(!expandWideMenu)
-    }
 
     const handleSearchClear = () => {
         setExpandSearchBar(data => !data)
@@ -86,6 +81,7 @@ function _AuthenticatedAppHeader() {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
+
     return (
         <>
             <div className="main-header-container">
@@ -93,30 +89,25 @@ function _AuthenticatedAppHeader() {
                     render={ ({ isSideNavExpanded, onClickSideNavExpand }) => (
                         <Header aria-label="Bynar">
                             <SkipToContent />
-                            {/* previous code for hamburger icon*/ }
-                            {/* <HeaderMenuButton
-                                aria-label="Open menu"
-                                onClick={onClickSideNavExpand}
-                                isActive={isSideNavExpanded}
-                            /> */ }
-                            {/* added code for waffle icon */ }
+                            <CustomSideNavMenu expanded={ isSideNavExpanded } />
                             <HeaderGlobalAction
                                 aria-label={
                                     isSideNavExpanded ? 'Close' : 'Open'
                                 }
                                 aria-expanded={ isSideNavExpanded }
                                 isActive={ isSideNavExpanded }
-                                onClick={() => {
-                                    handleWideMenuExpand()
+                                onClick={ (e) => {
+                                    e.preventDefault()
+                                    e.stopPropagation()
                                     onClickSideNavExpand()
-                                }}
+                                } }
                                 tooltipAlignment="end"
                                 id="switcher-button">
                                 <Switcher size="25" style={ { color: "cornflowerblue" } } />
                             </HeaderGlobalAction>
 
                             <HeaderName href="/" prefix="">
-                                <img src={ibmLogo} alt="ibm_logo" />
+                                <img src={ ibmLogo } alt="ibm_logo" />
                             </HeaderName>
 
                             <HeaderName className="seperatorHead" prefix="">
@@ -216,12 +207,6 @@ function _AuthenticatedAppHeader() {
                     setIsOpen={ setIsUserListOpen }
                     isOpen={ isUserListOpen }
                 />
-            </div>
-
-            <div>
-                {
-                    <CustomSideNavMenu isShow={expandWideMenu} />
-                }
             </div>
 
             <Outlet />

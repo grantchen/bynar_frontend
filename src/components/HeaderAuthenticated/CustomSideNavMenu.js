@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import jsonData from '../JSONs/usen.json';
 import { ArrowRight } from "@carbon/react/icons";
 
@@ -11,17 +11,29 @@ import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-item.js
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-menu.js';
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-menu-item.js';
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-overlay.js';
-imp
-export function CustomSideNavMenu({ isShow }) {
+
+export function CustomSideNavMenu({ expanded }) {
     const [activeTitle, setActiveTitle] = useState(jsonData.mastheadNav.links[0]?.title);
     const handleClick = (title) => {
         setActiveTitle(title);
     };
     const [viewAllArray, setViewAllArray] = useState([])
-    const [selectedMenuItem, setSelectedMenuItem] = useState("")
+    const leftNavRef = useRef(null)
+    const wideMenuWrapperRef = useRef(null);
 
     const isMobile = useMobile();
-    const ddsPrefix = "dds"
+
+    useEffect(() => {
+        if (!leftNavRef.current) {
+            return
+        }
+
+        if (expanded) {
+            leftNavRef.current.setAttribute("expanded", true);
+        } else {
+            leftNavRef.current.removeAttribute("expanded");
+        }
+    }, [expanded]);
 
     useEffect(() => {
         const filteredItems = jsonData.mastheadNav.links.flatMap((ele) => {
@@ -38,36 +50,61 @@ export function CustomSideNavMenu({ isShow }) {
             {
                 isMobile ? (
                     <>
-                        <dds-left-nav-overlay active={isShow}></dds-left-nav-overlay>
-                        <dds-left-nav aria-label="Left navigation" slot="navigation"
-                                      expanded={ isShow }>
-                            {
+                        <dds-left-nav-overlay></dds-left-nav-overlay>
+                        <dds-left-nav ref={ leftNavRef }>
+                            {/* first level menus section */}
+                            <dds-left-nav-menu-section
+                                section-id={ `-1, -1` }
+                            >
+                                {
+                                    jsonData.mastheadNav.links.map((ele, i) => {
+                                        return (
+                                            <>
+                                                <dds-left-nav-menu
+                                                    title={ ele.title }
+                                                    panel-id={ `${ i }, -1` }
+                                                ></dds-left-nav-menu>
+                                            </>
+                                        )
+                                    })
+                                }
+                            </dds-left-nav-menu-section>
 
-                                jsonData.mastheadNav.links.map((elem, i) => {
+                            {
+                                // sub menus section
+                                jsonData.mastheadNav.links.map((ele, i) => {
                                     return (
                                         <>
-                                            <dds-left-nav-menu
-                                                title={ elem.title }
-                                                data-autoid={ `${ ddsPrefix }--masthead__l1-sidenav--nav${ i }` }
+                                            <dds-left-nav-menu-section
+                                                section-id={ `${ i }, -1` }
+                                                show-back-button={ true }
+                                                is-submenu={ true }
+                                                title={ ele.title }
+                                                titleUrl={ ele.url }
                                             >
-                                                ${ elem.menuSections[0]?.menuItems.map((item, j) => <>
-                                                    <dds-left-nav-menu-item
-                                                        href={ item.url }
-                                                        title={ item.title }
-                                                        data-autoid={ `${ ddsPrefix }--masthead__l1-sidenav--subnav-col${ i }-item${ j }` }
-                                                    ></dds-left-nav-menu-item>
-                                                </>
-                                            ) }
-                                            </dds-left-nav-menu>
+                                                {
+                                                    ele.menuSections[0]?.menuItems.map((item) => {
+                                                        if (!item.megaPanelViewAll) {
+                                                            return (
+                                                                <dds-left-nav-menu-item
+                                                                    href={ item.url }
+                                                                    title={ item.title }
+                                                                ></dds-left-nav-menu-item>
+                                                            )
+                                                        }
+                                                    })
+                                                }
+                                            </dds-left-nav-menu-section>
                                         </>
                                     )
+
                                 })
                             }
                         </dds-left-nav>
                     </>
                 ) : (
                     <>
-                        <div className={ `menu-body ${ isShow ? 'wide-menu-expanded' : '' }` }>
+                        <div ref={ wideMenuWrapperRef } className={ `menu-body ${ expanded ? 'wide-menu-expanded' : '' }` }>
                             <div className="mega-menu">
                                 <div className="bmegamenu-container">
                                     <div className="megamenu-container-row">
@@ -137,16 +174,12 @@ export function CustomSideNavMenu({ isShow }) {
                                                                                 <h2>{ ele.title } </h2>
                                                                             )
                                                                         }
-                                                                        <span>
-                                      { ele.description }
-                                    </span>
+                                                                        <span>{ ele.description }</span>
                                                                     </div>
                                                                     <div className="link-group">
                                                                         {
                                                                             ele.menuSections[0]?.menuItems.map((item) => {
-                                                                                console.log(item, item)
                                                                                 if (!item.megaPanelViewAll) {
-                                                                                    console.log(viewAllArray, 'bt');
                                                                                     return (
                                                                                         <div
                                                                                             key={ item.title }
@@ -180,7 +213,7 @@ export function CustomSideNavMenu({ isShow }) {
 
                             </div>
                         </div>
-                        <div className={ `menu-overlay ${ isShow ? 'active' : '' }` }>
+                        <div className={ `menu-overlay ${ expanded ? 'active' : '' }` }>
                         </div>
                     </>
                 )

@@ -23,7 +23,7 @@ const Home = () => {
     return (
         <div>
             <Header>
-                <HeaderName href="http://bynar.tajansoft.com" prefix="">
+                <HeaderName href="/" prefix="">
                     <img src={ibmLogo} style={{marginLeft: 1 + "rem"}} />
                 </HeaderName>
             </Header>

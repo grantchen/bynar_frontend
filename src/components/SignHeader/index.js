@@ -3,7 +3,7 @@ import {Header, HeaderName} from "@carbon/react";
 const signHeader = ({})=>{
   return (
     <Header>
-      <HeaderName href="http://bynar.tajansoft.com/" prefix="">
+      <HeaderName href="/" prefix="">
         <svg
           width="58"
           height="23"
