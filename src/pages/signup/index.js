@@ -39,6 +39,7 @@ import {
   SubscribeTabMessage
 } from "../../sdk/tabMessage";
 import SignHeader from "../../components/SignHeader";
+import {Footer} from "@carbon/ibmdotcom-react";
 
 const Signup = () => {
   const phoneUtil = PhoneNumberUtil.getInstance();
@@ -648,10 +649,14 @@ const Signup = () => {
         subscribe={ checkOtherTabVerification }>
       </SubscribeTabMessage>
       {(
-        <div style={{ height:"100%" }}>
-          <SignHeader></SignHeader>
+        <div className={"main-container Aligner two-column"}>
+          <div className={"Aligner-item--top header-container"}>
+              <SignHeader></SignHeader>
+          </div>
+
           <div
             ref={containerRef}
+            className={"bg-container"}
           >
             <Grid fullWidth className={"signup-grid"}>
               <Column sm={{span:4}} lg={{span: 6,offset:5}} md={{span:5,offset:2}} id="scroller">
@@ -1104,26 +1109,13 @@ const Signup = () => {
                 </div>
               </Column>
             </Grid>
-            <footer
-              className="carbon-footer"
-              role="contentinfo"
-              aria-label="BYNAR"
-            >
-              <div className="footer-nav-container">
-                  <Grid>
-                      <Column sm={1} lg={2} md={1}>
-                          <Link href="#">Contact</Link>
-                      </Column>
-                      <Column sm={1} lg={2} md={1}>
-                          <Link href="#">Privacy</Link>
-                      </Column>
-                      <Column sm={2} lg={2} md={2}>
-                          <Link href="#">Terms Of Use</Link>
-                      </Column>
-                  </Grid>
-              </div>
-            </footer>
           </div>
+            <div className={"Aligner-item--bottom"}>
+                <Footer
+                    type="micro"
+                    disableLocaleButton={true}
+                />
+            </div>
         </div>
       )}
     </div>

@@ -619,3 +619,90 @@ label[for="password-input"] {
     background: #F4F4F4 !important;
   }
 }
+.Aligner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  min-height: 24em;
+  justify-content: center;
+  flex-flow: row wrap
+}
+
+.Aligner .two-column {
+  width: 100%;
+  background-color: #fff
+}
+
+.Aligner-item {
+  flex: 1 1 100%
+}
+
+
+.Aligner-item--bottom {
+  align-self: flex-end;
+  flex: 1 1 100%;
+}
+.Aligner-item--top {
+  align-self: flex-start
+}
+
+@media(min-width: 66rem) {
+  .Aligner-item--top {
+    flex:1 1 100%
+  }
+}
+
+.header-container {
+  min-height: 3rem
+}
+
+.bg-container {
+  flex: 1 1 100%;
+  margin-top: 3rem
+}
+
+@media(min-width: 66rem) {
+  .bg-container {
+    display:flex;
+    position: relative;
+    flex: 1 1 100%;
+    margin-top: 0
+  }
+
+  .bg-container:after,.bg-container:before {
+    content: " ";
+    position: absolute;
+    height: 100%;
+    z-index: -1
+  }
+
+  .bg-container:before {
+    width: 50%;
+    left: 0;
+    border-right: 1rem solid #fff
+  }
+}
+
+@media only screen and (min-width: 66rem)and (min-width:137.5rem) {
+  .bg-container:before {
+    width:50%
+  }
+}
+
+@media(min-width: 66rem) {
+  .bg-container:after {
+    width:50%;
+    right: 0
+  }
+}
+
+@media only screen and (min-width: 66rem)and (min-width:137.5rem) {
+  .bg-container:after {
+    width:50%
+  }
+}
+
+.bg-container:after {
+  background-color: #fff;
+  content: " "
+}
