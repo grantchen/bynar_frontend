@@ -1,23 +1,17 @@
 import { EditSidePanel } from "@carbon/ibm-products";
 import {
-    Button,
     TextInput,
-    PasswordInput,
     Select,
     SelectItem,
     ToastNotification,
 } from "carbon-components-react";
 import {
-    SkeletonText,
-    CodeSnippetSkeleton,
     TextInputSkeleton,
 } from "@carbon/react";
-// import "./SidePanel.scss";
-import React, { useState, useRef, useContext, useEffect } from "react";
+import React, {useState, useEffect, useRef} from "react";
 import {BaseURL, Languages, Themes} from "../../sdk/constant";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { useSearchParams } from "react-router-dom";
 import {useAuth, useUserManagement} from "../../sdk";
 import {
     PhoneNumberUtil,
@@ -28,13 +22,6 @@ export const UserDetailPanel = ({ open }) => {
     const { t } = useTranslation();
     const { user,getUser,authFetch } = useAuth();
     const phoneUtil = PhoneNumberUtil.getInstance();
-    const [accountInfoErrors, setAccountInfoErrors] = useState({
-        userName: false,
-        fullName: false,
-        phoneNumber: false,
-        theme: false,
-        language: false,
-    });
     const [phoneNumber, setPhoneNumber] = useState("");
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
@@ -42,26 +29,18 @@ export const UserDetailPanel = ({ open }) => {
         () => localStorage.getItem("theme-preference") ?? "light"
     );
     const [language,setLanguage]= useState("");
-    const [errorNotification, setErrorNotification] = useState({});
-    const [emailErrorNotification, setEmailErrorNotification] = useState({});
+    const [disable,setDisable] = useState(false)
     const [dataLoading, setDataLoading] = useState(false);
-    const emailInput = useRef(null);
-    const fullNameInput = useRef(null);
     const [errorMessage, setErrorMessage] = useState("");
     const [phoneNumberValid, setIsPhoneNumberValid] = useState(false);
     const [errors, setErrors] = useState({});
-    const inputRefs = useRef([]);
-    const [searchParams] = useSearchParams();
-    const [userId, setUserId] = useState(1);
     const [serverErrorNotification, setServerErrorNotification] = useState({});
     const [serverNotification, setServerNotification] = useState(false);
-    const [countryCode, setCountryCode] = useState("IN");
-    const [countryDialCode, setCountryDialCode] = useState("91");
-
-    const isUserEdit = searchParams.get("userIdToShowDetails");
-
+    const inputRefs = useRef([]);
     const { closeModalAndGoBackToUserList} = useUserManagement();
     const handleThemeChange = (e) => {
+        setServerErrorNotification({});
+        setServerNotification(false);
         const selectedItem = Themes.find((item) => item.code === e.target.value);
         if (Object.keys(selectedItem).length === 0) {
             setTheme('light')
@@ -71,6 +50,8 @@ export const UserDetailPanel = ({ open }) => {
     }
 
     const handleLanguageChange = (e) => {
+        setServerErrorNotification({});
+        setServerNotification(false);
         const selectedItem = Languages.find((item) => item.code === e.target.value);
         if (Object.keys(selectedItem).length === 0) {
             setLanguage('en')
@@ -80,11 +61,11 @@ export const UserDetailPanel = ({ open }) => {
     }
     /* Function to set state, check email address validation when email address is changed  */
     const handleEmailChange = (value) => {
-        setErrorNotification({});
+        setServerErrorNotification({});
+        setServerNotification(false);
         setEmail(value);
         const errors = validateOrganizationForm(value);
         setErrors(errors);
-        // change email needs to verify again
     };
     const validateOrganizationForm = (email) => {
         const errors = {};
@@ -108,12 +89,15 @@ export const UserDetailPanel = ({ open }) => {
     };
 
     const handleFullName = (e) => {
+        setServerErrorNotification({});
+        setServerNotification(false);
         const { name, value } = e.target;
         setFullName(value);
-        setAccountInfoErrors({
-            ...accountInfoErrors,
-            [name]: value.trim().length === 0,
-        });
+        const errors = {};
+        if (value.trim() === "") {
+            errors.fullName = "FullName is required";
+        }
+        setErrors(errors);
     };
     const handleClose = () => {
         closeModalAndGoBackToUserList();
@@ -121,12 +105,10 @@ export const UserDetailPanel = ({ open }) => {
 
     const getUserList = async (userid) => {
         try {
-            console.log(user)
             setDataLoading(true);
             const response = await authFetch(`${BaseURL}/user/${userid}`,{
                 method: "GET",
             })
-            console.log('response',response)
             const res = await response.json();
             if (response.ok) {
                 setEmail(res?.email)
@@ -137,8 +119,9 @@ export const UserDetailPanel = ({ open }) => {
             } else {
                 setServerErrorNotification({
                     title: res.error,
-                    status: "success",
+                    status: "error",
                 });
+                setServerNotification(true)
             }
         } catch (e) {
         } finally {
@@ -147,11 +130,7 @@ export const UserDetailPanel = ({ open }) => {
     };
     const handlePhoneNumber = (value, country) => {
         setPhoneNumber(value)
-        setCountryCode(country?.countryCode);
-        setCountryDialCode(
-            country?.dialCode.toString().replace("+", "")
-        );
-        validatePhoneNumber(value, country.dialCode, country?.countryCode);
+        validatePhoneNumber(value, country?.dialCode, country?.countryCode);
     }
     const validatePhoneNumber = (value, dialCode, country) => {
         if (value === dialCode) {
@@ -185,18 +164,21 @@ export const UserDetailPanel = ({ open }) => {
         }
     }
     const handleUpdateProfile = () => {
+        setServerErrorNotification({});
+        setServerNotification(false);
+        setDisable(true)
         const fetchData = async () => {
             try {
                 setDataLoading(true);
                 const data = {
-                    username: email,
+                    email: email,
                     fullName: fullName,
                     phoneNumber: phoneNumber,
                     theme: theme,
                     language: language,
                 };
                 const response = await authFetch(`${BaseURL}/update-profile`, {
-                    method: "POST",
+                    method: "put",
                     body: JSON.stringify(data),
                     headers: {
                         "Content-Type": "application/json",
@@ -205,26 +187,30 @@ export const UserDetailPanel = ({ open }) => {
 
                 const res = await response.json();
                 if (response.ok) {
+                    setDisable(false)
                     await getUserList(user.id)
                     await getUser();
                     handleClose()
-                    return
                 } else if (response.status === 500) {
-                    setErrorNotification({
+                    setDisable(false)
+                    setServerErrorNotification({
                         title: res.error,
                         status: "error",
                     });
+                    setServerNotification(true)
                 }
                 setDataLoading(false);
             } catch (e) {
                 setDataLoading(false);
-                setErrorNotification({
+                setServerErrorNotification({
                     title: 'error occurred while update profile',
                     status: "error",
                 });
-                console.log(e);
+                setServerNotification(true)
+                setDisable(false)
             }
         };
+        fetchData()
     };
     useEffect(() => {
         if (!open) {
@@ -247,13 +233,14 @@ export const UserDetailPanel = ({ open }) => {
                 primaryButtonText='save'
                 secondaryButtonText='cancel'
                 onRequestSubmit={handleUpdateProfile}
+                disableSubmit={disable}
             >
                 <div className={"story__body-content"}>
                     {serverNotification && (
                         <ToastNotification
                             className="error-notification-box"
                             iconDescription="Close Notification"
-                            subtitle={serverErrorNotification?.message}
+                            subtitle={serverErrorNotification?.title}
                             onCloseButtonClick={() => {
                                 setServerErrorNotification({});
                                 setServerNotification(false);
@@ -268,32 +255,27 @@ export const UserDetailPanel = ({ open }) => {
                             <TextInputSkeleton className="skeleton-loading" />
                         ) : (
                             <TextInput
-                                ref={emailInput}
-                                name="email"
-                                type="text"
                                 id="email"
-                                className={`story__text-input`}
                                 labelText={`${t("email-label")} *`}
                                 value={email}
                                 onChange={(e) => handleEmailChange(e.target.value)}
                                 invalid={!!errors.email}
                                 invalidText={errors.email}
+                                disabled={dataLoading ? true : false}
                             />
                         )}
                         {dataLoading ? (
                             <TextInputSkeleton className="skeleton-loading" />
                         ) : (
                             <TextInput
-                                ref={fullNameInput}
-                                type="text"
-                                name="fullName"
                                 id="fullName"
                                 labelText={`${t("full-name-label")} *`}
                                 className={`story__text-input`}
                                 value={fullName}
                                 onChange={handleFullName}
-                                invalid={accountInfoErrors.fullName}
-                                invalidText={"Full name is required"}
+                                invalid={!!errors.fullName}
+                                invalidText={errors.fullName}
+                                disabled={dataLoading ? true : false}
                             />
                         )}
                         {dataLoading ? (
@@ -307,6 +289,7 @@ export const UserDetailPanel = ({ open }) => {
                                 </div>
                                 <PhoneInput
                                     className="phone-input-sidepanel"
+                                    ref={(el) => (inputRefs.current[1] = el)}
                                     inputProps={{
                                         disabled: false,
                                     }}
