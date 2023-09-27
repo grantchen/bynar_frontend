@@ -100,6 +100,8 @@ export const UserDetailPanel = ({ open }) => {
         setErrors(errors);
     };
     const handleClose = () => {
+        setServerErrorNotification({});
+        setServerNotification(false);
         closeModalAndGoBackToUserList();
     };
 
