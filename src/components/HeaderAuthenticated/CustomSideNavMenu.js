@@ -2,15 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import jsonData from '../JSONs/usen.json';
 import { ArrowRight } from "@carbon/react/icons";
 
-import "./CustomSideNav.scss";
 import { useMobile } from "../../sdk";
-import '@carbon/ibmdotcom-web-components/es/components/masthead/masthead.js';
-import '@carbon/ibmdotcom-web-components/es/components/masthead/masthead-menu-button.js';
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav.js';
-import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-item.js';
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-menu.js';
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-menu-item.js';
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-overlay.js';
+import "./CustomSideNav.scss";
 
 export function CustomSideNavMenu({ expanded }) {
     const [activeTitle, setActiveTitle] = useState(jsonData.mastheadNav.links[0]?.title);
@@ -19,7 +16,6 @@ export function CustomSideNavMenu({ expanded }) {
     };
     const [viewAllArray, setViewAllArray] = useState([])
     const leftNavRef = useRef(null)
-    const wideMenuWrapperRef = useRef(null);
 
     const isMobile = useMobile();
 
@@ -51,10 +47,16 @@ export function CustomSideNavMenu({ expanded }) {
                 isMobile ? (
                     <>
                         <dds-left-nav-overlay></dds-left-nav-overlay>
-                        <dds-left-nav ref={ leftNavRef }>
-                            {/* first level menus section */}
+                        <dds-left-nav
+                            ref={ leftNavRef }
+                            data-autoid="dds--masthead__l0-sidenav"
+                            collapse-mode="responsive"
+                            usage-mode="header-nav"
+                        >
+                            {/* first level menus section */ }
                             <dds-left-nav-menu-section
                                 section-id={ `-1, -1` }
+                                ariaHidden={ true }
                             >
                                 {
                                     jsonData.mastheadNav.links.map((ele, i) => {
@@ -81,6 +83,7 @@ export function CustomSideNavMenu({ expanded }) {
                                                 is-submenu={ true }
                                                 title={ ele.title }
                                                 titleUrl={ ele.url }
+                                                ariaHidden={ true }
                                             >
                                                 {
                                                     ele.menuSections[0]?.menuItems.map((item) => {
@@ -104,7 +107,7 @@ export function CustomSideNavMenu({ expanded }) {
                     </>
                 ) : (
                     <>
-                        <div ref={ wideMenuWrapperRef } className={ `menu-body ${ expanded ? 'wide-menu-expanded' : '' }` }>
+                        <div className={ `menu-body ${ expanded ? 'wide-menu-expanded' : '' }` }>
                             <div className="mega-menu">
                                 <div className="bmegamenu-container">
                                     <div className="megamenu-container-row">

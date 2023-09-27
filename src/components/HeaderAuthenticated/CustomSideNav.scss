@@ -1,7 +1,7 @@
 @keyframes expand {
   0% {
     overflow-y: hidden;
-    max-height: 0px;
+    max-height: 0;
   }
 
   100% {
@@ -9,7 +9,7 @@
   }
 }
 
-// background mask
+/* background mask */
 .menu-overlay {
   position: fixed;
   left: 0px;
@@ -37,7 +37,7 @@
   position: fixed;
   display: block;
   visibility: hidden;
-  margin-bottom: var(--cds-layout-05,4rem);
+  margin-bottom: var(--cds-layout-05, 4rem);
   left: 0px;
   width: 100vw;
   transform: translateZ(0.0001px);
@@ -57,9 +57,9 @@
     left: 0px;
     transform: translateZ(0px);
     visibility: visible;
-    margin-bottom: var(--cds-layout-05,4rem);
-    width: var(--dds-ce--viewport-width,100vw);
-    top: var(--cds-spacing-09,3rem);
+    margin-bottom: var(--cds-layout-05, 4rem);
+    width: var(--dds-ce--viewport-width, 100vw);
+    top: var(--cds-spacing-09, 3rem);
     bottom: auto;
     height: auto;
     max-height: calc(100vh - var(--cds-spacing-09, 3rem) - var(--cds-layout-05, 4rem));
@@ -69,8 +69,8 @@
       visibility: visible;
       display: block;
       overflow: hidden overlay;
-      background-color: var(--cds-ui-background,#fff);
-      box-shadow: 0 2px 6px var(--cds-shadow,rgba(0,0,0,.3));
+      background-color: var(--cds-ui-background, #fff);
+      box-shadow: 0 2px 6px var(--cds-shadow, rgba(0, 0, 0, .3));
       position: relative;
       animation: 0.24s cubic-bezier(0.4, 0.14, 0.3, 1) 0s 1 normal none running expand;
     }
@@ -82,8 +82,8 @@
   visibility: hidden;
   display: block;
   overflow: hidden overlay;
-  background-color: var(--cds-ui-background,#fff);
-  box-shadow: 0 2px 6px var(--cds-shadow,rgba(0,0,0,.3));
+  background-color: var(--cds-ui-background, #fff);
+  box-shadow: 0 2px 6px var(--cds-shadow, rgba(0, 0, 0, .3));
   position: relative;
 
   &:after {
@@ -139,14 +139,6 @@
             color: var(--cds-text-01, #161616);
           }
         }
-
-        .tab:hover,
-        .tab.active {
-          //background-color: #d9d7d7;
-          //cursor: pointer;
-          //text-decoration: none;
-        }
-
       }
     }
 
@@ -321,3 +313,4 @@
     padding-left: 2.5rem;
   }
 }
+
