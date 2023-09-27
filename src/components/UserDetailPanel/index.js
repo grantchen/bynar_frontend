@@ -166,9 +166,15 @@ export const UserDetailPanel = ({ open }) => {
     const handleUpdateProfile = () => {
         setServerErrorNotification({});
         setServerNotification(false);
-        setDisable(true)
+        const emptyInput = inputRefs.current.find((ref) => ref && ref.value === "");
+
+        if (emptyInput) {
+            emptyInput.scrollIntoView({ behavior: "smooth" });
+        }
+
         const fetchData = async () => {
             try {
+                setDisable(true)
                 setDataLoading(true);
                 const data = {
                     email: email,
@@ -188,10 +194,10 @@ export const UserDetailPanel = ({ open }) => {
                 const res = await response.json();
                 if (response.ok) {
                     setDisable(false)
-                    await getUserList(user.id)
-                    await getUser();
+                    // await getUserList(user.id)
                     handleClose()
-                } else if (response.status === 500) {
+                    await getUser();
+                } else {
                     setDisable(false)
                     setServerErrorNotification({
                         title: res.error,
@@ -210,7 +216,9 @@ export const UserDetailPanel = ({ open }) => {
                 setDisable(false)
             }
         };
-        fetchData()
+        if (!emptyInput){
+            fetchData()
+        }
     };
     useEffect(() => {
         if (!open) {
@@ -256,6 +264,7 @@ export const UserDetailPanel = ({ open }) => {
                         ) : (
                             <TextInput
                                 id="email"
+                                ref={(el) => (inputRefs.current[0] = el)}
                                 labelText={`${t("email-label")} *`}
                                 value={email}
                                 onChange={(e) => handleEmailChange(e.target.value)}
@@ -269,6 +278,7 @@ export const UserDetailPanel = ({ open }) => {
                         ) : (
                             <TextInput
                                 id="fullName"
+                                ref={(el) => (inputRefs.current[1] = el)}
                                 labelText={`${t("full-name-label")} *`}
                                 className={`story__text-input`}
                                 value={fullName}
@@ -289,7 +299,7 @@ export const UserDetailPanel = ({ open }) => {
                                 </div>
                                 <PhoneInput
                                     className="phone-input-sidepanel"
-                                    ref={(el) => (inputRefs.current[1] = el)}
+                                    ref={(el) => (inputRefs.current[2] = el)}
                                     inputProps={{
                                         disabled: false,
                                     }}
@@ -309,6 +319,17 @@ export const UserDetailPanel = ({ open }) => {
                                         handlePhoneNumber(value, country)
                                     }
                                 />
+                                {!phoneNumberValid && errorMessage.length > 0 && (
+                                    <p
+                                        style={{
+                                            marginTop: "4px",
+                                            fontSize: "12px",
+                                            color: "#DA1E28",
+                                        }}
+                                    >
+                                        {errorMessage}
+                                    </p>
+                                )}
                             </>
                         )}
                         {dataLoading ? (
