@@ -1106,26 +1106,24 @@ const Signup = () => {
                 </div>
               </Column>
             </Grid>
+              <Footer
+                  type="micro"
+                  disableLocaleButton={true}
+                  navigation={
+                      {
+                          footerThin: [{
+                              title: "Contact",
+                              url: "#"
+                          },{
+                              title: "Privacy",
+                              url: "#"
+                          },{
+                              title: "Terms Of Use",
+                              url: "#"
+                          }]
+                      }}
+              />
           </div>
-            <div className={"Aligner-item--bottom"}>
-                <Footer
-                    type="micro"
-                    disableLocaleButton={true}
-                    navigation={
-                        {
-                            footerThin: [{
-                                title: "Contact",
-                                url: "#"
-                            },{
-                                title: "Privacy",
-                                url: "#"
-                            },{
-                                title: "Terms Of Use",
-                                url: "#"
-                            }]
-                        }}
-                />
-            </div>
         </div>
       )}
     </div>
