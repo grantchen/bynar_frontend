@@ -12,8 +12,7 @@ import { downloadFile, removeNullEntries } from "../util";
 import { useAuth } from "../AuthContext";
 import { useTranslation } from "react-i18next";
 import { Tearsheet } from "@carbon/ibm-products";
-import InvoicesTable from "../../components/InvoicesTable";
-import { format } from "date-fns";
+import {TreeGrid} from "../../components/TreeGrid";
 
 const InvoicesContext = createContext();
 
@@ -180,18 +179,26 @@ const InvoicesProvider = ({ children }) => {
         <>
             <InvoicesContext.Provider value={value}>
                 {children}
-                <Tearsheet
-                    hasCloseIcon
-                    closeIconDescription={t("close-tearsheet-text")}
-                    label=""
-                    onClose={handleCloseInvoiceList}
-                    open={isInvoiceListOpen}
-                    preventCloseOnClickOutside
-                    // title={t("user-list")} // todo
-                    title={t("invoices")}
-                >
-                    <InvoicesTable />
-                </Tearsheet>
+                {
+                    isInvoiceListOpen && (
+                        <Tearsheet
+                            hasCloseIcon
+                            closeIconDescription={t("close-tearsheet-text")}
+                            label=""
+                            onClose={handleCloseInvoiceList}
+                            open={isInvoiceListOpen}
+                            preventCloseOnClickOutside
+                            title={t("invoices")}
+                        >
+                            <TreeGrid
+                                table={ "invoices" }
+                                config={{
+                                    Debug: '',
+                                }}
+                            ></TreeGrid>
+                        </Tearsheet>
+                    )
+                }
             </InvoicesContext.Provider>
         </>
     );

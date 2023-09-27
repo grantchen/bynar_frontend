@@ -1,12 +1,4 @@
 .signin-container {
-  width: 100vw;
-  height: calc(100vh - 3rem);
-  .signin-grid {
-    max-width: none;
-    width: 100vw;
-    height: 100%;
-  }
-
   .box-container {
     //display: flex;
     //align-items: center;
@@ -14,16 +6,9 @@
     //justify-content: center;
 
     .sign-in-form-area {
-      height: 100%;
-      margin-top: 48px;
-      margin-bottom: 144px;
-      padding-top: 5.5rem;
-      //max-width: 448px;
-      min-height: 610px;
+      padding-top: 8.5rem;
 
       .signin-form {
-        background: #fff;
-
         .form-heading {
           padding-bottom: 2rem;
           margin-bottom: 1rem;

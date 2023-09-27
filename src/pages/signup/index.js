@@ -658,8 +658,8 @@ const Signup = () => {
             ref={containerRef}
             className={"bg-container"}
           >
-            <Grid fullWidth className={"signup-grid"}>
-              <Column sm={{span:4}} lg={{span: 6,offset:5}} md={{span:5,offset:2}} id="scroller">
+            <Grid className={"signup-grid"}>
+              <Column sm={{span: 4}} md={{span: 4, offset: 2}} lg={{span: 6, offset: 5}} id="scroller">
                 <Content className={"signup-container"}>
                   <div className="heading-container">
                     <Heading className={"form-mainHeading"}>
