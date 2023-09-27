@@ -7,9 +7,9 @@ import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav.js';
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-menu.js';
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-menu-item.js';
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-overlay.js';
-import "./CustomSideNav.scss";
+import "./CustomWideMenu.scss";
 
-export function CustomSideNavMenu({ expanded }) {
+export function CustomWideMenu({ expanded }) {
     const [activeTitle, setActiveTitle] = useState(jsonData.mastheadNav.links[0]?.title);
     const handleClick = (title) => {
         setActiveTitle(title);

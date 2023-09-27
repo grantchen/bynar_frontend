@@ -36,7 +36,7 @@ import UploadProfileImageModal from "../../sdk/uploadprofileimage";
 
 import { Switcher } from "@carbon/react/icons";
 import ibmLogo from '../media/IBM_logo_black.svg'
-import { CustomSideNavMenu } from "./CustomSideNavMenu";
+import { CustomWideMenu } from "./CustomWideMenu";
 
 function _AuthenticatedAppHeader() {
     const { user } = useAuth();
@@ -89,7 +89,7 @@ function _AuthenticatedAppHeader() {
                     render={ ({ isSideNavExpanded, onClickSideNavExpand }) => (
                         <Header aria-label="Bynar">
                             <SkipToContent />
-                            <CustomSideNavMenu expanded={ isSideNavExpanded } />
+                            <CustomWideMenu expanded={ isSideNavExpanded } />
                             <HeaderGlobalAction
                                 aria-label={
                                     isSideNavExpanded ? 'Close' : 'Open'
