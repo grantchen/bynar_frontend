@@ -1,3 +1,15 @@
+@use "@carbon/react";
+@import "../../../node_modules/carbon-components/scss/globals/scss/vars";
+
+[data-carbon-theme=g90] {
+  // TODO shadow root elements not working
+  dds-left-nav-overlay, dds-left-nav, dds-left-nav-menu-section, dds-left-nav-menu, dds-left-nav-menu-item {
+    @include react.theme(react.$g90);
+    @include carbon--theme($carbon--theme--g90, true);
+    color: #fff5e0;
+  }
+}
+
 @keyframes expand {
   0% {
     overflow-y: hidden;

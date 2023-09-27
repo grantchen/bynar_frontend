@@ -20,6 +20,9 @@ export function CustomSideNavMenu({ expanded }) {
     const isMobile = useMobile();
 
     useEffect(() => {
+        if (!isMobile) {
+            return
+        }
         if (!leftNavRef.current) {
             return
         }
@@ -32,6 +35,9 @@ export function CustomSideNavMenu({ expanded }) {
     }, [expanded]);
 
     useEffect(() => {
+        if (isMobile) {
+            return
+        }
         const filteredItems = jsonData.mastheadNav.links.flatMap((ele) => {
             if (ele.menuSections.length && ele.title === activeTitle) {
                 return ele.menuSections[0]?.menuItems.filter((item) => item.megaPanelViewAll);
