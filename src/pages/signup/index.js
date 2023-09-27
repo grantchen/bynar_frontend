@@ -39,6 +39,7 @@ import {
   SubscribeTabMessage
 } from "../../sdk/tabMessage";
 import SignHeader from "../../components/SignHeader";
+import {Footer} from "@carbon/ibmdotcom-react";
 
 const Signup = () => {
   const phoneUtil = PhoneNumberUtil.getInstance();
@@ -648,8 +649,9 @@ const Signup = () => {
         subscribe={ checkOtherTabVerification }>
       </SubscribeTabMessage>
       {(
-        <div style={{ height:"100%" }}>
-          <SignHeader></SignHeader>
+          <div style={{ height:"100%" }}>
+              <SignHeader></SignHeader>
+
           <div
             ref={containerRef}
           >
@@ -1104,25 +1106,23 @@ const Signup = () => {
                 </div>
               </Column>
             </Grid>
-            <footer
-              className="carbon-footer"
-              role="contentinfo"
-              aria-label="BYNAR"
-            >
-              <div className="footer-nav-container">
-                  <Grid>
-                      <Column sm={1} lg={2} md={1}>
-                          <Link href="#">Contact</Link>
-                      </Column>
-                      <Column sm={1} lg={2} md={1}>
-                          <Link href="#">Privacy</Link>
-                      </Column>
-                      <Column sm={2} lg={2} md={2}>
-                          <Link href="#">Terms Of Use</Link>
-                      </Column>
-                  </Grid>
-              </div>
-            </footer>
+              <Footer
+                  type="micro"
+                  disableLocaleButton={true}
+                  navigation={
+                      {
+                          footerThin: [{
+                              title: "Contact",
+                              url: "#"
+                          },{
+                              title: "Privacy",
+                              url: "#"
+                          },{
+                              title: "Terms Of Use",
+                              url: "#"
+                          }]
+                      }}
+              />
           </div>
         </div>
       )}

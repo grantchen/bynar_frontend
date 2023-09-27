@@ -9,6 +9,8 @@
     "@carbon/elements": "^10",
     "@carbon/grid": "^10.43.0",
     "@carbon/ibm-products": "^1",
+    "@carbon/ibmdotcom-react": "^1.51.0",
+    "@carbon/ibmdotcom-styles": "^1.51.0",
     "@carbon/ibmdotcom-web-components": "^1.16.1",
     "@carbon/icons": "^11.19.0",
     "@carbon/icons-react": "^10",
