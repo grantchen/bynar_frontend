@@ -156,7 +156,9 @@ const UserManagementProvider = ({ children }) => {
     const getUserById = useCallback(
         async (id) => {
             const response = await authFetch(`${BaseURL}/user/${id}`).then(
-                (res) => res.json()
+                (res) => {
+                   return res.json()
+                }
             );
             return response;
         },

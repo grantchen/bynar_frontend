@@ -1,6 +1,8 @@
 {
     "de": "Allemand",
     "en": "Anglais",
+    "es": "Espagnol",
+    "fr": "Français",
     "title": "Tableau de bord",
     "header": "Pkb Albanie",
     "add-new-tab": "Ajouter un nouvel onglet",
@@ -63,6 +65,7 @@
     "add-user": "Ajouter un utilisateur",
     "update": "Mettre à jour",
     "user-name-label": "Nom d'utilisateur",
+    "email-label": "E-mail",
     "full-name-label": "Nom complet",
     "role": "Rôle",
     "address-line1": "Adresse ligne 1",
@@ -155,5 +158,7 @@
     "type-last-four-digit": "Saisissez les 4 derniers chiffres pour confirmer",
     "card": "Carte",
     "card-added-successfully": "Carte ajoutée avec succès",
-    "invalid-card-details": "Détails de carte invalides"
+    "invalid-card-details": "Détails de carte invalides",
+    "save": "Sauvegarder",
+    "theme": "Thème"
 }

@@ -1237,6 +1237,8 @@ export const DATA_SOVEREIGNTY_REGION_NAMES = {
     "us-gov-east-1": "US Gov East 1"
 }
 
+export const Themes = [{"code": "system"},{"code": "dark"},{"code": "light"}]
+export const Languages = [{"code": "en"},{"code": "de"},{"code": "es"},{"code": "fr"}]
   const currentDate = new Date();
   let yesterdayDate = new Date();
   yesterdayDate.setDate(yesterdayDate.getDate() - 1);

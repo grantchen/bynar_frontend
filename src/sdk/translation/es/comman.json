@@ -1,6 +1,8 @@
 {
     "de": "Alemán",
     "en": "Inglés",
+    "es": "Español",
+    "fr": "Francés",
     "title": "Tablero de mandos",
     "header": "paquete Albania",
     "add-new-tab": "Agregar nueva pestaña",
@@ -63,6 +65,7 @@
     "add-user": "Agregar usuario",
     "update": "Actualizar",
     "user-name-label": "Nombre de usuario",
+    "email-label": "Correo electrónico",
     "full-name-label": "Nombre completo",
     "role": "Rol",
     "address-line1": "Línea de dirección 1",
@@ -155,5 +158,7 @@
     "type-last-four-digit": "Ingrese los últimos 4 dígitos para confirmar",
     "card": "Tarjeta",
     "card-added-successfully": "Tarjeta agregada exitosamente",
-    "invalid-card-details": "Detalles de tarjeta inválidos"
+    "invalid-card-details": "Detalles de tarjeta inválidos",
+    "save": "Guardar",
+    "theme": "Temática"
 }

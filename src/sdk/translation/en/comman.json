@@ -1,6 +1,8 @@
 {
     "de": "German",
     "en": "English",
+    "es": "Spanish",
+    "fr": "French",
     "title": "Home",
     "header": "Pkb Albania",
     "add-new-tab": "Add new tab",
@@ -63,6 +65,7 @@
     "add-user":"Add User",
     "update":"Update",
     "user-name-label":"User Name",
+    "email-label": "Email",
     "full-name-label":"Full Name",
     "role":"Role",
     "address-line1":"Address line 1",
@@ -155,5 +158,7 @@
     "type-last-four-digit": "Type last 4 digit to confirm",
     "card": "Card",
     "card-added-successfully":"Card added successfully",
-    "invalid-card-details":"Invalid card details"
+    "invalid-card-details":"Invalid card details",
+    "save": "save",
+    "theme": "Theme"
 }

@@ -1,6 +1,8 @@
 {
     "de": "Deutsch",
     "en": "Englisch",
+    "es": "Spanisch",
+    "fr": "Französisch",
     "title": "Armaturenbrett",
     "header": "BCP Albanien",
     "add-new-tab": "Neue Registerkarte hinzufügen",
@@ -63,6 +65,7 @@
     "add-user": "Benutzer hinzufügen",
     "update": "Aktualisieren",
     "user-name-label": "Nutzername",
+    "email-label": "Email",
     "full-name-label": "Vollständiger Name",
     "role": "Rolle",
     "address-line1": "Anschrift Zeile 1",
@@ -155,5 +158,7 @@
     "type-last-four-digit": "Geben Sie die letzten 4 Ziffern ein, um zu bestätigen",
     "card": "Karte",
     "card-added-successfully": "Karte erfolgreich hinzugefügt",
-    "invalid-card-details": "Ungültige Kartendetails"    
+    "invalid-card-details": "Ungültige Kartendetails",
+    "save": "Sparen",
+    "theme": "Thema"
 }
