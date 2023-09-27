@@ -649,14 +649,11 @@ const Signup = () => {
         subscribe={ checkOtherTabVerification }>
       </SubscribeTabMessage>
       {(
-        <div className={"main-container Aligner two-column"}>
-          <div className={"Aligner-item--top header-container"}>
+          <div style={{ height:"100%" }}>
               <SignHeader></SignHeader>
-          </div>
 
           <div
             ref={containerRef}
-            className={"bg-container"}
           >
             <Grid className={"signup-grid"}>
               <Column sm={{span: 4}} md={{span: 4, offset: 2}} lg={{span: 6, offset: 5}} id="scroller">

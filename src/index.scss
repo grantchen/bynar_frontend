@@ -5,6 +5,7 @@ $feature-flags: (
 $prefix: "cds";
 @use "@carbon/react";
 @import "../node_modules/carbon-components/scss/globals/scss/vars";
+
 .display-none {
     display: none;
 }
