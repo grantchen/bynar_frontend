@@ -179,7 +179,6 @@ export const UserDetailPanel = ({ open }) => {
         const fetchData = async () => {
             try {
                 setDisable(true)
-                setDataLoading(true);
                 const data = {
                     email: email,
                     fullName: fullName,
@@ -209,9 +208,7 @@ export const UserDetailPanel = ({ open }) => {
                     });
                     setServerNotification(true)
                 }
-                setDataLoading(false);
             } catch (e) {
-                setDataLoading(false);
                 setServerErrorNotification({
                     title: 'error occurred while update profile',
                     status: "error",
