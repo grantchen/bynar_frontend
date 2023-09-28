@@ -145,6 +145,11 @@
               color: var(--cds-text-01, #161616);
               background-color: var(--cds-hover-ui, #e5e5e5);
             }
+
+            &:focus {
+              outline: 0.125rem solid var(--cds-focus,#0f62fe);
+              outline-offset: -0.125rem;
+            }
           }
 
           &.active button {
