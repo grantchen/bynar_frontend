@@ -1,3 +1,9 @@
+.sign-up-form-area {
+  max-width: 448px;
+  margin: auto;
+  padding-top: 8.5rem;
+}
+
 .header-box {
   padding: 80px 48px 20px 48px;
   color: white;
@@ -6,10 +12,10 @@
   font-weight: bold;
 }
 .toast-notification{
-  padding: 0 16px
+  padding: 0
 }
 .signup-container{
-  padding: 0 16px
+  padding: 0
 }
 .error-notification-box {
   display: flex;
@@ -507,16 +513,8 @@ label[for="password-input"] {
 }
 
 .signup-grid {
-  max-width: none;
-  width: 100vw;
   height: calc(100vh - 50px);
   overflow-y: auto;
-  padding: 5.5rem 0 0;
-
-  #scroller {
-    max-width: 448px;
-    margin: auto;
-  }
 }
 
 .signup-form {
@@ -524,7 +522,6 @@ label[for="password-input"] {
   // overflow-y: auto;
 
   .account-info-box {
-    padding: 0px 16px;
     // margin-top: 16px;
     .account-heading {
       margin: 16px 0px 22px 0px;

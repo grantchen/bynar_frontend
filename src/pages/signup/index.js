@@ -657,453 +657,455 @@ const Signup = () => {
           >
             <Grid className={"signup-grid"}>
               <Column sm={{span: 4}} md={{span: 8}} lg={{span: 16}} xlg={{span: 16}} id="scroller">
-                <Content className={"signup-container"}>
-                  <div className="heading-container">
-                    <Heading className={"form-mainHeading"}>
-                      Sign up for an Bynar account
-                    </Heading>
-                    <div
-                      className="login-link"
-                    >
-                      Already have an BYNAR account?{" "}
-                      <Link href="/signin">Log in</Link>
-                    </div>
-                  </div>
-                </Content>
-                {(typeof errorNotification === "object" &&
-                Object.keys(errorNotification).length !== 0) && (
-                  <div style={{paddingLeft: 16,paddingRight: 16}}>
-                    <ToastNotification
-                      className="error-notification-box"
-                      iconDescription="describes the close button"
-                      subtitle={errorNotification?.title}
-                      timeout={0}
-                      title={""}
-                      kind={errorNotification?.status}
-                      onCloseButtonClick={() => {
-                        setErrorNotification({});
-                        setIsError(false);
-                      }}
-                    />
-                  </div>
-                )}
-
-                <div className="signup-form">
-                  {activeStep === 1 && (
-                    <div className="account-info-box">
-                      <div className="account-heading">
-                        <p className="heading">1. Organization account</p>
-                      </div>
-                      <TextInput
-                        id="email"
-                        className="email-form-input"
-                        value={email}
-                        labelText="E-mail"
-                        onChange={(e) => handleEmailChange(e.target.value)}
-                        invalid={!!errors.email}
-                        invalidText={errors.email}
-                        disabled={loading ? true : false}
-                      />
-                      {loading ? (
-                        <div style={{marginTop: "32px"}}>
-                          <InlineLoading
-                            description={"sending confirmation email"}
-                            className="submit-button-loading"
-                          />
-                        </div>
-                      ) : (
-                        <div style={{marginTop: "32px"}}>
-                          <Button
-                            kind="tertiary"
-                            onClick={handleOrganizationFormSubmit}
-                          >
-                            {"Next"}
-                          </Button>
-                        </div>
-                      )}
-                    </div>
-                  )}
-                  {activeStep === 2 && (
-                    <div className="account-info-box">
-                      <div className="account-heading">
-                        <p className="heading">2. Verify email</p>
-                      </div>
-                      <div>
-                        <p className="email-text">
-                          {isEmailVerified ? (
-                            <>
-                              Email has been verified.
-                            </>
-                          ) : (
-                            <>
-                              Didn’t receive the email? Check your spam filter for
-                              an email from noreply@bynar.al.
-                            </>
-                          )}
-                        </p>
-                      </div>
-                      <div>
-                        {(resendCodeLoading || verifyEmailLoading) ? (
-                          <div
-                            style={{marginTop: "32px"}}
-                          >
-                            <InlineLoading
-                              description={ resendCodeLoading ? "re-sending confirmation email" : ""}
-                              className="submit-button-loading"
-                            />
-                          </div>
-                        ) : !isEmailVerified && (
-                          <p
-                            className="resend-code"
-                            onClick={handleSignupRequest}
-                          >
-                            Resend confirmation email
-                          </p>
-                        )}
-                      </div>
-                      {isEmailVerified && (
-                          <div
-                              style={{ marginTop: "32px", marginBottom: "16px" }}
-                          >
-                            <Button
-                                kind="tertiary"
-                                disabled={!isEmailVerified}
-                                onClick={() => handleVerifyEmailFormSubmit()}
-                            >
-                              Next
-                            </Button>
-                          </div>
-                      )}
-                    </div>
-                  )}
-                  {activeStep === 3 && (
-                    <div className="account-info-box">
-                      <div className="account-heading">
-                        <p className="heading">3. Account information</p>
-                      </div>
-                      <TextInput
-                        type="text"
-                        ref={(el) => (inputRefs.current[0] = el)}
-                        name="fullName"
-                        className="email-form-input"
-                        id="full name"
-                        labelText="Full name *"
-                        value={fullName}
-                        onChange={handleFullName}
-                        invalid={accountInfoErrors.fullName}
-                        invalidText={"Full name is required"}
-                      />
-                      <Select
-                        className="country-select"
-                        value={country}
-                        id="country-ci"
-                        labelText="Country or region *"
-                        onChange={handleCountryChange}
-                      >
-                        {COUNTRIES.map((countryObject, countryIndex) => (
-                          <SelectItem
-                            text={countryObject.name}
-                            value={countryObject.name}
-                            key={countryIndex}
-                          />
-                        ))}
-                      </Select>
-                      <TextInput
-                        type="text"
-                        name="addressLine1"
-                        className="email-form-input"
-                        labelText="Address line 1 *"
-                        ref={(el) => (inputRefs.current[1] = el)}
-                        id="address line 1"
-                        value={addressLine1}
-                        onChange={handleAddressLine1}
-                        invalid={accountInfoErrors.addressLine1}
-                        invalidText={"Address line1 is required"}
-                      />
-                      <TextInput
-                        type="text"
-                        id="address line 2"
-                        className="email-form-input"
-                        labelText="Address line 2 (optional)"
-                        value={addressLine2}
-                        onChange={(e) => setAddressLine2(e.target.value)}
-                      />
-                      <TextInput
-                        type="text"
-                        name="city"
-                        className="email-form-input"
-                        id="city"
-                        ref={(el) => (inputRefs.current[2] = el)}
-                        labelText="City *"
-                        value={city}
-                        onChange={handleCity}
-                        invalid={accountInfoErrors.city}
-                        invalidText={"City name is required"}
-                      />
-                      <TextInput
-                        type="text"
-                        name="state"
-                        className="email-form-input"
-                        ref={(el) => (inputRefs.current[3] = el)}
-                        id="state"
-                        labelText="State *"
-                        value={state}
-                        onChange={handleState}
-                        invalid={accountInfoErrors.state}
-                        invalidText={"State is required"}
-                      />
-                      <TextInput
-                        type="text"
-                        name="postalCode"
-                        ref={(el) => (inputRefs.current[4] = el)}
-                        id="postalcode"
-                        labelText="Postal code *"
-                        className="postalcode"
-                        value={postalCode}
-                        onChange={handlePostalCode}
-                        invalid={
-                          typeof postalCodeErrorNotification === "object" &&
-                          Object.keys(postalCodeErrorNotification).length !== 0
-                        }
-                        invalidText={
-                          postalCodeErrorNotification &&
-                          postalCodeErrorNotification.title
-                            ? postalCodeErrorNotification.title
-                            : ""
-                        }
-                      />
-                      <div style={{marginTop: "6px"}}>
-                        <p className="input-heading">Phone number *</p>
-                      </div>
-                      <PhoneInput
-                        className="phone-input-signup"
-                        ref={(el) => (inputRefs.current[5] = el)}
-                        style={{
-                          border: !phoneNumberValid && errorMessage.length > 0 ? "2px solid red" : 0,
-                        }}
-                        name="phoneNumber"
-                        country={""}
-                        value={phoneNumber}
-                        onChange={(value, country, formattedValue) =>
-                          handlePhoneNumber(value, country)
-                        }
-                      />
-                      {!phoneNumberValid && errorMessage.length > 0 && (
-                        <p
-                          style={{
-                            marginTop: "4px",
-                            fontSize: "12px",
-                            color: "#DA1E28",
-                          }}
-                        >
-                          {errorMessage}
-                        </p>
-                      )}
-                      <div style={{marginTop: "32px", marginBottom: "16px"}}>
-                        <Button
-                          kind="tertiary"
-                          onClick={handleAccountInformationFormSubmit}
-                        >
-                          Next
-                        </Button>
-                        <hr className="underline-border"></hr>
-                      </div>
-                    </div>
-                  )}
-                  {activeStep === 4 && (
-                    <div className="account-info-box">
-                      <div className="account-heading">
-                        <p className="heading">4. Organization information</p>
-                      </div>
-                      <TextInput
-                        type="text"
-                        name="organizationName"
-                        className="email-form-input"
-                        id="Organization Name"
-                        labelText="Organization Name *"
-                        value={organizationName}
-                        onChange={handleOrganizationNameChange}
-                        invalid={organizationInfoErrors.organizationName}
-                        invalidText={"Organization name is required"}
-                      />
-                      <TextInput
-                        type="text"
-                        name="organizationNumber"
-                        className="email-form-input"
-                        id="VAT/GST/Tax Number"
-                        labelText="Organization Number *"
-                        value={vatNumber}
-                        onChange={handleVatNumberChange}
-                        invalid={organizationInfoErrors.organizationNumber}
-                        invalidText={"Organization number is required"}
-                      />
-                      <Select
-                        name="organizationCountry"
-                        className="country-select"
-                        value={organizationCountry}
-                        id="organization-country-ci"
-                        labelText="Organization Country or region *"
-                        onChange={handleOrganizationCountryChange}
-                        invalid={organizationInfoErrors.organizationCountry}
-                      >
-                        {COUNTRIES.map((countryObject, countryIndex) => (
-                          <SelectItem
-                            text={countryObject.name}
-                            value={countryObject.name}
-                            key={countryIndex}
-                          />
-                        ))}
-                      </Select>
-                      <div style={{marginTop: "32px", marginBottom: "16px"}}>
-                        <Button
-                          kind="tertiary"
-                          onClick={handleOrganizationInformationFormSubmit}
-                        >
-                          Next
-                        </Button>
-                      </div>
-                    </div>
-                  )}
-                  {activeStep === 5 && (
-                    <>
-                      <div className="account-info-box">
-                        <div className="account-heading">
-                          <p className="heading">5. Credit card information</p>
-                        </div>
-                      </div>
-                      <Frames
-                        config={{
-                          publicKey: CheckoutPublicKey,
-                        }}
-                        ref={cardElement}
-                      >
-                        <div
-                          className="card-input-container"
-                        >
-                          <div>
-                            <p className="input-heading">Card details</p>
-                          </div>
-                          <div>
-                            <CardFrame className="card-number"/>
-                          </div>
-
-                          {loadingCardSuccess ? (
-                            <div className="create-account-loader">
-                              <InlineLoading
-                                description={"verifying card details..."}
-                                className="submit-button-loading"
-                              />
-                            </div>
-                          ) : (
-                            <div className="create-account">
-                              <Button
-                                kind="tertiary"
-                                onClick={handleVerifyCardDetails}
+                  <div className="sign-up-form-area">
+                      <Content className={"signup-container"}>
+                          <div className="heading-container">
+                              <Heading className={"form-mainHeading"}>
+                                  Sign up for an Bynar account
+                              </Heading>
+                              <div
+                                  className="login-link"
                               >
-                                Verify card
-                              </Button>
-                            </div>
+                                  Already have an BYNAR account?{" "}
+                                  <Link href="/signin">Log in</Link>
+                              </div>
+                          </div>
+                      </Content>
+                      {(typeof errorNotification === "object" &&
+                          Object.keys(errorNotification).length !== 0) && (
+                          <div>
+                              <ToastNotification
+                                  className="error-notification-box"
+                                  iconDescription="describes the close button"
+                                  subtitle={errorNotification?.title}
+                                  timeout={0}
+                                  title={""}
+                                  kind={errorNotification?.status}
+                                  onCloseButtonClick={() => {
+                                      setErrorNotification({});
+                                      setIsError(false);
+                                  }}
+                              />
+                          </div>
+                      )}
+
+                      <div className="signup-form">
+                          {activeStep === 1 && (
+                              <div className="account-info-box">
+                                  <div className="account-heading">
+                                      <p className="heading">1. Organization account</p>
+                                  </div>
+                                  <TextInput
+                                      id="email"
+                                      className="email-form-input"
+                                      value={email}
+                                      labelText="E-mail"
+                                      onChange={(e) => handleEmailChange(e.target.value)}
+                                      invalid={!!errors.email}
+                                      invalidText={errors.email}
+                                      disabled={loading ? true : false}
+                                  />
+                                  {loading ? (
+                                      <div style={{marginTop: "32px"}}>
+                                          <InlineLoading
+                                              description={"sending confirmation email"}
+                                              className="submit-button-loading"
+                                          />
+                                      </div>
+                                  ) : (
+                                      <div style={{marginTop: "32px"}}>
+                                          <Button
+                                              kind="tertiary"
+                                              onClick={handleOrganizationFormSubmit}
+                                          >
+                                              {"Next"}
+                                          </Button>
+                                      </div>
+                                  )}
+                              </div>
                           )}
-                        </div>
-                      </Frames>
-                    </>
-                  )}
-                  {activeStep === 6 && (
-                    <>
-                      <div className="account-info-box">
-                        <div className="account-heading">
-                          <p className="heading">6. Account notice</p>
-                        </div>
+                          {activeStep === 2 && (
+                              <div className="account-info-box">
+                                  <div className="account-heading">
+                                      <p className="heading">2. Verify email</p>
+                                  </div>
+                                  <div>
+                                      <p className="email-text">
+                                          {isEmailVerified ? (
+                                              <>
+                                                  Email has been verified.
+                                              </>
+                                          ) : (
+                                              <>
+                                                  Didn’t receive the email? Check your spam filter for
+                                                  an email from noreply@bynar.al.
+                                              </>
+                                          )}
+                                      </p>
+                                  </div>
+                                  <div>
+                                      {(resendCodeLoading || verifyEmailLoading) ? (
+                                          <div
+                                              style={{marginTop: "32px"}}
+                                          >
+                                              <InlineLoading
+                                                  description={ resendCodeLoading ? "re-sending confirmation email" : ""}
+                                                  className="submit-button-loading"
+                                              />
+                                          </div>
+                                      ) : !isEmailVerified && (
+                                          <p
+                                              className="resend-code"
+                                              onClick={handleSignupRequest}
+                                          >
+                                              Resend confirmation email
+                                          </p>
+                                      )}
+                                  </div>
+                                  {isEmailVerified && (
+                                      <div
+                                          style={{ marginTop: "32px", marginBottom: "16px" }}
+                                      >
+                                          <Button
+                                              kind="tertiary"
+                                              disabled={!isEmailVerified}
+                                              onClick={() => handleVerifyEmailFormSubmit()}
+                                          >
+                                              Next
+                                          </Button>
+                                      </div>
+                                  )}
+                              </div>
+                          )}
+                          {activeStep === 3 && (
+                              <div className="account-info-box">
+                                  <div className="account-heading">
+                                      <p className="heading">3. Account information</p>
+                                  </div>
+                                  <TextInput
+                                      type="text"
+                                      ref={(el) => (inputRefs.current[0] = el)}
+                                      name="fullName"
+                                      className="email-form-input"
+                                      id="full name"
+                                      labelText="Full name *"
+                                      value={fullName}
+                                      onChange={handleFullName}
+                                      invalid={accountInfoErrors.fullName}
+                                      invalidText={"Full name is required"}
+                                  />
+                                  <Select
+                                      className="country-select"
+                                      value={country}
+                                      id="country-ci"
+                                      labelText="Country or region *"
+                                      onChange={handleCountryChange}
+                                  >
+                                      {COUNTRIES.map((countryObject, countryIndex) => (
+                                          <SelectItem
+                                              text={countryObject.name}
+                                              value={countryObject.name}
+                                              key={countryIndex}
+                                          />
+                                      ))}
+                                  </Select>
+                                  <TextInput
+                                      type="text"
+                                      name="addressLine1"
+                                      className="email-form-input"
+                                      labelText="Address line 1 *"
+                                      ref={(el) => (inputRefs.current[1] = el)}
+                                      id="address line 1"
+                                      value={addressLine1}
+                                      onChange={handleAddressLine1}
+                                      invalid={accountInfoErrors.addressLine1}
+                                      invalidText={"Address line1 is required"}
+                                  />
+                                  <TextInput
+                                      type="text"
+                                      id="address line 2"
+                                      className="email-form-input"
+                                      labelText="Address line 2 (optional)"
+                                      value={addressLine2}
+                                      onChange={(e) => setAddressLine2(e.target.value)}
+                                  />
+                                  <TextInput
+                                      type="text"
+                                      name="city"
+                                      className="email-form-input"
+                                      id="city"
+                                      ref={(el) => (inputRefs.current[2] = el)}
+                                      labelText="City *"
+                                      value={city}
+                                      onChange={handleCity}
+                                      invalid={accountInfoErrors.city}
+                                      invalidText={"City name is required"}
+                                  />
+                                  <TextInput
+                                      type="text"
+                                      name="state"
+                                      className="email-form-input"
+                                      ref={(el) => (inputRefs.current[3] = el)}
+                                      id="state"
+                                      labelText="State *"
+                                      value={state}
+                                      onChange={handleState}
+                                      invalid={accountInfoErrors.state}
+                                      invalidText={"State is required"}
+                                  />
+                                  <TextInput
+                                      type="text"
+                                      name="postalCode"
+                                      ref={(el) => (inputRefs.current[4] = el)}
+                                      id="postalcode"
+                                      labelText="Postal code *"
+                                      className="postalcode"
+                                      value={postalCode}
+                                      onChange={handlePostalCode}
+                                      invalid={
+                                          typeof postalCodeErrorNotification === "object" &&
+                                          Object.keys(postalCodeErrorNotification).length !== 0
+                                      }
+                                      invalidText={
+                                          postalCodeErrorNotification &&
+                                          postalCodeErrorNotification.title
+                                              ? postalCodeErrorNotification.title
+                                              : ""
+                                      }
+                                  />
+                                  <div style={{marginTop: "6px"}}>
+                                      <p className="input-heading">Phone number *</p>
+                                  </div>
+                                  <PhoneInput
+                                      className="phone-input-signup"
+                                      ref={(el) => (inputRefs.current[5] = el)}
+                                      style={{
+                                          border: !phoneNumberValid && errorMessage.length > 0 ? "2px solid red" : 0,
+                                      }}
+                                      name="phoneNumber"
+                                      country={""}
+                                      value={phoneNumber}
+                                      onChange={(value, country, formattedValue) =>
+                                          handlePhoneNumber(value, country)
+                                      }
+                                  />
+                                  {!phoneNumberValid && errorMessage.length > 0 && (
+                                      <p
+                                          style={{
+                                              marginTop: "4px",
+                                              fontSize: "12px",
+                                              color: "#DA1E28",
+                                          }}
+                                      >
+                                          {errorMessage}
+                                      </p>
+                                  )}
+                                  <div style={{marginTop: "32px", marginBottom: "16px"}}>
+                                      <Button
+                                          kind="tertiary"
+                                          onClick={handleAccountInformationFormSubmit}
+                                      >
+                                          Next
+                                      </Button>
+                                      <hr className="underline-border"></hr>
+                                  </div>
+                              </div>
+                          )}
+                          {activeStep === 4 && (
+                              <div className="account-info-box">
+                                  <div className="account-heading">
+                                      <p className="heading">4. Organization information</p>
+                                  </div>
+                                  <TextInput
+                                      type="text"
+                                      name="organizationName"
+                                      className="email-form-input"
+                                      id="Organization Name"
+                                      labelText="Organization Name *"
+                                      value={organizationName}
+                                      onChange={handleOrganizationNameChange}
+                                      invalid={organizationInfoErrors.organizationName}
+                                      invalidText={"Organization name is required"}
+                                  />
+                                  <TextInput
+                                      type="text"
+                                      name="organizationNumber"
+                                      className="email-form-input"
+                                      id="VAT/GST/Tax Number"
+                                      labelText="Organization Number *"
+                                      value={vatNumber}
+                                      onChange={handleVatNumberChange}
+                                      invalid={organizationInfoErrors.organizationNumber}
+                                      invalidText={"Organization number is required"}
+                                  />
+                                  <Select
+                                      name="organizationCountry"
+                                      className="country-select"
+                                      value={organizationCountry}
+                                      id="organization-country-ci"
+                                      labelText="Organization Country or region *"
+                                      onChange={handleOrganizationCountryChange}
+                                      invalid={organizationInfoErrors.organizationCountry}
+                                  >
+                                      {COUNTRIES.map((countryObject, countryIndex) => (
+                                          <SelectItem
+                                              text={countryObject.name}
+                                              value={countryObject.name}
+                                              key={countryIndex}
+                                          />
+                                      ))}
+                                  </Select>
+                                  <div style={{marginTop: "32px", marginBottom: "16px"}}>
+                                      <Button
+                                          kind="tertiary"
+                                          onClick={handleOrganizationInformationFormSubmit}
+                                      >
+                                          Next
+                                      </Button>
+                                  </div>
+                              </div>
+                          )}
+                          {activeStep === 5 && (
+                              <>
+                                  <div className="account-info-box">
+                                      <div className="account-heading">
+                                          <p className="heading">5. Credit card information</p>
+                                      </div>
+                                  </div>
+                                  <Frames
+                                      config={{
+                                          publicKey: CheckoutPublicKey,
+                                      }}
+                                      ref={cardElement}
+                                  >
+                                      <div
+                                          className="card-input-container"
+                                      >
+                                          <div>
+                                              <p className="input-heading">Card details</p>
+                                          </div>
+                                          <div>
+                                              <CardFrame className="card-number"/>
+                                          </div>
 
-                        <Select
-                          className="country-select"
-                          value={dataSovereignty}
-                          id="data-sovereignty"
-                          labelText="Data Sovereignty *"
-                          onChange={handleDataSovereigntyChange}
-                          disabled={!isAgreementSigned || loadingSuccess}
-                        >
-                          {Object.keys(DATA_SOVEREIGNTY_REGION_NAMES).map((regionCode, index) => (
-                            <SelectItem
-                              text={DATA_SOVEREIGNTY_REGION_NAMES[regionCode]}
-                              value={regionCode}
-                              key={index}
-                            />
-                          ))}
-                        </Select>
+                                          {loadingCardSuccess ? (
+                                              <div className="create-account-loader">
+                                                  <InlineLoading
+                                                      description={"verifying card details..."}
+                                                      className="submit-button-loading"
+                                                  />
+                                              </div>
+                                          ) : (
+                                              <div className="create-account">
+                                                  <Button
+                                                      kind="tertiary"
+                                                      onClick={handleVerifyCardDetails}
+                                                  >
+                                                      Verify card
+                                                  </Button>
+                                              </div>
+                                          )}
+                                      </div>
+                                  </Frames>
+                              </>
+                          )}
+                          {activeStep === 6 && (
+                              <>
+                                  <div className="account-info-box">
+                                      <div className="account-heading">
+                                          <p className="heading">6. Account notice</p>
+                                      </div>
 
-                        <div>
-                          <p className="account-notice-text">
-                            Bynar may use my contact data to keep me informed of
-                            products, services and offerings:
-                          </p>
-                        </div>
-                        <div style={{display: "flex", alignItems: "center"}}>
-                          <Checkbox
-                            labelText="by email"
-                            checked={isByEmailChecked}
-                            id="by-email"
-                            onChange={(_, {checked}) => {
-                              setIsByEmailChecked(checked);
-                            }}
-                            disabled={loadingSuccess}
-                          />
-                        </div>
-                        <div>
-                          <p className="account-notice-text">
-                            You can withdraw your marketing consent at any time by
-                            submitting an{" "}
-                            <Link href="/signup">opt-out request</Link>. Also you
-                            may unsubscribe from receiving marketing emails by
-                            clicking the unsubscribe link in each email.
-                          </p>
-                        </div>
-                        <div>
-                          <p className="account-notice-text">
-                            More information on our processing can be found in the{" "}
-                            <Link href="/signup">Bynar Privacy Statement.</Link>{" "}
-                            By submitting this form, I acknowledge that I have
-                            read and understand the Bynar Privacy Statement.
-                          </p>
-                        </div>
-                        <div>
-                          <p className="account-notice-text">
-                            <Checkbox
-                              labelText={<>
-                                I accept the product{" "}
-                                <Link href="/signup">Terms and Conditions</Link> of
-                                this registration form.
-                              </>}
-                              checked={isAgreementSigned}
-                              disabled={loadingSuccess}
-                              id="is-accept-agreement"
-                              onChange={(_, {checked}) => {
-                                setIsAgreementSigned(checked);
-                              }}
-                            />
-                          </p>
-                        </div>
-                        {loadingSuccess ? (
-                        <>
-                          <div style={{marginTop: "32px"}}>
-                            <InlineLoading description="Creating Account" />
-                          </div>
-                        </>
-                        ): (
-                          <div className="create-account">
-                            <Button
-                              kind="tertiary"
-                              onClick={handleCreateEnvironment}
-                              disabled={!isAgreementSigned}
-                            >
-                              Create environment
-                            </Button>
-                          </div>
-                        )}
+                                      <Select
+                                          className="country-select"
+                                          value={dataSovereignty}
+                                          id="data-sovereignty"
+                                          labelText="Data Sovereignty *"
+                                          onChange={handleDataSovereigntyChange}
+                                          disabled={!isAgreementSigned || loadingSuccess}
+                                      >
+                                          {Object.keys(DATA_SOVEREIGNTY_REGION_NAMES).map((regionCode, index) => (
+                                              <SelectItem
+                                                  text={DATA_SOVEREIGNTY_REGION_NAMES[regionCode]}
+                                                  value={regionCode}
+                                                  key={index}
+                                              />
+                                          ))}
+                                      </Select>
+
+                                      <div>
+                                          <p className="account-notice-text">
+                                              Bynar may use my contact data to keep me informed of
+                                              products, services and offerings:
+                                          </p>
+                                      </div>
+                                      <div style={{display: "flex", alignItems: "center"}}>
+                                          <Checkbox
+                                              labelText="by email"
+                                              checked={isByEmailChecked}
+                                              id="by-email"
+                                              onChange={(_, {checked}) => {
+                                                  setIsByEmailChecked(checked);
+                                              }}
+                                              disabled={loadingSuccess}
+                                          />
+                                      </div>
+                                      <div>
+                                          <p className="account-notice-text">
+                                              You can withdraw your marketing consent at any time by
+                                              submitting an{" "}
+                                              <Link href="/signup">opt-out request</Link>. Also you
+                                              may unsubscribe from receiving marketing emails by
+                                              clicking the unsubscribe link in each email.
+                                          </p>
+                                      </div>
+                                      <div>
+                                          <p className="account-notice-text">
+                                              More information on our processing can be found in the{" "}
+                                              <Link href="/signup">Bynar Privacy Statement.</Link>{" "}
+                                              By submitting this form, I acknowledge that I have
+                                              read and understand the Bynar Privacy Statement.
+                                          </p>
+                                      </div>
+                                      <div>
+                                          <p className="account-notice-text">
+                                              <Checkbox
+                                                  labelText={<>
+                                                      I accept the product{" "}
+                                                      <Link href="/signup">Terms and Conditions</Link> of
+                                                      this registration form.
+                                                  </>}
+                                                  checked={isAgreementSigned}
+                                                  disabled={loadingSuccess}
+                                                  id="is-accept-agreement"
+                                                  onChange={(_, {checked}) => {
+                                                      setIsAgreementSigned(checked);
+                                                  }}
+                                              />
+                                          </p>
+                                      </div>
+                                      {loadingSuccess ? (
+                                          <>
+                                              <div style={{marginTop: "32px"}}>
+                                                  <InlineLoading description="Creating Account" />
+                                              </div>
+                                          </>
+                                      ): (
+                                          <div className="create-account">
+                                              <Button
+                                                  kind="tertiary"
+                                                  onClick={handleCreateEnvironment}
+                                                  disabled={!isAgreementSigned}
+                                              >
+                                                  Create environment
+                                              </Button>
+                                          </div>
+                                      )}
+                                  </div>
+                              </>
+                          )}
                       </div>
-                    </>
-                  )}
-                </div>
+                  </div>
               </Column>
             </Grid>
               <Footer
