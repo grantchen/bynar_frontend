@@ -387,7 +387,7 @@ const UserManagementProvider = ({ children }) => {
                 {isUserManagementAllowed && (
                     <SidePanels open={addUserPanelOpen} />
                 )}
-                {isUserManagementAllowed && (
+                {(
                     <UserDetailPanel open={userDetailsOpen} />
                 )}
             </UserManagementContext.Provider>
