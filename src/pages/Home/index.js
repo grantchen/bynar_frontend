@@ -42,8 +42,8 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <dds-table-of-contents toc-layout="horizontal" stickyOffset="48" > 
-          <a name="1" id="1" data-title="Smarter decisions"></a>      
+        <dds-table-of-contents toc-layout="horizontal" stickyOffset="48" >
+          <a name="1" id="1" data-title="Smarter decisions"></a>
           <dds-content-section >
             <dds-content-section-heading>Smarter decisions</dds-content-section-heading>
             <dds-content-block complementary-style-scheme="with-border">

@@ -36,7 +36,7 @@ import UploadProfileImageModal from "../../sdk/uploadprofileimage";
 
 import { Switcher } from "@carbon/react/icons";
 import ibmLogo from '../media/IBM_logo_black.svg'
-import { CustomSideNavMenu } from "./CustomSideNavMenu";
+import { CustomWideMenu } from "./CustomWideMenu";
 
 function _AuthenticatedAppHeader() {
     const { user } = useAuth();
@@ -44,7 +44,6 @@ function _AuthenticatedAppHeader() {
     const { theme } = useThemePreference();
     const { isUserManagementAllowed } = useUserManagement();
     const [searchParams, setSearchParams] = useSearchParams();
-    const isMobile = useMobile();
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
     const [isLanguageChangeModalOpen, openLanguageChangeModal] =
         useState(false);
@@ -60,16 +59,14 @@ function _AuthenticatedAppHeader() {
     );
 
     const wrapperRef = useRef(null);
+    const wideMenuWaffleRef = useRef(null);
+    const wideMenuRef = useRef(null);
 
-    const [expandSideNav, setExpandSideNav] = useState(false)
     const [expandSearchBar, setExpandSearchBar] = useState(false)
+    const [wideMenuExpanded, setWideMenuExpanded] = useState(false)
 
-    const handleSideNavExpand = () => {
-        setExpandSideNav(!expandSideNav)
-    }
-
-    const handleSearchClear=()=>{
-        setExpandSearchBar(data=>!data)
+    const handleSearchClear = () => {
+        setExpandSearchBar(data => !data)
     }
 
     useEffect(() => {
@@ -87,80 +84,97 @@ function _AuthenticatedAppHeader() {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
+
+    useEffect(() => {
+        // Close wide menu when clicked outside
+        const handleClickWideMenuOutside = (event) => {
+            if (
+                wideMenuWaffleRef.current &&
+                !wideMenuWaffleRef.current.contains(event.target) &&
+                wideMenuRef.current &&
+                !wideMenuRef.current.contains(event.target)
+            ) {
+                setWideMenuExpanded(false)
+            }
+        };
+        document.addEventListener("mousedown", handleClickWideMenuOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickWideMenuOutside);
+        };
+    }, []);
+
     return (
         <>
             <div className="main-header-container">
                 <HeaderContainer
-                    render={({ isSideNavExpanded, onClickSideNavExpand }) => (
+                    isSideNavExpanded={wideMenuExpanded}
+                    render={ ({ isSideNavExpanded, onClickSideNavExpand }) => (
                         <Header aria-label="Bynar">
                             <SkipToContent />
-                            {/* previous code for hamburger icon*/}
-                            {/* <HeaderMenuButton
-                                aria-label="Open menu"
-                                onClick={onClickSideNavExpand}
-                                isActive={isSideNavExpanded}
-                            /> */}
-                            {/* added code for waffle icon */}
                             <HeaderGlobalAction
+                                ref={ wideMenuWaffleRef }
                                 aria-label={
-                                    isSideNavExpanded ? 'Close switcher' : 'Open switcher'
+                                    wideMenuExpanded ? 'Close' : 'Open'
                                 }
-                                aria-expanded={isSideNavExpanded}
-                                isActive={isSideNavExpanded}
-                                onClick={onClickSideNavExpand}
+                                aria-expanded={ wideMenuExpanded }
+                                isActive={ wideMenuExpanded }
+                                onClick={ (e) => {
+                                    e.stopPropagation()
+                                    setWideMenuExpanded(!wideMenuExpanded)
+                                } }
                                 tooltipAlignment="end"
                                 id="switcher-button">
-                                <Switcher size="25" onClick={() => { handleSideNavExpand() }} style={{ color: "cornflowerblue" }} />
+                                <Switcher size="25" style={ { color: "cornflowerblue" } } />
                             </HeaderGlobalAction>
+                            <CustomWideMenu wideMenuRef={ wideMenuRef } expanded={ wideMenuExpanded } />
 
-                            <HeaderName href="#" prefix="">
-                                <img src={ibmLogo} alt="ibm_logo" />
+                            <HeaderName href="/" prefix="">
+                                <img src={ ibmLogo } alt="ibm_logo" />
                             </HeaderName>
 
-                            <HeaderName className="seperatorHead" href="#" prefix="">
+                            <HeaderName className="seperatorHead" prefix="">
                                 <div className="logoSeperator" />
                             </HeaderName>
 
-                            <HeaderName className="orgName" href="#" prefix="">
+                            <HeaderName className="orgName" prefix="">
                                 Bynar
                             </HeaderName>
 
                             {/* <HeaderName href="#" prefix="Bynar">
                                 [Platform]
-                            </HeaderName> */}
+                            </HeaderName> */ }
 
                             <HeaderGlobalBar>
                                 <HeaderTab />
-                                {
-                                    <ExpandableSearch
-                                        className="search-container"
-                                        labelText="Enter search term"
-                                        isExpanded={expandSearchBar}
-                                        placeholder="Search all of Bynar"
-                                        onClear={handleSearchClear}
-                                    />
-                                }
+                                <ExpandableSearch
+                                    className="search-container"
+                                    labelText="Enter search term"
+                                    isExpanded={ expandSearchBar }
+                                    placeholder="Search all of Bynar"
+                                    onClear={ handleSearchClear }
+                                />
                             </HeaderGlobalBar>
 
-                            {isUserManagementAllowed && (
+                            { isUserManagementAllowed && (
                                 <HeaderGlobalAction
-                                    aria-label={t("user")}
+                                    aria-label={ t("user") }
                                     className="user-list-nav-button"
-                                    onClick={() => setIsUserListOpen(true)}
+                                    onClick={ () => setIsUserListOpen(true) }
                                 >
                                     <UserData20 />
                                 </HeaderGlobalAction>
-                            )}
+                            ) }
 
                             <Popover
-                                open={isProfileDropdownOpen}
+                                open={ isProfileDropdownOpen }
                                 isTabTip
                                 align="bottom-right"
                                 className="popover-dropdown"
                             >
                                 <HeaderGlobalAction
-                                    aria-label={user?.fullName ?? t("user")}
-                                    onClick={() => {
+                                    aria-label={ user?.fullName ?? t("user") }
+                                    onClick={ () => {
                                         setIsProfileDropdownOpen(true);
                                         setSearchParams((prev) =>
                                             omitQueryParams(prev, [
@@ -171,13 +185,13 @@ function _AuthenticatedAppHeader() {
                                                 "isInvoiceListOpen"
                                             ])
                                         );
-                                    }}
+                                    } }
                                 >
                                     <UserProfileImage
-                                        backgroundColor={"light-cyan"}
-                                        size={"md"}
-                                        initials={user?.fullName ?? "..."}
-                                        image={user?.profileURL ?? ""}
+                                        backgroundColor={ "light-cyan" }
+                                        size={ "md" }
+                                        initials={ user?.fullName ?? "..." }
+                                        image={ user?.profileURL ?? "" }
                                         theme={
                                             theme === "g90"
                                                 ? "dark"
@@ -185,15 +199,15 @@ function _AuthenticatedAppHeader() {
                                         }
                                     />
                                 </HeaderGlobalAction>
-                                <PopoverContent ref={wrapperRef}>
+                                <PopoverContent ref={ wrapperRef }>
                                     <ProfileDropdown
-                                        onProfileOptionClick={() => {
+                                        onProfileOptionClick={ () => {
                                             setSearchParams({
                                                 userIdToShowDetails:
                                                 user?.id,
                                             });
                                             setIsProfileDropdownOpen(false);
-                                        }}
+                                        } }
                                         openLanguageModal={
                                             isLanguageChangeModalOpen
                                         }
@@ -210,28 +224,22 @@ function _AuthenticatedAppHeader() {
                                 </PopoverContent>
                             </Popover>
                         </Header>
-                    )}
+                    ) }
                 />
                 <TearSheets
-                    setIsOpen={setIsUserListOpen}
-                    isOpen={isUserListOpen}
+                    setIsOpen={ setIsUserListOpen }
+                    isOpen={ isUserListOpen }
                 />
-            </div>
-
-            <div>
-                {
-                    expandSideNav && <CustomSideNavMenu />
-                }
             </div>
 
             <Outlet />
             <LanguageChangeModal
-                isLanguageChangeModalOpen={isLanguageChangeModalOpen}
-                openLanguageChangeModal={openLanguageChangeModal}
+                isLanguageChangeModalOpen={ isLanguageChangeModalOpen }
+                openLanguageChangeModal={ openLanguageChangeModal }
             />
             <UploadProfileImageModal
-                isUploadProfileImageModalOpen={isUploadProfileImageModalOpen}
-                openUploadProfileImageModal={openUploadProfileImageModal}
+                isUploadProfileImageModalOpen={ isUploadProfileImageModalOpen }
+                openUploadProfileImageModal={ openUploadProfileImageModal }
             />
         </>
     );
@@ -241,7 +249,7 @@ export default function AuthenticatedAppHeader(props) {
     return (
         <CardManagementProvider>
             <InvoicesProvider>
-                <_AuthenticatedAppHeader {...props} />
+                <_AuthenticatedAppHeader { ...props } />
             </InvoicesProvider>
         </CardManagementProvider>
     );

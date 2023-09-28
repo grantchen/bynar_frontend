@@ -2,9 +2,9 @@
   "mastheadNav": {
     "links": [
       {
-        "title": "Products & Solutions",
-        "titleEnglish": "Products & Solutions",
-        "description": "Blend cloud and on-premises resources for flexibility and balance",
+        "title": "Featured",
+        "titleEnglish": "Featured",
+        "description": "",
         "url": "",
         "hasMenu": true,
         "hasMegapanel": true,
@@ -329,10 +329,3890 @@
         ]
       },
       {
-        "title": "Consulting & Services",
-        "titleEnglish": "Consulting & Services",
+        "title": "AI & machine learning",
+        "titleEnglish": "AI & machine learning",
         "description": "Blend cloud and on-premises resources for flexibility and balance",
-        "url": "",
+        "url": "https://www.ibm.com/artificial-intelligence?lnk=flathl",
+        "hasMenu": true,
+        "hasMegapanel": true,
+        "menuSections": [
+          {
+            "heading": "",
+            "menuItems": [
+              {
+                "title": "IBM Consulting",
+                "titleEnglish": "IBM Consulting",
+                "url": "https://www.ibm.com/consulting?lnk=hpmco&lnk2=link",
+                "megapanelContent": {
+                  "headingTitle": "IBM Consulting",
+                  "headingUrl": "https://www.ibm.com/consulting?lnk=hpmco&lnk2=link",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Strategy Consulting",
+                        "titleEnglish": "Strategy Consulting",
+                        "url": "https://www.ibm.com/consulting/strategy?lnk=hpmco_bust&lnk2=learn"
+                      },
+                      {
+                        "title": "Experience Consulting",
+                        "titleEnglish": "Experience Consulting",
+                        "url": "https://www.ibm.com/consulting/experience?lnk=hpmco_buex&lnk2=learn"
+                      },
+                      {
+                        "title": "Operations Consulting",
+                        "titleEnglish": "Operations Consulting",
+                        "url": "https://www.ibm.com/consulting/operations?lnk=hpmco_buop&lnk2=learn"
+                      },
+                      {
+                        "title": "Technology Consulting",
+                        "titleEnglish": "Technology Consulting",
+                        "url": "https://www.ibm.com/consulting/technology?lnk=hpmco_bute&lnk2=learn"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/79a6c3cde7dd0665/original/megamenu-pictogram-business-process-service.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Business consulting services",
+                "titleEnglish": "Business process services",
+                "url": "https://www.ibm.com/services/business?lnk=hpmsc_bups",
+                "megapanelContent": {
+                  "headingTitle": "Business consulting services",
+                  "headingUrl": "https://www.ibm.com/services/business?lnk=hpmsc_bups",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Artificial intelligence services",
+                        "titleEnglish": "Artificial intelligence services",
+                        "url": "https://www.ibm.com/services/artificial-intelligence?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Automation",
+                        "titleEnglish": "Automation",
+                        "url": "https://www.ibm.com/cloud/automation/services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Big data & data platform",
+                        "titleEnglish": "Big data & data platform",
+                        "url": "https://www.ibm.com/services/big-data-services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Business process outsourcing",
+                        "titleEnglish": "Business process outsourcing",
+                        "url": "https://www.ibm.com/services/process/outsourcing?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Edge consulting",
+                        "titleEnglish": "Edge consulting",
+                        "url": "https://www.ibm.com/services/process/edge-services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Finance consulting and outsourcing services",
+                        "titleEnglish": "Finance transformation",
+                        "url": "https://www.ibm.com/services/process/finance-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "IBM Garage",
+                        "titleEnglish": "IBM Garages",
+                        "url": "https://www.ibm.com/garage?lnk=hpmsc_buas"
+                      },
+                      {
+                        "title": "Operations consulting",
+                        "titleEnglish": "IoT consulting",
+                        "url": "https://www.ibm.com/services/process/operations-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Procurement consulting and managed services",
+                        "titleEnglish": "Procurement & strategic sourcing",
+                        "url": "https://www.ibm.com/services/process/procurement-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Risk management consulting services",
+                        "titleEnglish": "Risk consulting & fraud management",
+                        "url": "https://www.ibm.com/services/process/risk-management?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Supply chain consulting services",
+                        "titleEnglish": "Supply chain",
+                        "url": "https://www.ibm.com/services/process/supply-chain?lnk=hpmsc_bups"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/79a6c3cde7dd0665/original/megamenu-pictogram-business-process-service.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Design & business strategy",
+                "titleEnglish": "Design & business strategy",
+                "url": "https://www.ibm.com/services/ibmix/?lnk=hpmsc_budbs",
+                "megapanelContent": {
+                  "headingTitle": "Design & business strategy",
+                  "headingUrl": "https://www.ibm.com/services/ibmix/?lnk=hpmsc_bubs",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Customer experience consulting",
+                        "titleEnglish": "Experience strategy",
+                        "url": "https://www.ibm.com/services/customer-experience-consulting?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "E-commerce consulting",
+                        "titleEnglish": "Digital strategy",
+                        "url": "https://www.ibm.com/services/ecommerce?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "Marketing consulting",
+                        "titleEnglish": "Marketing platforms",
+                        "url": "https://www.ibm.com/services/marketing-consulting?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "Salesforce consulting",
+                        "titleEnglish": "Salesforce consulting",
+                        "url": "https://www.ibm.com/services/salesforce?lnk=hpmsc_bubs"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/1b7522c50ea39ca/original/megamenu-pictogram-design-business-strategy.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Hybrid multicloud services",
+                "titleEnglish": "Hybrid multicloud services",
+                "url": "https://www.ibm.com/cloud/services?lnk=hpmsc_bups",
+                "megapanelContent": {
+                  "headingTitle": "Talent management services",
+                  "headingUrl": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "HR transformation services",
+                        "titleEnglish": "HR transformation",
+                        "url": "https://www.ibm.com/services/talent-management/hr-transformation?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent acquisition services",
+                        "titleEnglish": "Talent acquisition",
+                        "url": "https://www.ibm.com/services/talent-management/talent-acquisition?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent development services",
+                        "titleEnglish": "Talent development",
+                        "url": "https://www.ibm.com/services/talent-management/talent-development?lnk=hpmsc_buta"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/69e350b141e12bd5/original/megamenu-pictogram-talent-and-transformation.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Talent management services",
+                "titleEnglish": "Talent & transformation",
+                "url": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                "megapanelContent": {
+                  "headingTitle": "Talent management services",
+                  "headingUrl": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "HR transformation services",
+                        "titleEnglish": "HR transformation",
+                        "url": "https://www.ibm.com/services/talent-management/hr-transformation?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent acquisition services",
+                        "titleEnglish": "Talent acquisition",
+                        "url": "https://www.ibm.com/services/talent-management/talent-acquisition?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent development services",
+                        "titleEnglish": "Talent development",
+                        "url": "https://www.ibm.com/services/talent-management/talent-development?lnk=hpmsc_buta"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/69e350b141e12bd5/original/megamenu-pictogram-talent-and-transformation.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Application services",
+                "titleEnglish": "Application services",
+                "url": "https://www.ibm.com/services/applications?lnk=hpmsc_buas",
+                "megapanelContent": {
+                  "headingTitle": "Application services",
+                  "headingUrl": "https://www.ibm.com/services/applications?lnk=hpmsc_buas",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Application Modernization",
+                        "titleEnglish": "Application Modernization",
+                        "url": "https://www.ibm.com/services/cloud/modernize-applications?lnk=hpmsc_buas"
+                      },
+                      {
+                        "title": "Enterprise applications strategy",
+                        "titleEnglish": "Enterprise applications strategy",
+                        "url": "https://www.ibm.com/services/applications/enterprise?lnk=hpmsc_buas"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/2b7c180c68557dcb/original/megamenu-pictogram-application-services.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Security services",
+                "titleEnglish": "Security services",
+                "url": "https://www.ibm.com/security/services?lnk=hpmsc_buse",
+                "megapanelContent": {
+                  "headingTitle": "Security services",
+                  "headingUrl": "https://www.ibm.com/security/services?lnk=hpmsc_buse",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Application security",
+                        "titleEnglish": "Application security",
+                        "url": "https://www.ibm.com/security/services/application-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Cloud security",
+                        "titleEnglish": "Cloud security",
+                        "url": "https://www.ibm.com/security/services/cloud-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Data security",
+                        "titleEnglish": "Data security",
+                        "url": "https://www.ibm.com/security/services/data-security?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Identity & access management",
+                        "titleEnglish": "Identity & access management",
+                        "url": "https://www.ibm.com/security/services/identity-access-management?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Managed detection and response (MDR) services",
+                        "titleEnglish": "Managed detection and response (MDR) services",
+                        "url": "https://www.ibm.com/security/services/managed-detection-response?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Managed security",
+                        "titleEnglish": "Managed security",
+                        "url": "https://www.ibm.com/security/services/managed-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Secure Access Service Edge (SASE)",
+                        "titleEnglish": "Secure Access Service Edge (SASE)",
+                        "url": "https://www.ibm.com/security/services/secure-access-service-edge?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Security governance",
+                        "titleEnglish": "Security governance",
+                        "url": "https://www.ibm.com/security/services/security-governance?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Threat Management",
+                        "titleEnglish": "Threat Management",
+                        "url": "https://www.ibm.com/security/services/threat-management?lnk=hpmsc_bups"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/6ecec25a8489cf82/original/megamenu-pictogram-security-services.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Technology Support Services",
+                "titleEnglish": "Services for tech support",
+                "url": "https://www.ibm.com/services/technology-support?lnk=hpmsc_busv",
+                "megapanelContent": {
+                  "headingTitle": "Technology Support Services",
+                  "headingUrl": "https://www.ibm.com/services/technology-support?lnk=hpmsc_busv",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Open source",
+                        "titleEnglish": "Open source",
+                        "url": "https://www.ibm.com/services/technology-support/open-source?lnk=hpmsc_busv"
+                      },
+                      {
+                        "title": "Third party & multivendor",
+                        "titleEnglish": "Third party & multivendor",
+                        "url": "https://www.ibm.com/services/technology-support/multivendor-it?lnk=hpmsc_busv"
+                      },
+                      {
+                        "title": "IBM warranties and maintenance",
+                        "titleEnglish": "IBM warranties and maintenance",
+                        "url": "https://www.ibm.com/services/technology-support/hardware-software?lnk=hpmsc_busv"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/7056e2b83b04133e/original/megamenu-pictogram-services-for-tech-support.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Flexible payment plans",
+                "titleEnglish": "Flexible payment plans",
+                "url": "https://www.ibm.com/financing?lnk=hpmsc_bufi"
+              },{
+                "title": "View all products",
+                "titleEnglish": "View all products",
+                "url": "https://www.ibm.com/products?lnk=hpmps_buall",
+                "megaPanelViewAll": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Analytics",
+        "titleEnglish": "Analytics",
+        "description": "Blend cloud and on-premises resources for flexibility and balance",
+        "url": "https://www.ibm.com/artificial-intelligence?lnk=flathl",
+        "hasMenu": true,
+        "hasMegapanel": true,
+        "menuSections": [
+          {
+            "heading": "",
+            "menuItems": [
+              {
+                "title": "IBM Consulting",
+                "titleEnglish": "IBM Consulting",
+                "url": "https://www.ibm.com/consulting?lnk=hpmco&lnk2=link",
+                "megapanelContent": {
+                  "headingTitle": "IBM Consulting",
+                  "headingUrl": "https://www.ibm.com/consulting?lnk=hpmco&lnk2=link",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Strategy Consulting",
+                        "titleEnglish": "Strategy Consulting",
+                        "url": "https://www.ibm.com/consulting/strategy?lnk=hpmco_bust&lnk2=learn"
+                      },
+                      {
+                        "title": "Experience Consulting",
+                        "titleEnglish": "Experience Consulting",
+                        "url": "https://www.ibm.com/consulting/experience?lnk=hpmco_buex&lnk2=learn"
+                      },
+                      {
+                        "title": "Operations Consulting",
+                        "titleEnglish": "Operations Consulting",
+                        "url": "https://www.ibm.com/consulting/operations?lnk=hpmco_buop&lnk2=learn"
+                      },
+                      {
+                        "title": "Technology Consulting",
+                        "titleEnglish": "Technology Consulting",
+                        "url": "https://www.ibm.com/consulting/technology?lnk=hpmco_bute&lnk2=learn"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/79a6c3cde7dd0665/original/megamenu-pictogram-business-process-service.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Business consulting services",
+                "titleEnglish": "Business process services",
+                "url": "https://www.ibm.com/services/business?lnk=hpmsc_bups",
+                "megapanelContent": {
+                  "headingTitle": "Business consulting services",
+                  "headingUrl": "https://www.ibm.com/services/business?lnk=hpmsc_bups",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Artificial intelligence services",
+                        "titleEnglish": "Artificial intelligence services",
+                        "url": "https://www.ibm.com/services/artificial-intelligence?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Automation",
+                        "titleEnglish": "Automation",
+                        "url": "https://www.ibm.com/cloud/automation/services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Big data & data platform",
+                        "titleEnglish": "Big data & data platform",
+                        "url": "https://www.ibm.com/services/big-data-services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Business process outsourcing",
+                        "titleEnglish": "Business process outsourcing",
+                        "url": "https://www.ibm.com/services/process/outsourcing?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Edge consulting",
+                        "titleEnglish": "Edge consulting",
+                        "url": "https://www.ibm.com/services/process/edge-services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Finance consulting and outsourcing services",
+                        "titleEnglish": "Finance transformation",
+                        "url": "https://www.ibm.com/services/process/finance-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "IBM Garage",
+                        "titleEnglish": "IBM Garages",
+                        "url": "https://www.ibm.com/garage?lnk=hpmsc_buas"
+                      },
+                      {
+                        "title": "Operations consulting",
+                        "titleEnglish": "IoT consulting",
+                        "url": "https://www.ibm.com/services/process/operations-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Procurement consulting and managed services",
+                        "titleEnglish": "Procurement & strategic sourcing",
+                        "url": "https://www.ibm.com/services/process/procurement-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Risk management consulting services",
+                        "titleEnglish": "Risk consulting & fraud management",
+                        "url": "https://www.ibm.com/services/process/risk-management?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Supply chain consulting services",
+                        "titleEnglish": "Supply chain",
+                        "url": "https://www.ibm.com/services/process/supply-chain?lnk=hpmsc_bups"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/79a6c3cde7dd0665/original/megamenu-pictogram-business-process-service.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Design & business strategy",
+                "titleEnglish": "Design & business strategy",
+                "url": "https://www.ibm.com/services/ibmix/?lnk=hpmsc_budbs",
+                "megapanelContent": {
+                  "headingTitle": "Design & business strategy",
+                  "headingUrl": "https://www.ibm.com/services/ibmix/?lnk=hpmsc_bubs",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Customer experience consulting",
+                        "titleEnglish": "Experience strategy",
+                        "url": "https://www.ibm.com/services/customer-experience-consulting?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "E-commerce consulting",
+                        "titleEnglish": "Digital strategy",
+                        "url": "https://www.ibm.com/services/ecommerce?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "Marketing consulting",
+                        "titleEnglish": "Marketing platforms",
+                        "url": "https://www.ibm.com/services/marketing-consulting?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "Salesforce consulting",
+                        "titleEnglish": "Salesforce consulting",
+                        "url": "https://www.ibm.com/services/salesforce?lnk=hpmsc_bubs"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/1b7522c50ea39ca/original/megamenu-pictogram-design-business-strategy.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Hybrid multicloud services",
+                "titleEnglish": "Hybrid multicloud services",
+                "url": "https://www.ibm.com/cloud/services?lnk=hpmsc_bups",
+                "megapanelContent": {
+                  "headingTitle": "Talent management services",
+                  "headingUrl": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "HR transformation services",
+                        "titleEnglish": "HR transformation",
+                        "url": "https://www.ibm.com/services/talent-management/hr-transformation?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent acquisition services",
+                        "titleEnglish": "Talent acquisition",
+                        "url": "https://www.ibm.com/services/talent-management/talent-acquisition?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent development services",
+                        "titleEnglish": "Talent development",
+                        "url": "https://www.ibm.com/services/talent-management/talent-development?lnk=hpmsc_buta"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/69e350b141e12bd5/original/megamenu-pictogram-talent-and-transformation.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Talent management services",
+                "titleEnglish": "Talent & transformation",
+                "url": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                "megapanelContent": {
+                  "headingTitle": "Talent management services",
+                  "headingUrl": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "HR transformation services",
+                        "titleEnglish": "HR transformation",
+                        "url": "https://www.ibm.com/services/talent-management/hr-transformation?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent acquisition services",
+                        "titleEnglish": "Talent acquisition",
+                        "url": "https://www.ibm.com/services/talent-management/talent-acquisition?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent development services",
+                        "titleEnglish": "Talent development",
+                        "url": "https://www.ibm.com/services/talent-management/talent-development?lnk=hpmsc_buta"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/69e350b141e12bd5/original/megamenu-pictogram-talent-and-transformation.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Application services",
+                "titleEnglish": "Application services",
+                "url": "https://www.ibm.com/services/applications?lnk=hpmsc_buas",
+                "megapanelContent": {
+                  "headingTitle": "Application services",
+                  "headingUrl": "https://www.ibm.com/services/applications?lnk=hpmsc_buas",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Application Modernization",
+                        "titleEnglish": "Application Modernization",
+                        "url": "https://www.ibm.com/services/cloud/modernize-applications?lnk=hpmsc_buas"
+                      },
+                      {
+                        "title": "Enterprise applications strategy",
+                        "titleEnglish": "Enterprise applications strategy",
+                        "url": "https://www.ibm.com/services/applications/enterprise?lnk=hpmsc_buas"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/2b7c180c68557dcb/original/megamenu-pictogram-application-services.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Security services",
+                "titleEnglish": "Security services",
+                "url": "https://www.ibm.com/security/services?lnk=hpmsc_buse",
+                "megapanelContent": {
+                  "headingTitle": "Security services",
+                  "headingUrl": "https://www.ibm.com/security/services?lnk=hpmsc_buse",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Application security",
+                        "titleEnglish": "Application security",
+                        "url": "https://www.ibm.com/security/services/application-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Cloud security",
+                        "titleEnglish": "Cloud security",
+                        "url": "https://www.ibm.com/security/services/cloud-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Data security",
+                        "titleEnglish": "Data security",
+                        "url": "https://www.ibm.com/security/services/data-security?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Identity & access management",
+                        "titleEnglish": "Identity & access management",
+                        "url": "https://www.ibm.com/security/services/identity-access-management?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Managed detection and response (MDR) services",
+                        "titleEnglish": "Managed detection and response (MDR) services",
+                        "url": "https://www.ibm.com/security/services/managed-detection-response?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Managed security",
+                        "titleEnglish": "Managed security",
+                        "url": "https://www.ibm.com/security/services/managed-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Secure Access Service Edge (SASE)",
+                        "titleEnglish": "Secure Access Service Edge (SASE)",
+                        "url": "https://www.ibm.com/security/services/secure-access-service-edge?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Security governance",
+                        "titleEnglish": "Security governance",
+                        "url": "https://www.ibm.com/security/services/security-governance?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Threat Management",
+                        "titleEnglish": "Threat Management",
+                        "url": "https://www.ibm.com/security/services/threat-management?lnk=hpmsc_bups"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/6ecec25a8489cf82/original/megamenu-pictogram-security-services.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Technology Support Services",
+                "titleEnglish": "Services for tech support",
+                "url": "https://www.ibm.com/services/technology-support?lnk=hpmsc_busv",
+                "megapanelContent": {
+                  "headingTitle": "Technology Support Services",
+                  "headingUrl": "https://www.ibm.com/services/technology-support?lnk=hpmsc_busv",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Open source",
+                        "titleEnglish": "Open source",
+                        "url": "https://www.ibm.com/services/technology-support/open-source?lnk=hpmsc_busv"
+                      },
+                      {
+                        "title": "Third party & multivendor",
+                        "titleEnglish": "Third party & multivendor",
+                        "url": "https://www.ibm.com/services/technology-support/multivendor-it?lnk=hpmsc_busv"
+                      },
+                      {
+                        "title": "IBM warranties and maintenance",
+                        "titleEnglish": "IBM warranties and maintenance",
+                        "url": "https://www.ibm.com/services/technology-support/hardware-software?lnk=hpmsc_busv"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/7056e2b83b04133e/original/megamenu-pictogram-services-for-tech-support.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Flexible payment plans",
+                "titleEnglish": "Flexible payment plans",
+                "url": "https://www.ibm.com/financing?lnk=hpmsc_bufi"
+              },{
+                "title": "View all products",
+                "titleEnglish": "View all products",
+                "url": "https://www.ibm.com/products?lnk=hpmps_buall",
+                "megaPanelViewAll": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Asset management",
+        "titleEnglish": "Asset management",
+        "description": "Blend cloud and on-premises resources for flexibility and balance",
+        "url": "https://www.ibm.com/artificial-intelligence?lnk=flathl",
+        "hasMenu": true,
+        "hasMegapanel": true,
+        "menuSections": [
+          {
+            "heading": "",
+            "menuItems": [
+              {
+                "title": "IBM Consulting",
+                "titleEnglish": "IBM Consulting",
+                "url": "https://www.ibm.com/consulting?lnk=hpmco&lnk2=link",
+                "megapanelContent": {
+                  "headingTitle": "IBM Consulting",
+                  "headingUrl": "https://www.ibm.com/consulting?lnk=hpmco&lnk2=link",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Strategy Consulting",
+                        "titleEnglish": "Strategy Consulting",
+                        "url": "https://www.ibm.com/consulting/strategy?lnk=hpmco_bust&lnk2=learn"
+                      },
+                      {
+                        "title": "Experience Consulting",
+                        "titleEnglish": "Experience Consulting",
+                        "url": "https://www.ibm.com/consulting/experience?lnk=hpmco_buex&lnk2=learn"
+                      },
+                      {
+                        "title": "Operations Consulting",
+                        "titleEnglish": "Operations Consulting",
+                        "url": "https://www.ibm.com/consulting/operations?lnk=hpmco_buop&lnk2=learn"
+                      },
+                      {
+                        "title": "Technology Consulting",
+                        "titleEnglish": "Technology Consulting",
+                        "url": "https://www.ibm.com/consulting/technology?lnk=hpmco_bute&lnk2=learn"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/79a6c3cde7dd0665/original/megamenu-pictogram-business-process-service.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Business consulting services",
+                "titleEnglish": "Business process services",
+                "url": "https://www.ibm.com/services/business?lnk=hpmsc_bups",
+                "megapanelContent": {
+                  "headingTitle": "Business consulting services",
+                  "headingUrl": "https://www.ibm.com/services/business?lnk=hpmsc_bups",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Artificial intelligence services",
+                        "titleEnglish": "Artificial intelligence services",
+                        "url": "https://www.ibm.com/services/artificial-intelligence?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Automation",
+                        "titleEnglish": "Automation",
+                        "url": "https://www.ibm.com/cloud/automation/services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Big data & data platform",
+                        "titleEnglish": "Big data & data platform",
+                        "url": "https://www.ibm.com/services/big-data-services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Business process outsourcing",
+                        "titleEnglish": "Business process outsourcing",
+                        "url": "https://www.ibm.com/services/process/outsourcing?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Edge consulting",
+                        "titleEnglish": "Edge consulting",
+                        "url": "https://www.ibm.com/services/process/edge-services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Finance consulting and outsourcing services",
+                        "titleEnglish": "Finance transformation",
+                        "url": "https://www.ibm.com/services/process/finance-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "IBM Garage",
+                        "titleEnglish": "IBM Garages",
+                        "url": "https://www.ibm.com/garage?lnk=hpmsc_buas"
+                      },
+                      {
+                        "title": "Operations consulting",
+                        "titleEnglish": "IoT consulting",
+                        "url": "https://www.ibm.com/services/process/operations-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Procurement consulting and managed services",
+                        "titleEnglish": "Procurement & strategic sourcing",
+                        "url": "https://www.ibm.com/services/process/procurement-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Risk management consulting services",
+                        "titleEnglish": "Risk consulting & fraud management",
+                        "url": "https://www.ibm.com/services/process/risk-management?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Supply chain consulting services",
+                        "titleEnglish": "Supply chain",
+                        "url": "https://www.ibm.com/services/process/supply-chain?lnk=hpmsc_bups"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/79a6c3cde7dd0665/original/megamenu-pictogram-business-process-service.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Design & business strategy",
+                "titleEnglish": "Design & business strategy",
+                "url": "https://www.ibm.com/services/ibmix/?lnk=hpmsc_budbs",
+                "megapanelContent": {
+                  "headingTitle": "Design & business strategy",
+                  "headingUrl": "https://www.ibm.com/services/ibmix/?lnk=hpmsc_bubs",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Customer experience consulting",
+                        "titleEnglish": "Experience strategy",
+                        "url": "https://www.ibm.com/services/customer-experience-consulting?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "E-commerce consulting",
+                        "titleEnglish": "Digital strategy",
+                        "url": "https://www.ibm.com/services/ecommerce?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "Marketing consulting",
+                        "titleEnglish": "Marketing platforms",
+                        "url": "https://www.ibm.com/services/marketing-consulting?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "Salesforce consulting",
+                        "titleEnglish": "Salesforce consulting",
+                        "url": "https://www.ibm.com/services/salesforce?lnk=hpmsc_bubs"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/1b7522c50ea39ca/original/megamenu-pictogram-design-business-strategy.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Hybrid multicloud services",
+                "titleEnglish": "Hybrid multicloud services",
+                "url": "https://www.ibm.com/cloud/services?lnk=hpmsc_bups",
+                "megapanelContent": {
+                  "headingTitle": "Talent management services",
+                  "headingUrl": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "HR transformation services",
+                        "titleEnglish": "HR transformation",
+                        "url": "https://www.ibm.com/services/talent-management/hr-transformation?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent acquisition services",
+                        "titleEnglish": "Talent acquisition",
+                        "url": "https://www.ibm.com/services/talent-management/talent-acquisition?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent development services",
+                        "titleEnglish": "Talent development",
+                        "url": "https://www.ibm.com/services/talent-management/talent-development?lnk=hpmsc_buta"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/69e350b141e12bd5/original/megamenu-pictogram-talent-and-transformation.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Talent management services",
+                "titleEnglish": "Talent & transformation",
+                "url": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                "megapanelContent": {
+                  "headingTitle": "Talent management services",
+                  "headingUrl": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "HR transformation services",
+                        "titleEnglish": "HR transformation",
+                        "url": "https://www.ibm.com/services/talent-management/hr-transformation?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent acquisition services",
+                        "titleEnglish": "Talent acquisition",
+                        "url": "https://www.ibm.com/services/talent-management/talent-acquisition?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent development services",
+                        "titleEnglish": "Talent development",
+                        "url": "https://www.ibm.com/services/talent-management/talent-development?lnk=hpmsc_buta"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/69e350b141e12bd5/original/megamenu-pictogram-talent-and-transformation.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Application services",
+                "titleEnglish": "Application services",
+                "url": "https://www.ibm.com/services/applications?lnk=hpmsc_buas",
+                "megapanelContent": {
+                  "headingTitle": "Application services",
+                  "headingUrl": "https://www.ibm.com/services/applications?lnk=hpmsc_buas",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Application Modernization",
+                        "titleEnglish": "Application Modernization",
+                        "url": "https://www.ibm.com/services/cloud/modernize-applications?lnk=hpmsc_buas"
+                      },
+                      {
+                        "title": "Enterprise applications strategy",
+                        "titleEnglish": "Enterprise applications strategy",
+                        "url": "https://www.ibm.com/services/applications/enterprise?lnk=hpmsc_buas"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/2b7c180c68557dcb/original/megamenu-pictogram-application-services.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Security services",
+                "titleEnglish": "Security services",
+                "url": "https://www.ibm.com/security/services?lnk=hpmsc_buse",
+                "megapanelContent": {
+                  "headingTitle": "Security services",
+                  "headingUrl": "https://www.ibm.com/security/services?lnk=hpmsc_buse",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Application security",
+                        "titleEnglish": "Application security",
+                        "url": "https://www.ibm.com/security/services/application-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Cloud security",
+                        "titleEnglish": "Cloud security",
+                        "url": "https://www.ibm.com/security/services/cloud-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Data security",
+                        "titleEnglish": "Data security",
+                        "url": "https://www.ibm.com/security/services/data-security?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Identity & access management",
+                        "titleEnglish": "Identity & access management",
+                        "url": "https://www.ibm.com/security/services/identity-access-management?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Managed detection and response (MDR) services",
+                        "titleEnglish": "Managed detection and response (MDR) services",
+                        "url": "https://www.ibm.com/security/services/managed-detection-response?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Managed security",
+                        "titleEnglish": "Managed security",
+                        "url": "https://www.ibm.com/security/services/managed-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Secure Access Service Edge (SASE)",
+                        "titleEnglish": "Secure Access Service Edge (SASE)",
+                        "url": "https://www.ibm.com/security/services/secure-access-service-edge?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Security governance",
+                        "titleEnglish": "Security governance",
+                        "url": "https://www.ibm.com/security/services/security-governance?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Threat Management",
+                        "titleEnglish": "Threat Management",
+                        "url": "https://www.ibm.com/security/services/threat-management?lnk=hpmsc_bups"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/6ecec25a8489cf82/original/megamenu-pictogram-security-services.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Technology Support Services",
+                "titleEnglish": "Services for tech support",
+                "url": "https://www.ibm.com/services/technology-support?lnk=hpmsc_busv",
+                "megapanelContent": {
+                  "headingTitle": "Technology Support Services",
+                  "headingUrl": "https://www.ibm.com/services/technology-support?lnk=hpmsc_busv",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Open source",
+                        "titleEnglish": "Open source",
+                        "url": "https://www.ibm.com/services/technology-support/open-source?lnk=hpmsc_busv"
+                      },
+                      {
+                        "title": "Third party & multivendor",
+                        "titleEnglish": "Third party & multivendor",
+                        "url": "https://www.ibm.com/services/technology-support/multivendor-it?lnk=hpmsc_busv"
+                      },
+                      {
+                        "title": "IBM warranties and maintenance",
+                        "titleEnglish": "IBM warranties and maintenance",
+                        "url": "https://www.ibm.com/services/technology-support/hardware-software?lnk=hpmsc_busv"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/7056e2b83b04133e/original/megamenu-pictogram-services-for-tech-support.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Flexible payment plans",
+                "titleEnglish": "Flexible payment plans",
+                "url": "https://www.ibm.com/financing?lnk=hpmsc_bufi"
+              },{
+                "title": "View all products",
+                "titleEnglish": "View all products",
+                "url": "https://www.ibm.com/products?lnk=hpmps_buall",
+                "megaPanelViewAll": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Business automation",
+        "titleEnglish": "Asset management",
+        "description": "Blend cloud and on-premises resources for flexibility and balance",
+        "url": "https://www.ibm.com/artificial-intelligence?lnk=flathl",
+        "hasMenu": true,
+        "hasMegapanel": true,
+        "menuSections": [
+          {
+            "heading": "",
+            "menuItems": [
+              {
+                "title": "IBM Consulting",
+                "titleEnglish": "IBM Consulting",
+                "url": "https://www.ibm.com/consulting?lnk=hpmco&lnk2=link",
+                "megapanelContent": {
+                  "headingTitle": "IBM Consulting",
+                  "headingUrl": "https://www.ibm.com/consulting?lnk=hpmco&lnk2=link",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Strategy Consulting",
+                        "titleEnglish": "Strategy Consulting",
+                        "url": "https://www.ibm.com/consulting/strategy?lnk=hpmco_bust&lnk2=learn"
+                      },
+                      {
+                        "title": "Experience Consulting",
+                        "titleEnglish": "Experience Consulting",
+                        "url": "https://www.ibm.com/consulting/experience?lnk=hpmco_buex&lnk2=learn"
+                      },
+                      {
+                        "title": "Operations Consulting",
+                        "titleEnglish": "Operations Consulting",
+                        "url": "https://www.ibm.com/consulting/operations?lnk=hpmco_buop&lnk2=learn"
+                      },
+                      {
+                        "title": "Technology Consulting",
+                        "titleEnglish": "Technology Consulting",
+                        "url": "https://www.ibm.com/consulting/technology?lnk=hpmco_bute&lnk2=learn"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/79a6c3cde7dd0665/original/megamenu-pictogram-business-process-service.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Business consulting services",
+                "titleEnglish": "Business process services",
+                "url": "https://www.ibm.com/services/business?lnk=hpmsc_bups",
+                "megapanelContent": {
+                  "headingTitle": "Business consulting services",
+                  "headingUrl": "https://www.ibm.com/services/business?lnk=hpmsc_bups",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Artificial intelligence services",
+                        "titleEnglish": "Artificial intelligence services",
+                        "url": "https://www.ibm.com/services/artificial-intelligence?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Automation",
+                        "titleEnglish": "Automation",
+                        "url": "https://www.ibm.com/cloud/automation/services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Big data & data platform",
+                        "titleEnglish": "Big data & data platform",
+                        "url": "https://www.ibm.com/services/big-data-services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Business process outsourcing",
+                        "titleEnglish": "Business process outsourcing",
+                        "url": "https://www.ibm.com/services/process/outsourcing?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Edge consulting",
+                        "titleEnglish": "Edge consulting",
+                        "url": "https://www.ibm.com/services/process/edge-services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Finance consulting and outsourcing services",
+                        "titleEnglish": "Finance transformation",
+                        "url": "https://www.ibm.com/services/process/finance-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "IBM Garage",
+                        "titleEnglish": "IBM Garages",
+                        "url": "https://www.ibm.com/garage?lnk=hpmsc_buas"
+                      },
+                      {
+                        "title": "Operations consulting",
+                        "titleEnglish": "IoT consulting",
+                        "url": "https://www.ibm.com/services/process/operations-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Procurement consulting and managed services",
+                        "titleEnglish": "Procurement & strategic sourcing",
+                        "url": "https://www.ibm.com/services/process/procurement-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Risk management consulting services",
+                        "titleEnglish": "Risk consulting & fraud management",
+                        "url": "https://www.ibm.com/services/process/risk-management?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Supply chain consulting services",
+                        "titleEnglish": "Supply chain",
+                        "url": "https://www.ibm.com/services/process/supply-chain?lnk=hpmsc_bups"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/79a6c3cde7dd0665/original/megamenu-pictogram-business-process-service.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Design & business strategy",
+                "titleEnglish": "Design & business strategy",
+                "url": "https://www.ibm.com/services/ibmix/?lnk=hpmsc_budbs",
+                "megapanelContent": {
+                  "headingTitle": "Design & business strategy",
+                  "headingUrl": "https://www.ibm.com/services/ibmix/?lnk=hpmsc_bubs",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Customer experience consulting",
+                        "titleEnglish": "Experience strategy",
+                        "url": "https://www.ibm.com/services/customer-experience-consulting?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "E-commerce consulting",
+                        "titleEnglish": "Digital strategy",
+                        "url": "https://www.ibm.com/services/ecommerce?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "Marketing consulting",
+                        "titleEnglish": "Marketing platforms",
+                        "url": "https://www.ibm.com/services/marketing-consulting?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "Salesforce consulting",
+                        "titleEnglish": "Salesforce consulting",
+                        "url": "https://www.ibm.com/services/salesforce?lnk=hpmsc_bubs"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/1b7522c50ea39ca/original/megamenu-pictogram-design-business-strategy.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Hybrid multicloud services",
+                "titleEnglish": "Hybrid multicloud services",
+                "url": "https://www.ibm.com/cloud/services?lnk=hpmsc_bups",
+                "megapanelContent": {
+                  "headingTitle": "Talent management services",
+                  "headingUrl": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "HR transformation services",
+                        "titleEnglish": "HR transformation",
+                        "url": "https://www.ibm.com/services/talent-management/hr-transformation?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent acquisition services",
+                        "titleEnglish": "Talent acquisition",
+                        "url": "https://www.ibm.com/services/talent-management/talent-acquisition?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent development services",
+                        "titleEnglish": "Talent development",
+                        "url": "https://www.ibm.com/services/talent-management/talent-development?lnk=hpmsc_buta"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/69e350b141e12bd5/original/megamenu-pictogram-talent-and-transformation.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Talent management services",
+                "titleEnglish": "Talent & transformation",
+                "url": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                "megapanelContent": {
+                  "headingTitle": "Talent management services",
+                  "headingUrl": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "HR transformation services",
+                        "titleEnglish": "HR transformation",
+                        "url": "https://www.ibm.com/services/talent-management/hr-transformation?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent acquisition services",
+                        "titleEnglish": "Talent acquisition",
+                        "url": "https://www.ibm.com/services/talent-management/talent-acquisition?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent development services",
+                        "titleEnglish": "Talent development",
+                        "url": "https://www.ibm.com/services/talent-management/talent-development?lnk=hpmsc_buta"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/69e350b141e12bd5/original/megamenu-pictogram-talent-and-transformation.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Application services",
+                "titleEnglish": "Application services",
+                "url": "https://www.ibm.com/services/applications?lnk=hpmsc_buas",
+                "megapanelContent": {
+                  "headingTitle": "Application services",
+                  "headingUrl": "https://www.ibm.com/services/applications?lnk=hpmsc_buas",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Application Modernization",
+                        "titleEnglish": "Application Modernization",
+                        "url": "https://www.ibm.com/services/cloud/modernize-applications?lnk=hpmsc_buas"
+                      },
+                      {
+                        "title": "Enterprise applications strategy",
+                        "titleEnglish": "Enterprise applications strategy",
+                        "url": "https://www.ibm.com/services/applications/enterprise?lnk=hpmsc_buas"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/2b7c180c68557dcb/original/megamenu-pictogram-application-services.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Security services",
+                "titleEnglish": "Security services",
+                "url": "https://www.ibm.com/security/services?lnk=hpmsc_buse",
+                "megapanelContent": {
+                  "headingTitle": "Security services",
+                  "headingUrl": "https://www.ibm.com/security/services?lnk=hpmsc_buse",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Application security",
+                        "titleEnglish": "Application security",
+                        "url": "https://www.ibm.com/security/services/application-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Cloud security",
+                        "titleEnglish": "Cloud security",
+                        "url": "https://www.ibm.com/security/services/cloud-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Data security",
+                        "titleEnglish": "Data security",
+                        "url": "https://www.ibm.com/security/services/data-security?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Identity & access management",
+                        "titleEnglish": "Identity & access management",
+                        "url": "https://www.ibm.com/security/services/identity-access-management?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Managed detection and response (MDR) services",
+                        "titleEnglish": "Managed detection and response (MDR) services",
+                        "url": "https://www.ibm.com/security/services/managed-detection-response?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Managed security",
+                        "titleEnglish": "Managed security",
+                        "url": "https://www.ibm.com/security/services/managed-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Secure Access Service Edge (SASE)",
+                        "titleEnglish": "Secure Access Service Edge (SASE)",
+                        "url": "https://www.ibm.com/security/services/secure-access-service-edge?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Security governance",
+                        "titleEnglish": "Security governance",
+                        "url": "https://www.ibm.com/security/services/security-governance?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Threat Management",
+                        "titleEnglish": "Threat Management",
+                        "url": "https://www.ibm.com/security/services/threat-management?lnk=hpmsc_bups"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/6ecec25a8489cf82/original/megamenu-pictogram-security-services.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Technology Support Services",
+                "titleEnglish": "Services for tech support",
+                "url": "https://www.ibm.com/services/technology-support?lnk=hpmsc_busv",
+                "megapanelContent": {
+                  "headingTitle": "Technology Support Services",
+                  "headingUrl": "https://www.ibm.com/services/technology-support?lnk=hpmsc_busv",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Open source",
+                        "titleEnglish": "Open source",
+                        "url": "https://www.ibm.com/services/technology-support/open-source?lnk=hpmsc_busv"
+                      },
+                      {
+                        "title": "Third party & multivendor",
+                        "titleEnglish": "Third party & multivendor",
+                        "url": "https://www.ibm.com/services/technology-support/multivendor-it?lnk=hpmsc_busv"
+                      },
+                      {
+                        "title": "IBM warranties and maintenance",
+                        "titleEnglish": "IBM warranties and maintenance",
+                        "url": "https://www.ibm.com/services/technology-support/hardware-software?lnk=hpmsc_busv"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/7056e2b83b04133e/original/megamenu-pictogram-services-for-tech-support.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Flexible payment plans",
+                "titleEnglish": "Flexible payment plans",
+                "url": "https://www.ibm.com/financing?lnk=hpmsc_bufi"
+              },{
+                "title": "View all products",
+                "titleEnglish": "View all products",
+                "url": "https://www.ibm.com/products?lnk=hpmps_buall",
+                "megaPanelViewAll": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Compute & servers",
+        "titleEnglish": "Compute & servers",
+        "description": "Blend cloud and on-premises resources for flexibility and balance",
+        "url": "https://www.ibm.com/artificial-intelligence?lnk=flathl",
+        "hasMenu": true,
+        "hasMegapanel": true,
+        "menuSections": [
+          {
+            "heading": "",
+            "menuItems": [
+              {
+                "title": "IBM Consulting",
+                "titleEnglish": "IBM Consulting",
+                "url": "https://www.ibm.com/consulting?lnk=hpmco&lnk2=link",
+                "megapanelContent": {
+                  "headingTitle": "IBM Consulting",
+                  "headingUrl": "https://www.ibm.com/consulting?lnk=hpmco&lnk2=link",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Strategy Consulting",
+                        "titleEnglish": "Strategy Consulting",
+                        "url": "https://www.ibm.com/consulting/strategy?lnk=hpmco_bust&lnk2=learn"
+                      },
+                      {
+                        "title": "Experience Consulting",
+                        "titleEnglish": "Experience Consulting",
+                        "url": "https://www.ibm.com/consulting/experience?lnk=hpmco_buex&lnk2=learn"
+                      },
+                      {
+                        "title": "Operations Consulting",
+                        "titleEnglish": "Operations Consulting",
+                        "url": "https://www.ibm.com/consulting/operations?lnk=hpmco_buop&lnk2=learn"
+                      },
+                      {
+                        "title": "Technology Consulting",
+                        "titleEnglish": "Technology Consulting",
+                        "url": "https://www.ibm.com/consulting/technology?lnk=hpmco_bute&lnk2=learn"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/79a6c3cde7dd0665/original/megamenu-pictogram-business-process-service.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Business consulting services",
+                "titleEnglish": "Business process services",
+                "url": "https://www.ibm.com/services/business?lnk=hpmsc_bups",
+                "megapanelContent": {
+                  "headingTitle": "Business consulting services",
+                  "headingUrl": "https://www.ibm.com/services/business?lnk=hpmsc_bups",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Artificial intelligence services",
+                        "titleEnglish": "Artificial intelligence services",
+                        "url": "https://www.ibm.com/services/artificial-intelligence?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Automation",
+                        "titleEnglish": "Automation",
+                        "url": "https://www.ibm.com/cloud/automation/services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Big data & data platform",
+                        "titleEnglish": "Big data & data platform",
+                        "url": "https://www.ibm.com/services/big-data-services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Business process outsourcing",
+                        "titleEnglish": "Business process outsourcing",
+                        "url": "https://www.ibm.com/services/process/outsourcing?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Edge consulting",
+                        "titleEnglish": "Edge consulting",
+                        "url": "https://www.ibm.com/services/process/edge-services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Finance consulting and outsourcing services",
+                        "titleEnglish": "Finance transformation",
+                        "url": "https://www.ibm.com/services/process/finance-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "IBM Garage",
+                        "titleEnglish": "IBM Garages",
+                        "url": "https://www.ibm.com/garage?lnk=hpmsc_buas"
+                      },
+                      {
+                        "title": "Operations consulting",
+                        "titleEnglish": "IoT consulting",
+                        "url": "https://www.ibm.com/services/process/operations-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Procurement consulting and managed services",
+                        "titleEnglish": "Procurement & strategic sourcing",
+                        "url": "https://www.ibm.com/services/process/procurement-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Risk management consulting services",
+                        "titleEnglish": "Risk consulting & fraud management",
+                        "url": "https://www.ibm.com/services/process/risk-management?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Supply chain consulting services",
+                        "titleEnglish": "Supply chain",
+                        "url": "https://www.ibm.com/services/process/supply-chain?lnk=hpmsc_bups"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/79a6c3cde7dd0665/original/megamenu-pictogram-business-process-service.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Design & business strategy",
+                "titleEnglish": "Design & business strategy",
+                "url": "https://www.ibm.com/services/ibmix/?lnk=hpmsc_budbs",
+                "megapanelContent": {
+                  "headingTitle": "Design & business strategy",
+                  "headingUrl": "https://www.ibm.com/services/ibmix/?lnk=hpmsc_bubs",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Customer experience consulting",
+                        "titleEnglish": "Experience strategy",
+                        "url": "https://www.ibm.com/services/customer-experience-consulting?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "E-commerce consulting",
+                        "titleEnglish": "Digital strategy",
+                        "url": "https://www.ibm.com/services/ecommerce?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "Marketing consulting",
+                        "titleEnglish": "Marketing platforms",
+                        "url": "https://www.ibm.com/services/marketing-consulting?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "Salesforce consulting",
+                        "titleEnglish": "Salesforce consulting",
+                        "url": "https://www.ibm.com/services/salesforce?lnk=hpmsc_bubs"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/1b7522c50ea39ca/original/megamenu-pictogram-design-business-strategy.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Hybrid multicloud services",
+                "titleEnglish": "Hybrid multicloud services",
+                "url": "https://www.ibm.com/cloud/services?lnk=hpmsc_bups",
+                "megapanelContent": {
+                  "headingTitle": "Talent management services",
+                  "headingUrl": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "HR transformation services",
+                        "titleEnglish": "HR transformation",
+                        "url": "https://www.ibm.com/services/talent-management/hr-transformation?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent acquisition services",
+                        "titleEnglish": "Talent acquisition",
+                        "url": "https://www.ibm.com/services/talent-management/talent-acquisition?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent development services",
+                        "titleEnglish": "Talent development",
+                        "url": "https://www.ibm.com/services/talent-management/talent-development?lnk=hpmsc_buta"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/69e350b141e12bd5/original/megamenu-pictogram-talent-and-transformation.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Talent management services",
+                "titleEnglish": "Talent & transformation",
+                "url": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                "megapanelContent": {
+                  "headingTitle": "Talent management services",
+                  "headingUrl": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "HR transformation services",
+                        "titleEnglish": "HR transformation",
+                        "url": "https://www.ibm.com/services/talent-management/hr-transformation?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent acquisition services",
+                        "titleEnglish": "Talent acquisition",
+                        "url": "https://www.ibm.com/services/talent-management/talent-acquisition?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent development services",
+                        "titleEnglish": "Talent development",
+                        "url": "https://www.ibm.com/services/talent-management/talent-development?lnk=hpmsc_buta"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/69e350b141e12bd5/original/megamenu-pictogram-talent-and-transformation.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Application services",
+                "titleEnglish": "Application services",
+                "url": "https://www.ibm.com/services/applications?lnk=hpmsc_buas",
+                "megapanelContent": {
+                  "headingTitle": "Application services",
+                  "headingUrl": "https://www.ibm.com/services/applications?lnk=hpmsc_buas",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Application Modernization",
+                        "titleEnglish": "Application Modernization",
+                        "url": "https://www.ibm.com/services/cloud/modernize-applications?lnk=hpmsc_buas"
+                      },
+                      {
+                        "title": "Enterprise applications strategy",
+                        "titleEnglish": "Enterprise applications strategy",
+                        "url": "https://www.ibm.com/services/applications/enterprise?lnk=hpmsc_buas"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/2b7c180c68557dcb/original/megamenu-pictogram-application-services.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Security services",
+                "titleEnglish": "Security services",
+                "url": "https://www.ibm.com/security/services?lnk=hpmsc_buse",
+                "megapanelContent": {
+                  "headingTitle": "Security services",
+                  "headingUrl": "https://www.ibm.com/security/services?lnk=hpmsc_buse",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Application security",
+                        "titleEnglish": "Application security",
+                        "url": "https://www.ibm.com/security/services/application-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Cloud security",
+                        "titleEnglish": "Cloud security",
+                        "url": "https://www.ibm.com/security/services/cloud-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Data security",
+                        "titleEnglish": "Data security",
+                        "url": "https://www.ibm.com/security/services/data-security?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Identity & access management",
+                        "titleEnglish": "Identity & access management",
+                        "url": "https://www.ibm.com/security/services/identity-access-management?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Managed detection and response (MDR) services",
+                        "titleEnglish": "Managed detection and response (MDR) services",
+                        "url": "https://www.ibm.com/security/services/managed-detection-response?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Managed security",
+                        "titleEnglish": "Managed security",
+                        "url": "https://www.ibm.com/security/services/managed-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Secure Access Service Edge (SASE)",
+                        "titleEnglish": "Secure Access Service Edge (SASE)",
+                        "url": "https://www.ibm.com/security/services/secure-access-service-edge?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Security governance",
+                        "titleEnglish": "Security governance",
+                        "url": "https://www.ibm.com/security/services/security-governance?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Threat Management",
+                        "titleEnglish": "Threat Management",
+                        "url": "https://www.ibm.com/security/services/threat-management?lnk=hpmsc_bups"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/6ecec25a8489cf82/original/megamenu-pictogram-security-services.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Technology Support Services",
+                "titleEnglish": "Services for tech support",
+                "url": "https://www.ibm.com/services/technology-support?lnk=hpmsc_busv",
+                "megapanelContent": {
+                  "headingTitle": "Technology Support Services",
+                  "headingUrl": "https://www.ibm.com/services/technology-support?lnk=hpmsc_busv",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Open source",
+                        "titleEnglish": "Open source",
+                        "url": "https://www.ibm.com/services/technology-support/open-source?lnk=hpmsc_busv"
+                      },
+                      {
+                        "title": "Third party & multivendor",
+                        "titleEnglish": "Third party & multivendor",
+                        "url": "https://www.ibm.com/services/technology-support/multivendor-it?lnk=hpmsc_busv"
+                      },
+                      {
+                        "title": "IBM warranties and maintenance",
+                        "titleEnglish": "IBM warranties and maintenance",
+                        "url": "https://www.ibm.com/services/technology-support/hardware-software?lnk=hpmsc_busv"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/7056e2b83b04133e/original/megamenu-pictogram-services-for-tech-support.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Flexible payment plans",
+                "titleEnglish": "Flexible payment plans",
+                "url": "https://www.ibm.com/financing?lnk=hpmsc_bufi"
+              },{
+                "title": "View all products",
+                "titleEnglish": "View all products",
+                "url": "https://www.ibm.com/products?lnk=hpmps_buall",
+                "megaPanelViewAll": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Databases",
+        "titleEnglish": "Databases",
+        "description": "Blend cloud and on-premises resources for flexibility and balance",
+        "url": "https://www.ibm.com/artificial-intelligence?lnk=flathl",
+        "hasMenu": true,
+        "hasMegapanel": true,
+        "menuSections": [
+          {
+            "heading": "",
+            "menuItems": [
+              {
+                "title": "IBM Consulting",
+                "titleEnglish": "IBM Consulting",
+                "url": "https://www.ibm.com/consulting?lnk=hpmco&lnk2=link",
+                "megapanelContent": {
+                  "headingTitle": "IBM Consulting",
+                  "headingUrl": "https://www.ibm.com/consulting?lnk=hpmco&lnk2=link",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Strategy Consulting",
+                        "titleEnglish": "Strategy Consulting",
+                        "url": "https://www.ibm.com/consulting/strategy?lnk=hpmco_bust&lnk2=learn"
+                      },
+                      {
+                        "title": "Experience Consulting",
+                        "titleEnglish": "Experience Consulting",
+                        "url": "https://www.ibm.com/consulting/experience?lnk=hpmco_buex&lnk2=learn"
+                      },
+                      {
+                        "title": "Operations Consulting",
+                        "titleEnglish": "Operations Consulting",
+                        "url": "https://www.ibm.com/consulting/operations?lnk=hpmco_buop&lnk2=learn"
+                      },
+                      {
+                        "title": "Technology Consulting",
+                        "titleEnglish": "Technology Consulting",
+                        "url": "https://www.ibm.com/consulting/technology?lnk=hpmco_bute&lnk2=learn"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/79a6c3cde7dd0665/original/megamenu-pictogram-business-process-service.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Business consulting services",
+                "titleEnglish": "Business process services",
+                "url": "https://www.ibm.com/services/business?lnk=hpmsc_bups",
+                "megapanelContent": {
+                  "headingTitle": "Business consulting services",
+                  "headingUrl": "https://www.ibm.com/services/business?lnk=hpmsc_bups",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Artificial intelligence services",
+                        "titleEnglish": "Artificial intelligence services",
+                        "url": "https://www.ibm.com/services/artificial-intelligence?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Automation",
+                        "titleEnglish": "Automation",
+                        "url": "https://www.ibm.com/cloud/automation/services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Big data & data platform",
+                        "titleEnglish": "Big data & data platform",
+                        "url": "https://www.ibm.com/services/big-data-services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Business process outsourcing",
+                        "titleEnglish": "Business process outsourcing",
+                        "url": "https://www.ibm.com/services/process/outsourcing?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Edge consulting",
+                        "titleEnglish": "Edge consulting",
+                        "url": "https://www.ibm.com/services/process/edge-services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Finance consulting and outsourcing services",
+                        "titleEnglish": "Finance transformation",
+                        "url": "https://www.ibm.com/services/process/finance-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "IBM Garage",
+                        "titleEnglish": "IBM Garages",
+                        "url": "https://www.ibm.com/garage?lnk=hpmsc_buas"
+                      },
+                      {
+                        "title": "Operations consulting",
+                        "titleEnglish": "IoT consulting",
+                        "url": "https://www.ibm.com/services/process/operations-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Procurement consulting and managed services",
+                        "titleEnglish": "Procurement & strategic sourcing",
+                        "url": "https://www.ibm.com/services/process/procurement-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Risk management consulting services",
+                        "titleEnglish": "Risk consulting & fraud management",
+                        "url": "https://www.ibm.com/services/process/risk-management?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Supply chain consulting services",
+                        "titleEnglish": "Supply chain",
+                        "url": "https://www.ibm.com/services/process/supply-chain?lnk=hpmsc_bups"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/79a6c3cde7dd0665/original/megamenu-pictogram-business-process-service.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Design & business strategy",
+                "titleEnglish": "Design & business strategy",
+                "url": "https://www.ibm.com/services/ibmix/?lnk=hpmsc_budbs",
+                "megapanelContent": {
+                  "headingTitle": "Design & business strategy",
+                  "headingUrl": "https://www.ibm.com/services/ibmix/?lnk=hpmsc_bubs",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Customer experience consulting",
+                        "titleEnglish": "Experience strategy",
+                        "url": "https://www.ibm.com/services/customer-experience-consulting?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "E-commerce consulting",
+                        "titleEnglish": "Digital strategy",
+                        "url": "https://www.ibm.com/services/ecommerce?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "Marketing consulting",
+                        "titleEnglish": "Marketing platforms",
+                        "url": "https://www.ibm.com/services/marketing-consulting?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "Salesforce consulting",
+                        "titleEnglish": "Salesforce consulting",
+                        "url": "https://www.ibm.com/services/salesforce?lnk=hpmsc_bubs"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/1b7522c50ea39ca/original/megamenu-pictogram-design-business-strategy.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Hybrid multicloud services",
+                "titleEnglish": "Hybrid multicloud services",
+                "url": "https://www.ibm.com/cloud/services?lnk=hpmsc_bups",
+                "megapanelContent": {
+                  "headingTitle": "Talent management services",
+                  "headingUrl": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "HR transformation services",
+                        "titleEnglish": "HR transformation",
+                        "url": "https://www.ibm.com/services/talent-management/hr-transformation?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent acquisition services",
+                        "titleEnglish": "Talent acquisition",
+                        "url": "https://www.ibm.com/services/talent-management/talent-acquisition?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent development services",
+                        "titleEnglish": "Talent development",
+                        "url": "https://www.ibm.com/services/talent-management/talent-development?lnk=hpmsc_buta"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/69e350b141e12bd5/original/megamenu-pictogram-talent-and-transformation.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Talent management services",
+                "titleEnglish": "Talent & transformation",
+                "url": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                "megapanelContent": {
+                  "headingTitle": "Talent management services",
+                  "headingUrl": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "HR transformation services",
+                        "titleEnglish": "HR transformation",
+                        "url": "https://www.ibm.com/services/talent-management/hr-transformation?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent acquisition services",
+                        "titleEnglish": "Talent acquisition",
+                        "url": "https://www.ibm.com/services/talent-management/talent-acquisition?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent development services",
+                        "titleEnglish": "Talent development",
+                        "url": "https://www.ibm.com/services/talent-management/talent-development?lnk=hpmsc_buta"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/69e350b141e12bd5/original/megamenu-pictogram-talent-and-transformation.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Application services",
+                "titleEnglish": "Application services",
+                "url": "https://www.ibm.com/services/applications?lnk=hpmsc_buas",
+                "megapanelContent": {
+                  "headingTitle": "Application services",
+                  "headingUrl": "https://www.ibm.com/services/applications?lnk=hpmsc_buas",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Application Modernization",
+                        "titleEnglish": "Application Modernization",
+                        "url": "https://www.ibm.com/services/cloud/modernize-applications?lnk=hpmsc_buas"
+                      },
+                      {
+                        "title": "Enterprise applications strategy",
+                        "titleEnglish": "Enterprise applications strategy",
+                        "url": "https://www.ibm.com/services/applications/enterprise?lnk=hpmsc_buas"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/2b7c180c68557dcb/original/megamenu-pictogram-application-services.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Security services",
+                "titleEnglish": "Security services",
+                "url": "https://www.ibm.com/security/services?lnk=hpmsc_buse",
+                "megapanelContent": {
+                  "headingTitle": "Security services",
+                  "headingUrl": "https://www.ibm.com/security/services?lnk=hpmsc_buse",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Application security",
+                        "titleEnglish": "Application security",
+                        "url": "https://www.ibm.com/security/services/application-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Cloud security",
+                        "titleEnglish": "Cloud security",
+                        "url": "https://www.ibm.com/security/services/cloud-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Data security",
+                        "titleEnglish": "Data security",
+                        "url": "https://www.ibm.com/security/services/data-security?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Identity & access management",
+                        "titleEnglish": "Identity & access management",
+                        "url": "https://www.ibm.com/security/services/identity-access-management?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Managed detection and response (MDR) services",
+                        "titleEnglish": "Managed detection and response (MDR) services",
+                        "url": "https://www.ibm.com/security/services/managed-detection-response?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Managed security",
+                        "titleEnglish": "Managed security",
+                        "url": "https://www.ibm.com/security/services/managed-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Secure Access Service Edge (SASE)",
+                        "titleEnglish": "Secure Access Service Edge (SASE)",
+                        "url": "https://www.ibm.com/security/services/secure-access-service-edge?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Security governance",
+                        "titleEnglish": "Security governance",
+                        "url": "https://www.ibm.com/security/services/security-governance?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Threat Management",
+                        "titleEnglish": "Threat Management",
+                        "url": "https://www.ibm.com/security/services/threat-management?lnk=hpmsc_bups"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/6ecec25a8489cf82/original/megamenu-pictogram-security-services.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Technology Support Services",
+                "titleEnglish": "Services for tech support",
+                "url": "https://www.ibm.com/services/technology-support?lnk=hpmsc_busv",
+                "megapanelContent": {
+                  "headingTitle": "Technology Support Services",
+                  "headingUrl": "https://www.ibm.com/services/technology-support?lnk=hpmsc_busv",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Open source",
+                        "titleEnglish": "Open source",
+                        "url": "https://www.ibm.com/services/technology-support/open-source?lnk=hpmsc_busv"
+                      },
+                      {
+                        "title": "Third party & multivendor",
+                        "titleEnglish": "Third party & multivendor",
+                        "url": "https://www.ibm.com/services/technology-support/multivendor-it?lnk=hpmsc_busv"
+                      },
+                      {
+                        "title": "IBM warranties and maintenance",
+                        "titleEnglish": "IBM warranties and maintenance",
+                        "url": "https://www.ibm.com/services/technology-support/hardware-software?lnk=hpmsc_busv"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/7056e2b83b04133e/original/megamenu-pictogram-services-for-tech-support.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Flexible payment plans",
+                "titleEnglish": "Flexible payment plans",
+                "url": "https://www.ibm.com/financing?lnk=hpmsc_bufi"
+              },{
+                "title": "View all products",
+                "titleEnglish": "View all products",
+                "url": "https://www.ibm.com/products?lnk=hpmps_buall",
+                "megaPanelViewAll": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "DevOps",
+        "titleEnglish": "DevOps",
+        "description": "Blend cloud and on-premises resources for flexibility and balance",
+        "url": "https://www.ibm.com/artificial-intelligence?lnk=flathl",
+        "hasMenu": true,
+        "hasMegapanel": true,
+        "menuSections": [
+          {
+            "heading": "",
+            "menuItems": [
+              {
+                "title": "IBM Consulting",
+                "titleEnglish": "IBM Consulting",
+                "url": "https://www.ibm.com/consulting?lnk=hpmco&lnk2=link",
+                "megapanelContent": {
+                  "headingTitle": "IBM Consulting",
+                  "headingUrl": "https://www.ibm.com/consulting?lnk=hpmco&lnk2=link",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Strategy Consulting",
+                        "titleEnglish": "Strategy Consulting",
+                        "url": "https://www.ibm.com/consulting/strategy?lnk=hpmco_bust&lnk2=learn"
+                      },
+                      {
+                        "title": "Experience Consulting",
+                        "titleEnglish": "Experience Consulting",
+                        "url": "https://www.ibm.com/consulting/experience?lnk=hpmco_buex&lnk2=learn"
+                      },
+                      {
+                        "title": "Operations Consulting",
+                        "titleEnglish": "Operations Consulting",
+                        "url": "https://www.ibm.com/consulting/operations?lnk=hpmco_buop&lnk2=learn"
+                      },
+                      {
+                        "title": "Technology Consulting",
+                        "titleEnglish": "Technology Consulting",
+                        "url": "https://www.ibm.com/consulting/technology?lnk=hpmco_bute&lnk2=learn"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/79a6c3cde7dd0665/original/megamenu-pictogram-business-process-service.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Business consulting services",
+                "titleEnglish": "Business process services",
+                "url": "https://www.ibm.com/services/business?lnk=hpmsc_bups",
+                "megapanelContent": {
+                  "headingTitle": "Business consulting services",
+                  "headingUrl": "https://www.ibm.com/services/business?lnk=hpmsc_bups",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Artificial intelligence services",
+                        "titleEnglish": "Artificial intelligence services",
+                        "url": "https://www.ibm.com/services/artificial-intelligence?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Automation",
+                        "titleEnglish": "Automation",
+                        "url": "https://www.ibm.com/cloud/automation/services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Big data & data platform",
+                        "titleEnglish": "Big data & data platform",
+                        "url": "https://www.ibm.com/services/big-data-services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Business process outsourcing",
+                        "titleEnglish": "Business process outsourcing",
+                        "url": "https://www.ibm.com/services/process/outsourcing?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Edge consulting",
+                        "titleEnglish": "Edge consulting",
+                        "url": "https://www.ibm.com/services/process/edge-services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Finance consulting and outsourcing services",
+                        "titleEnglish": "Finance transformation",
+                        "url": "https://www.ibm.com/services/process/finance-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "IBM Garage",
+                        "titleEnglish": "IBM Garages",
+                        "url": "https://www.ibm.com/garage?lnk=hpmsc_buas"
+                      },
+                      {
+                        "title": "Operations consulting",
+                        "titleEnglish": "IoT consulting",
+                        "url": "https://www.ibm.com/services/process/operations-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Procurement consulting and managed services",
+                        "titleEnglish": "Procurement & strategic sourcing",
+                        "url": "https://www.ibm.com/services/process/procurement-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Risk management consulting services",
+                        "titleEnglish": "Risk consulting & fraud management",
+                        "url": "https://www.ibm.com/services/process/risk-management?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Supply chain consulting services",
+                        "titleEnglish": "Supply chain",
+                        "url": "https://www.ibm.com/services/process/supply-chain?lnk=hpmsc_bups"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/79a6c3cde7dd0665/original/megamenu-pictogram-business-process-service.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Design & business strategy",
+                "titleEnglish": "Design & business strategy",
+                "url": "https://www.ibm.com/services/ibmix/?lnk=hpmsc_budbs",
+                "megapanelContent": {
+                  "headingTitle": "Design & business strategy",
+                  "headingUrl": "https://www.ibm.com/services/ibmix/?lnk=hpmsc_bubs",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Customer experience consulting",
+                        "titleEnglish": "Experience strategy",
+                        "url": "https://www.ibm.com/services/customer-experience-consulting?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "E-commerce consulting",
+                        "titleEnglish": "Digital strategy",
+                        "url": "https://www.ibm.com/services/ecommerce?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "Marketing consulting",
+                        "titleEnglish": "Marketing platforms",
+                        "url": "https://www.ibm.com/services/marketing-consulting?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "Salesforce consulting",
+                        "titleEnglish": "Salesforce consulting",
+                        "url": "https://www.ibm.com/services/salesforce?lnk=hpmsc_bubs"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/1b7522c50ea39ca/original/megamenu-pictogram-design-business-strategy.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Hybrid multicloud services",
+                "titleEnglish": "Hybrid multicloud services",
+                "url": "https://www.ibm.com/cloud/services?lnk=hpmsc_bups",
+                "megapanelContent": {
+                  "headingTitle": "Talent management services",
+                  "headingUrl": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "HR transformation services",
+                        "titleEnglish": "HR transformation",
+                        "url": "https://www.ibm.com/services/talent-management/hr-transformation?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent acquisition services",
+                        "titleEnglish": "Talent acquisition",
+                        "url": "https://www.ibm.com/services/talent-management/talent-acquisition?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent development services",
+                        "titleEnglish": "Talent development",
+                        "url": "https://www.ibm.com/services/talent-management/talent-development?lnk=hpmsc_buta"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/69e350b141e12bd5/original/megamenu-pictogram-talent-and-transformation.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Talent management services",
+                "titleEnglish": "Talent & transformation",
+                "url": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                "megapanelContent": {
+                  "headingTitle": "Talent management services",
+                  "headingUrl": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "HR transformation services",
+                        "titleEnglish": "HR transformation",
+                        "url": "https://www.ibm.com/services/talent-management/hr-transformation?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent acquisition services",
+                        "titleEnglish": "Talent acquisition",
+                        "url": "https://www.ibm.com/services/talent-management/talent-acquisition?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent development services",
+                        "titleEnglish": "Talent development",
+                        "url": "https://www.ibm.com/services/talent-management/talent-development?lnk=hpmsc_buta"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/69e350b141e12bd5/original/megamenu-pictogram-talent-and-transformation.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Application services",
+                "titleEnglish": "Application services",
+                "url": "https://www.ibm.com/services/applications?lnk=hpmsc_buas",
+                "megapanelContent": {
+                  "headingTitle": "Application services",
+                  "headingUrl": "https://www.ibm.com/services/applications?lnk=hpmsc_buas",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Application Modernization",
+                        "titleEnglish": "Application Modernization",
+                        "url": "https://www.ibm.com/services/cloud/modernize-applications?lnk=hpmsc_buas"
+                      },
+                      {
+                        "title": "Enterprise applications strategy",
+                        "titleEnglish": "Enterprise applications strategy",
+                        "url": "https://www.ibm.com/services/applications/enterprise?lnk=hpmsc_buas"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/2b7c180c68557dcb/original/megamenu-pictogram-application-services.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Security services",
+                "titleEnglish": "Security services",
+                "url": "https://www.ibm.com/security/services?lnk=hpmsc_buse",
+                "megapanelContent": {
+                  "headingTitle": "Security services",
+                  "headingUrl": "https://www.ibm.com/security/services?lnk=hpmsc_buse",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Application security",
+                        "titleEnglish": "Application security",
+                        "url": "https://www.ibm.com/security/services/application-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Cloud security",
+                        "titleEnglish": "Cloud security",
+                        "url": "https://www.ibm.com/security/services/cloud-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Data security",
+                        "titleEnglish": "Data security",
+                        "url": "https://www.ibm.com/security/services/data-security?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Identity & access management",
+                        "titleEnglish": "Identity & access management",
+                        "url": "https://www.ibm.com/security/services/identity-access-management?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Managed detection and response (MDR) services",
+                        "titleEnglish": "Managed detection and response (MDR) services",
+                        "url": "https://www.ibm.com/security/services/managed-detection-response?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Managed security",
+                        "titleEnglish": "Managed security",
+                        "url": "https://www.ibm.com/security/services/managed-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Secure Access Service Edge (SASE)",
+                        "titleEnglish": "Secure Access Service Edge (SASE)",
+                        "url": "https://www.ibm.com/security/services/secure-access-service-edge?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Security governance",
+                        "titleEnglish": "Security governance",
+                        "url": "https://www.ibm.com/security/services/security-governance?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Threat Management",
+                        "titleEnglish": "Threat Management",
+                        "url": "https://www.ibm.com/security/services/threat-management?lnk=hpmsc_bups"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/6ecec25a8489cf82/original/megamenu-pictogram-security-services.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Technology Support Services",
+                "titleEnglish": "Services for tech support",
+                "url": "https://www.ibm.com/services/technology-support?lnk=hpmsc_busv",
+                "megapanelContent": {
+                  "headingTitle": "Technology Support Services",
+                  "headingUrl": "https://www.ibm.com/services/technology-support?lnk=hpmsc_busv",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Open source",
+                        "titleEnglish": "Open source",
+                        "url": "https://www.ibm.com/services/technology-support/open-source?lnk=hpmsc_busv"
+                      },
+                      {
+                        "title": "Third party & multivendor",
+                        "titleEnglish": "Third party & multivendor",
+                        "url": "https://www.ibm.com/services/technology-support/multivendor-it?lnk=hpmsc_busv"
+                      },
+                      {
+                        "title": "IBM warranties and maintenance",
+                        "titleEnglish": "IBM warranties and maintenance",
+                        "url": "https://www.ibm.com/services/technology-support/hardware-software?lnk=hpmsc_busv"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/7056e2b83b04133e/original/megamenu-pictogram-services-for-tech-support.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Flexible payment plans",
+                "titleEnglish": "Flexible payment plans",
+                "url": "https://www.ibm.com/financing?lnk=hpmsc_bufi"
+              },{
+                "title": "View all products",
+                "titleEnglish": "View all products",
+                "url": "https://www.ibm.com/products?lnk=hpmps_buall",
+                "megaPanelViewAll": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "IT automation",
+        "titleEnglish": "IT automation",
+        "description": "Blend cloud and on-premises resources for flexibility and balance",
+        "url": "https://www.ibm.com/artificial-intelligence?lnk=flathl",
+        "hasMenu": true,
+        "hasMegapanel": true,
+        "menuSections": [
+          {
+            "heading": "",
+            "menuItems": [
+              {
+                "title": "IBM Consulting",
+                "titleEnglish": "IBM Consulting",
+                "url": "https://www.ibm.com/consulting?lnk=hpmco&lnk2=link",
+                "megapanelContent": {
+                  "headingTitle": "IBM Consulting",
+                  "headingUrl": "https://www.ibm.com/consulting?lnk=hpmco&lnk2=link",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Strategy Consulting",
+                        "titleEnglish": "Strategy Consulting",
+                        "url": "https://www.ibm.com/consulting/strategy?lnk=hpmco_bust&lnk2=learn"
+                      },
+                      {
+                        "title": "Experience Consulting",
+                        "titleEnglish": "Experience Consulting",
+                        "url": "https://www.ibm.com/consulting/experience?lnk=hpmco_buex&lnk2=learn"
+                      },
+                      {
+                        "title": "Operations Consulting",
+                        "titleEnglish": "Operations Consulting",
+                        "url": "https://www.ibm.com/consulting/operations?lnk=hpmco_buop&lnk2=learn"
+                      },
+                      {
+                        "title": "Technology Consulting",
+                        "titleEnglish": "Technology Consulting",
+                        "url": "https://www.ibm.com/consulting/technology?lnk=hpmco_bute&lnk2=learn"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/79a6c3cde7dd0665/original/megamenu-pictogram-business-process-service.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Business consulting services",
+                "titleEnglish": "Business process services",
+                "url": "https://www.ibm.com/services/business?lnk=hpmsc_bups",
+                "megapanelContent": {
+                  "headingTitle": "Business consulting services",
+                  "headingUrl": "https://www.ibm.com/services/business?lnk=hpmsc_bups",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Artificial intelligence services",
+                        "titleEnglish": "Artificial intelligence services",
+                        "url": "https://www.ibm.com/services/artificial-intelligence?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Automation",
+                        "titleEnglish": "Automation",
+                        "url": "https://www.ibm.com/cloud/automation/services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Big data & data platform",
+                        "titleEnglish": "Big data & data platform",
+                        "url": "https://www.ibm.com/services/big-data-services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Business process outsourcing",
+                        "titleEnglish": "Business process outsourcing",
+                        "url": "https://www.ibm.com/services/process/outsourcing?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Edge consulting",
+                        "titleEnglish": "Edge consulting",
+                        "url": "https://www.ibm.com/services/process/edge-services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Finance consulting and outsourcing services",
+                        "titleEnglish": "Finance transformation",
+                        "url": "https://www.ibm.com/services/process/finance-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "IBM Garage",
+                        "titleEnglish": "IBM Garages",
+                        "url": "https://www.ibm.com/garage?lnk=hpmsc_buas"
+                      },
+                      {
+                        "title": "Operations consulting",
+                        "titleEnglish": "IoT consulting",
+                        "url": "https://www.ibm.com/services/process/operations-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Procurement consulting and managed services",
+                        "titleEnglish": "Procurement & strategic sourcing",
+                        "url": "https://www.ibm.com/services/process/procurement-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Risk management consulting services",
+                        "titleEnglish": "Risk consulting & fraud management",
+                        "url": "https://www.ibm.com/services/process/risk-management?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Supply chain consulting services",
+                        "titleEnglish": "Supply chain",
+                        "url": "https://www.ibm.com/services/process/supply-chain?lnk=hpmsc_bups"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/79a6c3cde7dd0665/original/megamenu-pictogram-business-process-service.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Design & business strategy",
+                "titleEnglish": "Design & business strategy",
+                "url": "https://www.ibm.com/services/ibmix/?lnk=hpmsc_budbs",
+                "megapanelContent": {
+                  "headingTitle": "Design & business strategy",
+                  "headingUrl": "https://www.ibm.com/services/ibmix/?lnk=hpmsc_bubs",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Customer experience consulting",
+                        "titleEnglish": "Experience strategy",
+                        "url": "https://www.ibm.com/services/customer-experience-consulting?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "E-commerce consulting",
+                        "titleEnglish": "Digital strategy",
+                        "url": "https://www.ibm.com/services/ecommerce?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "Marketing consulting",
+                        "titleEnglish": "Marketing platforms",
+                        "url": "https://www.ibm.com/services/marketing-consulting?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "Salesforce consulting",
+                        "titleEnglish": "Salesforce consulting",
+                        "url": "https://www.ibm.com/services/salesforce?lnk=hpmsc_bubs"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/1b7522c50ea39ca/original/megamenu-pictogram-design-business-strategy.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Hybrid multicloud services",
+                "titleEnglish": "Hybrid multicloud services",
+                "url": "https://www.ibm.com/cloud/services?lnk=hpmsc_bups",
+                "megapanelContent": {
+                  "headingTitle": "Talent management services",
+                  "headingUrl": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "HR transformation services",
+                        "titleEnglish": "HR transformation",
+                        "url": "https://www.ibm.com/services/talent-management/hr-transformation?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent acquisition services",
+                        "titleEnglish": "Talent acquisition",
+                        "url": "https://www.ibm.com/services/talent-management/talent-acquisition?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent development services",
+                        "titleEnglish": "Talent development",
+                        "url": "https://www.ibm.com/services/talent-management/talent-development?lnk=hpmsc_buta"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/69e350b141e12bd5/original/megamenu-pictogram-talent-and-transformation.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Talent management services",
+                "titleEnglish": "Talent & transformation",
+                "url": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                "megapanelContent": {
+                  "headingTitle": "Talent management services",
+                  "headingUrl": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "HR transformation services",
+                        "titleEnglish": "HR transformation",
+                        "url": "https://www.ibm.com/services/talent-management/hr-transformation?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent acquisition services",
+                        "titleEnglish": "Talent acquisition",
+                        "url": "https://www.ibm.com/services/talent-management/talent-acquisition?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent development services",
+                        "titleEnglish": "Talent development",
+                        "url": "https://www.ibm.com/services/talent-management/talent-development?lnk=hpmsc_buta"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/69e350b141e12bd5/original/megamenu-pictogram-talent-and-transformation.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Application services",
+                "titleEnglish": "Application services",
+                "url": "https://www.ibm.com/services/applications?lnk=hpmsc_buas",
+                "megapanelContent": {
+                  "headingTitle": "Application services",
+                  "headingUrl": "https://www.ibm.com/services/applications?lnk=hpmsc_buas",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Application Modernization",
+                        "titleEnglish": "Application Modernization",
+                        "url": "https://www.ibm.com/services/cloud/modernize-applications?lnk=hpmsc_buas"
+                      },
+                      {
+                        "title": "Enterprise applications strategy",
+                        "titleEnglish": "Enterprise applications strategy",
+                        "url": "https://www.ibm.com/services/applications/enterprise?lnk=hpmsc_buas"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/2b7c180c68557dcb/original/megamenu-pictogram-application-services.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Security services",
+                "titleEnglish": "Security services",
+                "url": "https://www.ibm.com/security/services?lnk=hpmsc_buse",
+                "megapanelContent": {
+                  "headingTitle": "Security services",
+                  "headingUrl": "https://www.ibm.com/security/services?lnk=hpmsc_buse",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Application security",
+                        "titleEnglish": "Application security",
+                        "url": "https://www.ibm.com/security/services/application-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Cloud security",
+                        "titleEnglish": "Cloud security",
+                        "url": "https://www.ibm.com/security/services/cloud-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Data security",
+                        "titleEnglish": "Data security",
+                        "url": "https://www.ibm.com/security/services/data-security?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Identity & access management",
+                        "titleEnglish": "Identity & access management",
+                        "url": "https://www.ibm.com/security/services/identity-access-management?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Managed detection and response (MDR) services",
+                        "titleEnglish": "Managed detection and response (MDR) services",
+                        "url": "https://www.ibm.com/security/services/managed-detection-response?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Managed security",
+                        "titleEnglish": "Managed security",
+                        "url": "https://www.ibm.com/security/services/managed-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Secure Access Service Edge (SASE)",
+                        "titleEnglish": "Secure Access Service Edge (SASE)",
+                        "url": "https://www.ibm.com/security/services/secure-access-service-edge?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Security governance",
+                        "titleEnglish": "Security governance",
+                        "url": "https://www.ibm.com/security/services/security-governance?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Threat Management",
+                        "titleEnglish": "Threat Management",
+                        "url": "https://www.ibm.com/security/services/threat-management?lnk=hpmsc_bups"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/6ecec25a8489cf82/original/megamenu-pictogram-security-services.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Technology Support Services",
+                "titleEnglish": "Services for tech support",
+                "url": "https://www.ibm.com/services/technology-support?lnk=hpmsc_busv",
+                "megapanelContent": {
+                  "headingTitle": "Technology Support Services",
+                  "headingUrl": "https://www.ibm.com/services/technology-support?lnk=hpmsc_busv",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Open source",
+                        "titleEnglish": "Open source",
+                        "url": "https://www.ibm.com/services/technology-support/open-source?lnk=hpmsc_busv"
+                      },
+                      {
+                        "title": "Third party & multivendor",
+                        "titleEnglish": "Third party & multivendor",
+                        "url": "https://www.ibm.com/services/technology-support/multivendor-it?lnk=hpmsc_busv"
+                      },
+                      {
+                        "title": "IBM warranties and maintenance",
+                        "titleEnglish": "IBM warranties and maintenance",
+                        "url": "https://www.ibm.com/services/technology-support/hardware-software?lnk=hpmsc_busv"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/7056e2b83b04133e/original/megamenu-pictogram-services-for-tech-support.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Flexible payment plans",
+                "titleEnglish": "Flexible payment plans",
+                "url": "https://www.ibm.com/financing?lnk=hpmsc_bufi"
+              },{
+                "title": "View all products",
+                "titleEnglish": "View all products",
+                "url": "https://www.ibm.com/products?lnk=hpmps_buall",
+                "megaPanelViewAll": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Middleware",
+        "titleEnglish": "Middleware",
+        "description": "Blend cloud and on-premises resources for flexibility and balance",
+        "url": "https://www.ibm.com/artificial-intelligence?lnk=flathl",
+        "hasMenu": true,
+        "hasMegapanel": true,
+        "menuSections": [
+          {
+            "heading": "",
+            "menuItems": [
+              {
+                "title": "IBM Consulting",
+                "titleEnglish": "IBM Consulting",
+                "url": "https://www.ibm.com/consulting?lnk=hpmco&lnk2=link",
+                "megapanelContent": {
+                  "headingTitle": "IBM Consulting",
+                  "headingUrl": "https://www.ibm.com/consulting?lnk=hpmco&lnk2=link",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Strategy Consulting",
+                        "titleEnglish": "Strategy Consulting",
+                        "url": "https://www.ibm.com/consulting/strategy?lnk=hpmco_bust&lnk2=learn"
+                      },
+                      {
+                        "title": "Experience Consulting",
+                        "titleEnglish": "Experience Consulting",
+                        "url": "https://www.ibm.com/consulting/experience?lnk=hpmco_buex&lnk2=learn"
+                      },
+                      {
+                        "title": "Operations Consulting",
+                        "titleEnglish": "Operations Consulting",
+                        "url": "https://www.ibm.com/consulting/operations?lnk=hpmco_buop&lnk2=learn"
+                      },
+                      {
+                        "title": "Technology Consulting",
+                        "titleEnglish": "Technology Consulting",
+                        "url": "https://www.ibm.com/consulting/technology?lnk=hpmco_bute&lnk2=learn"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/79a6c3cde7dd0665/original/megamenu-pictogram-business-process-service.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Business consulting services",
+                "titleEnglish": "Business process services",
+                "url": "https://www.ibm.com/services/business?lnk=hpmsc_bups",
+                "megapanelContent": {
+                  "headingTitle": "Business consulting services",
+                  "headingUrl": "https://www.ibm.com/services/business?lnk=hpmsc_bups",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Artificial intelligence services",
+                        "titleEnglish": "Artificial intelligence services",
+                        "url": "https://www.ibm.com/services/artificial-intelligence?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Automation",
+                        "titleEnglish": "Automation",
+                        "url": "https://www.ibm.com/cloud/automation/services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Big data & data platform",
+                        "titleEnglish": "Big data & data platform",
+                        "url": "https://www.ibm.com/services/big-data-services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Business process outsourcing",
+                        "titleEnglish": "Business process outsourcing",
+                        "url": "https://www.ibm.com/services/process/outsourcing?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Edge consulting",
+                        "titleEnglish": "Edge consulting",
+                        "url": "https://www.ibm.com/services/process/edge-services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Finance consulting and outsourcing services",
+                        "titleEnglish": "Finance transformation",
+                        "url": "https://www.ibm.com/services/process/finance-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "IBM Garage",
+                        "titleEnglish": "IBM Garages",
+                        "url": "https://www.ibm.com/garage?lnk=hpmsc_buas"
+                      },
+                      {
+                        "title": "Operations consulting",
+                        "titleEnglish": "IoT consulting",
+                        "url": "https://www.ibm.com/services/process/operations-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Procurement consulting and managed services",
+                        "titleEnglish": "Procurement & strategic sourcing",
+                        "url": "https://www.ibm.com/services/process/procurement-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Risk management consulting services",
+                        "titleEnglish": "Risk consulting & fraud management",
+                        "url": "https://www.ibm.com/services/process/risk-management?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Supply chain consulting services",
+                        "titleEnglish": "Supply chain",
+                        "url": "https://www.ibm.com/services/process/supply-chain?lnk=hpmsc_bups"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/79a6c3cde7dd0665/original/megamenu-pictogram-business-process-service.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Design & business strategy",
+                "titleEnglish": "Design & business strategy",
+                "url": "https://www.ibm.com/services/ibmix/?lnk=hpmsc_budbs",
+                "megapanelContent": {
+                  "headingTitle": "Design & business strategy",
+                  "headingUrl": "https://www.ibm.com/services/ibmix/?lnk=hpmsc_bubs",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Customer experience consulting",
+                        "titleEnglish": "Experience strategy",
+                        "url": "https://www.ibm.com/services/customer-experience-consulting?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "E-commerce consulting",
+                        "titleEnglish": "Digital strategy",
+                        "url": "https://www.ibm.com/services/ecommerce?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "Marketing consulting",
+                        "titleEnglish": "Marketing platforms",
+                        "url": "https://www.ibm.com/services/marketing-consulting?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "Salesforce consulting",
+                        "titleEnglish": "Salesforce consulting",
+                        "url": "https://www.ibm.com/services/salesforce?lnk=hpmsc_bubs"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/1b7522c50ea39ca/original/megamenu-pictogram-design-business-strategy.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Hybrid multicloud services",
+                "titleEnglish": "Hybrid multicloud services",
+                "url": "https://www.ibm.com/cloud/services?lnk=hpmsc_bups",
+                "megapanelContent": {
+                  "headingTitle": "Talent management services",
+                  "headingUrl": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "HR transformation services",
+                        "titleEnglish": "HR transformation",
+                        "url": "https://www.ibm.com/services/talent-management/hr-transformation?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent acquisition services",
+                        "titleEnglish": "Talent acquisition",
+                        "url": "https://www.ibm.com/services/talent-management/talent-acquisition?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent development services",
+                        "titleEnglish": "Talent development",
+                        "url": "https://www.ibm.com/services/talent-management/talent-development?lnk=hpmsc_buta"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/69e350b141e12bd5/original/megamenu-pictogram-talent-and-transformation.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Talent management services",
+                "titleEnglish": "Talent & transformation",
+                "url": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                "megapanelContent": {
+                  "headingTitle": "Talent management services",
+                  "headingUrl": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "HR transformation services",
+                        "titleEnglish": "HR transformation",
+                        "url": "https://www.ibm.com/services/talent-management/hr-transformation?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent acquisition services",
+                        "titleEnglish": "Talent acquisition",
+                        "url": "https://www.ibm.com/services/talent-management/talent-acquisition?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent development services",
+                        "titleEnglish": "Talent development",
+                        "url": "https://www.ibm.com/services/talent-management/talent-development?lnk=hpmsc_buta"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/69e350b141e12bd5/original/megamenu-pictogram-talent-and-transformation.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Application services",
+                "titleEnglish": "Application services",
+                "url": "https://www.ibm.com/services/applications?lnk=hpmsc_buas",
+                "megapanelContent": {
+                  "headingTitle": "Application services",
+                  "headingUrl": "https://www.ibm.com/services/applications?lnk=hpmsc_buas",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Application Modernization",
+                        "titleEnglish": "Application Modernization",
+                        "url": "https://www.ibm.com/services/cloud/modernize-applications?lnk=hpmsc_buas"
+                      },
+                      {
+                        "title": "Enterprise applications strategy",
+                        "titleEnglish": "Enterprise applications strategy",
+                        "url": "https://www.ibm.com/services/applications/enterprise?lnk=hpmsc_buas"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/2b7c180c68557dcb/original/megamenu-pictogram-application-services.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Security services",
+                "titleEnglish": "Security services",
+                "url": "https://www.ibm.com/security/services?lnk=hpmsc_buse",
+                "megapanelContent": {
+                  "headingTitle": "Security services",
+                  "headingUrl": "https://www.ibm.com/security/services?lnk=hpmsc_buse",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Application security",
+                        "titleEnglish": "Application security",
+                        "url": "https://www.ibm.com/security/services/application-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Cloud security",
+                        "titleEnglish": "Cloud security",
+                        "url": "https://www.ibm.com/security/services/cloud-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Data security",
+                        "titleEnglish": "Data security",
+                        "url": "https://www.ibm.com/security/services/data-security?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Identity & access management",
+                        "titleEnglish": "Identity & access management",
+                        "url": "https://www.ibm.com/security/services/identity-access-management?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Managed detection and response (MDR) services",
+                        "titleEnglish": "Managed detection and response (MDR) services",
+                        "url": "https://www.ibm.com/security/services/managed-detection-response?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Managed security",
+                        "titleEnglish": "Managed security",
+                        "url": "https://www.ibm.com/security/services/managed-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Secure Access Service Edge (SASE)",
+                        "titleEnglish": "Secure Access Service Edge (SASE)",
+                        "url": "https://www.ibm.com/security/services/secure-access-service-edge?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Security governance",
+                        "titleEnglish": "Security governance",
+                        "url": "https://www.ibm.com/security/services/security-governance?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Threat Management",
+                        "titleEnglish": "Threat Management",
+                        "url": "https://www.ibm.com/security/services/threat-management?lnk=hpmsc_bups"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/6ecec25a8489cf82/original/megamenu-pictogram-security-services.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Technology Support Services",
+                "titleEnglish": "Services for tech support",
+                "url": "https://www.ibm.com/services/technology-support?lnk=hpmsc_busv",
+                "megapanelContent": {
+                  "headingTitle": "Technology Support Services",
+                  "headingUrl": "https://www.ibm.com/services/technology-support?lnk=hpmsc_busv",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Open source",
+                        "titleEnglish": "Open source",
+                        "url": "https://www.ibm.com/services/technology-support/open-source?lnk=hpmsc_busv"
+                      },
+                      {
+                        "title": "Third party & multivendor",
+                        "titleEnglish": "Third party & multivendor",
+                        "url": "https://www.ibm.com/services/technology-support/multivendor-it?lnk=hpmsc_busv"
+                      },
+                      {
+                        "title": "IBM warranties and maintenance",
+                        "titleEnglish": "IBM warranties and maintenance",
+                        "url": "https://www.ibm.com/services/technology-support/hardware-software?lnk=hpmsc_busv"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/7056e2b83b04133e/original/megamenu-pictogram-services-for-tech-support.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Flexible payment plans",
+                "titleEnglish": "Flexible payment plans",
+                "url": "https://www.ibm.com/financing?lnk=hpmsc_bufi"
+              },{
+                "title": "View all products",
+                "titleEnglish": "View all products",
+                "url": "https://www.ibm.com/products?lnk=hpmps_buall",
+                "megaPanelViewAll": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Network",
+        "titleEnglish": "Network",
+        "description": "Blend cloud and on-premises resources for flexibility and balance",
+        "url": "https://www.ibm.com/artificial-intelligence?lnk=flathl",
+        "hasMenu": true,
+        "hasMegapanel": true,
+        "menuSections": [
+          {
+            "heading": "",
+            "menuItems": [
+              {
+                "title": "IBM Consulting",
+                "titleEnglish": "IBM Consulting",
+                "url": "https://www.ibm.com/consulting?lnk=hpmco&lnk2=link",
+                "megapanelContent": {
+                  "headingTitle": "IBM Consulting",
+                  "headingUrl": "https://www.ibm.com/consulting?lnk=hpmco&lnk2=link",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Strategy Consulting",
+                        "titleEnglish": "Strategy Consulting",
+                        "url": "https://www.ibm.com/consulting/strategy?lnk=hpmco_bust&lnk2=learn"
+                      },
+                      {
+                        "title": "Experience Consulting",
+                        "titleEnglish": "Experience Consulting",
+                        "url": "https://www.ibm.com/consulting/experience?lnk=hpmco_buex&lnk2=learn"
+                      },
+                      {
+                        "title": "Operations Consulting",
+                        "titleEnglish": "Operations Consulting",
+                        "url": "https://www.ibm.com/consulting/operations?lnk=hpmco_buop&lnk2=learn"
+                      },
+                      {
+                        "title": "Technology Consulting",
+                        "titleEnglish": "Technology Consulting",
+                        "url": "https://www.ibm.com/consulting/technology?lnk=hpmco_bute&lnk2=learn"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/79a6c3cde7dd0665/original/megamenu-pictogram-business-process-service.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Business consulting services",
+                "titleEnglish": "Business process services",
+                "url": "https://www.ibm.com/services/business?lnk=hpmsc_bups",
+                "megapanelContent": {
+                  "headingTitle": "Business consulting services",
+                  "headingUrl": "https://www.ibm.com/services/business?lnk=hpmsc_bups",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Artificial intelligence services",
+                        "titleEnglish": "Artificial intelligence services",
+                        "url": "https://www.ibm.com/services/artificial-intelligence?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Automation",
+                        "titleEnglish": "Automation",
+                        "url": "https://www.ibm.com/cloud/automation/services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Big data & data platform",
+                        "titleEnglish": "Big data & data platform",
+                        "url": "https://www.ibm.com/services/big-data-services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Business process outsourcing",
+                        "titleEnglish": "Business process outsourcing",
+                        "url": "https://www.ibm.com/services/process/outsourcing?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Edge consulting",
+                        "titleEnglish": "Edge consulting",
+                        "url": "https://www.ibm.com/services/process/edge-services?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Finance consulting and outsourcing services",
+                        "titleEnglish": "Finance transformation",
+                        "url": "https://www.ibm.com/services/process/finance-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "IBM Garage",
+                        "titleEnglish": "IBM Garages",
+                        "url": "https://www.ibm.com/garage?lnk=hpmsc_buas"
+                      },
+                      {
+                        "title": "Operations consulting",
+                        "titleEnglish": "IoT consulting",
+                        "url": "https://www.ibm.com/services/process/operations-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Procurement consulting and managed services",
+                        "titleEnglish": "Procurement & strategic sourcing",
+                        "url": "https://www.ibm.com/services/process/procurement-consulting?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Risk management consulting services",
+                        "titleEnglish": "Risk consulting & fraud management",
+                        "url": "https://www.ibm.com/services/process/risk-management?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Supply chain consulting services",
+                        "titleEnglish": "Supply chain",
+                        "url": "https://www.ibm.com/services/process/supply-chain?lnk=hpmsc_bups"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/79a6c3cde7dd0665/original/megamenu-pictogram-business-process-service.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Design & business strategy",
+                "titleEnglish": "Design & business strategy",
+                "url": "https://www.ibm.com/services/ibmix/?lnk=hpmsc_budbs",
+                "megapanelContent": {
+                  "headingTitle": "Design & business strategy",
+                  "headingUrl": "https://www.ibm.com/services/ibmix/?lnk=hpmsc_bubs",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Customer experience consulting",
+                        "titleEnglish": "Experience strategy",
+                        "url": "https://www.ibm.com/services/customer-experience-consulting?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "E-commerce consulting",
+                        "titleEnglish": "Digital strategy",
+                        "url": "https://www.ibm.com/services/ecommerce?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "Marketing consulting",
+                        "titleEnglish": "Marketing platforms",
+                        "url": "https://www.ibm.com/services/marketing-consulting?lnk=hpmsc_bubs"
+                      },
+                      {
+                        "title": "Salesforce consulting",
+                        "titleEnglish": "Salesforce consulting",
+                        "url": "https://www.ibm.com/services/salesforce?lnk=hpmsc_bubs"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/1b7522c50ea39ca/original/megamenu-pictogram-design-business-strategy.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Hybrid multicloud services",
+                "titleEnglish": "Hybrid multicloud services",
+                "url": "https://www.ibm.com/cloud/services?lnk=hpmsc_bups",
+                "megapanelContent": {
+                  "headingTitle": "Talent management services",
+                  "headingUrl": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "HR transformation services",
+                        "titleEnglish": "HR transformation",
+                        "url": "https://www.ibm.com/services/talent-management/hr-transformation?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent acquisition services",
+                        "titleEnglish": "Talent acquisition",
+                        "url": "https://www.ibm.com/services/talent-management/talent-acquisition?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent development services",
+                        "titleEnglish": "Talent development",
+                        "url": "https://www.ibm.com/services/talent-management/talent-development?lnk=hpmsc_buta"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/69e350b141e12bd5/original/megamenu-pictogram-talent-and-transformation.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Talent management services",
+                "titleEnglish": "Talent & transformation",
+                "url": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                "megapanelContent": {
+                  "headingTitle": "Talent management services",
+                  "headingUrl": "https://www.ibm.com/services/talent-management?lnk=hpmsc_buta",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "HR transformation services",
+                        "titleEnglish": "HR transformation",
+                        "url": "https://www.ibm.com/services/talent-management/hr-transformation?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent acquisition services",
+                        "titleEnglish": "Talent acquisition",
+                        "url": "https://www.ibm.com/services/talent-management/talent-acquisition?lnk=hpmsc_buta"
+                      },
+                      {
+                        "title": "Talent development services",
+                        "titleEnglish": "Talent development",
+                        "url": "https://www.ibm.com/services/talent-management/talent-development?lnk=hpmsc_buta"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/69e350b141e12bd5/original/megamenu-pictogram-talent-and-transformation.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Application services",
+                "titleEnglish": "Application services",
+                "url": "https://www.ibm.com/services/applications?lnk=hpmsc_buas",
+                "megapanelContent": {
+                  "headingTitle": "Application services",
+                  "headingUrl": "https://www.ibm.com/services/applications?lnk=hpmsc_buas",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Application Modernization",
+                        "titleEnglish": "Application Modernization",
+                        "url": "https://www.ibm.com/services/cloud/modernize-applications?lnk=hpmsc_buas"
+                      },
+                      {
+                        "title": "Enterprise applications strategy",
+                        "titleEnglish": "Enterprise applications strategy",
+                        "url": "https://www.ibm.com/services/applications/enterprise?lnk=hpmsc_buas"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/2b7c180c68557dcb/original/megamenu-pictogram-application-services.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Security services",
+                "titleEnglish": "Security services",
+                "url": "https://www.ibm.com/security/services?lnk=hpmsc_buse",
+                "megapanelContent": {
+                  "headingTitle": "Security services",
+                  "headingUrl": "https://www.ibm.com/security/services?lnk=hpmsc_buse",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Application security",
+                        "titleEnglish": "Application security",
+                        "url": "https://www.ibm.com/security/services/application-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Cloud security",
+                        "titleEnglish": "Cloud security",
+                        "url": "https://www.ibm.com/security/services/cloud-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Data security",
+                        "titleEnglish": "Data security",
+                        "url": "https://www.ibm.com/security/services/data-security?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Identity & access management",
+                        "titleEnglish": "Identity & access management",
+                        "url": "https://www.ibm.com/security/services/identity-access-management?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Managed detection and response (MDR) services",
+                        "titleEnglish": "Managed detection and response (MDR) services",
+                        "url": "https://www.ibm.com/security/services/managed-detection-response?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Managed security",
+                        "titleEnglish": "Managed security",
+                        "url": "https://www.ibm.com/security/services/managed-security-services?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Secure Access Service Edge (SASE)",
+                        "titleEnglish": "Secure Access Service Edge (SASE)",
+                        "url": "https://www.ibm.com/security/services/secure-access-service-edge?lnk=hpmsc_bups"
+                      },
+                      {
+                        "title": "Security governance",
+                        "titleEnglish": "Security governance",
+                        "url": "https://www.ibm.com/security/services/security-governance?lnk=hpmsc_buse"
+                      },
+                      {
+                        "title": "Threat Management",
+                        "titleEnglish": "Threat Management",
+                        "url": "https://www.ibm.com/security/services/threat-management?lnk=hpmsc_bups"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/6ecec25a8489cf82/original/megamenu-pictogram-security-services.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Technology Support Services",
+                "titleEnglish": "Services for tech support",
+                "url": "https://www.ibm.com/services/technology-support?lnk=hpmsc_busv",
+                "megapanelContent": {
+                  "headingTitle": "Technology Support Services",
+                  "headingUrl": "https://www.ibm.com/services/technology-support?lnk=hpmsc_busv",
+                  "description": "Blend cloud and on-premises resources for flexibility and balance",
+                  "quickLinks": {
+                    "title": "",
+                    "links": [
+                      {
+                        "title": "Open source",
+                        "titleEnglish": "Open source",
+                        "url": "https://www.ibm.com/services/technology-support/open-source?lnk=hpmsc_busv"
+                      },
+                      {
+                        "title": "Third party & multivendor",
+                        "titleEnglish": "Third party & multivendor",
+                        "url": "https://www.ibm.com/services/technology-support/multivendor-it?lnk=hpmsc_busv"
+                      },
+                      {
+                        "title": "IBM warranties and maintenance",
+                        "titleEnglish": "IBM warranties and maintenance",
+                        "url": "https://www.ibm.com/services/technology-support/hardware-software?lnk=hpmsc_busv"
+                      }
+                    ]
+                  },
+                  "feature": {
+                    "heading": "",
+                    "imageUrl": "https://1.dam.s81c.com/m/7056e2b83b04133e/original/megamenu-pictogram-services-for-tech-support.png",
+                    "linkTitle": "",
+                    "linkUrl": ""
+                  }
+                }
+              },
+              {
+                "title": "Flexible payment plans",
+                "titleEnglish": "Flexible payment plans",
+                "url": "https://www.ibm.com/financing?lnk=hpmsc_bufi"
+              },{
+                "title": "View all products",
+                "titleEnglish": "View all products",
+                "url": "https://www.ibm.com/products?lnk=hpmps_buall",
+                "megaPanelViewAll": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Operating systems",
+        "titleEnglish": "Operating systems",
+        "description": "Blend cloud and on-premises resources for flexibility and balance",
+        "url": "https://www.ibm.com/artificial-intelligence?lnk=flathl",
         "hasMenu": true,
         "hasMegapanel": true,
         "menuSections": [
