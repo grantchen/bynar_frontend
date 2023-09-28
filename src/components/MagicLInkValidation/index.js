@@ -35,7 +35,7 @@ const MagicLinkValidation = ({
                 <SignHeader></SignHeader>
                 <div className="signin-container">
                     <Grid>
-                        <Column sm={{span: 4}} md={{span: 4, offset: 2}} lg={{span: 6, offset: 5}} className={"box-container"}>
+                        <Column sm={{span: 4}} md={{span: 8}} lg={{span: 16}} xlg={{span: 16}} className={"box-container"}>
                             <div className="sign-in-form-area">
                                 <div className="bx--row">
                                     <div className="bx--col">

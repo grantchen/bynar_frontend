@@ -80,9 +80,9 @@ export function LanguageChangeModal({
     return (
         <ComposedModal
             open={isLanguageChangeModalOpen}
-            size="sm"
             onClose={handleClose}
             className="language-change-modal"
+            containerClassName="language-change-modal-container"
         >
             <ModalHeader title={t("languages")} />
             <ModalBody className="language-modal-body">

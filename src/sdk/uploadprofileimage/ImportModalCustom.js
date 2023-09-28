@@ -237,7 +237,7 @@ export let ImportModal = forwardRef(
                 {...{ open, ref, onClose }}
                 aria-label={title}
                 className={cx(blockClass, className)}
-                size="sm"
+                containerClassName={"uploadprofileimage-change-modal-container"}
                 preventCloseOnClickOutside
             >
                 <ModalHeader

@@ -656,7 +656,7 @@ const Signup = () => {
             ref={containerRef}
           >
             <Grid className={"signup-grid"}>
-              <Column sm={{span: 4}} md={{span: 4, offset: 2}} lg={{span: 6, offset: 5}} id="scroller">
+              <Column sm={{span: 4}} md={{span: 8}} lg={{span: 16}} xlg={{span: 16}} id="scroller">
                 <Content className={"signup-container"}>
                   <div className="heading-container">
                     <Heading className={"form-mainHeading"}>
