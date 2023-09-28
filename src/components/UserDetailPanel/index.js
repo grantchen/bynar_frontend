@@ -3,7 +3,7 @@ import {
     TextInput,
     Select,
     SelectItem,
-    ToastNotification,
+    ToastNotification, InlineLoading,
 } from "carbon-components-react";
 import {
     TextInputSkeleton,
@@ -242,7 +242,13 @@ export const UserDetailPanel = ({ open }) => {
                 title={t("user-detail")}
                 subtitle=""
                 actions={[]}
-                primaryButtonText={t("save")}
+                primaryButtonText={(
+                    <>
+                        {t('save')}
+                        {disable && <InlineLoading className="inline-loading-within-btn"/>}
+                    </>
+
+                )}
                 secondaryButtonText={t("cancel")}
                 onRequestSubmit={handleUpdateProfile}
                 disableSubmit={disable}
