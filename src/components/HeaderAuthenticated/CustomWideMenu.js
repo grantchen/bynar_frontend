@@ -113,7 +113,7 @@ export function CustomWideMenu({ expanded, wideMenuRef }) {
                     </>
                 ) : (
                     <>
-                        <div className={ `menu-body ${ expanded ? 'wide-menu-expanded' : '' }` }>
+                        <div className="menu-body" expanded={`${expanded}`}>
                             <div ref={ wideMenuRef } className="mega-menu">
                                 <div className="bmegamenu-container">
                                     <div className="megamenu-container-row">
