@@ -9,7 +9,7 @@ import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-menu-it
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-overlay.js';
 import "./CustomWideMenu.scss";
 
-export function CustomWideMenu({ expanded }) {
+export function CustomWideMenu({ expanded, wideMenuRef }) {
     const [activeTitle, setActiveTitle] = useState(jsonData.mastheadNav.links[0]?.title);
     const handleClick = (title) => {
         setActiveTitle(title);
@@ -114,7 +114,7 @@ export function CustomWideMenu({ expanded }) {
                 ) : (
                     <>
                         <div className={ `menu-body ${ expanded ? 'wide-menu-expanded' : '' }` }>
-                            <div className="mega-menu">
+                            <div ref={ wideMenuRef } className="mega-menu">
                                 <div className="bmegamenu-container">
                                     <div className="megamenu-container-row">
                                         <div className="left-navigation">

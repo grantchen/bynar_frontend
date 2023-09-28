@@ -59,8 +59,11 @@ function _AuthenticatedAppHeader() {
     );
 
     const wrapperRef = useRef(null);
+    const wideMenuWaffleRef = useRef(null);
+    const wideMenuRef = useRef(null);
 
     const [expandSearchBar, setExpandSearchBar] = useState(false)
+    const [wideMenuExpanded, setWideMenuExpanded] = useState(false)
 
     const handleSearchClear = () => {
         setExpandSearchBar(data => !data)
@@ -82,29 +85,49 @@ function _AuthenticatedAppHeader() {
         };
     }, []);
 
+    useEffect(() => {
+        // Close wide menu when clicked outside
+        const handleClickWideMenuOutside = (event) => {
+            if (
+                wideMenuWaffleRef.current &&
+                !wideMenuWaffleRef.current.contains(event.target) &&
+                wideMenuRef.current &&
+                !wideMenuRef.current.contains(event.target)
+            ) {
+                setWideMenuExpanded(false)
+            }
+        };
+        document.addEventListener("mousedown", handleClickWideMenuOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickWideMenuOutside);
+        };
+    }, []);
+
     return (
         <>
             <div className="main-header-container">
                 <HeaderContainer
+                    isSideNavExpanded={wideMenuExpanded}
                     render={ ({ isSideNavExpanded, onClickSideNavExpand }) => (
                         <Header aria-label="Bynar">
                             <SkipToContent />
-                            <CustomWideMenu expanded={ isSideNavExpanded } />
                             <HeaderGlobalAction
+                                ref={ wideMenuWaffleRef }
                                 aria-label={
-                                    isSideNavExpanded ? 'Close' : 'Open'
+                                    wideMenuExpanded ? 'Close' : 'Open'
                                 }
-                                aria-expanded={ isSideNavExpanded }
-                                isActive={ isSideNavExpanded }
+                                aria-expanded={ wideMenuExpanded }
+                                isActive={ wideMenuExpanded }
                                 onClick={ (e) => {
-                                    e.preventDefault()
                                     e.stopPropagation()
-                                    onClickSideNavExpand()
+                                    setWideMenuExpanded(!wideMenuExpanded)
                                 } }
                                 tooltipAlignment="end"
                                 id="switcher-button">
                                 <Switcher size="25" style={ { color: "cornflowerblue" } } />
                             </HeaderGlobalAction>
+                            <CustomWideMenu wideMenuRef={ wideMenuRef } expanded={ wideMenuExpanded } />
 
                             <HeaderName href="/" prefix="">
                                 <img src={ ibmLogo } alt="ibm_logo" />
