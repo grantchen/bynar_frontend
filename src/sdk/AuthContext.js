@@ -292,12 +292,29 @@ export const AuthProvider = ({ children }) => {
         return "Bearer " + token
     }, []);
 
-    // check if user has permission
-    const hasPermission = useCallback((permission) => {
+    // check if user has permission, example: hasPermission("invoices", "add")
+    const hasPermission = useCallback((name, permission) => {
         if (!state?.user) {
             return false;
         }
-        return state.user.permissions && state.user.permissions[permission] === 1
+
+        if (!state.user.permissions) {
+            return false;
+        }
+
+        if (!state.user.permissions["services"]) {
+            return false;
+        }
+
+        // return true if some of services permission matched
+        return state.user.permissions["services"].some(item => {
+            if (item.name === "*" || item.name === name) {
+                // return true if item.permissions includes "*" or permission
+                if (item.permissions.some(item => item === "*" || item === permission)) {
+                    return true
+                }
+            }
+        })
     }, [state.user]);
 
     const updateUserThemePreference = useCallback(
