@@ -1151,15 +1151,6 @@ const Signup = () => {
                                     }, {
                                         title: "Terms Of Use",
                                         url: "#"
-                                    }, {
-                                        title: "Terms Of Use",
-                                        url: "#"
-                                    }, {
-                                        title: "Terms Of Use",
-                                        url: "#"
-                                    }, {
-                                        title: "Terms Of Use",
-                                        url: "#"
                                     }]
                                 }}
                         />
