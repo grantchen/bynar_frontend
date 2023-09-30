@@ -1,3 +1,9 @@
+.signup-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .sign-up-form-area {
   max-width: 448px;
   margin: auto;
@@ -14,7 +20,7 @@
 .toast-notification{
   padding: 0
 }
-.signup-container{
+.signup-content{
   padding: 0
 }
 .error-notification-box {
@@ -513,14 +519,11 @@ label[for="password-input"] {
 }
 
 .signup-grid {
-  height: calc(100vh - 50px);
-  overflow-y: auto;
+  flex: 1;
+  margin-bottom: 2rem;
 }
 
 .signup-form {
-  height: 70%;
-  // overflow-y: auto;
-
   .account-info-box {
     // margin-top: 16px;
     .account-heading {
