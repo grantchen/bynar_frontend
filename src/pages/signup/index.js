@@ -647,17 +647,18 @@ const Signup = () => {
                 subscribe={checkOtherTabVerification}>
             </SubscribeTabMessage>
             {(
-                <div style={{height: "100%"}}>
+                <div>
                     <SignHeader></SignHeader>
 
                     <div
                         ref={containerRef}
+                        className={"signup-container"}
                     >
                         <Grid className={"signup-grid"}>
                             <Column sm={{span: 4}} md={{span: 8}} lg={{span: 16}} xlg={{span: 16}}
                                     id="scroller">
                                 <div className="sign-up-form-area">
-                                    <Content className={"signup-container"}>
+                                    <Content className={"signup-content"}>
                                         <div className="heading-container">
                                             <Heading className={"form-mainHeading"}>
                                                 Sign up for an Bynar account
@@ -1146,6 +1147,15 @@ const Signup = () => {
                                         url: "#"
                                     }, {
                                         title: "Privacy",
+                                        url: "#"
+                                    }, {
+                                        title: "Terms Of Use",
+                                        url: "#"
+                                    }, {
+                                        title: "Terms Of Use",
+                                        url: "#"
+                                    }, {
+                                        title: "Terms Of Use",
                                         url: "#"
                                     }, {
                                         title: "Terms Of Use",
