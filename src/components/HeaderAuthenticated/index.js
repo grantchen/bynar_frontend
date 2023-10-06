@@ -1,8 +1,6 @@
-import { ExpandableSearch } from "carbon-components-react";
 import {
     HeaderContainer,
     Header,
-    HeaderMenuButton,
     HeaderName,
     HeaderGlobalBar,
     HeaderGlobalAction,
