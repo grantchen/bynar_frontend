@@ -1,3 +1,6 @@
+// for masthead search css
+@import '@carbon/ibmdotcom-styles/scss/components/masthead/index';
+
 .main-header-container {
 
     .bx--header,
@@ -15,102 +18,6 @@
         height: 100%;
     }
 
-    .search-container.cds--search--md.cds--search--expandable,
-    .search-container.bx--search--md.bx--search--expandable,
-    .bx--search {
-        display: flex;
-        align-items: center;
-        z-index: 1;
-        height: 3rem;
-        max-width: 100%;
-        width: 3rem;
-
-        &.cds--search--expanded .cds--search-input,
-        &.bx--search--expanded .bx--search-input {
-            height: 3rem;
-        }
-
-        button,
-        .cds--search-magnifier,
-        .bx--search-magnifier {
-            height: 3rem;
-            width: 3rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .bx--search-input:focus {
-            outline: none;
-            outline-offset: 0;
-        }
-    }
-
-    .search-container {
-        &.bx--search--expandable.bx--search--expanded {
-            width: 100vw;
-            position: absolute;
-
-            .bx--search-input {
-                border-bottom: 2px solid var(--cds-interactive-01,#0f62fe);
-            }
-
-            .bx--search-close {
-                // always show close button
-                opacity: 1;
-                visibility: visible;
-
-                &:hover {
-                    border: 2px solid var(--cds-focus, #0f62fe);
-                    outline-offset: -2px;
-                }
-
-                // set width to 0, due to overlap with close button left border
-                &::before {
-                    width: 0;
-                }
-            }
-        }
-    }
-
-    ul.cds--side-nav__items .cds--search,
-    ul.cds--side-nav__items .bx--search,
-    ul.bx--side-nav__items .cds--search,
-    ul.bx--side-nav__items .bx--search {
-        position: relative;
-        display: flex;
-        align-items: center;
-        right: 0;
-        height: 2rem;
-        width: 100%;
-        margin: 0 0 1rem 0;
-        max-width: -webkit-fill-available;
-
-        &.cds--search--expanded .cds--search-input,
-        &.bx--search--expanded .bx--search-input {
-            height: 2rem;
-        }
-
-        .cds--search-magnifier,
-        .bx--search-magnifier {
-            height: 2rem;
-            width: auto;
-        }
-
-        button {
-            height: 2rem;
-            width: 2rem;
-
-            &:focus {
-                outline: none;
-            }
-        }
-
-        .bx--search-input {
-            height: 2.5rem;
-        }
-    }
-
     .popover-dropdown {
         .cds--tooltip-content {
             display: none !important;
@@ -118,28 +25,11 @@
     }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 41.98rem) {
     .main-header-container {
-        .cds--header__global {
-            position: static;
-        }
-
-        .search-container.cds--search--md.cds--search--expandable,
-        .search-container.bx--search--md.bx--search--expandable,
-        .bx--search {
-
-            &.cds--search--expanded,
-            &.bx--search--expanded {
-                max-width: 100vw;
-                right: 0;
-                left: 0;
-                z-index: 1;
-            }
-
-            &.cds--search--expanded .cds--search-input,
-            &.bx--search--expanded .bx--search-input {
-                position: absolute;
-            }
+        // hide other elements when search bar active
+        .has-search-active {
+            display: none;
         }
     }
 }
