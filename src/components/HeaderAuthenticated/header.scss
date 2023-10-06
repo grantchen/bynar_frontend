@@ -104,6 +104,15 @@
     width: 0.0625rem;
     background-color: var(--cds-ui-03, #e0e0e0);
 }
+
+
+[data-carbon-theme="g90"] {
+    .logoSeperator {
+        background-color: var(--cds-text-secondary, #525252);
+    }
+
+}
+
 .seperatorHead{
     padding-left: 10px;
 }
