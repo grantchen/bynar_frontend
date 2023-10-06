@@ -1,6 +1,50 @@
 // for masthead search css
 @import '@carbon/ibmdotcom-styles/scss/components/masthead/index';
 
+[data-carbon-theme="g90"] {
+    // overwrite masthead search css
+    .bx--header__search--actions .bx--header__search--search, .bx--header__search--actions .bx--header__search--close {
+        background: none;
+    }
+
+    .bx--header__action > svg {
+        fill: var(--cds-icon-secondary, #525252);
+    }
+
+    .bx--btn.bx--btn--icon-only.bx--tooltip__trigger svg, .bx--btn.bx--btn--icon-only.bx--tooltip__trigger:hover svg, .bx--btn.bx--btn--icon-only.bx--tooltip__trigger:focus svg {
+        fill: var(--cds-icon-secondary, #525252);
+    }
+
+    .bx--header__search--actions .bx--header__search--search:hover, .bx--header__search--actions .bx--header__search--close:hover {
+        background-color: var(--cds-background-hover, rgba(141, 141, 141, 0.12));
+    }
+
+    .bx--header__search--actions .bx--header__search--search:hover svg[focusable=false][aria-hidden=true], .bx--header__search--actions .bx--header__search--close:hover svg[focusable=false][aria-hidden=true] {
+        fill: var(--cds-icon-primary,#161616);
+    }
+
+    .bx--search-input {
+        color: var(--cds-text-01,#161616);
+    }
+
+    .bx--masthead__search.bx--masthead__search--active .bx--header__search--input, .bx--masthead__search[active] .bx--header__search--input, :host(dds-masthead-search).bx--masthead__search--active .bx--header__search--input, :host(dds-masthead-search)[active] .bx--header__search--input {
+        background-color: var(--cds-field-01,#f4f4f4);
+        color: var(--cds-text-01,#161616);
+    }
+
+    .bx--masthead__search.bx--masthead__search--active .bx--header__action, .bx--masthead__search[active] .bx--header__action, :host(dds-masthead-search).bx--masthead__search--active .bx--header__action, :host(dds-masthead-search)[active] .bx--header__action {
+        background: none;
+    }
+
+    .bx--header__search--actions .bx--header__search--search:hover, .bx--header__search--actions .bx--header__search--close:hover {
+        background-color: var(--cds-background-hover, rgba(141, 141, 141, 0.12));
+    }
+
+    .bx--header__profile .bx--header__action:focus, .bx--header__search--actions .bx--btn.bx--btn--icon-only.bx--tooltip__trigger:focus {
+        box-shadow: none;
+    }
+}
+
 .main-header-container {
 
     .bx--header,
