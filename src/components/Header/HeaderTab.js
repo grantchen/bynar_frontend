@@ -5,7 +5,7 @@ import "./HeaderTab.scss";
 import {TabContext, useMobile} from "../../sdk";
 import {useTranslation} from "react-i18next";
 
-const HeaderTab = () => {
+const HeaderTab = ({ className }) => {
     const {tab, handleAddTab, handleRemoveTab, activeTab, setActiveTab} =
         useContext(TabContext);
     const carouselRef = useRef(null);
@@ -22,7 +22,7 @@ const HeaderTab = () => {
 
     return (
         <>
-            <div className="tab">
+            <div className={ `tab ${className}` }>
                 <div className="tab-buttons-list" ref={carouselRef}>
                     <div style={{display: "flex", whiteSpace: "nowrap", height: "100%"}}>
                         <Tabs selectedIndex={activeTab} onChange={handleTabChange} dismissable onTabCloseRequest={removeTab}>

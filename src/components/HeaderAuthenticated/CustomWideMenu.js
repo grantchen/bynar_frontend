@@ -9,13 +9,15 @@ import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-menu-it
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-overlay.js';
 import "./CustomWideMenu.scss";
 
-export function CustomWideMenu({ expanded, wideMenuRef }) {
+export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
     const [activeTitle, setActiveTitle] = useState(jsonData.mastheadNav.links[0]?.title);
     const handleClick = (title) => {
         setActiveTitle(title);
     };
     const [viewAllArray, setViewAllArray] = useState([])
     const leftNavRef = useRef(null)
+    const wideMenuRef = useRef(null);
+    const wideMenuButtonRef = useRef(null);
 
     const isMobile = useMobile();
 
@@ -47,11 +49,37 @@ export function CustomWideMenu({ expanded, wideMenuRef }) {
         setViewAllArray(filteredItems);
     }, [activeTitle, isMobile]);
 
+    useEffect(() => {
+        // Close wide menu when clicked outside
+        const handleClickWideMenuOutside = (event) => {
+            if (
+                wideMenuButtonRef.current &&
+                !wideMenuButtonRef.current.contains(event.target) &&
+                (
+                    wideMenuRef.current && // pc
+                    !wideMenuRef.current.contains(event.target) ||
+                    leftNavRef.current && // mobile
+                    !leftNavRef.current.contains(event.target)
+                )
+            ) {
+                if (expanded) {
+                    onClickSideNavExpand()
+                }
+            }
+        };
+        document.addEventListener("mousedown", handleClickWideMenuOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickWideMenuOutside);
+        };
+    }, [expanded]);
+
     return (
         <>
             {
                 isMobile ? (
                     <>
+                        <div ref={ wideMenuButtonRef }>{ children }</div>
                         <dds-left-nav-overlay></dds-left-nav-overlay>
                         <dds-left-nav
                             ref={ leftNavRef }
@@ -113,7 +141,8 @@ export function CustomWideMenu({ expanded, wideMenuRef }) {
                     </>
                 ) : (
                     <>
-                        <div className="menu-body" expanded={`${expanded}`}>
+                        <div ref={ wideMenuButtonRef }>{ children }</div>
+                        <div className="menu-body" expanded={ `${ expanded }` }>
                             <div ref={ wideMenuRef } className="mega-menu">
                                 <div className="bmegamenu-container">
                                     <div className="megamenu-container-row">

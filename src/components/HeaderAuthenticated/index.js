@@ -1,14 +1,12 @@
-import { ExpandableSearch } from "carbon-components-react";
 import {
     HeaderContainer,
     Header,
-    HeaderMenuButton,
     HeaderName,
     HeaderGlobalBar,
     HeaderGlobalAction,
     SkipToContent,
     Popover,
-    PopoverContent,
+    PopoverContent, HeaderMenuButton,
 } from "@carbon/react";
 import { UserData20 } from "@carbon/icons-react";
 import {
@@ -37,6 +35,7 @@ import UploadProfileImageModal from "../../sdk/uploadprofileimage";
 import { Switcher } from "@carbon/react/icons";
 import ibmLogo from '../media/IBM_logo_black.svg'
 import { CustomWideMenu } from "./CustomWideMenu";
+import MastheadSearch from "@carbon/ibmdotcom-react/lib/components/Masthead/MastheadSearch";
 
 function _AuthenticatedAppHeader() {
     const { user } = useAuth();
@@ -59,15 +58,7 @@ function _AuthenticatedAppHeader() {
     );
 
     const wrapperRef = useRef(null);
-    const wideMenuWaffleRef = useRef(null);
-    const wideMenuRef = useRef(null);
-
-    const [expandSearchBar, setExpandSearchBar] = useState(false)
-    const [wideMenuExpanded, setWideMenuExpanded] = useState(false)
-
-    const handleSearchClear = () => {
-        setExpandSearchBar(data => !data)
-    }
+    const [isSearchBarExpanded, setIsSearchBarExpanded] = useState(false)
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -85,81 +76,72 @@ function _AuthenticatedAppHeader() {
         };
     }, []);
 
-    useEffect(() => {
-        // Close wide menu when clicked outside
-        const handleClickWideMenuOutside = (event) => {
-            if (
-                wideMenuWaffleRef.current &&
-                !wideMenuWaffleRef.current.contains(event.target) &&
-                wideMenuRef.current &&
-                !wideMenuRef.current.contains(event.target)
-            ) {
-                setWideMenuExpanded(false)
-            }
-        };
-        document.addEventListener("mousedown", handleClickWideMenuOutside);
-
-        return () => {
-            document.removeEventListener("mousedown", handleClickWideMenuOutside);
-        };
-    }, []);
-
     return (
         <>
             <div className="main-header-container">
                 <HeaderContainer
-                    isSideNavExpanded={wideMenuExpanded}
                     render={ ({ isSideNavExpanded, onClickSideNavExpand }) => (
                         <Header aria-label="Bynar">
                             <SkipToContent />
-                            <HeaderGlobalAction
-                                ref={ wideMenuWaffleRef }
-                                aria-label={
-                                    wideMenuExpanded ? 'Close' : 'Open'
-                                }
-                                aria-expanded={ wideMenuExpanded }
-                                isActive={ wideMenuExpanded }
-                                onClick={ (e) => {
-                                    e.stopPropagation()
-                                    setWideMenuExpanded(!wideMenuExpanded)
-                                } }
-                                tooltipAlignment="end"
-                                id="switcher-button">
-                                <Switcher size="25" style={ { color: "cornflowerblue" } } />
-                            </HeaderGlobalAction>
-                            <CustomWideMenu wideMenuRef={ wideMenuRef } expanded={ wideMenuExpanded } />
+                            <CustomWideMenu expanded={ isSideNavExpanded }
+                                            onClickSideNavExpand={ onClickSideNavExpand }>
+                                <HeaderGlobalAction
+                                    className={ isSearchBarExpanded ? 'has-search-active' : '' }
+                                    aria-label={
+                                        isSideNavExpanded ? 'Close' : 'Open'
+                                    }
+                                    aria-expanded={ isSideNavExpanded }
+                                    onClick={ (e) => {
+                                        e.stopPropagation()
+                                        onClickSideNavExpand()
+                                    } }
+                                    tooltipAlignment="end"
+                                    id="switcher-button">
+                                    <HeaderMenuButton
+                                        isActive={ isSideNavExpanded }
+                                    />
+                                </HeaderGlobalAction>
+                            </CustomWideMenu>
 
-                            <HeaderName href="/" prefix="">
+                            <HeaderName
+                                href="/"
+                                prefix=""
+                                className={ isSearchBarExpanded ? 'has-search-active' : '' }
+                            >
                                 <img src={ ibmLogo } alt="ibm_logo" />
                             </HeaderName>
 
-                            <HeaderName className="seperatorHead" prefix="">
+                            <HeaderName
+                                className={ `seperatorHead ${ isSearchBarExpanded ? 'has-search-active' : '' }` }
+                                prefix=""
+                            >
                                 <div className="logoSeperator" />
                             </HeaderName>
 
-                            <HeaderName className="orgName" prefix="">
+                            <HeaderName
+                                className={ `orgName ${ isSearchBarExpanded ? 'has-search-active' : '' }` }
+                                prefix=""
+                            >
                                 Bynar
                             </HeaderName>
 
-                            {/* <HeaderName href="#" prefix="Bynar">
-                                [Platform]
-                            </HeaderName> */ }
-
                             <HeaderGlobalBar>
-                                <HeaderTab />
-                                <ExpandableSearch
-                                    className="search-container"
-                                    labelText="Enter search term"
-                                    isExpanded={ expandSearchBar }
-                                    placeholder="Search all of Bynar"
-                                    onClear={ handleSearchClear }
-                                />
+                                {
+                                    !isSearchBarExpanded &&
+                                    <HeaderTab className={ isSearchBarExpanded ? 'has-search-active' : '' } />
+                                }
+                                <MastheadSearch
+                                    placeHolderText="Search all of Bynar"
+                                    isSearchActive={ isSearchBarExpanded }
+                                    onChangeSearchActive={ (event, { isOpen }) => {
+                                        setIsSearchBarExpanded(isOpen)
+                                    } }></MastheadSearch>
                             </HeaderGlobalBar>
 
                             { isUserManagementAllowed && (
                                 <HeaderGlobalAction
                                     aria-label={ t("user") }
-                                    className="user-list-nav-button"
+                                    className={ `user-list-nav-button ${ isSearchBarExpanded ? 'has-search-active' : '' }` }
                                     onClick={ () => setIsUserListOpen(true) }
                                 >
                                     <UserData20 />
@@ -170,7 +152,7 @@ function _AuthenticatedAppHeader() {
                                 open={ isProfileDropdownOpen }
                                 isTabTip
                                 align="bottom-right"
-                                className="popover-dropdown"
+                                className={ `popover-dropdown ${ isSearchBarExpanded ? 'has-search-active' : '' }` }
                             >
                                 <HeaderGlobalAction
                                     aria-label={ user?.fullName ?? t("user") }
