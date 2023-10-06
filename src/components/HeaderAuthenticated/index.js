@@ -6,7 +6,7 @@ import {
     HeaderGlobalAction,
     SkipToContent,
     Popover,
-    PopoverContent,
+    PopoverContent, HeaderMenuButton,
 } from "@carbon/react";
 import { UserData20 } from "@carbon/icons-react";
 import {
@@ -58,11 +58,7 @@ function _AuthenticatedAppHeader() {
     );
 
     const wrapperRef = useRef(null);
-    const wideMenuWaffleRef = useRef(null);
-    const wideMenuRef = useRef(null);
-
     const [isSearchBarExpanded, setIsSearchBarExpanded] = useState(false)
-    const [wideMenuExpanded, setWideMenuExpanded] = useState(false)
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -80,50 +76,32 @@ function _AuthenticatedAppHeader() {
         };
     }, []);
 
-    useEffect(() => {
-        // Close wide menu when clicked outside
-        const handleClickWideMenuOutside = (event) => {
-            if (
-                wideMenuWaffleRef.current &&
-                !wideMenuWaffleRef.current.contains(event.target) &&
-                wideMenuRef.current &&
-                !wideMenuRef.current.contains(event.target)
-            ) {
-                setWideMenuExpanded(false)
-            }
-        };
-        document.addEventListener("mousedown", handleClickWideMenuOutside);
-
-        return () => {
-            document.removeEventListener("mousedown", handleClickWideMenuOutside);
-        };
-    }, []);
-
     return (
         <>
             <div className="main-header-container">
                 <HeaderContainer
-                    isSideNavExpanded={ wideMenuExpanded }
                     render={ ({ isSideNavExpanded, onClickSideNavExpand }) => (
                         <Header aria-label="Bynar">
                             <SkipToContent />
-                            <HeaderGlobalAction
-                                className={ isSearchBarExpanded ? 'has-search-active' : '' }
-                                ref={ wideMenuWaffleRef }
-                                aria-label={
-                                    wideMenuExpanded ? 'Close' : 'Open'
-                                }
-                                aria-expanded={ wideMenuExpanded }
-                                isActive={ wideMenuExpanded }
-                                onClick={ (e) => {
-                                    e.stopPropagation()
-                                    setWideMenuExpanded(!wideMenuExpanded)
-                                } }
-                                tooltipAlignment="end"
-                                id="switcher-button">
-                                <Switcher size="25" style={ { color: "cornflowerblue" } } />
-                            </HeaderGlobalAction>
-                            <CustomWideMenu wideMenuRef={ wideMenuRef } expanded={ wideMenuExpanded } />
+                            <CustomWideMenu expanded={ isSideNavExpanded }
+                                            onClickSideNavExpand={ onClickSideNavExpand }>
+                                <HeaderGlobalAction
+                                    className={ isSearchBarExpanded ? 'has-search-active' : '' }
+                                    aria-label={
+                                        isSideNavExpanded ? 'Close' : 'Open'
+                                    }
+                                    aria-expanded={ isSideNavExpanded }
+                                    onClick={ (e) => {
+                                        e.stopPropagation()
+                                        onClickSideNavExpand()
+                                    } }
+                                    tooltipAlignment="end"
+                                    id="switcher-button">
+                                    <HeaderMenuButton
+                                        isActive={ isSideNavExpanded }
+                                    />
+                                </HeaderGlobalAction>
+                            </CustomWideMenu>
 
                             <HeaderName
                                 href="/"
@@ -134,14 +112,14 @@ function _AuthenticatedAppHeader() {
                             </HeaderName>
 
                             <HeaderName
-                                className={ `seperatorHead ${isSearchBarExpanded ? 'has-search-active' : ''}` }
+                                className={ `seperatorHead ${ isSearchBarExpanded ? 'has-search-active' : '' }` }
                                 prefix=""
                             >
                                 <div className="logoSeperator" />
                             </HeaderName>
 
                             <HeaderName
-                                className={ `orgName ${isSearchBarExpanded ? 'has-search-active' : ''}` }
+                                className={ `orgName ${ isSearchBarExpanded ? 'has-search-active' : '' }` }
                                 prefix=""
                             >
                                 Bynar
@@ -149,7 +127,8 @@ function _AuthenticatedAppHeader() {
 
                             <HeaderGlobalBar>
                                 {
-                                    !isSearchBarExpanded && <HeaderTab className={ isSearchBarExpanded ? 'has-search-active' : '' } />
+                                    !isSearchBarExpanded &&
+                                    <HeaderTab className={ isSearchBarExpanded ? 'has-search-active' : '' } />
                                 }
                                 <MastheadSearch
                                     placeHolderText="Search all of Bynar"
@@ -162,7 +141,7 @@ function _AuthenticatedAppHeader() {
                             { isUserManagementAllowed && (
                                 <HeaderGlobalAction
                                     aria-label={ t("user") }
-                                    className={ `user-list-nav-button ${isSearchBarExpanded ? 'has-search-active' : ''}` }
+                                    className={ `user-list-nav-button ${ isSearchBarExpanded ? 'has-search-active' : '' }` }
                                     onClick={ () => setIsUserListOpen(true) }
                                 >
                                     <UserData20 />
@@ -173,7 +152,7 @@ function _AuthenticatedAppHeader() {
                                 open={ isProfileDropdownOpen }
                                 isTabTip
                                 align="bottom-right"
-                                className={ `popover-dropdown ${isSearchBarExpanded ? 'has-search-active' : ''}` }
+                                className={ `popover-dropdown ${ isSearchBarExpanded ? 'has-search-active' : '' }` }
                             >
                                 <HeaderGlobalAction
                                     aria-label={ user?.fullName ?? t("user") }

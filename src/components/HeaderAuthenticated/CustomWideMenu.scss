@@ -22,6 +22,16 @@
   }
 }
 
+@keyframes collapse {
+  0% {
+    max-height: 100vh;
+  }
+
+  100% {
+    max-height: 0;
+  }
+}
+
 /* background mask */
 .menu-overlay {
   position: fixed;
@@ -32,7 +42,7 @@
   z-index: -1;
   visibility: hidden;
   opacity: 0;
-  transition: opacity 0.24s cubic-bezier(0.2, 0, 0.38, 0.9) 0s, visibility 0.24s cubic-bezier(0.2, 0, 0.38, 0.9) 0s, background-color 0.24s cubic-bezier(0.2, 0, 0.38, 0.9) 0s;
+  transition: opacity 0.24s cubic-bezier(0.2, 0, 0.38, 0.9), visibility 0.24s cubic-bezier(0.2, 0, 0.38, 0.9), background-color 0.24s cubic-bezier(0.2, 0, 0.38, 0.9);
 
   &.active {
     background-color: var(--cds-overlay-01, rgba(22, 22, 22, .5));
@@ -51,10 +61,11 @@
   display: block;
   visibility: hidden;
   margin-bottom: var(--cds-layout-05, 4rem);
+  top: var(--cds-spacing-09, 3rem);
   left: 0px;
   width: 100vw;
   transform: translateZ(0.0001px);
-  transition: visibility 0.24s cubic-bezier(0.2, 0, 0.38, 0.9) 0s;
+  transition: visibility 0.24s cubic-bezier(0.2, 0, 0.38, 0.9);
 
   &[expanded="true"] {
     z-index: 9;
@@ -75,20 +86,17 @@
     min-height: 0px;
 
     .mega-menu {
-      visibility: visible;
-      animation: 0.24s cubic-bezier(0.4, 0.14, 0.3, 1) 0s 1 normal none running expand;
+      animation: 0.24s cubic-bezier(0.4, 0.14, 0.3, 1) expand;
     }
   }
 }
 
 .mega-menu {
-  list-style: none;
-  visibility: hidden;
   display: block;
   overflow: hidden overlay;
   background-color: var(--cds-ui-background, #fff);
   box-shadow: 0 2px 6px var(--cds-shadow, rgba(0, 0, 0, .3));
-  position: relative;
+  animation: 0.24s cubic-bezier(0.4, 0.14, 0.3, 1) collapse;
 
   &:after {
     content: "";
