@@ -8,30 +8,23 @@ import {
     Popover,
     PopoverContent, HeaderMenuButton,
 } from "@carbon/react";
-import { UserData20 } from "@carbon/icons-react";
 import {
     CardManagementProvider,
-    InvoicesProvider,
     omitQueryParams,
     useAuth,
-    useMobile,
     useThemePreference,
-    useUserManagement,
 } from "../../sdk";
 import { useTranslation } from "react-i18next";
 import { UserProfileImage } from "@carbon/ibm-products";
 import { useState } from "react";
 import HeaderTab from "../../components/Header/HeaderTab";
 import { Outlet, useSearchParams } from "react-router-dom";
-import { useMemo } from "react";
 import "./header.scss";
-import { TearSheets } from "../TearSheet";
 import { useRef } from "react";
 import { useEffect } from "react";
 import ProfileDropdown from "../ProfileDropdown";
 import UploadProfileImageModal from "../../sdk/uploadprofileimage";
 
-import { Switcher } from "@carbon/react/icons";
 import ibmLogo from '../media/IBM_logo_black.svg'
 import { CustomWideMenu } from "./CustomWideMenu";
 import MastheadSearch from "@carbon/ibmdotcom-react/lib/components/Masthead/MastheadSearch";
@@ -40,19 +33,10 @@ function _AuthenticatedAppHeader() {
     const { user } = useAuth();
     const { t } = useTranslation();
     const { theme } = useThemePreference();
-    const { isUserManagementAllowed } = useUserManagement();
     const [searchParams, setSearchParams] = useSearchParams();
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
     const [isUploadProfileImageModalOpen, openUploadProfileImageModal] =
         useState(false);
-    const { isUserListOpen, setIsUserListOpen } = useMemo(
-        () => ({
-            isUserListOpen: searchParams.get("isUserListOpen") === "true",
-            setIsUserListOpen: (shouldOpen) =>
-                setSearchParams({ isUserListOpen: shouldOpen }),
-        }),
-        [searchParams.get("isUserListOpen")]
-    );
 
     const wrapperRef = useRef(null);
     const [isSearchBarExpanded, setIsSearchBarExpanded] = useState(false)
@@ -135,16 +119,6 @@ function _AuthenticatedAppHeader() {
                                     } }></MastheadSearch>
                             </HeaderGlobalBar>
 
-                            { isUserManagementAllowed && (
-                                <HeaderGlobalAction
-                                    aria-label={ t("user") }
-                                    className={ `user-list-nav-button ${ isSearchBarExpanded ? 'has-search-active' : '' }` }
-                                    onClick={ () => setIsUserListOpen(true) }
-                                >
-                                    <UserData20 />
-                                </HeaderGlobalAction>
-                            ) }
-
                             <Popover
                                 open={ isProfileDropdownOpen }
                                 isTabTip
@@ -199,10 +173,6 @@ function _AuthenticatedAppHeader() {
                         </Header>
                     ) }
                 />
-                <TearSheets
-                    setIsOpen={ setIsUserListOpen }
-                    isOpen={ isUserListOpen }
-                />
             </div>
 
             <Outlet />
@@ -217,9 +187,7 @@ function _AuthenticatedAppHeader() {
 export default function AuthenticatedAppHeader(props) {
     return (
         <CardManagementProvider>
-            <InvoicesProvider>
-                <_AuthenticatedAppHeader { ...props } />
-            </InvoicesProvider>
+            <_AuthenticatedAppHeader { ...props } />
         </CardManagementProvider>
     );
 }

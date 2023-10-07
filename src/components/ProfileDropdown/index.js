@@ -2,7 +2,7 @@ import { UserProfileImage } from "@carbon/ibm-products";
 import { Link, Tile, Tooltip } from "@carbon/react";
 import { ArrowRight, Camera } from "@carbon/react/icons";
 import React from "react";
-import {useAuth, useInvoices, useCardManagement, useThemePreference} from "../../sdk";
+import { useAuth, useThemePreference, useCardManagement } from "../../sdk";
 
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
@@ -18,7 +18,6 @@ const ProfileDropdown = React.memo(
     const [isHovered, setIsHovered] = useState(false);
     const {theme } = useThemePreference();
     const { openCardManagementPanel, isCardManagementAllowed } = useCardManagement();
-    const { handleOpenInvoiceList } = useInvoices()
     const handleLogout = async (e) => {
       e.preventDefault();
       await signout();
@@ -58,8 +57,6 @@ const ProfileDropdown = React.memo(
           <div className="link-list">
             <Link onClick={onProfileOptionClick}>{t("profile")}</Link>
             <Link>{t("privacy")}</Link>
-            {/* todo */}
-            <Link onClick={handleOpenInvoiceList}>{t("invoices")}</Link>
             {isCardManagementAllowed &&
               <Link onClick={openCardManagementPanel}>{t("card-management")}</Link>}
             <Link

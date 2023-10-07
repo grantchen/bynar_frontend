@@ -1,15 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import jsonData from '../JSONs/usen.json';
 import { ArrowRight } from "@carbon/react/icons";
 
-import { useMobile } from "../../sdk";
+import { TabContext, useMobile } from "../../sdk";
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav.js';
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-menu.js';
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-menu-item.js';
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-overlay.js';
 import "./CustomWideMenu.scss";
+import { useTranslation } from "react-i18next";
 
 export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
+    const { goToTab } = useContext(TabContext);
+
     const [activeTitle, setActiveTitle] = useState(jsonData.mastheadNav.links[0]?.title);
     const handleClick = (title) => {
         setActiveTitle(title);
@@ -20,6 +23,7 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
     const wideMenuButtonRef = useRef(null);
 
     const isMobile = useMobile();
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (!isMobile) {
@@ -122,12 +126,27 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                                 {
                                                     ele.menuSections[0]?.menuItems.map((item) => {
                                                         if (!item.megaPanelViewAll) {
-                                                            return (
-                                                                <dds-left-nav-menu-item
-                                                                    href={ item.url }
-                                                                    title={ item.title }
-                                                                ></dds-left-nav-menu-item>
-                                                            )
+                                                            if (item.tab) {
+                                                                return (
+                                                                    <dds-left-nav-menu-item
+                                                                        title={ t(item.title) }
+                                                                        onClick={ (e) => {
+                                                                            e.preventDefault()
+                                                                            goToTab(item.tab, item.title)
+                                                                            onClickSideNavExpand()
+                                                                        } }
+                                                                    >
+                                                                    </dds-left-nav-menu-item>
+                                                                )
+                                                            } else {
+                                                                return (
+                                                                    <dds-left-nav-menu-item
+                                                                        href={ item.url }
+                                                                        title={ t(item.title) }
+                                                                    ></dds-left-nav-menu-item>
+                                                                )
+                                                            }
+
                                                         }
                                                     })
                                                 }
@@ -218,22 +237,38 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                                                         {
                                                                             ele.menuSections[0]?.menuItems.map((item) => {
                                                                                 if (!item.megaPanelViewAll) {
-                                                                                    return (
-                                                                                        <div
-                                                                                            key={ item.title }
-                                                                                            className="link">
-                                                                                            <a href={ item.url }
-                                                                                               target="_blank"
-                                                                                               rel="noopener noreferrer">
-                                                                                                <div>
-                                                                                                    <span>{ item.title }</span>
-                                                                                                    <slot
-                                                                                                        name="icon"></slot>
-                                                                                                </div>
-                                                                                                <span>{ item.megapanelContent?.description }</span>
-                                                                                            </a>
-                                                                                        </div>
-                                                                                    )
+                                                                                    if (item.tab) {
+                                                                                        return (
+                                                                                            <div
+                                                                                                key={ item.title }
+                                                                                                className="link">
+                                                                                                <a onClick={ () => {
+                                                                                                    goToTab(item.tab, item.title)
+                                                                                                    onClickSideNavExpand()
+                                                                                                } }>
+                                                                                                    <div>
+                                                                                                        <span>{ t(item.title) }</span>
+                                                                                                    </div>
+                                                                                                    <span>{ t(item.megapanelContent?.description) }</span>
+                                                                                                </a>
+                                                                                            </div>
+                                                                                        )
+                                                                                    } else {
+                                                                                        return (
+                                                                                            <div
+                                                                                                key={ item.title }
+                                                                                                className="link">
+                                                                                                <a href={ item.url }
+                                                                                                   target="_blank"
+                                                                                                   rel="noopener noreferrer">
+                                                                                                    <div>
+                                                                                                        <span>{ t(item.title) }</span>
+                                                                                                    </div>
+                                                                                                    <span>{ t(item.megapanelContent?.description) }</span>
+                                                                                                </a>
+                                                                                            </div>
+                                                                                        )
+                                                                                    }
                                                                                 }
                                                                             })
                                                                         }
