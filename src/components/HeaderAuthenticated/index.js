@@ -201,9 +201,7 @@ function _AuthenticatedAppHeader() {
 export default function AuthenticatedAppHeader(props) {
     return (
         <CardManagementProvider>
-            <InvoicesProvider>
-                <_AuthenticatedAppHeader { ...props } />
-            </InvoicesProvider>
+            <_AuthenticatedAppHeader { ...props } />
         </CardManagementProvider>
     );
 }
