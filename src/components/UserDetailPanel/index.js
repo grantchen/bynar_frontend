@@ -237,7 +237,7 @@ export const UserDetailPanel = ({ open }) => {
                 open={open}
                 onRequestClose={handleClose}
                 title={t("user-detail")}
-                subtitle=""
+                subtitle={t("user-detail")}
                 actions={[]}
                 primaryButtonText={(
                     <>
