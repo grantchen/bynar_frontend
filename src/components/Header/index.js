@@ -17,11 +17,9 @@ import { useTranslation } from "react-i18next";
 import ProfileDropdown from "../ProfileDropdown";
 import HeaderTab from "./HeaderTab";
 import {
-    LanguageModal,
     useUserManagement,
     useThemePreference,
     useAuth,
-    LanguageChangeModal,
 } from "../../sdk";
 import { TearSheets } from "../TearSheet";
 import { useSearchParams } from "react-router-dom";
@@ -76,10 +74,6 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [wrapperRef]);
-
-    const [isLanguageChangeModalOpen, openLanguageChangeModal] =
-        useState(false);
-
     const { isUserListOpen, setIsUserListOpen } = useMemo(
         () => ({
             isUserListOpen: searchParams.get("isUserListOpen") === "true",
@@ -161,14 +155,7 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
                                         />
                                     </HeaderGlobalAction>
                                     <PopoverContent>
-                                        <ProfileDropdown
-                                            openLanguageModal={
-                                                isLanguageChangeModalOpen
-                                            }
-                                            setLanguageModalOpen={
-                                                openLanguageChangeModal
-                                            }
-                                        />
+                                        <ProfileDropdown/>
                                     </PopoverContent>
                                 </Popover>
                             </>
@@ -181,10 +168,6 @@ const HeaderComponent = ({ isSideNavExpanded, onClickSideNavExpand }) => {
                 />
             </Header>
             <Outlet />
-            <LanguageChangeModal
-                isLanguageChangeModalOpen={isLanguageChangeModalOpen}
-                openLanguageChangeModal={openLanguageChangeModal}
-            />
             <TearSheets setIsOpen={setIsUserListOpen} isOpen={isUserListOpen} />
         </>
     );

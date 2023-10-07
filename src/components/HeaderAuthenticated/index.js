@@ -12,7 +12,6 @@ import { UserData20 } from "@carbon/icons-react";
 import {
     CardManagementProvider,
     InvoicesProvider,
-    LanguageChangeModal,
     omitQueryParams,
     useAuth,
     useMobile,
@@ -44,8 +43,6 @@ function _AuthenticatedAppHeader() {
     const { isUserManagementAllowed } = useUserManagement();
     const [searchParams, setSearchParams] = useSearchParams();
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
-    const [isLanguageChangeModalOpen, openLanguageChangeModal] =
-        useState(false);
     const [isUploadProfileImageModalOpen, openUploadProfileImageModal] =
         useState(false);
     const { isUserListOpen, setIsUserListOpen } = useMemo(
@@ -190,12 +187,6 @@ function _AuthenticatedAppHeader() {
                                             });
                                             setIsProfileDropdownOpen(false);
                                         } }
-                                        openLanguageModal={
-                                            isLanguageChangeModalOpen
-                                        }
-                                        setLanguageModalOpen={
-                                            openLanguageChangeModal
-                                        }
                                         openUploadProfileModal={
                                             isUploadProfileImageModalOpen
                                         }
@@ -215,10 +206,6 @@ function _AuthenticatedAppHeader() {
             </div>
 
             <Outlet />
-            <LanguageChangeModal
-                isLanguageChangeModalOpen={ isLanguageChangeModalOpen }
-                openLanguageChangeModal={ openLanguageChangeModal }
-            />
             <UploadProfileImageModal
                 isUploadProfileImageModalOpen={ isUploadProfileImageModalOpen }
                 openUploadProfileImageModal={ openUploadProfileImageModal }
