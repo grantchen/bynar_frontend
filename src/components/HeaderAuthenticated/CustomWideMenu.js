@@ -8,6 +8,7 @@ import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-menu.js
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-menu-item.js';
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-overlay.js';
 import "./CustomWideMenu.scss";
+import { useTranslation } from "react-i18next";
 
 export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
     const { goToTab } = useContext(TabContext);
@@ -22,6 +23,7 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
     const wideMenuButtonRef = useRef(null);
 
     const isMobile = useMobile();
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (!isMobile) {
@@ -127,10 +129,10 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                                             if (item.tab) {
                                                                 return (
                                                                     <dds-left-nav-menu-item
-                                                                        title={ item.title }
+                                                                        title={ t(item.title) }
                                                                         onClick={ (e) => {
                                                                             e.preventDefault()
-                                                                            goToTab(item.tab)
+                                                                            goToTab(item.tab, item.title)
                                                                             onClickSideNavExpand()
                                                                         } }
                                                                     >
@@ -140,7 +142,7 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                                                 return (
                                                                     <dds-left-nav-menu-item
                                                                         href={ item.url }
-                                                                        title={ item.title }
+                                                                        title={ t(item.title) }
                                                                     ></dds-left-nav-menu-item>
                                                                 )
                                                             }
@@ -241,13 +243,13 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                                                                                 key={ item.title }
                                                                                                 className="link">
                                                                                                 <a onClick={ () => {
-                                                                                                    goToTab(item.tab)
+                                                                                                    goToTab(item.tab, item.title)
                                                                                                     onClickSideNavExpand()
                                                                                                 } }>
                                                                                                     <div>
-                                                                                                        <span>{ item.title }</span>
+                                                                                                        <span>{ t(item.title) }</span>
                                                                                                     </div>
-                                                                                                    <span>{ item.megapanelContent?.description }</span>
+                                                                                                    <span>{ t(item.megapanelContent?.description) }</span>
                                                                                                 </a>
                                                                                             </div>
                                                                                         )
@@ -260,9 +262,9 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                                                                                    target="_blank"
                                                                                                    rel="noopener noreferrer">
                                                                                                     <div>
-                                                                                                        <span>{ item.title }</span>
+                                                                                                        <span>{ t(item.title) }</span>
                                                                                                     </div>
-                                                                                                    <span>{ item.megapanelContent?.description }</span>
+                                                                                                    <span>{ t(item.megapanelContent?.description) }</span>
                                                                                                 </a>
                                                                                             </div>
                                                                                         )

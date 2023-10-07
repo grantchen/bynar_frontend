@@ -9,8 +9,6 @@ const HeaderTab = ({ className }) => {
     const {tab, handleAddTab, handleRemoveTab, activeTab, setActiveTab} =
         useContext(TabContext);
     const carouselRef = useRef(null);
-    const {t} = useTranslation();
-    const isMobile = useMobile();
 
     const handleTabChange = (evt) => {
         setActiveTab(evt.selectedIndex);
@@ -40,7 +38,7 @@ const HeaderTab = ({ className }) => {
                     kind="ghost"
                     className="add-new-tab"
                     hasIconOnly
-                    onClick={() => handleAddTab("")}
+                    onClick={(e) => handleAddTab()}
                 >
                     <Add20 aria-label="Add" />
                 </Button>

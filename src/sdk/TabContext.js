@@ -8,6 +8,7 @@ const UserList = lazy(() => import("./../components/UserList/index"));
 const InvoicesTable = lazy(() => import("./../components/InvoicesTable/index"));
 
 const TabContext = createContext();
+const EmptyTabName = "EmptyTab";
 const EmptyTab = ({ label }) => {
     return (
         <>
@@ -47,6 +48,7 @@ const TabContextProvider = ({ children }) => {
             content: <DashboardContainer />,
             id: 0,
             label: t('title'),
+            labelKey: 'title',
             isDelted: false,
             name: 'Dashboard',
         },
@@ -72,11 +74,12 @@ const TabContextProvider = ({ children }) => {
 
     useEffect(() => {
         setTab(prev => prev.map((val, idx) => {
-            if (idx === 0) {
-                return { ...val, label: t('title') }
+            if (val.name === EmptyTabName) {
+                const tabNumber = val.label.split(' ')[1]
+                return { ...val, label: t('tab') + ' ' + tabNumber }
             }
-            const tabNumber = val.label.split(' ')[1]
-            return { ...val, label: t('tab') + ' ' + tabNumber }
+
+            return { ...val, label: t(val.labelKey) }
         }))
     }, [user?.languagePreference, t]);
 
@@ -91,7 +94,7 @@ const TabContextProvider = ({ children }) => {
 
     }, [tab, setActiveTab, activeTab, setTab]);
 
-    const handleAddTab = (name) => {
+    const handleAddTab = (name = EmptyTabName, labelKey = '') => {
         const maxId = tab.reduce((max, item) => {
             return item.id > max ? item.id : max;
         }, 0);
@@ -101,14 +104,16 @@ const TabContextProvider = ({ children }) => {
         if (!content) {
             // use empty tab if no content
             content = <EmptyTab label={ `${ t('tab') } ${ maxId + 1 }` } id={ maxId + 1 } />
-            label = `${ t('tab') } ${ maxId + 1 }`
+            labelKey = `tab ${ maxId + 1 }`
+            label = `${ t('tab') } ${ maxId + 1 }`;
         } else {
-            label = t(name)
+            label = t(labelKey);
         }
 
         const newTab = {
             id: maxId + 1,
             label: label,
+            labelKey: labelKey,
             content: content,
             isDelted: true,
             name: name,
@@ -122,13 +127,13 @@ const TabContextProvider = ({ children }) => {
         }
     };
 
-    const goToTab = (name) => {
+    const goToTab = (name, labelKey) => {
         // find tab by name of tab, if not found, add new tab, if found, set active tab to that tab
         const tabIndexToGo = tab.findIndex((item) => item.name === name);
         if (tabIndexToGo > -1) {
             setActiveTab(tabIndexToGo);
         } else {
-            handleAddTab(name);
+            handleAddTab(name, labelKey);
         }
     }
 

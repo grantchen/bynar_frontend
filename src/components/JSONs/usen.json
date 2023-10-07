@@ -5000,36 +5000,36 @@
             "heading": "",
             "menuItems": [
               {
-                "title": "Invoices",
-                "titleEnglish": "Invoices",
+                "title": "invoices",
+                "titleEnglish": "",
                 "url": "",
                 "tab": "Invoices",
                 "megapanelContent": {
-                  "headingTitle": "invoice management",
+                  "headingTitle": "",
                   "headingUrl": "",
-                  "description": "invoice management"
+                  "description": "invoices"
                 }
               },
               {
-                "title": "Users",
-                "titleEnglish": "Users",
+                "title": "users",
+                "titleEnglish": "",
                 "url": "",
                 "tab": "Users",
                 "megapanelContent": {
-                  "headingTitle": "user management",
+                  "headingTitle": "",
                   "headingUrl": "",
-                  "description": "user management"
+                  "description": "user-list"
                 }
               },
               {
-                "title": "Home",
-                "titleEnglish": "Home",
+                "title": "title",
+                "titleEnglish": "",
                 "url": "",
                 "tab": "Dashboard",
                 "megapanelContent": {
-                  "headingTitle": "link to home dashboard",
+                  "headingTitle": "",
                   "headingUrl": "",
-                  "description": "link to home dashboard"
+                  "description": ""
                 }
               },
               {
