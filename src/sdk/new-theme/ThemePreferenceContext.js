@@ -6,7 +6,6 @@ import React, {
     useEffect,
     useState,
 } from "react";
-import { ThemeModal } from "./ThemeModal";
 import { useAuth } from "../AuthContext";
 import {useThemeDetector} from './useThemeDetector'
 
@@ -65,7 +64,6 @@ function ThemePreferenceProvider({ children }) {
     return (
         <ThemePreferenceContext.Provider value={value}>
             <GlobalTheme theme={mapCarbonThemeFromThemePreference(theme)}>{children}</GlobalTheme>
-            <ThemeModal />
         </ThemePreferenceContext.Provider>
     );
 }
