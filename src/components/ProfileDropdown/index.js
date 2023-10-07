@@ -9,8 +9,6 @@ import { useState } from "react";
 import "./profileDropdown.scss";
 const ProfileDropdown = React.memo(
   ({
-    openLanguageModal,
-    setLanguageModalOpen,
     openUploadProfileModal,
     setUploadProfileModalOpen,
     onProfileOptionClick = () => null
@@ -18,15 +16,11 @@ const ProfileDropdown = React.memo(
     const [t, i18n] = useTranslation();
     const { signout, user } = useAuth();
     const [isHovered, setIsHovered] = useState(false);
-    const { openThemeChangeModal, theme } = useThemePreference();
+    const {theme } = useThemePreference();
     const { openCardManagementPanel, isCardManagementAllowed } = useCardManagement();
     const handleLogout = async (e) => {
       e.preventDefault();
       await signout();
-    };
-    const handleLanguageChange = (e) => {
-      e.preventDefault();
-      setLanguageModalOpen(!openLanguageModal);
     };
 
     const handleImageUploadChange = (e) => {
@@ -65,12 +59,6 @@ const ProfileDropdown = React.memo(
             <Link>{t("privacy")}</Link>
             {isCardManagementAllowed &&
               <Link onClick={openCardManagementPanel}>{t("card-management")}</Link>}
-            <Link style={{ cursor: "pointer" }} onClick={handleLanguageChange}>
-              {t("change-language")}
-            </Link>
-            <Link style={{ cursor: "pointer" }} onClick={() => openThemeChangeModal(true)}>
-              {t("change-theme")}
-            </Link>
             <Link
               style={{ cursor: "pointer", alignItems: 'center' }}
               onClick={handleLogout}

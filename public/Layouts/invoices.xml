@@ -22,6 +22,7 @@
    <Cfg PrintPagePrefix="&lt;center class='%9' style='width:%7px'>First example printed page %3 from %6&lt;/center>"/>
    <Cfg PrintPagePostfix="&lt;center class='%9' style='width:%7px'>Page %1 horizontally from %4 , page %2 vertically from %5&lt;/center>"/>
    <Cfg Language='EN'/>
+   <Cfg GroupHideCols='0' />
    <Colors Alternate="rgb(251,251,251,1)"/>
    <Actions OnDel="ClearValue"/>
    <Actions OnMouseOverEditable="Grid.MouseCursor('url(aero_prec.cur),default')"/>

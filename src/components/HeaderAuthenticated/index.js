@@ -10,7 +10,6 @@ import {
 } from "@carbon/react";
 import {
     CardManagementProvider,
-    LanguageChangeModal,
     omitQueryParams,
     useAuth,
     useThemePreference,
@@ -36,8 +35,6 @@ function _AuthenticatedAppHeader() {
     const { theme } = useThemePreference();
     const [searchParams, setSearchParams] = useSearchParams();
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
-    const [isLanguageChangeModalOpen, openLanguageChangeModal] =
-        useState(false);
     const [isUploadProfileImageModalOpen, openUploadProfileImageModal] =
         useState(false);
 
@@ -164,12 +161,6 @@ function _AuthenticatedAppHeader() {
                                             });
                                             setIsProfileDropdownOpen(false);
                                         } }
-                                        openLanguageModal={
-                                            isLanguageChangeModalOpen
-                                        }
-                                        setLanguageModalOpen={
-                                            openLanguageChangeModal
-                                        }
                                         openUploadProfileModal={
                                             isUploadProfileImageModalOpen
                                         }
@@ -185,10 +176,6 @@ function _AuthenticatedAppHeader() {
             </div>
 
             <Outlet />
-            <LanguageChangeModal
-                isLanguageChangeModalOpen={ isLanguageChangeModalOpen }
-                openLanguageChangeModal={ openLanguageChangeModal }
-            />
             <UploadProfileImageModal
                 isUploadProfileImageModalOpen={ isUploadProfileImageModalOpen }
                 openUploadProfileImageModal={ openUploadProfileImageModal }
