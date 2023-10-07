@@ -1,6 +1,6 @@
 import React from "react";
 import { Tearsheet } from "@carbon/ibm-products";
-import { UserList } from "./../UserList";
+import UserList from "./../UserList";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 export const TearSheets = ({ setIsOpen, isOpen }) => {

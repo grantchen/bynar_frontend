@@ -5000,6 +5000,39 @@
             "heading": "",
             "menuItems": [
               {
+                "title": "Invoices",
+                "titleEnglish": "Invoices",
+                "url": "",
+                "tab": "Invoices",
+                "megapanelContent": {
+                  "headingTitle": "invoice management",
+                  "headingUrl": "",
+                  "description": "invoice management"
+                }
+              },
+              {
+                "title": "Users",
+                "titleEnglish": "Users",
+                "url": "",
+                "tab": "Users",
+                "megapanelContent": {
+                  "headingTitle": "user management",
+                  "headingUrl": "",
+                  "description": "user management"
+                }
+              },
+              {
+                "title": "Home",
+                "titleEnglish": "Home",
+                "url": "",
+                "tab": "Dashboard",
+                "megapanelContent": {
+                  "headingTitle": "link to home dashboard",
+                  "headingUrl": "",
+                  "description": "link to home dashboard"
+                }
+              },
+              {
                 "title": "Partner with us",
                 "titleEnglish": "Partners",
                 "url": "https://www.ibm.com/partnerplus/?lnk=hpmex_bupa",

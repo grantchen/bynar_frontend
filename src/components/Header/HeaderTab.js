@@ -40,7 +40,7 @@ const HeaderTab = ({ className }) => {
                     kind="ghost"
                     className="add-new-tab"
                     hasIconOnly
-                    onClick={handleAddTab}
+                    onClick={() => handleAddTab("")}
                 >
                     <Add20 aria-label="Add" />
                 </Button>

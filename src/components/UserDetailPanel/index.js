@@ -1,4 +1,4 @@
-import { EditSidePanel } from "@carbon/ibm-products";
+import { EditSidePanel, pkg } from "@carbon/ibm-products";
 import {
     TextInput,
     Select,
@@ -18,6 +18,9 @@ import {
 } from "google-libphonenumber";
 import "./UserDetailPanel.scss";
 import { useTranslation } from "react-i18next";
+
+pkg.component.EditSidePanel = true;
+
 export const UserDetailPanel = ({ open }) => {
     const { t } = useTranslation();
     const { user,getUser,authFetch } = useAuth();
