@@ -101,6 +101,7 @@
     "postal-code-text": "Postleitzahl",
     "phone-number-text": "Telefonnummer",
     "user-detail": "Benutzerdetails",
+    "user-profile-information": "Informationen zum Benutzerprofil",
     "user-load-failed": "Benutzerdaten konnten nicht geladen werden",
     "user-deleted-successfully": "Benutzer erfolgreich gelöscht",
     "error-deleting-user": "Fehler beim Löschen des Benutzers",
