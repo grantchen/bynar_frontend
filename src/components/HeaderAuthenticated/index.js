@@ -10,7 +10,6 @@ import {
 } from "@carbon/react";
 import {
     CardManagementProvider,
-    InvoicesProvider,
     LanguageChangeModal,
     omitQueryParams,
     useAuth,
