@@ -17,7 +17,6 @@ const Home = lazy(() => import("./pages/Home"));
 const Home2 = lazy(() => import("./pages/Home2"));
 const Signin = lazy(() => import("./pages/signin"));
 const Signup = lazy(() => import("./pages/signup"));
-const Test = lazy(() => import("./pages/test"));
 const AuthenticatedAppHeader = lazy(() => import("./components/HeaderAuthenticated"));
 
 function App() {
@@ -40,10 +39,6 @@ function App() {
                                         <Route
                                             path="/auth/magic-link"
                                             element={<MagicLinkAuth />}
-                                        />
-                                        <Route
-                                            path="/test"
-                                            element={<Test />}
                                         />
                                         <Route
                                             exact
