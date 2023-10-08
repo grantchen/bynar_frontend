@@ -36,6 +36,10 @@
   overflow: hidden;
   align-items: stretch;
 
+  &.has-search-active {
+    display: none;
+  }
+
 
   .tab-buttons-list {
     overflow-x: auto;

@@ -29,7 +29,7 @@ import ibmLogo from '../media/IBM_logo_black.svg'
 import { CustomWideMenu } from "./CustomWideMenu";
 import MastheadSearch from "@carbon/ibmdotcom-react/lib/components/Masthead/MastheadSearch";
 
-function _AuthenticatedAppHeader() {
+function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
     const { user } = useAuth();
     const { t } = useTranslation();
     const { theme } = useThemePreference();
@@ -59,123 +59,113 @@ function _AuthenticatedAppHeader() {
 
     return (
         <>
-            <div className="main-header-container">
-                <HeaderContainer
-                    render={ ({ isSideNavExpanded, onClickSideNavExpand }) => (
-                        <Header aria-label="Bynar">
-                            <SkipToContent />
-                            <CustomWideMenu expanded={ isSideNavExpanded }
-                                            onClickSideNavExpand={ onClickSideNavExpand }>
-                                <HeaderGlobalAction
-                                    className={ isSearchBarExpanded ? 'has-search-active' : '' }
-                                    aria-label={
-                                        isSideNavExpanded ? 'Close' : 'Open'
-                                    }
-                                    aria-expanded={ isSideNavExpanded }
-                                    onClick={ (e) => {
-                                        e.stopPropagation()
-                                        onClickSideNavExpand()
-                                    } }
-                                    tooltipAlignment="end"
-                                    id="switcher-button">
-                                    <HeaderMenuButton
-                                        isActive={ isSideNavExpanded }
-                                    />
-                                </HeaderGlobalAction>
-                            </CustomWideMenu>
+            <Header aria-label="Bynar">
+                <SkipToContent />
+                <CustomWideMenu expanded={ isSideNavExpanded }
+                                onClickSideNavExpand={ onClickSideNavExpand }>
+                    <HeaderGlobalAction
+                        className={ isSearchBarExpanded ? 'has-search-active' : '' }
+                        aria-label={
+                            isSideNavExpanded ? 'Close' : 'Open'
+                        }
+                        aria-expanded={ isSideNavExpanded }
+                        onClick={ (e) => {
+                            e.stopPropagation()
+                            onClickSideNavExpand()
+                        } }
+                        tooltipAlignment="end"
+                        id="switcher-button">
+                        <HeaderMenuButton
+                            isActive={ isSideNavExpanded }
+                        />
+                    </HeaderGlobalAction>
+                </CustomWideMenu>
 
-                            <HeaderName
-                                href="/"
-                                prefix=""
-                                className={ isSearchBarExpanded ? 'has-search-active' : '' }
-                            >
-                                <img src={ ibmLogo } alt="ibm_logo" />
-                            </HeaderName>
+                <HeaderName
+                    href="/"
+                    prefix=""
+                    className={ isSearchBarExpanded ? 'has-search-active' : '' }
+                >
+                    <img src={ ibmLogo } alt="ibm_logo" />
+                </HeaderName>
 
-                            <HeaderName
-                                className={ `seperatorHead ${ isSearchBarExpanded ? 'has-search-active' : '' }` }
-                                prefix=""
-                            >
-                                <div className="logoSeperator" />
-                            </HeaderName>
+                <HeaderName
+                    className={ `seperatorHead ${ isSearchBarExpanded ? 'has-search-active' : '' }` }
+                    prefix=""
+                >
+                    <div className="logoSeperator" />
+                </HeaderName>
 
-                            <HeaderName
-                                className={ `orgName ${ isSearchBarExpanded ? 'has-search-active' : '' }` }
-                                prefix=""
-                            >
-                                Bynar
-                            </HeaderName>
+                <HeaderName
+                    className={ `orgName ${ isSearchBarExpanded ? 'has-search-active' : '' }` }
+                    prefix=""
+                >
+                    Bynar
+                </HeaderName>
 
-                            <HeaderGlobalBar>
-                                {
-                                    !isSearchBarExpanded &&
-                                    <HeaderTab className={ isSearchBarExpanded ? 'has-search-active' : '' } />
-                                }
-                                <MastheadSearch
-                                    placeHolderText="Search all of Bynar"
-                                    isSearchActive={ isSearchBarExpanded }
-                                    onChangeSearchActive={ (event, { isOpen }) => {
-                                        setIsSearchBarExpanded(isOpen)
-                                    } }></MastheadSearch>
-                            </HeaderGlobalBar>
+                <HeaderGlobalBar>
+                    <HeaderTab className={ isSearchBarExpanded ? 'has-search-active' : '' } />
+                    <MastheadSearch
+                        placeHolderText="Search all of Bynar"
+                        isSearchActive={ isSearchBarExpanded }
+                        onChangeSearchActive={ (event, { isOpen }) => {
+                            setIsSearchBarExpanded(isOpen)
+                        } }></MastheadSearch>
+                </HeaderGlobalBar>
 
-                            <Popover
-                                open={ isProfileDropdownOpen }
-                                isTabTip
-                                align="bottom-right"
-                                className={ `popover-dropdown ${ isSearchBarExpanded ? 'has-search-active' : '' }` }
-                            >
-                                <HeaderGlobalAction
-                                    aria-label={ user?.fullName ?? t("user") }
-                                    onClick={ () => {
-                                        setIsProfileDropdownOpen(true);
-                                        setSearchParams((prev) =>
-                                            omitQueryParams(prev, [
-                                                "userIdToShowDetails",
-                                                "openAddUserPanel",
-                                                "userIdToBeEdited",
-                                                "openCardMangementPanel",
-                                                "isInvoiceListOpen"
-                                            ])
-                                        );
-                                    } }
-                                >
-                                    <UserProfileImage
-                                        backgroundColor={ "light-cyan" }
-                                        size={ "md" }
-                                        initials={ user?.fullName ?? "..." }
-                                        image={ user?.profileURL ?? "" }
-                                        theme={
-                                            theme === "g90"
-                                                ? "dark"
-                                                : "light"
-                                        }
-                                    />
-                                </HeaderGlobalAction>
-                                <PopoverContent ref={ wrapperRef }>
-                                    <ProfileDropdown
-                                        onProfileOptionClick={ () => {
-                                            setSearchParams({
-                                                userIdToShowDetails:
-                                                user?.id,
-                                            });
-                                            setIsProfileDropdownOpen(false);
-                                        } }
-                                        openUploadProfileModal={
-                                            isUploadProfileImageModalOpen
-                                        }
-                                        setUploadProfileModalOpen={
-                                            openUploadProfileImageModal
-                                        }
-                                    />
-                                </PopoverContent>
-                            </Popover>
-                        </Header>
-                    ) }
-                />
-            </div>
+                <Popover
+                    ref={ wrapperRef }
+                    open={ isProfileDropdownOpen }
+                    isTabTip
+                    align="bottom-right"
+                    className={ `popover-dropdown ${ isSearchBarExpanded ? 'has-search-active' : '' }` }
+                >
+                    <HeaderGlobalAction
+                        aria-label={ user?.fullName ?? t("user") }
+                        onClick={ () => {
+                            setIsProfileDropdownOpen(!isProfileDropdownOpen);
+                            setSearchParams((prev) =>
+                                omitQueryParams(prev, [
+                                    "userIdToShowDetails",
+                                    "openAddUserPanel",
+                                    "userIdToBeEdited",
+                                    "openCardMangementPanel",
+                                ])
+                            );
+                        } }
+                    >
+                        <UserProfileImage
+                            backgroundColor={ "light-cyan" }
+                            size={ "md" }
+                            initials={ user?.fullName ?? "..." }
+                            image={ user?.profileURL ?? "" }
+                            theme={
+                                theme === "g90"
+                                    ? "dark"
+                                    : "light"
+                            }
+                        />
+                    </HeaderGlobalAction>
+                    <PopoverContent>
+                        <ProfileDropdown
+                            onProfileOptionClick={ () => {
+                                setSearchParams({
+                                    userIdToShowDetails:
+                                    user?.id,
+                                });
+                                setIsProfileDropdownOpen(false);
+                            } }
+                            openUploadProfileModal={
+                                isUploadProfileImageModalOpen
+                            }
+                            setUploadProfileModalOpen={
+                                openUploadProfileImageModal
+                            }
+                        />
+                    </PopoverContent>
+                </Popover>
+            </Header>
 
-            <Outlet />
             <UploadProfileImageModal
                 isUploadProfileImageModalOpen={ isUploadProfileImageModalOpen }
                 openUploadProfileImageModal={ openUploadProfileImageModal }
@@ -187,7 +177,10 @@ function _AuthenticatedAppHeader() {
 export default function AuthenticatedAppHeader(props) {
     return (
         <CardManagementProvider>
-            <_AuthenticatedAppHeader { ...props } />
+            <div className="main-header-container">
+                <HeaderContainer { ...props } render={_AuthenticatedAppHeader} />
+            </div>
+            <Outlet />
         </CardManagementProvider>
     );
 }
