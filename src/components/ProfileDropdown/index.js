@@ -2,15 +2,13 @@ import { UserProfileImage } from "@carbon/ibm-products";
 import { Link, Tile, Tooltip } from "@carbon/react";
 import { ArrowRight, Camera } from "@carbon/react/icons";
 import React from "react";
-import { useAuth, useThemePreference, useUserManagement, useInvoices, useCardManagement } from "../../sdk";
+import { useAuth, useThemePreference, useCardManagement } from "../../sdk";
 
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import "./profileDropdown.scss";
 const ProfileDropdown = React.memo(
   ({
-    openLanguageModal,
-    setLanguageModalOpen,
     openUploadProfileModal,
     setUploadProfileModalOpen,
     onProfileOptionClick = () => null
@@ -18,16 +16,11 @@ const ProfileDropdown = React.memo(
     const [t, i18n] = useTranslation();
     const { signout, user } = useAuth();
     const [isHovered, setIsHovered] = useState(false);
-    const { openThemeChangeModal, theme } = useThemePreference();
+    const {theme } = useThemePreference();
     const { openCardManagementPanel, isCardManagementAllowed } = useCardManagement();
-    const { handleOpenInvoiceList } = useInvoices()
     const handleLogout = async (e) => {
       e.preventDefault();
       await signout();
-    };
-    const handleLanguageChange = (e) => {
-      e.preventDefault();
-      setLanguageModalOpen(!openLanguageModal);
     };
 
     const handleImageUploadChange = (e) => {
@@ -64,16 +57,8 @@ const ProfileDropdown = React.memo(
           <div className="link-list">
             <Link onClick={onProfileOptionClick}>{t("profile")}</Link>
             <Link>{t("privacy")}</Link>
-            {/* todo */}
-            <Link onClick={handleOpenInvoiceList}>{t("invoices")}</Link>
             {isCardManagementAllowed &&
               <Link onClick={openCardManagementPanel}>{t("card-management")}</Link>}
-            <Link style={{ cursor: "pointer" }} onClick={handleLanguageChange}>
-              {t("change-language")}
-            </Link>
-            <Link style={{ cursor: "pointer" }} onClick={() => openThemeChangeModal(true)}>
-              {t("change-theme")}
-            </Link>
             <Link
               style={{ cursor: "pointer", alignItems: 'center' }}
               onClick={handleLogout}

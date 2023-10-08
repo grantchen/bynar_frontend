@@ -1,29 +1,20 @@
-import {
-  pkg,
-} from "@carbon/ibm-products";
 import React from "react";
 import "./UserList.scss";
 import { TreeGrid } from "../TreeGrid";
 
-pkg.setAllComponents(true);
-pkg.setAllFeatures(true);
-
-export const UserList = ({ isOpen }) => {
-  return (
-    <>
-      {
-        isOpen && (
-          <div className="user-list">
-            <TreeGrid
-              table={ "user_list" }
-              config={{
-                Debug: '',
-              }}
-            ></TreeGrid>
-          </div>
-        )
-      }
-    </>
-  );
+const UserList = () => {
+    return (
+        <>
+            <div className="user-list" style={ { height: '400px'} }>
+                <TreeGrid
+                    table={ "user_list" }
+                    config={ {
+                        Debug: '',
+                    } }
+                ></TreeGrid>
+            </div>
+        </>
+    );
 };
 
+export default UserList;
