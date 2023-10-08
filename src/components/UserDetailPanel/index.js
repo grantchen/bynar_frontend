@@ -1,4 +1,4 @@
-import { EditSidePanel } from "@carbon/ibm-products";
+import {SidePanel} from "@carbon/ibm-products";
 import {
     TextInput,
     Select,
@@ -230,25 +230,33 @@ export const UserDetailPanel = ({ open }) => {
 
     return (
         <div className="user-detail-panel">
-            <EditSidePanel
+            <SidePanel
                 preventCloseOnClickOutside
                 includeOverlay
                 className="test"
                 open={open}
-                onRequestClose={handleClose}
                 title={t("user-detail")}
                 subtitle={t("user-profile-information")}
-                actions={[]}
-                primaryButtonText={(
-                    <>
-                        {t('save')}
-                        {disable && <InlineLoading className="inline-loading-within-btn"/>}
-                    </>
+                actions={[{
+                    label: (
+                        <>
+                            {t('save')}
+                            {disable && <InlineLoading className="inline-loading-within-btn"/>}
+                        </>
 
-                )}
-                secondaryButtonText={t("cancel")}
-                onRequestSubmit={handleUpdateProfile}
-                disableSubmit={disable}
+                    ),
+                    onClick: function onClick(event) {
+                        event.preventDefault();
+                        handleUpdateProfile();
+                    },
+                    kind: 'primary',
+                    disabled: disable,
+                    type: 'submit'
+                }, {
+                    label: t("cancel"),
+                    onClick: handleClose,
+                    kind: 'secondary',
+                }]}
             >
                 <div className={"story__body-content"}>
                     {serverNotification && (
@@ -381,7 +389,7 @@ export const UserDetailPanel = ({ open }) => {
                         )}
                     </div>
                 </div>
-            </EditSidePanel>
+            </SidePanel>
         </div>
     );
 };
