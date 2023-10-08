@@ -108,33 +108,6 @@ export const UserDetailPanel = ({ open }) => {
         closeModalAndGoBackToUserList();
     };
 
-    const getUserList = async (userid) => {
-        try {
-            setServerErrorNotification({});
-            setServerNotification(false);
-            setDataLoading(true);
-            const response = await authFetch(`${BaseURL}/user/${userid}`,{
-                method: "GET",
-            })
-            const res = await response.json();
-            if (response.ok) {
-                setEmail(res?.email)
-                setFullName(res?.fullName);
-                setPhoneNumber(res?.phoneNumber);
-                setTheme(res?.theme)
-                setLanguage(res?.language)
-            } else {
-                setServerErrorNotification({
-                    title: res.error,
-                    status: "error",
-                });
-                setServerNotification(true)
-            }
-        } catch (e) {
-        } finally {
-            setDataLoading(false);
-        }
-    };
     const handlePhoneNumber = (value, country) => {
         setPhoneNumber(value)
         validatePhoneNumber(value, country?.dialCode, country?.countryCode);
@@ -200,7 +173,6 @@ export const UserDetailPanel = ({ open }) => {
                 const res = await response.json();
                 if (response.ok) {
                     setDisable(false)
-                    // await getUserList(user.id)
                     handleClose()
                     await getUser();
                 } else {
@@ -225,11 +197,38 @@ export const UserDetailPanel = ({ open }) => {
         }
     };
     useEffect(() => {
+        const getUserList = async (userid) => {
+            try {
+                setServerErrorNotification({});
+                setServerNotification(false);
+                setDataLoading(true);
+                const response = await authFetch(`${BaseURL}/user/${userid}`,{
+                    method: "GET",
+                })
+                const res = await response.json();
+                if (response.ok) {
+                    setEmail(res?.email)
+                    setFullName(res?.fullName);
+                    setPhoneNumber(res?.phoneNumber);
+                    setTheme(res?.theme)
+                    setLanguage(res?.language)
+                } else {
+                    setServerErrorNotification({
+                        title: res.error,
+                        status: "error",
+                    });
+                    setServerNotification(true)
+                }
+            } catch (e) {
+            } finally {
+                setDataLoading(false);
+            }
+        };
         if (!open) {
             return;
         }
         getUserList(user.id)
-    }, [open,user]);
+    }, [open,user,authFetch]);
 
     return (
         <div className="user-detail-panel">
