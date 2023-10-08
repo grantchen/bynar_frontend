@@ -1,12 +1,11 @@
-import React, {useRef, useContext} from "react";
-import {Button, TabList, Tabs, Tab} from "@carbon/react";
+import React, { useRef, useContext } from "react";
+import { Button, TabList, Tabs, Tab } from "@carbon/react";
 import { Add20 } from '@carbon/icons-react';
 import "./HeaderTab.scss";
-import {TabContext, useMobile} from "../../sdk";
-import {useTranslation} from "react-i18next";
+import { TabContext } from "../../sdk";
 
 const HeaderTab = ({ className }) => {
-    const {tab, handleAddTab, handleRemoveTab, activeTab, setActiveTab} =
+    const { tab, handleAddTab, handleRemoveTab, activeTab, setActiveTab } =
         useContext(TabContext);
     const carouselRef = useRef(null);
 
@@ -20,15 +19,17 @@ const HeaderTab = ({ className }) => {
 
     return (
         <>
-            <div className={ `tab ${className}` }>
-                <div className="tab-buttons-list" ref={carouselRef}>
-                    <div style={{display: "flex", whiteSpace: "nowrap", height: "100%"}}>
-                        <Tabs selectedIndex={activeTab} onChange={handleTabChange} dismissable onTabCloseRequest={removeTab}>
+            <div className={ `tab ${ className }` }>
+                <div className="tab-buttons-list" ref={ carouselRef }>
+                    <div style={ { display: "flex", whiteSpace: "nowrap", height: "100%" } }>
+                        <Tabs selectedIndex={ activeTab } onChange={ handleTabChange } dismissable
+                              onTabCloseRequest={ removeTab }>
                             <TabList aria-label="List of tabs">
-                                {tab.map((item, index) =>
-                                    <Tab key={index} className={item.isDelted ? 'custom-tab' : 'custom-tab tab-stable'}>
-                                        {item.label}
-                                    </Tab>)}
+                                { tab.map((item, index) =>
+                                    <Tab key={ index }
+                                         className={ item.isDelted ? 'custom-tab' : 'custom-tab tab-stable' }>
+                                        { item.label }
+                                    </Tab>) }
                             </TabList>
                         </Tabs>
                     </div>
@@ -38,7 +39,7 @@ const HeaderTab = ({ className }) => {
                     kind="ghost"
                     className="add-new-tab"
                     hasIconOnly
-                    onClick={(e) => handleAddTab()}
+                    onClick={ (e) => handleAddTab() }
                 >
                     <Add20 aria-label="Add" />
                 </Button>

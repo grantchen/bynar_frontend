@@ -4,6 +4,11 @@
     overflow-y: auto;
     background: var(--cds-field-01, #ffffff);
     color: var(--cds-text-01, #161616);
+
+    .content-wrapper {
+        padding: 0;
+        outline: none;
+    }
 }
 
 
