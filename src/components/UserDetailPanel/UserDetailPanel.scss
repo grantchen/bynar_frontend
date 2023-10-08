@@ -7,7 +7,9 @@
         margin-top: calc(var(--c4p--side-panel--title-text-height) + var(--c4p--side-panel--subtitle-container-height) + var(--c4p--side-panel--action-bar-container-height) + var(--c4p--side-panel--label-text-height));
         overflow-x: hidden;
     }
-
+    .c4p--side-panel__container .bx--btn.c4p--side-panel__close-button{
+        display: none;
+    }
     .bx--form-item {
         margin: 16px 0px;
     }
@@ -106,3 +108,4 @@ button.button-with-loading {
         min-height: auto;
     }
 }
+
