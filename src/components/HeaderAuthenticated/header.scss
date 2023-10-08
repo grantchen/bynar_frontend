@@ -30,6 +30,7 @@
     .bx--masthead__search.bx--masthead__search--active .bx--header__search--input, .bx--masthead__search[active] .bx--header__search--input, :host(dds-masthead-search).bx--masthead__search--active .bx--header__search--input, :host(dds-masthead-search)[active] .bx--header__search--input {
         background-color: var(--cds-field-01,#f4f4f4);
         color: var(--cds-text-01,#161616);
+        padding-right: 6rem; // fix words cut off
     }
 
     .bx--masthead__search.bx--masthead__search--active .bx--header__action, .bx--masthead__search[active] .bx--header__action, :host(dds-masthead-search).bx--masthead__search--active .bx--header__action, :host(dds-masthead-search)[active] .bx--header__action {
@@ -64,6 +65,14 @@
     .popover-dropdown {
         .cds--tooltip-content {
             display: none !important;
+        }
+    }
+
+    .bx--masthead__search {
+        .bx--header__search--actions {
+            // fix masthead search icon overflow header
+            overflow: hidden;
+            max-height: 100%;
         }
     }
 }
