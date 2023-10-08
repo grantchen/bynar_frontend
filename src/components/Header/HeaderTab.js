@@ -1,8 +1,9 @@
 import React, { useRef, useContext } from "react";
-import { Button, TabList, Tabs, Tab } from "@carbon/react";
+import {Button, TabList, Tabs, Tab, TabsSkeleton} from "@carbon/react";
 import { Add20 } from '@carbon/icons-react';
 import "./HeaderTab.scss";
 import { TabContext } from "../../sdk";
+import TabSkeleton from "carbon-web-components/es/components-react/tabs/tab-skeleton";
 
 const HeaderTab = ({ className }) => {
     const { tab, handleAddTab, handleRemoveTab, activeTab, setActiveTab } =
@@ -26,11 +27,16 @@ const HeaderTab = ({ className }) => {
                               onTabCloseRequest={ removeTab }>
                             <TabList aria-label="List of tabs">
                                 { tab.map((item, index) =>
-                                    <Tab key={ index }
-                                         className={ item.isDelted ? 'custom-tab' : 'custom-tab tab-stable' }>
-                                        { item.label }
-                                    </Tab>) }
+                                        <Tab key={ index }
+                                             className={ item.isDelted ? 'custom-tab' : 'custom-tab tab-stable' }>
+                                            {
+                                                activeTab === index ? (item.label) : (<TabSkeleton></TabSkeleton>)
+                                            }
+                                        </Tab>
+                                ) }
                             </TabList>
+                            {/*<TabsSkeleton className={'test2'} contained={false}>2233</TabsSkeleton>*/}
+
                         </Tabs>
                     </div>
                 </div>
