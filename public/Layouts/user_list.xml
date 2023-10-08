@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Grid>
-   <Cfg id='users' Size='Low' SuppressCfg='1' ShowDeleted='1'/>
+   <Cfg id='users' Size='Low' SuppressCfg='1' ShowDeleted='1' MainCol="id" Sorting="0" ColMoving="0" />
    <Cfg Validate='All,Added,Focus,Edit,Changed,Text' ValidateMessageTime='2500' ValidateMessage="Ju lutemi plotësoni të dhënat e nevojshme tek qelizat me ngjyrë të kuqe!"/>
    <Cfg SearchCells='1' SearchAction='Select' SearchHidden='1'/>
    <Cfg Paging="3" ColPaging="2" PageLengthDiv="2" FastPages="100" PageLength="100" AllPages='1' RemoveUnusedPages='3'/>
@@ -22,13 +22,13 @@
    <Cfg PrintPagePrefix="&lt;center class='%9' style='width:%7px'>First example printed page %3 from %6&lt;/center>"/>
    <Cfg PrintPagePostfix="&lt;center class='%9' style='width:%7px'>Page %1 horizontally from %4 , page %2 vertically from %5&lt;/center>"/>
    <Cfg Language='EN'/>
-   <Cfg GroupHideCols='0' />
+   <!-- <Cfg GroupHideCols='0' /> -->
    <Colors Alternate="rgb(251,251,251,1)"/>
    <Actions OnDel="ClearValue"/>
    <Actions OnMouseOverEditable="Grid.MouseCursor('url(aero_prec.cur),default')"/>
    <Pager Width="100" Visible='0'/>
    <Panel Adding='1' Delete='1' Select='1'/>
-
+   <Header id="id"/>
    <Def>
       <D Name='Node'
          Parent='#Body' CDef='Data' Sorted='1' AcceptDef='Data' Spanned='1' Calculated='1' Expanded='1' CanFilter='1'
@@ -43,7 +43,9 @@
          project_id='Child' project_idSpan='24' project_idAlign="Center" project_idType='Text' project_idCanEdit="0"
       />
    </Def>
-
+   <LeftCols>
+      <C Name="id" RelWidth="100" CanEdit='0'/>
+   </LeftCols>
 
    <Cols>
       <C Name='email' RelWidth='150' Type='Text' CanEdit='1' VarHeight='1' CaseSensitive='0'/>
