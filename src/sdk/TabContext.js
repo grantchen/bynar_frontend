@@ -96,14 +96,14 @@ const TabContextProvider = ({ children }) => {
         if (index === activeTab) {
             if (updatedTabs.length === index) {
                 for (let i = index - 1; i >= 0 ; i--) {
-                   if (ref.current[i].loaded === true){
+                   if (updatedTabs[i].loaded === true){
                        setActiveTab(i);
                        return
                    }
                 }
             } else {
                 for (let i = index; i >= 0 ; i--) {
-                    if (ref.current[i].loaded === true){
+                    if (updatedTabs[i].loaded === true){
                         setActiveTab(i);
                         return
                     }
@@ -116,7 +116,7 @@ const TabContextProvider = ({ children }) => {
 
     const handleSetTabLoaded = (tabId) => {
         let tmpTabs = [...ref.current]
-        tab.forEach((item,index) => {
+        tmpTabs.forEach((item,index) => {
             if (item.id === Number(tabId)){
                 let tmpTab = item
                 tmpTab.loaded = true
