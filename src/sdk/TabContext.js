@@ -3,6 +3,7 @@ import React, { createContext, lazy, useCallback, useEffect, useState } from "re
 import DashboardContainer from "./../components/Dashboard/DashboardContainer";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "./AuthContext";
+import OrganizationList from "../components/OrganizationList";
 
 const UserList = lazy(() => import("./../components/UserList/index"));
 const InvoicesTable = lazy(() => import("./../components/InvoicesTable/index"));
@@ -67,6 +68,8 @@ const TabContextProvider = ({ children }) => {
                 return <UserList />;
             case "Invoices":
                 return <InvoicesTable />;
+            case "Organizations":
+                return <OrganizationList />;
             default:
                 return null;
         }
