@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Grid>
-   <Cfg id='invoices' Size='Low' SuppressCfg='1' ShowDeleted='1' MainCol="id"/>
+   <Cfg id='invoices' Size='Low' SuppressCfg='1' ShowDeleted='1'/>
    <Cfg Validate='All,Added,Focus,Edit,Changed,Text' ValidateMessageTime='2500' ValidateMessage="Ju lutemi plotësoni të dhënat e nevojshme tek qelizat me ngjyrë të kuqe!"/>
    <Cfg SearchCells='1' SearchAction='Select' SearchHidden='1'/>
    <Cfg Paging="3" ColPaging="2" PageLengthDiv="2" FastPages="100" PageLength="100" AllPages='1' RemoveUnusedPages='3'/>
@@ -28,7 +28,6 @@
    <Actions OnMouseOverEditable="Grid.MouseCursor('url(aero_prec.cur),default')"/>
    <Pager Width="100" Visible='0'/>
    <Panel Adding='1' Delete='1' Select='1'/>
-   <Header id="id"/>
    <Def>
       <D Name='Node'
          Parent='#Body' CDef='Data' Sorted='1' AcceptDef='Data' Spanned='1' Calculated='1' Expanded='1' CanFilter='1'
@@ -44,9 +43,6 @@
       />
    </Def>
 
-   <LeftCols>
-      <C Name="id" RelWidth="100" CanEdit='0'/>
-   </LeftCols>
    <Cols>
       <C Name='invoice_date' RelWidth='150' Type='Date' Format="yyyy-MM-dd" CanEdit='1' CaseSensitive='0' VarHeight='1'/>
       <C Name='invoice_no' RelWidth='150' Type='Text' CanEdit='1' CaseSensitive='0' VarHeight='1'/>
