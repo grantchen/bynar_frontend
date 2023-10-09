@@ -85,14 +85,19 @@ const TabContextProvider = ({ children }) => {
     }, [user?.languagePreference, t]);
 
     const handleRemoveTab = useCallback((idToRemove, index) => {
+        const selectedTabId = tab[activeTab].id;
         const updatedTabs = tab.filter((tab) => tab.id !== idToRemove);
         setTab(updatedTabs);
-        if (updatedTabs.length === index) {
-            setActiveTab(index - 1);
-        } else {
-            setActiveTab(index);
-        }
 
+        if (index === activeTab) {
+            if (updatedTabs.length === index) {
+                setActiveTab(index - 1);
+            } else {
+                setActiveTab(index);
+            }
+        } else {
+            setActiveTab(updatedTabs.findIndex((item) => item.id === selectedTabId));
+        }
     }, [tab, setActiveTab, activeTab, setTab]);
 
     const handleSetTabLoaded = (tabId) => {

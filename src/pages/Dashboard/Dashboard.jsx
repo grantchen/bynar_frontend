@@ -10,8 +10,8 @@ const Dashboard = () => {
             <Tabs selectedIndex={ activeTab }>
                 <TabPanels>
                     {
-                        tab.map(tab => {
-                            return <TabPanel className="content-wrapper">{ tab.content }</TabPanel>
+                        tab.map((item) => {
+                            return <TabPanel className="content-wrapper" key={ item.id }>{ item.content }</TabPanel>
                         })
                     }
                 </TabPanels>
