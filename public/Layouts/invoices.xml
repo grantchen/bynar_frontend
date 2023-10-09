@@ -22,13 +22,12 @@
    <Cfg PrintPagePrefix="&lt;center class='%9' style='width:%7px'>First example printed page %3 from %6&lt;/center>"/>
    <Cfg PrintPagePostfix="&lt;center class='%9' style='width:%7px'>Page %1 horizontally from %4 , page %2 vertically from %5&lt;/center>"/>
    <Cfg Language='EN'/>
-   <Cfg GroupHideCols='0' />
+   <!-- <Cfg GroupHideCols='0' /> -->
    <Colors Alternate="rgb(251,251,251,1)"/>
    <Actions OnDel="ClearValue"/>
    <Actions OnMouseOverEditable="Grid.MouseCursor('url(aero_prec.cur),default')"/>
    <Pager Width="100" Visible='0'/>
    <Panel Adding='1' Delete='1' Select='1'/>
-
    <Def>
       <D Name='Node'
          Parent='#Body' CDef='Data' Sorted='1' AcceptDef='Data' Spanned='1' Calculated='1' Expanded='1' CanFilter='1'
@@ -43,7 +42,6 @@
          project_id='Child' project_idSpan='24' project_idAlign="Center" project_idType='Text' project_idCanEdit="0"
       />
    </Def>
-
 
    <Cols>
       <C Name='invoice_date' RelWidth='150' Type='Date' Format="yyyy-MM-dd" CanEdit='1' CaseSensitive='0' VarHeight='1'/>
