@@ -51,6 +51,7 @@ const TabContextProvider = ({ children }) => {
             labelKey: 'title',
             isDelted: false,
             name: 'Dashboard',
+            loaded: true
         },
     ]);
     const [activeTab, setActiveTab] = useState(0);
@@ -59,14 +60,14 @@ const TabContextProvider = ({ children }) => {
     const [maxTab, setMaxTab] = useState(0);
     const { user } = useAuth()
 
-    const TabComponent = (name) => {
+    const TabComponent = (name,tabId) => {
         switch (name) {
             case "Dashboard":
                 return <DashboardContainer />;
             case "Users":
-                return <UserList />;
+                return <UserList tabId={tabId}/>;
             case "Invoices":
-                return <InvoicesTable />;
+                return <InvoicesTable tabId={tabId}/>;
             default:
                 return null;
         }
@@ -94,32 +95,47 @@ const TabContextProvider = ({ children }) => {
 
     }, [tab, setActiveTab, activeTab, setTab]);
 
-    const handleAddTab = (name = EmptyTabName, labelKey = '') => {
+    const handleSetTabLoaded = (tabId) => {
+        let tmpTabs = [...tab]
+        tab.forEach((item,index) => {
+            if (item.id === Number(tabId)){
+                let tmpTab = item
+                tmpTab.loaded = true
+                tmpTabs[index] = tmpTab
+            }
+        })
+        setTab(tmpTabs)
+    }
+    const handleAddTab = (name = EmptyTabName, labelKey = '',tabType = 'default') => {
         const maxId = tab.reduce((max, item) => {
             return item.id > max ? item.id : max;
         }, 0);
 
         let label;
-        let content = TabComponent(name);
+        let tabId = maxId + 1
+        let content = TabComponent(name,tabId);
         if (!content) {
             // use empty tab if no content
-            content = <EmptyTab label={ `${ t('tab') } ${ maxId + 1 }` } id={ maxId + 1 } />
-            labelKey = `tab ${ maxId + 1 }`
-            label = `${ t('tab') } ${ maxId + 1 }`;
+            content = <EmptyTab label={ `${ t('tab') } ${ tabId }` } id={ tabId } />
+            labelKey = `tab ${ tabId }`
+            label = `${ t('tab') } ${ tabId }`;
         } else {
             label = t(labelKey);
         }
 
         const newTab = {
-            id: maxId + 1,
+            id: tabId,
             label: label,
             labelKey: labelKey,
             content: content,
             isDelted: true,
             name: name,
+            loaded: tabType === "treeGrid" ? false : true
         };
         setTab([...tab, newTab]);
-        setActiveTab(tab.length);
+        if (newTab.loaded) {
+            setActiveTab(tab.length);
+        }
 
         if (tab.length >= maxTab && maxTab > 0) {
             setStartIndex(startIndex + 1);
@@ -127,13 +143,15 @@ const TabContextProvider = ({ children }) => {
         }
     };
 
-    const goToTab = (name, labelKey) => {
+    const goToTab = (name, labelKey,tabType) => {
         // find tab by name of tab, if not found, add new tab, if found, set active tab to that tab
         const tabIndexToGo = tab.findIndex((item) => item.name === name);
         if (tabIndexToGo > -1) {
-            setActiveTab(tabIndexToGo);
+            if (tab[tabIndexToGo].loaded === true){
+                setActiveTab(tabIndexToGo);
+            }
         } else {
-            handleAddTab(name, labelKey);
+            handleAddTab(name, labelKey,tabType);
         }
     }
 
@@ -153,6 +171,7 @@ const TabContextProvider = ({ children }) => {
                 maxTab,
                 setMaxTab,
                 goToTab,
+                handleSetTabLoaded,
             } }
         >
             { children }

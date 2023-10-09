@@ -16,7 +16,9 @@ const HeaderTab = ({ className }) => {
     const [isDropdownTabsOpen, setIsDropdownTabsOpen] = useState(false);
 
     const handleTabChange = (evt) => {
-        setActiveTab(evt.selectedIndex);
+        if (tab[evt.selectedIndex]?.loaded === true){
+            setActiveTab(evt.selectedIndex);
+        }
     };
 
     const removeTab = (index) => {
@@ -51,7 +53,7 @@ const HeaderTab = ({ className }) => {
                                         <Tab key={ index }
                                              className={ item.isDelted ? 'custom-tab' : 'custom-tab tab-stable' }>
                                             {
-                                                activeTab === index ? (item.label) : (<TabSkeleton></TabSkeleton>)
+                                                item.loaded ? (item.label) : (<TabSkeleton></TabSkeleton>)
                                             }
                                         </Tab>
                                 ) }
@@ -105,7 +107,7 @@ const HeaderTab = ({ className }) => {
                                         )
                                     }
                                     onClick={ () => {
-                                        setActiveTab(index);
+                                        handleTabChange({selectedIndex:index});
                                         setIsDropdownTabsOpen(false);
                                     } }
                                 >{ item.label }

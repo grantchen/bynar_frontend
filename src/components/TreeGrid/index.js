@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React, {useContext, useEffect, useRef} from "react";
 import {
-  BaseURL,
-  useAuth, uuidv4,
+    BaseURL, TabContext,
+    useAuth, uuidv4,
 } from "../../sdk";
 import { InlineLoading } from "@carbon/react";
 import "./TreeGrid.scss";
@@ -19,19 +19,19 @@ function getAPIRequestURL(url) {
   }
 }
 
-export const TreeGrid = ({ table, config = {} }) => {
+export const TreeGrid = ({ table, config = {} ,tabId}) => {
   let treeGrid = null;
   const ref = useRef(null);
-
+  const { handleSetTabLoaded } =
+        useContext(TabContext);
   const { getAuthorizationToken } = useAuth()
-
   useEffect(() => {
     const fetchData = async () => {
       const token = await getAuthorizationToken()
       if (token) {
         const defaultConfig = {
           Debug: '', // check, info
-          id: `treeGrid_${uuidv4()}`,
+          id: `treeGrid_${tabId || uuidv4()}`,
           Layout: { Url: `/Layouts/${ table }.xml` },
           Data: {
             Url: `/${ table }/data`,
@@ -75,6 +75,11 @@ export const TreeGrid = ({ table, config = {} }) => {
                 ref.current?.id,
                 { Component: this }
             );
+              window.Grids.OnReady = function(G){
+                 //update tab loaded
+                  handleSetTabLoaded(G.id.replace('treeGrid_',''))
+                  console.log('OnReady')
+              }
           }
         }, 0)
       }
@@ -95,7 +100,7 @@ export const TreeGrid = ({ table, config = {} }) => {
           style={ { width: '100%', height: '100%' } }
       >
         <div style={ { display: "flex" } }>
-          <InlineLoading />
+          {/*<InlineLoading />*/}
         </div>
       </div>
     </>

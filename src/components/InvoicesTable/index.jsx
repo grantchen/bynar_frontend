@@ -2,7 +2,8 @@ import React from "react";
 import "./invoices-table.scss";
 import { TreeGrid } from "../TreeGrid";
 
-const InvoicesTable = () => {
+
+const InvoicesTable = ({tabId}) => {
     return (
         <>
             <div style={ { height: '400px' } }>
@@ -11,6 +12,7 @@ const InvoicesTable = () => {
                     config={ {
                         Debug: '',
                     } }
+                    tabId={tabId}
                 ></TreeGrid>
             </div>
         </>
