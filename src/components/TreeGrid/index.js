@@ -78,7 +78,6 @@ export const TreeGrid = ({ table, config = {} ,tabId}) => {
               window.Grids.OnReady = function(G){
                  //update tab loaded
                   handleSetTabLoaded(G.id.replace('treeGrid_',''))
-                  console.log('OnReady')
               }
           }
         }, 0)

@@ -22,7 +22,7 @@ const HeaderTab = ({ className }) => {
     };
 
     const removeTab = (index) => {
-        handleRemoveTab(tab[index].id, index);
+        handleRemoveTab(tab[index]?.id, index);
     };
 
     useEffect(() => {

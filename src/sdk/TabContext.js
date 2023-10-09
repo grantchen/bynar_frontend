@@ -1,5 +1,5 @@
 import { Heading } from "@carbon/react";
-import React, { createContext, lazy, useCallback, useEffect, useState } from "react";
+import React, { createContext, lazy, useCallback, useEffect, useState,useRef } from "react";
 import DashboardContainer from "./../components/Dashboard/DashboardContainer";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "./AuthContext";
@@ -43,6 +43,7 @@ const EmptyTab = ({ label }) => {
 
 const TabContextProvider = ({ children }) => {
     const { t } = useTranslation();
+    let ref = useRef([]);
     const [tab, setTab] = useState([
         {
             content: <DashboardContainer />,
@@ -72,6 +73,9 @@ const TabContextProvider = ({ children }) => {
                 return null;
         }
     }
+    useEffect(() => {
+        ref.current = tab;
+    }, [tab]);
 
     useEffect(() => {
         setTab(prev => prev.map((val, idx) => {
@@ -91,9 +95,19 @@ const TabContextProvider = ({ children }) => {
 
         if (index === activeTab) {
             if (updatedTabs.length === index) {
-                setActiveTab(index - 1);
+                for (let i = index - 1; i >= 0 ; i--) {
+                   if (ref.current[i].loaded === true){
+                       setActiveTab(i);
+                       return
+                   }
+                }
             } else {
-                setActiveTab(index);
+                for (let i = index; i >= 0 ; i--) {
+                    if (ref.current[i].loaded === true){
+                        setActiveTab(i);
+                        return
+                    }
+                }
             }
         } else {
             setActiveTab(updatedTabs.findIndex((item) => item.id === selectedTabId));
@@ -101,7 +115,7 @@ const TabContextProvider = ({ children }) => {
     }, [tab, setActiveTab, activeTab, setTab]);
 
     const handleSetTabLoaded = (tabId) => {
-        let tmpTabs = [...tab]
+        let tmpTabs = [...ref.current]
         tab.forEach((item,index) => {
             if (item.id === Number(tabId)){
                 let tmpTab = item
