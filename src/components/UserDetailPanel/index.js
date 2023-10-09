@@ -1,4 +1,4 @@
-import { EditSidePanel } from "@carbon/ibm-products";
+import {SidePanel,pkg} from "@carbon/ibm-products";
 import {
     TextInput,
     Select,
@@ -18,6 +18,9 @@ import {
 } from "google-libphonenumber";
 import "./UserDetailPanel.scss";
 import { useTranslation } from "react-i18next";
+
+pkg.component.SidePanel = true;
+
 export const UserDetailPanel = ({ open }) => {
     const { t } = useTranslation();
     const { user,getUser,authFetch } = useAuth();
@@ -105,33 +108,6 @@ export const UserDetailPanel = ({ open }) => {
         closeModalAndGoBackToUserList();
     };
 
-    const getUserList = async (userid) => {
-        try {
-            setServerErrorNotification({});
-            setServerNotification(false);
-            setDataLoading(true);
-            const response = await authFetch(`${BaseURL}/user/${userid}`,{
-                method: "GET",
-            })
-            const res = await response.json();
-            if (response.ok) {
-                setEmail(res?.email)
-                setFullName(res?.fullName);
-                setPhoneNumber(res?.phoneNumber);
-                setTheme(res?.theme)
-                setLanguage(res?.language)
-            } else {
-                setServerErrorNotification({
-                    title: res.error,
-                    status: "error",
-                });
-                setServerNotification(true)
-            }
-        } catch (e) {
-        } finally {
-            setDataLoading(false);
-        }
-    };
     const handlePhoneNumber = (value, country) => {
         setPhoneNumber(value)
         validatePhoneNumber(value, country?.dialCode, country?.countryCode);
@@ -197,7 +173,6 @@ export const UserDetailPanel = ({ open }) => {
                 const res = await response.json();
                 if (response.ok) {
                     setDisable(false)
-                    // await getUserList(user.id)
                     handleClose()
                     await getUser();
                 } else {
@@ -222,33 +197,68 @@ export const UserDetailPanel = ({ open }) => {
         }
     };
     useEffect(() => {
+        const getUserList = async (userid) => {
+            try {
+                setServerErrorNotification({});
+                setServerNotification(false);
+                setDataLoading(true);
+                const response = await authFetch(`${BaseURL}/user/${userid}`,{
+                    method: "GET",
+                })
+                const res = await response.json();
+                if (response.ok) {
+                    setEmail(res?.email)
+                    setFullName(res?.fullName);
+                    setPhoneNumber(res?.phoneNumber);
+                    setTheme(res?.theme)
+                    setLanguage(res?.language)
+                } else {
+                    setServerErrorNotification({
+                        title: res.error,
+                        status: "error",
+                    });
+                    setServerNotification(true)
+                }
+            } catch (e) {
+            } finally {
+                setDataLoading(false);
+            }
+        };
         if (!open) {
             return;
         }
         getUserList(user.id)
-    }, [open,user]);
+    }, [open,user,authFetch]);
 
     return (
         <div className="user-detail-panel">
-            <EditSidePanel
+            <SidePanel
                 preventCloseOnClickOutside
                 includeOverlay
                 className="test"
                 open={open}
-                onRequestClose={handleClose}
                 title={t("user-detail")}
-                subtitle=""
-                actions={[]}
-                primaryButtonText={(
-                    <>
-                        {t('save')}
-                        {disable && <InlineLoading className="inline-loading-within-btn"/>}
-                    </>
+                subtitle={t("user-profile-information")}
+                actions={[{
+                    label: (
+                        <>
+                            {t('save')}
+                            {disable && <InlineLoading className="inline-loading-within-btn"/>}
+                        </>
 
-                )}
-                secondaryButtonText={t("cancel")}
-                onRequestSubmit={handleUpdateProfile}
-                disableSubmit={disable}
+                    ),
+                    onClick: function onClick(event) {
+                        event.preventDefault();
+                        handleUpdateProfile();
+                    },
+                    kind: 'primary',
+                    disabled: disable,
+                    type: 'submit'
+                }, {
+                    label: t("cancel"),
+                    onClick: handleClose,
+                    kind: 'secondary',
+                }]}
             >
                 <div className={"story__body-content"}>
                     {serverNotification && (
@@ -381,7 +391,7 @@ export const UserDetailPanel = ({ open }) => {
                         )}
                     </div>
                 </div>
-            </EditSidePanel>
+            </SidePanel>
         </div>
     );
 };
