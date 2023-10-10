@@ -13,7 +13,7 @@ import {
 import { Add20 } from '@carbon/icons-react';
 import "./HeaderTab.scss";
 import { TabContext } from "../../sdk";
-import { ChevronDown20, Close20 } from "@carbon/icons-react";
+import { ChevronDown20, Close16 } from "@carbon/icons-react";
 import { useTranslation } from "react-i18next";
 import TabSkeleton from "carbon-web-components/es/components-react/tabs/tab-skeleton";
 
@@ -109,6 +109,7 @@ const HeaderTab = ({ className }) => {
                         hasIconOnly
                         onClick={ () => {
                             setIsDropdownTabsOpen(!isDropdownTabsOpen);
+                            setSearchTerm('');
                         } }>
                         <ChevronDown20 />
                     </Button>
@@ -125,19 +126,22 @@ const HeaderTab = ({ className }) => {
                                         size="md" />
                                 { searchResults.map((item, index) =>
                                     <ContainedListItem
-                                        key={ index }
+                                        key={ `${item.id}-${index}` }
                                         className={ tab[activeTab].id === item.id ? 'list-item-active' : '' }
                                         action={
                                             item.isDelted && (
                                                 <Button
                                                     kind="ghost"
+                                                    className="close-list-tab"
                                                     hasIconOnly
                                                     title={ t("close") }
                                                     onClick={ () => {
                                                         removeTab(item.id);
                                                     } }
                                                 >
-                                                    <Close20 />
+                                                    <div>
+                                                        <Close16 />
+                                                    </div>
                                                 </Button>
                                             )
                                         }

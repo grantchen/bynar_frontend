@@ -56,20 +56,63 @@
 
 // drop down tabs
 .header-dynamic-dropdown-tabs-content {
+  background-color: var(--cds-ui-02, #ffffff);
+
   .list-wrapper {
     overflow-y: auto;
     overflow-x: hidden;
     max-height: calc(100vh - 8rem);
 
     .cds--contained-list {
-      .list-item-active {
-        background: var(--cds-layer-hover);
-      }
-
       // hide tooltip popover
       .cds--popover[role="tooltip"] {
         display: none;
       }
+
+      .cds--contained-list-item {
+        &:not(:last-of-type)::before {
+          content: none;
+        }
+
+        .cds--contained-list-item__action {
+          align-items: center;
+          height: 100%;
+          margin-right: 0.625rem;
+
+          .close-list-tab {
+            --cds-layout-size-height-local: 1.5rem;
+            color: var(--cds-text-secondary, #525252);
+
+            &:hover {
+              color: var(--cds-text-primary, #161616);
+            }
+
+            svg {
+              fill: currentColor;
+            }
+          }
+        }
+
+        &.list-item-active {
+          background: var(--cds-field-01, #e5e5e5);
+
+          .close-list-tab {
+            color: var(--cds-text-primary, #161616);
+          }
+        }
+
+        &:hover {
+          .close-list-tab {
+            color: var(--cds-text-primary, #161616);
+          }
+        }
+      }
+
+      + .cds--popover-caret {
+        background-color: var(--cds-ui-02, #ffffff);
+      }
+
+
     }
   }
 }
