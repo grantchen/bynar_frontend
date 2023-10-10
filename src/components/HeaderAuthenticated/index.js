@@ -87,7 +87,10 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                     prefix=""
                     className={ isSearchBarExpanded ? 'has-search-active' : '' }
                 >
-                    <img src={ theme === 'light' ? ibmLogo : ibmWhiteLogo } alt="ibm_logo" />
+                    <img src={ document.documentElement.getAttribute(
+                        "data-carbon-theme") !== null &&
+                    document.documentElement.getAttribute(
+                        "data-carbon-theme") !== 'white' ? ibmWhiteLogo : ibmLogo } alt="ibm_logo" />
                 </HeaderName>
 
                 <HeaderName
