@@ -97,22 +97,23 @@ const TabContextProvider = ({ children }) => {
         }))
     }, [user?.languagePreference, t]);
 
-    const handleRemoveTab = useCallback((idToRemove, index) => {
-        const selectedTabId = tab[activeTab].id;
-        const updatedTabs = tab.filter((tab) => tab.id !== idToRemove);
+    const handleRemoveTab = useCallback((idToRemove) => {
+        const selectedTabId = tab[activeTab]?.id;
+        const indexToRemove = tab.findIndex((item) => item.id === idToRemove);
+        const updatedTabs = tab.filter((item) => item.id !== idToRemove);
         setTab(updatedTabs);
 
-        if (index === activeTab) {
-            if (updatedTabs.length === index) {
-                for (let i = index - 1; i >= 0; i--) {
-                    if (updatedTabs[i].loaded === true) {
-                        setActiveTab(i);
-                        return
-                    }
+        if (indexToRemove === activeTab) {
+            if (updatedTabs.length === indexToRemove) {
+                for (let i = indexToRemove - 1; i >= 0 ; i--) {
+                   if (updatedTabs[i].loaded === true){
+                       setActiveTab(i);
+                       return
+                   }
                 }
             } else {
-                for (let i = index; i >= 0; i--) {
-                    if (updatedTabs[i].loaded === true) {
+                for (let i = indexToRemove; i >= 0 ; i--) {
+                    if (updatedTabs[i].loaded === true){
                         setActiveTab(i);
                         return
                     }
