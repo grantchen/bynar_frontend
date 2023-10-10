@@ -139,9 +139,7 @@ const HeaderTab = ({ className }) => {
                                                         removeTab(item.id);
                                                     } }
                                                 >
-                                                    <div>
-                                                        <Close16 />
-                                                    </div>
+                                                    <Close16 />
                                                 </Button>
                                             )
                                         }
