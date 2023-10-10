@@ -23,7 +23,7 @@ pkg.component.SidePanel = true;
 
 export const UserDetailPanel = ({ open }) => {
     const { t } = useTranslation();
-    const { user,getUser,authFetch } = useAuth();
+    const { user,refreshPostSignIn,getUser,authFetch } = useAuth();
     const phoneUtil = PhoneNumberUtil.getInstance();
     const [phoneNumber, setPhoneNumber] = useState("");
     const [fullName, setFullName] = useState("");
@@ -169,12 +169,12 @@ export const UserDetailPanel = ({ open }) => {
                         "Content-Type": "application/json",
                     },
                 });
-
                 const res = await response.json();
                 if (response.ok) {
                     setDisable(false)
                     handleClose()
                     await getUser();
+                    await refreshPostSignIn();
                 } else {
                     setDisable(false)
                     setServerErrorNotification({
