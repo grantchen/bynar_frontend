@@ -162,5 +162,8 @@
     "card-added-successfully": "Tarjeta agregada exitosamente",
     "invalid-card-details": "Detalles de tarjeta inválidos",
     "save": "Guardar",
-    "theme": "Temática"
+    "theme": "Temática",
+    "general-posting-setup": "Configuración general de publicación",
+    "organizations": "Organizaciones",
+    "user-groups": "Grupos de Usuarios"
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import jsonData from '../JSONs/usen.json';
 import { ArrowRight } from "@carbon/react/icons";
 
-import { TabContext, useMobile } from "../../sdk";
+import { TabContext, useAuth, useMobile } from "../../sdk";
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav.js';
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-menu.js';
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-menu-item.js';
@@ -24,6 +24,7 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
 
     const isMobile = useMobile();
     const { t } = useTranslation();
+    const { hasPermission } = useAuth();
 
     useEffect(() => {
         if (!isMobile) {
@@ -125,14 +126,14 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                             >
                                                 {
                                                     ele.menuSections[0]?.menuItems.map((item) => {
-                                                        if (!item.megaPanelViewAll) {
+                                                        if (!item.megaPanelViewAll && (!item.permission || hasPermission(item.permission, "list"))) {
                                                             if (item.tab) {
                                                                 return (
                                                                     <dds-left-nav-menu-item
                                                                         title={ t(item.title) }
                                                                         onClick={ (e) => {
                                                                             e.preventDefault()
-                                                                            goToTab(item.tab, item.title,item.tabType)
+                                                                            goToTab(item.tab, item.title, item.tabType)
                                                                             onClickSideNavExpand()
                                                                         } }
                                                                     >
@@ -236,14 +237,14 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                                                     <div className="link-group">
                                                                         {
                                                                             ele.menuSections[0]?.menuItems.map((item) => {
-                                                                                if (!item.megaPanelViewAll) {
+                                                                                if (!item.megaPanelViewAll && (!item.permission || hasPermission(item.permission, "list"))) {
                                                                                     if (item.tab) {
                                                                                         return (
                                                                                             <div
                                                                                                 key={ item.title }
                                                                                                 className="link">
                                                                                                 <a onClick={ () => {
-                                                                                                    goToTab(item.tab, item.title,item.tabType)
+                                                                                                    goToTab(item.tab, item.title, item.tabType)
                                                                                                     onClickSideNavExpand()
                                                                                                 } }>
                                                                                                     <div>
