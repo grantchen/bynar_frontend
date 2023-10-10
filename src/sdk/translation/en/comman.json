@@ -90,6 +90,8 @@
     "delete-modal-input-label-text-1":"Type",
     "delete-modal-input-label-text-2":"to confirm",
     "close":"Close",
+    "filter":"Filter",
+    "clear":"Clear",
     "delete-modal-bulk-heading":"Confirming will permanently delete the users. This action cannot be undone.",
     "delete-users":"Delete Users",
     "english":"English",

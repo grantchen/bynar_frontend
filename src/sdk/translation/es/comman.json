@@ -90,6 +90,8 @@
     "delete-modal-input-label-text-1": "Escriba",
     "delete-modal-input-label-text-2": "para confirmar",
     "close": "Cerrar",
+    "filter":"Filtrar",
+    "clear":"Claro",
     "delete-modal-bulk-heading": "Confirmar eliminará permanentemente a los usuarios. Esta acción no se puede deshacer.",
     "delete-users": "Eliminar usuarios",
     "english": "Inglés",
