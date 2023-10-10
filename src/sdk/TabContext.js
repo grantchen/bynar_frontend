@@ -105,19 +105,9 @@ const TabContextProvider = ({ children }) => {
 
         if (indexToRemove === activeTab) {
             if (updatedTabs.length === indexToRemove) {
-                for (let i = indexToRemove - 1; i >= 0 ; i--) {
-                   if (updatedTabs[i].loaded === true){
-                       setActiveTab(i);
-                       return
-                   }
-                }
+                setActiveTab(indexToRemove - 1);
             } else {
-                for (let i = indexToRemove; i >= 0 ; i--) {
-                    if (updatedTabs[i].loaded === true){
-                        setActiveTab(i);
-                        return
-                    }
-                }
+                setActiveTab(indexToRemove);
             }
         } else {
             setActiveTab(updatedTabs.findIndex((item) => item.id === selectedTabId));
@@ -162,9 +152,7 @@ const TabContextProvider = ({ children }) => {
             loaded: tabType === "treeGrid" ? false : true
         };
         setTab([...tab, newTab]);
-        if (newTab.loaded) {
-            setActiveTab(tab.length);
-        }
+        setActiveTab(tab.length);
 
         if (tab.length >= maxTab && maxTab > 0) {
             setStartIndex(startIndex + 1);
