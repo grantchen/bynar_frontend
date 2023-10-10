@@ -9,6 +9,7 @@ import {
     TextInputSkeleton,
 } from "@carbon/react";
 import React, {useState, useEffect, useRef} from "react";
+import { useSearchParams } from "react-router-dom";
 import {BaseURL, Languages, Themes} from "../../sdk/constant";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -40,6 +41,7 @@ export const UserDetailPanel = ({ open }) => {
     const [serverErrorNotification, setServerErrorNotification] = useState({});
     const [serverNotification, setServerNotification] = useState(false);
     const inputRefs = useRef([]);
+    const [searchParams] = useSearchParams();
     const { closeModalAndGoBackToUserList} = useUserManagement();
     const handleThemeChange = (e) => {
         setServerErrorNotification({});
@@ -227,7 +229,7 @@ export const UserDetailPanel = ({ open }) => {
         if (!open) {
             return;
         }
-        getUserList(user.id)
+        getUserList(user?.id || parseInt(searchParams?.get("userIdToShowDetails")))
     }, [open,user,authFetch]);
 
     return (

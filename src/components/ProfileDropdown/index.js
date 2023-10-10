@@ -41,9 +41,7 @@ const ProfileDropdown = React.memo(
                 image={user?.profileURL ?? ""}
                 // tooltipText={user?.fullName ?? '...'}
                 theme={
-                  theme === "g90"
-                    ? "dark"
-                    : "light"
+                  user?.themePreference
                 }
                 onMouseEnter={() => setIsHovered(true)}
               />
