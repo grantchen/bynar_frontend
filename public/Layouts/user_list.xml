@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Grid>
-   <Cfg id='users' Size='Low' SuppressCfg='1' ShowDeleted='1' Sorting="0" ColMoving="0" />
+   <Cfg id='users' Size='Low' SuppressCfg='1' ShowDeleted='1' />
    <Cfg Validate='All,Added,Focus,Edit,Changed,Text' ValidateMessageTime='2500' ValidateMessage="Ju lutemi plotësoni të dhënat e nevojshme tek qelizat me ngjyrë të kuqe!"/>
    <Cfg SearchCells='1' SearchAction='Select' SearchHidden='1'/>
    <Cfg Paging="3" ColPaging="2" PageLengthDiv="2" FastPages="100" PageLength="100" AllPages='1' RemoveUnusedPages='3'/>
