@@ -91,6 +91,24 @@
             background: var(--cds-field-02, #ffffff) !important;
             box-shadow: none !important;
         }
+        .flag-dropdown.open{
+            color: var(--cds-text-01, #161616);
+            .selected-flag{
+                background: var(--cds-field-02, #ffffff) !important;
+            }
+            .country-list.country.country-name{
+                color: var(--cds-text-01, #161616);
+            }
+            .country-list{
+                background: var(--cds-field-02, #ffffff) !important;
+            }
+            .country-list .country.highlight{
+                background-color: #a2a2a2;
+            }
+            .country-list .country:hover {
+                background-color: #a2a2a2
+            }
+        }
     }
 
     .error-notification-box {
