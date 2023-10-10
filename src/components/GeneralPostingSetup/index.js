@@ -2,7 +2,7 @@ import React from "react";
 import "./GeneralPostingSetup.scss";
 import { TreeGrid } from "../TreeGrid";
 
-const GeneralPostingSetup = () => {
+const GeneralPostingSetup = ({ tabId }) => {
     return (
         <>
             <div className="general_posting_setup" style={{ height: '400px' }}>
@@ -11,6 +11,7 @@ const GeneralPostingSetup = () => {
                     config={{
                         Debug: '',
                     }}
+                    tabId={tabId}
                 ></TreeGrid>
             </div>
         </>
