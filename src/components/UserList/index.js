@@ -2,15 +2,16 @@ import React from "react";
 import "./UserList.scss";
 import { TreeGrid } from "../TreeGrid";
 
-const UserList = () => {
+const UserList = ({tabId}) => {
     return (
         <>
             <div className="user-list" style={ { height: '400px'} }>
                 <TreeGrid
                     table={ "user_list" }
                     config={ {
-                        Debug: '',
+                        Debug: ''
                     } }
+                    tabId={tabId}
                 ></TreeGrid>
             </div>
         </>

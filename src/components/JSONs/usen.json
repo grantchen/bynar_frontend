@@ -5016,6 +5016,7 @@
                 "titleEnglish": "",
                 "url": "",
                 "tab": "Invoices",
+                "tabType": "treeGrid",
                 "megapanelContent": {
                   "headingTitle": "",
                   "headingUrl": "",
@@ -5027,6 +5028,7 @@
                 "titleEnglish": "",
                 "url": "",
                 "tab": "Users",
+                "tabType": "treeGrid",
                 "megapanelContent": {
                   "headingTitle": "",
                   "headingUrl": "",
@@ -5049,6 +5051,7 @@
                 "titleEnglish": "",
                 "url": "",
                 "tab": "Dashboard",
+                "tabType": "default",
                 "megapanelContent": {
                   "headingTitle": "",
                   "headingUrl": "",

@@ -6,7 +6,7 @@ import {
     SideNav,
 } from "carbon-components-react";
 import { Fade, Close } from "@carbon/react/icons";
-import { 
+import {
     SideNavItems,
     SideNavLink,
     SideNavMenu,
@@ -61,7 +61,7 @@ export function AppSideNav({ isSideNavExpanded, onClickSideNavExpand }) {
                                     index === activeTabIndex ? "page" : "link"
                                 }
                                 onClick={() => {
-                                    setActiveTab(index);
+                                    handleTabChange({selectedIndex:index});
                                     onClickSideNavExpand();
                                 }}
                             >
