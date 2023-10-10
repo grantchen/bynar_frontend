@@ -132,7 +132,7 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                                                         title={ t(item.title) }
                                                                         onClick={ (e) => {
                                                                             e.preventDefault()
-                                                                            goToTab(item.tab, item.title)
+                                                                            goToTab(item.tab, item.title,item.tabType)
                                                                             onClickSideNavExpand()
                                                                         } }
                                                                     >
@@ -243,7 +243,7 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                                                                                 key={ item.title }
                                                                                                 className="link">
                                                                                                 <a onClick={ () => {
-                                                                                                    goToTab(item.tab, item.title)
+                                                                                                    goToTab(item.tab, item.title,item.tabType)
                                                                                                     onClickSideNavExpand()
                                                                                                 } }>
                                                                                                     <div>

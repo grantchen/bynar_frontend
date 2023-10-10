@@ -5,6 +5,7 @@ import "./HeaderTab.scss";
 import { TabContext } from "../../sdk";
 import { ChevronDown20, Close20 } from "@carbon/icons-react";
 import { useTranslation } from "react-i18next";
+import TabSkeleton from "carbon-web-components/es/components-react/tabs/tab-skeleton";
 
 const HeaderTab = ({ className }) => {
     const { t } = useTranslation();
@@ -15,11 +16,13 @@ const HeaderTab = ({ className }) => {
     const [isDropdownTabsOpen, setIsDropdownTabsOpen] = useState(false);
 
     const handleTabChange = (evt) => {
-        setActiveTab(evt.selectedIndex);
+        if (tab[evt.selectedIndex]?.loaded === true){
+            setActiveTab(evt.selectedIndex);
+        }
     };
 
     const removeTab = (index) => {
-        handleRemoveTab(tab[index].id, index);
+        handleRemoveTab(tab[index]?.id, index);
     };
 
     useEffect(() => {
@@ -47,10 +50,13 @@ const HeaderTab = ({ className }) => {
                               onTabCloseRequest={ removeTab }>
                             <TabList aria-label="List of tabs">
                                 { tab.map((item, index) =>
-                                    <Tab key={ index }
-                                         className={ item.isDelted ? 'custom-tab' : 'custom-tab tab-stable' }>
-                                        { item.label }
-                                    </Tab>) }
+                                        <Tab key={ index }
+                                             className={ item.isDelted ? 'custom-tab' : 'custom-tab tab-stable' }>
+                                            {
+                                                item.loaded ? (item.label) : (<TabSkeleton></TabSkeleton>)
+                                            }
+                                        </Tab>
+                                ) }
                             </TabList>
                         </Tabs>
                     </div>
@@ -101,7 +107,7 @@ const HeaderTab = ({ className }) => {
                                         )
                                     }
                                     onClick={ () => {
-                                        setActiveTab(index);
+                                        handleTabChange({selectedIndex:index});
                                         setIsDropdownTabsOpen(false);
                                     } }
                                 >{ item.label }
