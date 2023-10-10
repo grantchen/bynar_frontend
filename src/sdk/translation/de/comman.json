@@ -162,5 +162,6 @@
     "card-added-successfully": "Karte erfolgreich hinzugefügt",
     "invalid-card-details": "Ungültige Kartendetails",
     "save": "Sparen",
-    "theme": "Thema"
+    "theme": "Thema",
+    "general-posting-setup": "Allgemeine Buchungseinstellungen"
 }
