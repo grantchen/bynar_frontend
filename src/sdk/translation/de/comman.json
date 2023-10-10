@@ -163,5 +163,7 @@
     "invalid-card-details": "Ungültige Kartendetails",
     "save": "Sparen",
     "theme": "Thema",
-    "general-posting-setup": "Allgemeine Buchungseinstellungen"
+    "general-posting-setup": "Allgemeine Buchungseinstellungen",
+    "organizations": "Organisationen",
+    "user-groups": "Benutzergruppen"
 }

@@ -4,6 +4,7 @@ import DashboardContainer from "./../components/Dashboard/DashboardContainer";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "./AuthContext";
 import OrganizationList from "../components/OrganizationList";
+import UserGroupList from "../components/UserGroupList";
 
 const UserList = lazy(() => import("./../components/UserList/index"));
 const InvoicesTable = lazy(() => import("./../components/InvoicesTable/index"));
@@ -75,6 +76,8 @@ const TabContextProvider = ({ children }) => {
                 return <GeneralPostingSetup tabId={tabId} />;
             case "Organizations":
                 return <OrganizationList tabId={tabId} />;
+            case "UserGroups":
+                return <UserGroupList tabId={tabId} />;
             default:
                 return null;
         }

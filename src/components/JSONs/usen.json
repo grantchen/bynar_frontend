@@ -5047,6 +5047,17 @@
                 }
               },
               {
+                "title": "user-groups",
+                "titleEnglish": "",
+                "url": "",
+                "tab": "UserGroups",
+                "megapanelContent": {
+                  "headingTitle": "",
+                  "headingUrl": "",
+                  "description": "user-groups"
+                }
+              },
+              {
                 "title": "organizations",
                 "titleEnglish": "",
                 "url": "",

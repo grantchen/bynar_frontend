@@ -163,5 +163,7 @@
     "invalid-card-details": "Detalles de tarjeta inválidos",
     "save": "Guardar",
     "theme": "Temática",
-    "general-posting-setup": "Configuración general de publicación"
+    "general-posting-setup": "Configuración general de publicación",
+    "organizations": "Organizaciones",
+    "user-groups": "Grupos de Usuarios"
 }
