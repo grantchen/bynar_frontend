@@ -92,6 +92,7 @@
     "close": "Cerrar",
     "filter":"Filtrar",
     "clear":"Claro",
+    "no-results-found": "No se han encontrado resultados",
     "delete-modal-bulk-heading": "Confirmar eliminará permanentemente a los usuarios. Esta acción no se puede deshacer.",
     "delete-users": "Eliminar usuarios",
     "english": "Inglés",

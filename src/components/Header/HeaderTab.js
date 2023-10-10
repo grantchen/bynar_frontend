@@ -126,7 +126,7 @@ const HeaderTab = ({ className }) => {
                                         size="md" />
                                 { searchResults.map((item, index) =>
                                     <ContainedListItem
-                                        key={ `${item.id}-${index}` }
+                                        key={ `${ item.id }-${ index }` }
                                         className={ tab[activeTab].id === item.id ? 'list-item-active' : '' }
                                         action={
                                             item.isDelted && (
@@ -152,6 +152,13 @@ const HeaderTab = ({ className }) => {
                                     >{ item.label }
                                     </ContainedListItem>
                                 ) }
+                                {
+                                    searchResults.length === 0 && (
+                                        <ContainedListItem>
+                                            { t("no-results-found") }
+                                        </ContainedListItem>
+                                    )
+                                }
                             </ContainedList>
                         </div>
                     </PopoverContent>

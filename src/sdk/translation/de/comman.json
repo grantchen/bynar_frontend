@@ -92,6 +92,7 @@
     "close": "Schließen",
     "filter":"Filter",
     "clear":"Klar",
+    "no-results-found": "keine Ergebnisse gefunden",
     "delete-modal-bulk-heading": "Die Bestätigung wird die Benutzer dauerhaft löschen. Diese Aktion kann nicht rückgängig gemacht werden.",
     "delete-users": "Benutzer löschen",
     "english": "Englisch",

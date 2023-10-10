@@ -92,6 +92,7 @@
     "close":"Close",
     "filter":"Filter",
     "clear":"Clear",
+    "no-results-found": "No results found",
     "delete-modal-bulk-heading":"Confirming will permanently delete the users. This action cannot be undone.",
     "delete-users":"Delete Users",
     "english":"English",
