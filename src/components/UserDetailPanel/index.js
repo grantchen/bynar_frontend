@@ -230,7 +230,7 @@ export const UserDetailPanel = ({ open }) => {
             return;
         }
         getUserList(user?.id || parseInt(searchParams?.get("userIdToShowDetails")))
-    }, [open,user,authFetch]);
+    }, [open,authFetch]);
 
     return (
         <div className="user-detail-panel">
