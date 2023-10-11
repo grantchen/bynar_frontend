@@ -93,11 +93,11 @@ export const AuthProvider = ({ children }) => {
                 await i18n.changeLanguage(res?.languagePreference);
             } else {
                 console.log('clear token, error response in get user')
-                signout()
+                // signout()
             }
         } catch (e) {
             console.log(e, 'clear token, error in get user')
-            signout()
+            // signout()
         }
     }, [state.token]);
     useEffect(() => {

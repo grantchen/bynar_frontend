@@ -26,6 +26,7 @@ import ProfileDropdown from "../ProfileDropdown";
 import UploadProfileImageModal from "../../sdk/uploadprofileimage";
 
 import ibmLogo from '../media/IBM_logo_black.svg'
+import ibmWhiteLogo from '../media/IBM_logo_white.svg'
 import { CustomWideMenu } from "./CustomWideMenu";
 import MastheadSearch from "@carbon/ibmdotcom-react/lib/components/Masthead/MastheadSearch";
 
@@ -86,7 +87,10 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                     prefix=""
                     className={ isSearchBarExpanded ? 'has-search-active' : '' }
                 >
-                    <img src={ ibmLogo } alt="ibm_logo" />
+                    <img src={ document.documentElement.getAttribute(
+                        "data-carbon-theme") !== null &&
+                    document.documentElement.getAttribute(
+                        "data-carbon-theme") !== 'white' ? ibmWhiteLogo : ibmLogo } alt="ibm_logo" />
                 </HeaderName>
 
                 <HeaderName

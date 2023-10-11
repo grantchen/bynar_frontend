@@ -75,7 +75,7 @@ export function AppSideNav({ isSideNavExpanded, onClickSideNavExpand }) {
                                             onClick={(e) => {
                                                 e.preventDefault()
                                                 e.stopPropagation()
-                                                handleRemoveTab(tab.id, index);
+                                                handleRemoveTab(tab.id);
                                             }}
                                             className="delete-btn"
                                         >

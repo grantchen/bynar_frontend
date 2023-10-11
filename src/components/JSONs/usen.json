@@ -706,7 +706,8 @@
                 "title": "Flexible payment plans",
                 "titleEnglish": "Flexible payment plans",
                 "url": "https://www.ibm.com/financing?lnk=hpmsc_bufi"
-              },{
+              },
+              {
                 "title": "View all products",
                 "titleEnglish": "View all products",
                 "url": "https://www.ibm.com/products?lnk=hpmps_buall",
@@ -1094,7 +1095,8 @@
                 "title": "Flexible payment plans",
                 "titleEnglish": "Flexible payment plans",
                 "url": "https://www.ibm.com/financing?lnk=hpmsc_bufi"
-              },{
+              },
+              {
                 "title": "View all products",
                 "titleEnglish": "View all products",
                 "url": "https://www.ibm.com/products?lnk=hpmps_buall",
@@ -1482,7 +1484,8 @@
                 "title": "Flexible payment plans",
                 "titleEnglish": "Flexible payment plans",
                 "url": "https://www.ibm.com/financing?lnk=hpmsc_bufi"
-              },{
+              },
+              {
                 "title": "View all products",
                 "titleEnglish": "View all products",
                 "url": "https://www.ibm.com/products?lnk=hpmps_buall",
@@ -1870,7 +1873,8 @@
                 "title": "Flexible payment plans",
                 "titleEnglish": "Flexible payment plans",
                 "url": "https://www.ibm.com/financing?lnk=hpmsc_bufi"
-              },{
+              },
+              {
                 "title": "View all products",
                 "titleEnglish": "View all products",
                 "url": "https://www.ibm.com/products?lnk=hpmps_buall",
@@ -2258,7 +2262,8 @@
                 "title": "Flexible payment plans",
                 "titleEnglish": "Flexible payment plans",
                 "url": "https://www.ibm.com/financing?lnk=hpmsc_bufi"
-              },{
+              },
+              {
                 "title": "View all products",
                 "titleEnglish": "View all products",
                 "url": "https://www.ibm.com/products?lnk=hpmps_buall",
@@ -2646,7 +2651,8 @@
                 "title": "Flexible payment plans",
                 "titleEnglish": "Flexible payment plans",
                 "url": "https://www.ibm.com/financing?lnk=hpmsc_bufi"
-              },{
+              },
+              {
                 "title": "View all products",
                 "titleEnglish": "View all products",
                 "url": "https://www.ibm.com/products?lnk=hpmps_buall",
@@ -3034,7 +3040,8 @@
                 "title": "Flexible payment plans",
                 "titleEnglish": "Flexible payment plans",
                 "url": "https://www.ibm.com/financing?lnk=hpmsc_bufi"
-              },{
+              },
+              {
                 "title": "View all products",
                 "titleEnglish": "View all products",
                 "url": "https://www.ibm.com/products?lnk=hpmps_buall",
@@ -3422,7 +3429,8 @@
                 "title": "Flexible payment plans",
                 "titleEnglish": "Flexible payment plans",
                 "url": "https://www.ibm.com/financing?lnk=hpmsc_bufi"
-              },{
+              },
+              {
                 "title": "View all products",
                 "titleEnglish": "View all products",
                 "url": "https://www.ibm.com/products?lnk=hpmps_buall",
@@ -3810,7 +3818,8 @@
                 "title": "Flexible payment plans",
                 "titleEnglish": "Flexible payment plans",
                 "url": "https://www.ibm.com/financing?lnk=hpmsc_bufi"
-              },{
+              },
+              {
                 "title": "View all products",
                 "titleEnglish": "View all products",
                 "url": "https://www.ibm.com/products?lnk=hpmps_buall",
@@ -4198,7 +4207,8 @@
                 "title": "Flexible payment plans",
                 "titleEnglish": "Flexible payment plans",
                 "url": "https://www.ibm.com/financing?lnk=hpmsc_bufi"
-              },{
+              },
+              {
                 "title": "View all products",
                 "titleEnglish": "View all products",
                 "url": "https://www.ibm.com/products?lnk=hpmps_buall",
@@ -4586,7 +4596,8 @@
                 "title": "Flexible payment plans",
                 "titleEnglish": "Flexible payment plans",
                 "url": "https://www.ibm.com/financing?lnk=hpmsc_bufi"
-              },{
+              },
+              {
                 "title": "View all products",
                 "titleEnglish": "View all products",
                 "url": "https://www.ibm.com/products?lnk=hpmps_buall",
@@ -4978,7 +4989,8 @@
                 "title": "Newsletter subscriptions",
                 "titleEnglish": "Newsletter subscriptions",
                 "url": "https://www.ibm.com/subscribe/"
-              },{
+              },
+              {
                 "title": "View all products",
                 "titleEnglish": "View all products",
                 "url": "https://www.ibm.com/products?lnk=hpmps_buall",
@@ -5005,6 +5017,7 @@
                 "url": "",
                 "tab": "Invoices",
                 "tabType": "treeGrid",
+                "permission": "invoices",
                 "megapanelContent": {
                   "headingTitle": "",
                   "headingUrl": "",
@@ -5017,10 +5030,50 @@
                 "url": "",
                 "tab": "Users",
                 "tabType": "treeGrid",
+                "permission": "user_list",
                 "megapanelContent": {
                   "headingTitle": "",
                   "headingUrl": "",
                   "description": "user-list"
+                }
+              },
+              {
+                "title": "general-posting-setup",
+                "titleEnglish": "",
+                "url": "",
+                "tab": "GeneralPostingSetup",
+                "tabType": "treeGrid",
+                "permission": "general_posting_setup",
+                "megapanelContent": {
+                  "headingTitle": "",
+                  "headingUrl": "",
+                  "description": "general-posting-setup"
+                }
+              },
+              {
+                "title": "user-groups",
+                "titleEnglish": "",
+                "url": "",
+                "tab": "UserGroups",
+                "tabType": "treeGrid",
+                "permission": "user_groups",
+                "megapanelContent": {
+                  "headingTitle": "",
+                  "headingUrl": "",
+                  "description": "user-groups"
+                }
+              },
+              {
+                "title": "organizations",
+                "titleEnglish": "",
+                "url": "",
+                "tab": "Organizations",
+                "tabType": "treeGrid",
+                "permission": "organizations",
+                "megapanelContent": {
+                  "headingTitle": "",
+                  "headingUrl": "",
+                  "description": "organizations"
                 }
               },
               {
