@@ -66,3 +66,43 @@
     vertical-align: baseline;
   }
 }
+.TSMain .TSHasSpace4 {
+  border-bottom: 0px solid transparent;
+}
+.TSHeadLeft, .TSBodyLeft, .TSFootLeft{
+  border-left: 0px solid #CDD8E4
+}
+
+.TSRowSpace0 .TSSolidRow, .TSRowSpace1 .TSSolidRow, .TSRowSpace2 .TSSolidRow, .TSRowSpace3 .TSSolidRow{
+  border-left: 0px solid #CDD8E4;
+  border-right: 0px solid #CDD8E4;
+}
+.TSHeadMid, .TSBodyMid, .TSFootMid{
+   border-right: 0px solid #CDD8E4;
+}
+
+.TSRowSpace0.TSRowSpaceFirst .TSSolidRow, .TSRowSpace2.TSRowSpaceFirst .TSSolidRow, .TSRowSpace3.TSRowSpaceFirst .TSSolidRow{
+  border-top: 0px solid #CDD8E4;
+}
+.TSHeadMid .TSHeaderRow .TSCellHeader:last-child{
+  border-right: 0px solid #CDD8E4;
+}
+.TSHeadMid .TSFilterRow .TSCellBase:nth-last-child(2){
+  border-right: 0px solid #CDD8E4;
+}
+.TSHeadMid .TSFilterRow .TSCellBase:last-child{
+  border-right: 0px solid #CDD8E4;
+}
+.TSBodyMid .TSDataRow .TSCellBase:last-child{
+  border-right: 0px solid #CDD8E4;
+}
+.TSBodyMid .TSDataRow .TSCellBase:nth-last-child(2){
+  border-right: 0px solid #CDD8E4;
+}
+.TSHeadLeft, .TSHeadMid, .TSHeadRight{
+  border-top:0px solid #586980;
+}
+
+.TSMainTable {
+  border-bottom: 0px solid #CDD8E4;
+}
