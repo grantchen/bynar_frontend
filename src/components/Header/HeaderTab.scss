@@ -5,6 +5,7 @@
 .header-dynamic-tab {
   display: flex;
   align-items: stretch;
+  height: 100%; // header height
   /* for scroll instead of overflow hidden */
   flex-flow: row;
   width: 0;
