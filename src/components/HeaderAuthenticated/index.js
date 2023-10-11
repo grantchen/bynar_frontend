@@ -33,7 +33,7 @@ import MastheadSearch from "@carbon/ibmdotcom-react/lib/components/Masthead/Mast
 function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
     const { user } = useAuth();
     const { t } = useTranslation();
-    const { theme } = useThemePreference();
+    const { theme,themePreference } = useThemePreference();
     const [searchParams, setSearchParams] = useSearchParams();
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
     const [isUploadProfileImageModalOpen, openUploadProfileImageModal] =
@@ -87,10 +87,8 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                     prefix=""
                     className={ isSearchBarExpanded ? 'has-search-active' : '' }
                 >
-                    <img src={ document.documentElement.getAttribute(
-                        "data-carbon-theme") !== null &&
-                    document.documentElement.getAttribute(
-                        "data-carbon-theme") !== 'white' ? ibmWhiteLogo : ibmLogo } alt="ibm_logo" />
+                    <img src={ themePreference !== null &&
+                    themePreference !== 'white' ? ibmWhiteLogo : ibmLogo } alt="ibm_logo" />
                 </HeaderName>
 
                 <HeaderName

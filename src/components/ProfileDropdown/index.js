@@ -16,7 +16,7 @@ const ProfileDropdown = React.memo(
     const [t, i18n] = useTranslation();
     const { signout, user } = useAuth();
     const [isHovered, setIsHovered] = useState(false);
-    const {theme } = useThemePreference();
+    const {theme,themePreference } = useThemePreference();
     const { openCardManagementPanel, isCardManagementAllowed } = useCardManagement();
     const handleLogout = async (e) => {
       e.preventDefault();
@@ -41,7 +41,7 @@ const ProfileDropdown = React.memo(
                 image={user?.profileURL ?? ""}
                 // tooltipText={user?.fullName ?? '...'}
                 theme={
-                  user?.themePreference
+                    themePreference === "white" ? "light" : "dark"
                 }
                 onMouseEnter={() => setIsHovered(true)}
               />
