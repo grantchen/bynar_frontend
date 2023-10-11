@@ -90,6 +90,9 @@
     "delete-modal-input-label-text-1": "Escriba",
     "delete-modal-input-label-text-2": "para confirmar",
     "close": "Cerrar",
+    "filter":"Filtrar",
+    "clear":"Claro",
+    "no-results-found": "No se han encontrado resultados",
     "delete-modal-bulk-heading": "Confirmar eliminará permanentemente a los usuarios. Esta acción no se puede deshacer.",
     "delete-users": "Eliminar usuarios",
     "english": "Inglés",
@@ -162,5 +165,8 @@
     "card-added-successfully": "Tarjeta agregada exitosamente",
     "invalid-card-details": "Detalles de tarjeta inválidos",
     "save": "Guardar",
-    "theme": "Temática"
+    "theme": "Temática",
+    "general-posting-setup": "Configuración general de publicación",
+    "organizations": "Organizaciones",
+    "user-groups": "Grupos de Usuarios"
 }

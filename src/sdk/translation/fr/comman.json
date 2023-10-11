@@ -90,6 +90,9 @@
     "delete-modal-input-label-text-1": "Tapez",
     "delete-modal-input-label-text-2": "pour confirmer",
     "close": "Fermer",
+    "filter":"Filtre",
+    "clear":"Clair",
+    "no-results-found": "Aucun résultat trouvé",
     "delete-modal-bulk-heading": "La confirmation supprimera définitivement les utilisateurs. Cette action ne peut pas être annulée.",
     "delete-users": "Supprimer les utilisateurs",
     "english": "Anglais",
@@ -101,7 +104,7 @@
     "address": "Adresse",
     "postal-code-text": "Code postal",
     "phone-number-text": "Numéro de téléphone",
-    "user-detail":"Détails de l'utilisateur",
+    "user-detail": "Détails de l'utilisateur",
     "user-profile-information": "Informations sur le profil utilisateur",
     "user-load-failed": "Impossible de charger les données des utilisateurs",
     "user-deleted-successfully": "Utilisateur supprimé avec succès",
@@ -162,5 +165,8 @@
     "card-added-successfully": "Carte ajoutée avec succès",
     "invalid-card-details": "Détails de carte invalides",
     "save": "Sauvegarder",
-    "theme": "Thème"
+    "theme": "Thème",
+    "general-posting-setup": "Configuration générale de la publication",
+    "organizations": "Organisations",
+    "user-groups": "Groupes d'utilisateurs"
 }
