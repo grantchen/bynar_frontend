@@ -34,7 +34,7 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
     const { user } = useAuth();
     const { t } = useTranslation();
     const isMobile = useMobile();
-    const { theme } = useThemePreference();
+    const { theme} = useThemePreference();
     const [searchParams, setSearchParams] = useSearchParams();
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
     const [isUploadProfileImageModalOpen, openUploadProfileImageModal] =
@@ -88,7 +88,7 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                     prefix=""
                     className={ isSearchBarExpanded ? 'has-search-active' : '' }
                 >
-                    <img src={ document.documentElement.getAttribute(
+                    <img src={document.documentElement.getAttribute(
                         "data-carbon-theme") !== null &&
                     document.documentElement.getAttribute(
                         "data-carbon-theme") !== 'white' ? ibmWhiteLogo : ibmLogo } alt="ibm_logo" />

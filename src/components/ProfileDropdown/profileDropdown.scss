@@ -11,7 +11,7 @@
   }
 
   .tile {
-    background-color: var(--cds-ui-02, #ffffff);
+    background-color: var(--cds-background, #ffffff);
     margin: 0px;
     padding: 0;
     max-width: none;
@@ -57,7 +57,7 @@
       cursor: pointer;
     }
   }
-  
+
   .edit-overlay svg {
     color: white;
     width: 24px;

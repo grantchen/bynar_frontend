@@ -29,7 +29,7 @@ body {
     @include react.theme(react.$g90);
 
     @include carbon--theme($carbon--theme--g90, true);
-    --cds-background: #404040;
+    //--cds-background: #404040;
     background-color: var(--cds-ui-background);
     color: var(--cds-text-01);
 }

@@ -25,7 +25,9 @@ function ThemePreferenceProvider({ children }) {
     const [theme, setTheme] = useState(
         () => localStorage.getItem("theme-preference") ?? "light"
     );
-
+    const [themePreference,setThemePreference ] = useState(()=>
+        mapCarbonThemeFromThemePreference(localStorage.getItem("theme-preference") ?? "light")
+    )
     const isSystemThemeDark = useThemeDetector()
 
     const [isThemeChangeModalOpen, openThemeChangeModal] = useState(false);
@@ -40,8 +42,9 @@ function ThemePreferenceProvider({ children }) {
     useEffect(() => {
         if (user) {
             setTheme(user.themePreference === "" ? "light" : user.themePreference)
+            setThemePreference(mapCarbonThemeFromThemePreference(user.themePreference === "" ? "light" : user.themePreference))
         }
-    }, [user]);
+    }, [user,isSystemThemeDark]);
 
     useEffect(() => {
         if(!theme || !user){
@@ -52,11 +55,13 @@ function ThemePreferenceProvider({ children }) {
             mapCarbonThemeFromThemePreference(theme)
         );
         localStorage.setItem("theme-preference", theme);
-    }, [theme + isSystemThemeDark + user?.id]);
+        setThemePreference(mapCarbonThemeFromThemePreference(theme))
+    }, [theme,user,isSystemThemeDark]);
 
     const value = {
         theme,
         setTheme,
+        themePreference,
         changeThemeManually,
         isThemeChangeModalOpen,
         openThemeChangeModal,
