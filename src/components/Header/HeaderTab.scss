@@ -57,7 +57,7 @@
 
 // drop down tabs
 .header-dynamic-dropdown-tabs-content {
-  //background-color: var(--cds-ui-02, #ffffff);
+  background-color: var(--cds-ui-02, #ffffff);
 
   .list-wrapper {
     overflow-y: auto;
@@ -151,7 +151,7 @@
 
 [data-carbon-theme="g90"] {
   .header-dynamic-dropdown-tabs-content {
-    //background-color: var(--cds-background);
+    background-color: var(--cds-background);
 
     .list-wrapper {
       .cds--contained-list {
