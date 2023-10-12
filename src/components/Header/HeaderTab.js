@@ -13,9 +13,42 @@ import {
 import { Add20 } from '@carbon/icons-react';
 import "./HeaderTab.scss";
 import { TabContext } from "../../sdk";
-import { ChevronDown20, Close16 } from "@carbon/icons-react";
+import { ChevronDown20, Close16, Home16 } from "@carbon/icons-react";
 import { useTranslation } from "react-i18next";
 import TabSkeleton from "carbon-web-components/es/components-react/tabs/tab-skeleton";
+
+const TabIcon = (tabItem, handleRemoveTab) => {
+    const { t } = useTranslation();
+
+    return (
+        <>
+            {
+                tabItem.isDelted ? (
+                    <>
+                        <div role="button"
+                             aria-hidden="false"
+                             className="cds--tabs__nav-item--close-icon"
+                             aria-label="Close tab"
+                             title={ t("close") }
+                             onClick={ (e) => {
+                                 e.stopPropagation()
+                                 handleRemoveTab(tabItem.id)
+                             } }
+                        >
+                            <Close16></Close16>
+                        </div>
+                    </>
+                ) : (
+                    tabItem.name === "Dashboard" &&
+                    <>
+                        <Home16></Home16>
+                    </>
+                )
+            }
+        </>
+    )
+}
+
 
 const HeaderTab = ({ className }) => {
     const { t } = useTranslation();
@@ -26,7 +59,7 @@ const HeaderTab = ({ className }) => {
     const [isDropdownTabsOpen, setIsDropdownTabsOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
-    const handleChange = event => {
+    const handleSearchChange = event => {
         setSearchTerm(event.target.value);
     };
 
@@ -73,14 +106,14 @@ const HeaderTab = ({ className }) => {
             <div className={ `header-dynamic-tab ${ className }` }>
                 <div className="tab-buttons-list" ref={ carouselRef }>
                     <div style={ { display: "flex", whiteSpace: "nowrap", height: "100%" } }>
-                        <Tabs selectedIndex={ activeTab } onChange={ handleTabChange } dismissable
-                              onTabCloseRequest={ (index) => {
-                                  removeTab(tab[index].id)
-                              } }>
+                        <Tabs selectedIndex={ activeTab } onChange={ handleTabChange }>
                             <TabList aria-label="List of tabs">
                                 { tab.map((item, index) =>
-                                    <Tab key={ index }
-                                         className={ item.isDelted ? 'custom-tab' : 'custom-tab tab-stable' }>
+                                    <Tab key={ `${ item.id }-${ index }` }
+                                         renderIcon={ () => {
+                                             return TabIcon(item, removeTab)
+                                         } }
+                                         className={ "custom-tab" }>
                                         {
                                             item.loaded ? (item.label) : (<TabSkeleton></TabSkeleton>)
                                         }
@@ -121,7 +154,7 @@ const HeaderTab = ({ className }) => {
                             >
                                 <Search placeholder={ t("search-tabs") }
                                         value={ searchTerm }
-                                        onChange={ handleChange }
+                                        onChange={ handleSearchChange }
                                         closeButtonLabelText={ t("clear") }
                                         size="md" />
                                 { searchResults.map((item, index) =>
@@ -129,18 +162,34 @@ const HeaderTab = ({ className }) => {
                                         key={ `${ item.id }-${ index }` }
                                         className={ tab[activeTab].id === item.id ? 'list-item-active' : '' }
                                         action={
-                                            item.isDelted && (
-                                                <Button
-                                                    kind="ghost"
-                                                    className="close-list-tab"
-                                                    hasIconOnly
-                                                    title={ t("close") }
-                                                    onClick={ () => {
-                                                        removeTab(item.id);
-                                                    } }
-                                                >
-                                                    <Close16 />
-                                                </Button>
+                                            item.isDelted ? (
+                                                <>
+                                                    <Button
+                                                        kind="ghost"
+                                                        className="close-list-tab"
+                                                        hasIconOnly
+                                                        title={ t("close") }
+                                                        onClick={ () => {
+                                                            removeTab(item.id);
+                                                        } }
+                                                    >
+                                                        <Close16 />
+                                                    </Button>
+                                                </>
+                                            ) : (
+                                                item.name === "Dashboard" && <>
+                                                    <Button
+                                                        kind="ghost"
+                                                        className="home-tab-icon"
+                                                        hasIconOnly
+                                                        onClick={ () => {
+                                                            handleTabListChange(item.id);
+                                                            setIsDropdownTabsOpen(false);
+                                                        } }
+                                                    >
+                                                        <Home16></Home16>
+                                                    </Button>
+                                                </>
                                             )
                                         }
                                         onClick={ () => {
