@@ -3,7 +3,7 @@ import {
     TextInput,
     Select,
     SelectItem,
-    ToastNotification, InlineLoading,
+    ToastNotification,
 } from "carbon-components-react";
 import {
     TextInputSkeleton,
@@ -14,6 +14,7 @@ import {BaseURL, Languages, Themes} from "../../sdk/constant";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import {useAuth, useUserManagement} from "../../sdk";
+
 import {
     PhoneNumberUtil,
 } from "google-libphonenumber";
@@ -242,20 +243,14 @@ export const UserDetailPanel = ({ open }) => {
                 title={t("user-detail")}
                 subtitle={t("user-profile-information")}
                 actions={[{
-                    label: (
-                        <>
-                            {t('save')}
-                            {disable && <InlineLoading className="inline-loading-within-btn"/>}
-                        </>
-
-                    ),
+                    label: t('save'),
                     onClick: function onClick(event) {
                         event.preventDefault();
                         handleUpdateProfile();
                     },
                     kind: 'primary',
                     disabled: disable,
-                    type: 'submit'
+                    loading: disable,
                 }, {
                     label: t("cancel"),
                     onClick: handleClose,

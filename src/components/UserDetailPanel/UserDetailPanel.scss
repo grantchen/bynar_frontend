@@ -118,6 +118,9 @@
     .skeleton-loading {
         margin: 16px 0px;
     }
+    .bx--btn-set .bx--btn:not(:focus){
+        box-shadow: -0.0625rem 0 0 0 var(--cds-button-separator, #e0e0e0);
+    }
 }
 button.button-with-loading {
     padding-right: calc(1rem - 1px);

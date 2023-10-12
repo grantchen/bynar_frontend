@@ -11,7 +11,7 @@
   }
 
   .tile {
-    //background-color: var(--cds-ui-02, #ffffff);
+    background-color: var(--cds-background, #ffffff);
     margin: 0px;
     padding: 0;
     max-width: none;
@@ -28,7 +28,7 @@
       &:hover {
         color: var(--cds-text-01, #161616);
         text-decoration: none;
-        //background-color: var(--cds-field-01, #e5e5e5);
+        background-color: var(--cds-field-01, #e5e5e5);
         cursor: pointer;
       }
     }
