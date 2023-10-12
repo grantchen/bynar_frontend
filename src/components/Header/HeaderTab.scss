@@ -39,6 +39,27 @@
       &.cds--tabs__nav-link:not(.cds--tabs__nav-item--selected) {
         border-bottom-color: transparent;
       }
+
+      &.tab-stable {
+        .cds--tabs__nav-item--icon {
+          display: none;
+        }
+      }
+
+      &.tab-icon-reverse {
+        .cds--tabs__nav-item-label-wrapper {
+          flex-direction: row-reverse;
+
+          // reverse icon from left to right
+          .cds--tabs__nav-item--icon-left {
+            align-items: center;
+            padding-right: 0;
+            margin-top: 0;
+            display: flex;
+            padding-left: 0.5rem;
+          }
+        }
+      }
     }
   }
 

@@ -25,18 +25,7 @@ const TabIcon = (tabItem, handleRemoveTab) => {
             {
                 tabItem.isDelted ? (
                     <>
-                        <div role="button"
-                             aria-hidden="false"
-                             className="cds--tabs__nav-item--close-icon"
-                             aria-label="Close tab"
-                             title={ t("close") }
-                             onClick={ (e) => {
-                                 e.stopPropagation()
-                                 handleRemoveTab(tabItem.id)
-                             } }
-                        >
-                            <Close16></Close16>
-                        </div>
+                        {/* use native dismissable because of Chevron scroll misbehave */ }
                     </>
                 ) : (
                     tabItem.name === "Dashboard" &&
@@ -106,14 +95,20 @@ const HeaderTab = ({ className }) => {
             <div className={ `header-dynamic-tab ${ className }` }>
                 <div className="tab-buttons-list" ref={ carouselRef }>
                     <div style={ { display: "flex", whiteSpace: "nowrap", height: "100%" } }>
-                        <Tabs selectedIndex={ activeTab } onChange={ handleTabChange }>
+                        <Tabs selectedIndex={ activeTab }
+                              onChange={ handleTabChange }
+                              dismissable
+                              onTabCloseRequest={ (index) => {
+                                  removeTab(tab[index].id)
+                              } }
+                        >
                             <TabList aria-label="List of tabs">
                                 { tab.map((item, index) =>
                                     <Tab key={ `${ item.id }-${ index }` }
                                          renderIcon={ () => {
                                              return TabIcon(item, removeTab)
                                          } }
-                                         className={ "custom-tab" }>
+                                         className={ `custom-tab ${ !item.isDelted ? 'tab-stable' : '' } ${ item.name === 'Dashboard' ? 'tab-icon-reverse' : '' }` }>
                                         {
                                             item.loaded ? (item.label) : (<TabSkeleton></TabSkeleton>)
                                         }
