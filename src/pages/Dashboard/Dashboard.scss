@@ -1,6 +1,6 @@
 .dashboard-container{
     padding: 3rem 4rem;
-    max-height: calc(100vh - 50px);
+    height: calc(100vh - 50px);
     overflow-y: auto;
     //background: var(--cds-field-01, #ffffff);
     color: var(--cds-text-01, #161616);
@@ -8,6 +8,7 @@
     .content-wrapper {
         padding: 0;
         outline: none;
+        height: 100%;
     }
 }
 

@@ -3,7 +3,6 @@ import {
     BaseURL, TabContext,
     useAuth, uuidv4,
 } from "../../sdk";
-import { InlineLoading } from "@carbon/react";
 import "./TreeGrid.scss";
 
 // get api request url
@@ -19,7 +18,7 @@ function getAPIRequestURL(url) {
   }
 }
 
-export const TreeGrid = ({ table, config = {} ,tabId}) => {
+export const TreeGrid = ({ table, config = {} , tabId, className}) => {
   let treeGrid = null;
   const ref = useRef(null);
   const { handleSetTabLoaded } =
@@ -93,13 +92,12 @@ export const TreeGrid = ({ table, config = {} ,tabId}) => {
 
   return (
     <>
-      <div
-          ref={ref}
-          id={ `treeGridMainTag_${uuidv4()}` }
-          style={ { width: '100%', height: '100%' } }
-      >
-        <div style={ { display: "flex" } }>
-          {/*<InlineLoading />*/}
+      <div className={`tree-grid-wrapper ${className}`}>
+        <div
+            ref={ref}
+            id={ `treeGridMainTag_${uuidv4()}` }
+            style={ { width: '100%', height: '100%' } }
+        >
         </div>
       </div>
     </>
