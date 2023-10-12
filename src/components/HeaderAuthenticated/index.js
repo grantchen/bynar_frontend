@@ -11,7 +11,7 @@ import {
 import {
     CardManagementProvider,
     omitQueryParams,
-    useAuth,
+    useAuth, useMobile,
     useThemePreference,
 } from "../../sdk";
 import { useTranslation } from "react-i18next";
@@ -33,6 +33,7 @@ import MastheadSearch from "@carbon/ibmdotcom-react/lib/components/Masthead/Mast
 function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
     const { user } = useAuth();
     const { t } = useTranslation();
+    const isMobile = useMobile();
     const { theme,themePreference } = useThemePreference();
     const [searchParams, setSearchParams] = useSearchParams();
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
@@ -91,22 +92,35 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                     themePreference !== 'white' ? ibmWhiteLogo : ibmLogo } alt="ibm_logo" />
                 </HeaderName>
 
-                <HeaderName
-                    className={ `seperatorHead ${ isSearchBarExpanded ? 'has-search-active' : '' }` }
-                    prefix=""
-                >
-                    <div className="logoSeperator" />
-                </HeaderName>
+                {
+                    !isMobile && (
+                        <HeaderName
+                            className={ `seperatorHead ${ isSearchBarExpanded ? 'has-search-active' : '' }` }
+                            prefix=""
+                        >
+                            <div className="logoSeperator" />
+                        </HeaderName>
+                    )
+                }
 
-                <HeaderName
-                    className={ `orgName ${ isSearchBarExpanded ? 'has-search-active' : '' }` }
-                    prefix=""
-                >
-                    Bynar
-                </HeaderName>
+                {
+                    !isMobile && (
+                        <HeaderName
+                            className={ `orgName ${ isSearchBarExpanded ? 'has-search-active' : '' }` }
+                            prefix=""
+                        >
+                            Bynar
+                        </HeaderName>
+                    )
+                }
+
 
                 <HeaderGlobalBar>
-                    <HeaderTab className={ isSearchBarExpanded ? 'has-search-active' : '' } />
+                    {
+                        !isMobile && (
+                            <HeaderTab className={ isSearchBarExpanded ? 'has-search-active' : '' } />
+                        )
+                    }
                     <MastheadSearch
                         placeHolderText="Search all of Bynar"
                         isSearchActive={ isSearchBarExpanded }
@@ -180,7 +194,7 @@ export default function AuthenticatedAppHeader(props) {
     return (
         <CardManagementProvider>
             <div className="main-header-container">
-                <HeaderContainer { ...props } render={_AuthenticatedAppHeader} />
+                <HeaderContainer { ...props } render={ _AuthenticatedAppHeader } />
             </div>
             <Outlet />
         </CardManagementProvider>

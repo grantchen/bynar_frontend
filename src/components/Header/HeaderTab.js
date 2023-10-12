@@ -116,10 +116,10 @@ const HeaderTab = ({ className }) => {
                     <PopoverContent className="header-dynamic-dropdown-tabs-content">
                         <div className="list-wrapper">
                             <ContainedList
-                                label={ t("opened-tabs") }
+                                label={ "" }
                                 size="md"
                             >
-                                <Search placeholder={ t("filter") }
+                                <Search placeholder={ t("search-tabs") }
                                         value={ searchTerm }
                                         onChange={ handleChange }
                                         closeButtonLabelText={ t("clear") }
