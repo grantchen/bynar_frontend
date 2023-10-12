@@ -167,14 +167,14 @@
 
 [data-carbon-theme="g90"] {
   .header-dynamic-dropdown-tabs-content {
-    background-color: var(--cds-background);
+    background-color: var(--cds-layer);
 
     .list-wrapper {
       .cds--contained-list {
         .cds--contained-list-item {
           &:hover {
             .cds--contained-list-item__content {
-              background-color: #525252;
+              background-color: #444444;
             }
           }
 
@@ -191,10 +191,14 @@
           }
         }
       }
+
+      .cds--search .cds--search-input {
+        background-color: var(--cds-layer);
+      }
     }
 
     + .cds--popover-caret {
-      background-color: var(--cds-background);
+      background-color: var(--cds-layer);
     }
   }
 }
