@@ -42,8 +42,9 @@ function ThemePreferenceProvider({ children }) {
     useEffect(() => {
         if (user) {
             setTheme(user.themePreference === "" ? "light" : user.themePreference)
+            setThemePreference(mapCarbonThemeFromThemePreference(user.themePreference === "" ? "light" : user.themePreference))
         }
-    }, [user]);
+    }, [user,isSystemThemeDark]);
 
     useEffect(() => {
         if(!theme || !user){
@@ -55,7 +56,7 @@ function ThemePreferenceProvider({ children }) {
         );
         localStorage.setItem("theme-preference", theme);
         setThemePreference(mapCarbonThemeFromThemePreference(theme))
-    }, [theme + isSystemThemeDark + user?.id]);
+    }, [theme,user,isSystemThemeDark]);
 
     const value = {
         theme,
