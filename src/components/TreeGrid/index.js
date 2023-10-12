@@ -66,20 +66,15 @@ export const TreeGrid = ({ table, config = {} , tabId, className}) => {
           console.log(config)
         }
 
-        // TODO
-        setTimeout(() => {
-          if (ref.current) {
-            treeGrid = window.TreeGrid(
-                config,
-                ref.current?.id,
-                { Component: this }
-            );
-              window.Grids.OnReady = function(G){
-                 //update tab loaded
-                  handleSetTabLoaded(G.id.replace('treeGrid_',''))
-              }
-          }
-        }, 0)
+        treeGrid = window.TreeGrid(
+            config,
+            ref.current.id,
+            {}
+        );
+        window.Grids.OnReady = function(G){
+          //update tab loaded
+          handleSetTabLoaded(G.id.replace('treeGrid_',''))
+        }
       }
     }
 
