@@ -19,12 +19,12 @@ function getAPIRequestURL(url) {
 }
 
 export const TreeGrid = ({ table, config = {}, tabId, className }) => {
-    let treeGrid = null;
     const ref = useRef(null);
     const { handleSetTabLoaded } =
         useContext(TabContext);
     const { getAuthorizationToken } = useAuth()
     useEffect(() => {
+        let treeGrid = null;
         const fetchData = async () => {
             const token = await getAuthorizationToken()
             if (token) {
@@ -87,10 +87,10 @@ export const TreeGrid = ({ table, config = {}, tabId, className }) => {
 
     return (
         <>
-            <div className={ `tree-grid-wrapper ${ className }` }>
+            <div className={ `tree-grid-wrapper ${ className ? className : '' }` }>
                 <div
                     ref={ ref }
-                    id={ `treeGridMainTag_${ uuidv4() }` }
+                    id={ `treeGridMainTag_${ tabId || uuidv4() }` }
                     style={ { width: '100%', height: '100%' } }
                 >
                 </div>

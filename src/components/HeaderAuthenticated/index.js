@@ -78,6 +78,7 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                         tooltipAlignment="end"
                         id="switcher-button">
                         <HeaderMenuButton
+                            aria-label=""
                             isActive={ isSideNavExpanded }
                         />
                     </HeaderGlobalAction>

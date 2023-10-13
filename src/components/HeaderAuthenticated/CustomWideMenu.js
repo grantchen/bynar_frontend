@@ -61,10 +61,10 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                 wideMenuButtonRef.current &&
                 !wideMenuButtonRef.current.contains(event.target) &&
                 (
-                    wideMenuRef.current && // pc
-                    !wideMenuRef.current.contains(event.target) ||
-                    leftNavRef.current && // mobile
-                    !leftNavRef.current.contains(event.target)
+                    (wideMenuRef.current && // pc
+                        !wideMenuRef.current.contains(event.target)) ||
+                    (leftNavRef.current && // mobile
+                        !leftNavRef.current.contains(event.target))
                 )
             ) {
                 if (expanded) {
@@ -77,7 +77,7 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
         return () => {
             document.removeEventListener("mousedown", handleClickWideMenuOutside);
         };
-    }, [expanded]);
+    }, [expanded, onClickSideNavExpand]);
 
     return (
         <>
@@ -147,8 +147,8 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                                                     ></dds-left-nav-menu-item>
                                                                 )
                                                             }
-
                                                         }
+                                                        return null
                                                     })
                                                 }
                                             </dds-left-nav-menu-section>
@@ -222,6 +222,7 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                                                             ele.url !== '' ? (
                                                                                 <h2>
                                                                                     <a href={ ele.url }
+                                                                                       rel="noreferrer"
                                                                                        target="_blank">
                                                                                         { ele.title }
                                                                                         <ArrowRight
@@ -243,10 +244,12 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                                                                             <div
                                                                                                 key={ item.title }
                                                                                                 className="link">
-                                                                                                <a onClick={ () => {
-                                                                                                    goToTab(item.tab, item.title, item.tabType)
-                                                                                                    onClickSideNavExpand()
-                                                                                                } }>
+                                                                                                <a
+                                                                                                    onClick={ () => {
+                                                                                                        goToTab(item.tab, item.title, item.tabType)
+                                                                                                        onClickSideNavExpand()
+                                                                                                    } }
+                                                                                                >
                                                                                                     <div>
                                                                                                         <span>{ t(item.title) }</span>
                                                                                                     </div>
@@ -271,6 +274,7 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                                                                         )
                                                                                     }
                                                                                 }
+                                                                                return null
                                                                             })
                                                                         }
                                                                     </div>

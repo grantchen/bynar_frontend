@@ -17,9 +17,7 @@ import { ChevronDown20, Close16, Home16 } from "@carbon/icons-react";
 import { useTranslation } from "react-i18next";
 import TabSkeleton from "carbon-web-components/es/components-react/tabs/tab-skeleton";
 
-const TabIcon = (tabItem, handleRemoveTab) => {
-    const { t } = useTranslation();
-
+const TabIcon = (tabItem) => {
     return (
         <>
             {
@@ -106,7 +104,7 @@ const HeaderTab = ({ className }) => {
                                 { tab.map((item, index) =>
                                     <Tab key={ `${ item.id }-${ index }` }
                                          renderIcon={ () => {
-                                             return TabIcon(item, removeTab)
+                                             return TabIcon(item)
                                          } }
                                          className={ `custom-tab ${ !item.isDelted ? 'tab-stable' : '' } ${ item.name === 'Dashboard' ? 'tab-icon-reverse' : '' }` }>
                                         {
@@ -151,7 +149,8 @@ const HeaderTab = ({ className }) => {
                                         value={ searchTerm }
                                         onChange={ handleSearchChange }
                                         closeButtonLabelText={ t("clear") }
-                                        size="md" />
+                                        size="md"
+                                        labelText={ "" } />
                                 { searchResults.map((item, index) =>
                                     <ContainedListItem
                                         key={ `${ item.id }-${ index }` }
@@ -160,6 +159,7 @@ const HeaderTab = ({ className }) => {
                                             item.isDelted ? (
                                                 <>
                                                     <Button
+                                                        label=""
                                                         kind="ghost"
                                                         className="close-list-tab"
                                                         hasIconOnly
@@ -174,6 +174,7 @@ const HeaderTab = ({ className }) => {
                                             ) : (
                                                 item.name === "Dashboard" && <>
                                                     <Button
+                                                        label=""
                                                         kind="ghost"
                                                         className="home-tab-icon"
                                                         hasIconOnly
