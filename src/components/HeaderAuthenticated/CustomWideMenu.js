@@ -84,26 +84,26 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
             {
                 isMobile ? (
                     <>
-                        <div ref={ wideMenuButtonRef }>{ children }</div>
+                        <div ref={wideMenuButtonRef}>{children}</div>
                         <dds-left-nav-overlay></dds-left-nav-overlay>
                         <dds-left-nav
-                            ref={ leftNavRef }
+                            ref={leftNavRef}
                             data-autoid="dds--masthead__l0-sidenav"
                             collapse-mode="responsive"
                             usage-mode="header-nav"
                         >
-                            {/* first level menus section */ }
+                            {/* first level menus section */}
                             <dds-left-nav-menu-section
-                                section-id={ `-1, -1` }
-                                ariaHidden={ true }
+                                section-id={`-1, -1`}
+                                ariaHidden={true}
                             >
                                 {
                                     jsonData.mastheadNav.links.map((ele, i) => {
                                         return (
                                             <>
                                                 <dds-left-nav-menu
-                                                    title={ ele.title }
-                                                    panel-id={ `${ i }, -1` }
+                                                    title={ele.title}
+                                                    panel-id={`${i}, -1`}
                                                 ></dds-left-nav-menu>
                                             </>
                                         )
@@ -117,12 +117,12 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                     return (
                                         <>
                                             <dds-left-nav-menu-section
-                                                section-id={ `${ i }, -1` }
-                                                show-back-button={ true }
-                                                is-submenu={ true }
-                                                title={ ele.title }
-                                                titleUrl={ ele.url }
-                                                ariaHidden={ true }
+                                                section-id={`${i}, -1`}
+                                                show-back-button={true}
+                                                is-submenu={true}
+                                                title={ele.title}
+                                                titleUrl={ele.url}
+                                                ariaHidden={true}
                                             >
                                                 {
                                                     ele.menuSections[0]?.menuItems.map((item) => {
@@ -130,20 +130,20 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                                             if (item.tab) {
                                                                 return (
                                                                     <dds-left-nav-menu-item
-                                                                        title={ t(item.title) }
-                                                                        onClick={ (e) => {
+                                                                        title={t(item.title)}
+                                                                        onClick={(e) => {
                                                                             e.preventDefault()
                                                                             goToTab(item.tab, item.title, item.tabType)
                                                                             onClickSideNavExpand()
-                                                                        } }
+                                                                        }}
                                                                     >
                                                                     </dds-left-nav-menu-item>
                                                                 )
                                                             } else {
                                                                 return (
                                                                     <dds-left-nav-menu-item
-                                                                        href={ item.url }
-                                                                        title={ t(item.title) }
+                                                                        href={item.url}
+                                                                        title={t(item.title)}
                                                                     ></dds-left-nav-menu-item>
                                                                 )
                                                             }
@@ -161,9 +161,9 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                     </>
                 ) : (
                     <>
-                        <div ref={ wideMenuButtonRef }>{ children }</div>
-                        <div className="menu-body" expanded={ `${ expanded }` }>
-                            <div ref={ wideMenuRef } className="mega-menu">
+                        <div ref={wideMenuButtonRef}>{children}</div>
+                        <div className="menu-body" expanded={`${expanded}`}>
+                            <div ref={wideMenuRef} className="mega-menu">
                                 <div className="bmegamenu-container">
                                     <div className="megamenu-container-row">
                                         <div className="left-navigation">
@@ -176,12 +176,12 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                                                 return (
                                                                     <>
                                                                         <div
-                                                                            className={ `tab ${ isActive ? 'active' : '' }` }
-                                                                            key={ ele.title }
-                                                                            onClick={ () => handleClick(ele.title) }
+                                                                            className={`tab ${isActive ? 'active' : ''}`}
+                                                                            key={ele.title}
+                                                                            onClick={() => handleClick(ele.title)}
                                                                         >
                                                                             <button>
-                                                                                { ele.title }
+                                                                                {ele.title}
                                                                             </button>
                                                                         </div>
                                                                     </>
@@ -198,8 +198,8 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                                 <>
                                                     <div className="view-all">
                                                         <a className="bx--link"
-                                                           href={ viewAllArray[0]?.url }>
-                                                            <span>{ viewAllArray[0]?.title }</span>
+                                                            href={viewAllArray[0]?.url}>
+                                                            <span>{viewAllArray[0]?.title}</span>
                                                             <div className="bx--link__icon">
                                                                 <ArrowRight />
                                                             </div>
@@ -221,18 +221,18 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                                                         {
                                                                             ele.url !== '' ? (
                                                                                 <h2>
-                                                                                    <a href={ ele.url }
-                                                                                       target="_blank">
-                                                                                        { ele.title }
+                                                                                    <a href={ele.url}
+                                                                                        target="_blank">
+                                                                                        {ele.title}
                                                                                         <ArrowRight
-                                                                                            size={ 20 } />
+                                                                                            size={20} />
                                                                                     </a>
                                                                                 </h2>
                                                                             ) : (
-                                                                                <h2>{ ele.title } </h2>
+                                                                                <h2>{ele.title} </h2>
                                                                             )
                                                                         }
-                                                                        <span>{ ele.description }</span>
+                                                                        <span>{ele.description}</span>
                                                                     </div>
                                                                     <div className="link-group">
                                                                         {
@@ -241,31 +241,45 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                                                                     if (item.tab) {
                                                                                         return (
                                                                                             <div
-                                                                                                key={ item.title }
+                                                                                                key={item.title}
                                                                                                 className="link">
-                                                                                                <a onClick={ () => {
+                                                                                                <a onClick={() => {
                                                                                                     goToTab(item.tab, item.title, item.tabType)
                                                                                                     onClickSideNavExpand()
-                                                                                                } }>
+                                                                                                }}>
                                                                                                     <div>
-                                                                                                        <span>{ t(item.title) }</span>
+                                                                                                        <span>{t(item.title)}</span>
                                                                                                     </div>
-                                                                                                    <span>{ t(item.megapanelContent?.description) }</span>
+                                                                                                    <span>{t(item.megapanelContent?.description)}</span>
+                                                                                                </a>
+                                                                                            </div>
+                                                                                        )
+                                                                                    } else if (item.sidePanel) {
+                                                                                        return (
+                                                                                            <div
+                                                                                                key={item.title}
+                                                                                                className="link">
+                                                                                                <a href={item.url}
+                                                                                                    rel="noopener noreferrer">
+                                                                                                    <div>
+                                                                                                        <span>{t(item.title)}</span>
+                                                                                                    </div>
+                                                                                                    <span>{t(item.megapanelContent?.description)}</span>
                                                                                                 </a>
                                                                                             </div>
                                                                                         )
                                                                                     } else {
                                                                                         return (
                                                                                             <div
-                                                                                                key={ item.title }
+                                                                                                key={item.title}
                                                                                                 className="link">
-                                                                                                <a href={ item.url }
-                                                                                                   target="_blank"
-                                                                                                   rel="noopener noreferrer">
+                                                                                                <a href={item.url}
+                                                                                                    target="_blank"
+                                                                                                    rel="noopener noreferrer">
                                                                                                     <div>
-                                                                                                        <span>{ t(item.title) }</span>
+                                                                                                        <span>{t(item.title)}</span>
                                                                                                     </div>
-                                                                                                    <span>{ t(item.megapanelContent?.description) }</span>
+                                                                                                    <span>{t(item.megapanelContent?.description)}</span>
                                                                                                 </a>
                                                                                             </div>
                                                                                         )
@@ -287,7 +301,7 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
 
                             </div>
                         </div>
-                        <div className={ `menu-overlay ${ expanded ? 'active' : '' }` }>
+                        <div className={`menu-overlay ${expanded ? 'active' : ''}`}>
                         </div>
                     </>
                 )

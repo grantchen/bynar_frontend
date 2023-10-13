@@ -66,7 +66,7 @@ const CardManagementProvider = ({ children }) => {
     )]);
 
     const isCardManagementAllowed = useMemo(
-        () => user && user?.cognitoUserGroups === "PrimaryOwner",
+        () => user,
         [user]
     );
 
@@ -91,11 +91,11 @@ const CardManagementProvider = ({ children }) => {
                 ).toString();
 
                 const response = await authFetch(
-                    `${BaseURL}/card?${searchQueryParams}`
+                    `${BaseURL}/apprunnerurl/cards/list?${searchQueryParams}`
                 );
                 if (response.ok) {
                     const res = await response.json();
-                    setCardsData(res.result);
+                    setCardsData(res);
                 }
             } catch (error) {
                 setNotification({
