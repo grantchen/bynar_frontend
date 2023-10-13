@@ -67,6 +67,34 @@
   }
 }
 
+// toolbar scrollable
+.TBRowAbove,
+.TMRowAbove,
+.TSRowAbove,
+.TTRowAbove,
+.TWRowAbove,
+.CBRowAbove,
+.CCRowAbove,
+.CERowAbove,
+.CGRowAbove,
+.CLRowAbove,
+.CORowAbove,
+.CPRowAbove,
+.CQRowAbove,
+.CFRowAbove,
+.CRRowAbove,
+.CSRowAbove,
+.CLRowAbove {
+  overflow-x: auto;
+  margin-left: 0;
+  margin-right: 0;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+}
+
 .TSMain .TSHasSpace4 {
   border-bottom: 0px solid transparent;
 }
