@@ -87,7 +87,7 @@ export const TreeGrid = ({ table, config = {}, tabId, className }) => {
 
     return (
         <>
-            <div className={ `tree-grid-wrapper ${ className }` }>
+            <div className={ `tree-grid-wrapper ${ className ? className : '' }` }>
                 <div
                     ref={ ref }
                     id={ `treeGridMainTag_${ uuidv4() }` }
