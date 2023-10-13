@@ -149,7 +149,8 @@ const HeaderTab = ({ className }) => {
                                         value={ searchTerm }
                                         onChange={ handleSearchChange }
                                         closeButtonLabelText={ t("clear") }
-                                        size="md" />
+                                        size="md"
+                                        labelText={ "" } />
                                 { searchResults.map((item, index) =>
                                     <ContainedListItem
                                         key={ `${ item.id }-${ index }` }
@@ -158,6 +159,7 @@ const HeaderTab = ({ className }) => {
                                             item.isDelted ? (
                                                 <>
                                                     <Button
+                                                        label=""
                                                         kind="ghost"
                                                         className="close-list-tab"
                                                         hasIconOnly
@@ -172,6 +174,7 @@ const HeaderTab = ({ className }) => {
                                             ) : (
                                                 item.name === "Dashboard" && <>
                                                     <Button
+                                                        label=""
                                                         kind="ghost"
                                                         className="home-tab-icon"
                                                         hasIconOnly
