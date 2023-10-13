@@ -17,9 +17,7 @@ import { ChevronDown20, Close16, Home16 } from "@carbon/icons-react";
 import { useTranslation } from "react-i18next";
 import TabSkeleton from "carbon-web-components/es/components-react/tabs/tab-skeleton";
 
-const TabIcon = (tabItem, handleRemoveTab) => {
-    const { t } = useTranslation();
-
+const TabIcon = (tabItem) => {
     return (
         <>
             {
@@ -106,7 +104,7 @@ const HeaderTab = ({ className }) => {
                                 { tab.map((item, index) =>
                                     <Tab key={ `${ item.id }-${ index }` }
                                          renderIcon={ () => {
-                                             return TabIcon(item, removeTab)
+                                             return TabIcon(item)
                                          } }
                                          className={ `custom-tab ${ !item.isDelted ? 'tab-stable' : '' } ${ item.name === 'Dashboard' ? 'tab-icon-reverse' : '' }` }>
                                         {

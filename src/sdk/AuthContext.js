@@ -25,7 +25,7 @@ const initialState = {
     lang: null,
 };
 export const AuthContext = createContext(initialState);
-const { Provider, Consumer } = AuthContext;
+const { Provider } = AuthContext;
 const simpleReducer = (state, payload) => ({ ...state, ...payload });
 
 export const AuthProvider = ({ children }) => {
@@ -93,11 +93,11 @@ export const AuthProvider = ({ children }) => {
                 await i18n.changeLanguage(res?.languagePreference);
             } else {
                 console.log('clear token, error response in get user')
-                // signout()
+                signout()
             }
         } catch (e) {
             console.log(e, 'clear token, error in get user')
-            // signout()
+            signout()
         }
     }, [state.token]);
     useEffect(() => {
