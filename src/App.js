@@ -57,7 +57,11 @@ function App() {
                                             <Route
                                                 exact
                                                 path="dashboard"
-                                                element={<Dashboard />}
+                                                element={
+                                                    <Suspense fallback={<div></div>}>
+                                                    <Dashboard />
+                                                </Suspense>
+                                            }
                                             />
                                         </Route>
                                     </Routes>
