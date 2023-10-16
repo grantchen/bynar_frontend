@@ -48,7 +48,7 @@ const HeaderTab = ({ className }) => {
 
     return (
         <>
-            <div className={ `header-dynamic-tab ${ className }` }>
+            <div className={ `header-dynamic-tab ${ className ? className : '' }` }>
                 <div className="tab-buttons-list">
                     <div style={ { display: "flex", whiteSpace: "nowrap", height: "100%" } }>
                         <Tabs selectedIndex={ activeTab }

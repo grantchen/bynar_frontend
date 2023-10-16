@@ -3,14 +3,13 @@ import {
     Button,
     ContainedList,
     ContainedListItem,
-    PopoverContent,
-    Popover,
     Search
 } from "@carbon/react";
 import "./DropdownTabList.scss";
 import { TabContext } from "../../sdk";
-import { ChevronDown20, Close16, Home16 } from "@carbon/icons-react";
+import { ChevronDown16, Close16, Home16 } from "@carbon/icons-react";
 import { useTranslation } from "react-i18next";
+import TabSkeleton from "carbon-web-components/es/components-react/tabs/tab-skeleton";
 
 const DropdownTabList = ({ className }) => {
     const { t } = useTranslation();
@@ -19,7 +18,7 @@ const DropdownTabList = ({ className }) => {
     const dropdownTabsRef = useRef(null);
     const [isDropdownTabsOpen, setIsDropdownTabsOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
-    const [searchResults, setSearchResults] = useState([]);
+    const [searchResults, setSearchResults] = useState(tab);
     const handleSearchChange = event => {
         setSearchTerm(event.target.value);
     };
@@ -58,87 +57,100 @@ const DropdownTabList = ({ className }) => {
 
     return (
         <>
-            <div className={ `header-tab-list ${ className }` }>
-                <Popover
-                    ref={ dropdownTabsRef }
-                    open={ isDropdownTabsOpen }
-                >
-                    <Button
-                        kind="ghost"
-                        hasIconOnly
-                        onClick={ () => {
-                            setIsDropdownTabsOpen(!isDropdownTabsOpen);
-                            setSearchTerm('');
-                        } }>
-                        <ChevronDown20 />
-                    </Button>
-                    <PopoverContent className="header-dynamic-dropdown-tabs-content">
-                        <div className="list-wrapper">
-                            <ContainedList
-                                label={ "" }
-                                size="md"
-                            >
-                                <Search placeholder={ t("search-tabs") }
-                                        value={ searchTerm }
-                                        onChange={ handleSearchChange }
-                                        closeButtonLabelText={ t("clear") }
+            <div ref={ dropdownTabsRef } className={ `header-tab-list ${ className ? className : '' }` }>
+                <div
+                    className={ "cds--dropdown__wrapper cds--list-box__wrapper cds--dropdown__wrapper--inline cds--list-box__wrapper--inline" }>
+                    <div
+                        className={ `cds--dropdown cds--dropdown--inline cds--dropdown--lg cds--list-box cds--list-box--lg ${ isDropdownTabsOpen ? 'cds--dropdown--open cds--list-box--expanded' : '' }` }>
+                        <Button
+                            kind="ghost"
+                            className={ "cds--list-box__field" }
+                            onClick={ () => {
+                                setIsDropdownTabsOpen(!isDropdownTabsOpen);
+                                setSearchTerm('');
+                            } }>
+                            <div className="cds--list-box__label">
+                                {
+                                    tab[activeTab].loaded ? (tab[activeTab].label) : (<TabSkeleton></TabSkeleton>)
+                                }
+                            </div>
+                            <div
+                                className={ `cds--list-box__menu-icon ${ isDropdownTabsOpen ? 'cds--list-box__menu-icon--open' : '' }` }>
+                                <ChevronDown16 />
+                            </div>
+
+                        </Button>
+
+                        <ul className="cds--list-box__menu" role="listbox">
+                            <div className="header-dynamic-dropdown-tabs-content">
+                                <div className="list-wrapper">
+                                    <ContainedList
+                                        label={ "" }
                                         size="md"
-                                        labelText={ "" } />
-                                { searchResults.map((item, index) =>
-                                    <ContainedListItem
-                                        key={ `${ item.id }-${ index }` }
-                                        className={ tab[activeTab].id === item.id ? 'list-item-active' : '' }
-                                        action={
-                                            item.isDelted ? (
-                                                <>
-                                                    <Button
-                                                        label=""
-                                                        kind="ghost"
-                                                        className="close-list-tab"
-                                                        hasIconOnly
-                                                        title={ t("close") }
-                                                        onClick={ () => {
-                                                            removeTab(item.id);
-                                                        } }
-                                                    >
-                                                        <Close16 />
-                                                    </Button>
-                                                </>
-                                            ) : (
-                                                item.name === "Dashboard" && <>
-                                                    <Button
-                                                        label=""
-                                                        kind="ghost"
-                                                        className="home-tab-icon"
-                                                        hasIconOnly
-                                                        onClick={ () => {
-                                                            handleTabListChange(item.id);
-                                                            setIsDropdownTabsOpen(false);
-                                                        } }
-                                                    >
-                                                        <Home16 width={ 13 } height={ 13 }></Home16>
-                                                    </Button>
-                                                </>
+                                    >
+                                        <Search placeholder={ t("search-tabs") }
+                                                value={ searchTerm }
+                                                onChange={ handleSearchChange }
+                                                closeButtonLabelText={ t("clear") }
+                                                size="md"
+                                                labelText={ "" } />
+                                        { searchResults.map((item, index) =>
+                                            <ContainedListItem
+                                                key={ `${ item.id }-${ index }` }
+                                                className={ tab[activeTab].id === item.id ? 'list-item-active' : '' }
+                                                action={
+                                                    item.isDelted ? (
+                                                        <>
+                                                            <Button
+                                                                label=""
+                                                                kind="ghost"
+                                                                className="close-list-tab"
+                                                                hasIconOnly
+                                                                title={ t("close") }
+                                                                onClick={ () => {
+                                                                    removeTab(item.id);
+                                                                } }
+                                                            >
+                                                                <Close16 />
+                                                            </Button>
+                                                        </>
+                                                    ) : (
+                                                        item.name === "Dashboard" && <>
+                                                            <Button
+                                                                label=""
+                                                                kind="ghost"
+                                                                className="home-tab-icon"
+                                                                hasIconOnly
+                                                                onClick={ () => {
+                                                                    handleTabListChange(item.id);
+                                                                    setIsDropdownTabsOpen(false);
+                                                                } }
+                                                            >
+                                                                <Home16 width={ 13 } height={ 13 }></Home16>
+                                                            </Button>
+                                                        </>
+                                                    )
+                                                }
+                                                onClick={ () => {
+                                                    handleTabListChange(item.id);
+                                                    setIsDropdownTabsOpen(false);
+                                                } }
+                                            >{ item.label }
+                                            </ContainedListItem>
+                                        ) }
+                                        {
+                                            searchResults.length === 0 && (
+                                                <ContainedListItem>
+                                                    { t("no-results-found") }
+                                                </ContainedListItem>
                                             )
                                         }
-                                        onClick={ () => {
-                                            handleTabListChange(item.id);
-                                            setIsDropdownTabsOpen(false);
-                                        } }
-                                    >{ item.label }
-                                    </ContainedListItem>
-                                ) }
-                                {
-                                    searchResults.length === 0 && (
-                                        <ContainedListItem>
-                                            { t("no-results-found") }
-                                        </ContainedListItem>
-                                    )
-                                }
-                            </ContainedList>
-                        </div>
-                    </PopoverContent>
-                </Popover>
+                                    </ContainedList>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </>
     );

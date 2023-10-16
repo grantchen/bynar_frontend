@@ -4,10 +4,6 @@
     background-color: var(--cds-ui-02, #ffffff);
 
     .list-wrapper {
-      overflow-y: auto;
-      overflow-x: hidden;
-      max-height: 15rem;
-
       .cds--contained-list {
         // hide tooltip popover
         .cds--popover[role="tooltip"] {
