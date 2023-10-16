@@ -198,6 +198,7 @@ const Login = ({
                                                     </div>
                                                 </div>
                                             )}
+                                            <img src="./assets/images/footer.jpg" alt="Analytics Services Card" />
                                         </div>
                                     </div>
                                 </div>

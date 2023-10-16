@@ -693,7 +693,7 @@ const Signup = () => {
                                         {activeStep === 1 && (
                                             <div className="account-info-box">
                                                 <div className="account-heading">
-                                                    <p className="heading">1. Organization
+                                                    <p className="heading">Organization
                                                         account</p>
                                                 </div>
                                                 <TextInput
@@ -728,7 +728,7 @@ const Signup = () => {
                                         {activeStep === 2 && (
                                             <div className="account-info-box">
                                                 <div className="account-heading">
-                                                    <p className="heading">2. Verify email</p>
+                                                    <p className="heading">Verify email</p>
                                                 </div>
                                                 <div>
                                                     <p className="email-text">
@@ -785,7 +785,7 @@ const Signup = () => {
                                         {activeStep === 3 && (
                                             <div className="account-info-box">
                                                 <div className="account-heading">
-                                                    <p className="heading">3. Account
+                                                    <p className="heading">Account
                                                         information</p>
                                                 </div>
                                                 <TextInput
@@ -923,7 +923,7 @@ const Signup = () => {
                                         {activeStep === 4 && (
                                             <div className="account-info-box">
                                                 <div className="account-heading">
-                                                    <p className="heading">4. Organization
+                                                    <p className="heading">Organization
                                                         information</p>
                                                 </div>
                                                 <TextInput
@@ -982,7 +982,7 @@ const Signup = () => {
                                             <>
                                                 <div className="account-info-box">
                                                     <div className="account-heading">
-                                                        <p className="heading">5. Credit card
+                                                        <p className="heading">Credit card
                                                             information</p>
                                                     </div>
                                                 </div>
@@ -1028,7 +1028,7 @@ const Signup = () => {
                                             <>
                                                 <div className="account-info-box">
                                                     <div className="account-heading">
-                                                        <p className="heading">6. Account notice</p>
+                                                        <p className="heading">Account notice</p>
                                                     </div>
 
                                                     <Select
