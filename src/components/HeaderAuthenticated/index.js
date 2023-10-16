@@ -17,7 +17,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { UserProfileImage } from "@carbon/ibm-products";
 import { useState } from "react";
-import HeaderTab from "../../components/Header/HeaderTab";
+import HeaderTab from "../HeaderTab/index";
 import { Outlet, useSearchParams } from "react-router-dom";
 import "./header.scss";
 import { useRef } from "react";
@@ -29,6 +29,7 @@ import ibmLogo from '../media/IBM_logo_black.svg'
 import ibmWhiteLogo from '../media/IBM_logo_white.svg'
 import { CustomWideMenu } from "./CustomWideMenu";
 import MastheadSearch from "@carbon/ibmdotcom-react/lib/components/Masthead/MastheadSearch";
+import DropdownTabList from "../HeaderTab/DropdownTabList";
 
 function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
     const { user } = useAuth();
@@ -103,6 +104,12 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                         >
                             <div className="logoSeperator" />
                         </HeaderName>
+                    )
+                }
+
+                {
+                    !isMobile && (
+                        <DropdownTabList className={ `orgName ${ isSearchBarExpanded ? 'has-search-active' : '' }` }></DropdownTabList>
                     )
                 }
 

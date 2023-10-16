@@ -1,59 +1,27 @@
 import React, { useRef, useContext, useState, useEffect } from "react";
 import {
     Button,
-    TabList,
-    Tabs,
-    Tab,
     ContainedList,
     ContainedListItem,
     PopoverContent,
     Popover,
     Search
 } from "@carbon/react";
-import { Add20 } from '@carbon/icons-react';
-import "./HeaderTab.scss";
+import "./DropdownTabList.scss";
 import { TabContext } from "../../sdk";
 import { ChevronDown20, Close16, Home16 } from "@carbon/icons-react";
 import { useTranslation } from "react-i18next";
-import TabSkeleton from "carbon-web-components/es/components-react/tabs/tab-skeleton";
 
-const TabIcon = (tabItem) => {
-    return (
-        <>
-            {
-                tabItem.isDelted ? (
-                    <>
-                        {/* use native dismissable because of Chevron scroll misbehave */ }
-                    </>
-                ) : (
-                    tabItem.name === "Dashboard" &&
-                    <>
-                        <Home16></Home16>
-                    </>
-                )
-            }
-        </>
-    )
-}
-
-
-const HeaderTab = ({ className }) => {
+const DropdownTabList = ({ className }) => {
     const { t } = useTranslation();
-    const { tab, handleAddTab, handleRemoveTab, activeTab, setActiveTab } =
+    const { tab, handleRemoveTab, activeTab, setActiveTab } =
         useContext(TabContext);
-    const carouselRef = useRef(null);
     const dropdownTabsRef = useRef(null);
     const [isDropdownTabsOpen, setIsDropdownTabsOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const handleSearchChange = event => {
         setSearchTerm(event.target.value);
-    };
-
-    const handleTabChange = (evt) => {
-        if (tab[evt.selectedIndex]?.loaded === true) {
-            setActiveTab(evt.selectedIndex);
-        }
     };
 
     const handleTabListChange = (tabId) => {
@@ -90,42 +58,7 @@ const HeaderTab = ({ className }) => {
 
     return (
         <>
-            <div className={ `header-dynamic-tab ${ className }` }>
-                <div className="tab-buttons-list" ref={ carouselRef }>
-                    <div style={ { display: "flex", whiteSpace: "nowrap", height: "100%" } }>
-                        <Tabs selectedIndex={ activeTab }
-                              onChange={ handleTabChange }
-                              dismissable
-                              onTabCloseRequest={ (index) => {
-                                  removeTab(tab[index].id)
-                              } }
-                        >
-                            <TabList aria-label="List of tabs">
-                                { tab.map((item, index) =>
-                                    <Tab key={ `${ item.id }-${ index }` }
-                                         renderIcon={ () => {
-                                             return TabIcon(item)
-                                         } }
-                                         className={ `custom-tab ${ !item.isDelted ? 'tab-stable' : '' } ${ item.name === 'Dashboard' ? 'tab-icon-reverse' : '' }` }>
-                                        {
-                                            item.loaded ? (item.label) : (<TabSkeleton></TabSkeleton>)
-                                        }
-                                    </Tab>
-                                ) }
-                            </TabList>
-                        </Tabs>
-                    </div>
-                </div>
-
-                <Button
-                    kind="ghost"
-                    className="add-new-tab"
-                    hasIconOnly
-                    onClick={ (e) => handleAddTab() }
-                >
-                    <Add20 aria-label="Add" />
-                </Button>
-
+            <div className={ `header-tab-list ${ className }` }>
                 <Popover
                     ref={ dropdownTabsRef }
                     open={ isDropdownTabsOpen }
@@ -210,4 +143,4 @@ const HeaderTab = ({ className }) => {
         </>
     );
 };
-export default HeaderTab;
+export default DropdownTabList;

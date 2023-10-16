@@ -1,0 +1,71 @@
+.header-container {
+  background: var(--cds-ui-02, #ffffff);
+}
+
+.header-dynamic-tab {
+  display: flex;
+  align-items: stretch;
+  height: 100%; // header height
+  /* for scroll instead of overflow hidden */
+  flex-flow: row;
+  width: 0;
+  flex-grow: 1;
+  /* for scroll instead of overflow hidden end */
+
+  &.has-search-active {
+    display: none;
+  }
+
+
+  .tab-buttons-list {
+    overflow-x: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    // remove gap between tabs
+    .cds--tabs .cds--tabs__nav-item + .cds--tabs__nav-item {
+      margin-left: 0;
+    }
+
+    // previous icon should be on top of tabs
+    .cds--tabs .cds--tab--overflow-nav-button--previous {
+      z-index: 1;
+    }
+
+    .custom-tab {
+      // hide tab bottom border color
+      &.cds--tabs__nav-link:not(.cds--tabs__nav-item--selected) {
+        border-bottom-color: transparent;
+      }
+
+      &.tab-stable {
+        .cds--tabs__nav-item--icon {
+          display: none;
+        }
+      }
+
+      &.tab-icon-reverse {
+        .cds--tabs__nav-item-label-wrapper {
+          flex-direction: row-reverse;
+
+          // reverse icon from left to right
+          .cds--tabs__nav-item--icon-left {
+            align-items: center;
+            padding-right: 0;
+            margin-top: 0;
+            display: flex;
+            padding-left: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+
+
+  .add-new-tab {
+    align-items: center;
+    padding: 0;
+  }
+}
