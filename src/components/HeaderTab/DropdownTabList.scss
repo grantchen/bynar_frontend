@@ -1,5 +1,9 @@
+// drop down tabs
 .header-tab-list {
-  // drop down tabs
+  .cds--dropdown__wrapper--inline {
+    grid-gap: 0;
+  }
+
   .header-dynamic-dropdown-tabs-content {
     background-color: var(--cds-ui-02, #ffffff);
 
