@@ -9,7 +9,7 @@ import {
     PopoverContent, HeaderMenuButton,
 } from "@carbon/react";
 import {
-    CardManagementProvider,
+    CardManagementProvider, omitQueryParams,
     useAuth, useMobile,
     useThemePreference,
 } from "../../sdk";
@@ -17,7 +17,7 @@ import { useTranslation } from "react-i18next";
 import { UserProfileImage } from "@carbon/ibm-products";
 import { useState } from "react";
 import HeaderTab from "../HeaderTab/index";
-import { Outlet } from "react-router-dom";
+import { Outlet, useSearchParams } from "react-router-dom";
 import "./header.scss";
 import { useRef } from "react";
 import { useEffect } from "react";
@@ -35,6 +35,7 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
     const { t } = useTranslation();
     const isMobile = useMobile();
     const { theme } = useThemePreference();
+    const [searchParams, setSearchParams] = useSearchParams();
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
     const [isUploadProfileImageModalOpen, openUploadProfileImageModal] =
         useState(false);
@@ -139,6 +140,14 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                         aria-label={ user?.fullName ?? t("user") }
                         onClick={ () => {
                             setIsProfileDropdownOpen(!isProfileDropdownOpen);
+                            setSearchParams((prev) =>
+                                omitQueryParams(prev, [
+                                    "userIdToShowDetails",
+                                    "openAddUserPanel",
+                                    "userIdToBeEdited",
+                                    "openCardMangementPanel",
+                                ])
+                            );
                         } }
                     >
                         <UserProfileImage
@@ -156,6 +165,10 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                     <PopoverContent>
                         <ProfileDropdown
                             onProfileOptionClick={ () => {
+                                setSearchParams({
+                                    userIdToShowDetails:
+                                    user?.id,
+                                });
                                 setIsProfileDropdownOpen(false);
                             } }
                             openUploadProfileModal={
