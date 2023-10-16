@@ -91,7 +91,7 @@ export const TreeGrid = ({ table, config = {}, tabId, className }) => {
                 <div
                     ref={ ref }
                     id={ `treeGridMainTag_${ tabId || uuidv4() }` }
-                    style={ { width: '100%', height: '100%' } }
+                    style={ { width: '100%', height: '500px' } }
                 >
                 </div>
             </div>
