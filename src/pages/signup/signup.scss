@@ -575,7 +575,7 @@ label[for="password-input"] {
 }
 
 .carbon-footer {
-  background-color: #262626;
+  background-color: #ffffff;
   height: 50px;
   display: flex;
   align-items: center;
@@ -627,3 +627,42 @@ label[for="password-input"] {
 
 @import '@carbon/ibmdotcom-styles/scss/components/footer/index';
 
+.bx--footer {
+  width: 100%;
+  padding-block: 3rem;
+  color: #f4f4f4;
+  background-color: #ffffff;
+  padding-top: 3rem;
+}
+
+.bx--legal-nav__list.bx--legal-nav__micro .bx--legal-nav__holder .bx--legal-nav__list-item a {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  color: #525252;
+}
+
+.bx--legal-nav__list.bx--legal-nav__micro .bx--legal-nav__holder {
+  border-top: none;
+  margin-left: 35rem;
+}
+
+.bx--legal-nav__list.bx--legal-nav__micro .bx--legal-nav__holder .bx--legal-nav__list-item {
+  margin-right: 1rem;
+}
+
+.footer_info {
+  margin-top: -3rem;
+  margin-left: 38rem;
+  p {
+    font-size: 0.9em;
+    color: #525252;
+  }
+}
+
+.bx--legal-nav {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -2rem;
+  margin-left: -2rem;
+}

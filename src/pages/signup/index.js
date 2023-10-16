@@ -1139,21 +1139,31 @@ const Signup = () => {
                         </Grid>
                         <Footer
                             type="micro"
+                            className="carbon-footer"
                             disableLocaleButton={true}
                             navigation={
                                 {
                                     footerThin: [{
-                                        title: "Contact",
+                                        title: "Privacy Policy",
+                                        url: "#"
+                                    },{
+                                        title: "|",
                                         url: "#"
                                     }, {
-                                        title: "Privacy",
+                                        title: "Terms of Use",
                                         url: "#"
                                     }, {
-                                        title: "Terms Of Use",
+                                        title: "|",
+                                        url: "#"
+                                    },{
+                                        title: "Cookie Preferences",
                                         url: "#"
                                     }]
                                 }}
                         />
+                        <div className="footer_info">
+                            <p>Bynar, Inc. or its affiliates. All rights reserved.</p>
+                        </div>
                     </div>
                 </div>
             )}
