@@ -226,7 +226,7 @@ const Login = ({
                                 </div>
                             </Form>
                         </div>
-                    </div>carbon-footer
+                    </div>
                 </div>
             </div>
           </Column>
