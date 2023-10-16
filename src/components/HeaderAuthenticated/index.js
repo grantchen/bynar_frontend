@@ -106,18 +106,6 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                     )
                 }
 
-                {
-                    !isMobile && (
-                        <HeaderName
-                            className={ `orgName ${ isSearchBarExpanded ? 'has-search-active' : '' }` }
-                            prefix=""
-                        >
-                            Bynar
-                        </HeaderName>
-                    )
-                }
-
-
                 <HeaderGlobalBar>
                     {
                         !isMobile && (
