@@ -76,7 +76,7 @@ const Signin = () => {
                 console.log(e);
                 setLoadingSuccess(false);
                 setServerErrorNotification({
-                    title: "Email address not verified",
+                    title: "Something went wrong",
                     status: "error",
                 });
             }
