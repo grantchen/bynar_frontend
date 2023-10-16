@@ -135,7 +135,10 @@ const DropdownTabList = ({ className }) => {
                                                     handleTabListChange(item.id);
                                                     setIsDropdownTabsOpen(false);
                                                 } }
-                                            >{ item.label }
+                                            >
+                                                {
+                                                    item.loaded ? (item.label) : (<TabSkeleton></TabSkeleton>)
+                                                }
                                             </ContainedListItem>
                                         ) }
                                         {
