@@ -116,7 +116,7 @@ const DropdownTabList = ({ className }) => {
                                                             setIsDropdownTabsOpen(false);
                                                         } }
                                                     >
-                                                        <Home16></Home16>
+                                                        <Home16 width={ 13 } height={ 13 }></Home16>
                                                     </Button>
                                                 </>
                                             )

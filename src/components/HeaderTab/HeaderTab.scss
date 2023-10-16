@@ -49,6 +49,7 @@
       &.tab-icon-reverse {
         .cds--tabs__nav-item-label-wrapper {
           flex-direction: row-reverse;
+          align-items: center;
 
           // reverse icon from left to right
           .cds--tabs__nav-item--icon-left {

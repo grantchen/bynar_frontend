@@ -22,7 +22,8 @@ const TabIcon = (tabItem) => {
                 ) : (
                     tabItem.name === "Dashboard" &&
                     <>
-                        <Home16></Home16>
+                        {/* icon home should be a little smaller */ }
+                        <Home16 width={ 13 } height={ 13 }></Home16>
                     </>
                 )
             }
