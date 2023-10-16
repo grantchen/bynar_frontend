@@ -1,16 +1,10 @@
 .signin-container {
-  height: 100vh;
+  height: 85vh;
   display: flex;
   flex-direction: column;
-
-  .carbon-footer {
-    background-color: #ffffff;
-    height: 50px;
-    display: flex;
-    align-items: center;
-  }
-
   .box-container {
+    flex: 1;
+    margin-bottom: 2rem;
     //display: flex;
     //align-items: center;
     //height: 100%;
@@ -273,8 +267,6 @@
   margin-bottom: 10px;
 }
 
-
-
 @import '@carbon/ibmdotcom-styles/scss/components/footer/index';
 
 .bx--footer {
@@ -292,9 +284,20 @@
   color: #525252;
 }
 
+.bx--legal-nav__list.bx--legal-nav__micro .bx--legal-nav__holder .bx--legal-nav__list-item a:hover {
+  color: #0f62fe;
+}
+
 .bx--legal-nav__list.bx--legal-nav__micro .bx--legal-nav__holder {
   border-top: none;
-  margin-left: 35rem;
+}
+
+.bx--legal-nav__list.bx--legal-nav__micro {
+  flex-direction: row;
+  margin-left: 0;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
 }
 
 .bx--legal-nav__list.bx--legal-nav__micro .bx--legal-nav__holder .bx--legal-nav__list-item {
@@ -303,10 +306,13 @@
 
 .footer_info {
   margin-top: -3rem;
-  margin-left: 38rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   p {
     font-size: 0.9em;
     color: #525252;
+    margin: 0;
   }
 }
 
@@ -315,4 +321,12 @@
   flex-wrap: wrap;
   margin-right: -2rem;
   margin-left: -2rem;
+}
+
+.bx--footer .bx--legal-nav__list .bx--legal-nav__list-item .bx--link {
+  color: #0f62fe;
+}
+.bx--link .bx--footer__link {
+  color: #0f62fe;
+  background-color: #0f62fe;
 }

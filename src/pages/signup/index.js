@@ -28,6 +28,7 @@ import "react-phone-input-2/lib/style.css";
 import {useNavigate} from "react-router-dom";
 import "./../../styles/paymentform.scss";
 import "./signup.scss";
+import "../signin/signin.scss";
 import {PhoneNumberUtil,} from "google-libphonenumber";
 import {
     parseTabMessage,

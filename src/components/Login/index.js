@@ -46,7 +46,7 @@ const Login = ({
     <div className="app-container">
       <SignHeader></SignHeader>
       <div className="signin-container">
-        <Grid>
+        <Grid className={"signin-grid"}>
           <Column sm={{span: 4}} md={{span: 8}} lg={{span: 16}} xlg={{span: 16}} className={"box-container"}>
             <div className="sign-in-form-area">
                 <div className="bx--row">
