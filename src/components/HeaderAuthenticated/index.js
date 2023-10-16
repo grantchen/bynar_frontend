@@ -86,7 +86,7 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                 <HeaderName
                     href="/"
                     prefix=""
-                    className={ `logo-link ${isSearchBarExpanded ? 'has-search-active' : ''}` }
+                    className={ `${isSearchBarExpanded ? 'has-search-active' : ''}` }
                 >
                     <img src={ document.documentElement.getAttribute(
                         "data-carbon-theme") !== null &&
