@@ -46,7 +46,7 @@ const Login = ({
     <div className="app-container">
       <SignHeader></SignHeader>
       <div className="signin-container">
-        <Grid className={"signin-grid"}>
+        <Grid>
           <Column sm={{span: 4}} md={{span: 8}} lg={{span: 16}} xlg={{span: 16}} className={"box-container"}>
             <div className="sign-in-form-area">
                 <div className="bx--row">
@@ -226,7 +226,7 @@ const Login = ({
                                 </div>
                             </Form>
                         </div>
-                    </div>
+                    </div>carbon-footer
                 </div>
             </div>
           </Column>
