@@ -15,6 +15,9 @@ import { useAuth } from "../AuthContext";
 import './AddCardModal.scss'
 import { useThemePreference } from "../new-theme";
 import { useNavigate } from "react-router-dom";
+import {
+    CheckoutPublicKey,
+} from "./../../sdk";
 const AddCardModal = ({ open }) => {
     console.log(open)
     const [loading, setLoading] = useState();
@@ -22,7 +25,7 @@ const AddCardModal = ({ open }) => {
     const { authFetch } = useAuth();
     const navigate = useNavigate()
     const { handleVerifyCard, notification, setNotification } = useCardManagement();
-    const {theme} = useThemePreference()
+    const { theme } = useThemePreference()
     const { t } = useTranslation();
     const handleClose = useCallback(() => {
         navigate(-1)
@@ -57,11 +60,11 @@ const AddCardModal = ({ open }) => {
         }
     }, []);
 
-    useEffect(() => {
-        if(!open){
-            Frames.init("pk_sbox_u4jn2iacxvzosov4twmtl2yzlqe");
-        }
-    }, [open])
+    // useEffect(() => {
+    //     if (!open) {
+    //         Frames.init(CheckoutPublicKey);
+    //     }
+    // }, [open])
 
     // useEffect(() => {
     //     if(!modalBodyRef){
@@ -72,7 +75,7 @@ const AddCardModal = ({ open }) => {
 
     //         // this.style.backgroundColor = "red";
     //         this.classList.add('my-test-frame')
-        
+
     //     } )
     // }, [])
 
@@ -85,7 +88,7 @@ const AddCardModal = ({ open }) => {
         >
             <ModalHeader title={t("add-new-card")} />
             <ModalBody ref={modalBodyRef}>
-            {notification && (
+                {notification && (
                     <ToastNotification
                         className="error-notification-box"
                         iconDescription="Clear Notification"
@@ -100,20 +103,15 @@ const AddCardModal = ({ open }) => {
                 )}
                 <Frames
                     config={{
-                        publicKey: "pk_sbox_u4jn2iacxvzosov4twmtl2yzlqe",
-                        style: {
-                            base: {
-                                color: theme === 'dark' ? '#ffffff' : '#161616'
-                            },
-                        }
+                        publicKey: CheckoutPublicKey,
                     }}
                 >
-                    <div>
+                    <div className="card-input-container">
                         <div>
                             <p className="input-heading">{t("card-details")}</p>
                         </div>
                         <div>
-                            <CardFrame className="card-number"/>
+                            <CardFrame className="card-number" />
                         </div>
                     </div>
                 </Frames>

@@ -31,39 +31,39 @@ function App() {
                         <ThemePreferenceProvider>
                             <TabContextProvider>
                                 <UserManagementProvider>
-                                    <CardManagementProvider>
-                                        <Routes>
-                                            <Route
-                                                path="/"
-                                                // TODO
-                                                element={<Home2 />}
-                                            />
-                                            <Route
-                                                path="/auth/magic-link"
-                                                element={<MagicLinkAuth />}
-                                            />
+                                    {/* <CardManagementProvider> */}
+                                    <Routes>
+                                        <Route
+                                            path="/"
+                                            // TODO
+                                            element={<Home2 />}
+                                        />
+                                        <Route
+                                            path="/auth/magic-link"
+                                            element={<MagicLinkAuth />}
+                                        />
+                                        <Route
+                                            exact
+                                            path="/signin"
+                                            element={<Signin />}
+                                        />
+                                        <Route
+                                            exact
+                                            path="/signup"
+                                            element={<Signup />}
+                                        />
+                                        <Route
+                                            path="/home/"
+                                            element={<AuthenticatedAppHeader />}
+                                        >
                                             <Route
                                                 exact
-                                                path="/signin"
-                                                element={<Signin />}
+                                                path="dashboard"
+                                                element={<Dashboard />}
                                             />
-                                            <Route
-                                                exact
-                                                path="/signup"
-                                                element={<Signup />}
-                                            />
-                                            <Route
-                                                path="/home/"
-                                                element={<AuthenticatedAppHeader />}
-                                            >
-                                                <Route
-                                                    exact
-                                                    path="dashboard"
-                                                    element={<Dashboard />}
-                                                />
-                                            </Route>
-                                        </Routes>
-                                    </CardManagementProvider>
+                                        </Route>
+                                    </Routes>
+                                    {/* </CardManagementProvider> */}
                                 </UserManagementProvider>
                             </TabContextProvider>
                         </ThemePreferenceProvider>

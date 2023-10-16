@@ -91,7 +91,7 @@ const CardManagementProvider = ({ children }) => {
                 ).toString();
 
                 const response = await authFetch(
-                    `${BaseURL}/apprunnerurl/cards/list?${searchQueryParams}`
+                    `${BaseURL}/apprunnerurl/cards/list?${searchQueryParams}`,
                 );
                 if (response.ok) {
                     const res = await response.json();
@@ -112,8 +112,9 @@ const CardManagementProvider = ({ children }) => {
         async (cardId) => {
             try {
                 setLoading(true);
-                await authFetch(`${BaseURL}/card/${cardId}`, {
-                    method: "PUT",
+                await authFetch(`${BaseURL}/apprunnerurl/cards/update`, {
+                    method: "POST",
+                    body: JSON.stringify({ source_id: cardId }),
                 });
                 await getUserCardList();
             } catch (error) {
@@ -131,7 +132,7 @@ const CardManagementProvider = ({ children }) => {
             const data = {
                 token: token,
             };
-            const response = await authFetch(`${BaseURL}/verify-card`, {
+            const response = await authFetch(`${BaseURL}/apprunnerurl/cards/add`, {
                 method: "POST",
                 body: JSON.stringify(data),
             });
@@ -183,9 +184,10 @@ const CardManagementProvider = ({ children }) => {
                     try {
                         setLoading(true);
                         const response = await authFetch(
-                            `${BaseURL}/card/${cardIdToBeDeleted}`,
+                            `${BaseURL}/apprunnerurl/cards/delete`,
                             {
-                                method: "DELETE",
+                                method: "POST",
+                                body: JSON.stringify({ source_id: cardIdToBeDeleted }),
                             }
                         );
                         if (response.ok) {
