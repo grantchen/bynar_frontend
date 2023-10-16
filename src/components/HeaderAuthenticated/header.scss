@@ -47,6 +47,8 @@
 }
 
 .main-header-container {
+    padding-top: 3rem; // fixed header height
+
     // dropdown
     .cds--dropdown--inline, .cds--dropdown {
         &:hover {
@@ -70,13 +72,6 @@
             background-color: var(--cds-background-active, rgba(141, 141, 141, 0.5));
             color: var(--cds-text-primary, #161616);
         }
-    }
-
-    .bx--header,
-    .cds--header {
-        position: relative;
-        //background: var(--cds-ui-02, #ffffff);
-        border-bottom: 1px solid var(--cds-border-subtle);
     }
 
     .bx--header__global,
