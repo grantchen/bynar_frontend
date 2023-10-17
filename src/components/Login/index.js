@@ -16,7 +16,7 @@ import { ArrowRight } from "@carbon/react/icons";
 import { useNavigate } from "react-router-dom";
 import SignHeader from "../SignHeader";
 import {Footer} from "@carbon/ibmdotcom-react";
-import React from "react";
+import React, {useEffect, useState} from "react";
 const Login = ({
   heading,
   loading,
@@ -46,7 +46,7 @@ const Login = ({
     <div className="app-container">
       <SignHeader></SignHeader>
       <div className="signin-container">
-        <Grid>
+        <Grid className="signin-grid">
           <Column sm={{span: 4}} md={{span: 8}} lg={{span: 16}} xlg={{span: 16}} className={"box-container"}>
             <div className="sign-in-form-area">
                 <div className="bx--row">
@@ -231,32 +231,22 @@ const Login = ({
             </div>
           </Column>
         </Grid>
-      </div>
-      <Footer
-        type="micro"
-        disableLocaleButton={true}
-        navigation={
-            {
-                footerThin: [{
-                    title: "Privacy Policy",
-                    url: "#"
-                },{
-                    title: "|",
-                    url: "#"
-                }, {
-                    title: "Terms of Use",
-                    url: "#"
-                }, {
-                    title: "|",
-                    url: "#"
-                },{
-                    title: "Cookie Preferences",
-                    url: "#"
-                }]
-            }}
-      />
-      <div className="footer_info">
-        <p>Bynar, Inc. or its affiliates. All rights reserved.</p>
+        <Footer
+          type="micro"
+          disableLocaleButton={true}
+          navigation={{
+              footerThin: [
+                  { title: 'Privacy Policy', url: '#' },
+                  { title: '|', url: '#' },
+                  { title: 'Terms of Use', url: '#' },
+                  { title: '|', url: '#' },
+                  { title: 'Cookie Preferences', url: '#' },
+              ],
+          }}
+        />
+        <div className="footer_info">
+          <p>Bynar, Inc. or its affiliates. All rights reserved.</p>
+        </div>
       </div>
     </div>
   );
