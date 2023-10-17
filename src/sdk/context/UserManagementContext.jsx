@@ -333,7 +333,7 @@ const UserManagementProvider = ({ children }) => {
             setSearchParams(prev)
             return {}
         });
-    }, []);
+    }, [searchParams]);
     useEffect(() => {
         if (!searchParams.get("isUserListOpen")) {
             setNotification(null);
