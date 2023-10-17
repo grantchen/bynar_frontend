@@ -558,7 +558,7 @@ const Signup = () => {
         };
     }, []);
 
-    const footerElement = windowWidth > 670 ? <LargeScreenFooter /> : <SmallScreenFooter />;
+    const footerElement = windowWidth > 671 ? <LargeScreenFooter /> : <SmallScreenFooter />;
     useEffect(() => {
         // 👇️ scroll to top on page load
 

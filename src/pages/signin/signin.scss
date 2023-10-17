@@ -277,15 +277,15 @@
   color: #f4f4f4;
   background-color: #ffffff;
   padding-top: 0;
-  @media (min-width: 670px) and (max-width: 770px) {
+  @media (min-width: 671px) and (max-width: 770px) {
     margin-bottom: 2rem;
   }
-  @media (max-width: 670px) {
+  @media (max-width: 671px) {
     margin-bottom: 1rem;
     margin-top: 60px;
   }
 }
-@media (max-width: 670px) {
+@media (max-width: 671px) {
   .bx--footer {
     padding-block: 0;
   }
@@ -322,7 +322,7 @@
   margin-right: 1rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 671px) {
   .bx--legal-nav__list.bx--legal-nav__micro .bx--legal-nav__holder .bx--legal-nav__list-item {
     height: 1.5rem;
   }
@@ -338,7 +338,7 @@
     color: #525252;
     margin: 0;
   }
-  @media (min-width: 670px) and (max-width: 770px) {
+  @media (min-width: 672px) and (max-width: 770px) {
     margin-top: -4rem;
   }
 }

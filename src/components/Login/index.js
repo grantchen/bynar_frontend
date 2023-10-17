@@ -85,7 +85,7 @@ const Login = ({
         };
     }, []);
 
-    const footerElement = windowWidth > 670 ? <LargeScreenFooter /> : <SmallScreenFooter />;
+    const footerElement = windowWidth > 671 ? <LargeScreenFooter /> : <SmallScreenFooter />;
   return (
     <div className="app-container">
       <SignHeader></SignHeader>
