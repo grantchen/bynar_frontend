@@ -300,6 +300,9 @@
   align-items: center;
   width: 100%;
   color: #525252;
+  @media (max-width: 671px) {
+    font-size: 10px;
+  }
 }
 
 .bx--legal-nav__list.bx--legal-nav__micro .bx--legal-nav__holder .bx--legal-nav__list-item a:hover {
@@ -308,6 +311,8 @@
 
 .bx--legal-nav__list.bx--legal-nav__micro .bx--legal-nav__holder {
   border-top: none;
+  display: flex;
+  align-items: center;
 }
 
 .bx--legal-nav__list.bx--legal-nav__micro {
@@ -320,6 +325,9 @@
 
 .bx--legal-nav__list.bx--legal-nav__micro .bx--legal-nav__holder .bx--legal-nav__list-item {
   margin-right: 1rem;
+  @media (max-width: 400px) {
+    margin-right: 0.6rem;
+  }
 }
 
 @media (max-width: 671px) {
@@ -337,9 +345,15 @@
     font-size: 0.8em;
     color: #525252;
     margin: 0;
+    @media (max-width: 671px) {
+      font-size: 0.6em;
+    }
   }
   @media (min-width: 672px) and (max-width: 770px) {
     margin-top: -4.5rem;
+  }
+  @media (max-width: 671px) {
+    margin-top: -0.5rem;
   }
 }
 

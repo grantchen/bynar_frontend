@@ -31,50 +31,6 @@ const MagicLinkValidation = ({
                                  handleEmailFormSubmit,
                              }) => {
     useNavigate();
-    const LargeScreenFooter = () => (
-        <Footer
-            type="micro"
-            disableLocaleButton={true}
-            navigation={{
-                footerThin: [
-                    { title: 'Privacy Policy', url: '#' },
-                    { title: '|', url: '#' },
-                    { title: 'Terms of Use', url: '#' },
-                    { title: '|', url: '#' },
-                    { title: 'Cookie Preferences', url: '#' },
-                ],
-            }}
-        />
-    );
-
-    const SmallScreenFooter = () => (
-        <Footer
-            type="micro"
-            disableLocaleButton={true}
-            navigation={{
-                footerThin: [
-                    { title: 'Privacy Policy', url: '#' },
-                    { title: 'Terms of Use', url: '#' },
-                    { title: 'Cookie Preferences', url: '#' },
-                ],
-            }}
-        />
-    );
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-    useEffect(() => {
-        const handleResize = () => {
-            setWindowWidth(window.innerWidth);
-        };
-
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-
-    const footerElement = windowWidth > 671 ? <LargeScreenFooter /> : <SmallScreenFooter />;
     return (
         <>
             <div className="app-container">
@@ -188,7 +144,19 @@ const MagicLinkValidation = ({
                             </div>
                         </Column>
                     </Grid>
-                    {footerElement}
+                    <Footer
+                        type="micro"
+                        disableLocaleButton={true}
+                        navigation={{
+                            footerThin: [
+                                { title: 'Privacy Policy', url: '#' },
+                                { title: '|', url: '#' },
+                                { title: 'Terms of Use', url: '#' },
+                                { title: '|', url: '#' },
+                                { title: 'Cookie Preferences', url: '#' },
+                            ],
+                        }}
+                    />
                     <div className="footer_info">
                         <p>Bynar, Inc. or its affiliates. All rights reserved.</p>
                     </div>
