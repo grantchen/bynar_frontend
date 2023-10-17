@@ -11,7 +11,7 @@ import {
 import {useNavigate} from "react-router-dom";
 import SignHeader from "../SignHeader";
 import {Footer} from "@carbon/ibmdotcom-react";
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 const MagicLinkValidation = ({
                                  heading,
@@ -60,6 +60,21 @@ const MagicLinkValidation = ({
             }}
         />
     );
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    const footerElement = windowWidth > 670 ? <LargeScreenFooter /> : <SmallScreenFooter />;
     return (
         <>
             <div className="app-container">
@@ -173,7 +188,7 @@ const MagicLinkValidation = ({
                             </div>
                         </Column>
                     </Grid>
-                    {window.innerWidth > 768 ? <LargeScreenFooter /> : <SmallScreenFooter />}
+                    {footerElement}
                     <div className="footer_info">
                         <p>Bynar, Inc. or its affiliates. All rights reserved.</p>
                     </div>

@@ -544,7 +544,21 @@ const Signup = () => {
             }}
         />
     );
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    const footerElement = windowWidth > 670 ? <LargeScreenFooter /> : <SmallScreenFooter />;
     useEffect(() => {
         // 👇️ scroll to top on page load
 
@@ -1168,7 +1182,7 @@ const Signup = () => {
                                 </div>
                             </Column>
                         </Grid>
-                        {window.innerWidth > 768 ? <LargeScreenFooter /> : <SmallScreenFooter />}
+                        {footerElement}
                         <div className="footer_info">
                             <p>Bynar, Inc. or its affiliates. All rights reserved.</p>
                         </div>

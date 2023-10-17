@@ -282,9 +282,10 @@
   }
   @media (max-width: 670px) {
     margin-bottom: 1rem;
+    margin-top: 60px;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 670px) {
   .bx--footer {
     padding-block: 0;
   }
@@ -333,12 +334,12 @@
   align-items: center;
   justify-content: center;
   p {
-    font-size: 0.9em;
+    font-size: 0.8em;
     color: #525252;
     margin: 0;
   }
   @media (min-width: 670px) and (max-width: 770px) {
-    margin-top: -1.5rem;
+    margin-top: -4rem;
   }
 }
 

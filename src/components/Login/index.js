@@ -16,7 +16,7 @@ import { ArrowRight } from "@carbon/react/icons";
 import { useNavigate } from "react-router-dom";
 import SignHeader from "../SignHeader";
 import {Footer} from "@carbon/ibmdotcom-react";
-import React from "react";
+import React, {useEffect, useState} from "react";
 const Login = ({
   heading,
   loading,
@@ -58,19 +58,34 @@ const Login = ({
         />
     );
 
-const SmallScreenFooter = () => (
-    <Footer
-        type="micro"
-        disableLocaleButton={true}
-        navigation={{
-            footerThin: [
-                { title: 'Privacy Policy', url: '#' },
-                { title: 'Terms of Use', url: '#' },
-                { title: 'Cookie Preferences', url: '#' },
-            ],
-        }}
-    />
-);
+    const SmallScreenFooter = () => (
+        <Footer
+            type="micro"
+            disableLocaleButton={true}
+            navigation={{
+                footerThin: [
+                    { title: 'Privacy Policy', url: '#' },
+                    { title: 'Terms of Use', url: '#' },
+                    { title: 'Cookie Preferences', url: '#' },
+                ],
+            }}
+        />
+    );
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    const footerElement = windowWidth > 670 ? <LargeScreenFooter /> : <SmallScreenFooter />;
   return (
     <div className="app-container">
       <SignHeader></SignHeader>
@@ -260,7 +275,7 @@ const SmallScreenFooter = () => (
             </div>
           </Column>
         </Grid>
-        {window.innerWidth > 768 ? <LargeScreenFooter /> : <SmallScreenFooter />}
+        {footerElement}
         <div className="footer_info">
           <p>Bynar, Inc. or its affiliates. All rights reserved.</p>
         </div>
