@@ -5,13 +5,15 @@ import { TreeGrid } from "../TreeGrid";
 const GeneralPostingSetup = ({ tabId }) => {
     return (
         <>
-            <TreeGrid
-                table={ "general_posting_setup" }
-                config={ {
-                    Debug: '',
-                } }
-                tabId={ tabId }
-            ></TreeGrid>
+            <div className="tree-grid-content">
+                <TreeGrid
+                    table={ "general_posting_setup" }
+                    config={ {
+                        Debug: '',
+                    } }
+                    tabId={ tabId }
+                ></TreeGrid>
+            </div>
         </>
     );
 };
