@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import jsonData from '../JSONs/usen.json';
 import { ArrowRight } from "@carbon/react/icons";
 
-import { TabContext, useAuth, useMobile } from "../../sdk";
+import { TabContext, useAuth, useMobile, useCardManagement } from "../../sdk";
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav.js';
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-menu.js';
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-menu-item.js';
@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 
 export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
     const { goToTab } = useContext(TabContext);
+    const { openCardManagementPanel } = useCardManagement();
 
     const [activeTitle, setActiveTitle] = useState(jsonData.mastheadNav.links[0]?.title);
     const handleClick = (title) => {
@@ -257,13 +258,16 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                                                                                 </a>
                                                                                             </div>
                                                                                         )
-                                                                                    } else if (item.sidePanel) {
+                                                                                    } else if (item.sidePanel === "UserCardManagementPanel") {
                                                                                         return (
                                                                                             <div
                                                                                                 key={item.title}
                                                                                                 className="link">
-                                                                                                <a href={item.url}
-                                                                                                    rel="noopener noreferrer">
+                                                                                                <a onClick={() => {
+                                                                                                    openCardManagementPanel()
+                                                                                                    onClickSideNavExpand()
+                                                                                                }}
+                                                                                                >
                                                                                                     <div>
                                                                                                         <span>{t(item.title)}</span>
                                                                                                     </div>
