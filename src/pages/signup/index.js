@@ -515,6 +515,36 @@ const Signup = () => {
 
     const inputRefs = useRef([]);
 
+    const LargeScreenFooter = () => (
+        <Footer
+            type="micro"
+            disableLocaleButton={true}
+            navigation={{
+                footerThin: [
+                    { title: 'Privacy Policy', url: '#' },
+                    { title: '|', url: '#' },
+                    { title: 'Terms of Use', url: '#' },
+                    { title: '|', url: '#' },
+                    { title: 'Cookie Preferences', url: '#' },
+                ],
+            }}
+        />
+    );
+
+    const SmallScreenFooter = () => (
+        <Footer
+            type="micro"
+            disableLocaleButton={true}
+            navigation={{
+                footerThin: [
+                    { title: 'Privacy Policy', url: '#' },
+                    { title: 'Terms of Use', url: '#' },
+                    { title: 'Cookie Preferences', url: '#' },
+                ],
+            }}
+        />
+    );
+
     useEffect(() => {
         // 👇️ scroll to top on page load
 
@@ -1138,30 +1168,7 @@ const Signup = () => {
                                 </div>
                             </Column>
                         </Grid>
-                        <Footer
-                            type="micro"
-                            className="carbon-footer"
-                            disableLocaleButton={true}
-                            navigation={
-                                {
-                                    footerThin: [{
-                                        title: "Privacy Policy",
-                                        url: "#"
-                                    },{
-                                        title: "|",
-                                        url: "#"
-                                    }, {
-                                        title: "Terms of Use",
-                                        url: "#"
-                                    }, {
-                                        title: "|",
-                                        url: "#"
-                                    },{
-                                        title: "Cookie Preferences",
-                                        url: "#"
-                                    }]
-                                }}
-                        />
+                        {window.innerWidth > 768 ? <LargeScreenFooter /> : <SmallScreenFooter />}
                         <div className="footer_info">
                             <p>Bynar, Inc. or its affiliates. All rights reserved.</p>
                         </div>
