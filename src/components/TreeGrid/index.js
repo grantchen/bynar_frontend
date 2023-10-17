@@ -81,7 +81,7 @@ export const TreeGrid = ({ table, config = {}, tabId, className }) => {
         fetchData();
 
         return () => {
-            treeGrid?.Dispose()
+            treeGrid?.Dispose && treeGrid?.Dispose()
         }
     }, []);
 
