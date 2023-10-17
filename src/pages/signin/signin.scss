@@ -277,6 +277,9 @@
   color: #f4f4f4;
   background-color: #ffffff;
   padding-top: 0;
+  @media (max-width: 768px) {
+    margin-bottom: 1rem;
+  }
 }
 @media (max-width: 768px) {
   .bx--footer {
@@ -322,7 +325,7 @@
 }
 
 .footer_info {
-  margin-top: -2rem;
+  margin-top: -2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -331,13 +334,11 @@
     color: #525252;
     margin: 0;
   }
-}
-
-@media (max-width: 510px) {
-  .footer_info {
+  @media (min-width: 530px) and (max-width: 740px) {
     margin-top: -1.5rem;
   }
 }
+
 .bx--footer .bx--legal-nav__list .bx--legal-nav__list-item .bx--link {
   color: #0f62fe;
 }
