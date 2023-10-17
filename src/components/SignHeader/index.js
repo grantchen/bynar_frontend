@@ -2,7 +2,7 @@ import {Header, HeaderName} from "@carbon/react";
 // sign header components for sign_in and sign_up page
 const signHeader = ({})=>{
   return (
-    <Header>
+    <Header aria-label="Bynar">
       <HeaderName href="/" prefix="">
         <svg
           width="58"

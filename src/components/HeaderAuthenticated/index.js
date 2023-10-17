@@ -9,15 +9,14 @@ import {
     PopoverContent, HeaderMenuButton,
 } from "@carbon/react";
 import {
-    CardManagementProvider,
-    omitQueryParams,
+    CardManagementProvider, omitQueryParams,
     useAuth, useMobile,
     useThemePreference,
 } from "../../sdk";
 import { useTranslation } from "react-i18next";
 import { UserProfileImage } from "@carbon/ibm-products";
 import { useState } from "react";
-import HeaderTab from "../../components/Header/HeaderTab";
+import HeaderTab from "../HeaderTab/index";
 import { Outlet, useSearchParams } from "react-router-dom";
 import "./header.scss";
 import { useRef } from "react";
@@ -29,12 +28,13 @@ import ibmLogo from '../media/IBM_logo_black.svg'
 import ibmWhiteLogo from '../media/IBM_logo_white.svg'
 import { CustomWideMenu } from "./CustomWideMenu";
 import MastheadSearch from "@carbon/ibmdotcom-react/lib/components/Masthead/MastheadSearch";
+import DropdownTabList from "../HeaderTab/DropdownTabList";
 
 function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
     const { user } = useAuth();
     const { t } = useTranslation();
     const isMobile = useMobile();
-    const { theme} = useThemePreference();
+    const { theme } = useThemePreference();
     const [searchParams, setSearchParams] = useSearchParams();
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
     const [isUploadProfileImageModalOpen, openUploadProfileImageModal] =
@@ -78,6 +78,7 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                         tooltipAlignment="end"
                         id="switcher-button">
                         <HeaderMenuButton
+                            aria-label=""
                             isActive={ isSideNavExpanded }
                         />
                     </HeaderGlobalAction>
@@ -86,9 +87,9 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                 <HeaderName
                     href="/"
                     prefix=""
-                    className={ isSearchBarExpanded ? 'has-search-active' : '' }
+                    className={ `${isSearchBarExpanded ? 'has-search-active' : ''}` }
                 >
-                    <img src={document.documentElement.getAttribute(
+                    <img src={ document.documentElement.getAttribute(
                         "data-carbon-theme") !== null &&
                     document.documentElement.getAttribute(
                         "data-carbon-theme") !== 'white' ? ibmWhiteLogo : ibmLogo } alt="ibm_logo" />
@@ -107,15 +108,12 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
 
                 {
                     !isMobile && (
-                        <HeaderName
-                            className={ `orgName ${ isSearchBarExpanded ? 'has-search-active' : '' }` }
-                            prefix=""
+                        <DropdownTabList
+                            className={ `${ isSearchBarExpanded ? 'has-search-active' : '' }` }
                         >
-                            Bynar
-                        </HeaderName>
+                        </DropdownTabList>
                     )
                 }
-
 
                 <HeaderGlobalBar>
                     {

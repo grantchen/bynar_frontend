@@ -42,6 +42,7 @@ const UploadProfileImageModal = ({
     // }
 
     const props = {
+        inputId: "upload-profile-image",
         title: t("import"),
         accept: ["image/jpeg", "image/png"],
         defaultErrorBody: t("select-new-file-try-again"),
