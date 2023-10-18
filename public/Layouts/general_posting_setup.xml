@@ -95,13 +95,13 @@
     <Head>
         <Header id="Header2" CDef='Node' Spanned='1' Calculated='1' SortIcons='0' CanFilter='3'
                 document_no=''
-                code="Profil postimi" codeSpan="3" codeAlign="Scroll"
+                code="Posting Profile" codeSpan="3" codeAlign="Scroll"
         />
     </Head>
     <Head>
         <Header id="Header" CDef='Node' Calculated='1' Spanned='1' CanFilter='3' CanDelete='1' CanSelect='1'
-                description='Përshkrimi'
-                code='Kodi'
+                description='description'
+                code='code'
                 default_vat_business_posting_group_code='Grup postimi tatimi'
         />
     </Head>
