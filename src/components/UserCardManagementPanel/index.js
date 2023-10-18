@@ -12,14 +12,12 @@ import {
     PopoverContent,
     IconButton,
     Theme,
+    SkeletonPlaceholder,
+    ToastNotification,
 } from "@carbon/react";
 import { OverflowMenuVertical, TrashCan } from "@carbon/react/icons";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Add20, CheckmarkFilled16 } from "@carbon/icons-react";
-import {
-    SkeletonPlaceholder,
-    ToastNotification,
-} from "carbon-components-react";
 import "./UserCardManagementPanel.scss";
 import { TextInputSkeleton } from "@carbon/react";
 

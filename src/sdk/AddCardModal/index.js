@@ -6,7 +6,7 @@ import {
     ModalFooter,
     Button,
     ToastNotification
-} from "carbon-components-react";
+} from "@carbon/react";
 import { useTranslation } from "react-i18next";
 import { useCardManagement } from "../context";
 import { CardFrame, Frames } from "frames-react";
@@ -22,7 +22,7 @@ const AddCardModal = ({ open }) => {
     const { authFetch } = useAuth();
     const navigate = useNavigate()
     const { handleVerifyCard, notification, setNotification } = useCardManagement();
-    const {theme} = useThemePreference()
+    const { theme } = useThemePreference()
     const { t } = useTranslation();
     const handleClose = useCallback(() => {
         navigate(-1)
@@ -58,7 +58,7 @@ const AddCardModal = ({ open }) => {
     }, []);
 
     useEffect(() => {
-        if(!open){
+        if (!open) {
             Frames.init("pk_sbox_u4jn2iacxvzosov4twmtl2yzlqe");
         }
     }, [open])
@@ -72,7 +72,7 @@ const AddCardModal = ({ open }) => {
 
     //         // this.style.backgroundColor = "red";
     //         this.classList.add('my-test-frame')
-        
+
     //     } )
     // }, [])
 
@@ -85,7 +85,7 @@ const AddCardModal = ({ open }) => {
         >
             <ModalHeader title={t("add-new-card")} />
             <ModalBody ref={modalBodyRef}>
-            {notification && (
+                {notification && (
                     <ToastNotification
                         className="error-notification-box"
                         iconDescription="Clear Notification"
@@ -113,7 +113,7 @@ const AddCardModal = ({ open }) => {
                             <p className="input-heading">{t("card-details")}</p>
                         </div>
                         <div>
-                            <CardFrame className="card-number"/>
+                            <CardFrame className="card-number" />
                         </div>
                     </div>
                 </Frames>

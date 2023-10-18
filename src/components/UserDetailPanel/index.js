@@ -1,13 +1,8 @@
 import { SidePanel, pkg } from "@carbon/ibm-products";
 import {
-    // TextInput,
-    // Select,
-    // SelectItem,
-    ToastNotification,
-} from "carbon-components-react";
-import {
     TextInputSkeleton, Theme,
-    TextInput, Select, SelectItem
+    TextInput, Select, SelectItem,
+    ToastNotification
 } from "@carbon/react";
 import React, { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";

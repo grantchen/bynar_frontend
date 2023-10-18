@@ -4,7 +4,7 @@ import {
     Select,
     SelectItem,
     ToastNotification,
-} from "carbon-components-react";
+} from "@carbon/react";
 import "./SidePanel.scss";
 import { useState, useRef, useEffect } from "react";
 
@@ -16,7 +16,8 @@ import "react-phone-input-2/lib/style.css";
 import { useSearchParams } from "react-router-dom";
 import { COUNTRIES, useUserManagement } from "../../sdk";
 import {
-    PhoneNumberUtil} from "google-libphonenumber";
+    PhoneNumberUtil
+} from "google-libphonenumber";
 import { useTranslation } from "react-i18next";
 import {
     SkeletonText,
@@ -437,7 +438,7 @@ export const SidePanels = ({ open }) => {
             );
             const phone = "+" + result?.phoneNumber;
             const number = phoneUtil.parse(phone, "");
-            const countryDialCode = "+"+number.getCountryCode();
+            const countryDialCode = "+" + number.getCountryCode();
             const countryBasedOnPhoneNumber = COUNTRIES.find(
                 (item) => item.dial_code === countryDialCode
             );
