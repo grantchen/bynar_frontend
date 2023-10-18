@@ -2,7 +2,7 @@ import { SidePanel, pkg } from "@carbon/ibm-products";
 import {
     TextInputSkeleton, Theme,
     TextInput, Select, SelectItem,
-    ToastNotification
+    InlineNotification
 } from "@carbon/react";
 import React, { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -257,7 +257,7 @@ export const UserDetailPanel = ({ open }) => {
                 >
                     <div className={"story__body-content"}>
                         {serverNotification && (
-                            <ToastNotification
+                            <InlineNotification
                                 className="error-notification-box"
                                 iconDescription="Close Notification"
                                 subtitle={serverErrorNotification?.title}

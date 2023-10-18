@@ -3,33 +3,33 @@ import {
     Form,
     Heading,
     InlineLoading,
-    ToastNotification,
+    InlineNotification,
     Link,
     Grid,
     Column,
 } from "@carbon/react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SignHeader from "../SignHeader";
-import {Footer} from "@carbon/ibmdotcom-react";
-import React, {useEffect, useState} from "react";
+import { Footer } from "@carbon/ibmdotcom-react";
+import React, { useEffect, useState } from "react";
 
 const MagicLinkValidation = ({
-                                 heading,
-                                 loading,
-                                 loadingSuccess,
-                                 handleFormSubmit,
-                                 text,
-                                 subtitle,
-                                 setSignInPhaseOne,
-                                 showCreateAccount,
-                                 createAccountText,
-                                 navigationUrl,
-                                 navigationUrlText,
-                                 setErrorNotification,
-                                 setServerErrorNotification,
-                                 serverErrorNotification,
-                                 handleEmailFormSubmit,
-                             }) => {
+    heading,
+    loading,
+    loadingSuccess,
+    handleFormSubmit,
+    text,
+    subtitle,
+    setSignInPhaseOne,
+    showCreateAccount,
+    createAccountText,
+    navigationUrl,
+    navigationUrlText,
+    setErrorNotification,
+    setServerErrorNotification,
+    serverErrorNotification,
+    handleEmailFormSubmit,
+}) => {
     useNavigate();
     return (
         <>
@@ -37,7 +37,7 @@ const MagicLinkValidation = ({
                 <SignHeader></SignHeader>
                 <div className="signin-container">
                     <Grid className="signin-grid">
-                        <Column sm={{span: 4}} md={{span: 8}} lg={{span: 16}} xlg={{span: 16}} className={"box-container"}>
+                        <Column sm={{ span: 4 }} md={{ span: 8 }} lg={{ span: 16 }} xlg={{ span: 16 }} className={"box-container"}>
                             <div className="sign-in-form-area">
                                 <div className="bx--row">
                                     <div className="bx--col">
@@ -53,9 +53,9 @@ const MagicLinkValidation = ({
                                                     </div>
                                                 </div>
                                                 {typeof serverErrorNotification === "object" &&
-                                                Object.keys(serverErrorNotification).length !== 0 ? (
+                                                    Object.keys(serverErrorNotification).length !== 0 ? (
                                                     <div className="notification-container">
-                                                        <ToastNotification
+                                                        <InlineNotification
                                                             className="error-notification-box"
                                                             timeout={0}
                                                             title={serverErrorNotification?.title}
