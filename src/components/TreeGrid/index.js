@@ -81,7 +81,7 @@ export const TreeGrid = ({ table, config = {}, tabId, className }) => {
         fetchData();
 
         return () => {
-            treeGrid?.Dispose()
+            treeGrid?.Dispose && treeGrid?.Dispose()
         }
     }, []);
 
@@ -91,7 +91,7 @@ export const TreeGrid = ({ table, config = {}, tabId, className }) => {
                 <div
                     ref={ ref }
                     id={ `treeGridMainTag_${ tabId || uuidv4() }` }
-                    style={ { width: '100%', height: '500px' } }
+                    style={ { width: '100%', height: '100%' } }
                 >
                 </div>
             </div>

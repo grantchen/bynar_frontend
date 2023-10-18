@@ -5,13 +5,15 @@ import { TreeGrid } from "../TreeGrid";
 const InvoicesTable = ({ tabId }) => {
     return (
         <>
-            <TreeGrid
-                table={ "invoices" }
-                config={ {
-                    Debug: '',
-                } }
-                tabId={ tabId }
-            ></TreeGrid>
+            <div className="tree-grid-content">
+                <TreeGrid
+                    table={ "invoices" }
+                    config={ {
+                        Debug: '',
+                    } }
+                    tabId={ tabId }
+                ></TreeGrid>
+            </div>
         </>
     );
 };
