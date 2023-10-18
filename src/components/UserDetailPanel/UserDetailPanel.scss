@@ -1,15 +1,21 @@
 .user-detail-panel {
     display: flex;
 
+    .cds--form-item {
+        margin-top: 8px;
+    }
+
     .c4p--side-panel__container .c4p--side-panel__inner-content {
         overflow: auto;
         //height: calc(100vh - 80px) !important;
         margin-top: calc(var(--c4p--side-panel--title-text-height) + var(--c4p--side-panel--subtitle-container-height) + var(--c4p--side-panel--action-bar-container-height) + var(--c4p--side-panel--label-text-height));
         overflow-x: hidden;
     }
-    .c4p--side-panel__container .bx--btn.c4p--side-panel__close-button{
+
+    .c4p--side-panel__container .bx--btn.c4p--side-panel__close-button {
         display: none;
     }
+
     .bx--form-item {
         margin: 16px 0px;
     }
@@ -91,20 +97,26 @@
             background: var(--cds-field-02, #ffffff) !important;
             box-shadow: none !important;
         }
-        .flag-dropdown.open{
+
+        .flag-dropdown.open {
             color: var(--cds-text-01, #161616);
-            .selected-flag{
+
+            .selected-flag {
                 background: var(--cds-field-02, #ffffff) !important;
             }
-            .country-list.country.country-name{
+
+            .country-list.country.country-name {
                 color: var(--cds-text-01, #161616);
             }
-            .country-list{
+
+            .country-list {
                 background: var(--cds-field-02, #ffffff) !important;
             }
-            .country-list .country.highlight{
+
+            .country-list .country.highlight {
                 background-color: #a2a2a2;
             }
+
             .country-list .country:hover {
                 background-color: #a2a2a2
             }
@@ -118,15 +130,17 @@
     .skeleton-loading {
         margin: 16px 0px;
     }
-    .bx--btn-set .bx--btn:not(:focus){
+
+    .bx--btn-set .bx--btn:not(:focus) {
         box-shadow: -0.0625rem 0 0 0 var(--cds-button-separator, #e0e0e0);
     }
 }
+
 button.button-with-loading {
     padding-right: calc(1rem - 1px);
+
     .inline-loading-within-btn {
         width: auto;
         min-height: auto;
     }
 }
-
