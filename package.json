@@ -8,7 +8,7 @@
   "dependencies": {
     "@carbon/elements": "^10",
     "@carbon/grid": "^10.43.0",
-    "@carbon/ibm-products": "^1",
+    "@carbon/ibm-products": "^2",
     "@carbon/ibmdotcom-react": "^1.51.0",
     "@carbon/ibmdotcom-styles": "^1.51.0",
     "@carbon/ibmdotcom-web-components": "^1.16.1",

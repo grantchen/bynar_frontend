@@ -11,6 +11,7 @@ import {
     Popover,
     PopoverContent,
     IconButton,
+    Theme,
 } from "@carbon/react";
 import { OverflowMenuVertical, TrashCan } from "@carbon/react/icons";
 import { useState, useRef, useEffect, useCallback } from "react";
@@ -27,6 +28,7 @@ import {
     useAuth,
     useCardManagement,
     useUserManagement,
+    useThemePreference,
 } from "../../sdk";
 import { notificationTokens } from "@carbon/themes";
 import { Delete16 } from "@carbon/icons-react";
@@ -47,6 +49,7 @@ const UserCardManagementPanel = ({ open }) => {
 
     const [openOptionIndex, setOpenOptionIndex] = useState(-1);
     const { t } = useTranslation();
+    const { themePreference } = useThemePreference();
 
     const handleDefaultCardOptionClick = useCallback(
         async (cardId) => {
@@ -83,7 +86,7 @@ const UserCardManagementPanel = ({ open }) => {
     }, []);
 
     return (
-        <>
+        <Theme theme={themePreference === "white" ? "g10" : "g90"}>
             <div>
                 <SidePanel
                     preventCloseOnClickOutside
@@ -123,144 +126,144 @@ const UserCardManagementPanel = ({ open }) => {
                         >
                             {loading
                                 ? Array(4)
-                                      .fill({})
-                                      .map((_, idx) => (
-                                          <ContainedListItem key={idx}>
-                                              <SkeletonText
-                                                  heading={true}
-                                                  className="skeleton-loading"
-                                              />
-                                          </ContainedListItem>
-                                      ))
+                                    .fill({})
+                                    .map((_, idx) => (
+                                        <ContainedListItem key={idx}>
+                                            <SkeletonText
+                                                heading={true}
+                                                className="skeleton-loading"
+                                            />
+                                        </ContainedListItem>
+                                    ))
                                 : cardsData?.instruments?.map(
-                                      (listItem, index) => {
-                                          const date = new Date();
-                                          date.setFullYear(
-                                              listItem.expiry_year
-                                          );
-                                          date.setMonth(listItem.expiry_month);
-                                          return (
-                                              <ContainedListItem
-                                                  action={
-                                                      <Popover
-                                                          open={
-                                                              openOptionIndex ===
-                                                              index
-                                                          }
-                                                          align="bottom-right"
-                                                          dropShadow
-                                                          className="card-row-popover"
-                                                      >
-                                                          <IconButton
-                                                              onClick={() =>
-                                                                  setOpenOptionIndex(
-                                                                      index
-                                                                  )
-                                                              }
-                                                              kind="ghost"
-                                                          >
-                                                              <OverflowMenuVertical />
-                                                          </IconButton>
-                                                          {openOptionIndex ===
-                                                              index && (
-                                                              <PopoverContent
-                                                                  className="card-popver-content"
-                                                                  ref={
-                                                                      wrapperRef
-                                                                  }
-                                                              >
-                                                                  <OverflowMenuItem
-                                                                      className="test"
-                                                                      itemText={
-                                                                          <div className="row-action-renderer">
-                                                                              <CheckmarkFilled16 />{" "}
-                                                                              {t(
-                                                                                  "default-payment-method"
-                                                                              )}
-                                                                          </div>
-                                                                      }
-                                                                      onClick={() =>
-                                                                          handleDefaultCardOptionClick(
-                                                                              listItem?.id
-                                                                          )
-                                                                      }
-                                                                      disabled={
-                                                                          listItem?.id ===
-                                                                          cardsData?.default
-                                                                      }
-                                                                  />
-                                                                  <OverflowMenuItem
-                                                                      itemText={
-                                                                          <div className="row-action-renderer">
-                                                                              <TrashCan />{" "}
-                                                                              {t(
-                                                                                  "remove-payment-method"
-                                                                              )}
-                                                                          </div>
-                                                                      }
-                                                                      isDelete
-                                                                      hasDivider
-                                                                      disabled={
-                                                                          listItem?.id ===
-                                                                          cardsData?.default
-                                                                      }
-                                                                      onClick={() => {
-                                                                          openUserCardDeleteModal(
-                                                                              {
-                                                                                  cardIdToBeDeleted:
-                                                                                      listItem?.id,
-                                                                                  last4Digit:
-                                                                                      listItem?.last4,
-                                                                              }
-                                                                          );
-                                                                          setOpenOptionIndex(
-                                                                              -1
-                                                                          );
-                                                                      }}
-                                                                  ></OverflowMenuItem>
-                                                              </PopoverContent>
-                                                          )}
-                                                      </Popover>
-                                                  }
-                                                  key={listItem.id}
-                                              >
-                                                  <div className="card-box">
-                                                      <div className="card-logo">
-                                                          <div className="card-logo-with-checkicon">
-                                                              <p className="card-type">
-                                                                  {
-                                                                      listItem?.scheme
-                                                                  }
-                                                              </p>
-                                                              {listItem?.id ===
-                                                                  cardsData?.default && (
-                                                                  <CheckmarkFilled16 />
-                                                              )}
-                                                          </div>
-                                                      </div>
-                                                      <p>
-                                                          {"...."}
-                                                          {listItem?.last4}
-                                                      </p>
-                                                      <p className="card-holder-name">
-                                                          {cardsData?.name}
-                                                      </p>
-                                                      <p>
-                                                          {format(
-                                                              date,
-                                                              "MM/yyyy"
-                                                          )}
-                                                      </p>
-                                                  </div>
-                                              </ContainedListItem>
-                                          );
-                                      }
-                                  )}
+                                    (listItem, index) => {
+                                        const date = new Date();
+                                        date.setFullYear(
+                                            listItem.expiry_year
+                                        );
+                                        date.setMonth(listItem.expiry_month);
+                                        return (
+                                            <ContainedListItem
+                                                action={
+                                                    <Popover
+                                                        open={
+                                                            openOptionIndex ===
+                                                            index
+                                                        }
+                                                        align="bottom-right"
+                                                        dropShadow
+                                                        className="card-row-popover"
+                                                    >
+                                                        <IconButton
+                                                            onClick={() =>
+                                                                setOpenOptionIndex(
+                                                                    index
+                                                                )
+                                                            }
+                                                            kind="ghost"
+                                                        >
+                                                            <OverflowMenuVertical />
+                                                        </IconButton>
+                                                        {openOptionIndex ===
+                                                            index && (
+                                                                <PopoverContent
+                                                                    className="card-popver-content"
+                                                                    ref={
+                                                                        wrapperRef
+                                                                    }
+                                                                >
+                                                                    <OverflowMenuItem
+                                                                        className="test"
+                                                                        itemText={
+                                                                            <div className="row-action-renderer">
+                                                                                <CheckmarkFilled16 />{" "}
+                                                                                {t(
+                                                                                    "default-payment-method"
+                                                                                )}
+                                                                            </div>
+                                                                        }
+                                                                        onClick={() =>
+                                                                            handleDefaultCardOptionClick(
+                                                                                listItem?.id
+                                                                            )
+                                                                        }
+                                                                        disabled={
+                                                                            listItem?.id ===
+                                                                            cardsData?.default
+                                                                        }
+                                                                    />
+                                                                    <OverflowMenuItem
+                                                                        itemText={
+                                                                            <div className="row-action-renderer">
+                                                                                <TrashCan />{" "}
+                                                                                {t(
+                                                                                    "remove-payment-method"
+                                                                                )}
+                                                                            </div>
+                                                                        }
+                                                                        isDelete
+                                                                        hasDivider
+                                                                        disabled={
+                                                                            listItem?.id ===
+                                                                            cardsData?.default
+                                                                        }
+                                                                        onClick={() => {
+                                                                            openUserCardDeleteModal(
+                                                                                {
+                                                                                    cardIdToBeDeleted:
+                                                                                        listItem?.id,
+                                                                                    last4Digit:
+                                                                                        listItem?.last4,
+                                                                                }
+                                                                            );
+                                                                            setOpenOptionIndex(
+                                                                                -1
+                                                                            );
+                                                                        }}
+                                                                    ></OverflowMenuItem>
+                                                                </PopoverContent>
+                                                            )}
+                                                    </Popover>
+                                                }
+                                                key={listItem.id}
+                                            >
+                                                <div className="card-box">
+                                                    <div className="card-logo">
+                                                        <div className="card-logo-with-checkicon">
+                                                            <p className="card-type">
+                                                                {
+                                                                    listItem?.scheme
+                                                                }
+                                                            </p>
+                                                            {listItem?.id ===
+                                                                cardsData?.default && (
+                                                                    <CheckmarkFilled16 />
+                                                                )}
+                                                        </div>
+                                                    </div>
+                                                    <p>
+                                                        {"...."}
+                                                        {listItem?.last4}
+                                                    </p>
+                                                    <p className="card-holder-name">
+                                                        {cardsData?.name}
+                                                    </p>
+                                                    <p>
+                                                        {format(
+                                                            date,
+                                                            "MM/yyyy"
+                                                        )}
+                                                    </p>
+                                                </div>
+                                            </ContainedListItem>
+                                        );
+                                    }
+                                )}
                         </ContainedList>
                     </div>
                 </SidePanel>
             </div>
-        </>
+        </Theme>
     );
 };
 export default UserCardManagementPanel;
