@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Grid>
-    <Cfg id='organizations' Size="Low" SuppressCfg='1' ShowDeleted='1' Deleting='1' ShowButtons="3" PasteSelected='0'
+    <Cfg id='organizations' Size="Low" MainCol='code' SuppressCfg='1' ShowDeleted='1' Deleting='1' ShowButtons="3" PasteSelected='0'
          Scrollbar='0'/>
     <Cfg Validate='All,Added,Focus,Edit,Changed,Text' ValidateMessageTime='2500'/>
     <Cfg SearchCells='1' SearchAction='Select' SearchHidden='1'/>
