@@ -62,3 +62,11 @@
 .CFRowAbove .CFCellSpaceAbove:last-child{
   border-right: 0px
 }
+
+.CFBodyMid .CFDataRow:last-child .CFCellBase {
+  border-bottom: 0px;
+}
+
+.CFBodyLeft .CFDataRow:last-child .CFCellBase {
+  border-bottom: 0px;
+}
