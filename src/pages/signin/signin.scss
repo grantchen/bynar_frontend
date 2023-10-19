@@ -273,7 +273,6 @@
 
 .bx--footer {
   width: 100%;
-  padding-block: 2rem;
   color: #f4f4f4;
   background-color: #ffffff;
   padding-top: 0;
@@ -281,6 +280,7 @@
     margin-bottom: 2rem;
   }
   @media (max-width: 671px) {
+    padding-block: 2rem;
     margin-bottom: 1rem;
   }
 }
@@ -299,9 +299,8 @@
   align-items: center;
   width: 100%;
   color: #525252;
-  @media (max-width: 671px) {
-    font-size: 13px;
-  }
+  font-size: 13px;
+  text-decoration: none;
 }
 
 .bx--legal-nav__list.bx--legal-nav__micro .bx--legal-nav__holder .bx--legal-nav__list-item a:hover {
@@ -323,10 +322,7 @@
 }
 
 .bx--legal-nav__list.bx--legal-nav__micro .bx--legal-nav__holder .bx--legal-nav__list-item {
-  margin-right: 1rem;
-  @media (max-width: 400px) {
-    margin-right: 0.6rem;
-  }
+  margin-right: 0.6rem;
 }
 
 @media (max-width: 671px) {
@@ -336,20 +332,19 @@
 }
 
 .footer_info {
-  margin-top: -2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   p {
-    font-size: 0.8em;
+    font-size: 10px;
     color: #525252;
     margin: 0;
-    @media (max-width: 671px) {
-      font-size: 8px;
-    }
   }
   @media (min-width: 672px) and (max-width: 770px) {
-    margin-top: -4.5rem;
+    margin-top: -2.5rem;
+  }
+  @media (max-width: 671px) {
+    margin-top: -0.5rem;
   }
   @media (max-width: 671px) {
     margin-top: -0.5rem;

@@ -100,7 +100,7 @@ const CardManagementProvider = ({ children }) => {
             } catch (error) {
                 setNotification({
                     type: "error",
-                    message: t("invoices-load-failed"),
+                    message: t("payment-failed"),
                 });
             } finally {
                 setLoading(false);
@@ -112,12 +112,22 @@ const CardManagementProvider = ({ children }) => {
         async (cardId) => {
             try {
                 setLoading(true);
-                await authFetch(`${BaseURL}/apprunnerurl/cards/update`, {
+                const res = await authFetch(`${BaseURL}/apprunnerurl/cards/update`, {
                     method: "POST",
                     body: JSON.stringify({ source_id: cardId }),
                 });
+                if (res.ok) {
+                    setNotification({
+                        type: "success",
+                        message: t("payment-successful"),
+                    });
+                }
                 await getUserCardList();
             } catch (error) {
+                setNotification({
+                    type: "error",
+                    message: t("payment-failed"),
+                });
                 //todo show notification
             } finally {
                 setLoading(false);

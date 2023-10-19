@@ -12,8 +12,8 @@
         overflow-x: hidden;
     }
 
-    .c4p--side-panel .c4p--side-panel__inner-content .c4p--side-panel__close-button {
-        display: none;
+    .c4p--side-panel__container .cds--btn.c4p--side-panel__close-button {
+        display: none !important;
     }
 
     .bx--form-item {
