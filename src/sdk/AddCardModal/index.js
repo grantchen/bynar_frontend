@@ -5,7 +5,8 @@ import {
     ModalBody,
     ModalFooter,
     Button,
-    InlineNotification
+    InlineNotification,
+    ToastNotification
 } from "@carbon/react";
 import { useTranslation } from "react-i18next";
 import { useCardManagement } from "../context";
@@ -89,14 +90,14 @@ const AddCardModal = ({ open }) => {
             <ModalHeader title={t("add-new-card")} />
             <ModalBody ref={modalBodyRef}>
                 {notification && (
-                    <InlineNotification
+                    <ToastNotification
                         className="error-notification-box"
                         iconDescription="Clear Notification"
                         subtitle={notification?.message}
                         onCloseButtonClick={() => {
                             setNotification(null);
                         }}
-                        timeout={0}
+                        timeout={5000}
                         title=""
                         kind={notification?.type}
                     />

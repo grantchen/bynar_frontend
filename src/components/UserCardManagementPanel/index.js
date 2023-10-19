@@ -12,6 +12,7 @@ import {
     Theme,
     SkeletonPlaceholder,
     InlineNotification,
+    ToastNotification,
 } from "@carbon/react";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Add, CheckmarkFilled, TrashCan, OverflowMenuVertical } from "@carbon/react/icons";
@@ -91,11 +92,11 @@ const UserCardManagementPanel = ({ open }) => {
                 >
                     <div className="card-list">
                         {notification && (
-                            <InlineNotification
+                            <ToastNotification
                                 className="error-notification-box"
                                 iconDescription="Close Notification"
                                 subtitle={notification?.message}
-                                timeout={0}
+                                timeout={5000}
                                 title={""}
                                 kind={notification.type}
                             />
