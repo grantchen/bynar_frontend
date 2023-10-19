@@ -5,8 +5,6 @@ import {
     ContainedListItem,
     OverflowMenu,
     OverflowMenuItem,
-    Grid,
-    Column,
     SkeletonText,
     Popover,
     PopoverContent,
@@ -15,11 +13,9 @@ import {
     SkeletonPlaceholder,
     InlineNotification,
 } from "@carbon/react";
-import { OverflowMenuVertical, TrashCan } from "@carbon/react/icons";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Add20, CheckmarkFilled16 } from "@carbon/icons-react";
+import { Add, CheckmarkFilled, TrashCan, OverflowMenuVertical } from "@carbon/react/icons";
 import "./UserCardManagementPanel.scss";
-import { TextInputSkeleton } from "@carbon/react";
 
 import {
     BaseURL,
@@ -29,7 +25,6 @@ import {
     useThemePreference,
 } from "../../sdk";
 import { notificationTokens } from "@carbon/themes";
-import { Delete16 } from "@carbon/icons-react";
 import { useTranslation } from "react-i18next";
 import { format } from "date-fns";
 const UserCardManagementPanel = ({ open }) => {
@@ -111,7 +106,7 @@ const UserCardManagementPanel = ({ open }) => {
                                 <Button
                                     hasIconOnly
                                     iconDescription={t("add-new-card")}
-                                    renderIcon={Add20}
+                                    renderIcon={Add}
                                     tooltipPosition="left"
                                     onClick={openCardAddModal}
                                     disabled={
@@ -174,7 +169,7 @@ const UserCardManagementPanel = ({ open }) => {
                                                                         className="test"
                                                                         itemText={
                                                                             <div className="row-action-renderer">
-                                                                                <CheckmarkFilled16 />{" "}
+                                                                                <CheckmarkFilled size={16} />{" "}
                                                                                 {t(
                                                                                     "default-payment-method"
                                                                                 )}
@@ -235,7 +230,7 @@ const UserCardManagementPanel = ({ open }) => {
                                                             </p>
                                                             {listItem?.id ===
                                                                 cardsData?.default && (
-                                                                    <CheckmarkFilled16 />
+                                                                    <CheckmarkFilled size={16} />
                                                                 )}
                                                         </div>
                                                     </div>

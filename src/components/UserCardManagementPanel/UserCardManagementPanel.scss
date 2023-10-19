@@ -5,17 +5,17 @@
         display: flex;
         justify-content: space-between;
 
-        .card-logo{
-            width: 80px;
+        .card-logo {
+            width: 120px;
         }
 
-        .card-logo-with-checkicon{
+        .card-logo-with-checkicon {
             display: flex;
-            justify-content:flex-start;
+            justify-content: flex-start;
             gap: 0px;
             align-items: center;
 
-            .card-type{
+            .card-type {
                 width: 60px;
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -24,20 +24,21 @@
 
         .card-holder-name {
             // overflow-wrap: break-word;
-            width:100px;
+            width: 80px;
             padding: 0px;
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        
+
     }
 }
 
 .card-row-popover {
-    top: 0.4rem;
+    // top: 0.4rem;
 
     &.cds--popover--open,
     .card-popver-content {
+        margin-top: 0;
         box-shadow: 0 2px 6px var(--cds-shadow, rgba(0, 0, 0, 0.3));
     }
 
@@ -52,27 +53,28 @@
 }
 
 @media (max-width: 600px) {
-    .card-list {  
+    .card-list {
         .cds--contained-list-item--with-action .cds--contained-list-item__content {
             padding-inline-end: 3rem;
         }
+
         .card-box {
-            .card-logo{
+            .card-logo {
                 width: 70px;
             }
 
-            .card-logo-with-checkicon{
+            .card-logo-with-checkicon {
                 gap: 2px;
-                .card-type{
+
+                .card-type {
                     width: 42px;
                 }
             }
 
             .card-holder-name {
                 padding: 0px 12px;
-                width:88px;
+                width: 88px;
             }
         }
     }
 }
-

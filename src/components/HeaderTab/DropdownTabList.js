@@ -7,7 +7,7 @@ import {
 } from "@carbon/react";
 import "./DropdownTabList.scss";
 import { TabContext } from "../../sdk";
-import { ChevronDown16, Close16 } from "@carbon/icons-react";
+import { ChevronDown, Close } from "@carbon/react/icons";
 import { Home } from "@carbon/react/icons";
 import { useTranslation } from "react-i18next";
 import TabSkeleton from "carbon-web-components/es/components-react/tabs/tab-skeleton";
@@ -58,26 +58,26 @@ const DropdownTabList = ({ className }) => {
 
     return (
         <>
-            <div ref={ dropdownTabsRef } className={ `header-tab-list ${ className ? className : '' }` }>
+            <div ref={dropdownTabsRef} className={`header-tab-list ${className ? className : ''}`}>
                 <div
-                    className={ "cds--dropdown__wrapper cds--list-box__wrapper cds--dropdown__wrapper--inline cds--list-box__wrapper--inline" }>
+                    className={"cds--dropdown__wrapper cds--list-box__wrapper cds--dropdown__wrapper--inline cds--list-box__wrapper--inline"}>
                     <div
-                        className={ `cds--dropdown cds--dropdown--inline cds--dropdown--lg cds--list-box cds--list-box--lg ${ isDropdownTabsOpen ? 'cds--dropdown--open cds--list-box--expanded' : '' }` }>
+                        className={`cds--dropdown cds--dropdown--inline cds--dropdown--lg cds--list-box cds--list-box--lg ${isDropdownTabsOpen ? 'cds--dropdown--open cds--list-box--expanded' : ''}`}>
                         <Button
                             kind="ghost"
-                            className={ "cds--list-box__field" }
-                            onClick={ () => {
+                            className={"cds--list-box__field"}
+                            onClick={() => {
                                 setIsDropdownTabsOpen(!isDropdownTabsOpen);
                                 setSearchTerm('');
-                            } }>
+                            }}>
                             <div className="cds--list-box__label">
                                 {
                                     tab[activeTab].loaded ? (tab[activeTab].label) : (<TabSkeleton></TabSkeleton>)
                                 }
                             </div>
                             <div
-                                className={ `cds--list-box__menu-icon ${ isDropdownTabsOpen ? 'cds--list-box__menu-icon--open' : '' }` }>
-                                <ChevronDown16 />
+                                className={`cds--list-box__menu-icon ${isDropdownTabsOpen ? 'cds--list-box__menu-icon--open' : ''}`}>
+                                <ChevronDown size={16} />
                             </div>
 
                         </Button>
@@ -86,19 +86,19 @@ const DropdownTabList = ({ className }) => {
                             <div className="header-dynamic-dropdown-tabs-content">
                                 <div className="list-wrapper">
                                     <ContainedList
-                                        label={ "" }
+                                        label={""}
                                         size="md"
                                     >
-                                        <Search placeholder={ t("search-tabs") }
-                                                value={ searchTerm }
-                                                onChange={ handleSearchChange }
-                                                closeButtonLabelText={ t("clear") }
-                                                size="md"
-                                                labelText={ "" } />
-                                        { searchResults.map((item, index) =>
+                                        <Search placeholder={t("search-tabs")}
+                                            value={searchTerm}
+                                            onChange={handleSearchChange}
+                                            closeButtonLabelText={t("clear")}
+                                            size="md"
+                                            labelText={""} />
+                                        {searchResults.map((item, index) =>
                                             <ContainedListItem
-                                                key={ `${ item.id }-${ index }` }
-                                                className={ tab[activeTab].id === item.id ? 'list-item-active' : '' }
+                                                key={`${item.id}-${index}`}
+                                                className={tab[activeTab].id === item.id ? 'list-item-active' : ''}
                                                 action={
                                                     item.isDelted ? (
                                                         <>
@@ -107,12 +107,12 @@ const DropdownTabList = ({ className }) => {
                                                                 kind="ghost"
                                                                 className="close-list-tab"
                                                                 hasIconOnly
-                                                                title={ t("close") }
-                                                                onClick={ () => {
+                                                                title={t("close")}
+                                                                onClick={() => {
                                                                     removeTab(item.id);
-                                                                } }
+                                                                }}
                                                             >
-                                                                <Close16 />
+                                                                <Close size={16} />
                                                             </Button>
                                                         </>
                                                     ) : (
@@ -122,30 +122,30 @@ const DropdownTabList = ({ className }) => {
                                                                 kind="ghost"
                                                                 className="home-tab-icon"
                                                                 hasIconOnly
-                                                                onClick={ () => {
+                                                                onClick={() => {
                                                                     handleTabListChange(item.id);
                                                                     setIsDropdownTabsOpen(false);
-                                                                } }
+                                                                }}
                                                             >
-                                                                <Home size={ 15 }></Home>
+                                                                <Home size={15}></Home>
                                                             </Button>
                                                         </>
                                                     )
                                                 }
-                                                onClick={ () => {
+                                                onClick={() => {
                                                     handleTabListChange(item.id);
                                                     setIsDropdownTabsOpen(false);
-                                                } }
+                                                }}
                                             >
                                                 {
                                                     item.loaded ? (item.label) : (<TabSkeleton></TabSkeleton>)
                                                 }
                                             </ContainedListItem>
-                                        ) }
+                                        )}
                                         {
                                             searchResults.length === 0 && (
                                                 <ContainedListItem>
-                                                    { t("no-results-found") }
+                                                    {t("no-results-found")}
                                                 </ContainedListItem>
                                             )
                                         }
