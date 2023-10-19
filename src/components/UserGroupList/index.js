@@ -9,16 +9,26 @@ const UserGroupList = ({ tabId }) => {
     useEffect(() => {
         if (tab[activeTab].id !== tabId) return;
 
-        // Called on adding row
+        // before add
         window.Grids.OnCanRowAdd = function (G, par, next) {
             if (G.Editing === 2) return false;
-            // Disable adding rows to grouped root row
-            if (par.Level === 0 && par.Def?.Name === "Group" && par.Def?.CDef === "R") return false;
+            // Disable adding rows to grouped category
+            if (par.Def?.Name === "Group" && par.Def?.CDef === "R" && par.Rows) return false;
             return
+        }
+
+        // on add
+        window.Grids.OnRowAdd = function (G, row) {
+            let par = row.parentNode
+            // add child to grouped row, set code to empty
+            if (par && par.Def?.Name === "Group" && par.Def?.CDef === "R") {
+                row.code = ''
+            }
         }
 
         return () => {
             window.Grids.OnCanRowAdd = null;
+            window.Grids.OnRowAdd = null;
         }
     }, [tab, activeTab]);
 
