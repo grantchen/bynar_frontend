@@ -1,0 +1,75 @@
+.CRRowSpace1 .CRSolidRow, .CRRowSpace2 .CRSolidRow, .CRRowSpace3 .CRSolidRow{
+  border-left: 0px;
+  border-right: 0px;
+}
+.CRRowSpace2.CRRowSpaceLast .CRSolidRow, .CRRowSpace3.CRRowSpaceLast .CRSolidRow {
+  border-bottom: 0px;
+}
+
+.CRHeadLeft, .CRBodyLeft, .CRFootLeft {
+  border-left: 0px;
+}
+
+.CRHeadMid, .CRBodyMid, .CRFootMid {
+  border-right: 0px;
+}
+.CRHeadMid .CRHeaderRow .CRCellHeader:last-child {
+  border-right: 0px;
+}
+.CRHeadMid .CRHeaderRow .CRCellHeader:nth-last-child(2) {
+  border-right: 0px;
+}
+.CRHeadMid .CRFilterRow .CRCellBase:last-child {
+  border-right: 0px;
+}
+.CRHeadMid .CRFilterRow .CRCellBase:nth-last-child(2) {
+  border-right: 0px;
+}
+
+.CRHeadMid .CRFilterRow .CRCellBase:last-child {
+  border-right: 0px;
+}
+
+.CRBodyMid .CRDataRow .CRCellBase:last-child {
+  border-right: 0px;
+}
+
+.CRBodyMid .CRDataRow .CRCellBase:nth-last-child(2) {
+  border-right: 0px;
+}
+
+.CRMain .CRBodyLeft, .CRMain .CRBodyMid, .CRMain .CRBodyRight {
+  border-bottom: 0px;
+}
+.CRMainTable{
+  border: 0px solid #d0d0d0;
+  border-top: 1px solid #d0d0d0;
+}
+.CRRowAbove, .CRRowBelow {
+  border-left: 0px solid #e0e0ff;
+  border-right: 0px solid #e0e0ff;
+}
+.CRCellSpace, .CRCellSpaceIcon, .CRCellSpaceButton, .CRCellSpaceButtonIcon, .CRCellSpaceButtonButton, .CRCellSpacePanel, .CRCellSpaceBool, .CRCellSpaceRadio, .CRCellSpaceSelect, .CRCellSpaceEdit{
+  border-left: 0px;
+}
+.CRFillRow .CRCellSpaceEmpty{
+  border-right: 0px
+}
+.CRRowSpace .CRGroupRow .CRCellSpace:last-child{
+  border-right: 0px
+}
+.CRRowAbove .CRCellSpaceAbove:last-child{
+  border-right: 0px
+}
+.CRBodyLeft .CRDataRow:last-child .CRCellBase{
+  border-bottom: 0px
+}
+.CRBodyMid .CRDataRow:last-child .CRCellBase{
+  border-bottom: 0px
+}
+.CRBottom .CRBottom2,.CRBottom .CRBottom3,.CRBottom .CRBottom4,.CRBottom .CRBottom5{
+  height: 0px;
+}
+.CRFillRow{
+  border:0px;
+}

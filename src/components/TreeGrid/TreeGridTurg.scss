@@ -1,0 +1,44 @@
+//Turq
+.TTRowSpace1 .TTSolidRow, .TTRowSpace2 .TTSolidRow, .TTRowSpace3 .TTSolidRow{
+  border-left: 0px;
+  border-right: 0px;
+}
+.TTRowSpace2.TTRowSpaceLast .TTSolidRow, .TTRowSpace3.TTRowSpaceLast .TTSolidRow {
+  border-bottom: 0px;
+}
+
+.TTHeadLeft, .TTBodyLeft, .TTFootLeft {
+  border-left: 0px;
+}
+
+.TTHeadMid, .TTBodyMid, .TTFooTTid {
+  border-right: 0px;
+}
+.TTHeadMid .TTHeaderRow .TTCellHeader:last-child {
+  border-right: 0px;
+}
+.TTHeadMid .TTHeaderRow .TTCellHeader:nth-last-child(2) {
+  border-right: 0px;
+}
+.TTHeadMid .TTFilterRow .TTCellBase:last-child {
+  border-right: 0px;
+}
+.TTHeadMid .TTFilterRow .TTCellBase:nth-last-child(2) {
+  border-right: 0px;
+}
+
+.TTHeadMid .TTFilterRow .TTCellBase:last-child {
+  border-right: 0px;
+}
+
+.TTBodyMid .TDataRow .TTCellBase:last-child {
+  border-right: 0px;
+}
+
+.TTBodyMid .TTDataRow .TTCellBase:nth-last-child(2) {
+  border-right: 0px;
+}
+
+.TTMain .TTBodyLeft, .TTMain .TTBodyMid, .TTMain .TTBodyRight {
+  border-bottom: 0px;
+}
