@@ -93,9 +93,14 @@ const CardManagementProvider = ({ children }) => {
                 const response = await authFetch(
                     `${BaseURL}/apprunnerurl/cards/list?${searchQueryParams}`,
                 );
+                const res = await response.json();
                 if (response.ok) {
-                    const res = await response.json();
                     setCardsData(res);
+                } else if (response.status === 500) {
+                    setNotification({
+                        type: "error",
+                        message: res.error,
+                    });
                 }
             } catch (error) {
                 setNotification({
@@ -156,7 +161,10 @@ const CardManagementProvider = ({ children }) => {
                 });
                 navigate(-1);
             } else if (response.status === 500) {
-                throw { message: res.error, type: "error" };
+                setNotification({
+                    type: "error",
+                    message: res.error,
+                });
             } else {
                 throw { message: t("error-adding-user-card"), type: "error" };
             }
@@ -200,10 +208,16 @@ const CardManagementProvider = ({ children }) => {
                                 body: JSON.stringify({ source_id: cardIdToBeDeleted }),
                             }
                         );
+                        const res = await response.json()
                         if (response.ok) {
                             setNotification({
                                 type: "success",
                                 message: t("card-deleted-successfully"),
+                            });
+                        } else if (response.status === 500) {
+                            setNotification({
+                                type: "error",
+                                message: res.error,
                             });
                         } else {
                             throw "error";
