@@ -89,11 +89,7 @@ const AddCardModal = ({ open }) => {
             <ModalHeader title={t("add-new-card")} />
             <ModalBody ref={modalBodyRef}>
                 {notification && (
-<<<<<<< HEAD
-                    <ToastNotification
-=======
                     <InlineNotification
->>>>>>> fix/panel_theme
                         className="error-notification-box"
                         iconDescription="Clear Notification"
                         subtitle={notification?.message}
