@@ -39,6 +39,7 @@ const UserCardManagementPanel = ({ open }) => {
         handleVerifyCard,
         openUserCardDeleteModal,
         openCardAddModal,
+        setNotification
     } = useCardManagement();
 
     const [openOptionIndex, setOpenOptionIndex] = useState(-1);
@@ -92,13 +93,16 @@ const UserCardManagementPanel = ({ open }) => {
                 >
                     <div className="card-list">
                         {notification && (
-                            <ToastNotification
+                            <InlineNotification
                                 className="error-notification-box"
                                 iconDescription="Close Notification"
                                 subtitle={notification?.message}
-                                timeout={5000}
+                                timeout={0}
                                 title={""}
                                 kind={notification.type}
+                                onCloseButtonClick={() => {
+                                    setNotification({});
+                                }}
                             />
                         )}
                         <ContainedList

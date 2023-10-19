@@ -90,14 +90,14 @@ const AddCardModal = ({ open }) => {
             <ModalHeader title={t("add-new-card")} />
             <ModalBody ref={modalBodyRef}>
                 {notification && (
-                    <ToastNotification
+                    <InlineNotification
                         className="error-notification-box"
                         iconDescription="Clear Notification"
                         subtitle={notification?.message}
                         onCloseButtonClick={() => {
-                            setNotification(null);
+                            setNotification({});
                         }}
-                        timeout={5000}
+                        timeout={0}
                         title=""
                         kind={notification?.type}
                     />
