@@ -90,8 +90,8 @@
         <C Name='code' RelWidth='150' MinWidth='150' Type='Text' CaseSensitive='0' CanEdit='1' VarHeight='1'/>
         <C Name='description' RelWidth='150' MinWidth='150' Type='Text' CaseSensitive='0' CanEdit='1' VarHeight='1'/>
         <C Name='status' RelWidth='150' MinWidth='150' Type='Bool' CaseSensitive='0' CanEdit='1' VarHeight='1'/>
-        <C Name='full_name' RelWidth='150' MinWidth='150' Type='Text' CanEdit='1' VarHeight='1'/>
-        <C Name='email' RelWidth='150' MinWidth='150' Type='Text' CanEdit='1' VarHeight='1'/>
+        <C Name='full_name' RelWidth='150' MinWidth='150' Type='Text' CanEdit='0' VarHeight='1'/>
+        <C Name='email' RelWidth='150' MinWidth='150' Type='Text' CanEdit='0' VarHeight='1'/>
         <C Name='user_id' RelWidth='150' MinWidth='150' Type='Text' CaseSensitive='0' CanEdit='1' VarHeight='1'/>
     </Cols>
 
