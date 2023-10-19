@@ -4,13 +4,16 @@ $feature-flags: (
 );
 $prefix: "cds";
 @use "@carbon/react";
+@use '@carbon/react/scss/zone';
 @import "../node_modules/carbon-components/scss/globals/scss/vars";
 
 .display-none {
     display: none;
 }
 
-html, body, #root {
+html,
+body,
+#root {
     width: 100%;
     height: 100%;
 }
@@ -33,8 +36,8 @@ body {
     color: var(--cds-text-01);
 }
 
-.disable-focus{
-    &:focus{
+.disable-focus {
+    &:focus {
         outline: none;
         box-shadow: none;
     }
