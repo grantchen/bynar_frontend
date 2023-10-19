@@ -37,7 +37,7 @@ const UserManagementProvider = ({ children }) => {
     const userDetailsOpen = Boolean(searchParams.get("userIdToShowDetails"));
 
     const isUserManagementAllowed = useMemo(
-        () => hasPermission("user_list", "list"),
+        () => hasPermission && hasPermission("user_list", "list"),
         [hasPermission]
     );
 
@@ -333,7 +333,7 @@ const UserManagementProvider = ({ children }) => {
             setSearchParams(prev)
             return {}
         });
-    }, []);
+    }, [searchParams]);
     useEffect(() => {
         if (!searchParams.get("isUserListOpen")) {
             setNotification(null);

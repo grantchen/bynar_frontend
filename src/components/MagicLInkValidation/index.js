@@ -3,39 +3,41 @@ import {
     Form,
     Heading,
     InlineLoading,
-    ToastNotification,
+    InlineNotification,
     Link,
     Grid,
     Column,
 } from "@carbon/react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SignHeader from "../SignHeader";
+import { Footer } from "@carbon/ibmdotcom-react";
+import React, { useEffect, useState } from "react";
 
 const MagicLinkValidation = ({
-                                 heading,
-                                 loading,
-                                 loadingSuccess,
-                                 handleFormSubmit,
-                                 text,
-                                 subtitle,
-                                 setSignInPhaseOne,
-                                 showCreateAccount,
-                                 createAccountText,
-                                 navigationUrl,
-                                 navigationUrlText,
-                                 setErrorNotification,
-                                 setServerErrorNotification,
-                                 serverErrorNotification,
-                                 handleEmailFormSubmit,
-                             }) => {
+    heading,
+    loading,
+    loadingSuccess,
+    handleFormSubmit,
+    text,
+    subtitle,
+    setSignInPhaseOne,
+    showCreateAccount,
+    createAccountText,
+    navigationUrl,
+    navigationUrlText,
+    setErrorNotification,
+    setServerErrorNotification,
+    serverErrorNotification,
+    handleEmailFormSubmit,
+}) => {
     useNavigate();
     return (
         <>
             <div className="app-container">
                 <SignHeader></SignHeader>
                 <div className="signin-container">
-                    <Grid>
-                        <Column sm={{span: 4}} md={{span: 8}} lg={{span: 16}} xlg={{span: 16}} className={"box-container"}>
+                    <Grid className="signin-grid">
+                        <Column sm={{ span: 4 }} md={{ span: 8 }} lg={{ span: 16 }} xlg={{ span: 16 }} className={"box-container"}>
                             <div className="sign-in-form-area">
                                 <div className="bx--row">
                                     <div className="bx--col">
@@ -51,9 +53,9 @@ const MagicLinkValidation = ({
                                                     </div>
                                                 </div>
                                                 {typeof serverErrorNotification === "object" &&
-                                                Object.keys(serverErrorNotification).length !== 0 ? (
+                                                    Object.keys(serverErrorNotification).length !== 0 ? (
                                                     <div className="notification-container">
-                                                        <ToastNotification
+                                                        <InlineNotification
                                                             className="error-notification-box"
                                                             timeout={0}
                                                             title={serverErrorNotification?.title}
@@ -142,6 +144,22 @@ const MagicLinkValidation = ({
                             </div>
                         </Column>
                     </Grid>
+                    <Footer
+                        type="micro"
+                        disableLocaleButton={true}
+                        navigation={{
+                            footerThin: [
+                                { title: 'Privacy Policy', url: '#' },
+                                { title: '|', url: '#' },
+                                { title: 'Terms of Use', url: '#' },
+                                { title: '|', url: '#' },
+                                { title: 'Cookie Preferences', url: '#' },
+                            ],
+                        }}
+                    />
+                    <div className="footer_info">
+                        <p>Bynar, Inc. or its affiliates. All rights reserved.</p>
+                    </div>
                 </div>
             </div>
         </>

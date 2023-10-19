@@ -3,8 +3,8 @@ import {
     TextInput,
     Select,
     SelectItem,
-    ToastNotification,
-} from "carbon-components-react";
+    InlineNotification,
+} from "@carbon/react";
 import "./SidePanel.scss";
 import { useState, useRef, useEffect } from "react";
 
@@ -553,7 +553,7 @@ export const SidePanels = ({ open }) => {
                 ) : (
                     <div className={`story__body-content`}>
                         {serverNotification && (
-                            <ToastNotification
+                            <InlineNotification
                                 className="error-notification-box"
                                 iconDescription="Close Notification"
                                 subtitle={serverErrorNotification?.message}

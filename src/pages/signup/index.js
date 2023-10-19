@@ -10,10 +10,10 @@ import {
     Select,
     SelectItem,
     TextInput,
-    ToastNotification,
+    InlineNotification,
 } from "@carbon/react";
-import {CardFrame, Frames} from "frames-react";
-import React, {useEffect, useRef, useState} from "react";
+import { CardFrame, Frames } from "frames-react";
+import React, { useEffect, useRef, useState } from "react";
 import {
     BaseURL,
     CheckoutPublicKey,
@@ -25,11 +25,11 @@ import {
 
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./../../styles/paymentform.scss";
 import "./signup.scss";
 import "../signin/signin.scss";
-import {PhoneNumberUtil,} from "google-libphonenumber";
+import { PhoneNumberUtil, } from "google-libphonenumber";
 import {
     parseTabMessage,
     sendCloseTabMessage,
@@ -38,7 +38,7 @@ import {
     SubscribeTabMessage
 } from "../../sdk/tabMessage";
 import SignHeader from "../../components/SignHeader";
-import {Footer} from "@carbon/ibmdotcom-react";
+import { Footer } from "@carbon/ibmdotcom-react";
 
 const Signup = () => {
     const phoneUtil = PhoneNumberUtil.getInstance();
@@ -94,7 +94,7 @@ const Signup = () => {
     const [countryCode, setCountryCode] = useState('AL');
     const [countryDialCode, setCountryDialCode] = useState('355');
 
-    const {signinWithCustomToken} = useAuth()
+    const { signinWithCustomToken } = useAuth()
 
     const personalInfoButtonDisabled =
         fullName.trim().length === 0 ||
@@ -106,7 +106,7 @@ const Signup = () => {
         Object.keys(postalCodeErrorNotification).length !== 0;
 
     const handleFullName = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         setFullName(value);
         setAccountInfoErrors({
             ...accountInfoErrors,
@@ -115,7 +115,7 @@ const Signup = () => {
     };
 
     const handleAddressLine1 = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         setAddressLine1(value);
         setAccountInfoErrors({
             ...accountInfoErrors,
@@ -124,7 +124,7 @@ const Signup = () => {
     };
 
     const handleCity = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         setCity(value);
         setAccountInfoErrors({
             ...accountInfoErrors,
@@ -133,7 +133,7 @@ const Signup = () => {
     };
 
     const handleState = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         setState(value);
         setAccountInfoErrors({
             ...accountInfoErrors,
@@ -426,7 +426,7 @@ const Signup = () => {
     };
 
     const handleVatNumberChange = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         setVatNumber(value);
         setOrganizationInfoErrors({
             ...organizationInfoErrors,
@@ -435,7 +435,7 @@ const Signup = () => {
     };
 
     const handleOrganizationNameChange = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         setOrganizationName(value);
         setOrganizationInfoErrors({
             ...organizationInfoErrors,
@@ -444,7 +444,7 @@ const Signup = () => {
     };
 
     const handleOrganizationCountryChange = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         setOrganizationCountry(value);
         setOrganizationInfoErrors({
             ...organizationInfoErrors,
@@ -453,7 +453,7 @@ const Signup = () => {
     };
 
     const handleDataSovereigntyChange = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         setDataSovereignty(value);
     }
 
@@ -463,7 +463,7 @@ const Signup = () => {
 
     const postalCodeValidation = (value) => {
         if (value.length === 0) {
-            setPostalCodeErrorNotification({title: "Postal code is required"});
+            setPostalCodeErrorNotification({ title: "Postal code is required" });
         } else {
             setPostalCodeErrorNotification({});
         }
@@ -611,7 +611,7 @@ const Signup = () => {
         const emptyInput = inputRefs.current.find((ref) => ref && ref.value === "");
 
         if (emptyInput) {
-            emptyInput.scrollIntoView({behavior: "smooth"});
+            emptyInput.scrollIntoView({ behavior: "smooth" });
         }
 
         if (!personalInfoButtonDisabled) {
@@ -656,8 +656,8 @@ const Signup = () => {
                         className={"signup-container"}
                     >
                         <Grid className={"signup-grid"}>
-                            <Column sm={{span: 4}} md={{span: 8}} lg={{span: 16}} xlg={{span: 16}}
-                                    id="scroller">
+                            <Column sm={{ span: 4 }} md={{ span: 8 }} lg={{ span: 16 }} xlg={{ span: 16 }}
+                                id="scroller">
                                 <div className="sign-up-form-area">
                                     <Content className={"signup-content"}>
                                         <div className="heading-container">
@@ -674,21 +674,21 @@ const Signup = () => {
                                     </Content>
                                     {(typeof errorNotification === "object" &&
                                         Object.keys(errorNotification).length !== 0) && (
-                                        <div>
-                                            <ToastNotification
-                                                className="error-notification-box"
-                                                iconDescription="describes the close button"
-                                                subtitle={errorNotification?.title}
-                                                timeout={0}
-                                                title={""}
-                                                kind={errorNotification?.status}
-                                                onCloseButtonClick={() => {
-                                                    setErrorNotification({});
-                                                    setIsError(false);
-                                                }}
-                                            />
-                                        </div>
-                                    )}
+                                            <div>
+                                                <InlineNotification
+                                                    className="error-notification-box"
+                                                    iconDescription="describes the close button"
+                                                    subtitle={errorNotification?.title}
+                                                    timeout={0}
+                                                    title={""}
+                                                    kind={errorNotification?.status}
+                                                    onCloseButtonClick={() => {
+                                                        setErrorNotification({});
+                                                        setIsError(false);
+                                                    }}
+                                                />
+                                            </div>
+                                        )}
 
                                     <div className="signup-form">
                                         {activeStep === 1 && (
@@ -708,14 +708,14 @@ const Signup = () => {
                                                     disabled={loading ? true : false}
                                                 />
                                                 {loading ? (
-                                                    <div style={{marginTop: "32px"}}>
+                                                    <div style={{ marginTop: "32px" }}>
                                                         <InlineLoading
                                                             description={"sending confirmation email"}
                                                             className="submit-button-loading"
                                                         />
                                                     </div>
                                                 ) : (
-                                                    <div style={{marginTop: "32px"}}>
+                                                    <div style={{ marginTop: "32px" }}>
                                                         <Button
                                                             kind="tertiary"
                                                             onClick={handleOrganizationFormSubmit}
@@ -749,7 +749,7 @@ const Signup = () => {
                                                 <div>
                                                     {(resendCodeLoading || verifyEmailLoading) ? (
                                                         <div
-                                                            style={{marginTop: "32px"}}
+                                                            style={{ marginTop: "32px" }}
                                                         >
                                                             <InlineLoading
                                                                 description={resendCodeLoading ? "re-sending confirmation email" : ""}
@@ -875,12 +875,12 @@ const Signup = () => {
                                                     }
                                                     invalidText={
                                                         postalCodeErrorNotification &&
-                                                        postalCodeErrorNotification.title
+                                                            postalCodeErrorNotification.title
                                                             ? postalCodeErrorNotification.title
                                                             : ""
                                                     }
                                                 />
-                                                <div style={{marginTop: "6px"}}>
+                                                <div style={{ marginTop: "6px" }}>
                                                     <p className="input-heading">Phone number *</p>
                                                 </div>
                                                 <PhoneInput
@@ -1001,7 +1001,7 @@ const Signup = () => {
                                                                 details</p>
                                                         </div>
                                                         <div>
-                                                            <CardFrame className="card-number"/>
+                                                            <CardFrame className="card-number" />
                                                         </div>
 
                                                         {loadingCardSuccess ? (
@@ -1064,7 +1064,7 @@ const Signup = () => {
                                                             labelText="by email"
                                                             checked={isByEmailChecked}
                                                             id="by-email"
-                                                            onChange={(_, {checked}) => {
+                                                            onChange={(_, { checked }) => {
                                                                 setIsByEmailChecked(checked);
                                                             }}
                                                             disabled={loadingSuccess}
@@ -1107,7 +1107,7 @@ const Signup = () => {
                                                                 checked={isAgreementSigned}
                                                                 disabled={loadingSuccess}
                                                                 id="is-accept-agreement"
-                                                                onChange={(_, {checked}) => {
+                                                                onChange={(_, { checked }) => {
                                                                     setIsAgreementSigned(checked);
                                                                 }}
                                                             />
@@ -1115,9 +1115,9 @@ const Signup = () => {
                                                     </div>
                                                     {loadingSuccess ? (
                                                         <>
-                                                            <div style={{marginTop: "32px"}}>
+                                                            <div style={{ marginTop: "32px" }}>
                                                                 <InlineLoading
-                                                                    description="Creating Account"/>
+                                                                    description="Creating Account" />
                                                             </div>
                                                         </>
                                                     ) : (
@@ -1140,27 +1140,16 @@ const Signup = () => {
                         </Grid>
                         <Footer
                             type="micro"
-                            className="carbon-footer"
                             disableLocaleButton={true}
-                            navigation={
-                                {
-                                    footerThin: [{
-                                        title: "Privacy Policy",
-                                        url: "#"
-                                    },{
-                                        title: "|",
-                                        url: "#"
-                                    }, {
-                                        title: "Terms of Use",
-                                        url: "#"
-                                    }, {
-                                        title: "|",
-                                        url: "#"
-                                    },{
-                                        title: "Cookie Preferences",
-                                        url: "#"
-                                    }]
-                                }}
+                            navigation={{
+                                footerThin: [
+                                    { title: 'Privacy Policy', url: '#' },
+                                    { title: '|', url: '#' },
+                                    { title: 'Terms of Use', url: '#' },
+                                    { title: '|', url: '#' },
+                                    { title: 'Cookie Preferences', url: '#' },
+                                ],
+                            }}
                         />
                         <div className="footer_info">
                             <p>Bynar, Inc. or its affiliates. All rights reserved.</p>

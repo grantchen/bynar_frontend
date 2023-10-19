@@ -1,16 +1,15 @@
 import { useContext } from "react";
 import { TabContext, useMobile } from "../../sdk";
-import {
-    ExpandableSearch,
-    Search,
-    SideNav,
-} from "carbon-components-react";
 import { Fade, Close } from "@carbon/react/icons";
 import {
     SideNavItems,
     SideNavLink,
     SideNavMenu,
-    SideNavMenuItem, } from "@carbon/react";
+    SideNavMenuItem,
+    ExpandableSearch,
+    Search,
+    SideNav,
+} from "@carbon/react";
 import { useTranslation } from "react-i18next";
 import "./AppSideNav.scss";
 import { Button } from "@carbon/react";
@@ -61,7 +60,7 @@ export function AppSideNav({ isSideNavExpanded, onClickSideNavExpand }) {
                                     index === activeTabIndex ? "page" : "link"
                                 }
                                 onClick={() => {
-                                    handleTabChange({selectedIndex:index});
+                                    handleTabChange({ selectedIndex: index });
                                     onClickSideNavExpand();
                                 }}
                             >

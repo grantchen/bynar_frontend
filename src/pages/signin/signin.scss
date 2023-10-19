@@ -1,10 +1,12 @@
 .signin-container {
-  height: 85vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  .box-container {
+  .signin-grid {
     flex: 1;
     margin-bottom: 2rem;
+  }
+  .box-container {
     //display: flex;
     //align-items: center;
     //height: 100%;
@@ -271,10 +273,25 @@
 
 .bx--footer {
   width: 100%;
-  padding-block: 3rem;
+  padding-block: 2rem;
   color: #f4f4f4;
   background-color: #ffffff;
-  padding-top: 3rem;
+  padding-top: 0;
+  @media (min-width: 671px) and (max-width: 770px) {
+    margin-bottom: 2rem;
+  }
+  @media (max-width: 671px) {
+    margin-bottom: 1rem;
+  }
+}
+@media (max-width: 671px) {
+  .bx--footer {
+    padding-block: 0;
+  }
+}
+
+.bx--legal-nav__list {
+  border-top: 0 solid #e0e0e0;
 }
 
 .bx--legal-nav__list.bx--legal-nav__micro .bx--legal-nav__holder .bx--legal-nav__list-item a {
@@ -282,6 +299,9 @@
   align-items: center;
   width: 100%;
   color: #525252;
+  @media (max-width: 671px) {
+    font-size: 13px;
+  }
 }
 
 .bx--legal-nav__list.bx--legal-nav__micro .bx--legal-nav__holder .bx--legal-nav__list-item a:hover {
@@ -290,6 +310,8 @@
 
 .bx--legal-nav__list.bx--legal-nav__micro .bx--legal-nav__holder {
   border-top: none;
+  display: flex;
+  align-items: center;
 }
 
 .bx--legal-nav__list.bx--legal-nav__micro {
@@ -302,25 +324,36 @@
 
 .bx--legal-nav__list.bx--legal-nav__micro .bx--legal-nav__holder .bx--legal-nav__list-item {
   margin-right: 1rem;
+  @media (max-width: 400px) {
+    margin-right: 0.6rem;
+  }
+}
+
+@media (max-width: 671px) {
+  .bx--legal-nav__list.bx--legal-nav__micro .bx--legal-nav__holder .bx--legal-nav__list-item {
+    height: 1.5rem;
+  }
 }
 
 .footer_info {
-  margin-top: -3rem;
+  margin-top: -2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   p {
-    font-size: 0.9em;
+    font-size: 0.8em;
     color: #525252;
     margin: 0;
+    @media (max-width: 671px) {
+      font-size: 8px;
+    }
   }
-}
-
-.bx--legal-nav {
-  display: flex;
-  flex-wrap: wrap;
-  margin-right: -2rem;
-  margin-left: -2rem;
+  @media (min-width: 672px) and (max-width: 770px) {
+    margin-top: -4.5rem;
+  }
+  @media (max-width: 671px) {
+    margin-top: -0.5rem;
+  }
 }
 
 .bx--footer .bx--legal-nav__list .bx--legal-nav__list-item .bx--link {

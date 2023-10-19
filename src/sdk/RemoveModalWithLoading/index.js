@@ -6,7 +6,7 @@ import {
     ModalFooter,
     TextInput,
     Button,
-} from "carbon-components-react";
+} from "@carbon/react";
 import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { pkg } from "@carbon/ibm-products";

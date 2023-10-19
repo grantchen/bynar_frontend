@@ -5,8 +5,8 @@ import {
     ModalBody,
     ModalFooter,
     Button,
-    ToastNotification
-} from "carbon-components-react";
+    InlineNotification
+} from "@carbon/react";
 import { useTranslation } from "react-i18next";
 import { useCardManagement } from "../context";
 import { CardFrame, Frames } from "frames-react";
@@ -60,11 +60,11 @@ const AddCardModal = ({ open }) => {
         }
     }, []);
 
-    // useEffect(() => {
-    //     if (!open) {
-    //         Frames.init(CheckoutPublicKey);
-    //     }
-    // }, [open])
+    useEffect(() => {
+        if (!open) {
+            Frames.init(CheckoutPublicKey);
+        }
+    }, [open])
 
     // useEffect(() => {
     //     if(!modalBodyRef){
@@ -89,7 +89,11 @@ const AddCardModal = ({ open }) => {
             <ModalHeader title={t("add-new-card")} />
             <ModalBody ref={modalBodyRef}>
                 {notification && (
+<<<<<<< HEAD
                     <ToastNotification
+=======
+                    <InlineNotification
+>>>>>>> fix/panel_theme
                         className="error-notification-box"
                         iconDescription="Clear Notification"
                         subtitle={notification?.message}
