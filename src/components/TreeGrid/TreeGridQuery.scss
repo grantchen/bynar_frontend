@@ -1,0 +1,72 @@
+.CQRowSpace1 .CQSolidRow, .CQRowSpace2 .CQSolidRow, .CQRowSpace3 .CQSolidRow{
+  border-left: 0px;
+  border-right: 0px;
+}
+.CQRowSpace2.CQRowSpaceLast .CQSolidRow, .CQRowSpace3.CQRowSpaceLast .CQSolidRow {
+  border-bottom: 0px;
+}
+
+.CQHeadLeft, .CQBodyLeft, .CQFootLeft {
+  border-left: 0px;
+}
+
+.CQHeadMid, .CQBodyMid, .CQFootMid {
+  border-right: 0px;
+}
+.CQHeadMid .CQHeaderRow .CQCellHeader:last-child {
+  border-right: 0px;
+}
+.CQHeadMid .CQHeaderRow .CQCellHeader:nth-last-child(2) {
+  border-right: 0px;
+}
+.CQHeadMid .CQFilterRow .CQCellBase:last-child {
+  border-right: 0px;
+}
+.CQHeadMid .CQFilterRow .CQCellBase:nth-last-child(2) {
+  border-right: 0px;
+}
+
+.CQHeadMid .CQFilterRow .CQCellBase:last-child {
+  border-right: 0px;
+}
+
+.CQBodyMid .CQDataRow .CQCellBase:last-child {
+  border-right: 0px;
+}
+
+.CQBodyMid .CQDataRow .CQCellBase:nth-last-child(2) {
+  border-right: 0px;
+}
+
+.CQMain .CQBodyLeft, .CQMain .CQBodyMid, .CQMain .CQBodyRight {
+  border-bottom: 0px;
+}
+.CQMainTable{
+  border: 0px solid #d0d0d0;
+  border-top: 1px solid #d0d0d0;
+}
+.CQRowAbove, .CQRowBelow {
+  border-left: 0px solid #e0e0ff;
+  border-right: 0px solid #e0e0ff;
+}
+.CQCellSpace, .CQCellSpaceIcon, .CQCellSpaceButton, .CQCellSpaceButtonIcon, .CQCellSpaceButtonButton, .CQCellSpacePanel, .CQCellSpaceBool, .CQCellSpaceRadio, .CQCellSpaceSelect, .CQCellSpaceEdit{
+  border-left: 0px;
+}
+.CQFillRow .CQCellSpaceEmpty{
+  border-right: 0px
+}
+.CQRowSpace .CQGroupRow .CQCellSpace:last-child{
+  border-right: 0px
+}
+.CQRowAbove .CQCellSpaceAbove:last-child{
+  border-right: 0px
+}
+.CQBodyLeft .CQDataRow:last-child .CQCellBase{
+  border-bottom: 0px
+}
+.CQBodyMid .CQDataRow:last-child .CQCellBase{
+  border-bottom: 0px
+}
+.CQBottom .CQBottom2,.CQBottom .CQBottom3,.CQBottom .CQBottom4,.CQBottom .CQBottom5{
+  height: 0px;
+}

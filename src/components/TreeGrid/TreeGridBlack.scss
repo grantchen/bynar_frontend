@@ -1,0 +1,44 @@
+// black
+.TBRowSpace1 .TBSolidRow, .TBRowSpace2 .TBSolidRow, .TBRowSpace3 .TBSolidRow{
+  border-left: 0px;
+  border-right: 0px;
+}
+.TBRowSpace2.TBRowSpaceLast .TBSolidRow, .TBRowSpace3.TBRowSpaceLast .TBSolidRow {
+  border-bottom: 0px;
+}
+
+.TBHeadLeft, .TBBodyLeft, .TBFootLeft {
+  border-left: 0px;
+}
+
+.TBHeadMid, .TBBodyMid, .TBFootMid {
+  border-right: 0px;
+}
+.TBHeadMid .TBHeaderRow .TBCellHeader:last-child {
+  border-right: 0px;
+}
+.TBHeadMid .TBHeaderRow .TBCellHeader:nth-last-child(2) {
+  border-right: 0px;
+}
+.TBHeadMid .TBFilterRow .TBCellBase:last-child {
+  border-right: 0px;
+}
+.TBHeadMid .TBFilterRow .TBCellBase:nth-last-child(2) {
+  border-right: 0px;
+}
+
+.TBHeadMid .TBFilterRow .TBCellBase:last-child {
+  border-right: 0px;
+}
+
+.TBBodyMid .TBDataRow .TBCellBase:last-child {
+  border-right: 0px;
+}
+
+.TBBodyMid .TBDataRow .TBCellBase:nth-last-child(2) {
+  border-right: 0px;
+}
+
+.TBBodyLeft, .TBBodyMid, .TBBodyRight {
+  border-bottom: 0px;
+}
