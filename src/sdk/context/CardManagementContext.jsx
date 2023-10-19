@@ -116,6 +116,7 @@ const CardManagementProvider = ({ children }) => {
     const makeDefaultMethod = useCallback(
         async (cardId) => {
             try {
+                setNotification(null)
                 setLoading(true);
                 const res = await authFetch(`${BaseURL}/apprunnerurl/cards/update`, {
                     method: "POST",
@@ -143,6 +144,7 @@ const CardManagementProvider = ({ children }) => {
 
     const handleVerifyCard = useCallback(
         async (token) => {
+            setNotification(null)
             console.log("token", token);
             const data = {
                 token: token,
@@ -200,6 +202,7 @@ const CardManagementProvider = ({ children }) => {
                 textConfirmation: true,
                 onRequestSubmit: async () => {
                     try {
+                        setNotification(null)
                         setLoading(true);
                         const response = await authFetch(
                             `${BaseURL}/apprunnerurl/cards/delete`,

@@ -95,7 +95,7 @@ const AddCardModal = ({ open }) => {
                         iconDescription="Clear Notification"
                         subtitle={notification?.message}
                         onCloseButtonClick={() => {
-                            setNotification({});
+                            setNotification(null);
                         }}
                         timeout={0}
                         title=""

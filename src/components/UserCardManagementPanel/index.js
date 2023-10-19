@@ -101,7 +101,7 @@ const UserCardManagementPanel = ({ open }) => {
                                 title={""}
                                 kind={notification.type}
                                 onCloseButtonClick={() => {
-                                    setNotification({});
+                                    setNotification(null);
                                 }}
                             />
                         )}
