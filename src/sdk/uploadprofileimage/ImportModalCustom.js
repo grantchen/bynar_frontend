@@ -10,6 +10,7 @@ import {
     TextInput,
     Button,
     usePrefix,
+    InlineLoading
 } from "@carbon/react";
 import cx from "classnames";
 import PropTypes from "prop-types";
@@ -20,7 +21,6 @@ import { uuidv4 } from "../util";
 
 import { pkg } from "@carbon/ibm-products";
 import { async } from "@carbon/themes";
-import { InlineLoading } from "carbon-components-react";
 const componentName = "ImportModal";
 
 // Default values for props
@@ -88,11 +88,11 @@ export let ImportModal = forwardRef(
         }, [user?.profileURL, open]);
 
         useEffect(() => {
-            if(!open){
+            if (!open) {
                 setFiles([])
                 setFileChange(false)
             }
-        },[open])
+        }, [open])
 
         const isInvalidFileType = (file) => {
             const acceptSet = new Set(accept);

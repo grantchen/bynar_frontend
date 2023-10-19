@@ -1,19 +1,15 @@
-import {SidePanel,pkg} from "@carbon/ibm-products";
+import { SidePanel, pkg } from "@carbon/ibm-products";
 import {
-    TextInput,
-    Select,
-    SelectItem,
-    ToastNotification,
-} from "carbon-components-react";
-import {
-    TextInputSkeleton,
+    TextInputSkeleton, Theme,
+    TextInput, Select, SelectItem,
+    InlineNotification
 } from "@carbon/react";
-import React, {useState, useEffect, useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
-import {BaseURL, Languages, Themes} from "../../sdk/constant";
+import { BaseURL, Languages, Themes } from "../../sdk/constant";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import {useAuth, useUserManagement} from "../../sdk";
+import { useAuth, useUserManagement, useThemePreference } from "../../sdk";
 
 import {
     PhoneNumberUtil,
@@ -25,7 +21,8 @@ pkg.component.SidePanel = true;
 
 export const UserDetailPanel = ({ open }) => {
     const { t } = useTranslation();
-    const { user,refreshPostSignIn,getUser,authFetch } = useAuth();
+    const { themePreference } = useThemePreference();
+    const { user, refreshPostSignIn, getUser, authFetch } = useAuth();
     const phoneUtil = PhoneNumberUtil.getInstance();
     const [phoneNumber, setPhoneNumber] = useState("");
     const [fullName, setFullName] = useState("");
@@ -33,8 +30,8 @@ export const UserDetailPanel = ({ open }) => {
     const [theme, setTheme] = useState(
         () => localStorage.getItem("theme-preference") ?? "light"
     );
-    const [language,setLanguage]= useState("");
-    const [disable,setDisable] = useState(false)
+    const [language, setLanguage] = useState("");
+    const [disable, setDisable] = useState(false)
     const [dataLoading, setDataLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [phoneNumberValid, setIsPhoneNumberValid] = useState(false);
@@ -43,14 +40,14 @@ export const UserDetailPanel = ({ open }) => {
     const [serverNotification, setServerNotification] = useState(false);
     const inputRefs = useRef([]);
     const [searchParams] = useSearchParams();
-    const { closeModalAndGoBackToUserList} = useUserManagement();
+    const { closeModalAndGoBackToUserList } = useUserManagement();
     const handleThemeChange = (e) => {
         setServerErrorNotification({});
         setServerNotification(false);
         const selectedItem = Themes.find((item) => item.code === e.target.value);
         if (Object.keys(selectedItem).length === 0) {
             setTheme('light')
-        }else{
+        } else {
             setTheme(e.target.value)
         }
     }
@@ -61,7 +58,7 @@ export const UserDetailPanel = ({ open }) => {
         const selectedItem = Languages.find((item) => item.code === e.target.value);
         if (Object.keys(selectedItem).length === 0) {
             setLanguage('en')
-        }else{
+        } else {
             setLanguage(e.target.value)
         }
     }
@@ -195,7 +192,7 @@ export const UserDetailPanel = ({ open }) => {
                 setDisable(false)
             }
         };
-        if (!emptyInput){
+        if (!emptyInput) {
             fetchData()
         }
     };
@@ -205,7 +202,7 @@ export const UserDetailPanel = ({ open }) => {
                 setServerErrorNotification({});
                 setServerNotification(false);
                 setDataLoading(true);
-                const response = await authFetch(`${BaseURL}/user/${userid}`,{
+                const response = await authFetch(`${BaseURL}/user/${userid}`, {
                     method: "GET",
                 })
                 const res = await response.json();
@@ -231,164 +228,166 @@ export const UserDetailPanel = ({ open }) => {
             return;
         }
         getUserList(user?.id || parseInt(searchParams?.get("userIdToShowDetails")))
-    }, [open,authFetch]);
+    }, [open, authFetch]);
 
     return (
-        <div className="user-detail-panel">
-            <SidePanel
-                preventCloseOnClickOutside
-                includeOverlay
-                className="test"
-                open={open}
-                title={t("user-detail")}
-                subtitle={t("user-profile-information")}
-                actions={[{
-                    label: t('save'),
-                    onClick: function onClick(event) {
-                        event.preventDefault();
-                        handleUpdateProfile();
-                    },
-                    kind: 'primary',
-                    disabled: disable,
-                    loading: disable,
-                }, {
-                    label: t("cancel"),
-                    onClick: handleClose,
-                    kind: 'secondary',
-                }]}
-            >
-                <div className={"story__body-content"}>
-                    {serverNotification && (
-                        <ToastNotification
-                            className="error-notification-box"
-                            iconDescription="Close Notification"
-                            subtitle={serverErrorNotification?.title}
-                            onCloseButtonClick={() => {
-                                setServerErrorNotification({});
-                                setServerNotification(false);
-                            }}
-                            timeout={0}
-                            title={""}
-                            kind={serverErrorNotification?.status}
-                        />
-                    )}
-                    <div className={`story__text-inputs`}>
-                        {dataLoading ? (
-                            <TextInputSkeleton className="skeleton-loading" />
-                        ) : (
-                            <TextInput
-                                id="email"
-                                ref={(el) => (inputRefs.current[0] = el)}
-                                labelText={`${t("email-label")} *`}
-                                value={email}
-                                onChange={(e) => handleEmailChange(e.target.value)}
-                                invalid={!!errors.email}
-                                invalidText={errors.email}
-                                disabled={dataLoading ? true : false}
+        <Theme theme={themePreference === "white" ? "g10" : "g90"}>
+            <div className="user-detail-panel">
+                <SidePanel
+                    preventCloseOnClickOutside
+                    includeOverlay
+                    className="test"
+                    open={open}
+                    title={t("user-detail")}
+                    subtitle={t("user-profile-information")}
+                    actions={[{
+                        label: t('save'),
+                        onClick: function onClick(event) {
+                            event.preventDefault();
+                            handleUpdateProfile();
+                        },
+                        kind: 'primary',
+                        disabled: disable,
+                        loading: disable,
+                    }, {
+                        label: t("cancel"),
+                        onClick: handleClose,
+                        kind: 'secondary',
+                    }]}
+                >
+                    <div className={"story__body-content"}>
+                        {serverNotification && (
+                            <InlineNotification
+                                className="error-notification-box"
+                                iconDescription="Close Notification"
+                                subtitle={serverErrorNotification?.title}
+                                onCloseButtonClick={() => {
+                                    setServerErrorNotification({});
+                                    setServerNotification(false);
+                                }}
+                                timeout={0}
+                                title={""}
+                                kind={serverErrorNotification?.status}
                             />
                         )}
-                        {dataLoading ? (
-                            <TextInputSkeleton className="skeleton-loading" />
-                        ) : (
-                            <TextInput
-                                id="fullName"
-                                ref={(el) => (inputRefs.current[1] = el)}
-                                labelText={`${t("full-name-label")} *`}
-                                className={`story__text-input`}
-                                value={fullName}
-                                onChange={handleFullName}
-                                invalid={!!errors.fullName}
-                                invalidText={errors.fullName}
-                                disabled={dataLoading ? true : false}
-                            />
-                        )}
-                        {dataLoading ? (
-                            <TextInputSkeleton className="skeleton-loading" />
-                        ) : (
-                            <>
-                                <div className="phone-label-wrapper">
-                                    <p className="phone-label">
-                                        {`${t("phone-number-label")} *`}
-                                    </p>
-                                </div>
-                                <PhoneInput
-                                    className="phone-input-sidepanel"
-                                    ref={(el) => (inputRefs.current[2] = el)}
-                                    inputProps={{
-                                        disabled: false,
-                                    }}
-                                    disableDropdown={false}
-                                    style={{
-                                        border:
-                                            !phoneNumberValid &&
-                                            errorMessage.length > 0
-                                                ? "2px solid red"
-                                                : 0,
-                                        cursor: "not-allowed",
-                                    }}
-                                    name="phoneNumber"
-                                    country={""}
-                                    value={phoneNumber}
-                                    onChange={(value, country, formattedValue) =>
-                                        handlePhoneNumber(value, country)
-                                    }
+                        <div className={`story__text-inputs`}>
+                            {dataLoading ? (
+                                <TextInputSkeleton className="skeleton-loading" />
+                            ) : (
+                                <TextInput
+                                    id="email"
+                                    ref={(el) => (inputRefs.current[0] = el)}
+                                    labelText={`${t("email-label")} *`}
+                                    value={email}
+                                    onChange={(e) => handleEmailChange(e.target.value)}
+                                    invalid={!!errors.email}
+                                    invalidText={errors.email}
+                                    disabled={dataLoading ? true : false}
                                 />
-                                {!phoneNumberValid && errorMessage.length > 0 && (
-                                    <p
-                                        style={{
-                                            marginTop: "4px",
-                                            fontSize: "12px",
-                                            color: "#DA1E28",
+                            )}
+                            {dataLoading ? (
+                                <TextInputSkeleton className="skeleton-loading" />
+                            ) : (
+                                <TextInput
+                                    id="fullName"
+                                    ref={(el) => (inputRefs.current[1] = el)}
+                                    labelText={`${t("full-name-label")} *`}
+                                    className={`story__text-input`}
+                                    value={fullName}
+                                    onChange={handleFullName}
+                                    invalid={!!errors.fullName}
+                                    invalidText={errors.fullName}
+                                    disabled={dataLoading ? true : false}
+                                />
+                            )}
+                            {dataLoading ? (
+                                <TextInputSkeleton className="skeleton-loading" />
+                            ) : (
+                                <>
+                                    <div className="phone-label-wrapper">
+                                        <p className="phone-label">
+                                            {`${t("phone-number-label")} *`}
+                                        </p>
+                                    </div>
+                                    <PhoneInput
+                                        className="phone-input-sidepanel"
+                                        ref={(el) => (inputRefs.current[2] = el)}
+                                        inputProps={{
+                                            disabled: false,
                                         }}
+                                        disableDropdown={false}
+                                        style={{
+                                            border:
+                                                !phoneNumberValid &&
+                                                    errorMessage.length > 0
+                                                    ? "2px solid red"
+                                                    : 0,
+                                            cursor: "not-allowed",
+                                        }}
+                                        name="phoneNumber"
+                                        country={""}
+                                        value={phoneNumber}
+                                        onChange={(value, country, formattedValue) =>
+                                            handlePhoneNumber(value, country)
+                                        }
+                                    />
+                                    {!phoneNumberValid && errorMessage.length > 0 && (
+                                        <p
+                                            style={{
+                                                marginTop: "4px",
+                                                fontSize: "12px",
+                                                color: "#DA1E28",
+                                            }}
+                                        >
+                                            {errorMessage}
+                                        </p>
+                                    )}
+                                </>
+                            )}
+                            {dataLoading ? (
+                                <TextInputSkeleton className="skeleton-loading" />
+                            ) : (
+                                <>
+                                    <Select
+                                        value={theme}
+                                        id="theme-ci"
+                                        labelText={t('theme')}
+                                        onChange={handleThemeChange}
                                     >
-                                        {errorMessage}
-                                    </p>
-                                )}
-                            </>
-                        )}
-                        {dataLoading ? (
-                            <TextInputSkeleton className="skeleton-loading" />
-                        ) : (
-                            <>
-                                <Select
-                                    value={theme}
-                                    id="theme-ci"
-                                    labelText={t('theme')}
-                                    onChange={handleThemeChange}
-                                >
-                                    {Themes.map((themeObject, themeIndex) => (
-                                        <SelectItem
-                                            text={t(themeObject.code)}
-                                            value={themeObject.code}
-                                            key={themeIndex}
-                                        />
-                                    ))}
-                                </Select>
-                            </>
-                        )}
-                        {dataLoading ? (
-                            <TextInputSkeleton className="skeleton-loading" />
-                        ) : (
-                            <>
-                                <Select
-                                    value={language}
-                                    id="language-ci"
-                                    labelText={t('languages')}
-                                    onChange={handleLanguageChange}
-                                >
-                                    {Languages.map((object, index) => (
-                                        <SelectItem
-                                            text={t(object.code)}
-                                            value={object.code}
-                                            key={index}
-                                        />
-                                    ))}
-                                </Select>
-                            </>
-                        )}
+                                        {Themes.map((themeObject, themeIndex) => (
+                                            <SelectItem
+                                                text={t(themeObject.code)}
+                                                value={themeObject.code}
+                                                key={themeIndex}
+                                            />
+                                        ))}
+                                    </Select>
+                                </>
+                            )}
+                            {dataLoading ? (
+                                <TextInputSkeleton className="skeleton-loading" />
+                            ) : (
+                                <>
+                                    <Select
+                                        value={language}
+                                        id="language-ci"
+                                        labelText={t('languages')}
+                                        onChange={handleLanguageChange}
+                                    >
+                                        {Languages.map((object, index) => (
+                                            <SelectItem
+                                                text={t(object.code)}
+                                                value={object.code}
+                                                key={index}
+                                            />
+                                        ))}
+                                    </Select>
+                                </>
+                            )}
+                        </div>
                     </div>
-                </div>
-            </SidePanel>
-        </div>
+                </SidePanel>
+            </div>
+        </Theme>
     );
 };
