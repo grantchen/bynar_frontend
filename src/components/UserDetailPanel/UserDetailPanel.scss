@@ -12,8 +12,8 @@
         overflow-x: hidden;
     }
 
-    .c4p--side-panel__container .bx--btn.c4p--side-panel__close-button {
-        display: none;
+    .c4p--side-panel__container .cds--btn.c4p--side-panel__close-button {
+        display: none !important;
     }
 
     .bx--form-item {
@@ -144,3 +144,4 @@ button.button-with-loading {
         min-height: auto;
     }
 }
+
