@@ -68,6 +68,13 @@ export const TreeGrid = ({ table, config = {}, tabId, className }) => {
                             Authorization: token,
                         }
                     },
+                    Cell: {
+                        Script: `LoadMyData('${getAPIRequestURL(`/${ table }/cell`)}', Data, Func);`,
+                        Format: 'Json',
+                        Header: {
+                            Authorization: token,
+                        }
+                    },
                 }
 
                 config = { ...defaultConfig, ...config }
@@ -90,6 +97,7 @@ export const TreeGrid = ({ table, config = {}, tabId, className }) => {
                     //update tab loaded
                     handleSetTabLoaded(G.id.replace('treeGrid_', ''))
                 }
+
             }
         }
 

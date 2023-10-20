@@ -31,7 +31,6 @@ function parseCellSuggestionCallback(suggestionKey, lsSuggestionField){
 }
 
 function parseItemSuggestionCallBack(suggestionKey, data){
-	debugger
 	let jsonData = JSON.parse(data);
 	let dataSuggest = jsonData.Changes[0][suggestionKey];
 	let Items = dataSuggest.Items;
@@ -69,6 +68,6 @@ function parseItemSuggestionCallBack(suggestionKey, data){
 	}
 	Items = [{ Columns: lsField.length, Items: tableItems, Value: "<<dummy value>>", Name: "" }]
 	Items = Items.concat(dummyItems)
-	jsonData.Changes[0][keySuggest] = { Head: "suggest", Items: Items }
+	jsonData.Changes[0][suggestionKey] = { Head: "suggest", Items: Items }
 	return JSON.stringify(jsonData)
 }
