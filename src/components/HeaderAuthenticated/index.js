@@ -153,7 +153,7 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                         <UserProfileImage
                             backgroundColor={ "light-cyan" }
                             size={ "md" }
-                            initials={ user?.fullName ?? "..." }
+                            initials={ user?.fullName.match(/(^\S)/)?.[0].toUpperCase() ?? "..." }
                             image={ user?.profileURL ?? "" }
                             theme={
                                 theme === "g90"

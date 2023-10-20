@@ -6,7 +6,12 @@
 
   .header-dynamic-dropdown-tabs-content {
     background-color: var(--cds-ui-02, #ffffff);
-
+    transform: translateX(0);
+    transition-behavior: normal;
+    transition-delay: 0s;
+    transition-duration: 0.15s;
+    transition-property:all;
+    transition-timing-function:cubic-bezier(0, 0, 0.38, 0.9);
     .list-wrapper {
       .cds--contained-list {
         // hide tooltip popover
@@ -120,7 +125,12 @@
   .header-tab-list {
     .header-dynamic-dropdown-tabs-content {
       background-color: var(--cds-layer);
-
+      transform: translateX(0);
+      transition-behavior: normal;
+      transition-delay: 0s;
+      transition-duration: 0.15s;
+      transition-property:all;
+      transition-timing-function:cubic-bezier(0, 0, 0.38, 0.9);
       .list-wrapper {
         .cds--contained-list {
           .cds--contained-list-item {

@@ -269,92 +269,44 @@
   margin-bottom: 10px;
 }
 
-@import '@carbon/ibmdotcom-styles/scss/components/footer/index';
-
-.bx--footer {
-  width: 100%;
-  color: #f4f4f4;
-  background-color: #ffffff;
-  padding-top: 0;
-  @media (min-width: 671px) and (max-width: 770px) {
-    margin-bottom: 2rem;
-  }
-  @media (max-width: 671px) {
-    padding-block: 2rem;
-    margin-bottom: 1rem;
-  }
-}
-@media (max-width: 671px) {
-  .bx--footer {
-    padding-block: 0;
-  }
-}
-
-.bx--legal-nav__list {
-  border-top: 0 solid #e0e0e0;
-}
-
-.bx--legal-nav__list.bx--legal-nav__micro .bx--legal-nav__holder .bx--legal-nav__list-item a {
+.footer{
   display: flex;
-  align-items: center;
+  flex: 0 0 auto;
   width: 100%;
-  color: #525252;
-  font-size: 13px;
-  text-decoration: none;
-}
-
-.bx--legal-nav__list.bx--legal-nav__micro .bx--legal-nav__holder .bx--legal-nav__list-item a:hover {
-  color: #0f62fe;
-}
-
-.bx--legal-nav__list.bx--legal-nav__micro .bx--legal-nav__holder {
-  border-top: none;
-  display: flex;
   align-items: center;
-}
-
-.bx--legal-nav__list.bx--legal-nav__micro {
-  flex-direction: row;
-  margin-left: 0;
-  align-items: center;
-  width: 100%;
-  justify-content: center;
-}
-
-.bx--legal-nav__list.bx--legal-nav__micro .bx--legal-nav__holder .bx--legal-nav__list-item {
-  margin-right: 0.6rem;
-}
-
-@media (max-width: 671px) {
-  .bx--legal-nav__list.bx--legal-nav__micro .bx--legal-nav__holder .bx--legal-nav__list-item {
-    height: 1.5rem;
+  padding: 100px 0 20px;
+  flex-direction: column;
+  line-height: 20px;
+  font-weight: 400;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  .footer-content{
+    display: flex;
+    flex-direction: row;
+    a {
+      color:#0f62fe;
+      cursor: pointer;
+      text-decoration:none;
+      background-color: transparent;
+      font-size: 14px;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .footer_link_divider{
+      padding: 0 10px;
+      color: #808080;
+      font-size: 14px;
+    }
+  }
+  .footer_copy_right{
+    display: block;
+    text-align: center;
+    padding: 10px;
+    color: #545B64;
+    font-size: 12px;
+    text-size-adjust: 100%;
   }
 }
 
-.footer_info {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  p {
-    font-size: 10px;
-    color: #525252;
-    margin: 0;
-  }
-  @media (min-width: 672px) and (max-width: 770px) {
-    margin-top: -2.5rem;
-  }
-  @media (max-width: 671px) {
-    margin-top: -0.5rem;
-  }
-  @media (max-width: 671px) {
-    margin-top: -0.5rem;
-  }
-}
 
-.bx--footer .bx--legal-nav__list .bx--legal-nav__list-item .bx--link {
-  color: #0f62fe;
-}
-.bx--link .bx--footer__link {
-  color: #0f62fe;
-  background-color: #0f62fe;
-}
