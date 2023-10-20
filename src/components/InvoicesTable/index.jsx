@@ -8,9 +8,6 @@ const InvoicesTable = ({ tabId }) => {
             <div className="tree-grid-content">
                 <TreeGrid
                     table={ "invoices" }
-                    config={ {
-                        Debug: '',
-                    } }
                     tabId={ tabId }
                 ></TreeGrid>
             </div>

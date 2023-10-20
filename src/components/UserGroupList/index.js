@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import "./UserGroupList.scss";
 import { TreeGrid } from "../TreeGrid";
-import { TabContext, useAuth } from "../../sdk";
+import { TabContext } from "../../sdk";
 
 const UserGroupList = ({ tabId }) => {
     const { tab, activeTab } = useContext(TabContext);
@@ -9,37 +9,8 @@ const UserGroupList = ({ tabId }) => {
     useEffect(() => {
         if (tab[activeTab].id !== tabId) return;
 
-        const keySuggest = 'full_nameSuggest'
-        const lsSuggestionField = ["full_name", "email", "user_id"]
-
-        window.LoadMyData = function (url, param, callback) {
-            const response = customRequest(url, param);
-            const data = window.parseItemSuggestionCallBack(keySuggest, JSON.stringify(response), lsSuggestionField);
-            callback(0, data);
-        }
-
-        window.Grids.OnCustomAjax = function (G, IO, data, func) {
-            if (IO.Name !== "Data") {
-                return null;
-            }
-            var ret = customRequest(IO.Url, data);
-            if (ret < 0) func(ret, "Error"); else func(0, ret);
-            return true;
-        }
-
-        function customRequest(url, param, options = {}) {
-            let responseTxt = window.$.ajax({
-                type: "POST",
-                url: url,
-                async: false,
-                data: { Data: param },
-                headers: {
-                    Authorization: "Bearer "+window.token,
-                },
-                ...options,
-            }).responseText
-            return JSON.parse(responseTxt)
-        }
+        window.keySuggest = 'full_nameSuggest'
+        window.lsSuggestionField = ["full_name", "email", "user_id"]
 
         window.Grids.OnExpand = function (G, row) {
             if (row.Def.Name == "Node") {
@@ -47,7 +18,21 @@ const UserGroupList = ({ tabId }) => {
             }
         }
 
-        window.Grids.OnRowAdd = function (G, row, col, val) {
+        // before add
+        window.Grids.OnCanRowAdd = function (G, par, next) {
+            if (G.Editing === 2) return false;
+            // Disable adding rows to grouped category
+            if (par.Def?.Name === "Group" && par.Def?.CDef === "R" && par.Rows) return false;
+            return
+        }
+
+        // on add
+        window.Grids.OnRowAdd = function (G, row) {
+            let par = row.parentNode
+            // add child to grouped row, set code to empty
+            if (par && par.Def?.Name === "Group" && par.Def?.CDef === "R") {
+                row.code = ''
+            }
 
             if (row.Def.Name == "Node") {
                 G.SetAttribute(row, row.parent, "Calculated", 1);
@@ -55,15 +40,12 @@ const UserGroupList = ({ tabId }) => {
         }
 
         window.Grids.OnRowDelete = function (G, row, col, val) {
-            // console.log(row)
             if (row.Def.Name == "Node") {
                 G.SetAttribute(row, row.parent, "Calculated", 1);
             }
         }
 
-
         window.Grids.OnPasteRow = function (G, row, col, val) {
-
             if (row.Def.Name == "Node") {
                 G.SetAttribute(row, row.parent, "Calculated", 1);
             }
@@ -94,6 +76,7 @@ const UserGroupList = ({ tabId }) => {
             };
             return M;
         }
+
         window.Grids.OnContextMenu = function (G, row, col, N) {
             switch (N) {
                 case "Del":
@@ -126,8 +109,6 @@ const UserGroupList = ({ tabId }) => {
             }
         }
 
-        window.Grids.OnAfterValueChanged = window.parseCellSuggestionCallback(keySuggest, lsSuggestionField)
-
         window.Grids.OnDownloadPage = function (G, Row) {
             G.RecalculateRows(G.Rows.Fix1, 1);
         }
@@ -142,29 +123,24 @@ const UserGroupList = ({ tabId }) => {
 
         window.Grids.OnLanguageFinish = function (G, code) {
             var row = G.Rows.Fix3;
+            if (!row) return
             G.SetValue(row, "C", window.Get(row, window.Get(row, "D") + "Rate"), 1);
         }
 
-        // before add
-        window.Grids.OnCanRowAdd = function (G, par, next) {
-            if (G.Editing === 2) return false;
-            // Disable adding rows to grouped category
-            if (par.Def?.Name === "Group" && par.Def?.CDef === "R" && par.Rows) return false;
-            return
-        }
-
-        // on add
-        window.Grids.OnRowAdd = function (G, row) {
-            let par = row.parentNode
-            // add child to grouped row, set code to empty
-            if (par && par.Def?.Name === "Group" && par.Def?.CDef === "R") {
-                row.code = ''
-            }
-        }
-
         return () => {
+            window.keySuggest = ""
+            window.lsSuggestionField = []
+            window.Grids.OnExpand = null;
             window.Grids.OnCanRowAdd = null;
             window.Grids.OnRowAdd = null;
+            window.Grids.OnRowDelete = null;
+            window.Grids.OnPasteRow = null;
+            window.Grids.OnGetMenu = null;
+            window.Grids.OnContextMenu = null;
+            window.Grids.OnDownloadPage = null;
+            window.Grids.OnRenderPageFinish = null;
+            window.Grids.OnPageReady = null;
+            window.Grids.OnLanguageFinish = null;
         }
     }, [tab, activeTab]);
 
@@ -173,9 +149,6 @@ const UserGroupList = ({ tabId }) => {
             <div className="tree-grid-content">
                 <TreeGrid
                     table={ "user_groups" }
-                    config={ {
-                        Debug: '',
-                    } }
                     tabId={ tabId }
                 ></TreeGrid>
             </div>

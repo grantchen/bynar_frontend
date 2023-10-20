@@ -2,6 +2,7 @@ export const BaseURL=process.env.REACT_APP_BASE_URL;
 export const CheckoutPublicKey=process.env.REACT_APP_CHECKOUT_PUBLIC_KEY;
 export const FireBaseAPIKey=process.env.REACT_APP_FIREBASE_API_KEY;
 export const FireBaseAuthDomain=process.env.REACT_APP_FIREBASE_AUTH_DOMAIN;
+export const NodeEnv=process.env.NODE_ENV;
 
 export const COUNTRIES = [
     {

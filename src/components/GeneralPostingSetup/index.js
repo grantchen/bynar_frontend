@@ -8,9 +8,6 @@ const GeneralPostingSetup = ({ tabId }) => {
             <div className="tree-grid-content">
                 <TreeGrid
                     table={ "general_posting_setup" }
-                    config={ {
-                        Debug: '',
-                    } }
                     tabId={ tabId }
                 ></TreeGrid>
             </div>
