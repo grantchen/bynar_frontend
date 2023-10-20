@@ -8,9 +8,6 @@ const UserList = ({ tabId }) => {
             <div className="tree-grid-content">
                 <TreeGrid
                     table={ "user_list" }
-                    config={ {
-                        Debug: ''
-                    } }
                     tabId={ tabId }
                 ></TreeGrid>
             </div>

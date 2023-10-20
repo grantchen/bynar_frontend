@@ -1,9 +1,10 @@
 const LS_SUGGESTION_KEY = "lsSuggestionKey"
+keySuggest = ""
+lsSuggestionField = []
 
 function parseCellSuggestionCallback(suggestionKey, lsSuggestionField){
 	return (G, row, col, val) => {
 		try {
-
 			if(col + "Suggest" != suggestionKey){
 				return
 			}
@@ -12,9 +13,7 @@ function parseCellSuggestionCallback(suggestionKey, lsSuggestionField){
 			// console.log(suggestionData)
 			var s_items = suggestionData.Items;
 			for (i = 0; i < s_items.length; i++) {
-
 			   if (s_items[i].Value == val) {
-					console.log(s_items, s_items[i])
 				  // Clear the undo buffer to remove the entry with html string
 				  G.ClearUndo();
 				  for (j = 0; j < lsSuggestionField.length; j++) {
@@ -30,15 +29,14 @@ function parseCellSuggestionCallback(suggestionKey, lsSuggestionField){
 	}
 }
 
-function parseItemSuggestionCallBack(suggestionKey, data){
-	debugger
+function parseItemSuggestionCallBack(suggestionKey, data, lsSuggestionField){
 	let jsonData = JSON.parse(data);
 	let dataSuggest = jsonData.Changes[0][suggestionKey];
 	let Items = dataSuggest.Items;
 
 	if (Items.length == 0) { return data; }
 
-	let lsField = Object.keys(Items[0])
+	let lsField = lsSuggestionField
 	let nRow = Items.length + 1
 
 	let newItems = []
@@ -69,6 +67,6 @@ function parseItemSuggestionCallBack(suggestionKey, data){
 	}
 	Items = [{ Columns: lsField.length, Items: tableItems, Value: "<<dummy value>>", Name: "" }]
 	Items = Items.concat(dummyItems)
-	jsonData.Changes[0][keySuggest] = { Head: "suggest", Items: Items }
+	jsonData.Changes[0][suggestionKey] = { Head: "suggest", Items: Items }
 	return JSON.stringify(jsonData)
 }
