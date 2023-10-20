@@ -1,0 +1,71 @@
+// colors Gradient
+
+.CGRowSpace1 .CGSolidRow, .CGRowSpace2 .CGSolidRow, .CGRowSpace3 .CGSolidRow{
+  border-left: 0px;
+  border-right: 0px;
+}
+.CGRowSpace2.CGRowSpaceLast .CGSolidRow, .CGRowSpace3.CGRowSpaceLast .CGSolidRow {
+  border-bottom: 0px;
+}
+
+.CGHeadLeft, .CGBodyLeft, .CGFootLeft {
+  border-left: 0px;
+}
+
+.CGHeadMid, .CGBodyMid, .CGFootMid {
+  border-right: 0px;
+}
+.CGHeadMid .CGHeaderRow .CGCellHeader:last-child {
+  border-right: 0px;
+}
+.CGHeadMid .CGHeaderRow .CGCellHeader:nth-last-child(2) {
+  border-right: 0px;
+}
+.CGHeadMid .CGFilterRow .CGCellBase:last-child {
+  border-right: 0px;
+}
+.CGHeadMid .CGFilterRow .CGCellBase:nth-last-child(2) {
+  border-right: 0px;
+}
+
+.CGHeadMid .CGFilterRow .CGCellBase:last-child {
+  border-right: 0px;
+}
+
+.CGBodyMid .CGDataRow .CGCellBase:last-child {
+  border-right: 0px;
+}
+
+.CGBodyMid .CGDataRow .CGCellBase:nth-last-child(2) {
+  border-right: 0px;
+}
+
+.CGMain .CGBodyLeft, .CGMain .CGBodyMid, .CGMain .CGBodyRight {
+  border-bottom: 0px;
+}
+.CGMainTable{
+  border: 0px solid #d0d0d0;
+  border-top: 1px solid #d0d0d0;
+}
+.CGRowAbove, .CGRowBelow {
+  border-left: 0px solid #e0e0ff;
+  border-right: 0px solid #e0e0ff;
+}
+.CGCellSpace, .CGCellSpaceIcon, .CGCellSpaceButton, .CGCellSpaceButtonIcon, .CGCellSpaceButtonButton, .CGCellSpacePanel, .CGCellSpaceBool, .CGCellSpaceRadio, .CGCellSpaceSelect, .CGCellSpaceEdit{
+  border-left: 0px;
+}
+.CGFillRow .CGCellSpaceEmpty{
+  border-right: 0px
+}
+.CGRowSpace .CGGroupRow .CGCellSpace:last-child{
+  border-right: 0px
+}
+.CGRowAbove .CGCellSpaceAbove:last-child{
+  border-right: 0px
+}
+.CGBodyLeft .CGDataRow:last-child .CGCellBase{
+  border-bottom: 0px
+}
+.CGBodyMid .CGDataRow:last-child .CGCellBase{
+  border-bottom: 0px
+}

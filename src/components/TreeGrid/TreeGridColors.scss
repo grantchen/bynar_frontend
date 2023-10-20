@@ -1,0 +1,75 @@
+.CCRowSpace1 .CCSolidRow, .CCRowSpace2 .CCSolidRow, .CCRowSpace3 .CCSolidRow{
+  border-left: 0px;
+  border-right: 0px;
+}
+.CCRowSpace2.CCRowSpaceLast .CCSolidRow, .CCRowSpace3.CCRowSpaceLast .CCSolidRow {
+  border-bottom: 0px;
+}
+
+.CCHeadLeft, .CCBodyLeft, .CCFootLeft {
+  border-left: 0px;
+}
+
+.CCHeadMid, .CCBodyMid, .CCFootMid {
+  border-right: 0px;
+}
+.CCHeadMid .CCHeaderRow .CCCellHeader:last-child {
+  border-right: 0px;
+}
+.CCHeadMid .CCHeaderRow .CCCellHeader:nth-last-child(2) {
+  border-right: 0px;
+}
+.CCHeadMid .CCFilterRow .CCCellBase:last-child {
+  border-right: 0px;
+}
+.CCHeadMid .CCFilterRow .CCCellBase:nth-last-child(2) {
+  border-right: 0px;
+}
+
+.CCHeadMid .CCFilterRow .CCCellBase:last-child {
+  border-right: 0px;
+}
+
+.CCBodyMid .CCDataRow .CCCellBase:last-child {
+  border-right: 0px;
+}
+
+.CCBodyMid .CCDataRow .CCCellBase:nth-last-child(2) {
+  border-right: 0px;
+}
+
+.CCMain .CCBodyLeft, .CCMain .CCBodyMid, .CCMain .CCBodyRight {
+  border-bottom: 0px;
+}
+.CCMainTable{
+  border: 0px solid #d0d0d0;
+  border-top: 1px solid #d0d0d0;
+}
+.CCRowAbove, .CCRowBelow {
+  border-left: 0px solid #e0e0ff;
+  border-right: 0px solid #e0e0ff;
+}
+.CCCellSpace, .CCCellSpaceIcon, .CCCellSpaceButton, .CCCellSpaceButtonIcon, .CCCellSpaceButtonButton, .CCCellSpacePanel, .CCCellSpaceBool, .CCCellSpaceRadio, .CCCellSpaceSelect, .CCCellSpaceEdit{
+  border-left: 0px;
+}
+.CCFillRow .CCCellSpaceEmpty{
+  border-right: 0px
+}
+.CCRowSpace .CCGroupRow .CCCellSpace:last-child{
+  border-right: 0px
+}
+.CCRowAbove .CCCellSpaceAbove:last-child{
+  border-right: 0px
+}
+.CCBodyLeft .CCDataRow:last-child .CCCellBase{
+  border-bottom: 0px
+}
+.CCBodyMid .CCDataRow:last-child .CCCellBase{
+  border-bottom: 0px
+}
+.CCBottom .CCBottom2,.CCBottom .CCBottom3,.CCBottom .CCBottom4,.CCBottom .CCBottom5{
+  height: 0px;
+}
+.CCFillRow{
+  border:0px;
+}
