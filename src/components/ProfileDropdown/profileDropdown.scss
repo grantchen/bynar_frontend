@@ -1,4 +1,10 @@
 .user-profile-dropdown {
+  transform: translateX(0);
+  transition-behavior: normal;
+  transition-delay: 0s;
+  transition-duration: 0.15s;
+  transition-property:all;
+  transition-timing-function:cubic-bezier(0, 0, 0.38, 0.9);
   .bynar-profile-info-wrapper {
     display: flex;
     align-items: center;

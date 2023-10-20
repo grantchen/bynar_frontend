@@ -10,6 +10,7 @@ import {
     TextInput,
     Button,
     usePrefix,
+    Theme,
     InlineLoading
 } from "@carbon/react";
 import cx from "classnames";
@@ -21,6 +22,7 @@ import { uuidv4 } from "../util";
 
 import { pkg } from "@carbon/ibm-products";
 import { async } from "@carbon/themes";
+import {useThemePreference} from "../new-theme";
 const componentName = "ImportModal";
 
 // Default values for props
@@ -72,6 +74,10 @@ export let ImportModal = forwardRef(
         const [importUrl, setImportUrl] = useState();
         const [fileChanged, setFileChange] = useState(false);
         const [loading, setLoading] = useState(false);
+        const { themePreference } = useThemePreference();
+        const [theme, setTheme] = useState(
+            () => localStorage.getItem("theme-preference") ?? "light"
+        );
         useEffect(() => {
             if (!open) return;
             if (!user?.profileURL) return;
@@ -232,107 +238,109 @@ export let ImportModal = forwardRef(
         const blockClass = `${pkg.prefix}--import-modal`;
 
         return (
-            <ComposedModal
-                {...rest}
-                {...{ open, ref, onClose }}
-                aria-label={title}
-                className={cx(blockClass, className)}
-                containerClassName={"uploadprofileimage-change-modal-container"}
-                preventCloseOnClickOutside
-            >
-                <ModalHeader
-                    className={`${blockClass}__header`}
-                    title={title}
-                    closeClassName="display-none"
-                />
-                <ModalBody className={`${blockClass}__body-container`}>
-                    {description && (
-                        <p className={`${blockClass}__body`}>{description}</p>
-                    )}
-                    {fileDropHeader && (
-                        <p className={`${blockClass}__file-drop-header`}>
-                            {fileDropHeader}
-                        </p>
-                    )}
-                    <FileUploaderDropContainer
-                        accept={accept}
-                        labelText={fileDropLabel}
-                        onAddFiles={onAddFile}
-                        disabled={hasFiles}
-                        data-modal-primary-focus
+            <Theme theme={themePreference === "white" ? "g10" : "g90"}>
+                <ComposedModal
+                    {...rest}
+                    {...{ open, ref, onClose }}
+                    aria-label={title}
+                    className={cx(blockClass, className)}
+                    containerClassName={"uploadprofileimage-change-modal-container"}
+                    preventCloseOnClickOutside
+                >
+                    <ModalHeader
+                        className={`${blockClass}__header`}
+                        title={title}
+                        closeClassName="display-none"
                     />
-                    {inputLabel && (
-                        <p className={`${blockClass}__label`}>{inputLabel}</p>
-                    )}
-                    <div className={`${blockClass}__input-group`}>
-                        <TextInput
-                            labelText=""
-                            id={inputId}
-                            onChange={inputHandler}
-                            placeholder={inputPlaceholder}
-                            value={importUrl}
-                            disabled={hasFiles}
-                            aria-label={inputLabel}
-                        />
-                        <Button
-                            onClick={fetchFile}
-                            className={`${blockClass}__import-button`}
-                            size="sm"
-                            disabled={importButtonDisabled}
-                            renderIcon={
-                                inputButtonIcon
-                                    ? (props) => <Add size={20} {...props} />
-                                    : null
-                            }
-                        >
-                            {inputButtonText}
-                        </Button>
-                    </div>
-                    <div
-                        className={`${carbonPrefix}--file-container ${blockClass}__file-container`}
-                    >
-                        {hasFiles && (
-                            <p className={`${blockClass}__helper-text`}>
-                                {fileStatusString}
+                    <ModalBody className={`${blockClass}__body-container`}>
+                        {description && (
+                            <p className={`${blockClass}__body`}>{description}</p>
+                        )}
+                        {fileDropHeader && (
+                            <p className={`${blockClass}__file-drop-header`}>
+                                {fileDropHeader}
                             </p>
                         )}
-                        {files.map((file) => (
-                            <FileUploaderItem
-                                key={file.uuid}
-                                onDelete={() => onRemoveFile(file.uuid)}
-                                name={file.name}
-                                status={file.status}
-                                size="lg"
-                                uuid={file.uuid}
-                                iconDescription={file.iconDescription}
-                                invalid={file.invalid}
-                                errorBody={file.errorBody}
-                                errorSubject={file.errorSubject}
-                                filesize={
-                                    file.fileSize /* cspell:disable-line */
-                                }
-                            />
-                        ))}
-                    </div>
-                </ModalBody>
-                <ModalFooter className={`${blockClass}__footer`}>
-                    <Button type="button" kind="secondary" onClick={onClose}>
-                        {secondaryButtonText}
-                    </Button>
-                    <Button
-                        type="submit"
-                        kind="primary"
-                        onClick={onSubmitHandler}
-                        disabled={primaryButtonDisabled}
-                        className="button-with-loading"
-                    >
-                        {primaryButtonText}
-                        {loading && (
-                            <InlineLoading className="inline-loading-within-btn" />
+                        <FileUploaderDropContainer
+                            accept={accept}
+                            labelText={fileDropLabel}
+                            onAddFiles={onAddFile}
+                            disabled={hasFiles}
+                            data-modal-primary-focus
+                        />
+                        {inputLabel && (
+                            <p className={`${blockClass}__label`}>{inputLabel}</p>
                         )}
-                    </Button>
-                </ModalFooter>
-            </ComposedModal>
+                        <div className={`${blockClass}__input-group`}>
+                            <TextInput
+                                labelText=""
+                                id={inputId}
+                                onChange={inputHandler}
+                                placeholder={inputPlaceholder}
+                                value={importUrl}
+                                disabled={hasFiles}
+                                aria-label={inputLabel}
+                            />
+                            <Button
+                                onClick={fetchFile}
+                                className={`${blockClass}__import-button`}
+                                size="sm"
+                                disabled={importButtonDisabled}
+                                renderIcon={
+                                    inputButtonIcon
+                                        ? (props) => <Add size={20} {...props} />
+                                        : null
+                                }
+                            >
+                                {inputButtonText}
+                            </Button>
+                        </div>
+                        <div
+                            className={`${carbonPrefix}--file-container ${blockClass}__file-container`}
+                        >
+                            {hasFiles && (
+                                <p className={`${blockClass}__helper-text`}>
+                                    {fileStatusString}
+                                </p>
+                            )}
+                            {files.map((file) => (
+                                <FileUploaderItem
+                                    key={file.uuid}
+                                    onDelete={() => onRemoveFile(file.uuid)}
+                                    name={file.name}
+                                    status={file.status}
+                                    size="lg"
+                                    uuid={file.uuid}
+                                    iconDescription={file.iconDescription}
+                                    invalid={file.invalid}
+                                    errorBody={file.errorBody}
+                                    errorSubject={file.errorSubject}
+                                    filesize={
+                                        file.fileSize /* cspell:disable-line */
+                                    }
+                                />
+                            ))}
+                        </div>
+                    </ModalBody>
+                    <ModalFooter className={`${blockClass}__footer`}>
+                        <Button type="button" kind="secondary" onClick={onClose}>
+                            {secondaryButtonText}
+                        </Button>
+                        <Button
+                            type="submit"
+                            kind="primary"
+                            onClick={onSubmitHandler}
+                            disabled={primaryButtonDisabled}
+                            className="button-with-loading"
+                        >
+                            {primaryButtonText}
+                            {loading && (
+                                <InlineLoading className="inline-loading-within-btn" />
+                            )}
+                        </Button>
+                    </ModalFooter>
+                </ComposedModal>
+            </Theme>
         );
     }
 );
