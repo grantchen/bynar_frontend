@@ -26,6 +26,7 @@ const CARD_MANAGEMENT_CONSTANTS = {
     openCardManagementPanel: "openCardMangementPanel",
     openAddCardModal: "openCardAddModal",
 };
+
 const CardManagementProvider = ({ children }) => {
     const { user, authFetch } = useAuth();
     const { t } = useTranslation();

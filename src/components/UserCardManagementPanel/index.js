@@ -13,6 +13,7 @@ import {
     SkeletonPlaceholder,
     InlineNotification,
     ToastNotification,
+    Checkbox
 } from "@carbon/react";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Add, CheckmarkFilled, TrashCan, OverflowMenuVertical } from "@carbon/react/icons";
@@ -45,6 +46,9 @@ const UserCardManagementPanel = ({ open }) => {
     const [openOptionIndex, setOpenOptionIndex] = useState(-1);
     const { t } = useTranslation();
     const { themePreference } = useThemePreference();
+    const [disable, setDisable] = useState(false)
+
+    const [defCard, setDefCard] = useState(cardsData?.default)
 
     const handleDefaultCardOptionClick = useCallback(
         async (cardId) => {
@@ -60,6 +64,8 @@ const UserCardManagementPanel = ({ open }) => {
         }
         (async () => {
             await getUserCardList();
+            console.log("----- card ", cardsData?.default)
+            setDefCard(cardsData?.default)
         })();
     }, [open]);
 
@@ -88,8 +94,23 @@ const UserCardManagementPanel = ({ open }) => {
                     includeOverlay
                     className="test"
                     open={open}
-                    onRequestClose={closeCardManagementPanel}
+                    // onRequestClose={closeCardManagementPanel}
                     subtitle=""
+                    actions={[{
+                        label: t('save'),
+                        onClick: function onClick(event) {
+                            event.preventDefault();
+                            handleDefaultCardOptionClick(defCard)
+                            // handleUpdateProfile();
+                        },
+                        kind: 'primary',
+                        disabled: disable,
+                        loading: disable,
+                    }, {
+                        label: t("cancel"),
+                        onClick: closeCardManagementPanel,
+                        kind: 'secondary',
+                    }]}
                 >
                     <div className="card-list">
                         {notification && (
@@ -225,7 +246,7 @@ const UserCardManagementPanel = ({ open }) => {
                                                 }
                                                 key={listItem.id}
                                             >
-                                                <div className="card-box">
+                                                <div className="card-box" onClick={() => { setDefCard(listItem.id) }}>
                                                     <div className="card-logo">
                                                         <div className="card-logo-with-checkicon">
                                                             <p className="card-type">
@@ -233,10 +254,6 @@ const UserCardManagementPanel = ({ open }) => {
                                                                     listItem?.scheme
                                                                 }
                                                             </p>
-                                                            {listItem?.id ===
-                                                                cardsData?.default && (
-                                                                    <CheckmarkFilled size={16} />
-                                                                )}
                                                         </div>
                                                     </div>
                                                     <p>
@@ -251,6 +268,11 @@ const UserCardManagementPanel = ({ open }) => {
                                                             date,
                                                             "MM/yyyy"
                                                         )}
+                                                    </p>
+                                                    <p className="card-checkbox">
+                                                        {listItem?.id === defCard ? (
+                                                            <CheckmarkFilled size={16} />
+                                                        ) : <CheckmarkFilled size={16} style={{ visibility: "hidden" }} />}
                                                     </p>
                                                 </div>
                                             </ContainedListItem>

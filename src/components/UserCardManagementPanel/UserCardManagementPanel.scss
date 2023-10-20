@@ -1,7 +1,12 @@
-.card-list {
-    margin-top: 50px;
+.c4p--side-panel .c4p--side-panel__inner-content .c4p--side-panel__close-button {
+    display: none !important;
+}
 
+.card-list {
+
+    // margin-top: 50px;
     .card-box {
+        min-width: 380px;
         display: flex;
         justify-content: space-between;
 
@@ -24,13 +29,26 @@
 
         .card-holder-name {
             // overflow-wrap: break-word;
-            width: 80px;
+            width: 100px;
             padding: 0px;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
+        .card-checkbox {
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            .cds--checkbox {
+                clip-path: circle(50%) !important;
+            }
+
+        }
+
+
+
     }
+
 }
 
 .cds--toast-notification__subtitle {
