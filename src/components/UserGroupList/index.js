@@ -14,7 +14,7 @@ const UserGroupList = ({ tabId }) => {
 
         window.LoadMyData = function (url, param, callback) {
             const response = customRequest(url, param);
-            const data = window.parseItemSuggestionCallBack(keySuggest, JSON.stringify(response));
+            const data = window.parseItemSuggestionCallBack(keySuggest, JSON.stringify(response), lsSuggestionField);
             callback(0, data);
         }
 

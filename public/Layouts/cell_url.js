@@ -3,7 +3,6 @@ const LS_SUGGESTION_KEY = "lsSuggestionKey"
 function parseCellSuggestionCallback(suggestionKey, lsSuggestionField){
 	return (G, row, col, val) => {
 		try {
-
 			if(col + "Suggest" != suggestionKey){
 				return
 			}
@@ -30,14 +29,14 @@ function parseCellSuggestionCallback(suggestionKey, lsSuggestionField){
 	}
 }
 
-function parseItemSuggestionCallBack(suggestionKey, data){
+function parseItemSuggestionCallBack(suggestionKey, data, lsSuggestionField){
 	let jsonData = JSON.parse(data);
 	let dataSuggest = jsonData.Changes[0][suggestionKey];
 	let Items = dataSuggest.Items;
 
 	if (Items.length == 0) { return data; }
 
-	let lsField = Object.keys(Items[0])
+	let lsField = lsSuggestionField
 	let nRow = Items.length + 1
 
 	let newItems = []
