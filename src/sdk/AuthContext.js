@@ -44,7 +44,6 @@ export const AuthProvider = ({ children }) => {
                 if (auth.currentUser) {
                     const token = await auth.currentUser.getIdToken()
                     setState({ token: token });
-                    window.token = token
 
                     unsubscribeIdTokenChanged = auth.onIdTokenChanged(async (user) => {
                       if (user) {
