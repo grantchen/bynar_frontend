@@ -270,7 +270,7 @@ const UserCardManagementPanel = ({ open }) => {
                                                         )}
                                                     </p>
                                                     <p className="card-checkbox">
-                                                        {listItem?.id === defCard ? (
+                                                        {((defCard && listItem?.id === defCard) || (!defCard && listItem?.id === cardsData?.default)) ? (
                                                             <CheckmarkFilled size={16} />
                                                         ) : <CheckmarkFilled size={16} style={{ visibility: "hidden" }} />}
                                                     </p>
