@@ -247,33 +247,31 @@ const UserCardManagementPanel = ({ open }) => {
                                                 key={listItem.id}
                                             >
                                                 <div className="card-box" onClick={() => { setDefCard(listItem.id) }}>
-                                                    <div className="card-logo">
-                                                        <div className="card-logo-with-checkicon">
-                                                            <p className="card-type">
+                                                        <span className="card-logo card-logo-with-checkicon">
+                                                            <span className="card-type">
                                                                 {
                                                                     listItem?.scheme
                                                                 }
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <p>
+                                                            </span>
+                                                        </span>
+                                                    <span>
                                                         {"...."}
                                                         {listItem?.last4}
-                                                    </p>
-                                                    <p className="card-holder-name">
+                                                    </span>
+                                                    <span className="card-holder-name">
                                                         {cardsData?.name}
-                                                    </p>
-                                                    <p>
+                                                    </span>
+                                                    <span>
                                                         {format(
                                                             date,
                                                             "MM/yyyy"
                                                         )}
-                                                    </p>
-                                                    <p className="card-checkbox">
+                                                    </span>
+                                                    <span className="card-checkbox">
                                                         {((defCard && listItem?.id === defCard) || (!defCard && listItem?.id === cardsData?.default)) ? (
-                                                            <CheckmarkFilled size={16} />
-                                                        ) : <CheckmarkFilled size={16} style={{ visibility: "hidden" }} />}
-                                                    </p>
+                                                            <CheckmarkFilled size={14} />
+                                                        ) : <CheckmarkFilled size={14} style={{ visibility: "hidden" }} />}
+                                                    </span>
                                                 </div>
                                             </ContainedListItem>
                                         );
