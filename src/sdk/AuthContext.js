@@ -147,11 +147,12 @@ export const AuthProvider = ({ children }) => {
                     return new Promise();
                 }
             }
+            // TODO fetch exception, not call getAuthorizationToken
             let res = await fetch(url, {
                 ...options,
                 headers: {
                     ...options.headers,
-                    Authorization: "Bearer " + token,
+                    Authorization: await getAuthorizationToken(),
                 },
             });
             if (res.status === 401) {
