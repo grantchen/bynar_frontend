@@ -8,9 +8,9 @@
   .header-dynamic-dropdown-tabs-content {
     background-color: var(--cds-ui-02, #ffffff);
 
-    &:hover {
-      background-color: var(--cds-layer-hover);
-    }
+    // &:hover {
+    //   background-color: var(--cds-layer-hover);
+    // }
 
     .list-wrapper {
       .cds--contained-list {
