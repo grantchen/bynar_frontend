@@ -2,7 +2,13 @@
     display: none !important;
 }
 
+
+
 .card-list {
+
+    .cds--contained-list__header {
+        background-color: var(--cds-layer) !important;
+    }
 
     // margin-top: 50px;
     .card-box {
