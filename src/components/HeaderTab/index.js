@@ -5,10 +5,9 @@ import {
     Tabs,
     Tab,
 } from "@carbon/react";
-import { Add } from "@carbon/react/icons";
+import { Add, Home } from "@carbon/react/icons";
 import "./HeaderTab.scss";
 import { TabContext } from "../../sdk";
-import { Home } from "@carbon/react/icons";
 import TabSkeleton from "carbon-web-components/es/components-react/tabs/tab-skeleton";
 
 const TabIcon = (tabItem) => {
@@ -22,8 +21,7 @@ const TabIcon = (tabItem) => {
                 ) : (
                     tabItem.name === "Dashboard" &&
                     <>
-                        {/* icon home should be a little smaller */}
-                        <Home size={15}></Home>
+                        <Home size={16} />
                     </>
                 )
             }

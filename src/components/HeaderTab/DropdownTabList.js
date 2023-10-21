@@ -7,8 +7,7 @@ import {
 } from "@carbon/react";
 import "./DropdownTabList.scss";
 import { TabContext } from "../../sdk";
-import { ChevronDown, Close } from "@carbon/react/icons";
-import { Home } from "@carbon/react/icons";
+import { ChevronDown, Close, Home } from "@carbon/react/icons";
 import { useTranslation } from "react-i18next";
 import TabSkeleton from "carbon-web-components/es/components-react/tabs/tab-skeleton";
 
@@ -127,7 +126,7 @@ const DropdownTabList = ({ className }) => {
                                                                     setIsDropdownTabsOpen(false);
                                                                 }}
                                                             >
-                                                                <Home size={15}></Home>
+                                                                <Home size={16} />
                                                             </Button>
                                                         </>
                                                     )

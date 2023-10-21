@@ -22,7 +22,6 @@ const ProfileDropdown = React.memo(
       e.preventDefault();
       await signout();
     };
-
     const handleImageUploadChange = (e) => {
       e.preventDefault();
       setUploadProfileModalOpen(!openUploadProfileModal);
@@ -37,7 +36,7 @@ const ProfileDropdown = React.memo(
               <UserProfileImage
                 backgroundColor={"light-cyan"}
                 size={"xl"}
-                initials={user?.fullName ?? '...'}
+                initials={user?.fullName.match(/(^\S)/)?.[0].toUpperCase() ?? '...'}
                 image={user?.profileURL ?? ""}
                 // tooltipText={user?.fullName ?? '...'}
                 theme={
