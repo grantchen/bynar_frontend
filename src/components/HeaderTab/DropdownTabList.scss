@@ -1,11 +1,16 @@
 // drop down tabs
 .header-tab-list {
+
   .cds--dropdown__wrapper--inline {
     grid-gap: 0;
   }
 
   .header-dynamic-dropdown-tabs-content {
     background-color: var(--cds-ui-02, #ffffff);
+
+    &:hover {
+      background-color: var(--cds-layer-hover);
+    }
 
     .list-wrapper {
       .cds--contained-list {
@@ -38,6 +43,7 @@
 
           &.list-item-active {
             .cds--contained-list-item__content {
+              color: var(--cds-text-primary);
               background-color: var(--cds-layer-selected);
 
               &::after {
