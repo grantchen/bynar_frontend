@@ -9,12 +9,17 @@
 
     .list-wrapper {
       .cds--contained-list {
+
         // hide tooltip popover
         .cds--popover[role="tooltip"] {
           display: none;
         }
 
         .cds--contained-list-item {
+          .cds--contained-list-item__content {
+            color: var(--cds-text-02);
+          }
+
           // no border between tabs
           &:not(:last-of-type)::before {
             content: none;
@@ -22,6 +27,7 @@
 
           &:hover {
             .cds--contained-list-item__content {
+              color: var(--cds-text-01);
               background-color: var(--cds-layer-hover);
             }
 
@@ -110,7 +116,7 @@
       }
     }
 
-    + .cds--popover-caret {
+    +.cds--popover-caret {
       background-color: var(--cds-ui-02, #ffffff);
     }
   }
@@ -149,7 +155,7 @@
         }
       }
 
-      + .cds--popover-caret {
+      +.cds--popover-caret {
         background-color: var(--cds-layer);
       }
     }
