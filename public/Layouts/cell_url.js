@@ -34,7 +34,8 @@ function parseItemSuggestionCallBack(suggestionKey, data, lsSuggestionField){
 	let dataSuggest = jsonData.Changes[0][suggestionKey];
 	let Items = dataSuggest.Items;
 
-	if (Items.length == 0) { return data; }
+	// TreeGrid error when Items is empty
+	// if (Items.length == 0) { return data; }
 
 	let lsField = lsSuggestionField
 	let nRow = Items.length + 1
