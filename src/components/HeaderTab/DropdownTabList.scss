@@ -24,7 +24,7 @@
 
         .cds--contained-list-item {
           .cds--contained-list-item__content {
-            color: var(--cds-text-02);
+            color: var(--cds-text-02, #525252);
           }
 
           // no border between tabs
