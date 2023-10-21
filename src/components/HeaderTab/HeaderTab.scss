@@ -16,16 +16,28 @@
     display: none;
   }
 
+  .cds--popover-container {
+    &:hover {
+      background-color: var(--cds-background-hover);
+    }
+
+  }
 
   .tab-buttons-list {
     overflow-x: auto;
+
+    .cds--popover-container {
+      &:hover {
+        background-color: var(--cds-background-hover);
+      }
+    }
 
     &::-webkit-scrollbar {
       display: none;
     }
 
     // remove gap between tabs
-    .cds--tabs .cds--tabs__nav-item + .cds--tabs__nav-item {
+    .cds--tabs .cds--tabs__nav-item+.cds--tabs__nav-item {
       margin-left: 0;
     }
 
@@ -35,6 +47,7 @@
     }
 
     .custom-tab {
+
       // hide tab bottom border color
       &.cds--tabs__nav-link:not(.cds--tabs__nav-item--selected) {
         border-bottom-color: transparent;
