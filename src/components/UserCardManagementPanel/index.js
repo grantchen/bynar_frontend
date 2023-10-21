@@ -171,6 +171,7 @@ const UserCardManagementPanel = ({ open }) => {
                                                         }
                                                         align="bottom-right"
                                                         dropShadow
+                                                        isTabTip
                                                         className="card-row-popover"
                                                     >
                                                         <IconButton
@@ -220,7 +221,8 @@ const UserCardManagementPanel = ({ open }) => {
                                                                                 )}
                                                                             </div>
                                                                         }
-                                                                        isDelete
+                                                                        isDelete={listItem?.id !==
+                                                                            cardsData?.default}
                                                                         hasDivider
                                                                         disabled={
                                                                             listItem?.id ===
