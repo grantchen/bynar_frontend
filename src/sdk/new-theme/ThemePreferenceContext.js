@@ -7,7 +7,7 @@ import React, {
     useState,
 } from "react";
 import { useAuth } from "../AuthContext";
-import {useThemeDetector} from './useThemeDetector'
+import { useThemeDetector } from './useThemeDetector'
 
 const ThemePreferenceContext = createContext();
 
@@ -25,7 +25,7 @@ function ThemePreferenceProvider({ children }) {
     const [theme, setTheme] = useState(
         () => localStorage.getItem("theme-preference") ?? "light"
     );
-    const [themePreference,setThemePreference ] = useState(()=>
+    const [themePreference, setThemePreference] = useState(() =>
         mapCarbonThemeFromThemePreference(localStorage.getItem("theme-preference") ?? "light")
     )
     const isSystemThemeDark = useThemeDetector()
@@ -44,10 +44,16 @@ function ThemePreferenceProvider({ children }) {
             setTheme(user.themePreference === "" ? "light" : user.themePreference)
             setThemePreference(mapCarbonThemeFromThemePreference(user.themePreference === "" ? "light" : user.themePreference))
         }
-    }, [user,isSystemThemeDark]);
+    }, [user, isSystemThemeDark]);
 
     useEffect(() => {
-        if(!theme || !user){
+        if (theme) {
+            document.documentElement.setAttribute(
+                "data-carbon-theme",
+                mapCarbonThemeFromThemePreference(theme)
+            );
+        }
+        if (!theme || !user) {
             return
         }
         document.documentElement.setAttribute(
@@ -56,7 +62,7 @@ function ThemePreferenceProvider({ children }) {
         );
         localStorage.setItem("theme-preference", theme);
         setThemePreference(mapCarbonThemeFromThemePreference(theme))
-    }, [theme,user,isSystemThemeDark]);
+    }, [theme, user, isSystemThemeDark]);
 
     const value = {
         theme,

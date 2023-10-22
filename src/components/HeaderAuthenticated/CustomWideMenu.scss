@@ -229,7 +229,7 @@
           }
         }
 
-        > span {
+        >span {
           font-size: var(--cds-body-short-01-font-size, .875rem);
           font-weight: var(--cds-body-short-01-font-weight, 400);
           line-height: var(--cds-body-short-01-line-height, 1.28572);
@@ -275,7 +275,7 @@
               letter-spacing: var(--cds-expressive-heading-01-letter-spacing, .16px);
             }
 
-            > span {
+            >span {
               font-size: var(--cds-body-short-01-font-size, .875rem);
               font-weight: var(--cds-body-short-01-font-weight, 400);
               line-height: var(--cds-body-short-01-line-height, 1.28572);
@@ -333,7 +333,7 @@
         .panel-heading {
           width: auto;
 
-          > span {
+          >span {
             width: 40%;
           }
         }
@@ -367,4 +367,3 @@
     padding-left: 2.5rem;
   }
 }
-

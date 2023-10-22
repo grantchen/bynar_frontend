@@ -5,7 +5,8 @@ import {
     ModalBody,
     ModalFooter,
     Button,
-    InlineNotification
+    InlineNotification,
+    ToastNotification
 } from "@carbon/react";
 import { useTranslation } from "react-i18next";
 import { useCardManagement } from "../context";
@@ -15,9 +16,12 @@ import { useAuth } from "../AuthContext";
 import './AddCardModal.scss'
 import { useThemePreference } from "../new-theme";
 import { useNavigate } from "react-router-dom";
+import {
+    CheckoutPublicKey,
+} from "./../../sdk";
 const AddCardModal = ({ open }) => {
     console.log(open)
-    const [loading, setLoading] = useState();
+    const [loading, setLoading] = useState(false);
     const modalBodyRef = useRef(null)
     const { authFetch } = useAuth();
     const navigate = useNavigate()
@@ -59,7 +63,7 @@ const AddCardModal = ({ open }) => {
 
     useEffect(() => {
         if (!open) {
-            Frames.init("pk_sbox_u4jn2iacxvzosov4twmtl2yzlqe");
+            Frames.init(CheckoutPublicKey);
         }
     }, [open])
 
@@ -89,26 +93,21 @@ const AddCardModal = ({ open }) => {
                     <InlineNotification
                         className="error-notification-box"
                         iconDescription="Clear Notification"
-                        subtitle={notification?.message}
+                        title={notification?.message}
                         onCloseButtonClick={() => {
                             setNotification(null);
                         }}
                         timeout={0}
-                        title=""
+                        // title=""
                         kind={notification?.type}
                     />
                 )}
                 <Frames
                     config={{
-                        publicKey: "pk_sbox_u4jn2iacxvzosov4twmtl2yzlqe",
-                        style: {
-                            base: {
-                                color: theme === 'dark' ? '#ffffff' : '#161616'
-                            },
-                        }
+                        publicKey: CheckoutPublicKey,
                     }}
                 >
-                    <div>
+                    <div className="card-input-container">
                         <div>
                             <p className="input-heading">{t("card-details")}</p>
                         </div>

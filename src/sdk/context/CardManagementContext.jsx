@@ -26,6 +26,7 @@ const CARD_MANAGEMENT_CONSTANTS = {
     openCardManagementPanel: "openCardMangementPanel",
     openAddCardModal: "openCardAddModal",
 };
+
 const CardManagementProvider = ({ children }) => {
     const { user, authFetch } = useAuth();
     const { t } = useTranslation();
@@ -66,7 +67,7 @@ const CardManagementProvider = ({ children }) => {
     )]);
 
     const isCardManagementAllowed = useMemo(
-        () => user && user?.cognitoUserGroups === "PrimaryOwner",
+        () => user,
         [user]
     );
 
@@ -91,16 +92,21 @@ const CardManagementProvider = ({ children }) => {
                 ).toString();
 
                 const response = await authFetch(
-                    `${BaseURL}/card?${searchQueryParams}`
+                    `${BaseURL}/apprunnerurl/cards/list?${searchQueryParams}`,
                 );
+                const res = await response.json();
                 if (response.ok) {
-                    const res = await response.json();
-                    setCardsData(res.result);
+                    setCardsData(res);
+                } else if (response.status === 500) {
+                    setNotification({
+                        type: "error",
+                        message: res.error,
+                    });
                 }
             } catch (error) {
                 setNotification({
                     type: "error",
-                    message: t("invoices-load-failed"),
+                    message: t("payment-failed"),
                 });
             } finally {
                 setLoading(false);
@@ -111,12 +117,24 @@ const CardManagementProvider = ({ children }) => {
     const makeDefaultMethod = useCallback(
         async (cardId) => {
             try {
+                setNotification(null)
                 setLoading(true);
-                await authFetch(`${BaseURL}/card/${cardId}`, {
-                    method: "PUT",
+                const res = await authFetch(`${BaseURL}/apprunnerurl/cards/update`, {
+                    method: "POST",
+                    body: JSON.stringify({ source_id: cardId }),
                 });
+                if (res.ok) {
+                    setNotification({
+                        type: "success",
+                        message: t("payment-successful"),
+                    });
+                }
                 await getUserCardList();
             } catch (error) {
+                setNotification({
+                    type: "error",
+                    message: t("payment-failed"),
+                });
                 //todo show notification
             } finally {
                 setLoading(false);
@@ -127,11 +145,12 @@ const CardManagementProvider = ({ children }) => {
 
     const handleVerifyCard = useCallback(
         async (token) => {
+            setNotification(null)
             console.log("token", token);
             const data = {
                 token: token,
             };
-            const response = await authFetch(`${BaseURL}/verify-card`, {
+            const response = await authFetch(`${BaseURL}/apprunnerurl/cards/add`, {
                 method: "POST",
                 body: JSON.stringify(data),
             });
@@ -145,7 +164,10 @@ const CardManagementProvider = ({ children }) => {
                 });
                 navigate(-1);
             } else if (response.status === 500) {
-                throw { message: res.error, type: "error" };
+                setNotification({
+                    type: "error",
+                    message: res.error,
+                });
             } else {
                 throw { message: t("error-adding-user-card"), type: "error" };
             }
@@ -181,17 +203,25 @@ const CardManagementProvider = ({ children }) => {
                 textConfirmation: true,
                 onRequestSubmit: async () => {
                     try {
+                        setNotification(null)
                         setLoading(true);
                         const response = await authFetch(
-                            `${BaseURL}/card/${cardIdToBeDeleted}`,
+                            `${BaseURL}/apprunnerurl/cards/delete`,
                             {
-                                method: "DELETE",
+                                method: "POST",
+                                body: JSON.stringify({ source_id: cardIdToBeDeleted }),
                             }
                         );
+                        const res = await response.json()
                         if (response.ok) {
                             setNotification({
                                 type: "success",
                                 message: t("card-deleted-successfully"),
+                            });
+                        } else if (response.status === 500) {
+                            setNotification({
+                                type: "error",
+                                message: res.error,
                             });
                         } else {
                             throw "error";

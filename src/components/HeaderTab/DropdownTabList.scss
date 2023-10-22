@@ -1,5 +1,6 @@
 // drop down tabs
 .header-tab-list {
+
   .cds--dropdown__wrapper--inline {
     grid-gap: 0;
   }
@@ -10,16 +11,22 @@
     transition-behavior: normal;
     transition-delay: 0s;
     transition-duration: 0.15s;
-    transition-property:all;
-    transition-timing-function:cubic-bezier(0, 0, 0.38, 0.9);
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0, 0, 0.38, 0.9);
+
     .list-wrapper {
       .cds--contained-list {
+
         // hide tooltip popover
         .cds--popover[role="tooltip"] {
           display: none;
         }
 
         .cds--contained-list-item {
+          .cds--contained-list-item__content {
+            color: var(--cds-text-02, #525252);
+          }
+
           // no border between tabs
           &:not(:last-of-type)::before {
             content: none;
@@ -27,6 +34,7 @@
 
           &:hover {
             .cds--contained-list-item__content {
+              color: var(--cds-text-01);
               background-color: var(--cds-layer-hover);
             }
 
@@ -37,6 +45,7 @@
 
           &.list-item-active {
             .cds--contained-list-item__content {
+              color: var(--cds-text-primary);
               background-color: var(--cds-layer-selected);
 
               &::after {
@@ -115,7 +124,7 @@
       }
     }
 
-    + .cds--popover-caret {
+    +.cds--popover-caret {
       background-color: var(--cds-ui-02, #ffffff);
     }
   }
@@ -129,8 +138,9 @@
       transition-behavior: normal;
       transition-delay: 0s;
       transition-duration: 0.15s;
-      transition-property:all;
-      transition-timing-function:cubic-bezier(0, 0, 0.38, 0.9);
+      transition-property: all;
+      transition-timing-function: cubic-bezier(0, 0, 0.38, 0.9);
+
       .list-wrapper {
         .cds--contained-list {
           .cds--contained-list-item {
@@ -159,7 +169,7 @@
         }
       }
 
-      + .cds--popover-caret {
+      +.cds--popover-caret {
         background-color: var(--cds-layer);
       }
     }

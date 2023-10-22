@@ -9,6 +9,7 @@ import {
     TabContextProvider,
     ThemePreferenceProvider,
     UserManagementProvider,
+    CardManagementProvider,
 } from "./sdk";
 
 const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard"));
@@ -30,6 +31,7 @@ function App() {
                         <ThemePreferenceProvider>
                             <TabContextProvider>
                                 <UserManagementProvider>
+                                    {/* <CardManagementProvider> */}
                                     <Routes>
                                         <Route
                                             path="/"
@@ -65,6 +67,7 @@ function App() {
                                             />
                                         </Route>
                                     </Routes>
+                                    {/* </CardManagementProvider> */}
                                 </UserManagementProvider>
                             </TabContextProvider>
                         </ThemePreferenceProvider>

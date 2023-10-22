@@ -7,6 +7,7 @@ import {
     TextInput,
     Button,
 } from "@carbon/react";
+import "./removemodal.scss";
 import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { pkg } from "@carbon/ibm-products";

@@ -5,7 +5,7 @@ import {
     Tabs,
     Tab,
 } from "@carbon/react";
-import { Add20, Home16 } from '@carbon/icons-react';
+import { Add, Home } from "@carbon/react/icons";
 import "./HeaderTab.scss";
 import { TabContext } from "../../sdk";
 import TabSkeleton from "carbon-web-components/es/components-react/tabs/tab-skeleton";
@@ -16,12 +16,12 @@ const TabIcon = (tabItem) => {
             {
                 tabItem.isDelted ? (
                     <>
-                        {/* use native dismissable because of Chevron scroll misbehave */ }
+                        {/* use native dismissable because of Chevron scroll misbehave */}
                     </>
                 ) : (
                     tabItem.name === "Dashboard" &&
                     <>
-                        <Home16 />
+                        <Home size={16} />
                     </>
                 )
             }
@@ -46,28 +46,28 @@ const HeaderTab = ({ className }) => {
 
     return (
         <>
-            <div className={ `header-dynamic-tab ${ className ? className : '' }` }>
+            <div className={`header-dynamic-tab ${className ? className : ''}`}>
                 <div className="tab-buttons-list">
-                    <div style={ { display: "flex", whiteSpace: "nowrap", height: "100%" } }>
-                        <Tabs selectedIndex={ activeTab }
-                              onChange={ handleTabChange }
-                              dismissable
-                              onTabCloseRequest={ (index) => {
-                                  removeTab(tab[index].id)
-                              } }
+                    <div style={{ display: "flex", whiteSpace: "nowrap", height: "100%" }}>
+                        <Tabs selectedIndex={activeTab}
+                            onChange={handleTabChange}
+                            dismissable
+                            onTabCloseRequest={(index) => {
+                                removeTab(tab[index].id)
+                            }}
                         >
                             <TabList aria-label="List of tabs">
-                                { tab.map((item, index) =>
-                                    <Tab key={ `${ item.id }-${ index }` }
-                                         renderIcon={ () => {
-                                             return TabIcon(item)
-                                         } }
-                                         className={ `custom-tab ${ !item.isDelted ? 'tab-stable' : '' } ${ item.name === 'Dashboard' ? 'tab-icon-reverse' : '' }` }>
+                                {tab.map((item, index) =>
+                                    <Tab key={`${item.id}-${index}`}
+                                        renderIcon={() => {
+                                            return TabIcon(item)
+                                        }}
+                                        className={`custom-tab ${!item.isDelted ? 'tab-stable' : ''} ${item.name === 'Dashboard' ? 'tab-icon-reverse' : ''}`}>
                                         {
                                             item.loaded ? (item.label) : (<TabSkeleton></TabSkeleton>)
                                         }
                                     </Tab>
-                                ) }
+                                )}
                             </TabList>
                         </Tabs>
                     </div>
@@ -77,9 +77,9 @@ const HeaderTab = ({ className }) => {
                     kind="ghost"
                     className="add-new-tab"
                     hasIconOnly
-                    onClick={ (e) => handleAddTab() }
+                    onClick={(e) => handleAddTab()}
                 >
-                    <Add20 aria-label="Add" />
+                    <Add size={20} aria-label="Add" />
                 </Button>
 
             </div>

@@ -5,8 +5,6 @@ import {
     ContainedListItem,
     OverflowMenu,
     OverflowMenuItem,
-    Grid,
-    Column,
     SkeletonText,
     Popover,
     PopoverContent,
@@ -14,12 +12,12 @@ import {
     Theme,
     SkeletonPlaceholder,
     InlineNotification,
+    ToastNotification,
+    Checkbox
 } from "@carbon/react";
-import { OverflowMenuVertical, TrashCan } from "@carbon/react/icons";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Add20, CheckmarkFilled16 } from "@carbon/icons-react";
+import { Add, CheckmarkFilled, TrashCan, OverflowMenuVertical } from "@carbon/react/icons";
 import "./UserCardManagementPanel.scss";
-import { TextInputSkeleton } from "@carbon/react";
 
 import {
     BaseURL,
@@ -29,7 +27,6 @@ import {
     useThemePreference,
 } from "../../sdk";
 import { notificationTokens } from "@carbon/themes";
-import { Delete16 } from "@carbon/icons-react";
 import { useTranslation } from "react-i18next";
 import { format } from "date-fns";
 const UserCardManagementPanel = ({ open }) => {
@@ -43,11 +40,15 @@ const UserCardManagementPanel = ({ open }) => {
         handleVerifyCard,
         openUserCardDeleteModal,
         openCardAddModal,
+        setNotification
     } = useCardManagement();
 
     const [openOptionIndex, setOpenOptionIndex] = useState(-1);
     const { t } = useTranslation();
     const { themePreference } = useThemePreference();
+    const [disable, setDisable] = useState(false)
+
+    const [defCard, setDefCard] = useState(cardsData?.default)
 
     const handleDefaultCardOptionClick = useCallback(
         async (cardId) => {
@@ -63,6 +64,8 @@ const UserCardManagementPanel = ({ open }) => {
         }
         (async () => {
             await getUserCardList();
+            console.log("----- card ", cardsData?.default)
+            setDefCard(cardsData?.default)
         })();
     }, [open]);
 
@@ -91,8 +94,23 @@ const UserCardManagementPanel = ({ open }) => {
                     includeOverlay
                     className="test"
                     open={open}
-                    onRequestClose={closeCardManagementPanel}
+                    // onRequestClose={closeCardManagementPanel}
                     subtitle=""
+                    actions={[{
+                        label: t('save'),
+                        onClick: function onClick(event) {
+                            event.preventDefault();
+                            handleDefaultCardOptionClick(defCard)
+                            // handleUpdateProfile();
+                        },
+                        kind: 'primary',
+                        disabled: disable,
+                        loading: disable,
+                    }, {
+                        label: t("cancel"),
+                        onClick: closeCardManagementPanel,
+                        kind: 'secondary',
+                    }]}
                 >
                     <div className="card-list">
                         {notification && (
@@ -103,6 +121,9 @@ const UserCardManagementPanel = ({ open }) => {
                                 timeout={0}
                                 title={""}
                                 kind={notification.type}
+                                onCloseButtonClick={() => {
+                                    setNotification(null);
+                                }}
                             />
                         )}
                         <ContainedList
@@ -111,7 +132,7 @@ const UserCardManagementPanel = ({ open }) => {
                                 <Button
                                     hasIconOnly
                                     iconDescription={t("add-new-card")}
-                                    renderIcon={Add20}
+                                    renderIcon={Add}
                                     tooltipPosition="left"
                                     onClick={openCardAddModal}
                                     disabled={
@@ -150,6 +171,7 @@ const UserCardManagementPanel = ({ open }) => {
                                                         }
                                                         align="bottom-right"
                                                         dropShadow
+                                                        isTabTip
                                                         className="card-row-popover"
                                                     >
                                                         <IconButton
@@ -174,7 +196,7 @@ const UserCardManagementPanel = ({ open }) => {
                                                                         className="test"
                                                                         itemText={
                                                                             <div className="row-action-renderer">
-                                                                                <CheckmarkFilled16 />{" "}
+                                                                                <CheckmarkFilled size={16} />{" "}
                                                                                 {t(
                                                                                     "default-payment-method"
                                                                                 )}
@@ -199,7 +221,8 @@ const UserCardManagementPanel = ({ open }) => {
                                                                                 )}
                                                                             </div>
                                                                         }
-                                                                        isDelete
+                                                                        isDelete={listItem?.id !==
+                                                                            cardsData?.default}
                                                                         hasDivider
                                                                         disabled={
                                                                             listItem?.id ===
@@ -225,33 +248,32 @@ const UserCardManagementPanel = ({ open }) => {
                                                 }
                                                 key={listItem.id}
                                             >
-                                                <div className="card-box">
-                                                    <div className="card-logo">
-                                                        <div className="card-logo-with-checkicon">
-                                                            <p className="card-type">
+                                                <div className="card-box" onClick={() => { setDefCard(listItem.id) }}>
+                                                        <span className="card-logo card-logo-with-checkicon">
+                                                            <span className="card-type">
                                                                 {
                                                                     listItem?.scheme
                                                                 }
-                                                            </p>
-                                                            {listItem?.id ===
-                                                                cardsData?.default && (
-                                                                    <CheckmarkFilled16 />
-                                                                )}
-                                                        </div>
-                                                    </div>
-                                                    <p>
+                                                            </span>
+                                                        </span>
+                                                    <span>
                                                         {"...."}
                                                         {listItem?.last4}
-                                                    </p>
-                                                    <p className="card-holder-name">
+                                                    </span>
+                                                    <span className="card-holder-name">
                                                         {cardsData?.name}
-                                                    </p>
-                                                    <p>
+                                                    </span>
+                                                    <span>
                                                         {format(
                                                             date,
                                                             "MM/yyyy"
                                                         )}
-                                                    </p>
+                                                    </span>
+                                                    <span className="card-checkbox">
+                                                        {((defCard && listItem?.id === defCard) || (!defCard && listItem?.id === cardsData?.default)) ? (
+                                                            <CheckmarkFilled size={14} />
+                                                        ) : <CheckmarkFilled size={14} style={{ visibility: "hidden" }} />}
+                                                    </span>
                                                 </div>
                                             </ContainedListItem>
                                         );

@@ -3,8 +3,9 @@
   transition-behavior: normal;
   transition-delay: 0s;
   transition-duration: 0.15s;
-  transition-property:all;
-  transition-timing-function:cubic-bezier(0, 0, 0.38, 0.9);
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0, 0, 0.38, 0.9);
+
   .bynar-profile-info-wrapper {
     display: flex;
     align-items: center;
@@ -17,6 +18,7 @@
   }
 
   .tile {
+    color: var(--cds-text-02);
     background-color: var(--cds-background, #ffffff);
     margin: 0px;
     padding: 0;
@@ -29,7 +31,7 @@
 
     >a {
       padding: 0.5rem;
-      color: var(--cds-text-01, #161616);
+      color: var(--cds-text-02, #525252);
 
       &:hover {
         color: var(--cds-text-01, #161616);
@@ -76,6 +78,23 @@
   .user-profile-dropdown {
     .tile {
       background-color: var(--cds-layer, #ffffff);
+    }
+  }
+
+  .link-list {
+    display: flex;
+    flex-direction: column;
+
+    >a {
+      padding: 0.5rem;
+      color: var(--cds-text-02, #525252);
+
+      &:hover {
+        color: var(--cds-text-01, #161616);
+        text-decoration: none;
+        background-color: var(--cds-layer-hover, #e5e5e5);
+        cursor: pointer;
+      }
     }
   }
 }
