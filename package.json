@@ -15,6 +15,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "carbon-components": "^10",
+    "carbon-web-components": "^1.21.0",
     "carbon-components-react": "^7",
     "compression-webpack-plugin": "^10.0.0",
     "date-fns": "^2.30.0",
