@@ -3,6 +3,7 @@ import {
     BaseURL, NodeEnv, TabContext,
     useAuth, uuidv4,
 } from "../../sdk";
+import debounce from "lodash/debounce";
 import "./TreeGrid.scss";
 import "./TreeGridBorders.scss"
 import "./TreeGridBlack.scss"
@@ -53,7 +54,7 @@ export const TreeGrid = ({ table, config = {}, tabId, className }) => {
     // suggest
     window.Grids.OnAfterValueChanged = window.parseCellSuggestionCallback(window.keySuggest, window.lsSuggestionField)
     // load cell data
-    window.LoadCellData = function (url, param, callback) {
+    window.LoadCellData = debounce(function (url, param, callback) {
         treeGridRequest(url, param, function (res) {
             if (res?.IO?.Result === -1) {
                 // alert message
@@ -63,7 +64,7 @@ export const TreeGrid = ({ table, config = {}, tabId, className }) => {
                 callback(0, data);
             }
         });
-    }
+    }, 300)
 
     // custom TreeGrid ajax request
     window.Grids.OnCustomAjax = function (G, IO, data, func) {
