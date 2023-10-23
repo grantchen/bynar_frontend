@@ -95,6 +95,7 @@ const UserCardManagementPanel = ({ open }) => {
                     className="test"
                     open={open}
                     onRequestClose={closeCardManagementPanel}
+                    title={t("payment-method")}
                     subtitle=""
                     actions={[{
                         label: t('save'),
@@ -127,7 +128,6 @@ const UserCardManagementPanel = ({ open }) => {
                             />
                         )}
                         <ContainedList
-                            label={t("payment-method")}
                             action={
                                 <Button
                                     hasIconOnly
