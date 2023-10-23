@@ -250,7 +250,7 @@ export let ImportModal = forwardRef(
                     <ModalHeader
                         className={`${blockClass}__header`}
                         title={title}
-                        closeClassName="display-none"
+                        closeClassName=""
                     />
                     <ModalBody className={`${blockClass}__body-container`}>
                         {description && (

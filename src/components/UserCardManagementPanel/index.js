@@ -94,7 +94,7 @@ const UserCardManagementPanel = ({ open }) => {
                     includeOverlay
                     className="test"
                     open={open}
-                    // onRequestClose={closeCardManagementPanel}
+                    onRequestClose={closeCardManagementPanel}
                     subtitle=""
                     actions={[{
                         label: t('save'),

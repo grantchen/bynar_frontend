@@ -6,7 +6,7 @@
     transition-property:all;
     transition-timing-function:cubic-bezier(0, 0, 0.38, 0.9);
     .cds--form-item {
-        margin-top: 8px;
+        margin-top: 16px;
     }
 
     .c4p--side-panel__container .c4p--side-panel__inner-content {
@@ -14,10 +14,6 @@
         //height: calc(100vh - 80px) !important;
         margin-top: calc(var(--c4p--side-panel--title-text-height) + var(--c4p--side-panel--subtitle-container-height) + var(--c4p--side-panel--action-bar-container-height) + var(--c4p--side-panel--label-text-height));
         overflow-x: hidden;
-    }
-
-    .c4p--side-panel__container .cds--btn.c4p--side-panel__close-button {
-        display: none !important;
     }
 
     .bx--form-item {

@@ -240,6 +240,7 @@ export const UserDetailPanel = ({ open }) => {
                     open={open}
                     title={t("user-detail")}
                     subtitle={t("user-profile-information")}
+                    onRequestClose={handleClose}
                     actions={[{
                         label: t('save'),
                         onClick: function onClick(event) {
