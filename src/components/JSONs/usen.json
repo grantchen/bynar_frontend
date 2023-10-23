@@ -5090,6 +5090,19 @@
                 }
               },
               {
+                "title": "sites",
+                "titleEnglish": "",
+                "url": "",
+                "tab": "Sites",
+                "tabType": "treeGrid",
+                "permission": "sites",
+                "megapanelContent": {
+                  "headingTitle": "",
+                  "headingUrl": "",
+                  "description": "sites"
+                }
+              },
+              {
                 "title": "Partner with us",
                 "titleEnglish": "Partners",
                 "url": "https://www.ibm.com/partnerplus/?lnk=hpmex_bupa",
