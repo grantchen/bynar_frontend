@@ -70,7 +70,8 @@ export const TreeGrid = ({ table, config = {}, tabId, className }) => {
 
         treeGridRequest(IO.Url, data, function (res) {
             if (res?.IO?.Result === -1) {
-                func(res, res)
+                // alert message
+                func(0, res)
             } else {
                 func(0, res)
             }
