@@ -11,6 +11,7 @@
     "@carbon/ibmdotcom-styles": "^1.51.0",
     "@carbon/ibmdotcom-web-components": "^1.16.1",
     "@carbon/react": "^1.25.0",
+    "@carbon/motion": "^11.15.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
