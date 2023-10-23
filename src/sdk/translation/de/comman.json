@@ -168,5 +168,6 @@
     "general-posting-setup": "Allgemeine Buchungseinstellungen",
     "organizations": "Organisationen",
     "user-groups": "Benutzergruppen",
-    "warehouses": "Lagerhäuser"
+    "warehouses": "Lagerhäuser",
+    "sites": "Websites"
 }

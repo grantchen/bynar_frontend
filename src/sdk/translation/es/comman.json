@@ -168,5 +168,6 @@
     "general-posting-setup": "Configuración general de publicación",
     "organizations": "Organizaciones",
     "user-groups": "Grupos de Usuarios",
-    "warehouses": "Almacenes"
+    "warehouses": "Almacenes",
+    "sites": "Sitios"
 }
