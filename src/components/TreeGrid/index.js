@@ -56,7 +56,8 @@ export const TreeGrid = ({ table, config = {}, tabId, className }) => {
     window.LoadCellData = function (url, param, callback) {
         treeGridRequest(url, param, function (res) {
             if (res?.IO?.Result === -1) {
-                callback(-1, res.IO.Message);
+                // alert message
+                callback(0, res);
             } else {
                 const data = window.parseItemSuggestionCallBack(window.keySuggest, JSON.stringify(res), window.lsSuggestionField);
                 callback(0, data);
