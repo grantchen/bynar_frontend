@@ -5090,6 +5090,19 @@
                 }
               },
               {
+                "title": "warehouses",
+                "titleEnglish": "",
+                "url": "",
+                "tab": "Warehouses",
+                "tabType": "treeGrid",
+                "permission": "warehouses",
+                "megapanelContent": {
+                  "headingTitle": "",
+                  "headingUrl": "",
+                  "description": "warehouses"
+                }
+              },
+              {
                 "title": "Partner with us",
                 "titleEnglish": "Partners",
                 "url": "https://www.ibm.com/partnerplus/?lnk=hpmex_bupa",

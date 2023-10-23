@@ -9,6 +9,7 @@ import UserGroupList from "../components/UserGroupList";
 const UserList = lazy(() => import("./../components/UserList/index"));
 const InvoicesTable = lazy(() => import("./../components/InvoicesTable/index"));
 const GeneralPostingSetup = lazy(() => import("./../components/GeneralPostingSetup/index"));
+const Warehouses = lazy(() => import("./../components/Warehouses/index"));
 
 const TabContext = createContext();
 const EmptyTabName = "EmptyTab";
@@ -78,6 +79,8 @@ const TabContextProvider = ({ children }) => {
                 return <OrganizationList tabId={tabId} />;
             case "UserGroups":
                 return <UserGroupList tabId={tabId} />;
+            case "Warehouses":
+                return <Warehouses tabId={tabId} />;
             default:
                 return null;
         }

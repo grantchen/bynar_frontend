@@ -167,5 +167,6 @@
     "theme": "Thème",
     "general-posting-setup": "Configuration générale de la publication",
     "organizations": "Organisations",
-    "user-groups": "Groupes d'utilisateurs"
+    "user-groups": "Groupes d'utilisateurs",
+    "warehouses": "Entrepôts"
 }
