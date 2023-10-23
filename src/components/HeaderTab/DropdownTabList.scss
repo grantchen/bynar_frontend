@@ -7,13 +7,7 @@
 
   .header-dynamic-dropdown-tabs-content {
     background-color: var(--cds-ui-02, #ffffff);
-    transform: translateX(0);
-    transition-behavior: normal;
-    transition-delay: 0s;
-    transition-duration: 0.15s;
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0, 0, 0.38, 0.9);
-
+    transition: all .15s cubic-bezier(0,0,.38,.9);
     .list-wrapper {
       .cds--contained-list {
 
