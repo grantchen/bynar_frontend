@@ -167,6 +167,7 @@
     "theme": "Thema",
     "general-posting-setup": "Allgemeine Buchungseinstellungen",
     "organizations": "Organisationen",
-    "sites": "Websites",
-    "user-groups": "Benutzergruppen"
+    "user-groups": "Benutzergruppen",
+    "warehouses": "Lagerhäuser",
+    "sites": "Websites"
 }

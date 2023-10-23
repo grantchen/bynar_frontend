@@ -167,6 +167,7 @@
     "theme": "Theme",
     "general-posting-setup": "General posting setup",
     "organizations": "Organizations",
-    "sites": "Sites",
-    "user-groups": "User groups"
+    "user-groups": "User groups",
+    "warehouses": "Warehouses",
+    "sites": "Sites"
 }

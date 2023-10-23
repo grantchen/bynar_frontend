@@ -5090,6 +5090,19 @@
                 }
               },
               {
+                "title": "warehouses",
+                "titleEnglish": "",
+                "url": "",
+                "tab": "Warehouses",
+                "tabType": "treeGrid",
+                "permission": "warehouses",
+                "megapanelContent": {
+                  "headingTitle": "",
+                  "headingUrl": "",
+                  "description": "warehouses"
+                }
+              },
+              {
                 "title": "sites",
                 "titleEnglish": "",
                 "url": "",
