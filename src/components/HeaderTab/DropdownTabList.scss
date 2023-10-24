@@ -4,10 +4,14 @@
   .cds--dropdown__wrapper--inline {
     grid-gap: 0;
   }
-
+  .cds--list-box__menu {
+    display: block;
+  }
+  .cds--list-box--expanded.cds--list-box--lg .cds--list-box__menu {
+    transition: all 0.5s cubic-bezier(0,0,.38,.9);
+  }
   .header-dynamic-dropdown-tabs-content {
     background-color: var(--cds-ui-02, #ffffff);
-    transition: all .15s cubic-bezier(0,0,.38,.9);
     .list-wrapper {
       .cds--contained-list {
 
