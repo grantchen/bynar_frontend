@@ -141,10 +141,11 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                         onClick={ () => {
                             setIsProfileDropdownOpen(!isProfileDropdownOpen);
                             const popoverContent = document.querySelector('.custom-popover-content');
-                            if (!isProfileDropdownOpen) {
-                                popoverContent.style.maxWidth = '23rem';
-                            } else {
+                            console.log(popoverContent.style.maxWidth)
+                            if (popoverContent.style.maxWidth === '23rem') {
                                 popoverContent.style.maxWidth = '0px';
+                            } else {
+                                popoverContent.style.maxWidth = '23rem';
                             }
                             setSearchParams((prev) =>
                                 omitQueryParams(prev, [
