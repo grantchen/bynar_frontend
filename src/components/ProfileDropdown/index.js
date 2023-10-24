@@ -53,9 +53,6 @@ const ProfileDropdown = React.memo(
           </div>
           <div className="link-list">
             <Link onClick={onProfileOptionClick}>{t("profile")}</Link>
-            <Link>{t("privacy")}</Link>
-            {isCardManagementAllowed &&
-              <Link onClick={openCardManagementPanel}>{t("card-management")}</Link>}
             <Link
               style={{ cursor: "pointer", alignItems: 'center' }}
               onClick={handleLogout}

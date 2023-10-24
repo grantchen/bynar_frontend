@@ -81,7 +81,7 @@ const DropdownTabList = ({ className }) => {
 
                         </Button>
 
-                        <ul className="cds--list-box__menu" role="listbox">
+                        <ul className="cds--list-box__menu" role="listbox" style={{ maxHeight: isDropdownTabsOpen ? '16.5rem' : 0 }}>
                             <div className="header-dynamic-dropdown-tabs-content">
                                 <div className="list-wrapper">
                                     <ContainedList

@@ -47,6 +47,7 @@ const UserCardManagementPanel = ({ open }) => {
     const { t } = useTranslation();
     const { themePreference } = useThemePreference();
     const [disable, setDisable] = useState(false)
+    const [updateHappened, setUpdateHappened] = useState(true)
 
     const [defCard, setDefCard] = useState(cardsData?.default)
 
@@ -60,6 +61,7 @@ const UserCardManagementPanel = ({ open }) => {
 
     useEffect(() => {
         if (!open) {
+            setUpdateHappened(true)
             return;
         }
         (async () => {
@@ -105,7 +107,7 @@ const UserCardManagementPanel = ({ open }) => {
                             // handleUpdateProfile();
                         },
                         kind: 'primary',
-                        disabled: disable,
+                        disabled: updateHappened,
                         loading: disable,
                     }, {
                         label: t("cancel"),
@@ -248,7 +250,14 @@ const UserCardManagementPanel = ({ open }) => {
                                                 }
                                                 key={listItem.id}
                                             >
-                                                <div className="card-box" onClick={() => { setDefCard(listItem.id) }}>
+                                                <div className="card-box" onClick={() => {
+                                                    if (listItem?.id === cardsData?.default) {
+                                                        setUpdateHappened(true);
+                                                    } else {
+                                                        setUpdateHappened(false);
+                                                    }
+                                                    setDefCard(listItem.id);
+                                                }}>
                                                         <span className="card-logo card-logo-with-checkicon">
                                                             <span className="card-type">
                                                                 {
