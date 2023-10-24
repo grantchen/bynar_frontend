@@ -277,8 +277,7 @@ const UserCardManagementPanel = ({ open }) => {
                                                         ) : <CheckmarkFilled size={14} style={{ visibility: "hidden" }} />}
                                                     </span>
                                                 </div>
-                                            </ContainedListItem>
-                                        );
+                                            </ContainedListItem>);
                                     }
                                 )}
                         </ContainedList>
