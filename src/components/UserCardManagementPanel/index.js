@@ -96,7 +96,7 @@ const UserCardManagementPanel = ({ open }) => {
                     open={open}
                     onRequestClose={closeCardManagementPanel}
                     title={t("payment-method")}
-                    subtitle=""
+                    subtitle={t("user-payment-method-information")}
                     actions={[{
                         label: t('save'),
                         onClick: function onClick(event) {
@@ -128,6 +128,7 @@ const UserCardManagementPanel = ({ open }) => {
                             />
                         )}
                         <ContainedList
+                            label={t("payment-method")}
                             action={
                                 <Button
                                     hasIconOnly
@@ -163,6 +164,7 @@ const UserCardManagementPanel = ({ open }) => {
                                         date.setMonth(listItem.expiry_month);
                                         return (
                                             <ContainedListItem
+                                                onClick={ (() => {setDefCard(listItem.id)})}
                                                 action={
                                                     <Popover
                                                         open={
@@ -248,7 +250,7 @@ const UserCardManagementPanel = ({ open }) => {
                                                 }
                                                 key={listItem.id}
                                             >
-                                                <div className="card-box" onClick={() => { setDefCard(listItem.id) }}>
+                                                <div className="card-box">
                                                         <span className="card-logo card-logo-with-checkicon">
                                                             <span className="card-type">
                                                                 {

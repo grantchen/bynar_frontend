@@ -119,14 +119,20 @@ const CardManagementProvider = ({ children }) => {
             try {
                 setNotification(null)
                 setLoading(true);
-                const res = await authFetch(`${BaseURL}/apprunnerurl/cards/update`, {
+                const response = await authFetch(`${BaseURL}/apprunnerurl/cards/update`, {
                     method: "POST",
                     body: JSON.stringify({ source_id: cardId }),
                 });
-                if (res.ok) {
+                const res = await response.json();
+                if (response.ok) {
                     setNotification({
                         type: "success",
                         message: t("payment-successful"),
+                    });
+                }else{
+                    setNotification({
+                        type: "error",
+                        message: res.error,
                     });
                 }
                 await getUserCardList();
