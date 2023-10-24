@@ -52,10 +52,12 @@ const UserCardManagementPanel = ({ open }) => {
 
     const handleDefaultCardOptionClick = useCallback(
         async (cardId) => {
+            setDisable(true)
             setOpenOptionIndex(-1);
             await makeDefaultMethod(cardId);
+            setDisable(false)
         },
-        [makeDefaultMethod]
+        [makeDefaultMethod,setDisable]
     );
 
     useEffect(() => {
