@@ -16,6 +16,7 @@ import {
 } from "google-libphonenumber";
 import "./UserDetailPanel.scss";
 import { useTranslation } from "react-i18next";
+import {f} from "carbon-web-components/dist/collection-helpers-10ca40d0";
 
 pkg.component.SidePanel = true;
 
@@ -32,6 +33,7 @@ export const UserDetailPanel = ({ open }) => {
     );
     const [language, setLanguage] = useState("");
     const [disable, setDisable] = useState(false)
+    const [updateHappened, setUpdateHappened] = useState(true);
     const [dataLoading, setDataLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [phoneNumberValid, setIsPhoneNumberValid] = useState(false);
@@ -41,6 +43,7 @@ export const UserDetailPanel = ({ open }) => {
     const inputRefs = useRef([]);
     const [searchParams] = useSearchParams();
     const { closeModalAndGoBackToUserList } = useUserManagement();
+    const [defaultData,setDefaultData] = useState({});
     const handleThemeChange = (e) => {
         setServerErrorNotification({});
         setServerNotification(false);
@@ -49,6 +52,11 @@ export const UserDetailPanel = ({ open }) => {
             setTheme('light')
         } else {
             setTheme(e.target.value)
+        }
+        if (e.target.value === defaultData?.theme) {
+            checkValues(defaultData, "theme")
+        } else {
+            setUpdateHappened(false);
         }
     }
 
@@ -61,6 +69,11 @@ export const UserDetailPanel = ({ open }) => {
         } else {
             setLanguage(e.target.value)
         }
+        if (e.target.value === defaultData?.language) {
+            checkValues(defaultData, "language")
+        } else {
+            setUpdateHappened(false);
+        }
     }
     /* Function to set state, check email address validation when email address is changed  */
     const handleEmailChange = (value) => {
@@ -69,6 +82,15 @@ export const UserDetailPanel = ({ open }) => {
         setEmail(value);
         const errors = validateOrganizationForm(value);
         setErrors(errors);
+        if (Object.keys(errors).length === 0) {
+            if (value === defaultData?.email) {
+                checkValues(defaultData, "email")
+            } else {
+                setUpdateHappened(false);
+            }
+        } else {
+            setUpdateHappened(true);
+        }
     };
     const validateOrganizationForm = (email) => {
         const errors = {};
@@ -101,6 +123,11 @@ export const UserDetailPanel = ({ open }) => {
             errors.fullName = "FullName is required";
         }
         setErrors(errors);
+        if (value === defaultData?.fullName) {
+            checkValues(defaultData, "fullName")
+        } else {
+            setUpdateHappened(false);
+        }
     };
     const handleClose = () => {
         setServerErrorNotification({});
@@ -110,20 +137,28 @@ export const UserDetailPanel = ({ open }) => {
 
     const handlePhoneNumber = (value, country) => {
         setPhoneNumber(value)
+        if (value === defaultData?.phoneNumber.substring(1)) {
+            checkValues(defaultData, "phoneNumber")
+        } else {
+            setUpdateHappened(false);
+        }
         validatePhoneNumber(value, country?.dialCode, country?.countryCode);
     }
     const validatePhoneNumber = (value, dialCode, country) => {
         if (value === dialCode) {
             setErrorMessage("Enter valid phone number")
             setIsPhoneNumberValid(false)
+            setUpdateHappened(true);
         } else {
             const phoneNumberWithoutDialCode = value.toString().replace(dialCode, "");
             if (phoneNumberWithoutDialCode.length === 0) {
                 setErrorMessage("Phone number is required")
                 setIsPhoneNumberValid(false)
+                setUpdateHappened(true);
             } else if (phoneNumberWithoutDialCode === value) {
                 setErrorMessage("Enter valid phone number")
                 setIsPhoneNumberValid(false)
+                setUpdateHappened(true);
             } else {
 
                 try {
@@ -132,6 +167,7 @@ export const UserDetailPanel = ({ open }) => {
                     if (!isValid) {
                         setErrorMessage("Enter valid phone number")
                         setIsPhoneNumberValid(false)
+                        setUpdateHappened(true);
                     } else {
                         setErrorMessage("")
                         setIsPhoneNumberValid(true)
@@ -139,6 +175,7 @@ export const UserDetailPanel = ({ open }) => {
                 } catch (e) {
                     setErrorMessage("Enter valid phone number")
                     setIsPhoneNumberValid(false)
+                    setUpdateHappened(true);
                 }
             }
         }
@@ -196,6 +233,22 @@ export const UserDetailPanel = ({ open }) => {
             fetchData()
         }
     };
+    const checkValues = (defaultData, attribute) => {
+        if (attribute !== "email" && defaultData?.email !== email) {
+            setUpdateHappened(false);
+        } else if (attribute !== "fullName" && defaultData?.fullName !== fullName) {
+            setUpdateHappened(false);
+        } else if (attribute !== "phoneNumber" && defaultData?.phoneNumber.substring(1) !== phoneNumber && defaultData?.phoneNumber !== phoneNumber) {
+            setUpdateHappened(false);
+        } else if (attribute !== "theme" && defaultData?.theme !== theme) {
+            setUpdateHappened(false);
+        } else if (attribute !== "language" && defaultData?.language !== language) {
+            setUpdateHappened(false);
+        } else {
+            setUpdateHappened(true);
+        }
+    };
+
     useEffect(() => {
         const getUserList = async (userid) => {
             try {
@@ -212,6 +265,7 @@ export const UserDetailPanel = ({ open }) => {
                     setPhoneNumber(res?.phoneNumber);
                     setTheme(res?.theme)
                     setLanguage(res?.language)
+                    setDefaultData(res)
                 } else {
                     setServerErrorNotification({
                         title: res.error,
@@ -225,6 +279,7 @@ export const UserDetailPanel = ({ open }) => {
             }
         };
         if (!open) {
+            setUpdateHappened(true)
             return;
         }
         getUserList(user?.id || parseInt(searchParams?.get("userIdToShowDetails")))
@@ -248,7 +303,7 @@ export const UserDetailPanel = ({ open }) => {
                             handleUpdateProfile();
                         },
                         kind: 'primary',
-                        disabled: disable,
+                        disabled: updateHappened,
                         loading: disable,
                     }, {
                         label: t("cancel"),
