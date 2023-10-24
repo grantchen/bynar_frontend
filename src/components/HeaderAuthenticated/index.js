@@ -140,6 +140,12 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                         aria-label={ user?.fullName ?? t("user") }
                         onClick={ () => {
                             setIsProfileDropdownOpen(!isProfileDropdownOpen);
+                            const popoverContent = document.querySelector('.custom-popover-content');
+                            if (!isProfileDropdownOpen) {
+                                popoverContent.style.maxWidth = '23rem';
+                            } else {
+                                popoverContent.style.maxWidth = '0px';
+                            }
                             setSearchParams((prev) =>
                                 omitQueryParams(prev, [
                                     "userIdToShowDetails",
@@ -162,7 +168,7 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                             }
                         />
                     </HeaderGlobalAction>
-                    <PopoverContent>
+                    <PopoverContent className="custom-popover-content">
                         <ProfileDropdown
                             onProfileOptionClick={ () => {
                                 setSearchParams({
