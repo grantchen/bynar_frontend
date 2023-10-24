@@ -6,12 +6,12 @@ import { useAuth } from "./AuthContext";
 import OrganizationList from "../components/OrganizationList";
 import UserGroupList from "../components/UserGroupList";
 import SiteList from "../components/SiteList";
+import Payments from "../components/Payments"
 
 const UserList = lazy(() => import("./../components/UserList/index"));
 const InvoicesTable = lazy(() => import("./../components/InvoicesTable/index"));
 const GeneralPostingSetup = lazy(() => import("./../components/GeneralPostingSetup/index"));
 const Warehouses = lazy(() => import("./../components/Warehouses/index"));
-
 const TabContext = createContext();
 const EmptyTabName = "EmptyTab";
 const EmptyTab = ({ label }) => {
@@ -84,6 +84,8 @@ const TabContextProvider = ({ children }) => {
                 return <UserGroupList tabId={tabId} />;
             case "Warehouses":
                 return <Warehouses tabId={tabId} />;
+            case "Payments":
+                return <Payments tabId={tabId}></Payments>
             default:
                 return null;
         }

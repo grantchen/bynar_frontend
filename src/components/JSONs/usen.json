@@ -5116,6 +5116,19 @@
                 }
               },
               {
+                "title": "payments",
+                "titleEnglish": "",
+                "url": "",
+                "tab": "Payments",
+                "tabType": "treeGrid",
+                "permission": "payments",
+                "megapanelContent": {
+                  "headingTitle": "",
+                  "headingUrl": "",
+                  "description": "payments"
+                }
+              },
+              {
                 "title": "Partner with us",
                 "titleEnglish": "Partners",
                 "url": "https://www.ibm.com/partnerplus/?lnk=hpmex_bupa",
