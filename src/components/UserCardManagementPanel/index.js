@@ -105,6 +105,7 @@ const UserCardManagementPanel = ({ open }) => {
                             event.preventDefault();
                             handleDefaultCardOptionClick(defCard)
                             // handleUpdateProfile();
+                            setUpdateHappened(true)
                         },
                         kind: 'primary',
                         disabled: updateHappened,
