@@ -47,6 +47,7 @@ const UserCardManagementPanel = ({ open }) => {
     const { t } = useTranslation();
     const { themePreference } = useThemePreference();
     const [disable, setDisable] = useState(false)
+    const [updateHappened, setUpdateHappened] = useState(true)
 
     const [defCard, setDefCard] = useState(cardsData?.default)
 
@@ -62,6 +63,7 @@ const UserCardManagementPanel = ({ open }) => {
 
     useEffect(() => {
         if (!open) {
+            setUpdateHappened(true)
             return;
         }
         (async () => {
@@ -105,9 +107,10 @@ const UserCardManagementPanel = ({ open }) => {
                             event.preventDefault();
                             handleDefaultCardOptionClick(defCard)
                             // handleUpdateProfile();
+                            setUpdateHappened(true)
                         },
                         kind: 'primary',
-                        disabled: disable,
+                        disabled: updateHappened,
                         loading: disable,
                     }, {
                         label: t("cancel"),

@@ -120,8 +120,17 @@
         }
     }
 
-    .cds--popover--open > .cds--popover > .cds--popover-content {
-        transition: all .15s cubic-bezier(0,0,.38,.9) !important;
+    .cds--popover-content {
+        transition: all 0.25s cubic-bezier(0,0,.38,.9);
+        display: block;
+    }
+
+    .custom-popover-content {
+        max-width: 0px;
+    }
+
+    .custom-popover-content-open {
+        max-width: 23rem;
     }
 
 }

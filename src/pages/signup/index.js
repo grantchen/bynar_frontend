@@ -917,7 +917,6 @@ const Signup = () => {
                                                     >
                                                         Next
                                                     </Button>
-                                                    <hr className="underline-border"></hr>
                                                 </div>
                                             </div>
                                         )}
@@ -1117,7 +1116,7 @@ const Signup = () => {
                                                         <>
                                                             <div style={{ marginTop: "32px" }}>
                                                                 <InlineLoading
-                                                                    description="Creating Account" />
+                                                                    description="Creating environment. Please wait..." />
                                                             </div>
                                                         </>
                                                     ) : (
