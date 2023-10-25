@@ -151,6 +151,7 @@
     "invoices-load-failed": "Failed to load invoices",
     "card-management": "Card management",
     "payment-method": "Payment method",
+    "user-payment-method-information": "User payment method information",
     "add-new-card": "Add new card",
     "default-payment-method": "Default payment method",
     "remove-payment-method": "Remove payment method",

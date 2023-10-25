@@ -151,6 +151,7 @@
     "invoices-load-failed": "Fehler beim Laden der Rechnungen",
     "card-management": "Kartenverwaltung",
     "payment-method": "Zahlungsmethode",
+    "user-payment-method-information": "Informationen zur Benutzerzahlungsmethode",
     "add-new-card": "Neue Karte hinzufügen",
     "default-payment-method": "Standardzahlungsmethode",
     "remove-payment-method": "Zahlungsmethode entfernen",

@@ -53,10 +53,12 @@ const UserCardManagementPanel = ({ open }) => {
 
     const handleDefaultCardOptionClick = useCallback(
         async (cardId) => {
+            setDisable(true)
             setOpenOptionIndex(-1);
             await makeDefaultMethod(cardId);
+            setDisable(false)
         },
-        [makeDefaultMethod]
+        [makeDefaultMethod,setDisable]
     );
 
     useEffect(() => {
@@ -98,13 +100,14 @@ const UserCardManagementPanel = ({ open }) => {
                     open={open}
                     onRequestClose={closeCardManagementPanel}
                     title={t("payment-method")}
-                    subtitle=""
+                    subtitle={t("user-payment-method-information")}
                     actions={[{
                         label: t('save'),
                         onClick: function onClick(event) {
                             event.preventDefault();
                             handleDefaultCardOptionClick(defCard)
                             // handleUpdateProfile();
+                            setUpdateHappened(true)
                         },
                         kind: 'primary',
                         disabled: updateHappened,
@@ -130,6 +133,7 @@ const UserCardManagementPanel = ({ open }) => {
                             />
                         )}
                         <ContainedList
+                            label={t("payment-method")}
                             action={
                                 <Button
                                     hasIconOnly
@@ -165,6 +169,7 @@ const UserCardManagementPanel = ({ open }) => {
                                         date.setMonth(listItem.expiry_month);
                                         return (
                                             <ContainedListItem
+                                                onClick={ (() => {setDefCard(listItem.id)})}
                                                 action={
                                                     <Popover
                                                         open={
@@ -250,14 +255,7 @@ const UserCardManagementPanel = ({ open }) => {
                                                 }
                                                 key={listItem.id}
                                             >
-                                                <div className="card-box" onClick={() => {
-                                                    if (listItem?.id === cardsData?.default) {
-                                                        setUpdateHappened(true);
-                                                    } else {
-                                                        setUpdateHappened(false);
-                                                    }
-                                                    setDefCard(listItem.id);
-                                                }}>
+                                                <div className="card-box">
                                                         <span className="card-logo card-logo-with-checkicon">
                                                             <span className="card-type">
                                                                 {
@@ -284,8 +282,7 @@ const UserCardManagementPanel = ({ open }) => {
                                                         ) : <CheckmarkFilled size={14} style={{ visibility: "hidden" }} />}
                                                     </span>
                                                 </div>
-                                            </ContainedListItem>
-                                        );
+                                            </ContainedListItem>);
                                     }
                                 )}
                         </ContainedList>
