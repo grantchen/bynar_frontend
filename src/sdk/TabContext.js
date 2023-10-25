@@ -6,6 +6,7 @@ import { useAuth } from "./AuthContext";
 import OrganizationList from "../components/OrganizationList";
 import UserGroupList from "../components/UserGroupList";
 import SiteList from "../components/SiteList";
+import TransferList from "../components/TransfersList";
 import Payments from "../components/Payments"
 
 const UserList = lazy(() => import("./../components/UserList/index"));
@@ -80,6 +81,8 @@ const TabContextProvider = ({ children }) => {
                 return <OrganizationList tabId={tabId} />;
             case "Sites":
                 return <SiteList tabId={tabId} />;
+            case "Transfers":
+                return <TransferList tabId={tabId} />;
             case "UserGroups":
                 return <UserGroupList tabId={tabId} />;
             case "Warehouses":
