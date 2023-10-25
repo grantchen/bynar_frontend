@@ -48,6 +48,10 @@
 
     }
 
+    .row-action-renderer{
+        display: flex;
+        align-items: center;
+    }
 }
 
 // .cds--toast-notification__subtitle {
@@ -96,6 +100,11 @@
                 padding: 0px 12px;
                 width: 88px;
             }
+        }
+
+        .row-action-renderer{
+            display: flex;
+            align-items: center;
         }
     }
 }
