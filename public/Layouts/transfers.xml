@@ -44,7 +44,7 @@
                 CDef='' AcceptDef='Data'
                 Calculated='1' Spanned='1' Expanded='1' FormulaSuggest="6" A0="A0 centered &amp; scrolled"
                 document_id='Child' document_idSpan='7' document_idAlign="Center" document_idType='Text'
-                document_idCanEdit="0"
+                document_idCanEdit="0" document_idEditMask=""
                 project_id='Child' project_idSpan='15' project_idAlign="Center" project_idType='Text'
                 project_idCanEdit="0"
         />
@@ -52,7 +52,9 @@
 
 
     <Cols>
-        <C Name='document_id' Width='150' Type='Int' CanEdit='1' VarHeight='1' CaseSensitive='0'/>
+        <!-- Type Auto for group, EditMask empty or positive number -->
+        <C Name='document_id' Width='150' Type='Auto' CanEdit='1' VarHeight='1' CaseSensitive='0'
+           EditMask="^\+?[1-9][0-9]*$|^$"/>
         <C Name='document_no' Width='150' Type='Text' CanEdit='1' CaseSensitive='0' VarHeight='1' Size="255"/>
         <C Name='transaction_no' Width='150' Type='Int' CanEdit='1' CaseSensitive='0' VarHeight='1'/>
         <C Name='document_date' Width='150' Type='Date' Format="yyyy-MM-dd" CaseSensitive='0' CanEdit='1'
