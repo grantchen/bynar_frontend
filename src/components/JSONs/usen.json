@@ -3560,6 +3560,19 @@
                 }
               },
               {
+                "title": "transfers",
+                "titleEnglish": "",
+                "url": "",
+                "tab": "Transfers",
+                "tabType": "treeGrid",
+                "permission": "transfers",
+                "megapanelContent": {
+                  "headingTitle": "",
+                  "headingUrl": "",
+                  "description": "transfers"
+                }
+              },
+              {
                 "title": "payments",
                 "titleEnglish": "",
                 "url": "",
