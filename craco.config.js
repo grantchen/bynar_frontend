@@ -9,7 +9,7 @@ module.exports = {
                         env: {
                             // IBM Masthead search config env vars
                             SEARCH_REDIRECT_ENDPOINT: JSON.stringify('/search'),
-                            SEARCH_TYPEAHEAD_API: JSON.stringify('https://bynar-rjcb5uzfiq-ew.a.run.app'),
+                            SEARCH_TYPEAHEAD_API: JSON.stringify('https://back-bynar.tajansoft.com'),
                             SEARCH_TYPEAHEAD_VERSION: JSON.stringify('v1'),
                         }
                     },
