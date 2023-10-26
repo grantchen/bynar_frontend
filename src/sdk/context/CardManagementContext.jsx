@@ -73,6 +73,7 @@ const CardManagementProvider = ({ children }) => {
 
     const closeCardManagementPanel = useCallback(() => {
         setIsSidePanelOpen(false);
+        setSearchParams({})
     }, []);
 
     const openCardManagementPanel = useCallback(() => {
@@ -129,7 +130,7 @@ const CardManagementProvider = ({ children }) => {
                         type: "success",
                         message: t("payment-successful"),
                     });
-                }else{
+                } else {
                     setNotification({
                         type: "error",
                         message: res.error,
