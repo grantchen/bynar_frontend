@@ -11,9 +11,10 @@ import {
     SelectItem,
     TextInput,
     InlineNotification,
+    TextInputSkeleton,
 } from "@carbon/react";
 import { CardFrame, Frames } from "frames-react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import {
     BaseURL,
     CheckoutPublicKey,
@@ -41,6 +42,11 @@ import SignHeader from "../../components/SignHeader";
 import { Footer } from "@carbon/ibmdotcom-react";
 
 const Signup = () => {
+    const handleReady = useCallback(async () => {
+        document.querySelectorAll(".frame-heading").forEach(a => a.style.display = "");
+        document.querySelectorAll(".card-number").forEach(a => a.style.display = "");
+        document.querySelectorAll(".frame-skeleton-loading").forEach(a => a.style.display = "none");
+    })
     const phoneUtil = PhoneNumberUtil.getInstance();
     const navigate = useNavigate();
     const [errorNotification, setErrorNotification] = useState({});
@@ -474,6 +480,15 @@ const Signup = () => {
         setPostalCode(e.target.value.trim());
         postalCodeValidation(e.target.value.trim());
     };
+
+    useEffect(() => {
+        if (activeStep == 5) {
+            Frames.init({
+                publicKey: CheckoutPublicKey,
+                "ready": handleReady,
+            });
+        }
+    }, [activeStep])
 
     const handleVerifyCardDetails = async (e) => {
         e.preventDefault();
@@ -989,6 +1004,7 @@ const Signup = () => {
                                                 <Frames
                                                     config={{
                                                         publicKey: CheckoutPublicKey,
+                                                        "ready": handleReady,
                                                     }}
                                                     ref={cardElement}
                                                 >
@@ -996,11 +1012,12 @@ const Signup = () => {
                                                         className="card-input-container"
                                                     >
                                                         <div>
-                                                            <p className="input-heading">Card
+                                                            <p className="input-heading frame-heading" style={{ display: "none" }}>Card
                                                                 details</p>
                                                         </div>
                                                         <div>
-                                                            <CardFrame className="card-number" />
+                                                            <TextInputSkeleton className="frame-skeleton-loading" />
+                                                            <CardFrame className="card-number" style={{ display: "none" }} />
                                                         </div>
 
                                                         {loadingCardSuccess ? (

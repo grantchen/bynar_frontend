@@ -49,8 +49,6 @@ const UserCardManagementPanel = ({ open }) => {
     const [disable, setDisable] = useState(false)
     const [updateHappened, setUpdateHappened] = useState(true)
 
-    const [defCard, setDefCard] = useState(cardsData?.default)
-
     const handleDefaultCardOptionClick = useCallback(
         async (cardId) => {
             setDisable(true)
@@ -58,7 +56,7 @@ const UserCardManagementPanel = ({ open }) => {
             await makeDefaultMethod(cardId);
             setDisable(false)
         },
-        [makeDefaultMethod,setDisable]
+        [makeDefaultMethod, setDisable]
     );
 
     useEffect(() => {
@@ -68,8 +66,6 @@ const UserCardManagementPanel = ({ open }) => {
         }
         (async () => {
             await getUserCardList();
-            console.log("----- card ", cardsData?.default)
-            setDefCard(cardsData?.default)
         })();
     }, [open]);
 
@@ -101,22 +97,6 @@ const UserCardManagementPanel = ({ open }) => {
                     onRequestClose={closeCardManagementPanel}
                     title={t("payment-method")}
                     subtitle={t("user-payment-method-information")}
-                    actions={[{
-                        label: t('save'),
-                        onClick: function onClick(event) {
-                            event.preventDefault();
-                            handleDefaultCardOptionClick(defCard)
-                            // handleUpdateProfile();
-                            setUpdateHappened(true)
-                        },
-                        kind: 'primary',
-                        disabled: updateHappened,
-                        loading: disable,
-                    }, {
-                        label: t("cancel"),
-                        onClick: closeCardManagementPanel,
-                        kind: 'secondary',
-                    }]}
                 >
                     <div className="card-list">
                         {notification && (
@@ -169,7 +149,6 @@ const UserCardManagementPanel = ({ open }) => {
                                         date.setMonth(listItem.expiry_month);
                                         return (
                                             <ContainedListItem
-                                                onClick={ (() => {setDefCard(listItem.id)})}
                                                 action={
                                                     <Popover
                                                         open={
@@ -203,10 +182,11 @@ const UserCardManagementPanel = ({ open }) => {
                                                                         className="test"
                                                                         itemText={
                                                                             <div className="row-action-renderer">
-                                                                                <CheckmarkFilled size={16} />{" "}
-                                                                                {t(
-                                                                                    "default-payment-method"
-                                                                                )}
+                                                                                <CheckmarkFilled size={16} />
+                                                                                <div>&nbsp;&nbsp;
+                                                                                    {t(
+                                                                                        "default-payment-method"
+                                                                                    )}</div>
                                                                             </div>
                                                                         }
                                                                         onClick={() =>
@@ -222,10 +202,11 @@ const UserCardManagementPanel = ({ open }) => {
                                                                     <OverflowMenuItem
                                                                         itemText={
                                                                             <div className="row-action-renderer">
-                                                                                <TrashCan />{" "}
-                                                                                {t(
-                                                                                    "remove-payment-method"
-                                                                                )}
+                                                                                <TrashCan />
+                                                                                <div>&nbsp;&nbsp;
+                                                                                    {t(
+                                                                                        "remove-payment-method"
+                                                                                    )}</div>
                                                                             </div>
                                                                         }
                                                                         isDelete={listItem?.id !==
@@ -256,13 +237,13 @@ const UserCardManagementPanel = ({ open }) => {
                                                 key={listItem.id}
                                             >
                                                 <div className="card-box">
-                                                        <span className="card-logo card-logo-with-checkicon">
-                                                            <span className="card-type">
-                                                                {
-                                                                    listItem?.scheme
-                                                                }
-                                                            </span>
+                                                    <span className="card-logo card-logo-with-checkicon">
+                                                        <span className="card-type">
+                                                            {
+                                                                listItem?.scheme
+                                                            }
                                                         </span>
+                                                    </span>
                                                     <span>
                                                         {"...."}
                                                         {listItem?.last4}
@@ -277,7 +258,7 @@ const UserCardManagementPanel = ({ open }) => {
                                                         )}
                                                     </span>
                                                     <span className="card-checkbox">
-                                                        {((defCard && listItem?.id === defCard) || (!defCard && listItem?.id === cardsData?.default)) ? (
+                                                        {(listItem?.id === cardsData?.default) ? (
                                                             <CheckmarkFilled size={14} />
                                                         ) : <CheckmarkFilled size={14} style={{ visibility: "hidden" }} />}
                                                     </span>

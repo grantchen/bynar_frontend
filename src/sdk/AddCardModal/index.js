@@ -6,7 +6,8 @@ import {
     ModalFooter,
     Button,
     InlineNotification,
-    ToastNotification
+    ToastNotification,
+    TextInputSkeleton
 } from "@carbon/react";
 import { useTranslation } from "react-i18next";
 import { useCardManagement } from "../context";
@@ -27,6 +28,7 @@ const AddCardModal = ({ open }) => {
     const navigate = useNavigate()
     const { handleVerifyCard, notification, setNotification } = useCardManagement();
     const { theme } = useThemePreference()
+
     const { t } = useTranslation();
     const handleClose = useCallback(() => {
         navigate(-1)
@@ -61,9 +63,22 @@ const AddCardModal = ({ open }) => {
         }
     }, []);
 
+
+    const handleReady = useCallback(async () => {
+        document.querySelectorAll(".frame-heading").forEach(a => a.style.display = "");
+        document.querySelectorAll(".card-number").forEach(a => a.style.display = "");
+        document.querySelectorAll(".frame-skeleton-loading").forEach(a => a.style.display = "none");
+    })
+
     useEffect(() => {
-        if (!open) {
-            Frames.init(CheckoutPublicKey);
+        if (open) {
+            document.querySelectorAll(".frame-heading").forEach(a => a.style.display = "none");
+            document.querySelectorAll(".card-number").forEach(a => a.style.display = "none");
+            document.querySelectorAll(".frame-skeleton-loading").forEach(a => a.style.display = "");
+            Frames.init({
+                publicKey: CheckoutPublicKey,
+                "ready": handleReady,
+            });
         }
     }, [open])
 
@@ -105,14 +120,16 @@ const AddCardModal = ({ open }) => {
                 <Frames
                     config={{
                         publicKey: CheckoutPublicKey,
+                        "ready": handleReady,
                     }}
                 >
                     <div className="card-input-container">
                         <div>
-                            <p className="input-heading">{t("card-details")}</p>
+                            <p className="input-heading frame-heading" style={{ display: "none" }}>{t("card-details")}</p>
                         </div>
                         <div>
-                            <CardFrame className="card-number" />
+                            <TextInputSkeleton className="frame-skeleton-loading" />
+                            <CardFrame className="card-number" style={{ display: "none" }} />
                         </div>
                     </div>
                 </Frames>

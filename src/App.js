@@ -24,7 +24,7 @@ function App() {
     return (
         <>
             <Suspense
-                fallback={<Loading small />}
+                fallback={<div style={{ visibility: 'hidden' }}>Loading...</div>}
             >
                 <BrowserRouter>
                     <AuthProvider>
@@ -54,15 +54,15 @@ function App() {
                                         />
                                         <Route
                                             path="/home/"
-                                            element={<AuthenticatedAppHeader />}
+                                            element={
+                                                <AuthenticatedAppHeader />
+                                            }
                                         >
                                             <Route
                                                 exact
                                                 path="dashboard"
                                                 element={
-                                                    <Suspense fallback={<div></div>}>
                                                     <Dashboard />
-                                                </Suspense>
                                             }
                                             />
                                         </Route>
