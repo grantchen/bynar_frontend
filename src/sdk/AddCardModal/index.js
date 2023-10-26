@@ -63,13 +63,18 @@ const AddCardModal = ({ open }) => {
         }
     }, []);
 
+
     const handleReady = useCallback(async () => {
+        document.querySelectorAll(".frame-heading").forEach(a => a.style.display = "");
         document.querySelectorAll(".card-number").forEach(a => a.style.display = "");
         document.querySelectorAll(".frame-skeleton-loading").forEach(a => a.style.display = "none");
     })
 
     useEffect(() => {
-        if (!open) {
+        if (open) {
+            document.querySelectorAll(".frame-heading").forEach(a => a.style.display = "none");
+            document.querySelectorAll(".card-number").forEach(a => a.style.display = "none");
+            document.querySelectorAll(".frame-skeleton-loading").forEach(a => a.style.display = "");
             Frames.init({
                 publicKey: CheckoutPublicKey,
                 "ready": handleReady,
@@ -120,7 +125,7 @@ const AddCardModal = ({ open }) => {
                 >
                     <div className="card-input-container">
                         <div>
-                            <p className="input-heading">{t("card-details")}</p>
+                            <p className="input-heading frame-heading" style={{ display: "none" }}>{t("card-details")}</p>
                         </div>
                         <div>
                             <TextInputSkeleton className="frame-skeleton-loading" />

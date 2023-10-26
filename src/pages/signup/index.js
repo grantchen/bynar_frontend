@@ -43,6 +43,7 @@ import { Footer } from "@carbon/ibmdotcom-react";
 
 const Signup = () => {
     const handleReady = useCallback(async () => {
+        document.querySelectorAll(".frame-heading").forEach(a => a.style.display = "");
         document.querySelectorAll(".card-number").forEach(a => a.style.display = "");
         document.querySelectorAll(".frame-skeleton-loading").forEach(a => a.style.display = "none");
     })
@@ -1011,7 +1012,7 @@ const Signup = () => {
                                                         className="card-input-container"
                                                     >
                                                         <div>
-                                                            <p className="input-heading">Card
+                                                            <p className="input-heading frame-heading" style={{ display: "none" }}>Card
                                                                 details</p>
                                                         </div>
                                                         <div>
