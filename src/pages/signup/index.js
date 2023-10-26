@@ -480,6 +480,15 @@ const Signup = () => {
         postalCodeValidation(e.target.value.trim());
     };
 
+    useEffect(() => {
+        if (activeStep == 5) {
+            Frames.init({
+                publicKey: CheckoutPublicKey,
+                "ready": handleReady,
+            });
+        }
+    }, [activeStep])
+
     const handleVerifyCardDetails = async (e) => {
         e.preventDefault();
         setLoadingCardSuccess(true);
