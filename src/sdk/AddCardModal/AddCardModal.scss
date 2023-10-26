@@ -8,6 +8,10 @@ button.button-with-loading {
 }
 
 .add-card-modal {
+  .cds--modal-container {
+    width: 35%;
+  }
+
   .bx--modal-content {
     .container {
       height: auto;
@@ -17,7 +21,8 @@ button.button-with-loading {
   .bx--toast-notification {
     margin-right: 0;
   }
-  .error-notification-box{
+
+  .error-notification-box {
     width: 100% !important;
   }
 }

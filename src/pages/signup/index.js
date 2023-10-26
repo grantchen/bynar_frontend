@@ -11,9 +11,10 @@ import {
     SelectItem,
     TextInput,
     InlineNotification,
+    TextInputSkeleton,
 } from "@carbon/react";
 import { CardFrame, Frames } from "frames-react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import {
     BaseURL,
     CheckoutPublicKey,
@@ -41,6 +42,10 @@ import SignHeader from "../../components/SignHeader";
 import { Footer } from "@carbon/ibmdotcom-react";
 
 const Signup = () => {
+    const handleReady = useCallback(async () => {
+        document.querySelectorAll(".card-number").forEach(a => a.style.display = "");
+        document.querySelectorAll(".frame-skeleton-loading").forEach(a => a.style.display = "none");
+    })
     const phoneUtil = PhoneNumberUtil.getInstance();
     const navigate = useNavigate();
     const [errorNotification, setErrorNotification] = useState({});
@@ -989,6 +994,7 @@ const Signup = () => {
                                                 <Frames
                                                     config={{
                                                         publicKey: CheckoutPublicKey,
+                                                        "ready": handleReady,
                                                     }}
                                                     ref={cardElement}
                                                 >
@@ -1000,7 +1006,8 @@ const Signup = () => {
                                                                 details</p>
                                                         </div>
                                                         <div>
-                                                            <CardFrame className="card-number" />
+                                                            <TextInputSkeleton className="frame-skeleton-loading" />
+                                                            <CardFrame className="card-number" style={{ display: "none" }} />
                                                         </div>
 
                                                         {loadingCardSuccess ? (
