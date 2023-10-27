@@ -110,19 +110,19 @@ const AddCardModal = ({ open }) => {
         focus: {
             color: '#161616',
         },
-        valid: {
-            color: 'green',
-        },
-        invalid: {
-            color: 'red',
-        },
+        // valid: {
+        //     color: 'green',
+        // },
+        // invalid: {
+        //     color: 'red',
+        // },
         placeholder: {
             base: {
                 color: 'gray',
             },
-            focus: {
-                border: 'solid 1px #161616',
-            },
+            // focus: {
+            //     border: 'solid 1px #161616',
+            // },
         },
     };
 
@@ -139,19 +139,19 @@ const AddCardModal = ({ open }) => {
         focus: {
             color: '#f4f4f4',
         },
-        valid: {
-            color: 'green',
-        },
-        invalid: {
-            color: 'red',
-        },
+        // valid: {
+        //     color: 'green',
+        // },
+        // invalid: {
+        //     color: 'red',
+        // },
         placeholder: {
             base: {
                 color: '#ccc',
             },
-            focus: {
-                border: 'solid 1px #525252',
-            },
+            // focus: {
+            //     border: 'solid 1px #525252',
+            // },
         },
     };
 
@@ -162,6 +162,7 @@ const AddCardModal = ({ open }) => {
                 size="md"
                 onClose={handleClose}
                 className="add-card-modal"
+                preventCloseOnClickOutside
             >
                 <ModalHeader title={t("add-new-card")} />
                 <ModalBody ref={modalBodyRef}>
