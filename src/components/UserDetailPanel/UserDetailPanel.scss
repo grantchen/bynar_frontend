@@ -2,6 +2,9 @@
     display: flex;
     .cds--form-item {
         margin-top: 16px;
+        .cds--select-input {
+            transition: all 7s cubic-bezier(0.2, 0, 0.38, 0.9);
+        }
     }
 
     .c4p--side-panel__container .c4p--side-panel__inner-content {
@@ -71,6 +74,9 @@
         margin-top: 16px;
     }
 
+    .cds--dropdown__wrapper {
+        margin-top: 16px;
+    }
     .phone-label {
         font-size: 0.75rem;
         letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
