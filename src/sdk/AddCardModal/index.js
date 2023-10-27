@@ -78,6 +78,7 @@ const AddCardModal = ({ open }) => {
             document.querySelectorAll(".frame-skeleton-loading").forEach(a => a.style.display = "");
             Frames.init({
                 publicKey: CheckoutPublicKey,
+                style: themePreference == "white" ? g10style : g90style,
                 "ready": handleReady,
             });
         }
@@ -95,6 +96,64 @@ const AddCardModal = ({ open }) => {
 
     //     } )
     // }, [])
+
+    const g10style = {
+        base: {
+            color: '#161616',
+        },
+        // autofill: {
+        //     backgroundColor: 'yellow',
+        // },
+        hover: {
+            color: '#161616',
+        },
+        focus: {
+            color: '#161616',
+        },
+        valid: {
+            color: 'green',
+        },
+        invalid: {
+            color: 'red',
+        },
+        placeholder: {
+            base: {
+                color: 'gray',
+            },
+            focus: {
+                border: 'solid 1px #161616',
+            },
+        },
+    };
+
+    const g90style = {
+        base: {
+            color: '#f4f4f4',
+        },
+        // autofill: {
+        //     backgroundColor: '#525252',
+        // },
+        hover: {
+            color: '#f4f4f4',
+        },
+        focus: {
+            color: '#f4f4f4',
+        },
+        valid: {
+            color: 'green',
+        },
+        invalid: {
+            color: 'red',
+        },
+        placeholder: {
+            base: {
+                color: '#ccc',
+            },
+            focus: {
+                border: 'solid 1px #525252',
+            },
+        },
+    };
 
     return (
         <Theme theme={themePreference === "white" ? "g10" : "g90"}>
@@ -122,6 +181,7 @@ const AddCardModal = ({ open }) => {
                     <Frames
                         config={{
                             publicKey: CheckoutPublicKey,
+                            style: themePreference == "white" ? g10style : g90style,
                             "ready": handleReady,
                         }}
                     >
