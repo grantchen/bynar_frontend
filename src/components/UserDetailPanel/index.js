@@ -413,6 +413,7 @@ export const UserDetailPanel = ({ open }) => {
                                         items={themeItems}
                                         selectedItem={theme}
                                         onChange={selectedItem => handleThemeChange(selectedItem)}
+                                        itemToString={(item) => (item ? t(item) : '')}
                                         label={theme}/>
                                 </>
                             )}
@@ -426,6 +427,7 @@ export const UserDetailPanel = ({ open }) => {
                                         initialSelectedItem={language}
                                         items={languagesItems}
                                         selectedItem={language}
+                                        itemToString={(item) => (item ? t(item) : '')}
                                         onChange={selectedItem => handleLanguageChange(selectedItem)}
                                         label={language}/>
                                 </>
