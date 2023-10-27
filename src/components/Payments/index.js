@@ -60,22 +60,29 @@ const Payments = ({ tabId }) => {
             }
         }
 
-        // Grids.OnDownloadPage = function (G, Row) {
-        //     G.RecalculateRows(G.Rows.Fix1, 1);
-        // }
-        //
-        // Grids.OnRenderPageFinish = function (G) {
-        //     G.RecalculateRows(G.Rows.Fix1, 1);
-        // }
-        //
-        // Grids.OnPageReady = function (G, Row) {
-        //     G.RecalculateRows(G.Rows.Fix1, 1);
-        // }
+        window.Grids.OnDownloadPage = function (G, Row) {
+            var row = G.Rows.Fix1;
+            if (!row) return
+            G.RecalculateRows(G.Rows.Fix1, 1);
+        }
 
-        // window.Grids.OnLanguageFinish = function (G, code) {
-        //     var row = G.Rows.Fix3;
-        //     G.SetValue(row, "C", Get(row, Get(row, "D") + "Rate"), 1);
-        // }
+        window.Grids.OnRenderPageFinish = function (G) {
+            var row = G.Rows.Fix1;
+            if (!row) return
+            G.RecalculateRows(G.Rows.Fix1, 1);
+        }
+
+        window.Grids.OnPageReady = function (G, Row) {
+            var row = G.Rows.Fix1;
+            if (!row) return
+            G.RecalculateRows(G.Rows.Fix1, 1);
+        }
+
+        window.Grids.OnLanguageFinish = function (G, code) {
+            var row = G.Rows.Fix3;
+            if (!row) return
+            G.SetValue(row, "C", window.Get(row, window.Get(row, "D") + "Rate"), 1);
+        }
 
         return () => {
             window.Grids.OnExpand = null;
