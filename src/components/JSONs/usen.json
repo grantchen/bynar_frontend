@@ -3573,6 +3573,19 @@
                 }
               },
               {
+                "title": "payments",
+                "titleEnglish": "",
+                "url": "",
+                "tab": "Payments",
+                "tabType": "treeGrid",
+                "permission": "payments",
+                "megapanelContent": {
+                  "headingTitle": "",
+                  "headingUrl": "",
+                  "description": "payments"
+                }
+              },
+              {
                 "title": "View all products",
                 "titleEnglish": "View all products",
                 "url": "https://www.ibm.com/products?lnk=hpmps_buall",
