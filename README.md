@@ -69,8 +69,10 @@ $ npm start # start server on port 3000
 When push code to master will trigger google cloud build, google cloud build will run by cloudbuild.yaml step by step. As it store in google storage cloud, just access static files.
 
 ## How to config domain
-1. DNS A address set
+* DNS A address set
+
 A address set to ip 34.111.11.161
 
-2. Apply https Certificate
-Edit bynar-frontend and in Frontend configuration, add https protocol then upload certificate.
+* Upload https Certificate
+
+Network services -> Load balancing -> bynar-frontend -> EDIT -> Frontend configuration -> Add Frontend IP and protocol -> Upload https certificate.
