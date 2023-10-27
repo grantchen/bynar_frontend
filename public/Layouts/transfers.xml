@@ -74,7 +74,7 @@
         <C Name='shipment_method_id' Width='150' Type='Int' CaseSensitive='0' CanEdit='1' VarHeight='1'/>
         <C Name='shipping_agent_id' Width='150' Type='Int' CaseSensitive='0' CanEdit='1' VarHeight='1'/>
         <C Name='shipping_agent_service_id' Width='150' Type='Int' CaseSensitive='0' CanEdit='1' VarHeight='1'/>
-        <C Name='transaction_type_id' Width='150' Type='Text' CaseSensitive='0' CanEdit='1' VarHeight='1'/>
+        <C Name='transaction_type_id' Width='150' Type='Int' CaseSensitive='0' CanEdit='1' VarHeight='1'/>
         <C Name='transaction_specification_id' Width='150' Type='Int' CaseSensitive='0' CanEdit='1' VarHeight='1'/>
         <C Name='entry_exit_point_id' Width='150' Type='Int' CaseSensitive='0' CanEdit='1' VarHeight='1'/>
         <C Name='user_group_id' Width='150' Type='Int' VarHeight='1' CanSort='1' CanEdit='1'/>
