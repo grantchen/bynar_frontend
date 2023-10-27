@@ -7,7 +7,7 @@ import OrganizationList from "../components/OrganizationList";
 import UserGroupList from "../components/UserGroupList";
 import SiteList from "../components/SiteList";
 import TransferList from "../components/TransfersList";
-import Payments from "../components/Payments"
+import PaymentList from "../components/PaymentList"
 
 const UserList = lazy(() => import("./../components/UserList/index"));
 const InvoicesTable = lazy(() => import("./../components/InvoicesTable/index"));
@@ -88,7 +88,7 @@ const TabContextProvider = ({ children }) => {
             case "Warehouses":
                 return <Warehouses tabId={tabId} />;
             case "Payments":
-                return <Payments tabId={tabId}></Payments>
+                return <PaymentList tabId={tabId} />
             default:
                 return null;
         }

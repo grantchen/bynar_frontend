@@ -1,10 +1,12 @@
 <?xml version="1.0"?>
 <Grid>
-   <Cfg id='payments' Size='Low' MainCol='document_id' SuppressCfg='1' ShowDeleted='1' Deleting='1' ShowButtons="3" PasteSelected='0'
+   <Cfg id='payments' Size='Low' MainCol='document_id' SuppressCfg='1' ShowDeleted='1' Deleting='1' ShowButtons="3" 
+   	PasteSelected='0'
         Scrollbar='0'/>
-   <Cfg Validate='All,Added,Focus,Edit,Changed,Text' ValidateMessageTime='2500' ValidateMessage="Ju lutemi plotësoni të dhënat e nevojshme tek qelizat me ngjyrë të kuqe!"/>
+   <Cfg Validate='All,Added,Focus,Edit,Changed,Text' ValidateMessageTime='2500'/>
    <Cfg SearchCells='1' SearchAction='Select' SearchHidden='1'/>
-   <Cfg Paging="3" ColPaging="2" PageLengthDiv="2" FastPages="100" PageLength="100"  AllPages='1' RemoveUnusedPages='3' />
+   <Cfg Paging="3" ColPaging="2" PageLengthDiv="2" FastPages="100" PageLength="100"  AllPages='1' 
+   	RemoveUnusedPages='3' />
    <Cfg ChildPaging="3" ChildPageLength="25" ChildPageDiff="-25"/>
    <Cfg ChildParts="2" ChildPartLength="1" ChildPartMin="1"/>
    <Cfg MaxHeight='1'/>
@@ -32,7 +34,8 @@
    <Def>
       <D
          Name='Node'
-         Parent='#Body' CDef='Data' Sorted='1' AcceptDef='Data' Spanned='1' Calculated='1' Expanded='1' CanFilter='1'
+         Parent='#Body' CDef='Data' Sorted='1' AcceptDef='Data' Spanned='1' Calculated='1' Expanded='1'
+	 CanFilter='1'
          applies_document_type='Parent' applies_document_typeType='Text' applies_document_typeSpan="4" applies_document_typeCanEdit="0"  applies_document_typeAlign="Center"
 
       />
@@ -40,9 +43,11 @@
       <D
          Name='Data'
          CDef='' AcceptDef='Data'
-         Calculated='1' Spanned='1' Expanded='1' FormulaSuggest="6"
-         document_id ='Child' document_idSpan='16' document_idAlign="Center" document_idType='Text'  document_idCanEdit="0"
-         user_group_id='Child' user_group_idSpan='6' user_group_idAlign="Center" user_group_idType='Text'  user_group_idCanEdit="0"
+         Calculated='1' Spanned='1' Expanded='1' FormulaSuggest="6" A0="A0 centered &amp; scrolled"
+         document_id ='Child' document_idSpan='16' document_idAlign="Center" document_idType='Text'  
+	 document_idCanEdit="0"
+         user_group_id='Child' user_group_idSpan='6' user_group_idAlign="Center" user_group_idType='Text'  
+	 user_group_idCanEdit="0"
       />
    </Def>
 
