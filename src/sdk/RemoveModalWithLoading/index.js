@@ -6,12 +6,15 @@ import {
     ModalFooter,
     TextInput,
     Button,
+    Theme
 } from "@carbon/react";
 import "./removemodal.scss";
 import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { pkg } from "@carbon/ibm-products";
+import { useThemePreference } from "../../sdk";
 export const RemoveModalWithLoading = ({ deleteModalProps, loading }) => {
+    const { themePreference } = useThemePreference();
     const [userInput, setUserInput] = useState("");
     const { t } = useTranslation();
     const onChangeHandler = useCallback((e) => {
@@ -35,7 +38,7 @@ export const RemoveModalWithLoading = ({ deleteModalProps, loading }) => {
 
     const blockClass = `${pkg.prefix}--remove-modal`;
     return (
-        <>
+        <Theme theme={themePreference === "white" ? "g10" : "g90"}>
             <ComposedModal
                 open={Boolean(deleteModalProps)}
                 size="sm"
@@ -87,6 +90,6 @@ export const RemoveModalWithLoading = ({ deleteModalProps, loading }) => {
                     </Button>
                 </ModalFooter>
             </ComposedModal>
-        </>
+        </Theme>
     );
 };
