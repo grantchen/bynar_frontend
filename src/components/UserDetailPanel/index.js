@@ -1,7 +1,7 @@
 import { SidePanel, pkg } from "@carbon/ibm-products";
 import {
     TextInputSkeleton, Theme,
-    TextInput, Select, SelectItem,
+    TextInput, Select, SelectItem, Dropdown,
     InlineNotification
 } from "@carbon/react";
 import React, { useState, useEffect, useRef } from "react";
@@ -44,32 +44,34 @@ export const UserDetailPanel = ({ open }) => {
     const [searchParams] = useSearchParams();
     const { closeModalAndGoBackToUserList } = useUserManagement();
     const [defaultData,setDefaultData] = useState({});
-    const handleThemeChange = (e) => {
+    const themeItems = Themes.map(themeObject => themeObject.code);
+    const languagesItems = Languages.map(languageObject => languageObject.code);
+    const handleThemeChange = (selectedTheme) => {
         setServerErrorNotification({});
         setServerNotification(false);
-        const selectedItem = Themes.find((item) => item.code === e.target.value);
+        const selectedItem = Themes.find((item) => item.code === selectedTheme.selectedItem);
         if (Object.keys(selectedItem).length === 0) {
             setTheme('light')
         } else {
-            setTheme(e.target.value)
+            setTheme(selectedTheme.selectedItem)
         }
-        if (e.target.value === defaultData?.theme) {
+        if (selectedTheme.selectedItem === defaultData?.theme) {
             checkValues(defaultData, "theme")
         } else {
             setUpdateHappened(false);
         }
     }
 
-    const handleLanguageChange = (e) => {
+    const handleLanguageChange = (selectedLanguage) => {
         setServerErrorNotification({});
         setServerNotification(false);
-        const selectedItem = Languages.find((item) => item.code === e.target.value);
+        const selectedItem = Languages.find((item) => item.code === selectedLanguage.selectedItem);
         if (Object.keys(selectedItem).length === 0) {
             setLanguage('en')
         } else {
-            setLanguage(e.target.value)
+            setLanguage(selectedLanguage.selectedItem)
         }
-        if (e.target.value === defaultData?.language) {
+        if (selectedLanguage.selectedItem === defaultData?.language) {
             checkValues(defaultData, "language")
         } else {
             setUpdateHappened(false);
@@ -404,40 +406,30 @@ export const UserDetailPanel = ({ open }) => {
                                 <TextInputSkeleton className="skeleton-loading" />
                             ) : (
                                 <>
-                                    <Select
-                                        value={theme}
+                                    <Dropdown
                                         id="theme-ci"
-                                        labelText={t('theme')}
-                                        onChange={handleThemeChange}
-                                    >
-                                        {Themes.map((themeObject, themeIndex) => (
-                                            <SelectItem
-                                                text={t(themeObject.code)}
-                                                value={themeObject.code}
-                                                key={themeIndex}
-                                            />
-                                        ))}
-                                    </Select>
+                                        titleText={`${t("theme")} *`}
+                                        initialSelectedItem={theme}
+                                        items={themeItems}
+                                        selectedItem={theme}
+                                        onChange={selectedItem => handleThemeChange(selectedItem)}
+                                        itemToString={(item) => (item ? t(item) : '')}
+                                        label={theme}/>
                                 </>
                             )}
                             {dataLoading ? (
                                 <TextInputSkeleton className="skeleton-loading" />
                             ) : (
                                 <>
-                                    <Select
-                                        value={language}
+                                    <Dropdown
                                         id="language-ci"
-                                        labelText={t('languages')}
-                                        onChange={handleLanguageChange}
-                                    >
-                                        {Languages.map((object, index) => (
-                                            <SelectItem
-                                                text={t(object.code)}
-                                                value={object.code}
-                                                key={index}
-                                            />
-                                        ))}
-                                    </Select>
+                                        titleText={`${t("languages")} *`}
+                                        initialSelectedItem={language}
+                                        items={languagesItems}
+                                        selectedItem={language}
+                                        itemToString={(item) => (item ? t(item) : '')}
+                                        onChange={selectedItem => handleLanguageChange(selectedItem)}
+                                        label={language}/>
                                 </>
                             )}
                         </div>

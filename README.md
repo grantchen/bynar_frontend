@@ -67,3 +67,12 @@ $ npm start # start server on port 3000
 ## How to deploy
 
 When push code to master will trigger google cloud build, google cloud build will run by cloudbuild.yaml step by step. As it store in google storage cloud, just access static files.
+
+## How to config domain
+* DNS A address set
+
+A address set to ip 34.111.11.161
+
+* Upload https Certificate
+
+Network services -> Load balancing -> bynar-frontend -> EDIT -> Frontend configuration -> Add Frontend IP and protocol -> Upload https certificate.
