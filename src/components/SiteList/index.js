@@ -1,12 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useRef } from "react";
 import { TreeGrid } from "../TreeGrid";
-import { TabContext } from "../../sdk";
 
 const SiteList = ({ tabId }) => {
-    const { tab, activeTab } = useContext(TabContext);
+    const iframeRef = useRef();
 
-    useEffect(() => {
-        if (tab[activeTab].id !== tabId) return;
+    function iframeDidMount() {
+        const window = iframeRef.current.contentWindow
 
         window.Grids.OnExpand = function (G, row) {
             if (row.Def.Name == "Node") {
@@ -101,19 +100,7 @@ const SiteList = ({ tabId }) => {
             if (!row) return
             G.SetValue(row, "C", window.Get(row, window.Get(row, "D") + "Rate"), 1);
         }
-
-        return () => {
-            window.Grids.OnExpand = null;
-            window.Grids.OnRowAdd = null;
-            window.Grids.OnPasteRow = null;
-            window.Grids.OnGetMenu = null;
-            window.Grids.OnContextMenu = null;
-            window.Grids.OnDownloadPage = null;
-            window.Grids.OnRenderPageFinish = null;
-            window.Grids.OnPageReady = null;
-            window.Grids.OnLanguageFinish = null;
-        }
-    }, [tab, activeTab]);
+    }
 
     return (
         <>
@@ -121,6 +108,8 @@ const SiteList = ({ tabId }) => {
                 <TreeGrid
                     table={ "sites" }
                     tabId={ tabId }
+                    ref={ iframeRef }
+                    iframeDidMount={ iframeDidMount }
                 ></TreeGrid>
             </div>
         </>
