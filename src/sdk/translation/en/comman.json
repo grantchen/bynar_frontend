@@ -172,5 +172,6 @@
     "warehouses": "Warehouses",
     "sites": "Sites",
     "payments": "Payments",
-    "transfers": "Transfers"
+    "transfers": "Transfers",
+    "procurements": "Procurements"
 }

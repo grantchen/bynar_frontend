@@ -172,5 +172,6 @@
     "warehouses": "Lagerhäuser",
     "sites": "Websites",
     "transfers": "Überweisungen",
-    "payments": "Zahlungen"
+    "payments": "Zahlungen",
+    "procurements": "Beschaffungen"
 }

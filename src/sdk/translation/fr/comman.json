@@ -172,5 +172,6 @@
     "warehouses": "Entrepôts",
     "sites": "Des sites",
     "payments": "Paiements",
-    "transfers": "Transferts"
+    "transfers": "Transferts",
+    "procurements": "Achats"
 }

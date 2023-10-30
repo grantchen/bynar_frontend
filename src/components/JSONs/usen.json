@@ -3586,6 +3586,19 @@
                 }
               },
               {
+                "title": "procurements",
+                "titleEnglish": "",
+                "url": "",
+                "tab": "Procurements",
+                "tabType": "treeGrid",
+                "permission": "procurements",
+                "megapanelContent": {
+                  "headingTitle": "",
+                  "headingUrl": "",
+                  "description": "procurements"
+                }
+              },
+              {
                 "title": "View all products",
                 "titleEnglish": "View all products",
                 "url": "https://www.ibm.com/products?lnk=hpmps_buall",
