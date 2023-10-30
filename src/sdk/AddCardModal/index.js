@@ -7,7 +7,8 @@ import {
     Button,
     InlineNotification,
     ToastNotification,
-    TextInputSkeleton
+    TextInputSkeleton,
+    Theme
 } from "@carbon/react";
 import { useTranslation } from "react-i18next";
 import { useCardManagement } from "../context";
@@ -27,7 +28,7 @@ const AddCardModal = ({ open }) => {
     const { authFetch } = useAuth();
     const navigate = useNavigate()
     const { handleVerifyCard, notification, setNotification } = useCardManagement();
-    const { theme } = useThemePreference()
+    const { theme, themePreference } = useThemePreference()
 
     const { t } = useTranslation();
     const handleClose = useCallback(() => {
@@ -77,6 +78,7 @@ const AddCardModal = ({ open }) => {
             document.querySelectorAll(".frame-skeleton-loading").forEach(a => a.style.display = "");
             Frames.init({
                 publicKey: CheckoutPublicKey,
+                style: themePreference == "white" ? g10style : g90style,
                 "ready": handleReady,
             });
         }
@@ -95,56 +97,118 @@ const AddCardModal = ({ open }) => {
     //     } )
     // }, [])
 
+    const g10style = {
+        base: {
+            color: '#161616',
+        },
+        // autofill: {
+        //     backgroundColor: 'yellow',
+        // },
+        hover: {
+            color: '#161616',
+        },
+        focus: {
+            color: '#161616',
+        },
+        // valid: {
+        //     color: 'green',
+        // },
+        // invalid: {
+        //     color: 'red',
+        // },
+        placeholder: {
+            base: {
+                color: 'gray',
+            },
+            // focus: {
+            //     border: 'solid 1px #161616',
+            // },
+        },
+    };
+
+    const g90style = {
+        base: {
+            color: '#f4f4f4',
+        },
+        // autofill: {
+        //     backgroundColor: '#525252',
+        // },
+        hover: {
+            color: '#f4f4f4',
+        },
+        focus: {
+            color: '#f4f4f4',
+        },
+        // valid: {
+        //     color: 'green',
+        // },
+        // invalid: {
+        //     color: 'red',
+        // },
+        placeholder: {
+            base: {
+                color: '#ccc',
+            },
+            // focus: {
+            //     border: 'solid 1px #525252',
+            // },
+        },
+    };
+
     return (
-        <ComposedModal
-            open={open}
-            size="md"
-            onClose={handleClose}
-            className="add-card-modal"
-        >
-            <ModalHeader title={t("add-new-card")} />
-            <ModalBody ref={modalBodyRef}>
-                {notification && (
-                    <InlineNotification
-                        className="error-notification-box"
-                        iconDescription="Clear Notification"
-                        title={notification?.message}
-                        onCloseButtonClick={() => {
-                            setNotification(null);
-                        }}
-                        timeout={0}
-                        // title=""
-                        kind={notification?.type}
-                    />
-                )}
-                <Frames
-                    config={{
-                        publicKey: CheckoutPublicKey,
-                        "ready": handleReady,
-                    }}
-                >
-                    <div className="card-input-container">
-                        <div>
-                            <p className="input-heading frame-heading" style={{ display: "none" }}>{t("card-details")}</p>
-                        </div>
-                        <div>
-                            <TextInputSkeleton className="frame-skeleton-loading" />
-                            <CardFrame className="card-number" style={{ display: "none" }} />
-                        </div>
-                    </div>
-                </Frames>
-            </ModalBody>
-            <ModalFooter>
-                <Button kind="secondary" onClick={handleClose}>
-                    {t("cancel")}
-                </Button>
-                <Button kind="primary" onClick={handleSubmit} className="button-with-loading">
-                    {t("confirm")}
-                    {loading && (
-                        <InlineLoading className="inline-loading-within-btn" />
+        <Theme theme={themePreference === "white" ? "g10" : "g90"}>
+            <ComposedModal
+                open={open}
+                size="md"
+                onClose={handleClose}
+                className="add-card-modal"
+                preventCloseOnClickOutside
+            >
+                <ModalHeader title={t("add-new-card")} />
+                <ModalBody ref={modalBodyRef}>
+                    {notification && (
+                        <InlineNotification
+                            className="error-notification-box"
+                            iconDescription="Clear Notification"
+                            title={notification?.message}
+                            onCloseButtonClick={() => {
+                                setNotification(null);
+                            }}
+                            timeout={0}
+                            // title=""
+                            kind={notification?.type}
+                        />
                     )}
-                </Button>
-            </ModalFooter>
-        </ComposedModal>)
+                    <Frames
+                        config={{
+                            publicKey: CheckoutPublicKey,
+                            style: themePreference == "white" ? g10style : g90style,
+                            "ready": handleReady,
+                        }}
+                    >
+                        <div className="card-input-container">
+                            <div>
+                                <p className="input-heading frame-heading" style={{ display: "none" }}>{t("card-details")}</p>
+                            </div>
+                            <div>
+                                <TextInputSkeleton className="frame-skeleton-loading" />
+                                <CardFrame className="card-number" style={{ display: "none" }} />
+                            </div>
+                        </div>
+                    </Frames>
+                </ModalBody>
+                <ModalFooter>
+                    <Button kind="secondary" onClick={handleClose}>
+                        {t("cancel")}
+                    </Button>
+                    <Button kind="primary" onClick={handleSubmit} className="button-with-loading">
+                        {t("confirm")}
+                        {loading && (
+                            <InlineLoading className="inline-loading-within-btn" />
+                        )}
+                    </Button>
+                </ModalFooter>
+            </ComposedModal>
+        </Theme>)
 }
 export default AddCardModal;
