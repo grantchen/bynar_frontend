@@ -39,11 +39,9 @@ export const SubscribeTabMessage = ({subscribe}) => {
   }, []);
 
   useEffect(() => {
-    console.log('[Storage Subscribe] subscribe tab message');
     window.addEventListener("storage", subscribe);
 
     return () => {
-      console.log('[Storage Subscribe] unsubscribe tab message');
       window.addEventListener("storage", subscribe);
     }
   }, []);

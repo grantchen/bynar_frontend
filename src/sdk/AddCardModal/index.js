@@ -22,7 +22,6 @@ import {
     CheckoutPublicKey,
 } from "./../../sdk";
 const AddCardModal = ({ open }) => {
-    console.log(open)
     const [loading, setLoading] = useState(false);
     const modalBodyRef = useRef(null)
     const { authFetch } = useAuth();
