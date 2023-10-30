@@ -10,6 +10,9 @@ const UserGroupList = ({ tabId }) => {
         window.keySuggest = 'full_nameSuggest'
         window.lsSuggestionField = ["full_name", "email", "user_id"]
 
+        // suggest
+        window.Grids.OnAfterValueChanged = window.parseCellSuggestionCallback(window.keySuggest, window.lsSuggestionField)
+
         window.Grids.OnExpand = function (G, row) {
             if (row.Def.Name == "Node") {
                 G.SetAttribute(row, row.parent, "Calculated", 1);
