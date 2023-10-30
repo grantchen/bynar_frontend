@@ -1,0 +1,44 @@
+/*Material*/
+.TMRowSpace1 .TMSolidRow, .TMRowSpace2 .TMSolidRow, .TMRowSpace3 .TMSolidRow{
+  border-left: 0px;
+  border-right: 0px;
+}
+.TMRowSpace2.TMRowSpaceLast .TMSolidRow, .TMRowSpace3.TMRowSpaceLast .TMSolidRow {
+  border-bottom: 0px;
+}
+
+.TMHeadLeft, .TMBodyLeft, .TMFootLeft {
+  border-left: 0px;
+}
+
+.TMHeadMid, .TMBodyMid, .TMFootMid {
+  border-right: 0px;
+}
+.TMHeadMid .TMHeaderRow .TMCellHeader:last-child {
+  border-right: 0px;
+}
+.TMHeadMid .TMHeaderRow .TMCellHeader:nth-last-child(2) {
+  border-right: 0px;
+}
+.TMHeadMid .TMFilterRow .TMCellBase:last-child {
+  border-right: 0px;
+}
+.TMHeadMid .TMFilterRow .TMCellBase:nth-last-child(2) {
+  border-right: 0px;
+}
+
+.TMHeadMid .TMFilterRow .TMCellBase:last-child {
+  border-right: 0px;
+}
+
+.TMBodyMid .TMDataRow .TMCellBase:last-child {
+  border-right: 0px;
+}
+
+.TMBodyMid .TMDataRow .TMCellBase:nth-last-child(2) {
+  border-right: 0px;
+}
+
+.TMMain .TMBodyLeft, .TMMain .TMBodyMid, .TMMain .TMBodyRight {
+  border-bottom: 0px;
+}

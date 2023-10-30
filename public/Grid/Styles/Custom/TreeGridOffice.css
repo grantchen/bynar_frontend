@@ -1,0 +1,70 @@
+/*colors office*/
+.CORowSpace1 .COSolidRow, .CORowSpace2 .COSolidRow, .CORowSpace3 .COSolidRow{
+  border-left: 0px;
+  border-right: 0px;
+}
+.CORowSpace2.CORowSpaceLast .COSolidRow, .CORowSpace3.CORowSpaceLast .COSolidRow {
+  border-bottom: 0px;
+}
+
+.COHeadLeft, .COBodyLeft, .COFootLeft {
+  border-left: 0px;
+}
+
+.COHeadMid, .COBodyMid, .COFootMid {
+  border-right: 0px;
+}
+.COHeadMid .COHeaderRow .COCellHeader:last-child {
+  border-right: 0px;
+}
+.COHeadMid .COHeaderRow .COCellHeader:nth-last-child(2) {
+  border-right: 0px;
+}
+.COHeadMid .COFilterRow .COCellBase:last-child {
+  border-right: 0px;
+}
+.COHeadMid .COFilterRow .COCellBase:nth-last-child(2) {
+  border-right: 0px;
+}
+
+.COHeadMid .COFilterRow .COCellBase:last-child {
+  border-right: 0px;
+}
+
+.COBodyMid .CODataRow .COCellBase:last-child {
+  border-right: 0px;
+}
+
+.COBodyMid .CODataRow .COCellBase:nth-last-child(2) {
+  border-right: 0px;
+}
+
+.COMain .COBodyLeft, .COMain .COBodyMid, .COMain .COBodyRight {
+  border-bottom: 0px;
+}
+.COMainTable{
+  border: 0px solid #d0d0d0;
+  border-top: 1px solid #d0d0d0;
+}
+.CORowAbove, .CORowBelow {
+  border-left: 0px solid #e0e0ff;
+  border-right: 0px solid #e0e0ff;
+}
+.COCellSpace, .COCellSpaceIcon, .COCellSpaceButton, .COCellSpaceButtonIcon, .COCellSpaceButtonButton, .COCellSpacePanel, .COCellSpaceBool, .COCellSpaceRadio, .COCellSpaceSelect, .COCellSpaceEdit{
+  border-left: 0px;
+}
+.COFillRow .COCellSpaceEmpty{
+  border-right: 0px
+}
+.CORowSpace .COGroupRow .COCellSpace:last-child{
+  border-right: 0px
+}
+.CORowAbove .COCellSpaceAbove:last-child{
+  border-right: 0px
+}
+.COBodyLeft .CODataRow:last-child .COCellBase{
+  border-bottom: 0px
+}
+.COBodyMid .CODataRow:last-child .COCellBase{
+  border-bottom: 0px
+}

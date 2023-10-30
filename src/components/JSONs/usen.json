@@ -3459,7 +3459,7 @@
                 "title": "invoices",
                 "titleEnglish": "",
                 "url": "",
-                "tab": "Invoices",
+                "tab": "InvoiceList",
                 "tabType": "treeGrid",
                 "permission": "invoices",
                 "megapanelContent": {
@@ -3472,7 +3472,7 @@
                 "title": "users",
                 "titleEnglish": "",
                 "url": "",
-                "tab": "Users",
+                "tab": "UserList",
                 "tabType": "treeGrid",
                 "permission": "user_list",
                 "megapanelContent": {
@@ -3485,7 +3485,7 @@
                 "title": "general-posting-setup",
                 "titleEnglish": "",
                 "url": "",
-                "tab": "GeneralPostingSetup",
+                "tab": "GeneralPostingSetupList",
                 "tabType": "treeGrid",
                 "permission": "general_posting_setup",
                 "megapanelContent": {
@@ -3498,7 +3498,7 @@
                 "title": "user-groups",
                 "titleEnglish": "",
                 "url": "",
-                "tab": "UserGroups",
+                "tab": "UserGroupList",
                 "tabType": "treeGrid",
                 "permission": "user_groups",
                 "megapanelContent": {
@@ -3511,7 +3511,7 @@
                 "title": "organizations",
                 "titleEnglish": "",
                 "url": "",
-                "tab": "Organizations",
+                "tab": "OrganizationList",
                 "tabType": "treeGrid",
                 "permission": "organizations",
                 "megapanelContent": {
@@ -3537,7 +3537,7 @@
                 "title": "warehouses",
                 "titleEnglish": "",
                 "url": "",
-                "tab": "Warehouses",
+                "tab": "WarehouseList",
                 "tabType": "treeGrid",
                 "permission": "warehouses",
                 "megapanelContent": {
@@ -3550,7 +3550,7 @@
                 "title": "sites",
                 "titleEnglish": "",
                 "url": "",
-                "tab": "Sites",
+                "tab": "SiteList",
                 "tabType": "treeGrid",
                 "permission": "sites",
                 "megapanelContent": {
@@ -3563,7 +3563,7 @@
                 "title": "transfers",
                 "titleEnglish": "",
                 "url": "",
-                "tab": "Transfers",
+                "tab": "TransferList",
                 "tabType": "treeGrid",
                 "permission": "transfers",
                 "megapanelContent": {
@@ -3576,7 +3576,7 @@
                 "title": "payments",
                 "titleEnglish": "",
                 "url": "",
-                "tab": "Payments",
+                "tab": "PaymentList",
                 "tabType": "treeGrid",
                 "permission": "payments",
                 "megapanelContent": {
@@ -3589,7 +3589,7 @@
                 "title": "procurements",
                 "titleEnglish": "",
                 "url": "",
-                "tab": "Procurements",
+                "tab": "ProcurementList",
                 "tabType": "treeGrid",
                 "permission": "procurements",
                 "megapanelContent": {

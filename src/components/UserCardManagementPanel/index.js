@@ -122,7 +122,7 @@ const UserCardManagementPanel = ({ open }) => {
                                     tooltipPosition="left"
                                     onClick={openCardAddModal}
                                     disabled={
-                                        cardsData?.instruments?.length >= 10
+                                        (loading || cardsData?.instruments?.length >= 10)
                                             ? true
                                             : false
                                     }

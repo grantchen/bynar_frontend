@@ -1,0 +1,73 @@
+/*colors Gradient*/
+.CBRowSpace1 .CBSolidRow, .CBRowSpace2 .CBSolidRow, .CBRowSpace3 .CBSolidRow{
+  border-left: 0px;
+  border-right: 0px;
+}
+.CBRowSpace2.CBRowSpaceLast .CBSolidRow, .CBRowSpace3.CBRowSpaceLast .CBSolidRow {
+  border-bottom: 0px;
+}
+
+.CBHeadLeft, .CBBodyLeft, .CBFootLeft {
+  border-left: 0px;
+}
+
+.CBHeadMid, .CBBodyMid, .CBFootMid {
+  border-right: 0px;
+}
+.CBHeadMid .CBHeaderRow .CBCellHeader:last-child {
+  border-right: 0px;
+}
+.CBHeadMid .CBHeaderRow .CBCellHeader:nth-last-child(2) {
+  border-right: 0px;
+}
+.CBHeadMid .CBFilterRow .CBCellBase:last-child {
+  border-right: 0px;
+}
+.CBHeadMid .CBFilterRow .CBCellBase:nth-last-child(2) {
+  border-right: 0px;
+}
+
+.CBHeadMid .CBFilterRow .CBCellBase:last-child {
+  border-right: 0px;
+}
+
+.CBBodyMid .CBDataRow .CBCellBase:last-child {
+  border-right: 0px;
+}
+
+.CBBodyMid .CBDataRow .CBCellBase:nth-last-child(2) {
+  border-right: 0px;
+}
+
+.CBMain .CBBodyLeft, .CBMain .CBBodyMid, .CBMain .CBBodyRight {
+  border-bottom: 0px;
+}
+.CBMainTable{
+  border: 0px solid #d0d0d0;
+  border-top: 1px solid #d0d0d0;
+}
+.CBRowAbove, .CBRowBelow {
+  border-left: 0px solid #e0e0ff;
+  border-right: 0px solid #e0e0ff;
+}
+.CBCellSpace, .CBCellSpaceIcon, .CBCellSpaceButton, .CBCellSpaceButtonIcon, .CBCellSpaceButtonButton, .CBCellSpacePanel, .CBCellSpaceBool, .CBCellSpaceRadio, .CBCellSpaceSelect, .CBCellSpaceEdit{
+  border-left: 0px;
+}
+.CBFillRow .CBCellSpaceEmpty{
+  border-right: 0px
+}
+.CBRowSpace .CBGroupRow .CBCellSpace:last-child{
+  border-right: 0px
+}
+.CBRowAbove .CBCellSpaceAbove:last-child{
+  border-right: 0px
+}
+.CBBodyLeft .CBDataRow:last-child .CBCellBase{
+  border-bottom: 0px
+}
+.CBBodyMid .CBDataRow:last-child .CBCellBase{
+  border-bottom: 0px
+}
+.CBBottom .CBBottom2,.CBBottom .CBBottom3,.CBBottom .CBBottom4,.CBBottom .CBBottom5{
+  height: 0px;
+}

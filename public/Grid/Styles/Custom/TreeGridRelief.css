@@ -1,0 +1,72 @@
+/*Relief*/
+.CFRowSpace1 .CFSolidRow, .CFRowSpace2 .CFSolidRow, .CFRowSpace3 .CFSolidRow{
+  border-left: 0px;
+  border-right: 0px;
+}
+.CFRowSpace2.CFRowSpaceLast .CFSolidRow, .CFRowSpace3.CFRowSpaceLast .CFSolidRow {
+  border-bottom: 0px;
+}
+
+.CFHeadLeft, .CFBodyLeft, .CFFootLeft {
+  border-left: 0px;
+}
+
+.CFHeadMid, .CFBodyMid, .CFFootMid {
+  border-right: 0px;
+}
+.CFHeadMid .CFHeaderRow .CFCellHeader:last-child {
+  border-right: 0px;
+}
+.CFHeadMid .CFHeaderRow .CFCellHeader:nth-last-child(2) {
+  border-right: 0px;
+}
+.CFHeadMid .CFFilterRow .CFCellBase:last-child {
+  border-right: 0px;
+}
+.CFHeadMid .CFFilterRow .CFCellBase:nth-last-child(2) {
+  border-right: 0px;
+}
+
+.CFHeadMid .CFFilterRow .CFCellBase:last-child {
+  border-right: 0px;
+}
+
+.CFBodyMid .CFDataRow .CFCellBase:last-child {
+  border-right: 0px;
+}
+
+.CFBodyMid .CFDataRow .CFCellBase:nth-last-child(2) {
+  border-right: 0px;
+}
+
+.CFMain .CFBodyLeft, .CFMain .CFBodyMid, .CFMain .CFBodyRight {
+  border-bottom: 0px;
+}
+.CFMainTable{
+  border: 0px solid #d0d0d0;
+  border-top: 1px solid #d0d0d0;
+}
+.CFRowAbove, .CFRowBelow {
+  border-left: 0px solid #e0e0ff;
+  border-right: 0px solid #e0e0ff;
+}
+.CFCellSpace, .CFCellSpaceIcon, .CFCellSpaceButton, .CFCellSpaceButtonIcon, .CFCellSpaceButtonButton, .CFCellSpacePanel, .CFCellSpaceBool, .CFCellSpaceRadio, .CFCellSpaceSelect, .CFCellSpaceEdit{
+  border-left: 0px;
+}
+.CFFillRow .CFCellSpaceEmpty{
+  border-right: 0px
+}
+.CFRowSpace .CFGroupRow .CFCellSpace:last-child{
+  border-right: 0px
+}
+.CFRowAbove .CFCellSpaceAbove:last-child{
+  border-right: 0px
+}
+
+.CFBodyMid .CFDataRow:last-child .CFCellBase {
+  border-bottom: 0px;
+}
+
+.CFBodyLeft .CFDataRow:last-child .CFCellBase {
+  border-bottom: 0px;
+}
