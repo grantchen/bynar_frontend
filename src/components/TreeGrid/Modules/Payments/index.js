@@ -1,12 +1,13 @@
-import React, { useRef } from "react";
-import { TreeGrid } from "../TreeGrid";
+import React, {  useRef } from "react";
+import { TreeGrid } from "../../index";
 
-const SiteList = ({ tabId }) => {
+const PaymentList = ({ tabId }) => {
     const iframeRef = useRef();
 
     function iframeDidMount() {
         const window = iframeRef.current.contentWindow
 
+        // do something
         window.Grids.OnExpand = function (G, row) {
             if (row.Def.Name == "Node") {
                 G.SetAttribute(row, row.parent, "Calculated", 1);
@@ -14,12 +15,15 @@ const SiteList = ({ tabId }) => {
         }
 
         window.Grids.OnRowAdd = function (G, row, col, val) {
+
             if (row.Def.Name == "Node") {
                 G.SetAttribute(row, row.parent, "Calculated", 1);
             }
         }
 
+
         window.Grids.OnPasteRow = function (G, row, col, val) {
+
             if (row.Def.Name == "Node") {
                 G.SetAttribute(row, row.parent, "Calculated", 1);
             }
@@ -39,7 +43,8 @@ const SiteList = ({ tabId }) => {
             if (row.Def.Name == "Node") {
                 I[I.length] = { Name: "AddOrder", Text: "Add new order" };
                 I[I.length] = { Name: "InsItem", Text: "Add new product" };
-            } else I[I.length] = { Name: "AddItem", Text: "Add new product" };
+
+            }else I[I.length] = { Name: "AddItem", Text: "Add new product" };
             if (row.firstChild) I[I.length] = {
                 Name: "Exp",
                 Text: (row.Expanded ? "Collapse" : "Expand") + (row.Def.Name == "Node" ? " order" : " product")
@@ -50,7 +55,6 @@ const SiteList = ({ tabId }) => {
             };
             return M;
         }
-
         window.Grids.OnContextMenu = function (G, row, col, N) {
             switch (N) {
                 case "Del":
@@ -84,21 +88,27 @@ const SiteList = ({ tabId }) => {
         }
 
         window.Grids.OnDownloadPage = function (G, Row) {
-            G.RecalculateRows(G.Rows.Fix1, 1);
+            // var row = G.Rows.Fix1;
+            // if (!row) return
+            // G.RecalculateRows(G.Rows.Fix1, 1);
         }
 
         window.Grids.OnRenderPageFinish = function (G) {
-            G.RecalculateRows(G.Rows.Fix1, 1);
+            // var row = G.Rows.Fix1;
+            // if (!row) return
+            // G.RecalculateRows(G.Rows.Fix1, 1);
         }
 
         window.Grids.OnPageReady = function (G, Row) {
-            G.RecalculateRows(G.Rows.Fix1, 1);
+            // var row = G.Rows.Fix1;
+            // if (!row) return
+            // G.RecalculateRows(G.Rows.Fix1, 1);
         }
 
         window.Grids.OnLanguageFinish = function (G, code) {
-            var row = G.Rows.Fix3;
-            if (!row) return
-            G.SetValue(row, "C", window.Get(row, window.Get(row, "D") + "Rate"), 1);
+            // var row = G.Rows.Fix3;
+            // if (!row) return
+            // G.SetValue(row, "C", window.Get(row, window.Get(row, "D") + "Rate"), 1);
         }
     }
 
@@ -106,7 +116,7 @@ const SiteList = ({ tabId }) => {
         <>
             <div className="tree-grid-content">
                 <TreeGrid
-                    table={ "sites" }
+                    table={ "payments" }
                     tabId={ tabId }
                     ref={ iframeRef }
                     iframeDidMount={ iframeDidMount }
@@ -116,4 +126,4 @@ const SiteList = ({ tabId }) => {
     );
 };
 
-export default SiteList;
+export default PaymentList;

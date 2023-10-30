@@ -8,15 +8,10 @@ import React, {
 } from "react";
 import { BaseURL } from "../constant";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { mergeQueryParams, removeNullEntries } from "../util";
-import { SidePanels } from "../../components/SidePanel";
-import { UserDetailPanel } from "../../components/UserDetailPanel";
+import { removeNullEntries } from "../util";
 import { useAuth } from "../AuthContext";
 import { useTranslation } from "react-i18next";
 import { RemoveModalWithLoading } from "../RemoveModalWithLoading";
-import { Tearsheet } from "@carbon/ibm-products";
-import InvoicesTable from "../../components/InvoicesTable";
-import { format } from "date-fns";
 import UserCardManagementPanel from "../../components/UserCardManagementPanel";
 import AddCardModal from "../AddCardModal";
 

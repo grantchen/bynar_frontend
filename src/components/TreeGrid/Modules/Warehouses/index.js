@@ -1,8 +1,7 @@
 import React, { useRef } from "react";
-import "./UserList.scss";
-import { TreeGrid } from "../TreeGrid";
+import { TreeGrid } from "../../index";
 
-const UserList = ({ tabId }) => {
+const WarehousesList = ({ tabId }) => {
     const iframeRef = useRef();
 
     function iframeDidMount() {
@@ -15,8 +14,8 @@ const UserList = ({ tabId }) => {
         <>
             <div className="tree-grid-content">
                 <TreeGrid
-                    table={ "user_list" }
-                    tabId={ tabId }
+                    table={"warehouses"}
+                    tabId={tabId}
                     ref={ iframeRef }
                     iframeDidMount={ iframeDidMount }
                 ></TreeGrid>
@@ -25,4 +24,4 @@ const UserList = ({ tabId }) => {
     );
 };
 
-export default UserList;
+export default WarehousesList;

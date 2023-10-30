@@ -1,8 +1,7 @@
 import React, { useRef } from "react";
-import "./invoices-table.scss";
-import { TreeGrid } from "../TreeGrid";
+import { TreeGrid } from "../../index";
 
-const InvoicesTable = ({ tabId }) => {
+const InvoiceList = ({ tabId }) => {
     const iframeRef = useRef();
 
     function iframeDidMount() {
@@ -25,4 +24,4 @@ const InvoicesTable = ({ tabId }) => {
     );
 };
 
-export default InvoicesTable;
+export default InvoiceList;

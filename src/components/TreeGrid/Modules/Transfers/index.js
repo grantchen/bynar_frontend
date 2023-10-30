@@ -1,8 +1,7 @@
 import React, { useRef } from "react";
-import "./GeneralPostingSetup.scss";
-import { TreeGrid } from "../TreeGrid";
+import { TreeGrid } from "../../index";
 
-const GeneralPostingSetup = ({ tabId }) => {
+const TransferList = ({ tabId }) => {
     const iframeRef = useRef();
 
     function iframeDidMount() {
@@ -85,29 +84,29 @@ const GeneralPostingSetup = ({ tabId }) => {
         }
 
         window.Grids.OnDownloadPage = function (G, Row) {
-            G.RecalculateRows(G.Rows.Fix1, 1);
+            // G.RecalculateRows(G.Rows.Fix1, 1);
         }
 
         window.Grids.OnRenderPageFinish = function (G) {
-            G.RecalculateRows(G.Rows.Fix1, 1);
+            // G.RecalculateRows(G.Rows.Fix1, 1);
         }
 
         window.Grids.OnPageReady = function (G, Row) {
-            G.RecalculateRows(G.Rows.Fix1, 1);
+            // G.RecalculateRows(G.Rows.Fix1, 1);
         }
 
         window.Grids.OnLanguageFinish = function (G, code) {
-            var row = G.Rows.Fix3;
-            if (!row) return
-            G.SetValue(row, "C", window.Get(row, window.Get(row, "D") + "Rate"), 1);
+            // var row = G.Rows.Fix3;
+            // G.SetValue(row, "C", window.Get(row, window.Get(row, "D") + "Rate"), 1);
         }
     }
+
 
     return (
         <>
             <div className="tree-grid-content">
                 <TreeGrid
-                    table={ "general_posting_setup" }
+                    table={ "transfers" }
                     tabId={ tabId }
                     ref={ iframeRef }
                     iframeDidMount={ iframeDidMount }
@@ -117,4 +116,4 @@ const GeneralPostingSetup = ({ tabId }) => {
     );
 };
 
-export default GeneralPostingSetup;
+export default TransferList;

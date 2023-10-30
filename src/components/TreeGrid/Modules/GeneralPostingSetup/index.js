@@ -1,15 +1,11 @@
 import React, { useRef } from "react";
-import "./UserGroupList.scss";
-import { TreeGrid } from "../TreeGrid";
+import { TreeGrid } from "../../index";
 
-const UserGroupList = ({ tabId }) => {
+const GeneralPostingSetupList = ({ tabId }) => {
     const iframeRef = useRef();
 
     function iframeDidMount() {
         const window = iframeRef.current.contentWindow
-
-        window.keySuggest = 'full_nameSuggest'
-        window.lsSuggestionField = ["full_name", "email", "user_id"]
 
         window.Grids.OnExpand = function (G, row) {
             if (row.Def.Name == "Node") {
@@ -17,28 +13,7 @@ const UserGroupList = ({ tabId }) => {
             }
         }
 
-        // before add
-        window.Grids.OnCanRowAdd = function (G, par, next) {
-            if (G.Editing === 2) return false;
-            // Disable adding rows to grouped category
-            if (par.Def?.Name === "Group" && par.Def?.CDef === "R" && par.Rows) return false;
-            return
-        }
-
-        // on add
-        window.Grids.OnRowAdd = function (G, row) {
-            let par = row.parentNode
-            // add child to grouped row, set code to empty
-            if (par && par.Def?.Name === "Group" && par.Def?.CDef === "R") {
-                row.code = ''
-            }
-
-            if (row.Def.Name == "Node") {
-                G.SetAttribute(row, row.parent, "Calculated", 1);
-            }
-        }
-
-        window.Grids.OnRowDelete = function (G, row, col, val) {
+        window.Grids.OnRowAdd = function (G, row, col, val) {
             if (row.Def.Name == "Node") {
                 G.SetAttribute(row, row.parent, "Calculated", 1);
             }
@@ -131,7 +106,7 @@ const UserGroupList = ({ tabId }) => {
         <>
             <div className="tree-grid-content">
                 <TreeGrid
-                    table={ "user_groups" }
+                    table={ "general_posting_setup" }
                     tabId={ tabId }
                     ref={ iframeRef }
                     iframeDidMount={ iframeDidMount }
@@ -141,4 +116,4 @@ const UserGroupList = ({ tabId }) => {
     );
 };
 
-export default UserGroupList;
+export default GeneralPostingSetupList;

@@ -1,12 +1,11 @@
-import React, { useContext, useEffect } from "react";
-import { TreeGrid } from "../TreeGrid";
-import { TabContext } from "../../sdk";
+import React, { useRef } from "react";
+import { TreeGrid } from "../../index";
 
-const PaymentList = ({ tabId }) => {
-    const { tab, activeTab } = useContext(TabContext);
+const OrganizationList = ({ tabId }) => {
+    const iframeRef = useRef();
 
-    useEffect(() => {
-        if (tab[activeTab].id !== tabId) return;
+    function iframeDidMount() {
+        const window = iframeRef.current.contentWindow
 
         window.Grids.OnExpand = function (G, row) {
             if (row.Def.Name == "Node") {
@@ -15,15 +14,12 @@ const PaymentList = ({ tabId }) => {
         }
 
         window.Grids.OnRowAdd = function (G, row, col, val) {
-
             if (row.Def.Name == "Node") {
                 G.SetAttribute(row, row.parent, "Calculated", 1);
             }
         }
 
-
         window.Grids.OnPasteRow = function (G, row, col, val) {
-
             if (row.Def.Name == "Node") {
                 G.SetAttribute(row, row.parent, "Calculated", 1);
             }
@@ -43,8 +39,7 @@ const PaymentList = ({ tabId }) => {
             if (row.Def.Name == "Node") {
                 I[I.length] = { Name: "AddOrder", Text: "Add new order" };
                 I[I.length] = { Name: "InsItem", Text: "Add new product" };
-
-            }else I[I.length] = { Name: "AddItem", Text: "Add new product" };
+            } else I[I.length] = { Name: "AddItem", Text: "Add new product" };
             if (row.firstChild) I[I.length] = {
                 Name: "Exp",
                 Text: (row.Expanded ? "Collapse" : "Expand") + (row.Def.Name == "Node" ? " order" : " product")
@@ -55,6 +50,7 @@ const PaymentList = ({ tabId }) => {
             };
             return M;
         }
+
         window.Grids.OnContextMenu = function (G, row, col, N) {
             switch (N) {
                 case "Del":
@@ -88,52 +84,36 @@ const PaymentList = ({ tabId }) => {
         }
 
         window.Grids.OnDownloadPage = function (G, Row) {
-            // var row = G.Rows.Fix1;
-            // if (!row) return
-            // G.RecalculateRows(G.Rows.Fix1, 1);
+            G.RecalculateRows(G.Rows.Fix1, 1);
         }
 
         window.Grids.OnRenderPageFinish = function (G) {
-            // var row = G.Rows.Fix1;
-            // if (!row) return
-            // G.RecalculateRows(G.Rows.Fix1, 1);
+            G.RecalculateRows(G.Rows.Fix1, 1);
         }
 
         window.Grids.OnPageReady = function (G, Row) {
-            // var row = G.Rows.Fix1;
-            // if (!row) return
-            // G.RecalculateRows(G.Rows.Fix1, 1);
+            G.RecalculateRows(G.Rows.Fix1, 1);
         }
 
         window.Grids.OnLanguageFinish = function (G, code) {
-            // var row = G.Rows.Fix3;
-            // if (!row) return
-            // G.SetValue(row, "C", window.Get(row, window.Get(row, "D") + "Rate"), 1);
+            var row = G.Rows.Fix3;
+            if (!row) return
+            G.SetValue(row, "C", window.Get(row, window.Get(row, "D") + "Rate"), 1);
         }
-
-        return () => {
-            window.Grids.OnExpand = null;
-            window.Grids.OnRowAdd = null;
-            window.Grids.OnPasteRow = null;
-            window.Grids.OnGetMenu = null;
-            window.Grids.OnContextMenu = null;
-            window.Grids.OnDownloadPage = null;
-            window.Grids.OnRenderPageFinish = null;
-            window.Grids.OnPageReady = null;
-            window.Grids.OnLanguageFinish = null;
-        }
-    }, [tab, activeTab]);
+    }
 
     return (
         <>
             <div className="tree-grid-content">
                 <TreeGrid
-                    table={ "payments" }
+                    table={ "organizations" }
                     tabId={ tabId }
+                    ref={ iframeRef }
+                    iframeDidMount={ iframeDidMount }
                 ></TreeGrid>
             </div>
         </>
     );
 };
 
-export default PaymentList;
+export default OrganizationList;

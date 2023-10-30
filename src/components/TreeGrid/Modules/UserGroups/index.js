@@ -1,11 +1,14 @@
 import React, { useRef } from "react";
-import { TreeGrid } from "../TreeGrid";
+import { TreeGrid } from "../../index";
 
-const TransferList = ({ tabId }) => {
+const UserGroupList = ({ tabId }) => {
     const iframeRef = useRef();
 
     function iframeDidMount() {
         const window = iframeRef.current.contentWindow
+
+        window.keySuggest = 'full_nameSuggest'
+        window.lsSuggestionField = ["full_name", "email", "user_id"]
 
         window.Grids.OnExpand = function (G, row) {
             if (row.Def.Name == "Node") {
@@ -13,7 +16,28 @@ const TransferList = ({ tabId }) => {
             }
         }
 
-        window.Grids.OnRowAdd = function (G, row, col, val) {
+        // before add
+        window.Grids.OnCanRowAdd = function (G, par, next) {
+            if (G.Editing === 2) return false;
+            // Disable adding rows to grouped category
+            if (par.Def?.Name === "Group" && par.Def?.CDef === "R" && par.Rows) return false;
+            return
+        }
+
+        // on add
+        window.Grids.OnRowAdd = function (G, row) {
+            let par = row.parentNode
+            // add child to grouped row, set code to empty
+            if (par && par.Def?.Name === "Group" && par.Def?.CDef === "R") {
+                row.code = ''
+            }
+
+            if (row.Def.Name == "Node") {
+                G.SetAttribute(row, row.parent, "Calculated", 1);
+            }
+        }
+
+        window.Grids.OnRowDelete = function (G, row, col, val) {
             if (row.Def.Name == "Node") {
                 G.SetAttribute(row, row.parent, "Calculated", 1);
             }
@@ -84,29 +108,29 @@ const TransferList = ({ tabId }) => {
         }
 
         window.Grids.OnDownloadPage = function (G, Row) {
-            // G.RecalculateRows(G.Rows.Fix1, 1);
+            G.RecalculateRows(G.Rows.Fix1, 1);
         }
 
         window.Grids.OnRenderPageFinish = function (G) {
-            // G.RecalculateRows(G.Rows.Fix1, 1);
+            G.RecalculateRows(G.Rows.Fix1, 1);
         }
 
         window.Grids.OnPageReady = function (G, Row) {
-            // G.RecalculateRows(G.Rows.Fix1, 1);
+            G.RecalculateRows(G.Rows.Fix1, 1);
         }
 
         window.Grids.OnLanguageFinish = function (G, code) {
-            // var row = G.Rows.Fix3;
-            // G.SetValue(row, "C", window.Get(row, window.Get(row, "D") + "Rate"), 1);
+            var row = G.Rows.Fix3;
+            if (!row) return
+            G.SetValue(row, "C", window.Get(row, window.Get(row, "D") + "Rate"), 1);
         }
     }
-
 
     return (
         <>
             <div className="tree-grid-content">
                 <TreeGrid
-                    table={ "transfers" }
+                    table={ "user_groups" }
                     tabId={ tabId }
                     ref={ iframeRef }
                     iframeDidMount={ iframeDidMount }
@@ -116,4 +140,4 @@ const TransferList = ({ tabId }) => {
     );
 };
 
-export default TransferList;
+export default UserGroupList;
