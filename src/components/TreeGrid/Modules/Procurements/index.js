@@ -109,18 +109,6 @@ const ProcurementList = ({ tabId }) => {
             // if (!row) return
             // G.SetValue(row, "C", window.Get(row, window.Get(row, "D") + "Rate"), 1);
         }
-
-        return () => {
-            window.Grids.OnExpand = null;
-            window.Grids.OnRowAdd = null;
-            window.Grids.OnPasteRow = null;
-            window.Grids.OnGetMenu = null;
-            window.Grids.OnContextMenu = null;
-            window.Grids.OnDownloadPage = null;
-            window.Grids.OnRenderPageFinish = null;
-            window.Grids.OnPageReady = null;
-            window.Grids.OnLanguageFinish = null;
-        }
     };
 
     return (
