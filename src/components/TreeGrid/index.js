@@ -71,8 +71,6 @@ const TreeGridE = ({ table, config = {}, tabId, className }) => {
         return true
     }
 
-    // suggest
-    window.Grids.OnAfterValueChanged ||= window.parseCellSuggestionCallback(window.keySuggest, window.lsSuggestionField)
     // load cell data
     window.LoadCellData ||= debounce(function (url, param, callback) {
         window.treeGridRequest(url, param, function (res) {
@@ -140,6 +138,7 @@ const TreeGridE = ({ table, config = {}, tabId, className }) => {
             if (config.Debug) {
                 console.log(config)
             }
+
             treeGrid = window.TreeGrid(
                 config,
                 "treeGridMainTag",
