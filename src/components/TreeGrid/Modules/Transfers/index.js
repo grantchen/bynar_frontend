@@ -1,16 +1,11 @@
-import React, { useContext, useEffect } from "react";
-import "./UserGroupList.scss";
-import { TreeGrid } from "../TreeGrid";
-import { TabContext } from "../../sdk";
+import React, { useRef } from "react";
+import { TreeGrid } from "../../index";
 
-const UserGroupList = ({ tabId }) => {
-    const { tab, activeTab } = useContext(TabContext);
+const TransferList = ({ tabId }) => {
+    const iframeRef = useRef();
 
-    useEffect(() => {
-        if (tab[activeTab].id !== tabId) return;
-
-        window.keySuggest = 'full_nameSuggest'
-        window.lsSuggestionField = ["full_name", "email", "user_id"]
+    function iframeDidMount() {
+        const window = iframeRef.current.contentWindow
 
         window.Grids.OnExpand = function (G, row) {
             if (row.Def.Name == "Node") {
@@ -18,28 +13,7 @@ const UserGroupList = ({ tabId }) => {
             }
         }
 
-        // before add
-        window.Grids.OnCanRowAdd = function (G, par, next) {
-            if (G.Editing === 2) return false;
-            // Disable adding rows to grouped category
-            if (par.Def?.Name === "Group" && par.Def?.CDef === "R" && par.Rows) return false;
-            return
-        }
-
-        // on add
-        window.Grids.OnRowAdd = function (G, row) {
-            let par = row.parentNode
-            // add child to grouped row, set code to empty
-            if (par && par.Def?.Name === "Group" && par.Def?.CDef === "R") {
-                row.code = ''
-            }
-
-            if (row.Def.Name == "Node") {
-                G.SetAttribute(row, row.parent, "Calculated", 1);
-            }
-        }
-
-        window.Grids.OnRowDelete = function (G, row, col, val) {
+        window.Grids.OnRowAdd = function (G, row, col, val) {
             if (row.Def.Name == "Node") {
                 G.SetAttribute(row, row.parent, "Calculated", 1);
             }
@@ -110,50 +84,36 @@ const UserGroupList = ({ tabId }) => {
         }
 
         window.Grids.OnDownloadPage = function (G, Row) {
-            G.RecalculateRows(G.Rows.Fix1, 1);
+            // G.RecalculateRows(G.Rows.Fix1, 1);
         }
 
         window.Grids.OnRenderPageFinish = function (G) {
-            G.RecalculateRows(G.Rows.Fix1, 1);
+            // G.RecalculateRows(G.Rows.Fix1, 1);
         }
 
         window.Grids.OnPageReady = function (G, Row) {
-            G.RecalculateRows(G.Rows.Fix1, 1);
+            // G.RecalculateRows(G.Rows.Fix1, 1);
         }
 
         window.Grids.OnLanguageFinish = function (G, code) {
-            var row = G.Rows.Fix3;
-            if (!row) return
-            G.SetValue(row, "C", window.Get(row, window.Get(row, "D") + "Rate"), 1);
+            // var row = G.Rows.Fix3;
+            // G.SetValue(row, "C", window.Get(row, window.Get(row, "D") + "Rate"), 1);
         }
+    }
 
-        return () => {
-            window.keySuggest = ""
-            window.lsSuggestionField = []
-            window.Grids.OnExpand = null;
-            window.Grids.OnCanRowAdd = null;
-            window.Grids.OnRowAdd = null;
-            window.Grids.OnRowDelete = null;
-            window.Grids.OnPasteRow = null;
-            window.Grids.OnGetMenu = null;
-            window.Grids.OnContextMenu = null;
-            window.Grids.OnDownloadPage = null;
-            window.Grids.OnRenderPageFinish = null;
-            window.Grids.OnPageReady = null;
-            window.Grids.OnLanguageFinish = null;
-        }
-    }, [tab, activeTab]);
 
     return (
         <>
             <div className="tree-grid-content">
                 <TreeGrid
-                    table={ "user_groups" }
+                    table={ "transfers" }
                     tabId={ tabId }
+                    ref={ iframeRef }
+                    iframeDidMount={ iframeDidMount }
                 ></TreeGrid>
             </div>
         </>
     );
 };
 
-export default UserGroupList;
+export default TransferList;

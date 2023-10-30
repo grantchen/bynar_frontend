@@ -1,12 +1,11 @@
-import React, { useContext, useEffect } from "react";
-import { TreeGrid } from "../TreeGrid";
-import { TabContext } from "../../sdk";
+import React, { useRef } from "react";
+import { TreeGrid } from "../../index";
 
-const TransferList = ({ tabId }) => {
-    const { tab, activeTab } = useContext(TabContext);
+const GeneralPostingSetupList = ({ tabId }) => {
+    const iframeRef = useRef();
 
-    useEffect(() => {
-        if (tab[activeTab].id !== tabId) return;
+    function iframeDidMount() {
+        const window = iframeRef.current.contentWindow
 
         window.Grids.OnExpand = function (G, row) {
             if (row.Def.Name == "Node") {
@@ -85,45 +84,36 @@ const TransferList = ({ tabId }) => {
         }
 
         window.Grids.OnDownloadPage = function (G, Row) {
-            // G.RecalculateRows(G.Rows.Fix1, 1);
+            G.RecalculateRows(G.Rows.Fix1, 1);
         }
 
         window.Grids.OnRenderPageFinish = function (G) {
-            // G.RecalculateRows(G.Rows.Fix1, 1);
+            G.RecalculateRows(G.Rows.Fix1, 1);
         }
 
         window.Grids.OnPageReady = function (G, Row) {
-            // G.RecalculateRows(G.Rows.Fix1, 1);
+            G.RecalculateRows(G.Rows.Fix1, 1);
         }
 
         window.Grids.OnLanguageFinish = function (G, code) {
-            // var row = G.Rows.Fix3;
-            // G.SetValue(row, "C", window.Get(row, window.Get(row, "D") + "Rate"), 1);
+            var row = G.Rows.Fix3;
+            if (!row) return
+            G.SetValue(row, "C", window.Get(row, window.Get(row, "D") + "Rate"), 1);
         }
-
-        return () => {
-            window.Grids.OnExpand = null;
-            window.Grids.OnRowAdd = null;
-            window.Grids.OnPasteRow = null;
-            window.Grids.OnGetMenu = null;
-            window.Grids.OnContextMenu = null;
-            window.Grids.OnDownloadPage = null;
-            window.Grids.OnRenderPageFinish = null;
-            window.Grids.OnPageReady = null;
-            window.Grids.OnLanguageFinish = null;
-        }
-    }, [tab, activeTab]);
+    }
 
     return (
         <>
             <div className="tree-grid-content">
                 <TreeGrid
-                    table={ "transfers" }
+                    table={ "general_posting_setup" }
                     tabId={ tabId }
+                    ref={ iframeRef }
+                    iframeDidMount={ iframeDidMount }
                 ></TreeGrid>
             </div>
         </>
     );
 };
 
-export default TransferList;
+export default GeneralPostingSetupList;
