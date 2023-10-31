@@ -31,7 +31,7 @@ function App() {
                                     {/* <CardManagementProvider> */}
                                     <Routes>
                                         <Route
-                                            path="/"
+                                            path="/auth/login"
                                             // TODO
                                             element={<Home2 />}
                                         />
