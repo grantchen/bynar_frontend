@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { Suspense, useContext } from "react";
 import { TabContext } from "../../sdk";
 import './Dashboard.scss'
 import { TabPanel, TabPanels, Tabs } from "@carbon/react";
@@ -11,7 +11,13 @@ const Dashboard = () => {
                 <TabPanels>
                     {
                         tab.map((item) => {
-                            return <TabPanel className="content-wrapper" key={ item.id }>{ item.content }</TabPanel>
+                            return <TabPanel className="content-wrapper" key={ item.id }>
+                                <Suspense
+                                    fallback={ <div style={ { display: 'none' } }>Loading...</div> }
+                                >
+                                    { item.content }
+                                </Suspense>
+                            </TabPanel>
                         })
                     }
                 </TabPanels>
