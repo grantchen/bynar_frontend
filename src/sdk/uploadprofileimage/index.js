@@ -60,9 +60,9 @@ const UploadProfileImageModal = ({
         invalidFileTypeErrorBody: t("invalid-file-type"),
         invalidFileTypeErrorHeader: t("import-failed"),
         invalidIconDescription: t("delete"),
-        maxFileSize: 500 * 1024,
+        maxFileSize: 5000 * 1024,
         maxFileSizeErrorBody:
-            t("max-file-size-error-500"),
+            t("max-file-size-error-5000"),
         maxFileSizeErrorHeader: t("import-failed"),
         open: isUploadProfileImageModalOpen,
         primaryButtonText: t("confirm"),
