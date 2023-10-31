@@ -146,7 +146,7 @@ const AddCardModal = ({ open }) => {
         // },
         placeholder: {
             base: {
-                color: '#ccc',
+                color: 'gray',
             },
             // focus: {
             //     border: 'solid 1px #525252',

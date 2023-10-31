@@ -34,7 +34,7 @@ const ProfileDropdown = React.memo(
             <h4 className="user-name">{user?.fullName}</h4>
             <div className="profile-info-image" onClick={handleImageUploadChange}>
               <UserProfileImage
-                backgroundColor={"light-cyan"}
+                backgroundColor={user?.profileURL ? "transparent" : "light-cyan"}
                 size={"xl"}
                 initials={user?.fullName.match(/(^\S)/)?.[0].toUpperCase() ?? '...'}
                 image={user?.profileURL ?? ""}
