@@ -19,8 +19,11 @@
             .card-icon {
                 vertical-align: middle;
                 height: 1.2rem;
+                position: relative;
+                top: -0.1rem;
             }
         }
+
 
         .card-logo-with-checkicon {
             display: flex;
@@ -46,6 +49,8 @@
         .card-checkbox {
             overflow: hidden;
             text-overflow: ellipsis;
+            position: relative;
+            top: 0.15rem;
 
             .cds--checkbox {
                 clip-path: circle(50%) !important;
