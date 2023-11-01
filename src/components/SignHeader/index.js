@@ -5,19 +5,19 @@ import { useTranslation } from 'react-i18next';
 import "./SideHeader.scss";
 
 const SignHeader = () => {
-    const [language, setLanguage] = useState('en');
+    const [language, setLanguage] = useState(localStorage.getItem('lang') ?? "en");
     const languagesItems = Languages.map((languageObject) => languageObject.code);
     const { t } = useTranslation();
 
     const handleLanguageChange = (selectedLanguage) => {
-        console.log(selectedLanguage)
+        localStorage.clear();
         const selectedItem = Languages.find((item) => item.code === selectedLanguage.selectedItem);
         if (Object.keys(selectedItem).length === 0) {
             setLanguage('en');
             localStorage.setItem('lang', 'en')
         } else {
-            localStorage.setItem('lang', selectedLanguage.selectedItem)
             setLanguage(selectedLanguage.selectedItem);
+            localStorage.setItem('lang', selectedLanguage.selectedItem)
         }
     };
 
