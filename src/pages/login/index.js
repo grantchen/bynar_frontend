@@ -3,9 +3,9 @@ import {Button, Column, Grid, Header, Link,} from "@carbon/react";
 import { useNavigate } from "react-router-dom";
 import backgroundImage from '../../components/media/background.svg';
 import "./login.scss";
-import "../../pages/signin/signin.scss";
 import { TypeAnimation } from 'react-type-animation';
 import SignHeader from "../../components/SignHeader";
+import SignFooter from "../../components/SignFooter";
 
 const Home = () => {
     const [showVideo, setShowVideo] = useState(false);
@@ -72,16 +72,7 @@ const Home = () => {
                                 </div>
                             </div>
                         </div>
-                        <footer className="footer">
-                            <div className="footer-content">
-                                <a href="#">Privacy Policy</a>
-                                <div className="footer_link_divider">|</div>
-                                <a href="#">Terms of Use</a>
-                                <div className="footer_link_divider">|</div>
-                                <a href="#">Cookie Preferences</a>
-                            </div>
-                            <div className="footer_copy_right">Bynar, Inc. or its affiliates. All rights reserved.</div>
-                        </footer>
+                        <SignFooter></SignFooter>
                     </Column>
                 </Grid>
             </div>

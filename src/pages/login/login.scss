@@ -14,7 +14,7 @@
   }
   @media screen and (max-width: 1056px) {
     .auth-login-column {
-      display: none; /* 当屏幕宽度小于 768px 时，隐藏第一个 Column */
+      display: none;
     }
   }
   .cds--css-grid-column {
