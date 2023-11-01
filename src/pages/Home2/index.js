@@ -5,6 +5,9 @@ import ibmLogo from "../../components/media/IBM_logo_black.svg";
 import backgroundImage from '../../components/media/background.svg';
 import "../Home2/home2.scss";
 import "../../pages/signin/signin.scss";
+import {
+    forEach
+} from "@carbon/ibmdotcom-web-components/es/internal/vendor/@carbon/web-components/globals/internal/collection-helpers";
 
 const Home = () => {
     const [showVideo, setShowVideo] = useState(false);
@@ -33,17 +36,19 @@ const Home = () => {
             animateHeadline(headline);
         }
         function singleLetters(wordElements) {
-            wordElements.each(function() {
-                const word = this,
-                    letters = word.text().split(''),
-                    selected = word.hasClass('is-visible');
-                console.log(letters)
-                for (i in letters) {
-                    if (word.parents('.rotate-2').length > 0) letters[i] = '<em>' + letters[i] + '</em>';
-                    letters[i] = (selected) ? '<i class="in">' + letters[i] + '</i>' : '<i>' + letters[i] + '</i>';
-                }
-                var newLetters = letters.join('');
-                word.html(newLetters).css('opacity', 1);
+            wordElements.forEach((wordElement) => {
+                const word = wordElement;
+                console.log(word)
+                const letters = word.textContent.split('');
+                const selected = word.classList.contains('is-visible');
+                const newLetters = letters.map((letter) => {
+                    if (word.closest('.rotate-2')) {
+                        return `<em>${letter}</em>`;
+                    }
+                    return selected ? `<i class="in">${letter}</i>` : `<i>${letter}</i>`;
+                }).join('');
+                word.innerHTML = newLetters;
+                word.style.opacity = 1;
             });
         }
 
@@ -182,7 +187,8 @@ const Home = () => {
         }
 
         function takeNext(word) {
-            return (!word.is(':last-child')) ? word.next() : word.parent().children().eq(0);
+            return word
+            // return (!word.is(':last-child')) ? word.next() : word.parent().children().eq(0);
         }
 
         function takePrev(word) {
