@@ -15,6 +15,11 @@
 
         .card-logo {
             width: 120px;
+
+            .card-icon {
+                vertical-align: middle;
+                height: 1rem;
+            }
         }
 
         .card-logo-with-checkicon {
