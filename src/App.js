@@ -10,12 +10,13 @@ import {
     UserManagementProvider,
 } from "./sdk";
 
-const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard"));
-const MagicLinkAuth = lazy(() => import("./components/Auth/MagicLinkAuth"));
-const Home2 = lazy(() => import("./pages/Home2"));
-const Signin = lazy(() => import("./pages/signin"));
-const Signup = lazy(() => import("./pages/signup"));
-const AuthenticatedAppHeader = lazy(() => import("./components/HeaderAuthenticated"));
+// not use lazy load for no lazy loading like refreshing page
+import Home2 from "./pages/Home2";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import AuthenticatedAppHeader from "./components/HeaderAuthenticated";
+import MagicLinkAuth from "./components/Auth/MagicLinkAuth";
+import Signin from "./pages/signin";
+import Signup from "./pages/signup";
 
 function App() {
     return (
