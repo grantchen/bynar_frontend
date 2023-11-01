@@ -21,6 +21,16 @@ html, body {
   margin: 0;
 }
 
+.tree-grid-wrapper {
+  padding: 3rem 4rem;
+}
+
+@media screen and (max-width: 600px) {
+  .tree-grid-wrapper {
+    padding: 1rem;
+  }
+}
+
 /*suggest hover color(only TS theme)*/
 .TSSuggestMenuBody .TSMenuItem.TSMenuHover,
 .TSSuggestMenuBody .TSMenuItem.TSMenuFocus {
