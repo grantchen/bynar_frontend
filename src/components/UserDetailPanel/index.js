@@ -16,7 +16,6 @@ import {
 } from "google-libphonenumber";
 import "./UserDetailPanel.scss";
 import { useTranslation } from "react-i18next";
-import {f} from "carbon-web-components/dist/collection-helpers-10ca40d0";
 
 pkg.component.SidePanel = true;
 
