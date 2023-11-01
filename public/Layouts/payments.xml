@@ -51,8 +51,6 @@
 	 user_group_idCanEdit="0"
       />
 
-      <D Name="Group" Def="R" Group="1" CanEdit="0" CanFilter="0" CanDrag="0" CanCopy="0" CanDelete="0" Expanded="0" NoUpload="1"/>
-
    </Def>
 
 
