@@ -29,7 +29,6 @@ import "react-phone-input-2/lib/style.css";
 import { useNavigate } from "react-router-dom";
 import "./../../styles/paymentform.scss";
 import "./signup.scss";
-import "../signin/signin.scss";
 import { PhoneNumberUtil, } from "google-libphonenumber";
 import {
     parseTabMessage,
@@ -39,7 +38,7 @@ import {
     SubscribeTabMessage
 } from "../../sdk/tabMessage";
 import SignHeader from "../../components/SignHeader";
-import { Footer } from "@carbon/ibmdotcom-react";
+import SignFooter from "../../components/SignFooter";
 
 const Signup = () => {
     const handleReady = useCallback(async () => {
@@ -1154,16 +1153,7 @@ const Signup = () => {
                                 </div>
                             </Column>
                         </Grid>
-                        <footer className="footer">
-                            <div className="footer-content">
-                                <a href="#">Privacy Policy</a>
-                                <div className="footer_link_divider">|</div>
-                                <a href="#">Terms of Use</a>
-                                <div className="footer_link_divider">|</div>
-                                <a href="#">Cookie Preferences</a>
-                            </div>
-                            <div className="footer_copy_right">Bynar, Inc. or its affiliates. All rights reserved.</div>
-                        </footer>
+                        <SignFooter></SignFooter>
                     </div>
                 </div>
             )}
