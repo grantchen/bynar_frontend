@@ -27,7 +27,7 @@ export const TreeGrid = forwardRef(({ table, config, tabId, className, iframeDid
     <head>
         <script src="/Grid/GridED.js"></script>
         <script src="/Layouts/cell_url.js?v=1"></script>
-        <link rel="stylesheet" href="/Grid/Styles/Custom/index.css">
+        <link rel="stylesheet" href="/Grid/Styles/Custom/index.css?v=1">
     </head>
 
     <body>
