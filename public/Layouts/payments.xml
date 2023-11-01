@@ -10,6 +10,7 @@
    <Cfg ChildPaging="3" ChildPageLength="25" ChildPageDiff="-25"/>
    <Cfg ChildParts="2" ChildPartLength="1" ChildPartMin="1"/>
    <Cfg MaxHeight='1'/>
+   <Cfg DuplicateId='4' AutoIdPrefix='test' FullId='1'/>
    <Cfg CopyPasteTree ='3'/>
    <Cfg Alternate='2'/>
    <Cfg AutoCalendar='1'/>
@@ -49,6 +50,7 @@
          user_group_id='Child' user_group_idSpan='6' user_group_idAlign="Center" user_group_idType='Text'
 	 user_group_idCanEdit="0"
       />
+
    </Def>
 
 

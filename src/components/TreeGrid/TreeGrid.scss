@@ -1,13 +1,7 @@
 .tree-grid-content {
-  padding: 3rem 4rem;
   width: 100%;
   height: 100%;
-}
-
-@media screen and (max-width: 600px) {
-  .tree-grid-content {
-    padding: 1rem;
-  }
+  overflow: hidden;
 }
 
 

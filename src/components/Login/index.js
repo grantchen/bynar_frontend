@@ -16,6 +16,7 @@ import { ArrowRight } from "@carbon/react/icons";
 import { useNavigate } from "react-router-dom";
 import SignHeader from "../SignHeader";
 import React, { useEffect, useState } from "react";
+import SignFooter from "../../components/SignFooter";
 const Login = ({
     heading,
     loading,
@@ -230,16 +231,7 @@ const Login = ({
                         </div>
                     </Column>
                 </Grid>
-                <footer className="footer">
-                    <div className="footer-content">
-                        <a href="#">Privacy Policy</a>
-                        <div className="footer_link_divider">|</div>
-                        <a href="#">Terms of Use</a>
-                        <div className="footer_link_divider">|</div>
-                        <a href="#">Cookie Preferences</a>
-                    </div>
-                    <div className="footer_copy_right">Bynar, Inc. or its affiliates. All rights reserved.</div>
-                </footer>
+                <SignFooter></SignFooter>
             </div>
         </div>
     );
