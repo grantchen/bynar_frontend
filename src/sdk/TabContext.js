@@ -12,6 +12,7 @@ const OrganizationList = lazy(() => import("../components/TreeGrid/Modules/Organ
 const UserGroupList = lazy(() => import("../components/TreeGrid/Modules/UserGroups/index"));
 const SiteList = lazy(() => import("../components/TreeGrid/Modules/Sites/index"));
 const TransferList = lazy(() => import("./../components/TreeGrid/Modules/Transfers/index"));
+const SaleList = lazy(() => import("../components/TreeGrid/Modules/Sales/index"));
 const PaymentList = lazy(() => import("../components/TreeGrid/Modules/Payments/index"));
 const ProcurementList = lazy(() => import("../components/TreeGrid/Modules/Procurements/index"));
 
@@ -39,6 +40,8 @@ const TabContextProvider = ({ children }) => {
                 return <UserGroupList tabId={tabId} />;
             case "WarehouseList":
                 return <WarehouseList tabId={tabId} />;
+            case "SaleList":
+                return <SaleList tabId={tabId} />
             case "PaymentList":
                 return <PaymentList tabId={tabId} />
             case "ProcurementList":
