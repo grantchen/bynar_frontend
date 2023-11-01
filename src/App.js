@@ -12,7 +12,7 @@ import {
 
 const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard"));
 const MagicLinkAuth = lazy(() => import("./components/Auth/MagicLinkAuth"));
-const Home2 = lazy(() => import("./pages/Home2"));
+const Login = lazy(() => import("./pages/login"));
 const Signin = lazy(() => import("./pages/signin"));
 const Signup = lazy(() => import("./pages/signup"));
 const AuthenticatedAppHeader = lazy(() => import("./components/HeaderAuthenticated"));
@@ -33,7 +33,7 @@ function App() {
                                         <Route
                                             path="/auth/login"
                                             // TODO
-                                            element={<Home2 />}
+                                            element={<Login />}
                                         />
                                         <Route
                                             path="/auth/magic-link"
