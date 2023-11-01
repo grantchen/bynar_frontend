@@ -18,7 +18,7 @@ const Home = () => {
                 className={"auth-login-container"}
             >
                 <Grid className={"auth-login-grid"}>
-                    <Column sm={7} md={14} lg={10} className={"auth-login-column"} style={{
+                    <Column sm={1} md={6} lg={10} className={"auth-login-column"} style={{
                         backgroundImage: `url(${ backgroundImage })`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center center',
@@ -40,7 +40,7 @@ const Home = () => {
                         </div>
                     </Column>
 
-                    <Column sm={5} md={10} lg={6} className="auth-login-container">
+                    <Column sm={15} md={8} lg={6} className="auth-login-container">
                         <div className="auth-login-area">
                             <div className="bx--row">
                                 <div className="bx--col auth-login-bx">
