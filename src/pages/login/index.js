@@ -33,7 +33,8 @@ const Home = () => {
                                     'Test to for testing',
                                     1000,
                                 ]}
-                                speed={50}
+                                speed={90}
+                                deletionSpeed={90}
                                 style={{ fontSize: '40px', color: 'rgb(254, 118, 0)' }}
                                 repeat={Infinity}
                             />
@@ -44,11 +45,13 @@ const Home = () => {
                         <div className="auth-login-area">
                             <div className="bx--row">
                                 <div className="bx--col auth-login-bx">
-                                    <div className="fields-container button-container">
-                                        <div style={{ display: 'flex', flexDirection: 'row' }}>
-                                            <div style={{ flex: 1 }}>
+                                    <div className="button-container">
+                                        <h2 style={{ fontWeight: 'bold' }}>Get started</h2>
+                                        <div className="fields-container">
+                                            <div style={{ flex:1 }}>
                                                 <Button
                                                     type="submit"
+                                                    size={'md'}
                                                     className="login-submit-button bx--btn bx--btn--primary"
                                                     onClick={() => {
                                                         navigate("/signin");
@@ -57,10 +60,11 @@ const Home = () => {
                                                     {"Login"}
                                                 </Button>
                                             </div>
-                                            <div style={{ width: '16px' }} />
-                                            <div style={{ flex: 1, textAlign: 'center' }}>
+                                            <div style={{ width: '20px' }} />
+                                            <div style={{ flex: 1 }}>
                                                 <Button
                                                     type="submit"
+                                                    size={'md'}
                                                     className="login-submit-button bx--btn bx--btn--primary"
                                                     disabled={true}
                                                 >

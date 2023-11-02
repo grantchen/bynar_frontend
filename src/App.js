@@ -10,6 +10,7 @@ import {
     UserManagementProvider,
 } from "./sdk";
 
+import Home2 from "./pages/Home2";
 const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard"));
 const MagicLinkAuth = lazy(() => import("./components/Auth/MagicLinkAuth"));
 const Login = lazy(() => import("./pages/login"));
@@ -31,8 +32,12 @@ function App() {
                                     {/* <CardManagementProvider> */}
                                     <Routes>
                                         <Route
-                                            path="/auth/login"
+                                            path="/"
                                             // TODO
+                                            element={<Home2 />}
+                                        />
+                                        <Route
+                                            path="/auth/login"
                                             element={<Login />}
                                         />
                                         <Route
