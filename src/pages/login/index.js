@@ -31,7 +31,8 @@ const Home = () => {
     let mdValue2 = 4;
     let step = 5
     let button = 1
-    if (windowWidth >= 672 && windowWidth < 768) {
+    let buttonWidth = '380px'
+    if (windowWidth >= 672 && windowWidth <= 768) {
         mdValue1 = 0;
         mdValue2 = 8;
     }
@@ -46,6 +47,10 @@ const Home = () => {
     }
     if (windowWidth < 672 ) {
         button = 0
+    }
+
+    if (windowWidth < 400 ) {
+        buttonWidth = '300px'
     }
     return (
         <div>
@@ -196,7 +201,7 @@ const Home = () => {
                                     <div className="bx--col auth-login-bx">
                                         <div className="button-container">
                                             <h3 style={{ fontWeight: 'bold' }}>Get started</h3>
-                                            <div style={{ marginTop: '15px',  width: '300px' }}>
+                                            <div style={{ marginTop: '15px',  width: buttonWidth }}>
                                                 <div style={{ flex:1 }}>
                                                     <Button
                                                         type="submit"
@@ -209,7 +214,7 @@ const Home = () => {
                                                         {"Login"}
                                                     </Button>
                                                 </div>
-                                                <div style={{ flex: 1, marginTop: '15px'  }}>
+                                                <div style={{ flex: 1, marginTop: '15px' }}>
                                                     <Button
                                                         type="submit"
                                                         size={'md'}

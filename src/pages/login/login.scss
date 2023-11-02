@@ -35,6 +35,9 @@
       position: absolute;
       top: 45%;
       transform: translate(-50%, -50%);
+      @media (max-width: 1920px) and (min-width: 1059px) {
+        margin-left: -15px;
+      }
     }
     .button-container {
       display: flex;
