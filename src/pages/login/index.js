@@ -31,7 +31,7 @@ const Home = () => {
     let mdValue2 = 4;
     let step = 5
     let button = 1
-    if (windowWidth > 672 && windowWidth < 768) {
+    if (windowWidth >= 672 && windowWidth < 768) {
         mdValue1 = 0;
         mdValue2 = 8;
     }
