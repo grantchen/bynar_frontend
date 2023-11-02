@@ -10,13 +10,13 @@ import {
     UserManagementProvider,
 } from "./sdk";
 
-// not use lazy load for no lazy loading like refreshing page
 import Home2 from "./pages/Home2";
-import Dashboard from "./pages/Dashboard/Dashboard";
-import AuthenticatedAppHeader from "./components/HeaderAuthenticated";
-import MagicLinkAuth from "./components/Auth/MagicLinkAuth";
-import Signin from "./pages/signin";
-import Signup from "./pages/signup";
+const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard"));
+const MagicLinkAuth = lazy(() => import("./components/Auth/MagicLinkAuth"));
+const Login = lazy(() => import("./pages/login"));
+const Signin = lazy(() => import("./pages/signin"));
+const Signup = lazy(() => import("./pages/signup"));
+const AuthenticatedAppHeader = lazy(() => import("./components/HeaderAuthenticated"));
 
 function App() {
     return (
@@ -35,6 +35,10 @@ function App() {
                                             path="/"
                                             // TODO
                                             element={<Home2 />}
+                                        />
+                                        <Route
+                                            path="/auth/login"
+                                            element={<Login />}
                                         />
                                         <Route
                                             path="/auth/magic-link"
