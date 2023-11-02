@@ -10,9 +10,10 @@ import {
     UserManagementProvider,
 } from "./sdk";
 
+import Home2 from "./pages/Home2";
 const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard"));
 const MagicLinkAuth = lazy(() => import("./components/Auth/MagicLinkAuth"));
-const Home2 = lazy(() => import("./pages/Home2"));
+const Login = lazy(() => import("./pages/login"));
 const Signin = lazy(() => import("./pages/signin"));
 const Signup = lazy(() => import("./pages/signup"));
 const AuthenticatedAppHeader = lazy(() => import("./components/HeaderAuthenticated"));
@@ -34,6 +35,10 @@ function App() {
                                             path="/"
                                             // TODO
                                             element={<Home2 />}
+                                        />
+                                        <Route
+                                            path="/auth/login"
+                                            element={<Login />}
                                         />
                                         <Route
                                             path="/auth/magic-link"

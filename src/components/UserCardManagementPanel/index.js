@@ -239,9 +239,11 @@ const UserCardManagementPanel = ({ open }) => {
                                                 <div className="card-box">
                                                     <span className="card-logo card-logo-with-checkicon">
                                                         <span className="card-type">
-                                                            {
+                                                            <img class="card-icon" src={"/images/cc-" + listItem?.scheme.toLowerCase() + "-" + themePreference + ".svg"} />
+                                                            <span>&nbsp;{
                                                                 listItem?.scheme
                                                             }
+                                                            </span>
                                                         </span>
                                                     </span>
                                                     <span>

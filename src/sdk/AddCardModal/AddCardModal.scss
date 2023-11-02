@@ -8,6 +8,10 @@ button.button-with-loading {
 }
 
 .add-card-modal {
+  .cds--inline-notification {
+    margin-bottom: 1em;
+  }
+
   .cds--modal-container {
     width: 35%;
   }
@@ -24,6 +28,10 @@ button.button-with-loading {
 
   .error-notification-box {
     width: 100% !important;
+  }
+
+  .input-heading {
+    margin-bottom: 0.5rem;
   }
 }
 

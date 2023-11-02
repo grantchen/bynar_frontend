@@ -1,0 +1,73 @@
+.auth-login-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  .auth-login-grid {
+    flex: 1;
+    margin-bottom: 2rem;
+  }
+  .cds--css-grid {
+    flex: 1;
+    max-width: 10000rem;
+    padding-left:0;
+    padding-right:0;
+  }
+  @media screen and (max-width: 768px) {
+    .auth-login-column {
+      display: none;
+    }
+  }
+  .cds--css-grid-column {
+    margin-left:0;
+  }
+  .header-caption{
+    position: absolute;
+    top: 45%;
+    left:1%;
+  }
+  .auth-login-container {
+    .auth-login-area{
+      height: 100vh;
+      display: flex;
+      margin: auto;
+    }
+    .auth-login-bx {
+      position: absolute;
+      top: 45%;
+      transform: translate(-50%, -50%);
+      @media (max-width: 1920px) and (min-width: 1059px) {
+        margin-left: -15px;
+      }
+    }
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .fields-container {
+      display: flex;
+      flex-direction: row;
+      margin-top: 15px;
+      width: 380px;
+    }
+  }
+  .bx--btn--tertiary {
+    border: 1px solid #0f62fe;
+    background-color: transparent;
+    color: #0f62fe;
+  }
+
+  .bx--btn--tertiary:hover {
+    background-color: #0f62fe;
+    color: white;
+  }
+  .login-submit-button {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 55px;
+  }
+}
+

@@ -3586,6 +3586,19 @@
                 }
               },
               {
+                "title": "procurements",
+                "titleEnglish": "",
+                "url": "",
+                "tab": "ProcurementList",
+                "tabType": "treeGrid",
+                "permission": "procurements",
+                "megapanelContent": {
+                  "headingTitle": "",
+                  "headingUrl": "",
+                  "description": "procurements"
+                }
+              },
+              {
                 "title": "sales",
                 "titleEnglish": "",
                 "url": "",

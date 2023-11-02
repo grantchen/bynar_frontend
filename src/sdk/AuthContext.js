@@ -118,6 +118,7 @@ export const AuthProvider = ({ children }) => {
                     !(
                         location.pathname === "/signin" ||
                         location.pathname === "/forgotpassword" ||
+                        location.pathname === "/auth/login" ||
                         location.pathname === "/signup"
                     )
                 ) {
@@ -128,6 +129,7 @@ export const AuthProvider = ({ children }) => {
                 if (
                     location.pathname === "/signin" ||
                     location.pathname === "/forgotpassword" ||
+                    location.pathname === "/auth/login" ||
                     location.pathname === "/signup"
                 ) {
                   navigate("/home/dashboard");
