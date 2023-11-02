@@ -43,7 +43,7 @@
          Name='Data'
          CDef='' AcceptDef='Data'
          Calculated='1' Spanned='1' Expanded='1' FormulaSuggest="6" A0="A0 centered &amp; scrolled"
-         document_id ='Child' document_idSpan='16' document_idAlign="Center" document_idType='Text'
+         document_id ='Child' document_idSpan='34' document_idAlign="Center" document_idType='Text'
 	 document_idCanEdit="0"
          user_group_id='Child' user_group_idSpan='6' user_group_idAlign="Center" user_group_idType='Text'
 	 user_group_idCanEdit="0"
