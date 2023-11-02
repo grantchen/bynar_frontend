@@ -10,6 +10,7 @@ import {
     SubscribeCloseTabMessage,
     SubscribeTabMessage
 } from "../../sdk/tabMessage";
+import {useTranslation} from "react-i18next";
 
 const Signin = () => {
     const navigate = useNavigate();
@@ -20,7 +21,7 @@ const Signin = () => {
     const [email, setEmail] = useState("");
     const [loadingSuccess, setLoadingSuccess] = useState(false);
     const { signin } = useAuth();
-
+    const { t } = useTranslation();
 
     /** function to validate email address. */
     const validateEmail = (email) => {
@@ -160,13 +161,13 @@ const Signin = () => {
                         serverErrorNotification={serverErrorNotification}
                         errorNotification={errorNotification}
                         showCreateAccount={true}
-                        createAccountText={"Don't have an account?"}
+                        createAccountText={t("have-an-account")}
                         navigationUrl={"/signup"}
-                        navigationUrlText={"Create an Bynar account"}
-                        labelText={"E-mail"}
+                        navigationUrlText={t("create-account")}
+                        labelText={t("email-label")}
                         labelValue={email}
                         setFormLabelState={setEmail}
-                        buttonText={"Continue"}
+                        buttonText={t("continue")}
                         enableForgotPassword={false}
                         placeholderText={" "}
                         showRememberId={false}
@@ -187,9 +188,9 @@ const Signin = () => {
                         subtitle={"Not you?"}
                         setSignInPhaseOne={setSignInPhaseOne}
                         showCreateAccount={true}
-                        createAccountText={"Don't have an account?"}
+                        createAccountText={t("have-an-account")}
                         navigationUrl={"/signup"}
-                        navigationUrlText={"Create an Bynar account"}
+                        navigationUrlText={t("create-account")}
                         placeholderText={""}
                         setErrorNotification={setErrorNotification}
                         setServerErrorNotification={setServerErrorNotification}

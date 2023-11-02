@@ -39,6 +39,8 @@ import {
 } from "../../sdk/tabMessage";
 import SignHeader from "../../components/SignHeader";
 import SignFooter from "../../components/SignFooter";
+import SignHeaderSelect from "../../components/SignHeaderSelect";
+import {useTranslation} from "react-i18next";
 
 const Signup = () => {
     const handleReady = useCallback(async () => {
@@ -83,6 +85,7 @@ const Signup = () => {
     const [errors, setErrors] = useState({});
     const [phoneNumberValid, setIsPhoneNumberValid] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const { t } = useTranslation();
     const [accountInfoErrors, setAccountInfoErrors] = useState({
         fullName: false,
         addressLine1: false,
@@ -663,7 +666,7 @@ const Signup = () => {
             </SubscribeTabMessage>
             {(
                 <div>
-                    <SignHeader></SignHeader>
+                    <SignHeaderSelect></SignHeaderSelect>
 
                     <div
                         ref={containerRef}
@@ -676,13 +679,13 @@ const Signup = () => {
                                     <Content className={"signup-content"}>
                                         <div className="heading-container">
                                             <Heading className={"form-mainHeading"}>
-                                                Sign up for an Bynar account
+                                                {t("sign-up")}
                                             </Heading>
                                             <div
                                                 className="login-link"
                                             >
-                                                Already have an BYNAR account?{" "}
-                                                <Link href="/signin">Log in</Link>
+                                                {t("already-have")}{" "}
+                                                <Link href="/signin">{t("login")}</Link>
                                             </div>
                                         </div>
                                     </Content>
@@ -715,7 +718,7 @@ const Signup = () => {
                                                     id="email"
                                                     className="email-form-input"
                                                     value={email}
-                                                    labelText="E-mail"
+                                                    labelText= {t("email-label")}
                                                     onChange={(e) => handleEmailChange(e.target.value)}
                                                     invalid={!!errors.email}
                                                     invalidText={errors.email}
@@ -734,7 +737,7 @@ const Signup = () => {
                                                             kind="tertiary"
                                                             onClick={handleOrganizationFormSubmit}
                                                         >
-                                                            {"Next"}
+                                                            {t("next")}
                                                         </Button>
                                                     </div>
                                                 )}
@@ -743,19 +746,17 @@ const Signup = () => {
                                         {activeStep === 2 && (
                                             <div className="account-info-box">
                                                 <div className="account-heading">
-                                                    <p className="heading">Verify email</p>
+                                                    <p className="heading">{t("verify-email")}</p>
                                                 </div>
                                                 <div>
                                                     <p className="email-text">
                                                         {isEmailVerified ? (
                                                             <>
-                                                                Email has been verified.
+                                                                {t("email-has-verified")}
                                                             </>
                                                         ) : (
                                                             <>
-                                                                Didn’t receive the email? Check your
-                                                                spam filter for
-                                                                an email from noreply@bynar.al.
+                                                                {t("receive-the-email")}
                                                             </>
                                                         )}
                                                     </p>
@@ -775,7 +776,7 @@ const Signup = () => {
                                                             className="resend-code"
                                                             onClick={handleSignupRequest}
                                                         >
-                                                            Resend confirmation email
+                                                            {t("resend-email")}
                                                         </p>
                                                     )}
                                                 </div>

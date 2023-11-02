@@ -10,13 +10,14 @@ import {
     InlineLoading,
     Link,
     Grid,
-    Column,
+    Column, Dropdown, Header, HeaderName,
 } from "@carbon/react";
 import { ArrowRight } from "@carbon/react/icons";
 import { useNavigate } from "react-router-dom";
-import SignHeader from "../SignHeader";
 import React, { useEffect, useState } from "react";
 import SignFooter from "../../components/SignFooter";
+import {useTranslation} from "react-i18next";
+import SignHeaderSelect from "../SignHeaderSelect";
 const Login = ({
     heading,
     loading,
@@ -42,9 +43,10 @@ const Login = ({
     setSignInPhaseOne,
 }) => {
     const navigate = useNavigate();
+    const { t } = useTranslation();
     return (
         <div>
-            <SignHeader></SignHeader>
+            <SignHeaderSelect></SignHeaderSelect>
             <div className="signin-container">
                 <Grid className="signin-grid">
                     <Column sm={{ span: 4 }} md={{ span: 8 }} lg={{ span: 16 }} xlg={{ span: 16 }} className={"box-container"}>
@@ -60,7 +62,7 @@ const Login = ({
                                                 <div className="bx--row">
                                                     <div className="bx--col">
                                                         <Heading className="form-mainHeading">
-                                                            {heading}
+                                                            {t("login-to-bynar")}
                                                         </Heading>
                                                     </div>
                                                 </div>
@@ -207,7 +209,7 @@ const Login = ({
                                                 <div className="bx--col">
                                                     <div className="footer-text">
                                                         <p className="register-text-body-02">
-                                                            {"Need help?"}
+                                                            {t("need-help")}
                                                             <Link
                                                                 style={{
                                                                     cursor: "pointer",
@@ -218,7 +220,7 @@ const Login = ({
                                                                 href={`signin`}
                                                             >
                                                                 {" "}
-                                                                {"Contact the Bynar help desk"}
+                                                                {t("contact")}
                                                             </Link>
                                                         </p>
                                                     </div>

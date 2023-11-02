@@ -1,7 +1,28 @@
-import React from 'react';
-import { Header, HeaderName } from '@carbon/react';
+import React, {useState} from 'react';
+import {Dropdown, Header, HeaderName} from '@carbon/react';
+import {Languages} from "../../sdk";
+import {useTranslation} from "react-i18next";
+import i18n from "i18next";
+import "./SideHeader.scss";
 
-const SignHeader = () => {
+const SignHeaderSelect = () => {
+    const [language, setLanguage] = useState(localStorage.getItem('lang') ?? "en");
+    const languagesItems = Languages.map((languageObject) => languageObject.code);
+    const { t } = useTranslation();
+
+    const handleLanguageChange = (selectedLanguage) => {
+        localStorage.clear();
+        const selectedItem = Languages.find((item) => item.code === selectedLanguage.selectedItem);
+        if (Object.keys(selectedItem).length === 0) {
+            setLanguage('en');
+            localStorage.setItem('lang', 'en')
+            i18n.changeLanguage('en');
+        } else {
+            setLanguage(selectedLanguage.selectedItem);
+            localStorage.setItem('lang', selectedLanguage.selectedItem)
+            i18n.changeLanguage(selectedLanguage.selectedItem);
+        }
+    };
     return (
         <Header aria-label="Bynar">
             <HeaderName href="/" prefix="">
@@ -18,8 +39,18 @@ const SignHeader = () => {
                     ></path>
                 </svg>
             </HeaderName>
+            <div className="header-right">
+                <Dropdown
+                    id="language-ci"
+                    initialSelectedItem={language}
+                    items={languagesItems}
+                    selectedItem={language}
+                    itemToString={(item) => (item ? t(item) : '')}
+                    onChange={(selectedItem) => handleLanguageChange(selectedItem)}
+                />
+            </div>
         </Header>
     );
 };
 
-export default SignHeader;
+export default SignHeaderSelect;
