@@ -12,7 +12,6 @@ const Home = () => {
     const [videoBackgroundColor, setVideoBackgroundColor] = useState("white");
     const navigate = useNavigate();
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const [activeStep, setActiveStep] = useState(4);
     useEffect(() => {
         function handleResize() {
             setWindowWidth(window.innerWidth);
@@ -31,6 +30,7 @@ const Home = () => {
     let mdValue1 = 4;
     let mdValue2 = 4;
     let step = 5
+    let button = 1
     if (windowWidth > 672 && windowWidth < 768) {
         mdValue1 = 3;
         mdValue2 = 5;
@@ -43,6 +43,9 @@ const Home = () => {
     }
     if (windowWidth < 700 ) {
         step = 1
+    }
+    if (windowWidth < 700 ) {
+        button = 0
     }
     return (
         <div>
@@ -147,43 +150,83 @@ const Home = () => {
                         </Column>
                     )}
 
-                    <Column sm={4} md={mdValue2} lg={6} className="auth-login-container">
-                        <div className="auth-login-area">
-                            <div className="bx--row">
-                                <div className="bx--col auth-login-bx">
-                                    <div className="button-container">
-                                        <h2 style={{ fontWeight: 'bold' }}>Get started</h2>
-                                        <div className="fields-container">
-                                            <div style={{ flex:1 }}>
-                                                <Button
-                                                    type="submit"
-                                                    size={'md'}
-                                                    className="login-submit-button bx--btn bx--btn--primary"
-                                                    onClick={() => {
-                                                        navigate("/signin");
-                                                    }}
-                                                >
-                                                    {"Login"}
-                                                </Button>
-                                            </div>
-                                            <div style={{ width: '20px' }} />
-                                            <div style={{ flex: 1 }}>
-                                                <Button
-                                                    type="submit"
-                                                    size={'md'}
-                                                    className="login-submit-button bx--btn bx--btn--primary"
-                                                    disabled={true}
-                                                >
-                                                    {"Signup"}
-                                                </Button>
+                    {button ===1 && (
+                        <Column sm={4} md={mdValue2} lg={6} className="auth-login-container">
+                            <div className="auth-login-area">
+                                <div className="bx--row">
+                                    <div className="bx--col auth-login-bx">
+                                        <div className="button-container">
+                                            <h2 style={{ fontWeight: 'bold' }}>Get started</h2>
+                                            <div className="fields-container">
+                                                <div style={{ flex:1 }}>
+                                                    <Button
+                                                        type="submit"
+                                                        size={'md'}
+                                                        className="login-submit-button bx--btn bx--btn--primary"
+                                                        onClick={() => {
+                                                            navigate("/signin");
+                                                        }}
+                                                    >
+                                                        {"Login"}
+                                                    </Button>
+                                                </div>
+                                                <div style={{ width: '20px' }} />
+                                                <div style={{ flex: 1 }}>
+                                                    <Button
+                                                        type="submit"
+                                                        size={'md'}
+                                                        className="login-submit-button bx--btn bx--btn--primary"
+                                                        disabled={true}
+                                                    >
+                                                        {"Signup"}
+                                                    </Button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <SignFooter></SignFooter>
-                    </Column>
+                            <SignFooter></SignFooter>
+                        </Column>
+                    )}
+                    {button ===0 && (
+                        <Column sm={4} md={mdValue2} lg={6} className="auth-login-container">
+                            <div className="auth-login-area">
+                                <div className="bx--row">
+                                    <div className="bx--col auth-login-bx">
+                                        <div className="button-container">
+                                            <h3 style={{ fontWeight: 'bold' }}>Get started</h3>
+                                            <div style={{ marginTop: '15px',  width: '400px' }}>
+                                                <div style={{ flex:1 }}>
+                                                    <Button
+                                                        type="submit"
+                                                        size={'md'}
+                                                        className="login-submit-button bx--btn bx--btn--primary"
+                                                        onClick={() => {
+                                                            navigate("/signin");
+                                                        }}
+                                                    >
+                                                        {"Login"}
+                                                    </Button>
+                                                </div>
+                                                <div style={{ flex: 1, marginTop: '15px'  }}>
+                                                    <Button
+                                                        type="submit"
+                                                        size={'md'}
+                                                        className="login-submit-button bx--btn bx--btn--primary"
+                                                        disabled={true}
+                                                    >
+                                                        {"Signup"}
+                                                    </Button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <SignFooter></SignFooter>
+                        </Column>
+                    )}
                 </Grid>
             </div>
         </div>
