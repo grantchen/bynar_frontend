@@ -34,7 +34,7 @@ const MagicLinkValidation = ({
     useNavigate();
     return (
         <>
-            <div className="app-container">
+            <div>
                 <SignHeader></SignHeader>
                 <div className="signin-container">
                     <Grid className="signin-grid">

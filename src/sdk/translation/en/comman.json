@@ -173,5 +173,6 @@
     "sites": "Sites",
     "sales": "Sales",
     "payments": "Payments",
-    "transfers": "Transfers"
+    "transfers": "Transfers",
+    "procurements": "Procurements"
 }
