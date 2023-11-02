@@ -32,13 +32,12 @@
     <Panel Adding='1' Delete='1' Select='1' />
 
    <Def>
-      <D
-         Name='Node'
-         Parent='#Body' CDef='Data' Sorted='1' AcceptDef='Data' Spanned='1' Calculated='1' Expanded='1'
-	 CanFilter='1'
-         applies_document_type='Parent' applies_document_typeType='Text' applies_document_typeSpan="4" applies_document_typeCanEdit="0"  applies_document_typeAlign="Center"
+         <D
+      Name='Node'
+      Parent='#Body' CDef='Data' Sorted='1' AcceptDef='Data' Spanned='1' Calculated='1' Expanded='1' CanFilter='1'
+      item_id='Parent' item_idType='Text' item_idSpan="7" item_idCanEdit="0" item_idAlign="Center"
 
-      />
+    />
 
       <D
          Name='Data'
@@ -98,6 +97,13 @@
       <C Name='total_exclusive_vat_lcy'  Width='150' Type='Float' Format='0.00' CanEdit='1' VarHeight='1'   CaseSensitive='0' />
       <C Name='total_vat_lcy'  Width='150' Type='Float' Format='0.00' CanEdit='1' VarHeight='1'   CaseSensitive='0' />
       <C Name='total_inclusive_vat_lcy'  Width='150' Type='Float' Format='0.00' CanEdit='1' VarHeight='1'   CaseSensitive='0' />
+      <C Name='item_id' Width='150' Type='Int' CanEdit='1' CaseSensitive='0' VarHeight='1'/>
+    <C Name='item_type' Width='150' Type='Int' CanEdit='1' CaseSensitive='0' VarHeight='1'/>
+    <C Name='location_id' Width='150' Type='Int' CanEdit='1' CaseSensitive='0' VarHeight='1'/>
+    <C Name='input_quantity' Width='150' Type='Float' Format='0.00' CanEdit='1' CaseSensitive='0' VarHeight='1'/>
+    <C Name='item_unit_id' Width='150' Type='Int' CanEdit='1' VarHeight='1' CaseSensitive='0'/>
+    <C Name='tax_area_id' Width='150' Type='Int' CanEdit='1' VarHeight='1' CaseSensitive='0'/>
+    <C Name='vat_id' Width='150' Type='Int' CanEdit='1' VarHeight='1' CaseSensitive='0'/>
    </Cols>
 
     <Root CDef='Node' AcceptDef='Node'/>
