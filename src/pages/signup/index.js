@@ -1018,8 +1018,7 @@ const Signup = () => {
                                         {activeStep === 4 && (
                                             <div className="account-info-box">
                                                 <div className="account-heading">
-                                                    <p className="heading">Organization
-                                                        information</p>
+                                                    <p className="heading">{t("account-information")}</p>
                                                 </div>
                                                 <TextInput
                                                     type="text"
