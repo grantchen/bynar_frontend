@@ -10,7 +10,7 @@ import {
     UserManagementProvider,
 } from "./sdk";
 
-import Home2 from "./pages/Home2";
+const Home2 = lazy(() => import("./pages/Home2"));
 const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard"));
 const MagicLinkAuth = lazy(() => import("./components/Auth/MagicLinkAuth"));
 const Login = lazy(() => import("./pages/login"));
