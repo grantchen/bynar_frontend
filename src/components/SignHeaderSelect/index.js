@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {Dropdown, Header, HeaderName} from '@carbon/react';
 import {Languages} from "../../sdk";
 import {useTranslation} from "react-i18next";
 import i18n from "i18next";
 import "./SideHeader.scss";
 
-const SignHeaderSelect = () => {
+const SignHeaderSelect = ({ onLanguageChange }) => {
     const [language, setLanguage] = useState(localStorage.getItem('lang') ?? "en");
     const languagesItems = Languages.map((languageObject) => languageObject.code);
     const { t } = useTranslation();
@@ -17,10 +17,12 @@ const SignHeaderSelect = () => {
             setLanguage('en');
             localStorage.setItem('lang', 'en')
             i18n.changeLanguage('en');
+            onLanguageChange('en');
         } else {
             setLanguage(selectedLanguage.selectedItem);
             localStorage.setItem('lang', selectedLanguage.selectedItem)
             i18n.changeLanguage(selectedLanguage.selectedItem);
+            onLanguageChange(selectedLanguage.selectedItem);
         }
     };
     return (

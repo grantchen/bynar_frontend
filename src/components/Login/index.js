@@ -44,9 +44,12 @@ const Login = ({
 }) => {
     const navigate = useNavigate();
     const { t } = useTranslation();
+    const handleLanguageChange = (newLanguage) => {
+        console.log(newLanguage)
+    };
     return (
         <div>
-            <SignHeaderSelect></SignHeaderSelect>
+            <SignHeaderSelect onLanguageChange={handleLanguageChange}></SignHeaderSelect>
             <div className="signin-container">
                 <Grid className="signin-grid">
                     <Column sm={{ span: 4 }} md={{ span: 8 }} lg={{ span: 16 }} xlg={{ span: 16 }} className={"box-container"}>

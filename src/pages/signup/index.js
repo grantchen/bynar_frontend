@@ -30,6 +30,9 @@ import { useNavigate } from "react-router-dom";
 import "./../../styles/paymentform.scss";
 import "./signup.scss";
 import { PhoneNumberUtil, } from "google-libphonenumber";
+import es  from 'react-phone-input-2/lang/es.json'
+import de  from 'react-phone-input-2/lang/de.json'
+import fr  from 'react-phone-input-2/lang/fr.json'
 import {
     parseTabMessage,
     sendCloseTabMessage,
@@ -37,7 +40,6 @@ import {
     SubscribeCloseTabMessage,
     SubscribeTabMessage
 } from "../../sdk/tabMessage";
-import SignHeader from "../../components/SignHeader";
 import SignFooter from "../../components/SignFooter";
 import SignHeaderSelect from "../../components/SignHeaderSelect";
 import {useTranslation} from "react-i18next";
@@ -122,6 +124,22 @@ const Signup = () => {
         });
     };
 
+    const [language, setLanguage] = useState(localStorage.getItem('lang') ?? 'en');
+
+    const handleLanguageChange = (newLanguage) => {
+        console.log(newLanguage)
+        setLanguage(newLanguage);
+    };
+
+    let localization;
+    if (language === "es") {
+        localization = es;
+    } else if (language === "fr") {
+        localization = fr;
+    } else if (language === "de") {
+        localization = de;
+    }
+    console.log(localization)
     const handleAddressLine1 = (e) => {
         const { name, value } = e.target;
         setAddressLine1(value);
@@ -666,7 +684,7 @@ const Signup = () => {
             </SubscribeTabMessage>
             {(
                 <div>
-                    <SignHeaderSelect></SignHeaderSelect>
+                    <SignHeaderSelect onLanguageChange={handleLanguageChange}></SignHeaderSelect>
 
                     <div
                         ref={containerRef}
@@ -895,21 +913,71 @@ const Signup = () => {
                                                     }
                                                 />
                                                 <div style={{ marginTop: "6px" }}>
-                                                    <p className="input-heading">Phone number *</p>
+                                                    <p className="input-heading">{`${t("phone-number-label")} *`}</p>
                                                 </div>
-                                                <PhoneInput
-                                                    className="phone-input-signup"
-                                                    ref={(el) => (inputRefs.current[5] = el)}
-                                                    style={{
-                                                        border: !phoneNumberValid && errorMessage.length > 0 ? "2px solid red" : 0,
-                                                    }}
-                                                    name="phoneNumber"
-                                                    country={""}
-                                                    value={phoneNumber}
-                                                    onChange={(value, country, formattedValue) =>
-                                                        handlePhoneNumber(value, country)
-                                                    }
-                                                />
+                                                {language === 'es' && (
+                                                    <PhoneInput
+                                                        className="phone-input-signup"
+                                                        localization={es}
+                                                        ref={(el) => (inputRefs.current[5] = el)}
+                                                        style={{
+                                                            border: !phoneNumberValid && errorMessage.length > 0 ? "2px solid red" : 0,
+                                                        }}
+                                                        name="phoneNumber"
+                                                        country={""}
+                                                        value={phoneNumber}
+                                                        onChange={(value, country, formattedValue) =>
+                                                            handlePhoneNumber(value, country)
+                                                        }
+                                                    />
+                                                )}
+                                                {language === 'de' && (
+                                                    <PhoneInput
+                                                        className="phone-input-signup"
+                                                        localization={de}
+                                                        ref={(el) => (inputRefs.current[5] = el)}
+                                                        style={{
+                                                            border: !phoneNumberValid && errorMessage.length > 0 ? "2px solid red" : 0,
+                                                        }}
+                                                        name="phoneNumber"
+                                                        country={""}
+                                                        value={phoneNumber}
+                                                        onChange={(value, country, formattedValue) =>
+                                                            handlePhoneNumber(value, country)
+                                                        }
+                                                    />
+                                                )}
+                                                {language === 'fr' && (
+                                                    <PhoneInput
+                                                        className="phone-input-signup"
+                                                        localization={fr}
+                                                        ref={(el) => (inputRefs.current[5] = el)}
+                                                        style={{
+                                                            border: !phoneNumberValid && errorMessage.length > 0 ? "2px solid red" : 0,
+                                                        }}
+                                                        name="phoneNumber"
+                                                        country={""}
+                                                        value={phoneNumber}
+                                                        onChange={(value, country, formattedValue) =>
+                                                            handlePhoneNumber(value, country)
+                                                        }
+                                                    />
+                                                )}
+                                                {language === 'en' && (
+                                                    <PhoneInput
+                                                        className="phone-input-signup"
+                                                        ref={(el) => (inputRefs.current[5] = el)}
+                                                        style={{
+                                                            border: !phoneNumberValid && errorMessage.length > 0 ? "2px solid red" : 0,
+                                                        }}
+                                                        name="phoneNumber"
+                                                        country={""}
+                                                        value={phoneNumber}
+                                                        onChange={(value, country, formattedValue) =>
+                                                            handlePhoneNumber(value, country)
+                                                        }
+                                                    />
+                                                )}
                                                 {!phoneNumberValid && errorMessage.length > 0 && (
                                                     <p
                                                         style={{
