@@ -505,5 +505,7 @@
     "timestamp-has-expired": "timestamp has expired",
     "has-already-exist": "has already exist",
     "send-registration-email-fail": "has already exist",
-    "check-user-exists-fail": "check user exists fail"
+    "check-user-exists-fail": "check user exists fail",
+    "account-notice": "Account notice",
+    "by-email": "by email"
 }

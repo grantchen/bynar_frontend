@@ -505,5 +505,7 @@
     "timestamp-has-expired": "l'horodatage a expiré",
     "has-already-exist": "existe déjà",
     "send-registration-email-fail": "échec de l'envoi de l'e-mail d'inscription",
-    "check-user-exists-fail": "échec de la vérification de l'existence de l'utilisateur"
+    "check-user-exists-fail": "échec de la vérification de l'existence de l'utilisateur",
+    "account-notice": "Account notice",
+    "by-email": "by email"
 }

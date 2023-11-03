@@ -1120,7 +1120,7 @@ const Signup = () => {
                                             <>
                                                 <div className="account-info-box">
                                                     <div className="account-heading">
-                                                        <p className="heading">Account notice</p>
+                                                        <p className="heading">{t("account-notice")}</p>
                                                     </div>
 
                                                     <Select
@@ -1150,7 +1150,7 @@ const Signup = () => {
                                                         alignItems: "center"
                                                     }}>
                                                         <Checkbox
-                                                            labelText="by email"
+                                                            labelText={t("by-email")}
                                                             checked={isByEmailChecked}
                                                             id="by-email"
                                                             onChange={(_, { checked }) => {

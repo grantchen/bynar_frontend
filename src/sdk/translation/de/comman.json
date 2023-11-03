@@ -199,7 +199,7 @@
     "address-line-1": "Anschrift Zeile 1",
     "address-line-1-required": "Adresszeile1 ist erforderlich",
     "address-line-2": "Address line 2 (optional)",
-    "city-required": "Adresszeile 2 (freiwillig)",
+    "city-required": "Stadt-erforderlich",
     "state-required": "Staat ist erforderlich",
     "organization-name": "Organisationsname",
     "organization-name-required": "Organisationsname ist erforderlich",
@@ -505,5 +505,7 @@
     "timestamp-has-expired": "Zeitstempel ist abgelaufen",
     "has-already-exist": "existiert bereits",
     "send-registration-email-fail": "sende Registrierungs-E-Mail fehlgeschlagen",
-    "check-user-exists-fail": "Überprüfung des Benutzers fehlgeschlagen"
+    "check-user-exists-fail": "Überprüfung des Benutzers fehlgeschlagen",
+    "account-notice": "Kontobenachrichtigung",
+    "by-email": "per E-Mail"
 }
