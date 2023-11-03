@@ -506,9 +506,10 @@
     "has-already-exist": "existiert bereits",
     "send-registration-email-fail": "sende Registrierungs-E-Mail fehlgeschlagen",
     "check-user-exists-fail": "Überprüfung des Benutzers fehlgeschlagen",
-    "account-notice": "Kontobenachrichtigung",
+    "account-notice": "Kontohinweis",
     "by-email": "per E-Mail",
     "sending-confirmation-email": "Senden einer Bestätigungs-E-Mail",
     "re-sending-confirmation-email": "Bestätigungs-E-Mail erneut senden",
-    "error-user-account": "Beim Erstellen des Benutzerkontos ist ein Fehler aufgetreten"
+    "error-user-account": "Beim Erstellen des Benutzerkontos ist ein Fehler aufgetreten",
+    "login-failed-invalid": "Anmeldung fehlgeschlagen, Link abgelaufen oder ungültig"
 }

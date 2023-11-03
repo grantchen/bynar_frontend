@@ -334,8 +334,20 @@ const Signup = () => {
                     setIsError(true);
                     setIsEmailVerified(false);
                     setEmailVerified("");
+                    let err = res.error
+                    if (err.includes("timestamp has expired")) {
+                        err = t("timestamp-has-expired")
+                    } else if (err.includes("has already exist")) {
+                        const parts = err.split(' ');
+                        const emailAddress = parts[1];
+                        err = t("email-label") + " "+ emailAddress + " "+ t("has-already-exist")
+                    } else if (err.includes("send registration email fail")) {
+                        err = t("send-registration-email-fail")
+                    } else if (err.includes("check user exists fail")) {
+                        err = t("check-user-exists-fail")
+                    }
                     setErrorNotification({
-                        title: res.error,
+                        title: err,
                         status: "error",
                     });
                 }

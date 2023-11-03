@@ -510,5 +510,6 @@
     "by-email": "by email",
     "sending-confirmation-email": "sending confirmation email",
     "re-sending-confirmation-email": "re-sending confirmation email",
-    "error-user-account": "error occurred while creating user account"
+    "error-user-account": "error occurred while creating user account",
+    "login-failed-invalid": "Login failed, link expired or invalid"
 }

@@ -506,9 +506,10 @@
     "has-already-exist": "ya existe",
     "send-registration-email-fail": "envío de correo de registro fallido",
     "check-user-exists-fail": "comprobación de la existencia del usuario fallida",
-    "account-notice": "Account notice",
-    "by-email": "by email",
+    "account-notice": "aviso de cuenta",
+    "by-email": "Por correo electrónico",
     "sending-confirmation-email": "enviando correo electrónico de confirmación",
     "re-sending-confirmation-email": "reenviar correo electrónico de confirmación",
-    "error-user-account": "se produjo un error al crear una cuenta de usuario"
+    "error-user-account": "se produjo un error al crear una cuenta de usuario",
+    "login-failed-invalid": "Error al iniciar sesión, enlace caducado o no válido"
 }
