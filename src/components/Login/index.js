@@ -168,7 +168,7 @@ const Login = ({
                                                         {loading ? (
                                                             <div className="loader-signin">
                                                                 <InlineLoading
-                                                                    description={"Please wait..."}
+                                                                    description={`${t("please-wait")} ...`}
                                                                     className="submit-button-loading"
                                                                 />
                                                             </div>

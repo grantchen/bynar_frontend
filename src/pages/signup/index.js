@@ -151,15 +151,15 @@ const Signup = () => {
 
     const validatePhoneNumber = (value, dialCode, country) => {
         if (value === dialCode) {
-            setErrorMessage("Enter valid phone number")
+            setErrorMessage(t("enter-valid-phone-number"))
             setIsPhoneNumberValid(false)
         } else {
             const phoneNumberWithoutDialCode = value.toString().replace(dialCode, "");
             if (phoneNumberWithoutDialCode.length === 0) {
-                setErrorMessage("Phone number is required")
+                setErrorMessage(t("phone-number-required"))
                 setIsPhoneNumberValid(false)
             } else if (phoneNumberWithoutDialCode === value) {
-                setErrorMessage("Enter valid phone number")
+                setErrorMessage(t("enter-valid-phone-number"))
                 setIsPhoneNumberValid(false)
             } else {
 
@@ -167,14 +167,14 @@ const Signup = () => {
                     const number = phoneUtil.parse(phoneNumberWithoutDialCode, country);
                     const isValid = phoneUtil.isValidNumber(number);
                     if (!isValid) {
-                        setErrorMessage("Enter valid phone number")
+                        setErrorMessage(t("enter-valid-phone-number"))
                         setIsPhoneNumberValid(false)
                     } else {
                         setErrorMessage("")
                         setIsPhoneNumberValid(true)
                     }
                 } catch (e) {
-                    setErrorMessage("Enter valid phone number")
+                    setErrorMessage(t("enter-valid-phone-number"))
                     setIsPhoneNumberValid(false)
                 }
             }
@@ -255,7 +255,7 @@ const Signup = () => {
 
                     if (activeStep === 2) {
                         setErrorNotification({
-                            title: `verification email re-send to ${email}`,
+                            title: `${t("re-send-verification-email")} ${email}`,
                             status: "success",
                         });
                         setIsError(true);
@@ -267,7 +267,7 @@ const Signup = () => {
                         title:
                             res.error === "username already exist" || "email is not valid"
                                 ? res.error
-                                : "Some error occurred, please try after some time",
+                                : t("handle-signup-request"),
                         status: "error",
                     });
                 }
@@ -471,7 +471,7 @@ const Signup = () => {
 
     const postalCodeValidation = (value) => {
         if (value.length === 0) {
-            setPostalCodeErrorNotification({ title: "Postal code is required" });
+            setPostalCodeErrorNotification({ title: t("postal-code-required")});
         } else {
             setPostalCodeErrorNotification({});
         }
@@ -602,7 +602,7 @@ const Signup = () => {
             setActiveStep(3);
         } else {
             setErrorNotification({
-                title: "email not verified",
+                title: t("email-not-verified"),
                 status: "error",
             });
         }
@@ -619,7 +619,7 @@ const Signup = () => {
         error.phoneNumber = phoneNumber.length === 0;
         setAccountInfoErrors(error);
         if (phoneNumber.length === 0) {
-            setErrorMessage('Phone number is required')
+            setErrorMessage(t("phone-number-required"))
             setIsPhoneNumberValid(false)
         } else {
             validatePhoneNumber(phoneNumber, countryDialCode, countryCode)
@@ -824,7 +824,7 @@ const Signup = () => {
                                                 >
                                                     {COUNTRIES.map((countryObject, countryIndex) => (
                                                         <SelectItem
-                                                            text={countryObject.name}
+                                                            text={t(countryObject.name)}
                                                             value={countryObject.name}
                                                             key={countryIndex}
                                                         />
@@ -973,7 +973,7 @@ const Signup = () => {
                                                 >
                                                     {COUNTRIES.map((countryObject, countryIndex) => (
                                                         <SelectItem
-                                                            text={countryObject.name}
+                                                            text={t(countryObject.name)}
                                                             value={countryObject.name}
                                                             key={countryIndex}
                                                         />

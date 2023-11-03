@@ -37,11 +37,11 @@ const Signin = () => {
         e.preventDefault();
         if (email.length === 0) {
             setErrorNotification({
-                title: "Email should not be blank",
+                title: t("email-should-not-blank"),
             });
         } else if (!validateEmail(email)) {
             setErrorNotification({
-                title: "Enter valid email",
+                title: t("enter-valid-email"),
             });
         } else {
             setErrorNotification({});
@@ -63,7 +63,7 @@ const Signin = () => {
                     setSignInPhaseOne(false);
                     setLoadingSuccess(false);
                     setServerErrorNotification({
-                        title: `Login link sent to ${email}`,
+                        title: `${t("login-link-sent")} ${email}`,
                         status: "success",
                     });
                 } else if (response.status === 500) {
@@ -77,7 +77,7 @@ const Signin = () => {
                 console.log(e);
                 setLoadingSuccess(false);
                 setServerErrorNotification({
-                    title: "Something went wrong",
+                    title: t("something-went-wrong"),
                     status: "error",
                 });
             }
@@ -153,7 +153,7 @@ const Signin = () => {
             <div style={{ height:"100%" }}>
                 {signInPhaseOne ? (
                     <Login
-                        heading={"Log in to Bynar"}
+                        heading={t("login-to-bynar")}
                         loading={loadingSuccess}
                         handleFormSubmit={handleEmailFormSubmit}
                         setErrorNotification={setErrorNotification}
@@ -171,14 +171,14 @@ const Signin = () => {
                         enableForgotPassword={false}
                         placeholderText={" "}
                         showRememberId={false}
-                        text={`Logging in as ${email}`}
-                        subtitle={"Not you?"}
+                        text={`${t("logging-in-as")} ${email}`}
+                        subtitle={t("not-you")}
                         setSignInPhaseOne={setSignInPhaseOne}
                     />
                 ) : (
                     /* isPaswordLessSignin if true then sign in using magic link based on otp validation */
                     <MagicLinkValidation
-                        heading={"Log in to Bynar"}
+                        heading={t("login-to-bynar")}
                         loading={loading}
                         loadingSuccess={loadingSuccess}
                         handleFormSubmit={verifyMagicLink}
