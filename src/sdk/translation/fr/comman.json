@@ -493,5 +493,17 @@
     "login-link-sent": "Lien de connexion envoyé à",
     "something-went-wrong": "Quelque chose s'est mal passé",
     "logging-in-as": "Connexion en tant que",
-    "not-you": "Pas vous ?"
+    "not-you": "Pas vous ?",
+    "resend-login-email": "Renvoyer l'e-mail de connexion",
+    "resending-login-link": "Envoi du lien de connexion en cours",
+    "organization-account": "Compte d'organisation",
+    "suggested-format": "Format suggéré (nom@entreprise.com)",
+    "no-user-found": "utilisateur non trouvé",
+    "email-not-signed-up": "e-mail non enregistré",
+    "set-custom-fail": "échec de la définition des revendications personnalisées",
+    "send-email-fail": "échec de l'envoi de l'e-mail",
+    "timestamp-has-expired": "l'horodatage a expiré",
+    "has-already-exist": "existe déjà",
+    "send-registration-email-fail": "échec de l'envoi de l'e-mail d'inscription",
+    "check-user-exists-fail": "échec de la vérification de l'existence de l'utilisateur"
 }

@@ -493,5 +493,17 @@
     "login-link-sent": "Login link sent to",
     "something-went-wrong": "Something went wrong",
     "logging-in-as": "Logging in as",
-    "not-you": "Not you?"
+    "not-you": "Not you?",
+    "resend-login-email": "Resend login email",
+    "resending-login-link": "resending login link",
+    "organization-account": "Organization account",
+    "suggested-format": "Suggested format (name@company.com)",
+    "no-user-found": "no user found",
+    "email-not-signed-up": "email not signed up",
+    "set-custom-fail": "set custom user claims fail",
+    "send-email-fail": "send email fail",
+    "timestamp-has-expired": "timestamp has expired",
+    "has-already-exist": "has already exist",
+    "send-registration-email-fail": "has already exist",
+    "check-user-exists-fail": "check user exists fail"
 }

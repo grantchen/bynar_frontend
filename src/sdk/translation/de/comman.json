@@ -493,5 +493,17 @@
     "login-link-sent": "Anmelde-Link gesendet an",
     "something-went-wrong": "Etwas ist schiefgelaufen",
     "logging-in-as": "Anmeldung als",
-    "not-you": "Nicht du?"
+    "not-you": "Nicht du?",
+    "resend-login-email": "E-Mail zum erneuten Senden senden",
+    "resending-login-link": "Sende den Anmelde-Link erneut",
+    "organization-account": "Organisationskonto",
+    "suggested-format": "Vorgeschlagenes Format (name@company.com)",
+    "no-user-found": "Benutzer nicht gefunden",
+    "email-not-signed-up": "E-Mail nicht registriert",
+    "set-custom-fail": "Fehler beim Festlegen benutzerdefinierter Ansprüche",
+    "send-email-fail": "Fehler beim Senden der E-Mail",
+    "timestamp-has-expired": "Zeitstempel ist abgelaufen",
+    "has-already-exist": "existiert bereits",
+    "send-registration-email-fail": "sende Registrierungs-E-Mail fehlgeschlagen",
+    "check-user-exists-fail": "Überprüfung des Benutzers fehlgeschlagen"
 }

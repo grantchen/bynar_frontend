@@ -131,15 +131,14 @@ const Signup = () => {
         setLanguage(newLanguage);
     };
 
-    let localization;
+    let localizationlanguage = "en"
     if (language === "es") {
-        localization = es;
+        localizationlanguage="es"
     } else if (language === "fr") {
-        localization = fr;
+        localizationlanguage="fr"
     } else if (language === "de") {
-        localization = de;
+        localizationlanguage="de"
     }
-    console.log(localization)
     const handleAddressLine1 = (e) => {
         const { name, value } = e.target;
         setAddressLine1(value);
@@ -368,10 +367,10 @@ const Signup = () => {
                     setActiveStep(6);
                 } else if (response.status === 500) {
                     setIsError(true);
-                    let title = "error occurred while validating card"
-                    if (res?.error) {
-                        title = res?.error
-                    }
+                    let title = t("invalid-card-details")
+                    // if (res?.error) {
+                    //     title = res?.error
+                    // }
                     setErrorNotification({
                         title: title,
                         status: "error",
@@ -427,8 +426,20 @@ const Signup = () => {
                     return
                 } else if (response.status === 500) {
                     setIsError(true);
+                    let err = res.error
+                    if (err.includes("timestamp has expired")) {
+                        err = t("timestamp-has-expired")
+                    } else if (err.includes("has already exist")) {
+                        const parts = err.split(' ');
+                        const emailAddress = parts[1];
+                        err = t("email-label")+ emailAddress + t("has-already-exist")
+                    } else if (err.includes("send registration email fail")) {
+                        err = t("send-registration-email-fail")
+                    } else if (err.includes("check user exists fail")) {
+                        err = t("check-user-exists-fail")
+                    }
                     setErrorNotification({
-                        title: res.error,
+                        title: err,
                         status: "error",
                     });
                     setActiveStep(1);
@@ -588,10 +599,10 @@ const Signup = () => {
     const validateOrganizationForm = (email) => {
         const errors = {};
         if (email.trim() === "") {
-            errors.email = "Email is required";
+            errors.email = t("email-required");
         } else if (email.length > 0) {
             if (!checkEmailValid(email.trim())) {
-                errors.email = "Suggested format (name@company.com)";
+                errors.email = t("suggested-format");
             }
         }
 
@@ -729,8 +740,7 @@ const Signup = () => {
                                         {activeStep === 1 && (
                                             <div className="account-info-box">
                                                 <div className="account-heading">
-                                                    <p className="heading">Organization
-                                                        account</p>
+                                                    <p className="heading">{t("organization-account")}</p>
                                                 </div>
                                                 <TextInput
                                                     id="email"
@@ -915,7 +925,7 @@ const Signup = () => {
                                                 <div style={{ marginTop: "6px" }}>
                                                     <p className="input-heading">{`${t("phone-number-label")} *`}</p>
                                                 </div>
-                                                {language === 'es' && (
+                                                {localizationlanguage === "es" && (
                                                     <PhoneInput
                                                         className="phone-input-signup"
                                                         localization={es}
@@ -931,7 +941,7 @@ const Signup = () => {
                                                         }
                                                     />
                                                 )}
-                                                {language === 'de' && (
+                                                {localizationlanguage === "de" && (
                                                     <PhoneInput
                                                         className="phone-input-signup"
                                                         localization={de}
@@ -947,7 +957,7 @@ const Signup = () => {
                                                         }
                                                     />
                                                 )}
-                                                {language === 'fr' && (
+                                                {localizationlanguage === "fr" && (
                                                     <PhoneInput
                                                         className="phone-input-signup"
                                                         localization={fr}
@@ -963,7 +973,7 @@ const Signup = () => {
                                                         }
                                                     />
                                                 )}
-                                                {language === 'en' && (
+                                                {localizationlanguage === "en" && (
                                                     <PhoneInput
                                                         className="phone-input-signup"
                                                         ref={(el) => (inputRefs.current[5] = el)}

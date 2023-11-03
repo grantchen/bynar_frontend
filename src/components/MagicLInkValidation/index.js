@@ -13,6 +13,8 @@ import SignHeader from "../SignHeader";
 import { Footer } from "@carbon/ibmdotcom-react";
 import React, { useEffect, useState } from "react";
 import SignFooter from "../../components/SignFooter";
+import {useTranslation} from "react-i18next";
+import SignHeaderSelect from "../SignHeaderSelect";
 
 const MagicLinkValidation = ({
     heading,
@@ -32,10 +34,14 @@ const MagicLinkValidation = ({
     handleEmailFormSubmit,
 }) => {
     useNavigate();
+    const { t } = useTranslation();
+    const handleLanguageChange = (newLanguage) => {
+        console.log(newLanguage)
+    };
     return (
         <>
             <div>
-                <SignHeader></SignHeader>
+                <SignHeaderSelect onLanguageChange={handleLanguageChange}></SignHeaderSelect>
                 <div className="signin-container">
                     <Grid className="signin-grid">
                         <Column sm={{ span: 4 }} md={{ span: 8 }} lg={{ span: 16 }} xlg={{ span: 16 }} className={"box-container"}>
@@ -75,14 +81,14 @@ const MagicLinkValidation = ({
                                                         {loading ? (
                                                             <div className="loader-signin">
                                                                 <InlineLoading
-                                                                    description={"Please wait..."}
+                                                                    description={`${t("please-wait")}...`}
                                                                     className="submit-button-loading"
                                                                 />
                                                             </div>
                                                         ) : loadingSuccess ? (
                                                             <div className="loader-signin">
                                                                 <InlineLoading
-                                                                    description={"resending login link..."}
+                                                                    description={`${t("resending-login-link")}...`}
                                                                     className="submit-button-loading"
                                                                 />
                                                             </div>
@@ -91,7 +97,7 @@ const MagicLinkValidation = ({
                                                                 className="resend-code-text"
                                                                 onClick={handleEmailFormSubmit}
                                                             >
-                                                                Resend login email
+                                                                {t("resend-login-email")}
                                                             </p>
                                                         )}
                                                     </div>

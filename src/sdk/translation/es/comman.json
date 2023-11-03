@@ -493,5 +493,17 @@
     "login-link-sent": "Enlace de inicio de sesión enviado a",
     "something-went-wrong": "Algo salió mal",
     "logging-in-as": "Iniciando sesión como",
-    "not-you": "¿No eres tú?"
+    "not-you": "¿No eres tú?",
+    "resend-login-email": "Reenviar correo de inicio de sesión",
+    "resending-login-link": "Reenviando enlace de inicio de sesión",
+    "organization-account": "Cuenta de organización",
+    "suggested-format": "Formato sugerido (nombre@empresa.com)",
+    "no-user-found": "usuario no encontrado",
+    "email-not-signed-up": "correo electrónico no registrado",
+    "set-custom-fail": "error al establecer reclamos personalizados",
+    "send-email-fail": "error al enviar el correo electrónico",
+    "timestamp-has-expired": "la marca de tiempo ha caducado",
+    "has-already-exist": "ya existe",
+    "send-registration-email-fail": "envío de correo de registro fallido",
+    "check-user-exists-fail": "comprobación de la existencia del usuario fallida"
 }

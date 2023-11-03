@@ -16,17 +16,12 @@ const Home = () => {
         function handleResize() {
             setWindowWidth(window.innerWidth);
         }
-
-        // 添加窗口大小改变事件监听器
         window.addEventListener('resize', handleResize);
-
-        // 在组件卸载时移除事件监听器
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-    }, []); // 空数组表示仅在组件挂载和卸载时执行
+    }, []);
 
-    // 根据窗口宽度决定 md 属性的值
     let mdValue1 = 4;
     let mdValue2 = 4;
     let step = 5

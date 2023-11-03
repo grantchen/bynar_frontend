@@ -68,8 +68,18 @@ const Signin = () => {
                     });
                 } else if (response.status === 500) {
                     setLoadingSuccess(false);
+                    let err = res.error
+                    if (err.includes("no user found")) {
+                        err = t("no-user-found")
+                    } else if (err.includes("email not signed up")) {
+                        err = t("email-not-signed-up")
+                    } else if (err.includes("set custom user claims fail")) {
+                        err = t("set-custom-fail")
+                    } else if (err.includes("send email fail")) {
+                        err = t("send-email-fail")
+                    }
                     setServerErrorNotification({
-                        title: res.error,
+                        title: err,
                         status: "success",
                     });
                 }
@@ -184,8 +194,8 @@ const Signin = () => {
                         handleFormSubmit={verifyMagicLink}
                         errorNotification={errorNotification}
                         buttonText={"Login"}
-                        text={`Logging in as ${email}`}
-                        subtitle={"Not you?"}
+                        text={`${t("logging-in-as")} ${email}`}
+                        subtitle={t("not-you")}
                         setSignInPhaseOne={setSignInPhaseOne}
                         showCreateAccount={true}
                         createAccountText={t("have-an-account")}
