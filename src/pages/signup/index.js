@@ -1055,7 +1055,7 @@ const Signup = () => {
                                                     >
                                                         {Object.keys(DATA_SOVEREIGNTY_REGION_NAMES).map((regionCode, index) => (
                                                             <SelectItem
-                                                                text={DATA_SOVEREIGNTY_REGION_NAMES[regionCode]}
+                                                                text={t(regionCode)}
                                                                 value={regionCode}
                                                                 key={index}
                                                             />
