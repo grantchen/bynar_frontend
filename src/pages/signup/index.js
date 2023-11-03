@@ -539,8 +539,8 @@ const Signup = () => {
             setErrorNotification({
                 title:
                     e === "Card form invalid"
-                        ? "Invalid card details"
-                        : "error occurred while creating user account",
+                        ? t("invalid-card-details")
+                        : t("error-user-account"),
                 status: "error",
             });
 

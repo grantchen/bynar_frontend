@@ -509,5 +509,6 @@
     "account-notice": "Account notice",
     "by-email": "by email",
     "sending-confirmation-email": "enviando correo electrónico de confirmación",
-    "re-sending-confirmation-email": "reenviar correo electrónico de confirmación"
+    "re-sending-confirmation-email": "reenviar correo electrónico de confirmación",
+    "error-user-account": "se produjo un error al crear una cuenta de usuario"
 }
