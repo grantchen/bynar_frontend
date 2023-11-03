@@ -507,5 +507,7 @@
     "send-registration-email-fail": "has already exist",
     "check-user-exists-fail": "check user exists fail",
     "account-notice": "Account notice",
-    "by-email": "by email"
+    "by-email": "by email",
+    "sending-confirmation-email": "sending confirmation email",
+    "re-sending-confirmation-email": "re-sending confirmation email"
 }

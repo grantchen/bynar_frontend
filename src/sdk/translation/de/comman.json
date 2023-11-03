@@ -507,5 +507,7 @@
     "send-registration-email-fail": "sende Registrierungs-E-Mail fehlgeschlagen",
     "check-user-exists-fail": "Überprüfung des Benutzers fehlgeschlagen",
     "account-notice": "Kontobenachrichtigung",
-    "by-email": "per E-Mail"
+    "by-email": "per E-Mail",
+    "sending-confirmation-email": "Senden einer Bestätigungs-E-Mail",
+    "re-sending-confirmation-email": "Bestätigungs-E-Mail erneut senden"
 }

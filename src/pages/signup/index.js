@@ -755,7 +755,7 @@ const Signup = () => {
                                                 {loading ? (
                                                     <div style={{ marginTop: "32px" }}>
                                                         <InlineLoading
-                                                            description={"sending confirmation email"}
+                                                            description={t("sending-confirmation-email")}
                                                             className="submit-button-loading"
                                                         />
                                                     </div>
@@ -795,7 +795,7 @@ const Signup = () => {
                                                             style={{ marginTop: "32px" }}
                                                         >
                                                             <InlineLoading
-                                                                description={resendCodeLoading ? "re-sending confirmation email" : ""}
+                                                                description={resendCodeLoading ? t("re-sending-confirmation-email") : ""}
                                                                 className="submit-button-loading"
                                                             />
                                                         </div>

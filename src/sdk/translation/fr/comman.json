@@ -507,5 +507,7 @@
     "send-registration-email-fail": "échec de l'envoi de l'e-mail d'inscription",
     "check-user-exists-fail": "échec de la vérification de l'existence de l'utilisateur",
     "account-notice": "Account notice",
-    "by-email": "by email"
+    "by-email": "by email",
+    "sending-confirmation-email": "envoi d'un email de confirmation",
+    "re-sending-confirmation-email": "renvoyer l'e-mail de confirmation"
 }
