@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const { i18n } = useTranslation();
-
+    const { t } = useTranslation();
     useEffect(() => {
         let unsubscribeIdTokenChanged;
         (async () => {
@@ -201,7 +201,7 @@ export const AuthProvider = ({ children }) => {
         } catch (e) {
             setState({ user: null, token: null });
             console.log(e)
-            throw new Error('Login failed, link expired or invalid')
+            throw new Error(t("login-failed-invalid"))
         }
 
         throw new Error('Login failed, invalid link')

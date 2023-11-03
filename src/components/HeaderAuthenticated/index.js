@@ -151,7 +151,7 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                         } }
                     >
                         <UserProfileImage
-                            backgroundColor={ "light-cyan" }
+                            backgroundColor={user?.profileURL ? "transparent" : "light-cyan"}
                             size={ "md" }
                             initials={ user?.fullName.match(/(^\S)/)?.[0].toUpperCase() ?? "..." }
                             image={ user?.profileURL ?? "" }

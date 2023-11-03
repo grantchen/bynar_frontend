@@ -30,6 +30,9 @@ import { useNavigate } from "react-router-dom";
 import "./../../styles/paymentform.scss";
 import "./signup.scss";
 import { PhoneNumberUtil, } from "google-libphonenumber";
+import es  from 'react-phone-input-2/lang/es.json'
+import de  from 'react-phone-input-2/lang/de.json'
+import fr  from 'react-phone-input-2/lang/fr.json'
 import {
     parseTabMessage,
     sendCloseTabMessage,
@@ -37,8 +40,9 @@ import {
     SubscribeCloseTabMessage,
     SubscribeTabMessage
 } from "../../sdk/tabMessage";
-import SignHeader from "../../components/SignHeader";
 import SignFooter from "../../components/SignFooter";
+import SignHeaderSelect from "../../components/SignHeaderSelect";
+import {useTranslation} from "react-i18next";
 
 const Signup = () => {
     const handleReady = useCallback(async () => {
@@ -83,6 +87,7 @@ const Signup = () => {
     const [errors, setErrors] = useState({});
     const [phoneNumberValid, setIsPhoneNumberValid] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const { t } = useTranslation();
     const [accountInfoErrors, setAccountInfoErrors] = useState({
         fullName: false,
         addressLine1: false,
@@ -119,6 +124,13 @@ const Signup = () => {
         });
     };
 
+    const [language, setLanguage] = useState(localStorage.getItem('lang') ?? 'en');
+
+    const handleLanguageChange = (newLanguage) => {
+        console.log(newLanguage)
+        setLanguage(newLanguage);
+    };
+
     const handleAddressLine1 = (e) => {
         const { name, value } = e.target;
         setAddressLine1(value);
@@ -148,15 +160,15 @@ const Signup = () => {
 
     const validatePhoneNumber = (value, dialCode, country) => {
         if (value === dialCode) {
-            setErrorMessage("Enter valid phone number")
+            setErrorMessage(t("enter-valid-phone-number"))
             setIsPhoneNumberValid(false)
         } else {
             const phoneNumberWithoutDialCode = value.toString().replace(dialCode, "");
             if (phoneNumberWithoutDialCode.length === 0) {
-                setErrorMessage("Phone number is required")
+                setErrorMessage(t("phone-number-required"))
                 setIsPhoneNumberValid(false)
             } else if (phoneNumberWithoutDialCode === value) {
-                setErrorMessage("Enter valid phone number")
+                setErrorMessage(t("enter-valid-phone-number"))
                 setIsPhoneNumberValid(false)
             } else {
 
@@ -164,14 +176,14 @@ const Signup = () => {
                     const number = phoneUtil.parse(phoneNumberWithoutDialCode, country);
                     const isValid = phoneUtil.isValidNumber(number);
                     if (!isValid) {
-                        setErrorMessage("Enter valid phone number")
+                        setErrorMessage(t("enter-valid-phone-number"))
                         setIsPhoneNumberValid(false)
                     } else {
                         setErrorMessage("")
                         setIsPhoneNumberValid(true)
                     }
                 } catch (e) {
-                    setErrorMessage("Enter valid phone number")
+                    setErrorMessage(t("enter-valid-phone-number"))
                     setIsPhoneNumberValid(false)
                 }
             }
@@ -252,7 +264,7 @@ const Signup = () => {
 
                     if (activeStep === 2) {
                         setErrorNotification({
-                            title: `verification email re-send to ${email}`,
+                            title: `${t("re-send-verification-email")} ${email}`,
                             status: "success",
                         });
                         setIsError(true);
@@ -260,11 +272,22 @@ const Signup = () => {
                 } else if (response.status === 500) {
                     setIsError(true);
                     setActiveStep(1);
+                    let err = res.error
+                    if (err.includes("timestamp has expired")) {
+                        err = t("timestamp-has-expired")
+                    } else if (err.includes("has already exist")) {
+                        const parts = err.split(' ');
+                        const emailAddress = parts[1];
+                        err = t("email-label") + " "+ emailAddress + " "+ t("has-already-exist")
+                    } else if (err.includes("send registration email fail")) {
+                        err = t("send-registration-email-fail")
+                    } else if (err.includes("check user exists fail")) {
+                        err = t("check-user-exists-fail")
+                    }
                     setErrorNotification({
                         title:
-                            res.error === "username already exist" || "email is not valid"
-                                ? res.error
-                                : "Some error occurred, please try after some time",
+                            res.error === "username already exist" || "email is not valid" ? err
+                                : t("handle-signup-request"),
                         status: "error",
                     });
                 }
@@ -311,8 +334,20 @@ const Signup = () => {
                     setIsError(true);
                     setIsEmailVerified(false);
                     setEmailVerified("");
+                    let err = res.error
+                    if (err.includes("timestamp has expired")) {
+                        err = t("timestamp-has-expired")
+                    } else if (err.includes("has already exist")) {
+                        const parts = err.split(' ');
+                        const emailAddress = parts[1];
+                        err = t("email-label") + " "+ emailAddress + " "+ t("has-already-exist")
+                    } else if (err.includes("send registration email fail")) {
+                        err = t("send-registration-email-fail")
+                    } else if (err.includes("check user exists fail")) {
+                        err = t("check-user-exists-fail")
+                    }
                     setErrorNotification({
-                        title: res.error,
+                        title: err,
                         status: "error",
                     });
                 }
@@ -347,10 +382,10 @@ const Signup = () => {
                     setActiveStep(6);
                 } else if (response.status === 500) {
                     setIsError(true);
-                    let title = "error occurred while validating card"
-                    if (res?.error) {
-                        title = res?.error
-                    }
+                    let title = t("invalid-card-details")
+                    // if (res?.error) {
+                    //     title = res?.error
+                    // }
                     setErrorNotification({
                         title: title,
                         status: "error",
@@ -406,8 +441,20 @@ const Signup = () => {
                     return
                 } else if (response.status === 500) {
                     setIsError(true);
+                    let err = res.error
+                    if (err.includes("timestamp has expired")) {
+                        err = t("timestamp-has-expired")
+                    } else if (err.includes("has already exist")) {
+                        const parts = err.split(' ');
+                        const emailAddress = parts[1];
+                        err = t("email-label") + " "+ emailAddress + " "+ t("has-already-exist")
+                    } else if (err.includes("send registration email fail")) {
+                        err = t("send-registration-email-fail")
+                    } else if (err.includes("check user exists fail")) {
+                        err = t("check-user-exists-fail")
+                    }
                     setErrorNotification({
-                        title: res.error,
+                        title: err,
                         status: "error",
                     });
                     setActiveStep(1);
@@ -468,7 +515,7 @@ const Signup = () => {
 
     const postalCodeValidation = (value) => {
         if (value.length === 0) {
-            setPostalCodeErrorNotification({ title: "Postal code is required" });
+            setPostalCodeErrorNotification({ title: t("postal-code-required")});
         } else {
             setPostalCodeErrorNotification({});
         }
@@ -504,8 +551,8 @@ const Signup = () => {
             setErrorNotification({
                 title:
                     e === "Card form invalid"
-                        ? "Invalid card details"
-                        : "error occurred while creating user account",
+                        ? t("invalid-card-details")
+                        : t("error-user-account"),
                 status: "error",
             });
 
@@ -567,10 +614,10 @@ const Signup = () => {
     const validateOrganizationForm = (email) => {
         const errors = {};
         if (email.trim() === "") {
-            errors.email = "Email is required";
+            errors.email = t("email-required");
         } else if (email.length > 0) {
             if (!checkEmailValid(email.trim())) {
-                errors.email = "Suggested format (name@company.com)";
+                errors.email = t("suggested-format");
             }
         }
 
@@ -599,7 +646,7 @@ const Signup = () => {
             setActiveStep(3);
         } else {
             setErrorNotification({
-                title: "email not verified",
+                title: t("email-not-verified"),
                 status: "error",
             });
         }
@@ -616,7 +663,7 @@ const Signup = () => {
         error.phoneNumber = phoneNumber.length === 0;
         setAccountInfoErrors(error);
         if (phoneNumber.length === 0) {
-            setErrorMessage('Phone number is required')
+            setErrorMessage(t("phone-number-required"))
             setIsPhoneNumberValid(false)
         } else {
             validatePhoneNumber(phoneNumber, countryDialCode, countryCode)
@@ -663,7 +710,7 @@ const Signup = () => {
             </SubscribeTabMessage>
             {(
                 <div>
-                    <SignHeader></SignHeader>
+                    <SignHeaderSelect onLanguageChange={handleLanguageChange}></SignHeaderSelect>
 
                     <div
                         ref={containerRef}
@@ -676,13 +723,13 @@ const Signup = () => {
                                     <Content className={"signup-content"}>
                                         <div className="heading-container">
                                             <Heading className={"form-mainHeading"}>
-                                                Sign up for an Bynar account
+                                                {t("sign-up")}
                                             </Heading>
                                             <div
                                                 className="login-link"
                                             >
-                                                Already have an BYNAR account?{" "}
-                                                <Link href="/signin">Log in</Link>
+                                                {t("already-have")}{" "}
+                                                <Link href="/signin">{t("login")}</Link>
                                             </div>
                                         </div>
                                     </Content>
@@ -708,14 +755,13 @@ const Signup = () => {
                                         {activeStep === 1 && (
                                             <div className="account-info-box">
                                                 <div className="account-heading">
-                                                    <p className="heading">Organization
-                                                        account</p>
+                                                    <p className="heading">{t("organization-account")}</p>
                                                 </div>
                                                 <TextInput
                                                     id="email"
                                                     className="email-form-input"
                                                     value={email}
-                                                    labelText="E-mail"
+                                                    labelText= {t("email-label")}
                                                     onChange={(e) => handleEmailChange(e.target.value)}
                                                     invalid={!!errors.email}
                                                     invalidText={errors.email}
@@ -724,7 +770,7 @@ const Signup = () => {
                                                 {loading ? (
                                                     <div style={{ marginTop: "32px" }}>
                                                         <InlineLoading
-                                                            description={"sending confirmation email"}
+                                                            description={t("sending-confirmation-email")}
                                                             className="submit-button-loading"
                                                         />
                                                     </div>
@@ -734,7 +780,7 @@ const Signup = () => {
                                                             kind="tertiary"
                                                             onClick={handleOrganizationFormSubmit}
                                                         >
-                                                            {"Next"}
+                                                            {t("next")}
                                                         </Button>
                                                     </div>
                                                 )}
@@ -743,19 +789,17 @@ const Signup = () => {
                                         {activeStep === 2 && (
                                             <div className="account-info-box">
                                                 <div className="account-heading">
-                                                    <p className="heading">Verify email</p>
+                                                    <p className="heading">{t("verify-email")}</p>
                                                 </div>
                                                 <div>
                                                     <p className="email-text">
                                                         {isEmailVerified ? (
                                                             <>
-                                                                Email has been verified.
+                                                                {t("email-has-verified")}
                                                             </>
                                                         ) : (
                                                             <>
-                                                                Didn’t receive the email? Check your
-                                                                spam filter for
-                                                                an email from noreply@bynar.al.
+                                                                {t("receive-the-email")}
                                                             </>
                                                         )}
                                                     </p>
@@ -766,7 +810,7 @@ const Signup = () => {
                                                             style={{ marginTop: "32px" }}
                                                         >
                                                             <InlineLoading
-                                                                description={resendCodeLoading ? "re-sending confirmation email" : ""}
+                                                                description={resendCodeLoading ? t("re-sending-confirmation-email") : ""}
                                                                 className="submit-button-loading"
                                                             />
                                                         </div>
@@ -775,7 +819,7 @@ const Signup = () => {
                                                             className="resend-code"
                                                             onClick={handleSignupRequest}
                                                         >
-                                                            Resend confirmation email
+                                                            {t("resend-email")}
                                                         </p>
                                                     )}
                                                 </div>
@@ -800,8 +844,7 @@ const Signup = () => {
                                         {activeStep === 3 && (
                                             <div className="account-info-box">
                                                 <div className="account-heading">
-                                                    <p className="heading">Account
-                                                        information</p>
+                                                    <p className="heading">{t("account-information")}</p>
                                                 </div>
                                                 <TextInput
                                                     type="text"
@@ -809,22 +852,22 @@ const Signup = () => {
                                                     name="fullName"
                                                     className="email-form-input"
                                                     id="full name"
-                                                    labelText="Full name *"
+                                                    labelText={`${t("full-name")} *`}
                                                     value={fullName}
                                                     onChange={handleFullName}
                                                     invalid={accountInfoErrors.fullName}
-                                                    invalidText={"Full name is required"}
+                                                    invalidText={t("full-name-required")}
                                                 />
                                                 <Select
                                                     className="country-select"
                                                     value={country}
                                                     id="country-ci"
-                                                    labelText="Country or region *"
+                                                    labelText={`${t("country-label")} *`}
                                                     onChange={handleCountryChange}
                                                 >
                                                     {COUNTRIES.map((countryObject, countryIndex) => (
                                                         <SelectItem
-                                                            text={countryObject.name}
+                                                            text={t(countryObject.name)}
                                                             value={countryObject.name}
                                                             key={countryIndex}
                                                         />
@@ -834,19 +877,19 @@ const Signup = () => {
                                                     type="text"
                                                     name="addressLine1"
                                                     className="email-form-input"
-                                                    labelText="Address line 1 *"
+                                                    labelText={`${t("address-line-1")} *`}
                                                     ref={(el) => (inputRefs.current[1] = el)}
                                                     id="address line 1"
                                                     value={addressLine1}
                                                     onChange={handleAddressLine1}
                                                     invalid={accountInfoErrors.addressLine1}
-                                                    invalidText={"Address line1 is required"}
+                                                    invalidText={t("address-line-1-required")}
                                                 />
                                                 <TextInput
                                                     type="text"
                                                     id="address line 2"
                                                     className="email-form-input"
-                                                    labelText="Address line 2 (optional)"
+                                                    labelText={t("address-line-2")}
                                                     value={addressLine2}
                                                     onChange={(e) => setAddressLine2(e.target.value)}
                                                 />
@@ -856,11 +899,11 @@ const Signup = () => {
                                                     className="email-form-input"
                                                     id="city"
                                                     ref={(el) => (inputRefs.current[2] = el)}
-                                                    labelText="City *"
+                                                    labelText={`${t("city")} *`}
                                                     value={city}
                                                     onChange={handleCity}
                                                     invalid={accountInfoErrors.city}
-                                                    invalidText={"City name is required"}
+                                                    invalidText={t("city-required")}
                                                 />
                                                 <TextInput
                                                     type="text"
@@ -868,18 +911,18 @@ const Signup = () => {
                                                     className="email-form-input"
                                                     ref={(el) => (inputRefs.current[3] = el)}
                                                     id="state"
-                                                    labelText="State *"
+                                                    labelText={`${t("state")} *`}
                                                     value={state}
                                                     onChange={handleState}
                                                     invalid={accountInfoErrors.state}
-                                                    invalidText={"State is required"}
+                                                    invalidText={t("state-validation")}
                                                 />
                                                 <TextInput
                                                     type="text"
                                                     name="postalCode"
                                                     ref={(el) => (inputRefs.current[4] = el)}
                                                     id="postalcode"
-                                                    labelText="Postal code *"
+                                                    labelText={`${t("postal-code")} *`}
                                                     className="postalcode"
                                                     value={postalCode}
                                                     onChange={handlePostalCode}
@@ -895,21 +938,71 @@ const Signup = () => {
                                                     }
                                                 />
                                                 <div style={{ marginTop: "6px" }}>
-                                                    <p className="input-heading">Phone number *</p>
+                                                    <p className="input-heading">{`${t("phone-number-label")} *`}</p>
                                                 </div>
-                                                <PhoneInput
-                                                    className="phone-input-signup"
-                                                    ref={(el) => (inputRefs.current[5] = el)}
-                                                    style={{
-                                                        border: !phoneNumberValid && errorMessage.length > 0 ? "2px solid red" : 0,
-                                                    }}
-                                                    name="phoneNumber"
-                                                    country={""}
-                                                    value={phoneNumber}
-                                                    onChange={(value, country, formattedValue) =>
-                                                        handlePhoneNumber(value, country)
-                                                    }
-                                                />
+                                                {language === "es" && (
+                                                    <PhoneInput
+                                                        className="phone-input-signup"
+                                                        localization={es}
+                                                        ref={(el) => (inputRefs.current[5] = el)}
+                                                        style={{
+                                                            border: !phoneNumberValid && errorMessage.length > 0 ? "2px solid red" : 0,
+                                                        }}
+                                                        name="phoneNumber"
+                                                        country={""}
+                                                        value={phoneNumber}
+                                                        onChange={(value, country, formattedValue) =>
+                                                            handlePhoneNumber(value, country)
+                                                        }
+                                                    />
+                                                )}
+                                                {language === "de" && (
+                                                    <PhoneInput
+                                                        className="phone-input-signup"
+                                                        localization={de}
+                                                        ref={(el) => (inputRefs.current[5] = el)}
+                                                        style={{
+                                                            border: !phoneNumberValid && errorMessage.length > 0 ? "2px solid red" : 0,
+                                                        }}
+                                                        name="phoneNumber"
+                                                        country={""}
+                                                        value={phoneNumber}
+                                                        onChange={(value, country, formattedValue) =>
+                                                            handlePhoneNumber(value, country)
+                                                        }
+                                                    />
+                                                )}
+                                                {language === "fr" && (
+                                                    <PhoneInput
+                                                        className="phone-input-signup"
+                                                        localization={fr}
+                                                        ref={(el) => (inputRefs.current[5] = el)}
+                                                        style={{
+                                                            border: !phoneNumberValid && errorMessage.length > 0 ? "2px solid red" : 0,
+                                                        }}
+                                                        name="phoneNumber"
+                                                        country={""}
+                                                        value={phoneNumber}
+                                                        onChange={(value, country, formattedValue) =>
+                                                            handlePhoneNumber(value, country)
+                                                        }
+                                                    />
+                                                )}
+                                                {language === "en" && (
+                                                    <PhoneInput
+                                                        className="phone-input-signup"
+                                                        ref={(el) => (inputRefs.current[5] = el)}
+                                                        style={{
+                                                            border: !phoneNumberValid && errorMessage.length > 0 ? "2px solid red" : 0,
+                                                        }}
+                                                        name="phoneNumber"
+                                                        country={""}
+                                                        value={phoneNumber}
+                                                        onChange={(value, country, formattedValue) =>
+                                                            handlePhoneNumber(value, country)
+                                                        }
+                                                    />
+                                                )}
                                                 {!phoneNumberValid && errorMessage.length > 0 && (
                                                     <p
                                                         style={{
@@ -929,7 +1022,7 @@ const Signup = () => {
                                                         kind="tertiary"
                                                         onClick={handleAccountInformationFormSubmit}
                                                     >
-                                                        Next
+                                                        {t("next")}
                                                     </Button>
                                                 </div>
                                             </div>
@@ -937,43 +1030,42 @@ const Signup = () => {
                                         {activeStep === 4 && (
                                             <div className="account-info-box">
                                                 <div className="account-heading">
-                                                    <p className="heading">Organization
-                                                        information</p>
+                                                    <p className="heading">{t("account-information")}</p>
                                                 </div>
                                                 <TextInput
                                                     type="text"
                                                     name="organizationName"
                                                     className="email-form-input"
                                                     id="Organization Name"
-                                                    labelText="Organization Name *"
+                                                    labelText={`${t("organization-name")} *`}
                                                     value={organizationName}
                                                     onChange={handleOrganizationNameChange}
                                                     invalid={organizationInfoErrors.organizationName}
-                                                    invalidText={"Organization name is required"}
+                                                    invalidText={t("organization-name-required")}
                                                 />
                                                 <TextInput
                                                     type="text"
                                                     name="organizationNumber"
                                                     className="email-form-input"
                                                     id="VAT/GST/Tax Number"
-                                                    labelText="Organization Number *"
+                                                    labelText={`${t("organization-number")} *`}
                                                     value={vatNumber}
                                                     onChange={handleVatNumberChange}
                                                     invalid={organizationInfoErrors.organizationNumber}
-                                                    invalidText={"Organization number is required"}
+                                                    invalidText={t("organization-number-required")}
                                                 />
                                                 <Select
                                                     name="organizationCountry"
                                                     className="country-select"
                                                     value={organizationCountry}
                                                     id="organization-country-ci"
-                                                    labelText="Organization Country or region *"
+                                                    labelText={`${t("organization-region")} *`}
                                                     onChange={handleOrganizationCountryChange}
                                                     invalid={organizationInfoErrors.organizationCountry}
                                                 >
                                                     {COUNTRIES.map((countryObject, countryIndex) => (
                                                         <SelectItem
-                                                            text={countryObject.name}
+                                                            text={t(countryObject.name)}
                                                             value={countryObject.name}
                                                             key={countryIndex}
                                                         />
@@ -987,7 +1079,7 @@ const Signup = () => {
                                                         kind="tertiary"
                                                         onClick={handleOrganizationInformationFormSubmit}
                                                     >
-                                                        Next
+                                                        {t("next")}
                                                     </Button>
                                                 </div>
                                             </div>
@@ -996,8 +1088,7 @@ const Signup = () => {
                                             <>
                                                 <div className="account-info-box">
                                                     <div className="account-heading">
-                                                        <p className="heading">Credit card
-                                                            information</p>
+                                                        <p className="heading">{t("credit-card")}</p>
                                                     </div>
                                                 </div>
                                                 <Frames
@@ -1011,8 +1102,7 @@ const Signup = () => {
                                                         className="card-input-container"
                                                     >
                                                         <div>
-                                                            <p className="input-heading frame-heading" style={{ display: "none" }}>Card
-                                                                details</p>
+                                                            <p className="input-heading frame-heading" style={{ display: "none" }}>{t("card-details")}</p>
                                                         </div>
                                                         <div>
                                                             <TextInputSkeleton className="frame-skeleton-loading" />
@@ -1022,7 +1112,7 @@ const Signup = () => {
                                                         {loadingCardSuccess ? (
                                                             <div className="create-account-loader">
                                                                 <InlineLoading
-                                                                    description={"verifying card details..."}
+                                                                    description={`${t("verifying-card-details")} ...`}
                                                                     className="submit-button-loading"
                                                                 />
                                                             </div>
@@ -1032,7 +1122,7 @@ const Signup = () => {
                                                                     kind="tertiary"
                                                                     onClick={handleVerifyCardDetails}
                                                                 >
-                                                                    Verify card
+                                                                    {t("verify-card")}
                                                                 </Button>
                                                             </div>
                                                         )}
@@ -1044,20 +1134,20 @@ const Signup = () => {
                                             <>
                                                 <div className="account-info-box">
                                                     <div className="account-heading">
-                                                        <p className="heading">Account notice</p>
+                                                        <p className="heading">{t("account-notice")}</p>
                                                     </div>
 
                                                     <Select
                                                         className="country-select"
                                                         value={dataSovereignty}
                                                         id="data-sovereignty"
-                                                        labelText="Data Sovereignty *"
+                                                        labelText={`${t("data-sovereignty")} *`}
                                                         onChange={handleDataSovereigntyChange}
                                                         disabled={!isAgreementSigned || loadingSuccess}
                                                     >
                                                         {Object.keys(DATA_SOVEREIGNTY_REGION_NAMES).map((regionCode, index) => (
                                                             <SelectItem
-                                                                text={DATA_SOVEREIGNTY_REGION_NAMES[regionCode]}
+                                                                text={t(regionCode)}
                                                                 value={regionCode}
                                                                 key={index}
                                                             />
@@ -1066,9 +1156,7 @@ const Signup = () => {
 
                                                     <div>
                                                         <p className="account-notice-text">
-                                                            Bynar may use my contact data to keep me
-                                                            informed of
-                                                            products, services and offerings:
+                                                            {t("account-notice-text1")}
                                                         </p>
                                                     </div>
                                                     <div style={{
@@ -1076,7 +1164,7 @@ const Signup = () => {
                                                         alignItems: "center"
                                                     }}>
                                                         <Checkbox
-                                                            labelText="by email"
+                                                            labelText={t("by-email")}
                                                             checked={isByEmailChecked}
                                                             id="by-email"
                                                             onChange={(_, { checked }) => {
@@ -1087,37 +1175,26 @@ const Signup = () => {
                                                     </div>
                                                     <div>
                                                         <p className="account-notice-text">
-                                                            You can withdraw your marketing consent
-                                                            at any time by
-                                                            submitting an{" "}
-                                                            <Link href="/signup">opt-out
-                                                                request</Link>. Also you
-                                                            may unsubscribe from receiving marketing
-                                                            emails by
-                                                            clicking the unsubscribe link in each
-                                                            email.
+                                                            {t("account-notice-text2")}{" "}
+                                                            <Link href="/signup">{t("opt-out")}
+                                                                request</Link> {t("account-notice-text3")}
                                                         </p>
                                                     </div>
                                                     <div>
                                                         <p className="account-notice-text">
-                                                            More information on our processing can
-                                                            be found in the{" "}
-                                                            <Link href="/signup">Bynar Privacy
-                                                                Statement.</Link>{" "}
-                                                            By submitting this form, I acknowledge
-                                                            that I have
-                                                            read and understand the Bynar Privacy
-                                                            Statement.
+                                                            {t("account-notice-text4")}{" "}
+                                                            <Link href="/signup"> {t("bynar-privacy")}
+                                                                </Link>{" "}
+                                                            {t("account-notice-text5")}
                                                         </p>
                                                     </div>
                                                     <div>
                                                         <p className="account-notice-text">
                                                             <Checkbox
                                                                 labelText={<>
-                                                                    I accept the product{" "}
-                                                                    <Link href="/signup">Terms and
-                                                                        Conditions</Link> of
-                                                                    this registration form.
+                                                                    {t("accept-product")}{" "}
+                                                                    <Link href="/signup">{t("terms-and")}
+                                                                    </Link> {t("registration-form")}
                                                                 </>}
                                                                 checked={isAgreementSigned}
                                                                 disabled={loadingSuccess}
@@ -1132,7 +1209,7 @@ const Signup = () => {
                                                         <>
                                                             <div style={{ marginTop: "32px" }}>
                                                                 <InlineLoading
-                                                                    description="Creating environment. Please wait..." />
+                                                                    description={`${t("creating-environment")} ...`} />
                                                             </div>
                                                         </>
                                                     ) : (
@@ -1142,7 +1219,7 @@ const Signup = () => {
                                                                 onClick={handleCreateEnvironment}
                                                                 disabled={!isAgreementSigned}
                                                             >
-                                                                Create environment
+                                                                {t("create-environment")}
                                                             </Button>
                                                         </div>
                                                     )}
