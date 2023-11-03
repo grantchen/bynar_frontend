@@ -131,14 +131,6 @@ const Signup = () => {
         setLanguage(newLanguage);
     };
 
-    let localizationlanguage = "en"
-    if (language === "es") {
-        localizationlanguage="es"
-    } else if (language === "fr") {
-        localizationlanguage="fr"
-    } else if (language === "de") {
-        localizationlanguage="de"
-    }
     const handleAddressLine1 = (e) => {
         const { name, value } = e.target;
         setAddressLine1(value);
@@ -280,10 +272,21 @@ const Signup = () => {
                 } else if (response.status === 500) {
                     setIsError(true);
                     setActiveStep(1);
+                    let err = res.error
+                    if (err.includes("timestamp has expired")) {
+                        err = t("timestamp-has-expired")
+                    } else if (err.includes("has already exist")) {
+                        const parts = err.split(' ');
+                        const emailAddress = parts[1];
+                        err = t("email-label") + " "+ emailAddress + " "+ t("has-already-exist")
+                    } else if (err.includes("send registration email fail")) {
+                        err = t("send-registration-email-fail")
+                    } else if (err.includes("check user exists fail")) {
+                        err = t("check-user-exists-fail")
+                    }
                     setErrorNotification({
                         title:
-                            res.error === "username already exist" || "email is not valid"
-                                ? res.error
+                            res.error === "username already exist" || "email is not valid" ? err
                                 : t("handle-signup-request"),
                         status: "error",
                     });
@@ -432,7 +435,7 @@ const Signup = () => {
                     } else if (err.includes("has already exist")) {
                         const parts = err.split(' ');
                         const emailAddress = parts[1];
-                        err = t("email-label")+ emailAddress + t("has-already-exist")
+                        err = t("email-label") + " "+ emailAddress + " "+ t("has-already-exist")
                     } else if (err.includes("send registration email fail")) {
                         err = t("send-registration-email-fail")
                     } else if (err.includes("check user exists fail")) {
@@ -925,7 +928,7 @@ const Signup = () => {
                                                 <div style={{ marginTop: "6px" }}>
                                                     <p className="input-heading">{`${t("phone-number-label")} *`}</p>
                                                 </div>
-                                                {localizationlanguage === "es" && (
+                                                {language === "es" && (
                                                     <PhoneInput
                                                         className="phone-input-signup"
                                                         localization={es}
@@ -941,7 +944,7 @@ const Signup = () => {
                                                         }
                                                     />
                                                 )}
-                                                {localizationlanguage === "de" && (
+                                                {language === "de" && (
                                                     <PhoneInput
                                                         className="phone-input-signup"
                                                         localization={de}
@@ -957,7 +960,7 @@ const Signup = () => {
                                                         }
                                                     />
                                                 )}
-                                                {localizationlanguage === "fr" && (
+                                                {language === "fr" && (
                                                     <PhoneInput
                                                         className="phone-input-signup"
                                                         localization={fr}
@@ -973,7 +976,7 @@ const Signup = () => {
                                                         }
                                                     />
                                                 )}
-                                                {localizationlanguage === "en" && (
+                                                {language === "en" && (
                                                     <PhoneInput
                                                         className="phone-input-signup"
                                                         ref={(el) => (inputRefs.current[5] = el)}
