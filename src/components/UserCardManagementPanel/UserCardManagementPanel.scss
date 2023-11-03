@@ -14,13 +14,17 @@
         justify-content: space-between;
 
         .card-logo {
-            width: 120px;
+            width: 125px;
 
             .card-icon {
                 vertical-align: middle;
-                height: 1.5rem;
+                width: 26px;
                 position: relative;
                 top: -0.1rem;
+            }
+
+            .schema {
+                margin-left: 4px;
             }
         }
 
@@ -32,7 +36,6 @@
             align-items: center;
 
             .card-type {
-                width: 120px;
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
