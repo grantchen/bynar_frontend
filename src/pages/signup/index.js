@@ -1127,7 +1127,7 @@ const Signup = () => {
                                                                 onClick={handleCreateEnvironment}
                                                                 disabled={!isAgreementSigned}
                                                             >
-                                                                Create environment
+                                                                {t("create-environment")}
                                                             </Button>
                                                         </div>
                                                     )}

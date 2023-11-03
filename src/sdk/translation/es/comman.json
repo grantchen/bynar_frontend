@@ -208,12 +208,12 @@
     "organization-region": "País o región de la organización",
     "verifying-card-details": "Verificación de detalles de la tarjeta",
     "data-sovereignty": "Soberanía de datos",
-    "account-notice-text1": "Bynar puede utilizar mis datos de contacto para mantenerme informado sobre productos, servicios y ofertas:",
-    "account-notice-text2": "Puede retirar su consentimiento de marketing en cualquier momento enviando un",
-    "account-notice-text3": ". También puede darse de baja en la recepción de correos electrónicos de marketing haciendo clic en el enlace de cancelación en cada correo electrónico.",
-    "account-notice-text4": "Puede encontrar más información sobre nuestro procesamiento en la",
-    "account-notice-text5": "Al enviar este formulario, reconozco que he leído y comprendido la Declaración de Privacidad de Bynar.",
-    "account-notice-text6": ". También puede darse de baja en la recepción de correos electrónicos de marketing haciendo clic en el enlace de cancelación en cada correo electrónico.",
+    "account-notice-text1": "Bynar puede utilizar mis datos de contacto para \n mantenerme informado sobre productos, servicios y ofertas:",
+    "account-notice-text2": "Puede retirar su consentimiento \n de marketing en cualquier momento enviando un",
+    "account-notice-text3": ". También puede darse de baja \n en la recepción de correos electrónicos de marketing haciendo clic  \n en el enlace de cancelación en cada correo \n electrónico.",
+    "account-notice-text4": "Puede encontrar más información \n sobre nuestro procesamiento en la",
+    "account-notice-text5": "Al enviar este formulario, \n reconozco que he leído y comprendido \n la Declaración de Privacidad de Bynar.",
+    "account-notice-text6": ". También puede darse de baja en la recepción \n de correos electrónicos de marketing haciendo clic \n en el enlace de cancelación en \n cada correo electrónico.",
     "opt-out": "Solicitud de exclusión",
     "bynar-privacy": "Declaración de privacidad de Bynar",
     "accept-product": "Acepto el producto",
@@ -221,5 +221,6 @@
     "registration-form": "de este formulario de registro.",
     "creating-environment": "Creando entorno. Por favor, espere",
     "credit-card": "Información de la tarjeta de crédito",
-    "verify-card": "Verificar tarjeta"
+    "verify-card": "Verificar tarjeta",
+    "create-environment": "Crear entorno"
 }

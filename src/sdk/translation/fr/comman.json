@@ -221,5 +221,6 @@
     "registration-form": "de ce formulaire d'inscription.",
     "creating-environment": "Création de l'environnement. Veuillez patienter",
     "credit-card": "Informations de carte de crédit",
-    "verify-card": "Vérification de la carte"
+    "verify-card": "Vérification de la carte",
+    "create-environment": "Créer un environnement"
 }

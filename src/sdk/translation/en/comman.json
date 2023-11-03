@@ -221,5 +221,6 @@
     "registration-form": "of this registration form.",
     "creating-environment":"Creating environment. Please wait",
     "credit-card": "Credit card information",
-    "verify-card": "Verify card"
+    "verify-card": "Verify card",
+    "create-environment": "Create environment"
 }
