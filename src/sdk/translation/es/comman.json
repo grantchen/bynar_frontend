@@ -497,6 +497,8 @@
     "resend-login-email": "Reenviar correo de inicio de sesión",
     "resending-login-link": "Reenviando enlace de inicio de sesión",
     "organization-account": "Cuenta de organización",
+    "organization-account-information": "Información de la cuenta de la organización",
+    "delete-account": "Borrar cuenta",
     "suggested-format": "Formato sugerido (nombre@empresa.com)",
     "no-user-found": "usuario no encontrado",
     "email-not-signed-up": "correo electrónico no registrado",

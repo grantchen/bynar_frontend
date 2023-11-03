@@ -9,10 +9,12 @@ import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-menu-it
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-overlay.js';
 import "./CustomWideMenu.scss";
 import { useTranslation } from "react-i18next";
+import { useOrganizationAccount } from "../../sdk/context/OrganizationAccountManagementContext";
 
 export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
     const { goToTab } = useContext(TabContext);
     const { openCardManagementPanel } = useCardManagement();
+    const { openOrganizationAccountPanel } = useOrganizationAccount();
 
     const [activeTitle, setActiveTitle] = useState(jsonData.mastheadNav.links[0]?.title);
     const handleClick = (title) => {
@@ -26,6 +28,19 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
     const isMobile = useMobile();
     const { t } = useTranslation();
     const { hasPermission } = useAuth();
+
+    const openSidePanel = (menuItem) => {
+        switch (menuItem.sidePanel) {
+            case "UserCardManagementPanel":
+                openCardManagementPanel()
+                break
+            case "OrganizationAccountPanel":
+                openOrganizationAccountPanel()
+                break
+            default:
+                break
+        }
+    }
 
     useEffect(() => {
         if (!isMobile) {
@@ -258,13 +273,13 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                                                                                 </a>
                                                                                             </div>
                                                                                         )
-                                                                                    } else if (item.sidePanel === "UserCardManagementPanel") {
+                                                                                    } else if (item.sidePanel) {
                                                                                         return (
                                                                                             <div
                                                                                                 key={item.title}
                                                                                                 className="link">
                                                                                                 <a onClick={() => {
-                                                                                                    openCardManagementPanel()
+                                                                                                    openSidePanel(item)
                                                                                                     onClickSideNavExpand()
                                                                                                 }}
                                                                                                 >

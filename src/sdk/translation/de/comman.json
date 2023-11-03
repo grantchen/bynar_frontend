@@ -497,6 +497,8 @@
     "resend-login-email": "E-Mail zum erneuten Senden senden",
     "resending-login-link": "Sende den Anmelde-Link erneut",
     "organization-account": "Organisationskonto",
+    "organization-account-information": "Informationen zum Organisationskonto",
+    "delete-account": "Konto löschen",
     "suggested-format": "Vorgeschlagenes Format (name@company.com)",
     "no-user-found": "Benutzer nicht gefunden",
     "email-not-signed-up": "E-Mail nicht registriert",

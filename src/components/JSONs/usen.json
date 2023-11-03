@@ -3612,6 +3612,19 @@
                 }
               },
               {
+                "title": "organization-account",
+                "titleEnglish": "",
+                "url": "?openOrganizationAccountPanel=true",
+                "sidePanel": "OrganizationAccountPanel",
+                "tabType": "",
+                "permission": "",
+                "megapanelContent": {
+                  "headingTitle": "",
+                  "headingUrl": "",
+                  "description": "Organization Account Information"
+                }
+              },
+              {
                 "title": "View all products",
                 "titleEnglish": "View all products",
                 "url": "https://www.ibm.com/products?lnk=hpmps_buall",

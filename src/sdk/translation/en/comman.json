@@ -497,6 +497,8 @@
     "resend-login-email": "Resend login email",
     "resending-login-link": "resending login link",
     "organization-account": "Organization account",
+    "organization-account-information": "Organization account information",
+    "delete-account": "Delete Account",
     "suggested-format": "Suggested format (name@company.com)",
     "no-user-found": "no user found",
     "email-not-signed-up": "email not signed up",
