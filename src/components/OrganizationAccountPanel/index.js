@@ -66,7 +66,7 @@ export const OrganizationAccountPanel = ({open}) => {
         setFullName(value);
         delete errors.fullName;
         if (value.trim() === "") {
-            errors.fullName = `${t("full-name-label")} ${t("is required")}`;
+            errors.fullName = t("full-name-required")
         }
         setErrors(errors);
     };
@@ -75,11 +75,6 @@ export const OrganizationAccountPanel = ({open}) => {
         setServerErrorNotification({});
         setServerNotification(false);
         setCountry(data.selectedItem);
-        delete errors.country
-        if (data.selectedItem.trim() === "") {
-            errors.country = `${t("country-label")} ${t("is required")}`;
-        }
-        setErrors(errors);
     }
 
     const handleAddressLineChange = (e) => {
@@ -89,7 +84,7 @@ export const OrganizationAccountPanel = ({open}) => {
         setAddressLine(value);
         delete errors.addressLine;
         if (value.trim() === "") {
-            errors.addressLine = `${t("address-line1")} ${t("is required")}`;
+            errors.addressLine = t("address-line1-validation");
         }
         setErrors(errors);
     }
@@ -108,7 +103,7 @@ export const OrganizationAccountPanel = ({open}) => {
         setCity(value);
         delete errors.city;
         if (value.trim() === "") {
-            errors.city = `${t("city")} ${t("is required")}`;
+            errors.city = t("city-required");
         }
         setErrors(errors);
     }
@@ -120,7 +115,7 @@ export const OrganizationAccountPanel = ({open}) => {
         setState(value);
         delete errors.state;
         if (value.trim() === "") {
-            errors.state = `${t("state")} ${t("is required")}`;
+            errors.state = t("state-required");
         }
         setErrors(errors);
     }
@@ -132,7 +127,7 @@ export const OrganizationAccountPanel = ({open}) => {
         setPostalCode(value);
         delete errors.postalCode;
         if (value.trim() === "") {
-            errors.postalCode = `${t("postal-code")} ${t("is required")}`;
+            errors.postalCode = t("postal-code-required");
         }
         setErrors(errors);
     }
@@ -149,7 +144,7 @@ export const OrganizationAccountPanel = ({open}) => {
         setOrganizationName(value);
         delete errors.organizationName;
         if (value.trim() === "") {
-            errors.organizationName = `${t("organization-name")} ${t("is required")}`;
+            errors.organizationName = t("organization-name-required");
         }
         setErrors(errors);
     }
@@ -161,7 +156,7 @@ export const OrganizationAccountPanel = ({open}) => {
         setVatNumber(value);
         delete errors.vatNumber;
         if (value.trim() === "") {
-            errors.vatNumber = `${t("organization-number")} ${t("is required")}`;
+            errors.vatNumber = t("organization-number-required");
         }
         setErrors(errors);
     }
@@ -170,18 +165,13 @@ export const OrganizationAccountPanel = ({open}) => {
         setServerErrorNotification({});
         setServerNotification(false);
         setOrganizationCountry(data.selectedItem);
-        delete errors.organizationCountry
-        if (data.selectedItem.trim() === "") {
-            errors.organizationCountry = `${t("organization-country-or-region")} ${t("is required")}`;
-        }
-        setErrors(errors);
     }
 
 
     const validateEmail = (email) => {
         delete errors.email;
         if (email.trim() === "") {
-            errors.email = `${t("email-label")} ${t("is required")}`;
+            errors.email = t("email-required");
         } else if (email.length > 0) {
             if (!checkEmailValid(email.trim())) {
                 errors.email = t("email-format-error")
@@ -616,7 +606,7 @@ export const OrganizationAccountPanel = ({open}) => {
                                     <Dropdown
                                         id="organizationCountry"
                                         ref={(el) => (inputRefs.current[11] = el)}
-                                        titleText={`${t("organization-country-or-region")} *`}
+                                        titleText={`${t("organization-region")} *`}
                                         initialSelectedItem={''}
                                         items={COUNTRIES.map(obj => obj.name)}
                                         selectedItem={organizationCountry}
