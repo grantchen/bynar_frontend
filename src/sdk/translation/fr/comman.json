@@ -499,6 +499,7 @@
     "organization-account": "Compte d'organisation",
     "organization-account-information": "Informations sur le compte de l'organisation",
     "delete-account": "Supprimer le compte",
+    "delete-organization-account-modal-heading-2": "supprimera définitivement le compte (locataire). Cette action ne peut pas être annulée.",
     "suggested-format": "Format suggéré (nom@entreprise.com)",
     "no-user-found": "utilisateur non trouvé",
     "email-not-signed-up": "e-mail non enregistré",

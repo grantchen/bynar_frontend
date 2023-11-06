@@ -499,6 +499,7 @@
     "organization-account": "Cuenta de organización",
     "organization-account-information": "Información de la cuenta de la organización",
     "delete-account": "Borrar cuenta",
+    "delete-organization-account-modal-heading-2": "eliminará permanentemente la cuenta (inquilino). Esta acción no se puede deshacer.",
     "suggested-format": "Formato sugerido (nombre@empresa.com)",
     "no-user-found": "usuario no encontrado",
     "email-not-signed-up": "correo electrónico no registrado",

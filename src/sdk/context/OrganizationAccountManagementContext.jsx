@@ -6,7 +6,7 @@ import React, {
     useCallback,
     useEffect,
 } from "react";
-import {useNavigate, useSearchParams} from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 import {useAuth} from "../AuthContext";
 import {useTranslation} from "react-i18next";
 import OrganizationAccountPanel from "../../components/OrganizationAccountPanel";
@@ -22,7 +22,6 @@ const CONSTANTS = {
 const OrganizationAccountProvider = ({children}) => {
     const {user, authFetch} = useAuth();
     const {t} = useTranslation();
-    const navigate = useNavigate();
 
     /**render aware states */
     const [loading, setLoading] = useState(false);
@@ -65,10 +64,8 @@ const OrganizationAccountProvider = ({children}) => {
                 return;
             }
             setDeleteModalProps({
-                body: `${t(
-                    "delete-modal-heading-1"
-                )} ${confirmText} ${t("delete-modal-heading-2")}`,
-                className: "remove-modal-test",
+                body: `${t("delete-modal-heading-1")} 
+                ${t("delete-organization-account-modal-heading-2")}`,
                 title: t("delete-modal-title"),
                 iconDescription: t("delete-modal-icon"),
                 inputInvalidText: t("delete-modal-invalid-input-text"),
@@ -79,13 +76,12 @@ const OrganizationAccountProvider = ({children}) => {
                 open: true,
                 onClose: () => {
                     setDeleteModalProps(null);
-                    navigate(-1);
                 },
                 primaryButtonText: t("delete"),
                 primaryButtonDisabled: false,
                 resourceName: `${confirmText}`,
                 secondaryButtonText: t("close"),
-                label: `${t("delete")} ${confirmText}`,
+                label: t("delete-account"),
                 textConfirmation: true,
                 onRequestSubmit: async () => {
                     try {

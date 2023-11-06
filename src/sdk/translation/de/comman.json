@@ -499,6 +499,7 @@
     "organization-account": "Organisationskonto",
     "organization-account-information": "Informationen zum Organisationskonto",
     "delete-account": "Konto löschen",
+    "delete-organization-account-modal-heading-2": "löscht das Konto (den Mandanten) dauerhaft. Diese Aktion kann nicht rückgängig gemacht werden.",
     "suggested-format": "Vorgeschlagenes Format (name@company.com)",
     "no-user-found": "Benutzer nicht gefunden",
     "email-not-signed-up": "E-Mail nicht registriert",
