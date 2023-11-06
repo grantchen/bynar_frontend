@@ -27,6 +27,7 @@ const Home = () => {
     let step = 5
     let button = 1
     let buttonWidth = '380px'
+    let isShow = true
     if (windowWidth >= 672 && windowWidth <= 768) {
         mdValue1 = 0;
         mdValue2 = 8;
@@ -43,6 +44,9 @@ const Home = () => {
     if (windowWidth < 672 ) {
         button = 0
     }
+    if (windowWidth < 768 ) {
+        isShow = false
+    }
 
     if (windowWidth < 400 ) {
         buttonWidth = '300px'
@@ -54,7 +58,7 @@ const Home = () => {
                 className={"auth-login-container"}
             >
                 <Grid className={"auth-login-grid"}>
-                    {step ===5 && (
+                    {step ===5 && isShow && (
                         <Column sm={0} md={mdValue1} lg={10} className={"auth-login-column"} style={{
                             backgroundImage: `url(${ backgroundImage })`,
                             backgroundSize: 'cover',
@@ -78,7 +82,7 @@ const Home = () => {
                             </div>
                         </Column>
                     )}
-                    {step ===3 && (
+                    {step ===3 && isShow && (
                         <Column sm={0} md={mdValue1} lg={10} className={"auth-login-column"} style={{
                             backgroundImage: `url(${ backgroundImage })`,
                             backgroundSize: 'cover',
@@ -102,7 +106,7 @@ const Home = () => {
                         </Column>
                     )}
 
-                    {step ===2 && (
+                    {step ===2 && isShow && (
                         <Column sm={0} md={mdValue1} lg={10} className={"auth-login-column"} style={{
                             backgroundImage: `url(${ backgroundImage })`,
                             backgroundSize: 'cover',
@@ -126,7 +130,7 @@ const Home = () => {
                         </Column>
                     )}
 
-                    {step ===1 && (
+                    {step ===1 && isShow && (
                         <Column sm={0} md={mdValue1} lg={10} className={"auth-login-column"} style={{
                             backgroundImage: `url(${ backgroundImage })`,
                             backgroundSize: 'cover',
