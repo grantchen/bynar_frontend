@@ -43,7 +43,8 @@ const SignHeaderSelect = ({ onLanguageChange }) => {
             </HeaderName>
             <div className="header-right">
                 <Dropdown
-                    id="language-ci"
+                    id="default"
+                    type="inline"
                     initialSelectedItem={language}
                     items={languagesItems}
                     selectedItem={language}

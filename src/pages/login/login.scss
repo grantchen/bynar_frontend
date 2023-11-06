@@ -48,10 +48,15 @@
       align-items: center;
     }
     .fields-container {
-      display: flex;
-      flex-direction: row;
       margin-top: 15px;
       width: 380px;
+      @media (min-width: 672px) {
+        display: flex;
+        flex-direction: row;
+      }
+      @media (max-width: 400px) {
+        width: 300px;
+      }
     }
   }
   .bx--btn--tertiary {
