@@ -21,7 +21,7 @@ pkg.component.SidePanel = true;
 
 export const OrganizationAccountPanel = ({open}) => {
     const {t} = useTranslation();
-    const {closeOrganizationAccountPanel, openDeleteModal} = useOrganizationAccount();
+    const {closeOrganizationAccountPanel, openDeleteModal, notification, setNotification} = useOrganizationAccount();
 
     const [email, setEmail] = useState("");
     const [fullName, setFullName] = useState("");
@@ -36,9 +36,6 @@ export const OrganizationAccountPanel = ({open}) => {
     const [vatNumber, setVatNumber] = useState("");
     const [organizationCountry, setOrganizationCountry] = useState("");
 
-    const [serverErrorNotification, setServerErrorNotification] = useState({});
-    const [serverNotification, setServerNotification] = useState(false);
-
     const {themePreference} = useThemePreference();
     const {refreshPostSignIn, getUser, authFetch} = useAuth();
     const phoneUtil = PhoneNumberUtil.getInstance();
@@ -52,16 +49,14 @@ export const OrganizationAccountPanel = ({open}) => {
 
     /* Function to set state, check email address validation when email address is changed  */
     const handleEmailChange = (value) => {
-        setServerErrorNotification({});
-        setServerNotification(false);
+        setNotification({});
         setEmail(value);
         validateEmail(value);
     };
 
 
     const handleFullNameChange = (e) => {
-        setServerErrorNotification({});
-        setServerNotification(false);
+        setNotification({});
         const {value} = e.target;
         setFullName(value);
         delete errors.fullName;
@@ -72,14 +67,12 @@ export const OrganizationAccountPanel = ({open}) => {
     };
 
     const handleCountryChange = (data) => {
-        setServerErrorNotification({});
-        setServerNotification(false);
+        setNotification({});
         setCountry(data.selectedItem);
     }
 
     const handleAddressLineChange = (e) => {
-        setServerErrorNotification({});
-        setServerNotification(false);
+        setNotification({});
         const {value} = e.target;
         setAddressLine(value);
         delete errors.addressLine;
@@ -90,15 +83,13 @@ export const OrganizationAccountPanel = ({open}) => {
     }
 
     const handleAddressLine2Change = (e) => {
-        setServerErrorNotification({});
-        setServerNotification(false);
+        setNotification({});
         const {value} = e.target;
         setAddressLine2(value);
     }
 
     const handleCityChange = (e) => {
-        setServerErrorNotification({});
-        setServerNotification(false);
+        setNotification({});
         const {value} = e.target;
         setCity(value);
         delete errors.city;
@@ -109,8 +100,7 @@ export const OrganizationAccountPanel = ({open}) => {
     }
 
     const handleStateChange = (e) => {
-        setServerErrorNotification({});
-        setServerNotification(false);
+        setNotification({});
         const {value} = e.target;
         setState(value);
         delete errors.state;
@@ -121,8 +111,7 @@ export const OrganizationAccountPanel = ({open}) => {
     }
 
     const handlePostalCodeChange = (e) => {
-        setServerErrorNotification({});
-        setServerNotification(false);
+        setNotification({});
         const {value} = e.target;
         setPostalCode(value);
         delete errors.postalCode;
@@ -138,8 +127,7 @@ export const OrganizationAccountPanel = ({open}) => {
     }
 
     const handleOrganizationNameChange = (e) => {
-        setServerErrorNotification({});
-        setServerNotification(false);
+        setNotification({});
         const {value} = e.target;
         setOrganizationName(value);
         delete errors.organizationName;
@@ -150,8 +138,7 @@ export const OrganizationAccountPanel = ({open}) => {
     }
 
     const handleVatNumberChange = (e) => {
-        setServerErrorNotification({});
-        setServerNotification(false);
+        setNotification({});
         const {value} = e.target;
         setVatNumber(value);
         delete errors.vatNumber;
@@ -162,8 +149,7 @@ export const OrganizationAccountPanel = ({open}) => {
     }
 
     const handleOrganizationCountryChange = (data) => {
-        setServerErrorNotification({});
-        setServerNotification(false);
+        setNotification({});
         setOrganizationCountry(data.selectedItem);
     }
 
@@ -217,15 +203,13 @@ export const OrganizationAccountPanel = ({open}) => {
     }
 
     const handleClose = () => {
-        setServerErrorNotification({});
-        setServerNotification(false);
+        setNotification({});
         setErrors({});
         closeOrganizationAccountPanel()
     };
 
     const handleUpdateOrganizationAccount = () => {
-        setServerErrorNotification({});
-        setServerNotification(false);
+        setNotification({});
 
         const fetchData = async () => {
             try {
@@ -256,18 +240,16 @@ export const OrganizationAccountPanel = ({open}) => {
                     await refreshPostSignIn();
                 } else {
                     setDisable(false)
-                    setServerErrorNotification({
-                        title: res.error,
-                        status: "error",
+                    setNotification({
+                        message: res.error,
+                        type: "error",
                     });
-                    setServerNotification(true)
                 }
             } catch (e) {
-                setServerErrorNotification({
-                    title: 'error occurred while update organization account',
-                    status: "error",
+                setNotification({
+                    message: 'error occurred while update organization account',
+                    type: "error",
                 });
-                setServerNotification(true)
                 setDisable(false)
             }
         };
@@ -313,8 +295,7 @@ export const OrganizationAccountPanel = ({open}) => {
     useEffect(() => {
         const getOrganizationAccount = async () => {
             try {
-                setServerErrorNotification({});
-                setServerNotification(false);
+                setNotification({});
                 setDataLoading(true);
                 const response = await authFetch(`${BaseURL}/organization-account`, {
                     method: "GET",
@@ -335,11 +316,10 @@ export const OrganizationAccountPanel = ({open}) => {
                     setOrganizationCountry(res?.organizationCountry);
                     setDefaultData(res)
                 } else {
-                    setServerErrorNotification({
-                        title: res.error,
-                        status: "error",
+                    setNotification({
+                        message: res.error,
+                        type: "error",
                     });
-                    setServerNotification(true)
                 }
             } catch (e) {
             } finally {
@@ -387,19 +367,18 @@ export const OrganizationAccountPanel = ({open}) => {
                     ]}
                 >
                     <div className={"story__body-content"}>
-                        {serverNotification && (
+                        {!!notification?.message && (
                             <InlineNotification
                                 className="error-notification-box"
                                 iconDescription="Close Notification"
-                                subtitle={serverErrorNotification?.title}
+                                subtitle={notification?.message}
                                 onCloseButtonClick={() => {
-                                    setServerErrorNotification({});
-                                    setServerNotification(false);
+                                    setNotification({});
                                 }}
                                 timeout={0}
                                 title={""}
-                                kind={serverErrorNotification?.status}
-                            />
+                                kind={notification?.type}
+                                />
                         )}
 
                         <div>

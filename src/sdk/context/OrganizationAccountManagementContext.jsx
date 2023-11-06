@@ -89,10 +89,16 @@ const OrganizationAccountProvider = ({children}) => {
                         const response = await authFetch(`${BaseURL}/delete-organization-account`, {
                             method: "DELETE",
                         });
+                        const res = await response.json()
                         if (response.ok) {
                             setNotification({
                                 type: "success",
                                 message: t("user-deleted-successfully"),
+                            });
+                        } else if (response.status === 500) {
+                            setNotification({
+                                type: "error",
+                                message: res.error,
                             });
                         } else {
                             throw "error";
@@ -100,7 +106,7 @@ const OrganizationAccountProvider = ({children}) => {
                     } catch (error) {
                         setNotification({
                             type: "error",
-                            message: t("error-deleting-user"),
+                            message: t("error-deleting-account"),
                         });
                     } finally {
                         setLoading(false);
@@ -150,7 +156,7 @@ const OrganizationAccountProvider = ({children}) => {
                     <OrganizationAccountPanel open={isSidePanelOpen}/>
                 )}
             </OrganizationAccountContext.Provider>
-            {deleteModalProps && <RemoveModalWithLoading deleteModalProps={deleteModalProps} loading={loading} />}
+            {deleteModalProps && <RemoveModalWithLoading deleteModalProps={deleteModalProps} loading={loading}/>}
         </>
     );
 };
