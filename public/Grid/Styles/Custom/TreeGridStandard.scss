@@ -37,6 +37,7 @@
 
 .TSBodyMid .TSDataRow .TSCellBase:nth-last-child(2) {
   border-right: 0px solid #CDD8E4;
+  border-image: linear-gradient(270deg, #ffffff 0%, #CDD8E4 100%) 0 0 1 0
 }
 
 .TSHeadLeft, .TSHeadMid, .TSHeadRight {
@@ -46,16 +47,7 @@
 .TSMainTable {
   border-bottom: 0px solid #CDD8E4;
 }
-.TSBodyLeft .TSCellBase {
-  border-image: linear-gradient(90deg, #ffffff 0%, #CDD8E4 100%) 0 0 1 0
-}
 
-.TSHeadMid .TSHeaderRow .TSCellHeader{
-  border-image: linear-gradient(#ffffff 0%, #CDD8E4 100%) 0 1 0 0
-}
-.TSHeadLeft .TSCellBase {
-  border-image: linear-gradient(90deg, #ffffff 0%, #CDD8E4 100%) 0 0 1 0
-}
 
 .TSHeadLeft {
   border-image: linear-gradient(90deg, #ffffff 0%, #CDD8E4 100%) 0 0 1 0
@@ -74,3 +66,19 @@
   border-top: 1px solid #CDD8E4;
 }
 
+.TSBodyLeft .TSDataRow :nth-child(2) {
+  border-image: linear-gradient(90deg, #ffffff 0%, #CDD8E4 100%) 0 1 1 0
+}
+
+.TSHeadLeft .TSHeaderRow :nth-child(2) {
+  border-image: linear-gradient(90deg, #ffffff 0%, #CDD8E4 100%) 0 0 1 0
+}
+
+.TSHeadMid .TSSectionScroll .TSSection tbody tr:nth-child(2) {
+  .TSCellBase{
+    border-image: linear-gradient(180deg,#ffffff 0%, #6F7F94 100%) 0 1 1 0;
+  }
+}
+.TSHeadMid .TSHeaderRow .TSCellBase:nth-last-child(2) {
+  border-image: linear-gradient(180deg,#ffffff 0%, #6F7F94 100%) 0 1 1 0;
+}
