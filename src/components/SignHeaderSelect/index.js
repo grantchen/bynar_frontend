@@ -25,6 +25,11 @@ const SignHeaderSelect = ({ onLanguageChange }) => {
             onLanguageChange(selectedLanguage.selectedItem);
         }
     };
+    const customMenuStyle = {
+        maxWidth: '120px', // 设置下拉框的最小宽度
+        width: '120px',
+        // 其他样式属性
+    };
     return (
         <Header aria-label="Bynar">
             <HeaderName href="/" prefix="">
@@ -43,12 +48,14 @@ const SignHeaderSelect = ({ onLanguageChange }) => {
             </HeaderName>
             <div className="header-right">
                 <Dropdown
-                    id="language-ci"
+                    id="default"
+                    type="inline"
                     initialSelectedItem={language}
                     items={languagesItems}
                     selectedItem={language}
                     itemToString={(item) => (item ? t(item) : '')}
                     onChange={(selectedItem) => handleLanguageChange(selectedItem)}
+                    menuProps={{ style: customMenuStyle }} // 设置下拉框样式
                 />
             </div>
         </Header>
