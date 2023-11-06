@@ -20,7 +20,7 @@ const CONSTANTS = {
 };
 
 const OrganizationAccountProvider = ({children}) => {
-    const {user, authFetch} = useAuth();
+    const {tokenClaims, authFetch} = useAuth();
     const {t} = useTranslation();
 
     /**render aware states */
@@ -44,8 +44,8 @@ const OrganizationAccountProvider = ({children}) => {
 
 
     const isOrganizationAccountAllowed = useMemo(
-        () => user,
-        [user]
+        () => tokenClaims?.organization_account === true,
+        [tokenClaims?.organization_account],
     );
 
     const closeOrganizationAccountPanel = useCallback(() => {

@@ -14,7 +14,7 @@ import { useOrganizationAccount } from "../../sdk/context/OrganizationAccountMan
 export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
     const { goToTab } = useContext(TabContext);
     const { openCardManagementPanel } = useCardManagement();
-    const { openOrganizationAccountPanel } = useOrganizationAccount();
+    const { openOrganizationAccountPanel, isOrganizationAccountAllowed } = useOrganizationAccount();
 
     const [activeTitle, setActiveTitle] = useState(jsonData.mastheadNav.links[0]?.title);
     const handleClick = (title) => {
@@ -40,6 +40,15 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
             default:
                 break
         }
+    }
+
+    // check if the menu item has permission to be displayed
+    const hasLinkPermission = (menuItem) => {
+        if (menuItem.sidePanel === "OrganizationAccountPanel") {
+            return isOrganizationAccountAllowed
+        }
+
+        return !menuItem.permission || hasPermission(menuItem.permission, "list")
     }
 
     useEffect(() => {
@@ -142,7 +151,7 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                             >
                                                 {
                                                     ele.menuSections[0]?.menuItems.map((item) => {
-                                                        if (!item.megaPanelViewAll && (!item.permission || hasPermission(item.permission, "list"))) {
+                                                        if (!item.megaPanelViewAll && hasLinkPermission(item)) {
                                                             if (item.tab) {
                                                                 return (
                                                                     <dds-left-nav-menu-item
@@ -150,6 +159,18 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                                                         onClick={(e) => {
                                                                             e.preventDefault()
                                                                             goToTab(item.tab, item.title, item.tabType)
+                                                                            onClickSideNavExpand()
+                                                                        }}
+                                                                    >
+                                                                    </dds-left-nav-menu-item>
+                                                                )
+                                                            } else if (item.sidePanel) {
+                                                                return (
+                                                                    <dds-left-nav-menu-item
+                                                                        title={t(item.title)}
+                                                                        onClick={(e) => {
+                                                                            e.preventDefault()
+                                                                            openSidePanel(item)
                                                                             onClickSideNavExpand()
                                                                         }}
                                                                     >
@@ -254,7 +275,7 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                                                     <div className="link-group">
                                                                         {
                                                                             ele.menuSections[0]?.menuItems.map((item) => {
-                                                                                if (!item.megaPanelViewAll && (!item.permission || hasPermission(item.permission, "list"))) {
+                                                                                if (!item.megaPanelViewAll && hasLinkPermission(item)) {
                                                                                     if (item.tab) {
                                                                                         return (
                                                                                             <div

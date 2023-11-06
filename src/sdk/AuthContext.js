@@ -21,6 +21,7 @@ initializeApp(firebaseConfig);
 const initialState = {
     user: null,
     token: "loading",
+    tokenClaims: null, // token claims
     theme: null,
     lang: null,
 };
@@ -35,34 +36,43 @@ export const AuthProvider = ({ children }) => {
     const location = useLocation();
     const { i18n } = useTranslation();
     const { t } = useTranslation();
+
+    const clearLoginState = useCallback(() => {
+        setState({ token: null, user: null, tokenClaims: null });
+    }, [])
+
     useEffect(() => {
         let unsubscribeIdTokenChanged;
         (async () => {
             try {
                 const auth = getAuth();
+                unsubscribeIdTokenChanged = auth.onIdTokenChanged(async (user) => {
+                    if (user) {
+                        const idTokenResult = await auth.currentUser.getIdTokenResult()
+                        const token = idTokenResult.token
+                        const claims = idTokenResult.claims
+                        if (token !== state.token || claims !== state.tokenClaims) {
+                            setState({ token: token, tokenClaims: claims });
+                        }
+                    } else {
+                        console.log('clear token, id token changed')
+                        clearLoginState();
+                    }
+                })
+
                 await auth.authStateReady()
                 if (auth.currentUser) {
-                    const token = await auth.currentUser.getIdToken()
-                    setState({ token: token });
-
-                    unsubscribeIdTokenChanged = auth.onIdTokenChanged(async (user) => {
-                      if (user) {
-                        const token = await user.getIdToken()
-                        if (token !== state.token) {
-                          setState({ token: token });
-                        }
-                      } else {
-                        console.log('clear token, id token changed')
-                        setState({ token: null, user: null });
-                      }
-                    })
+                    const idTokenResult = await auth.currentUser.getIdTokenResult()
+                    const token = idTokenResult.token
+                    const claims = idTokenResult.claims
+                    setState({ token: token, tokenClaims: claims });
                 } else {
                     console.log('clear token, no currentUser')
-                    setState({ token: null });
+                    clearLoginState();
                 }
             } catch (e) {
                 console.log(e, 'clear token, error in auth state ready')
-                setState({ token: null, user: null });
+                clearLoginState();
             }
         })();
 
@@ -100,6 +110,7 @@ export const AuthProvider = ({ children }) => {
             signout()
         }
     }, [state.token]);
+
     useEffect(() => {
         getUser();
     }, [getUser]);
@@ -139,15 +150,15 @@ export const AuthProvider = ({ children }) => {
     const authFetch = useCallback(
         async (url, options = {}) => {
             let token = state.token;
-            if (token === "loading") {
-                try {
-                    const auth = getAuth();
-                    token = await auth.currentUser?.getIdToken()
-                } catch (error) {
-                    return new Promise();
-                }
-            }
             // TODO fetch exception, not call getAuthorizationToken
+            // if (token === "loading") {
+            //     try {
+            //         const auth = getAuth();
+            //         token = await auth.currentUser?.getIdToken()
+            //     } catch (error) {
+            //         return new Promise();
+            //     }
+            // }
             let res = await fetch(url, {
                 ...options,
                 headers: {
@@ -197,7 +208,7 @@ export const AuthProvider = ({ children }) => {
                 return result
             }
         } catch (e) {
-            setState({ user: null, token: null });
+            clearLoginState();
             console.log(e)
             throw new Error(t("login-failed-invalid"))
         }
@@ -215,7 +226,7 @@ export const AuthProvider = ({ children }) => {
             setState({ token: token });
             return result
         } catch (e) {
-            setState({ user: null, token: null });
+            clearLoginState();
             throw e
         }
     }, []);
@@ -244,10 +255,10 @@ export const AuthProvider = ({ children }) => {
             if (token) {
                 setState({ token: token });
             } else {
-                setState({ token: null });
+                clearLoginState();
             }
         } catch (e) {
-            setState({ token: null });
+            clearLoginState();
         }
     }, []);
 
@@ -368,7 +379,6 @@ export const AuthProvider = ({ children }) => {
         [
             state,
             signin,
-            signinWithCustomToken,
             signout,
             authFetch,
             refreshPostSignIn,
