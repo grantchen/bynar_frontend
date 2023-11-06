@@ -46,3 +46,31 @@
 .TSMainTable {
   border-bottom: 0px solid #CDD8E4;
 }
+.TSBodyLeft .TSCellBase {
+  border-image: linear-gradient(90deg, #ffffff 0%, #CDD8E4 100%) 0 0 1 0
+}
+
+.TSHeadMid .TSHeaderRow .TSCellHeader{
+  border-image: linear-gradient(#ffffff 0%, #CDD8E4 100%) 0 1 0 0
+}
+.TSHeadLeft .TSCellBase {
+  border-image: linear-gradient(90deg, #ffffff 0%, #CDD8E4 100%) 0 0 1 0
+}
+
+.TSHeadLeft {
+  border-image: linear-gradient(90deg, #ffffff 0%, #CDD8E4 100%) 0 0 1 0
+}
+
+.TSRowSpace1.TSRowSpaceLast .TSSolidRow{
+  border-bottom: 0px solid #CDD8E4;
+}
+
+.TSBodyLeft {
+  border-top: 1px solid #CDD8E4;
+  border-image: linear-gradient(90deg, #ffffff 0%, #CDD8E4 100%) 1 0 0 0
+}
+
+.TSBodyMid {
+  border-top: 1px solid #CDD8E4;
+}
+
