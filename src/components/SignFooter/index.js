@@ -1,6 +1,6 @@
 import React from "react";
 import "./SideFooterl.scss";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 const SignFooter = ({ className }) => {
     const { t } = useTranslation();
     return (
@@ -10,7 +10,7 @@ const SignFooter = ({ className }) => {
                 <div className="footer_link_divider">|</div>
                 <a href="#">{t("terms-of-use")}</a>
                 <div className="footer_link_divider">|</div>
-                <a href="#">{t("cookie-preferences")}</a>
+                <a href="#manage_cookies">{t("cookie-preferences")}</a>
             </div>
             <div className="footer_copy_right">{t("bynar-inc")}</div>
         </footer>
