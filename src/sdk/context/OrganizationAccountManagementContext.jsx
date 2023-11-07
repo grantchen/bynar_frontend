@@ -22,6 +22,7 @@ const CONSTANTS = {
 const OrganizationAccountProvider = ({children}) => {
     const {tokenClaims, authFetch} = useAuth();
     const {t} = useTranslation();
+    const { signout } = useAuth();
 
     /**render aware states */
     const [loading, setLoading] = useState(false);
@@ -91,10 +92,7 @@ const OrganizationAccountProvider = ({children}) => {
                         });
                         const res = await response.json()
                         if (response.ok) {
-                            setNotification({
-                                type: "success",
-                                message: t("user-deleted-successfully"),
-                            });
+                            signout();
                         } else if (response.status === 500) {
                             setNotification({
                                 type: "error",
@@ -104,6 +102,7 @@ const OrganizationAccountProvider = ({children}) => {
                             throw "error";
                         }
                     } catch (error) {
+                        console.log(error)
                         setNotification({
                             type: "error",
                             message: t("error-deleting-account"),
