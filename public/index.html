@@ -49,10 +49,9 @@
   </script>
   <script src="/Grid/GridED.js"></script>
   <script src="/Layouts/cell_url.js?v=2"></script>
-  <!-- <script src="//1.www.s81c.com/common/stats/ibm-common.js" type="text/javascript" async="async"></script> -->
   <script src="https://app.enzuzo.com/scripts/cookiebar/6b1edc44-7c7a-11ee-b4c9-27defc290481"></script>
   <script src="https://cdn.checkout.com/js/framesv2.min.js"></script>
-  <script src="https://unpkg.com/react-phone-input-2@2.x/dist/lib.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-phone-input-2@2.15.1/lib/lib.min.js"></script>
   <!-- <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
     async></script>
   <script type="text/javascript">
@@ -84,6 +83,82 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+  <!--   // custom enzuzo styles -->
+  <style>
+    .notification-main {
+      background: #f4f4f4;
+    }
+
+    .notification-text,
+    .notification-text span {
+      color: #161616 !important;
+    }
+
+    .notification-text a {
+      color: #0f62fe;
+    }
+
+    .notification-default .button-default,
+    .notification-bottom-center .button-default,
+    .notification-bottom-center-floating .button-default,
+    .notification-default-top .button-default,
+    .notification-top-center .button-default,
+    .notification-top-center-floating .button-default {
+      background: #0f62fe;
+    }
+
+    .enzuzo-cookie-modal {
+      background-color: #f4f4f4;
+      border-radius: 0px;
+    }
+
+    h3.enzuzo-modal-title {
+      font-size: 2rem;
+      font-weight: 400;
+    }
+
+    h3.enzuzo-hv-preference__purpose {
+      font-size: 1.1rem;
+      font-weight: 400;
+    }
+
+    button.enzuzo-modal-button {
+      border-radius: 0;
+    }
+
+    button.enzuzo-modal-button-confirm {
+      background-color: #0f62fe;
+    }
+
+    button.enzuzo-modal-button-accept {
+      background-color: #0f62fe;
+      border: none;
+      color: #ffffff;
+    }
+
+    button.enzuzo-modal-button-reject {
+      background-color: #393939;
+      border: none;
+      color: #ffffff;
+    }
+
+    .enzuzo-modal-desc {
+      color: #161616;
+    }
+
+    .enzuzo-privacy-policy-link {
+      color: #0f62fe;
+    }
+
+    .enzuzo-hv-preference__description {
+      color: #161616;
+    }
+
+    .enzuzo-poweredby-wrap {
+      display: none !important;
+    }
+  </style>
 </body>
 
 </html>
