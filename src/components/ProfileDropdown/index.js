@@ -52,7 +52,9 @@ const ProfileDropdown = React.memo(
             </div>
           </div>
           <div className="link-list">
-            <Link onClick={onProfileOptionClick}>{t("profile")}</Link>
+            {user?.id && (
+              <Link onClick={onProfileOptionClick}>{t("profile")}</Link>
+            )}
             <Link
               style={{ cursor: "pointer", alignItems: 'center' }}
               onClick={handleLogout}

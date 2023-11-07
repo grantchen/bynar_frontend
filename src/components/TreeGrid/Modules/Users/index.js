@@ -1,14 +1,7 @@
-import React, { useRef } from "react";
 import { TreeGrid } from "../../index";
 
 const UserList = ({ tabId }) => {
-    const iframeRef = useRef();
-
-    function iframeDidMount() {
-        const window = iframeRef.current.contentWindow
-
-        // do something
-    }
+    const events = {}
 
     return (
         <>
@@ -16,8 +9,7 @@ const UserList = ({ tabId }) => {
                 <TreeGrid
                     table={ "user_list" }
                     tabId={ tabId }
-                    ref={ iframeRef }
-                    iframeDidMount={ iframeDidMount }
+                    events={ events }
                 ></TreeGrid>
             </div>
         </>

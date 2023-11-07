@@ -3526,7 +3526,7 @@
                 "url": "?openCardMangementPanel=true",
                 "sidePanel": "UserCardManagementPanel",
                 "tabType": "",
-                "permission": "cards",
+                "permission": "payment-method",
                 "megapanelContent": {
                   "headingTitle": "",
                   "headingUrl": "",

@@ -1,23 +1,15 @@
-import React, { useRef } from "react";
 import { TreeGrid } from "../../index";
 
 const WarehousesList = ({ tabId }) => {
-    const iframeRef = useRef();
-
-    function iframeDidMount() {
-        const window = iframeRef.current.contentWindow
-
-        // do something
-    }
+    const events = {}
 
     return (
         <>
             <div className="tree-grid-content">
                 <TreeGrid
-                    table={"warehouses"}
-                    tabId={tabId}
-                    ref={ iframeRef }
-                    iframeDidMount={ iframeDidMount }
+                    table={ "warehouses" }
+                    tabId={ tabId }
+                    events={ events }
                 ></TreeGrid>
             </div>
         </>
