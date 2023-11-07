@@ -28,7 +28,6 @@
     "payment": "^2.4.6",
     "react": "^17",
     "react-dom": "^17",
-    "react-frame-component": "^5.2.6",
     "react-i18next": "^12.2.2",
     "react-phone-input-2": "^2.15.1",
     "react-router-dom": "^6.11.1",
