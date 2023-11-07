@@ -42,7 +42,7 @@ export const UserDetailPanel = ({ open }) => {
     const inputRefs = useRef([]);
     const [searchParams] = useSearchParams();
     const { closeModalAndGoBackToUserList } = useUserManagement();
-    const [defaultData,setDefaultData] = useState({});
+    const [defaultData, setDefaultData] = useState({});
     const themeItems = Themes.map(themeObject => themeObject.code);
     const languagesItems = Languages.map(languageObject => languageObject.code);
     const handleThemeChange = (selectedTheme) => {
@@ -254,6 +254,8 @@ export const UserDetailPanel = ({ open }) => {
         const getUserList = async (userid) => {
             try {
                 setServerErrorNotification({});
+                setErrors({});
+                setErrorMessage("");
                 setServerNotification(false);
                 setDataLoading(true);
                 const response = await authFetch(`${BaseURL}/user/${userid}`, {
@@ -304,7 +306,7 @@ export const UserDetailPanel = ({ open }) => {
                             handleUpdateProfile();
                         },
                         kind: 'primary',
-                        disabled: updateHappened,
+                        disabled: updateHappened || errorMessage !== "" || Object.keys(errors).length !== 0,
                         loading: disable,
                     }, {
                         label: t("cancel"),
@@ -413,7 +415,7 @@ export const UserDetailPanel = ({ open }) => {
                                         selectedItem={theme}
                                         onChange={selectedItem => handleThemeChange(selectedItem)}
                                         itemToString={(item) => (item ? t(item) : '')}
-                                        label={theme}/>
+                                        label={theme} />
                                 </>
                             )}
                             {dataLoading ? (
@@ -428,7 +430,7 @@ export const UserDetailPanel = ({ open }) => {
                                         selectedItem={language}
                                         itemToString={(item) => (item ? t(item) : '')}
                                         onChange={selectedItem => handleLanguageChange(selectedItem)}
-                                        label={language}/>
+                                        label={language} />
                                 </>
                             )}
                         </div>
