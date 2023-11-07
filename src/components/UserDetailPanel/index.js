@@ -94,12 +94,14 @@ export const UserDetailPanel = ({ open }) => {
         }
     };
     const validateOrganizationForm = (email) => {
-        const errors = {};
+        // const errors = {};
         if (email.trim() === "") {
             errors.email = "Email is required";
         } else if (email.length > 0) {
             if (!checkEmailValid(email.trim())) {
                 errors.email = "Suggested format (name@company.com)";
+            } else {
+                errors.email = ""
             }
         }
 
@@ -119,9 +121,11 @@ export const UserDetailPanel = ({ open }) => {
         setServerNotification(false);
         const { name, value } = e.target;
         setFullName(value);
-        const errors = {};
+        // const errors = {};
         if (value.trim() === "") {
             errors.fullName = "FullName is required";
+        } else {
+            errors.fullName = ""
         }
         setErrors(errors);
         if (value === defaultData?.fullName) {

@@ -132,7 +132,7 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
 
                 <Popover
                     ref={wrapperRef}
-                    open={isProfileDropdownOpen && user?.id}
+                    open={isProfileDropdownOpen}
                     isTabTip
                     align="bottom-right"
                     className={`popover-dropdown ${isSearchBarExpanded ? 'has-search-active' : ''}`}
