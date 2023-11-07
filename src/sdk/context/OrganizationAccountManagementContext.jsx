@@ -65,7 +65,10 @@ const OrganizationAccountProvider = ({children}) => {
             if (!confirmText) {
                 return;
             }
-            setSearchParams({ confirmDeleteAccount: confirmText });
+            setSearchParams({
+                [CONSTANTS.openOrganizationAccountPanel]: true,
+                confirmDeleteAccount: confirmText
+            });
             setDeleteModalProps({
                 body: `${t("delete-modal-heading-1")} 
                 ${t("delete-organization-account-modal-heading-2")}`,
