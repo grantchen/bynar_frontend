@@ -19,13 +19,19 @@
   border-top: 0px solid #CDD8E4;
 }
 
-.TSHeadMid .TSHeaderRow .TSCellHeader:last-child {
-  border-right: 0px solid #CDD8E4;
+//.TSHeadMid .TSHeaderRow .TSCellHeader:last-child {
+  //border-right: 1px solid #CDD8E4;
+//}
+.TSHeadMid td[valign]:last-child {
+  .TSFilterRow .TSCellBase:nth-last-child(2) {
+    border-right: 0px solid #CDD8E4;
+    border-image: linear-gradient(270deg, #ffffff 0%, #CDD8E4 100%) 0 0 1 0
+  }
+  .TSSection tbody tr:nth-child(2) .TSCellBase:nth-last-child(2){
+    border-image: linear-gradient(270deg, #fff 0%, #6F7F94 100%) 0 0 1 0
+  }
 }
 
-.TSHeadMid .TSFilterRow .TSCellBase:nth-last-child(2) {
-  border-right: 0px solid #CDD8E4;
-}
 
 .TSHeadMid .TSFilterRow .TSCellBase:last-child {
   border-right: 0px solid #CDD8E4;
@@ -35,8 +41,21 @@
   border-right: 0px solid #CDD8E4;
 }
 
-.TSBodyMid .TSDataRow .TSCellBase:nth-last-child(2) {
-  border-right: 0px solid #CDD8E4;
+.TSBodyMid td[valign]:last-child  {
+  .TSDataRow .TSCellBase:nth-last-child(2){
+    border-right: 0px solid #CDD8E4;
+    border-image: linear-gradient(270deg, #ffffff 0%, #CDD8E4 100%) 1 0 1 0
+  }
+  .TSChildPart .TSDataRow {
+    .TSCellBase:last-child{
+      border-image: linear-gradient(270deg, #fff 0%, #CDD8E4 100%) 0 0 1 0;
+      //border-bottom:0px solid #CDD8E4;
+    }
+    //.TSCellBase:nth-last-child(2){
+    //  border-bottom: 1px solid #CDD8E4;
+    //  border-image: linear-gradient(270deg, #CDD8E4 0%, #CDD8E4 100%) 0 0 1 0;
+    //}
+  }
 }
 
 .TSHeadLeft, .TSHeadMid, .TSHeadRight {
@@ -46,31 +65,93 @@
 .TSMainTable {
   border-bottom: 0px solid #CDD8E4;
 }
-.TSBodyLeft .TSCellBase {
-  border-image: linear-gradient(90deg, #ffffff 0%, #CDD8E4 100%) 0 0 1 0
-}
 
-.TSHeadMid .TSHeaderRow .TSCellHeader{
-  border-image: linear-gradient(#ffffff 0%, #CDD8E4 100%) 0 1 0 0
-}
-.TSHeadLeft .TSCellBase {
-  border-image: linear-gradient(90deg, #ffffff 0%, #CDD8E4 100%) 0 0 1 0
-}
 
 .TSHeadLeft {
+  border-bottom: 0px solid #CDD8E4;
+  //border-image: linear-gradient(90deg, #ffffff 0%, #CDD8E4 100%) 0 0 1 0
+}
+.TSHeadLeft .TSHeaderRow .TSCellBase{
+  //border-image: linear-gradient(90deg, #ffffff 0%, #CDD8E4 100%) 0 0 1 0
+}
+.TSHeadLeft .TSFilterRow td:nth-child(2) {
+  border-bottom: 2px #CDD8E4 solid;
   border-image: linear-gradient(90deg, #ffffff 0%, #CDD8E4 100%) 0 0 1 0
+}
+.TSHeadLeft .TSFilterRow .TSCellBase{
+  border-bottom: 2px #CDD8E4 solid;
 }
 
 .TSRowSpace1.TSRowSpaceLast .TSSolidRow{
   border-bottom: 0px solid #CDD8E4;
 }
 
-.TSBodyLeft {
-  border-top: 1px solid #CDD8E4;
-  border-image: linear-gradient(90deg, #ffffff 0%, #CDD8E4 100%) 1 0 0 0
+//.TSBodyLeft {
+//  border-top: 1px solid #CDD8E4;
+//  border-image: linear-gradient(90deg, #ffffff 0%, #CDD8E4 100%) 1 0 0 0
+//}
+
+//.TSBodyMid {
+//  border-top: 1px solid #CDD8E4;
+//}
+
+.TSBodyLeft .TSDataRow :nth-child(2) {
+  border-image: linear-gradient(90deg, #ffffff 0%, #CDD8E4 100%) 1 1 1 0;
 }
 
-.TSBodyMid {
-  border-top: 1px solid #CDD8E4;
+.TSHeadLeft .TSHeaderRow .TSCellHeader:nth-child(2) {
+  border-image: linear-gradient(90deg, #ffffff 0%, #6F7F94 100%) 0 1 1 0
 }
 
+.TSHeadMid .TSSectionScroll .TSSection tbody tr:nth-child(2) {
+  .TSCellBase{
+    border-image: linear-gradient(180deg,#ffffff 0%, #6F7F94 100%) 0 1 1 0;
+  }
+}
+.TSHeadMid .TSHeaderRow .TSCellBase:nth-last-child(2) {
+  border-image: linear-gradient(180deg,#ffffff 0%, #6F7F94 100%) 0 1 1 0;
+}
+
+.TSHeadLeft .TSSectionScroll table tbody tr:nth-child(2) .TSCellHeader:nth-child(3){
+  border-image: linear-gradient(180deg,#ffffff 0%, #6F7F94 100%) 0 0 1 1;
+  border-left: 1px #6F7F94 solid;
+}
+// set TSBodyMid border-top
+.TSBodyMid .TSSectionScroll .TSPageOne .TSDataRow:nth-child(2){
+  .TSCellBase{
+    border-top: 1px solid #CDD8E4;
+  }
+}
+.TSBodyMid .TSSectionScroll .TSPageOne .TSChildPart tbody tr:nth-child(2){
+  .TSCellBase{
+    border-top: 0px solid #CDD8E4;
+  }
+}
+
+.TSHeadMid{
+  border-bottom: 0px solid #CDD8E4;
+}
+.TSHeadMid .TSFilterRow .TSCellBase{
+  border-bottom: 2px solid #CDD8E4;
+}
+
+
+
+.TSHeadMid{
+  border-left: 0px solid #CDD8E4;
+  .TSHeaderRow .TSCellBase:nth-child(3){
+    border-left: 1px solid #6F7F94;
+  }
+}
+.TSHeadMid .TSSectionScroll .TSSection tbody tr:nth-child(2) .TSCellBase:nth-child(3){
+  border-image: linear-gradient(180deg, #fff 0%, #6F7F94 100%) 0 1 1 1;
+}
+.TSBodyLeft .TSSectionScroll tbody .TSDataRow:nth-child(2){
+  .TSCellBase:nth-child(2){
+      border-top: 1px solid #CDD8E4;
+      //border-image: linear-gradient(90deg, #ffffff 0%, #CDD8E4 100%) 1 1 0 0
+  }
+  .TSCellBase:last-child{
+    border-top: 1px solid #CDD8E4;
+  }
+}
