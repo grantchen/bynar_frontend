@@ -1,14 +1,27 @@
-import React, { forwardRef, useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import {
     BaseURL, NodeEnv, TabContext,
     useAuth, uuidv4,
 } from "../../sdk";
-import debounce from "lodash/debounce";
 import "./TreeGrid.scss";
-import Frame, { useFrame } from 'react-frame-component';
+import "./TreeGridBorders.scss"
+import "./TreeGridBlack.scss"
+import "./TreeGridGradient.scss"
+import "./TreeGridLight.scss"
+import "./TreeGridMaterial.scss"
+import "./TreeGridOffice.scss"
+import "./TreeGridRelief.scss"
+import "./TreeGridStandard.scss"
+import "./TreeGridTurg.scss"
+import "./TreeGridWhite.scss"
+import "./TreeGridQuery.scss"
+import "./TreeGridExtJS.scss"
+import "./TreeGridSharp.scss"
+import "./TreeGridRound.scss"
+import "./TreeGridColors.scss"
 
 // get api request url
-function getAPIRequestURL(url) {
+export function getAPIRequestURL(url) {
     if (!url) {
         return url
     }
@@ -20,88 +33,26 @@ function getAPIRequestURL(url) {
     }
 }
 
-export const TreeGrid = forwardRef(({ table, config, tabId, className, iframeDidMount }, ref) => {
-    const content = `
-<!DOCTYPE html>
-<html>
-    <head>
-        <script src="/Grid/GridED.js"></script>
-        <script src="/Layouts/cell_url.js?v=1"></script>
-        <link rel="stylesheet" href="/Grid/Styles/Custom/index.css?v=1">
-    </head>
-
-    <body>
-        <div id="mountHere"></div>
-    </body>
-</html>    
-    `
-    return (
-        <Frame
-            initialContent={ content }
-            mountTarget='#mountHere'
-            ref={ ref }
-            style={ { width: '100%', height: '100%' } }
-            contentDidMount={ iframeDidMount }
-        >
-            <TreeGridE
-                table={ table }
-                tabId={ tabId }
-                config={ config }
-                className={ className }
-            ></TreeGridE>
-        </Frame>
-    )
-})
-
-const TreeGridE = ({ table, config = {}, tabId, className }) => {
-    const { window } = useFrame();
+export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) => {
     const ref = useRef(null);
     const { handleSetTabLoaded } = useContext(TabContext);
-    const { authFetch } = useAuth();
+    const { treeGridRequest } = useAuth();
 
-    // request TreeGrid api
-    window.treeGridRequest ||= function (url, param, callback) {
-        authFetch(url, {
-            method: "POST",
-            body: new URLSearchParams(`Data=${ param }`),
-        }).then((response) => response.json())
-            .then((data) => {
-                callback(data)
+    // custom TreeGrid default ajax request
+    if (!events.OnCustomAjax) {
+        events.OnCustomAjax = function (G, IO, data, func) {
+            if (["Data", "Page", "Upload"].indexOf(IO.Name) === -1) return null;
+
+            treeGridRequest(IO.Url, data, function (res) {
+                if (res?.IO?.Result === -1) {
+                    // alert message
+                    func(0, res)
+                } else {
+                    func(0, res)
+                }
             });
-        return true
-    }
-
-    // load cell data
-    window.LoadCellData ||= debounce(function (url, param, callback) {
-        window.treeGridRequest(url, param, function (res) {
-            if (res?.IO?.Result === -1) {
-                // alert message
-                callback(0, res);
-            } else {
-                const data = window.parseItemSuggestionCallBack(window.keySuggest, JSON.stringify(res), window.lsSuggestionField);
-                callback(0, data);
-            }
-        });
-    }, 300)
-
-    // custom TreeGrid ajax request
-    window.Grids.OnCustomAjax ||= function (G, IO, data, func) {
-        if (["Data", "Page", "Upload"].indexOf(IO.Name) === -1) return null;
-
-        window.treeGridRequest(IO.Url, data, function (res) {
-            if (res?.IO?.Result === -1) {
-                // alert message
-                func(0, res)
-            } else {
-                func(0, res)
-            }
-        });
-        return true;
-    }
-
-    window.Grids.OnReady = function (G) {
-        // update tab loaded
-        handleSetTabLoaded(G.id.replace('treeGrid_', ''))
+            return true;
+        }
     }
 
     useEffect(() => {
@@ -123,10 +74,6 @@ const TreeGridE = ({ table, config = {}, tabId, className }) => {
                     Url: `/${ table }/upload`,
                     Format: 'Json',
                 },
-                Cell: {
-                    Script: `LoadCellData('${ getAPIRequestURL(`/${ table }/cell`) }', Data, Func);`,
-                    Format: 'Json',
-                },
             }
 
             config = { ...defaultConfig, ...config }
@@ -141,9 +88,20 @@ const TreeGridE = ({ table, config = {}, tabId, className }) => {
 
             treeGrid = window.TreeGrid(
                 config,
-                "treeGridMainTag",
+                ref.current.id,
                 {}
             );
+
+            // iterate events and call window.TGSetEvent
+            Object.keys(events).forEach((key) => {
+                window.TGSetEvent(key, treeGrid.id, events[key])
+            })
+
+            // add event on ready
+            window.TGAddEvent("OnReady", treeGrid.id, function (G) {
+                // update tab loaded
+                handleSetTabLoaded(G.id.replace('treeGrid_', ''))
+            })
         }
 
         fetchData();
@@ -158,8 +116,7 @@ const TreeGridE = ({ table, config = {}, tabId, className }) => {
             <div className={ `tree-grid-wrapper ${ className ? className : '' }` }>
                 <div
                     ref={ ref }
-                    id={ `treeGridMainTag` }
-                    className={ "tree-grid-main-tag" }
+                    id={ `treeGridMainTag_${ tabId || uuidv4() }` }
                     style={ { width: '100%', height: '100%' } }
                 >
                 </div>
