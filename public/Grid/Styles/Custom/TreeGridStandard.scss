@@ -22,10 +22,13 @@
 .TSHeadMid .TSHeaderRow .TSCellHeader:last-child {
   border-right: 0px solid #CDD8E4;
 }
-
-.TSHeadMid .TSFilterRow .TSCellBase:nth-last-child(2) {
-  border-right: 0px solid #CDD8E4;
+.TSHeadMid td[valign]:last-child {
+  .TSFilterRow .TSCellBase:nth-last-child(2) {
+    border-right: 0px solid #CDD8E4;
+    border-image: linear-gradient(270deg, #ffffff 0%, #CDD8E4 100%) 0 0 1 0
+  }
 }
+
 
 .TSHeadMid .TSFilterRow .TSCellBase:last-child {
   border-right: 0px solid #CDD8E4;
@@ -35,9 +38,11 @@
   border-right: 0px solid #CDD8E4;
 }
 
-.TSBodyMid .TSDataRow .TSCellBase:nth-last-child(2) {
-  border-right: 0px solid #CDD8E4;
-  border-image: linear-gradient(270deg, #ffffff 0%, #CDD8E4 100%) 0 0 1 0
+.TSBodyMid td[valign]:last-child  {
+  .TSDataRow .TSCellBase:nth-last-child(2){
+    border-right: 0px solid #CDD8E4;
+    border-image: linear-gradient(270deg, #ffffff 0%, #CDD8E4 100%) 1 0 1 0
+  }
 }
 
 .TSHeadLeft, .TSHeadMid, .TSHeadRight {
@@ -62,16 +67,16 @@
   border-image: linear-gradient(90deg, #ffffff 0%, #CDD8E4 100%) 1 0 0 0
 }
 
-.TSBodyMid {
-  border-top: 1px solid #CDD8E4;
-}
+//.TSBodyMid {
+//  border-top: 1px solid #CDD8E4;
+//}
 
 .TSBodyLeft .TSDataRow :nth-child(2) {
   border-image: linear-gradient(90deg, #ffffff 0%, #CDD8E4 100%) 0 1 1 0
 }
 
-.TSHeadLeft .TSHeaderRow :nth-child(2) {
-  border-image: linear-gradient(90deg, #ffffff 0%, #CDD8E4 100%) 0 0 1 0
+.TSHeadLeft .TSHeaderRow .TSCellHeader:nth-child(2) {
+  border-image: linear-gradient(90deg, #ffffff 0%, #6F7F94 100%) 0 1 1 0
 }
 
 .TSHeadMid .TSSectionScroll .TSSection tbody tr:nth-child(2) {
@@ -81,4 +86,22 @@
 }
 .TSHeadMid .TSHeaderRow .TSCellBase:nth-last-child(2) {
   border-image: linear-gradient(180deg,#ffffff 0%, #6F7F94 100%) 0 1 1 0;
+}
+
+.TSHeadLeft .TSSectionScroll table tbody tr:nth-child(2) .TSCellHeader:last-child{
+  border-image: linear-gradient(180deg,#ffffff 0%, #6F7F94 100%) 0 0 1 1;
+  border-left: 1px #6F7F94 solid;
+}
+// set TSBodyMid border-top
+.TSBodyMid .TSSectionScroll .TSPageOne .TSDataRow:nth-child(2){
+  .TSCellBase{
+    border-top: 1px solid #CDD8E4;
+  }
+}
+
+.TSHeadMid{
+  border-bottom: 0px solid #CDD8E4;
+}
+.TSHeadMid .TSFilterRow .TSCellBase{
+  border-bottom: 2px solid #CDD8E4;
 }
