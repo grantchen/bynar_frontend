@@ -101,7 +101,7 @@ export const UserDetailPanel = ({ open }) => {
             if (!checkEmailValid(email.trim())) {
                 errors.email = "Suggested format (name@company.com)";
             } else {
-                errors.email = ""
+                delete errors.email
             }
         }
 
@@ -125,7 +125,7 @@ export const UserDetailPanel = ({ open }) => {
         if (value.trim() === "") {
             errors.fullName = "FullName is required";
         } else {
-            errors.fullName = ""
+            delete errors.fullName
         }
         setErrors(errors);
         if (value === defaultData?.fullName) {
