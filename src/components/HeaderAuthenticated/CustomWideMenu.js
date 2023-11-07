@@ -9,10 +9,12 @@ import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-menu-it
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-overlay.js';
 import "./CustomWideMenu.scss";
 import { useTranslation } from "react-i18next";
+import { useOrganizationAccount } from "../../sdk/context/OrganizationAccountManagementContext";
 
 export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
     const { goToTab } = useContext(TabContext);
     const { openCardManagementPanel } = useCardManagement();
+    const { openOrganizationAccountPanel, isOrganizationAccountAllowed } = useOrganizationAccount();
 
     const [activeTitle, setActiveTitle] = useState(jsonData.mastheadNav.links[0]?.title);
     const handleClick = (title) => {
@@ -26,6 +28,28 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
     const isMobile = useMobile();
     const { t } = useTranslation();
     const { hasPermission } = useAuth();
+
+    const openSidePanel = (menuItem) => {
+        switch (menuItem.sidePanel) {
+            case "UserCardManagementPanel":
+                openCardManagementPanel()
+                break
+            case "OrganizationAccountPanel":
+                openOrganizationAccountPanel()
+                break
+            default:
+                break
+        }
+    }
+
+    // check if the menu item has permission to be displayed
+    const hasLinkPermission = (menuItem) => {
+        if (menuItem.sidePanel === "OrganizationAccountPanel") {
+            return isOrganizationAccountAllowed
+        }
+
+        return !menuItem.permission || hasPermission(menuItem.permission, "list")
+    }
 
     useEffect(() => {
         if (!isMobile) {
@@ -127,7 +151,7 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                             >
                                                 {
                                                     ele.menuSections[0]?.menuItems.map((item) => {
-                                                        if (!item.megaPanelViewAll && (!item.permission || hasPermission(item.permission, "list"))) {
+                                                        if (!item.megaPanelViewAll && hasLinkPermission(item)) {
                                                             if (item.tab) {
                                                                 return (
                                                                     <dds-left-nav-menu-item
@@ -135,6 +159,18 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                                                         onClick={(e) => {
                                                                             e.preventDefault()
                                                                             goToTab(item.tab, item.title, item.tabType)
+                                                                            onClickSideNavExpand()
+                                                                        }}
+                                                                    >
+                                                                    </dds-left-nav-menu-item>
+                                                                )
+                                                            } else if (item.sidePanel) {
+                                                                return (
+                                                                    <dds-left-nav-menu-item
+                                                                        title={t(item.title)}
+                                                                        onClick={(e) => {
+                                                                            e.preventDefault()
+                                                                            openSidePanel(item)
                                                                             onClickSideNavExpand()
                                                                         }}
                                                                     >
@@ -239,7 +275,7 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                                                     <div className="link-group">
                                                                         {
                                                                             ele.menuSections[0]?.menuItems.map((item) => {
-                                                                                if (!item.megaPanelViewAll && (!item.permission || hasPermission(item.permission, "list"))) {
+                                                                                if (!item.megaPanelViewAll && hasLinkPermission(item)) {
                                                                                     if (item.tab) {
                                                                                         return (
                                                                                             <div
@@ -258,13 +294,13 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                                                                                                 </a>
                                                                                             </div>
                                                                                         )
-                                                                                    } else if (item.sidePanel === "UserCardManagementPanel") {
+                                                                                    } else if (item.sidePanel) {
                                                                                         return (
                                                                                             <div
                                                                                                 key={item.title}
                                                                                                 className="link">
                                                                                                 <a onClick={() => {
-                                                                                                    openCardManagementPanel()
+                                                                                                    openSidePanel(item)
                                                                                                     onClickSideNavExpand()
                                                                                                 }}
                                                                                                 >
