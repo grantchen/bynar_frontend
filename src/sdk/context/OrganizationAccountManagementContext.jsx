@@ -6,7 +6,7 @@ import React, {
     useCallback,
     useEffect,
 } from "react";
-import {useSearchParams} from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import {useAuth} from "../AuthContext";
 import {useTranslation} from "react-i18next";
 import OrganizationAccountPanel from "../../components/OrganizationAccountPanel";
@@ -23,6 +23,7 @@ const OrganizationAccountProvider = ({children}) => {
     const {tokenClaims, authFetch} = useAuth();
     const {t} = useTranslation();
     const { signout } = useAuth();
+    const navigate = useNavigate();
 
     /**render aware states */
     const [loading, setLoading] = useState(false);
@@ -64,6 +65,7 @@ const OrganizationAccountProvider = ({children}) => {
             if (!confirmText) {
                 return;
             }
+            setSearchParams({ confirmDeleteAccount: confirmText });
             setDeleteModalProps({
                 body: `${t("delete-modal-heading-1")} 
                 ${t("delete-organization-account-modal-heading-2")}`,
@@ -77,6 +79,7 @@ const OrganizationAccountProvider = ({children}) => {
                 open: true,
                 onClose: () => {
                     setDeleteModalProps(null);
+                    navigate(-1);
                 },
                 primaryButtonText: t("delete"),
                 primaryButtonDisabled: false,
@@ -110,6 +113,7 @@ const OrganizationAccountProvider = ({children}) => {
                     } finally {
                         setLoading(false);
                         setDeleteModalProps(null);
+                        navigate(-1);
                     }
                 },
             });
