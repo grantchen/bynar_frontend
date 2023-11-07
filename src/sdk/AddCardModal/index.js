@@ -60,6 +60,11 @@ const AddCardModal = ({ open }) => {
             console.log("adding card", e)
         } finally {
             setLoading(false);
+            Frames.init({
+                publicKey: CheckoutPublicKey,
+                style: themePreference == "white" ? g10style : g90style,
+                "ready": handleReady,
+            });
         }
     }, []);
 
