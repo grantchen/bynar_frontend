@@ -295,7 +295,7 @@ export const OrganizationAccountPanel = ({open}) => {
     useEffect(() => {
         const getOrganizationAccount = async () => {
             try {
-                setNotification({});
+                // setNotification({}); for delete server error notification
                 setDataLoading(true);
                 const response = await authFetch(`${BaseURL}/organization-account`, {
                     method: "GET",
