@@ -66,7 +66,6 @@ const OrganizationAccountProvider = ({children}) => {
                 return;
             }
             setSearchParams({
-                [CONSTANTS.openOrganizationAccountPanel]: true,
                 confirmDeleteAccount: confirmText
             });
             setDeleteModalProps({
