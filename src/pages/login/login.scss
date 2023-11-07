@@ -4,7 +4,6 @@
   flex-direction: column;
   .auth-login-grid {
     flex: 1;
-    margin-bottom: 2rem;
   }
   .cds--css-grid {
     flex: 1;
@@ -19,6 +18,9 @@
   }
   .cds--css-grid-column {
     margin-left:0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
   .header-caption{
     position: absolute;
@@ -32,11 +34,12 @@
       margin: auto;
     }
     .auth-login-bx {
+      max-width: 400px;
       position: absolute;
       top: 45%;
       transform: translate(-50%, -50%);
-      @media (max-width: 1920px) and (min-width: 1059px) {
-        margin-left: -15px;
+      @media (max-width: 1059px) {
+        margin-left: 15px;
       }
     }
     .button-container {
@@ -45,10 +48,15 @@
       align-items: center;
     }
     .fields-container {
-      display: flex;
-      flex-direction: row;
       margin-top: 15px;
       width: 380px;
+      @media (min-width: 672px) {
+        display: flex;
+        flex-direction: row;
+      }
+      @media (max-width: 400px) {
+        width: 300px;
+      }
     }
   }
   .bx--btn--tertiary {

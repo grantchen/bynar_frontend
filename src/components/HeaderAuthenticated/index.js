@@ -29,6 +29,7 @@ import ibmWhiteLogo from '../media/IBM_logo_white.svg'
 import { CustomWideMenu } from "./CustomWideMenu";
 import MastheadSearch from "@carbon/ibmdotcom-react/lib/components/Masthead/MastheadSearch";
 import DropdownTabList from "../HeaderTab/DropdownTabList";
+import {OrganizationAccountProvider} from "../../sdk/context/OrganizationAccountManagementContext";
 
 function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
     const { user } = useAuth();
@@ -193,10 +194,12 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
 export default function AuthenticatedAppHeader(props) {
     return (
         <CardManagementProvider>
-            <div className="main-header-container">
-                <HeaderContainer { ...props } render={ _AuthenticatedAppHeader } />
-            </div>
-            <Outlet />
+            <OrganizationAccountProvider>
+                <div className="main-header-container">
+                    <HeaderContainer { ...props } render={ _AuthenticatedAppHeader } />
+                </div>
+                <Outlet />
+            </OrganizationAccountProvider>
         </CardManagementProvider>
     );
 }
