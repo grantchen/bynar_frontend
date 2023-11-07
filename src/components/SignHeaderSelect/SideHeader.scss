@@ -1,4 +1,4 @@
-.header-right-de {
+.header-right {
   margin-left: auto;
   height: 48px;
   display: flex;
@@ -14,19 +14,4 @@
     max-width: 8.26rem;
   }
 }
-.header-right {
-  margin-left: auto;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  width: 7.4rem;
-  .cds--dropdown {
-    max-height: 48px;
-    height: 48px;
-    width: 7.4rem;
-  }
-  .cds--dropdown--inline .cds--list-box__menu {
-    min-width:7.4rem;
-    max-width: 7.4rem;
-  }
-}
+

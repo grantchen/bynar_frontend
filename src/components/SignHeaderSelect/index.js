@@ -42,32 +42,17 @@ const SignHeaderSelect = ({ onLanguageChange }) => {
                     ></path>
                 </svg>
             </HeaderName>
-            {language !== "de" && (
-                <div className="header-right">
-                    <Dropdown
-                        id="default"
-                        type="inline"
-                        initialSelectedItem={language}
-                        items={languagesItems}
-                        selectedItem={language}
-                        itemToString={(item) => (item ? t(item) : '')}
-                        onChange={(selectedItem) => handleLanguageChange(selectedItem)}
-                    />
-                </div>
-            )}
-            {language === "de" && (
-                <div className="header-right-de">
-                    <Dropdown
-                        id="default"
-                        type="inline"
-                        initialSelectedItem={language}
-                        items={languagesItems}
-                        selectedItem={language}
-                        itemToString={(item) => (item ? t(item) : '')}
-                        onChange={(selectedItem) => handleLanguageChange(selectedItem)}
-                    />
-                </div>
-            )}
+            <div className="header-right">
+                <Dropdown
+                    id="default"
+                    type="inline"
+                    initialSelectedItem={language}
+                    items={languagesItems}
+                    selectedItem={language}
+                    itemToString={(item) => (item ? t(item) : '')}
+                    onChange={(selectedItem) => handleLanguageChange(selectedItem)}
+                />
+            </div>
         </Header>
     );
 };
