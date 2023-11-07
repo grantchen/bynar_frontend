@@ -4,6 +4,7 @@ import {Languages} from "../../sdk";
 import {useTranslation} from "react-i18next";
 import i18n from "i18next";
 import "./SideHeader.scss";
+import PhoneInput from "react-phone-input-2";
 
 const SignHeaderSelect = ({ onLanguageChange }) => {
     const [language, setLanguage] = useState(localStorage.getItem('lang') ?? "en");

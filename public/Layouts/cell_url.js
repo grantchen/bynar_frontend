@@ -1,19 +1,15 @@
-const LS_SUGGESTION_KEY = "lsSuggestionKey"
-keySuggest = ""
-lsSuggestionField = []
-
 function parseCellSuggestionCallback(suggestionKey, lsSuggestionField){
 	return (G, row, col, val) => {
 		try {
-			if(col + "Suggest" != suggestionKey){
+			if(col + "Suggest" !== suggestionKey){
 				return
 			}
 
 			let suggestionData = row[suggestionKey]
 			// console.log(suggestionData)
-			var s_items = suggestionData.Items;
+			const s_items = suggestionData.Items;
 			for (i = 0; i < s_items.length; i++) {
-			   if (s_items[i].Value == val) {
+			   if (s_items[i].Value === val) {
 				  // Clear the undo buffer to remove the entry with html string
 				  G.ClearUndo();
 				  for (j = 0; j < lsSuggestionField.length; j++) {
@@ -40,11 +36,9 @@ function parseItemSuggestionCallBack(suggestionKey, data, lsSuggestionField){
 	let lsField = lsSuggestionField
 	let nRow = Items.length + 1
 
-	let newItems = []
 	let dummyItems = []
 	let tableItems = new Array(lsField.length * (Items.length + 1))
 
-	let tmpItems = []
 	//create header
 	let idx = 0;
 

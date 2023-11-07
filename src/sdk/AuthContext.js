@@ -196,6 +196,18 @@ export const AuthProvider = ({ children }) => {
         [state.token]
     );
 
+    // request TreeGrid api
+    const treeGridRequest = useCallback((url, param, callback) => {
+        authFetch(url, {
+            method: "POST",
+            body: new URLSearchParams(`Data=${ param }`),
+        }).then((response) => response.json())
+            .then((data) => {
+                callback(data)
+            });
+        return true
+    }, [authFetch]);
+
     const signin = useCallback(async (email, href) => {
         try {
             const auth = getAuth();
@@ -378,6 +390,7 @@ export const AuthProvider = ({ children }) => {
             getUser,
             getAuthorizationToken,
             hasPermission,
+            treeGridRequest,
         }),
         [
             state,
@@ -390,6 +403,7 @@ export const AuthProvider = ({ children }) => {
             getUser,
             getAuthorizationToken,
             hasPermission,
+            treeGridRequest,
         ]
     );
     return <Provider value={providerValue}>{children}</Provider>;

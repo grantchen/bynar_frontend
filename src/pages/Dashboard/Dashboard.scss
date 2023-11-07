@@ -2,15 +2,10 @@
     color: var(--cds-text-01, #161616);
     width: 100%;
     height: calc(100% - 3rem); // 3rem is header height
-    position: relative;
 
     .content-wrapper {
-        position: absolute;
         padding: 0;
         outline: none;
         height: 100%;
-        width: 100%;
-        left: 0;
-        top: 0;
     }
 }
