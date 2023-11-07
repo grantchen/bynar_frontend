@@ -88,7 +88,7 @@ export const AuthProvider = ({ children }) => {
             return;
         }
         try {
-            const response = await fetch(`${ BaseURL }/user`, {
+            const response = await fetch(`${BaseURL}/user`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -141,7 +141,7 @@ export const AuthProvider = ({ children }) => {
                     location.pathname === "/forgotpassword" ||
                     location.pathname === "/signup"
                 ) {
-                  navigate("/home/dashboard");
+                    navigate("/home/dashboard");
                 }
                 break;
         }
@@ -271,7 +271,7 @@ export const AuthProvider = ({ children }) => {
                 languagePreference,
             };
 
-            const response = await authFetch(`${ BaseURL }/update-user-language-preference`, {
+            const response = await authFetch(`${BaseURL}/update-user-language-preference`, {
                 method: "PUT",
                 body: JSON.stringify(updateUserLanguage),
             });
@@ -310,6 +310,9 @@ export const AuthProvider = ({ children }) => {
             return false;
         }
 
+        if (name === "payment-method") {
+            return state.tokenClaims?.organization_account === true
+        }
         if (!state.user.permissions) {
             return false;
         }
@@ -327,7 +330,7 @@ export const AuthProvider = ({ children }) => {
                 }
             }
         })
-    }, [state.user]);
+    }, [state.user, state.tokenClaims]);
 
     const updateUserThemePreference = useCallback(
         async ({ themePreference }) => {
@@ -389,7 +392,7 @@ export const AuthProvider = ({ children }) => {
             hasPermission,
         ]
     );
-    return <Provider value={ providerValue }>{ children }</Provider>;
+    return <Provider value={providerValue}>{children}</Provider>;
 };
 
 export const useAuth = () => useContext(AuthContext);
