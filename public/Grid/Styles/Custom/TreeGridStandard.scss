@@ -76,10 +76,10 @@
   border-bottom: 0px solid #CDD8E4;
 }
 
-.TSBodyLeft {
-  border-top: 1px solid #CDD8E4;
-  border-image: linear-gradient(90deg, #ffffff 0%, #CDD8E4 100%) 1 0 0 0
-}
+//.TSBodyLeft {
+//  border-top: 1px solid #CDD8E4;
+//  border-image: linear-gradient(90deg, #ffffff 0%, #CDD8E4 100%) 1 0 0 0
+//}
 
 //.TSBodyMid {
 //  border-top: 1px solid #CDD8E4;
@@ -130,4 +130,10 @@
 }
 .TSHeadMid .TSSectionScroll .TSSection tbody tr:nth-child(2) .TSCellBase:nth-child(3){
   border-image: linear-gradient(180deg, #fff 0%, #6F7F94 100%) 0 1 1 1;
+}
+.TSBodyLeft .TSSectionScroll tbody .TSDataRow:nth-child(2){
+  .TSCellBase{
+      border-top: 1px solid #CDD8E4;
+      border-image: linear-gradient(90deg, #ffffff 0%, #CDD8E4 100%) 1 0 0 0
+  }
 }
