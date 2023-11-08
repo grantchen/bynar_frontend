@@ -3,7 +3,7 @@ import { TreeGrid } from "../../index";
 const InvoiceList = ({ tabId }) => {
     const events = {}
 
-    events.Grids.OnRowAdd = function (G, row) {
+    events.OnRowAdd = function (G, row) {
         // Set the value of the group field when adding data after grouping
         if (G.Group !== "") {
             for (let key of G.Group.split(",")) {
