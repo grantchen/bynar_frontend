@@ -1,4 +1,3 @@
-import React, { useRef } from "react";
 import { TreeGrid } from "../../index";
 
 const UserList = ({ tabId }) => {
