@@ -20,7 +20,7 @@ const PaymentList = ({ tabId }) => {
                 let parentNode = row.parentNode
                 // Recursively parent node to get the value of the group field
                 while (parentNode !== undefined) {
-                    if (parentNode[key] !== undefined) {
+                    if (parentNode.Visible === 1 && parentNode[key] !== undefined) {
                         row[key] = parentNode[key]
                         break
                     }
