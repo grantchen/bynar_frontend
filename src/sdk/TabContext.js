@@ -1,6 +1,6 @@
 import { Heading } from "@carbon/react";
 import React, { createContext, lazy, useCallback, useEffect, useState, useRef } from "react";
-import HomeContent from "../components/Dashboard";
+import Dashboard from "../components/Dashboard";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "./AuthContext";
 
@@ -25,7 +25,7 @@ const TabContextProvider = ({ children }) => {
     const TabComponent = (name, tabId) => {
         switch (name) {
             case "Dashboard":
-                return <HomeContent />;
+                return <Dashboard />;
             case "UserList":
                 return <UserList tabId={tabId} />;
             case "InvoiceList":
@@ -57,7 +57,7 @@ const TabContextProvider = ({ children }) => {
     let ref = useRef([]);
     const [tab, setTab] = useState([
         {
-            content: <HomeContent />,
+            content: <Dashboard />,
             id: 0,
             label: t('title'),
             labelKey: 'title',
