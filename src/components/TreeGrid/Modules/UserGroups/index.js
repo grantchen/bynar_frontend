@@ -34,14 +34,6 @@ const UserGroupList = ({ tabId }) => {
         }
     }
 
-    // before add
-    events.OnCanRowAdd = function (G, par, next) {
-        if (G.Editing === 2) return false;
-        // Disable adding rows to grouped category
-        if (par.Def?.Name === "Group" && par.Def?.CDef === "R" && par.Rows) return false;
-        return
-    }
-
     // on add
     events.OnRowAdd = function (G, row) {
         let par = row.parentNode
