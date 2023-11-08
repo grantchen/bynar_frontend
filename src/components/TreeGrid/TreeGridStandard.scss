@@ -120,12 +120,24 @@
 
 .TSHeadMid{
   border-left: 0px solid #CDD8E4;
-  .TSHeaderRow .TSCellBase:nth-child(3){
-    border-left: 1px solid #6F7F94;
+  .TSHeaderRow {
+    .TSCellBase:nth-child(3){
+      border-left: 1px solid #6F7F94;
+    }
+    .TSCellBase:nth-child(2){
+      border-left: 1px solid #6F7F94;
+    }
   }
 }
-.TSHeadMid .TSSectionScroll .TSSection tbody tr:nth-child(2) .TSCellBase:nth-child(3){
-  border-image: linear-gradient(180deg, #fff 0%, #6F7F94 100%) 0 1 1 1;
+.TSHeadMid .TSSectionScroll .TSSection tbody tr:nth-child(2) {
+  .TSCellBase:nth-child(3){
+    border-image: linear-gradient(180deg, #fff 0%, #6F7F94 100%) 0 1 1 1;
+    border-left: 1px solid #6F7F94;
+  }
+  .TSCellBase:nth-child(2){
+    border-image: linear-gradient(180deg, #fff 0%, #6F7F94 100%) 0 1 1 1;
+    border-left: 1px solid #6F7F94;
+  }
 }
 .TSBodyLeft .TSSectionScroll tbody .TSDataRow:nth-child(2){
   .TSCellBase:nth-child(2){
