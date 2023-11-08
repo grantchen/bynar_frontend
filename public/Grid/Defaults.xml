@@ -1,11 +1,11 @@
 <Grid>
-   
+
    <!-- Basic grid configuration -->
    <Cfg
       DefaultsVersion="150001"
-      
+
       AutoVersion="1" SuppressCfg="0" DefaultCfg="3" DefaultCfgMenu="1"
-      
+
       Locked="" LockedValues=";layout,sheet;layout,sheet,style,formula;layout,sheet,style,formula,edit,save"
       Editing="1" EditHtml="0" Adding="1" Deleting="1" ShowDeleted="1" Copying="1" Resizing="1" AutoBool="1"
       DynamicEditing="0" DynamicSpan="0" DynamicBorder="0" SpannedBorder="3" BorderOut="3,black" BorderIn="1,black" DefaultBorder="1" WordWrap="1"
@@ -26,7 +26,7 @@
       CopySelected="1" CopyFocused="1" CopyCols="1" CopyEdit="1" CopyTime="" CopyFormulas="1"
       Pasting="1" PasteSelected="1" PasteFocused="8" PasteCols="4" PasteTree="2" PasteErrors="1"
       RoundNumbers="0" RoundNumbersDigits="5"
-      AutoFillType="3" MoveFocusType="3" RotateStepsLeft="270,300,315,330,-1" RotateStepsRight="90,60,45,30,-2" 
+      AutoFillType="3" MoveFocusType="3" RotateStepsLeft="270,300,315,330,-1" RotateStepsRight="90,60,45,30,-2"
       MaxAvailability="100000"
       UndoMerge="|Focus,Select,Scroll|ColsVisibility|Filter"
       UpdateHeightsTimeout="0" MediaChange="1"
@@ -37,7 +37,7 @@
       ColPaging="0" ColPageLength="10" ColPageMin="10" MaxColPages="10"
       ChildPaging="2" RemoveCollapsed="0" RemoveChanged="0" ChildPageLength="0" ChildPageDiff="0"
       ChildParts="" ChildPartLength="20" ChildPartMin="3" MaxChildParts="0"
-		
+
       LastId="" IdPrefix="" IdPostfix="" IdChars="_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" SetIds="1" CaseSensitiveId="1" AutoIdPrefix="AR" GroupIdPrefix="GR" ChildIdPrefix="CR"
       TestIdSeparator="-"
       AutoUpdate="0"
@@ -57,7 +57,7 @@
       ExpandAllLoaded="0" ExpandAllLevels="3"
 
       SuppressAnimations="0" AnimateRows="3" AnimateCells="1" AnimateCols="1" AnimateDialogs="2" AnimateRowsMax="10" AnimateRowsColorMax="10" AnimateColsMax="10" AnimateCellsMax="200" AnimateUndo="1"
-      
+
       AbsoluteCursors="" BorderCursors="1"
       FocusWholeRow="0" FocusRect="0" TabStop="1" ExternalFocusMaxRows="200" ExternalFocusMaxCols="70" ShowFocused="1"
       Hover="2" ShiftHint="1"
@@ -102,8 +102,8 @@
       BorderColors="|black||red||green||blue||brown||maroon||gray||yellow||lime||aqua||pink||orange||silver"
       Indent="1" Indents="||&lt;span style='font-size:9px;color:silver;'>indent&lt;/span>|0|0|1|1|2|2|3|3|4|4|5|5|6|6|7|7|8|8|9|9|10|10|15|15|20|20|25|25|30|30|35|35|40|40|45|45|50|50"
       Format="1234.50" TextFormat="text" NumberFormat="general" DateFormat="12/31/2000"
-      Formats="{Items:[ 
-         {Name:'general',Text:'General number or text',Type:'Float',Format:''}, 
+      Formats="{Items:[
+         {Name:'general',Text:'General number or text',Type:'Float',Format:''},
          {Name:'-'},
          {Name:'@Enter',Text:'Enter custom format ...'},
          {Name:'@Custom',Text:'Custom formats',Menu:'1',Items:[
@@ -115,20 +115,20 @@
          {Name:'boolean',Text:'Boolean true / false',Type:'Int',Format:'!'},
          {Name:'-'},
          {Name:'integer',Text:'Integer number',Type:'Int',Format:'0'},
-         {Name:'1234.50',Text:'Float number 1234.50',Type:'Float',Format:'f'}, 
+         {Name:'1234.50',Text:'Float number 1234.50',Type:'Float',Format:'f'},
          {Name:'1,234.50',Text:'Float number 1,234.50',Type:'Float',Format:',0.00'},
          {Name:'float',Text:'Next float numbers',Menu:'1',Items:[
-            {Name:'1234.56',Text:'Float number 1234.5',Type:'Float',Format:'0.##'}, 
+            {Name:'1234.56',Text:'Float number 1234.5',Type:'Float',Format:'0.##'},
             {Name:'1,234.56',Text:'Float number 1,234.5',Type:'Float',Format:',0.##'},
-            {Name:'1234.5_',Text:'Float number 1234.5_',Type:'Float',Format:'0.??'}, 
+            {Name:'1234.5_',Text:'Float number 1234.5_',Type:'Float',Format:'0.??'},
             {Name:'1,234.5_',Text:'Float number 1,234.5_',Type:'Float',Format:',0.??'},
             {Name:'&lt;em>-1,234.50&lt;/em>',Text:'Float number &lt;em>-1,234.50&lt;/em>',Type:'Float',Format:',0.00;[red],-0.00'},
-            {Name:'(1,234.50)',Text:'Float number (1,234.50)',Type:'Float',Format:',0.00;,(0.00)'}, 
+            {Name:'(1,234.50)',Text:'Float number (1,234.50)',Type:'Float',Format:',0.00;,(0.00)'},
             {Name:'&lt;em>(1,234.50)&lt;/em>',Text:'Float number &lt;em>(1,234.50)&lt;/em>',Type:'Float',Format:',0.00;[red],(0.00)'},
             {Name:'-'},
-            {Name:'1234.5000',Text:'Float number 1234.5678',Type:'Float',Format:'r'}, 
-            {Name:'1234.5678',Text:'Float number 1234.5',Type:'Float',Format:'g'}, 
-            {Name:'1234.5___',Text:'Float number 1234.5___',Type:'Float',Format:'0.????'}, 
+            {Name:'1234.5000',Text:'Float number 1234.5678',Type:'Float',Format:'r'},
+            {Name:'1234.5678',Text:'Float number 1234.5',Type:'Float',Format:'g'},
+            {Name:'1234.5___',Text:'Float number 1234.5___',Type:'Float',Format:'0.????'},
             {Name:'-'},
             {Name:'$1,234.50',Text:'Currency number $1,234.50',Type:'Float',Format:'c'},
             {Name:'$1,234.50',Text:'Currency number -$1,234.50',Type:'Float',Format:'*ncm'},
@@ -136,28 +136,28 @@
             {Name:'$(1,234.50)',Text:'Currency number ($1,234.50)',Type:'Float',Format:'*ncp'},
             {Name:'&lt;em>($1,234.50)&lt;/em>',Text:'Currency number &lt;em>($1,234.50)&lt;/em>',Type:'Float',Format:'*ncpr'},
             {Name:'-'},
-            {Name:'percent',Text:'Float percent number',Type:'Float',Format:'p'}, 
+            {Name:'percent',Text:'Float percent number',Type:'Float',Format:'p'},
             {Name:'percent int',Text:'Integer percent number',Type:'Float',Format:',0%'}
-            ]}, 
+            ]},
          {Name:'-'},
-         {Name:'12/31/2000',Text:'Short full date (12/31/2000)',Type:'Date',Format:'d'}, 
+         {Name:'12/31/2000',Text:'Short full date (12/31/2000)',Type:'Date',Format:'d'},
          {Name:'12/31',Text:'Short partial date (12/31)',Type:'Date',Format:'m'},
-         {Name:'14:30:30',Text:'Long time (14:30:30)',Type:'Date',Format:'T'}, 
-         {Name:'14:30',Text:'Short time (14:30)',Type:'Date',Format:'t'}, 
-         {Name:'12/31/2000 14:30',Text:'Short date and time (12/31/2000 14:30)',Type:'Date',Format:'h'}, 
+         {Name:'14:30:30',Text:'Long time (14:30:30)',Type:'Date',Format:'T'},
+         {Name:'14:30',Text:'Short time (14:30)',Type:'Date',Format:'t'},
+         {Name:'12/31/2000 14:30',Text:'Short date and time (12/31/2000 14:30)',Type:'Date',Format:'h'},
          {Name:'date',Text:'Next date times',Menu:'1',Items:[
             {Name:'12/2000',Text:'Short month and year (12/2000)',Type:'Date',Format:'y'},
-            {Name:'12th December 2000',Text:'Long full date (12th December 2000)',Type:'Date',Format:'D'}, 
+            {Name:'12th December 2000',Text:'Long full date (12th December 2000)',Type:'Date',Format:'D'},
             {Name:'12th December',Text:'Long partial date (12th December)',Type:'Date',Format:'M'},
             {Name:'December 2000',Text:'Long month and year (December 2000)',Type:'Date',Format:'Y'},
             {Name:'2:30:30pm',Text:'Long time am/pm (2:30:30pm)',Type:'Date',Format:'I'},
             {Name:'2:30pm',Text:'Short time am/pm (2:30pm)',Type:'Date',Format:'i'},
             {Name:'12/31/2000 14:30:30',Text:'Short date and long time (12/31/2000 14:30:30)',Type:'Date',Format:'H'},
-            {Name:'12/31/2000 2:30pm',Text:'Short date and time am/pm (12/31/2000 2:30pm)',Type:'Date',Format:'j'}, 
+            {Name:'12/31/2000 2:30pm',Text:'Short date and time am/pm (12/31/2000 2:30pm)',Type:'Date',Format:'j'},
             {Name:'12/31/2000 2:30:30pm',Text:'Short date and long time am/pm (12/31/2000 2:30:30pm)',Type:'Date',Format:'J'},
-            {Name:'12th December 2000 14:30',Text:'Long date and time (12th December 2000 14:30)',Type:'Date',Format:'l'}, 
+            {Name:'12th December 2000 14:30',Text:'Long date and time (12th December 2000 14:30)',Type:'Date',Format:'l'},
             {Name:'12th December 14:30:30',Text:'Long date and long time (12th December 14:30:30)',Type:'Date',Format:'L'},
-            {Name:'12th December 2000 2:30pm',Text:'Long date and time am/pm (12th December 2000 2:30pm)',Type:'Date',Format:'k'}, 
+            {Name:'12th December 2000 2:30pm',Text:'Long date and time am/pm (12th December 2000 2:30pm)',Type:'Date',Format:'k'},
             {Name:'12th December 2:30:30pm',Text:'Long date and long time am/pm (12th December 2:30:30pm)',Type:'Date',Format:'K'}
             ]}
          ]}"
@@ -205,12 +205,12 @@
                 |92|linear-gradient(to top left,transparent 0%,transparent calc(50% - 0.85px),%1 50%,transparent calc(50% + 0.85px),transparent 100%),linear-gradient(to top right,transparent 0%,transparent calc(50% - 0.85px),%1 50%,transparent calc(50% + 0.85px),transparent 100%)
                 |93|linear-gradient(to top left,transparent 0%,transparent calc(50% - 1.7px),%1 50%,transparent calc(50% + 1.7px),transparent 100%),linear-gradient(to top right,transparent 0%,transparent calc(50% - 1.7px),%1 50%,transparent calc(50% + 1.7px),transparent 100%)
                 |94|linear-gradient(to top left,transparent 0%,transparent calc(50% - 2.55px),%1 50%,transparent calc(50% + 2.55px),transparent 100%),linear-gradient(to top right,transparent 0%,transparent calc(50% - 2.55px),%1 50%,transparent calc(50% + 2.55px),transparent 100%)"
-                
+
       PatternColor="gray" PatternColors="|black||red||green||blue||brown||maroon||gray||yellow||lime||aqua||pink||orange||silver|"
       />
 
       <!-- Prefetch all SVG icons for Microsoft IE / Edge -->
-      <Cfg 
+      <Cfg
          IESvg="CustScroll1Right,CustScroll1Left,CustScroll1Down,CustScroll1Up,
                  LevelButton,SpaceSelectInner,ButtonClose,PopupLeft,TabHtmlBase PopupLeft,CellImg,
                  PanelMove,PanelSelect,PanelSelectOn,PanelDelete,PanelCopy,CellHeaderPanel PanelSelect,CellHeaderPanel PanelSelectOn,CellHeaderPanel PanelCopy,FastPanel,
@@ -267,7 +267,7 @@
       OnMouseOverPanelMove="CursorMove" OnMouseOverPanelMoveAll="CursorMove" OnMouseOverPanelColMove="CursorMove" OnMouseOverPanelColMoveAll="CursorMove"
       OnMouseOverPanelOff="CursorDefault"
       OnMouseOverSpaceOff="CursorDefault"
-      OnMouseOverEditable="CursorText" 
+      OnMouseOverEditable="CursorText"
       OnMouseOverEditBool="CursorPointer" OnMouseOverEditEnum="CursorPointer" OnMouseOverEditRadio="CursorPointer"
       OnMouseOverSort="CursorPointer" OnMouseOverSortUp="CursorPointer" OnMouseOverSortDown="CursorPointer"
       OnMouseOverExpand="CursorPointer" OnMouseOverTree="CursorDefault"
@@ -275,19 +275,19 @@
       OnMouseOverResize="CursorResizeGrid"
 
       OnMouseDownButton="ButtonDown" OnMouseUpButton="ButtonUp"
-      
+
       OnClickCell="CancelLinkEdit OR ShowLinkA,FocusEdit"
       OnDblClickCell="CancelLinkEdit,Focus AND StartEdit"
       OnClickNoFocus="AcceptEdit,ChangeFocusRow OR ChangeFocusCol,0"
       OnClickEmpty="AcceptEdit"
-      OnRightClick="ShowPopupMenu" 
+      OnRightClick="ShowPopupMenu"
       OnRightClickCell="100"
       OnCtrlClickCell="ChooseCellInsert OR ShowLink OR DeselectCell OR SelectCell OR DeselectRow OR SelectRow,1"
       OnShiftClickCell="ChooseCellReplaceAll OR FocusCellRange OR InvertCellRangeFirst OR InvertRowRangeFirst,1"
       OnCtrlClickNoFocus="ChooseCellInsert OR ShowLink"
       OnShiftClickNoFocus="ChooseCellReplaceAll"
       OnClickNothing="CloseDialog" OnClickOther="CloseDialog,AcceptEdit,0"
-      
+
       OnClickSort="SortAsc OR SortDesc" OnClickSortUp="SortAsc" OnClickSortDown="SortDesc"
       OnCtrlClickSort="SortAscAdd OR SortDescAdd" OnCtrlClickSortUp="SortAscAdd" OnCtrlClickSortDown="SortDescAdd"
 
@@ -342,7 +342,7 @@
       OnClickButtonDebug="ShowDebug"
       OnClickButton="Button"
       OnDblClickResize="GridResizeDefault"
-      
+
       OnClickButtonCorrect="CorrectAllDependencies"
       OnClickButtonZoomFit="ZoomFit"
       OnClickButtonZoomIn="ZoomIn"
@@ -390,7 +390,7 @@
       OnClickEditEnum="Focus AND StartEdit"
       OnClickEditBool="Focus,Grid.EditMode?1:ChangeBool"
       OnClickEditRadio="Focus,Grid.EditMode?1:ChangeRadio"
-      
+
       OnClickOutside="Blur"
       OnClickPagerPage="ShowPage"
 
@@ -428,15 +428,15 @@
       OnCtrlClickGantt="DeleteGanttConstraint OR DeleteGanttFlag OR DeleteGanttPoint OR DeleteGanttMain OR DeleteGanttRun OR DeleteGanttRunContainerOnly OR DeleteGanttDependency OR DeleteGanttBase OR DeleteGanttFinish OR 1"
       OnDblClickGantt="SelectGanttRun OR SelectGanttRunContainer OR EditGanttFlag OR EditGanttResource OR EditGanttText OR EditGanttRun OR EditGanttRunTip OR EditGanttDependencyLag OR NewGanttMilestone OR NewGanttFlag OR NewGanttPoint"
       OnShiftClickGantt="SplitGanttMain OR SplitGanttRun"
-      OnCtrlRightClickGantt="SetGanttPercent OR SetGanttRunPercent" 
+      OnCtrlRightClickGantt="SetGanttPercent OR SetGanttRunPercent"
       OnShiftRightClickGantt="EditGanttPercent OR EditGanttRunPercent"
       OnRightClickGantt="GanttMenu,1"
       OnDragGanttHeader="ZoomGantt,1" OnClickGanttHeader="ZoomHeader OR ZoomIn" OnRightClickGanttHeader="UndoZoom OR ZoomOut,1" OnRightDragGanttHeader="SelectGanttRunRange,1"
 
       OnClick1Cell="HoverGantt,CancelLinkEdit OR ShowLink,FocusEdit"
-      OnClick2Cell="ShowPopupMenu OR Focus AND StartEdit" 
+      OnClick2Cell="ShowPopupMenu OR Focus AND StartEdit"
       OnClick2Resize="GridResizeDefault"
-      OnLongClick1="ShowPopupMenu OR ShowHintStatic" 
+      OnLongClick1="ShowPopupMenu OR ShowHintStatic"
       OnLongClick1Img="Focus,ShowPopupMenu"
       OnClick1Img="Focus,ShowPopupMenu"
       OnDrag1Row="ChooseCellsReplaceAll OR FocusCells OR DragSelected OR DragRow" OnDrag2Row="0" OnDrag3Row="0"
@@ -458,26 +458,26 @@
       OnCtrlEnter="Expand OR Collapse"
       OnEnter="ChangeBool OR ChangeRadioRightCycle OR StartEdit OR ShowLink OR ShowDefaults OR ShowFile OR ShowCalendar OR EditGanttResource"
       OnF2="StartEdit"
-		
+
       OnTab="TabRight?1:!Grid.TabStop" OnShiftTab="TabLeft?1:!Grid.TabStop"
       OnUp="GoUp,1" OnDown="GoDown,1" OnLeft="GoLeft,1" OnRight="GoRight,1"
       OnShiftUp="FocusUp,1" OnShiftDown="FocusDown,1" OnShiftLeft="FocusLeft,1" OnShiftRight="FocusRight,1"
       OnHome="GoFirst,1" OnEnd="GoLast,1" OnPageUp="PageUp,1" OnPageDown="PageDown,1"
-      
+
       OnTabEnum="TabRightEdit AND StartEdit?1:!Grid.TabStop" OnShiftTabEnum="TabLeftEdit AND StartEdit?1:!Grid.TabStop"
       OnTabEdit="TabRightEdit AND StartEdit?1:!Grid.TabStop" OnShiftTabEdit="TabLeftEdit AND StartEdit?1:!Grid.TabStop"
-      OnUpEdit="GoUpEdit AND StartEdit,1" OnDownEdit="GoDownEdit AND StartEdit,1" 
+      OnUpEdit="GoUpEdit AND StartEdit,1" OnDownEdit="GoDownEdit AND StartEdit,1"
       OnCtrlLeft="ChangeRadioLeft" OnCtrlRight="ChangeRadioRight"
       OnEnterEdit="AcceptEdit,1" OnEscEdit="CancelEdit"
       OnCtrlEnterEdit="AcceptEdit" OnAltEnterEdit="AcceptEdit" OnShiftEnterEdit="AcceptEdit"
       OnSpaceEdit="ChangeBool"
       OnF4Edit="SwitchRowColAbsolute"
 
-      OnCtrlBEdit="BoldOn" OnCtrlIEdit="ItalicOn" OnCtrlUEdit="UnderlineOn" 
+      OnCtrlBEdit="BoldOn" OnCtrlIEdit="ItalicOn" OnCtrlUEdit="UnderlineOn"
       OnCtrlRightBracketEdit="VertAlignBottom" OnCtrlLeftBracketEdit="VertAlignTop"
       OnCtrlCommaEdit="DecreaseTextSize" OnCtrlPointEdit="IncreateTextSize"
       OnCtrlShiftA="UpperCase" OnCtrlShiftK="LowerCase"
-      
+
       OnSpace="SelectRow OR DeselectRow" OnCtrlSpace="SelectAll OR DeselectAll"
       OnDel="DeleteRow OR UndeleteRow,1" OnCtrlDel="UndeleteSelected OR DeleteSelected,1"
       OnIns="AddRow" OnCtrlIns="AddChildEnd" OnShiftIns="CopyRow" OnShiftCtrlIns="CopyTree"
@@ -487,7 +487,7 @@
       OnMetaZ="Undo" OnMetaY="Redo"
       OnMetaC="Copy,0" OnMetaX="Exclude,0" OnMetaV="Paste,0"
       OnCtrlAltD="DebugUndo"
-      
+
       KeyCodes1="Space=32,Enter=13,Esc=27,Backspace=8,Tab=9"
       KeyCodes2="Tilde=192,Minus=189,Equal=187,Backslash=220,LeftBracket=219,RightBracket=221"
       KeyCodes3="Semicolon=186,Apostrophe=222,Comma=188,Point=190,Slash=191"
@@ -496,13 +496,13 @@
       KeyCodes6="NumDivide=111,NumStar=106,NumMinus=109,NumPlus=107,NumPoint=110"
       KeyCodes7="Num0=96,Num1=97,Num2=98,Num3=99,Num4=100,Num5=101,Num6=102,Num7=103,Num8=104,Num9=105"
       KeyCodes8="CapsLock=20,ScrollLock=145,NumLock=144"
-      
+
       EdgeSize="5" RowSize="5" GanttSize="5" GanttSizeOnly="10" DragSize="5" ClickSize="5" GridSize="" GanttSizeOver="0" ScrollColSize="10"
       EdgeSizeTouch="20" RowSizeTouch="10" GanttSizeTouch="20" GanttSizeOnlyTouch="1000" DragSizeTouch="5" ClickSizeTouch="20" GridSizeTouch="" GanttSizeOverTouch="3" GanttSizeOverTouchFocused="10" ScrollColSizeTouch="20"
 
       LeftPrefix="" RightPrefix="Right" MiddlePrefix="Middle" CtrlPrefix="Ctrl" AltPrefix="Alt" ShiftPrefix="Shift" MetaPrefix="Ctrl"
       />
-        
+
    <!-- Default rows -->
    <Def>
 
@@ -519,7 +519,7 @@
          MaxChildren="10000" MaxChildrenDiff="20"
          NoBorder="0" NoStyle="0" NoFormat="0" NoData="0"
          />
-      
+
       <!-- Default row for fixed rows -->
       <D Name="Fixed" Def="R"
          CanDelete="0" CanSelect="0" CanDrag="0" CanFilter="0" CanCopy="0"	AcceptChild="0" CanHide="1" InsertImg=""
@@ -531,7 +531,7 @@
          />
 
       <!-- Default row for column panel rows -->
-      <D Name="Panel" Def="Fixed" CanFix="0" 
+      <D Name="Panel" Def="Fixed" CanFix="0"
          Buttons="ColSelect,ColDelete,ColCopy" CanFocus="0" NoBorder="3" NoStyle="2" NoFormat="2" NoData="1" CanPrint="0" CanExport="0" CanHide="1"
          PanelColCopyMenu="CopyCol,CopyCols@FC,CopySelectedCols@SC,-,AddCol,AddCols@2"
          PanelColCopyAllMenu="CopyCol,CopyCols@2,CopySelectedCols,-,AddCol,AddCols@2,AddColEnd"
@@ -542,7 +542,7 @@
          CanEdit="0"	CanFilter="0" CanDrag="0" CanCopy="0" CanDelete="0"
          Expanded="0" NoUpload="1"
          />
-      
+
       <!-- Default row for all space rows -->
       <D Name="Solid" Def=""
          Visible="1"
@@ -607,7 +607,7 @@
 
       <!-- Default column for type Gantt -->
       <D Name="Gantt" Def="" Visible="1" Type="Gantt" MenuName="Gantt chart" CanPrint="1"
-         CanSort="0" CanEdit="0" CanResize="0" CanFilter="0" CanCopyPaste="0" CanGroup="0" CanSearch="0" CanExport="0" WidthPad="" ShowHint="0" CanDrag="0" CanSelect="0" CanDelete="0" NoUpload="1" FormulaCanUse="0" CanFix="0" 
+         CanSort="0" CanEdit="0" CanResize="0" CanFilter="0" CanCopyPaste="0" CanGroup="0" CanSearch="0" CanExport="0" WidthPad="" ShowHint="0" CanDrag="0" CanSelect="0" CanDelete="0" NoUpload="1" FormulaCanUse="0" CanFix="0"
          GanttOrder="Chart,Availability,Constraints,Run,Main,Mark,Dependency,Flags,Points" GanttHeaderCount="6" GanttMilestoneTopMin="0"
          GanttCount="1" GanttFlagsType="1" GanttFlagsMove="1" GanttShift="3" GanttFormatObject="Last"
          GanttSize="" GanttWidth="22" GanttUnits="d" GanttLeft="0" GanttRight="0" GanttRoundUnits="0" GanttPagingFixed="6" GanttPageWidth="200%"
@@ -619,7 +619,7 @@
          GanttDirection="0" GanttCorrectDependencies="2" GanttIncorrectDependencies="1" GanttCorrectDependenciesFixed="0" GanttCorrectDependenciesCreate="2" GanttFixComplete="0" GanttMaxCorrectingLoops="40" GanttRunMaxCorrectingLoops="5" GanttCorrectDependenciesButtons="Yes,No,Always,Never"
          GanttMarkIncorrectDependencies="2" GanttColorIncorrectDependencies="9" GanttMarkDisabledDependencies="2" GanttColorDisabledDependencies="8" GanttAssignDependencies="0" GanttDependencyColor="0" GanttAdjacentDependencies="1"
          GanttRunResize="Resize" GanttRunMove="Slide" GanttRunAdjust="Shift" GanttRunAdjustStart="Slip" GanttRunAdjustCorrect="Slip" GanttRunError="Sort" GanttRunErrors="1" GanttRunJoined="0" GanttRunJoinedNbsp="255" GanttRunSelect="0" GanttRunTip="*Text*"
-         GanttRunNew="0.0001,Box" GanttRunNewStart="0.0001,Box" GanttRunGroupHover="1" GanttRunStates="2" GanttRunCorrectFixed="1" GanttRunMilestones="1" GanttRunBoxMinType="1" 
+         GanttRunNew="0.0001,Box" GanttRunNewStart="0.0001,Box" GanttRunGroupHover="1" GanttRunStates="2" GanttRunCorrectFixed="1" GanttRunMilestones="1" GanttRunBoxMinType="1"
          GanttRunIds="1" GanttRunIdPrefix="new" GanttRunIdPostfix="" GanttRunLastId="" GanttRunDragObject="2" GanttRunContainersResize="1" GanttRunContainersDelete="1"
          GanttMenu="SplitGanttConstraint,ChangeGanttConstraint,EditGanttFlag,ChooseGanttFlagIcon,SetGanttMilestone,LockGanttMain,DisableGanttMain,SplitGanttMain,SetGanttPercent,EditGanttPercent,EditGanttText,SelectGanttRunPart,LockGanttRun,LockGanttRunContainer,DisableGanttRun,DisableGanttRunContainer,EnableGanttRunContainer,SplitGanttRun,EditGanttRun,EditGanttRunTip,ChooseGanttRunType,ChooseGanttRunContainer,AddGanttRunContainer,-,SelectGanttRun,UnselectGanttRun,SelectGanttRunContainer,UnselectGanttRunContainer,JoinGanttRunSelected,SplitGanttRunJoined,JoinGanttRunAdjacent,SplitGanttRunAdjacent,ChooseGanttRunSelectedType,ChooseGanttRunGroupType,ChooseGanttRunGroupAllType,ChooseGanttRunContainerType,ChooseGanttRunRowType,-,SetGanttRunMilestone,SetGanttRunPercent,EditGanttRunPercent,EditGanttRunText,-,EditGanttResource,GanttDepLagChange,-,DelGanttDep,DelGanttConstraint,DelGanttFlag,DelGanttPoint,DelGanttMilestone,DelGanttMainPart,DelGanttMain,DelGanttRunPart,DelGanttRunContainerOnly,-,DelAllGanttDep,DelGanttMainAll,DelGanttMainBar,DelGanttRunSelected,DelGanttRunGroup,DelGanttRunGroupAll,DelGanttRunContainer,DelGanttRun,DelGanttFlags,DelGanttPoints,DelGanttConstraints,DelGanttAll,-,NewGanttFlag,NewGanttPoint,NewGanttConstraint,NewGanttMilestone,NewGanttEndMilestone,NewGanttRunStop,-,SetGanttBase,DelGanttBase,SetGanttFinish,DelGanttFinish,CorrectRelatedDependencies,CorrectAllDependencies,-,ZoomBar,ZoomAll,ZoomHeader,ZoomUndo,ZoomIn,ZoomOut,ZoomFit"
          />
@@ -629,9 +629,9 @@
    <Header Kind="Header" Def="Header" id="Header"
       CanDrag="0" CanCopy="1" CanSelect="1" CanDelete="1" CanExport="1"
       />
-   
+
    <!-- Root settings -->
-   <Root 
+   <Root
       CDef="R"
       CanSort="1"
       FocusCell="Border" FocusRow="Border,Background"
@@ -639,7 +639,7 @@
       />
 
    <!-- Row left panel -->
-   <Panel 
+   <Panel
       Def="" Visible="1" Move="0" Select="1" Delete="1" Copy="0" Prepared="1"
       CanHide="1" CanResize="0" CanMove="0" CanDrag="1" CanExport="0" CanCopyPaste="0" CanSelect="0" CanPrint="0" NoUpload="1" FormulaCanUse="0" NoBorder="3" NoStyle="2" NoFormat="2" NoData="1"
       HoverCell="Color"
@@ -648,7 +648,7 @@
       />
 
    <!-- Right side pager -->
-   <Pager 
+   <Pager
       Visible="1" Width="100" MinWidth="35" CanResize="1" CanHide="1" Hover="1" Name="Pager"
       />
 
@@ -712,10 +712,10 @@
       SizeType="Html" SizeCanFocus="0" SizeWidth="33" SizeButton="Enum" SizeOnClick="Grid.CanEditStyle()?ShowDefaults:0" SizeVisibleFormula="!!Grid.DynamicStyle"
       SizeOnChange="Grid.TextSize=Value;return SetTextSize" SizeOnSame="var v=Grid.GetAttribute(Grid.FRow,Grid.FCol,'TextSize');Grid.TextSize=v?v:'';SetTextSize"
       SizeDefaultsFormula="var s=Grid.TextSizes,c=s.charAt(0);s=s.slice(1).split(c),o=[];for(var i=1;i&lt;s.length;i+=2)o[o.length]=s[i];return c+o.join(c)"
-      SizeFormatFormula="var s=Grid.TextSizes,c=s.charAt(0);s=s.slice(1).split(c),o=[];for(var i=0;i&lt;s.length;i+=2)o[o.length]='&quot;'+s[i]+'&quot;:&quot;'+s[i+1]+'&quot;';return '{'+o.join(',')+'}';" 
+      SizeFormatFormula="var s=Grid.TextSizes,c=s.charAt(0);s=s.slice(1).split(c),o=[];for(var i=0;i&lt;s.length;i+=2)o[o.length]='&quot;'+s[i]+'&quot;:&quot;'+s[i+1]+'&quot;';return '{'+o.join(',')+'}';"
       SizeEditFormatFormula="var s=Grid.TextSizes,c=s.charAt(0);s=s.slice(1).split(c),o=[];for(var i=0;i&lt;s.length;i+=2)o[o.length]='&quot;'+s[i]+'&quot;:&quot;'+s[i+1]+'&quot;';return '{'+o.join(',')+'}';"
       SizeFormula="var v=Grid.GetAttribute(Grid.FRow,Grid.FCol,'TextSize');return v?v:'';" SizeCanEdit="0"
-      ColorTextButton="Class" ColorTextOnEnter="SetTextColor" ColorTextDisabledFormula="!Grid.CanEditStyle()" ColorTextVisibleFormula="!!Grid.DynamicStyle" ColorTextUnderlineFormula="Grid.TextColor?Grid.TextColor:''" 
+      ColorTextButton="Class" ColorTextOnEnter="SetTextColor" ColorTextDisabledFormula="!Grid.CanEditStyle()" ColorTextVisibleFormula="!!Grid.DynamicStyle" ColorTextUnderlineFormula="Grid.TextColor?Grid.TextColor:''"
       ColorTextLeft="1" ColorTextLeftVisibleFormula="!!Grid.DynamicStyle"
       ColorTextSwitch="1" ColorTextPopupIcon="3" ColorTextOnClickPopup="ChooseTextColor OR 1"
       ColorShadowButton="Class" ColorShadowOnEnter="SetTextShadowColor" ColorShadowDisabledFormula="!Grid.CanEditStyle()" ColorShadowVisibleFormula="!!Grid.DynamicStyle" ColorShadowUnderlineFormula="Grid.TextShadowColor?Grid.TextShadowColor:''"
@@ -747,7 +747,7 @@
       LockButton="Class" LockOnEnter="Lock" LockVisibleFormula="Grid.LockedValues?1:0" LockFormula="Grid.GetLockIndex()" LockSwitch="2"
       HelpButton="Class" HelpOnEnter="ShowHelp"
       DebugButton="Class" DebugOnEnter="ShowDebug" DebugVisibleFormula="!!Grid.DebugFlags.length"
-      
+
       Cells70Styles="Languages,Styles,GanttStyles,Sizes,Scales,Contrasts"
       LanguagesType="Languages" Languages="2" LanguagesVisibleFormula="Grid.Language?1:0"
       StylesType="Styles" Styles="2"
@@ -865,9 +865,9 @@
       <XX Name="XX Test" Text_Url="Languages/TextXX.xml" Text_Static="TextXX" Tip="Test language to translate"/>
    </Languages>
 
-   <!-- Format configuration the same for all languages -->
+   <!-- Format configuration the same for all Languages -->
    <Lang>
-      <Format 
+      <Format
          StrictNumbers="0" StrictDates="15" GMT="1" DateFormatLowercase="1" EditFormats="" ExactNumbers="0" BaseSeparators="0" Unsupported="\?"
          Colors=",#000,#FFF,#F00,#0F0,#00F,#FF0,#F0F,#0FF,#800,#080,#008,#880,#808,#088,#CCC,#888,#99F,#936,#FFC,#CFF,#606,#F88,#06C,#CCF,#008,#F0F,#FF0,#0FF,#808,#800,#088,#00F,#0CF,#CFF,#CFC,#FF9,#9CF,#F9C,#C9F,#FC9,#36F,#3CC,#9C0,#FC0,#F90,#F60,#669,#999,#036,#396,#030,#330,#930,#936,#339,#333"
          ExportFilters=",= ,&#x2260; ,&lt; ,&#x2264; ,> ,&#x2265; ,|* ,|- ,*| ,-| ,*|* ,-|- " ExportFiltersHtml="&lt;span style='color:red;'>%1&lt;/span>"
