@@ -13,25 +13,24 @@ Bynar frontend react web application
 | Name | Sub Directory | Description |
 | :--- | :--- |:--- |
 | components | Auth | Auth react component|
-|  | Cards ||
-|  | Dashboard ||
-|  | GeneralPostingSetup |General Posting Setup treegrid service component|
-|  | Header | No authenticated  page header component|
+|  | Auth |Auth service component|
+|  | Cards |Credit card manment service component|
+|  | Dashboard |Dashboard page comppnent|
 |  | HeaderAuthenticated | Authenticated Page header component|
-|  | InvoicesTable | Invoices service treegrid component|
+|  | HeaderTab | Unauthenticated Page header component|
 |  | JSONS | Json config files |
 |  | Login | Sign in page component |
 |  | MagicLinkValidation | Magic link validation component|
 |  | media | Media files |
-|  | OrganizationList | Organization service treegrid component|
+|  | OrganizationAccountPanel | Organization account panel component|
 |  | ProfileDropdown | Profile dropdown component|
 |  | SidePanel | Side panel component|
-|  | SideHeader | Side header component|
-|  | TreeGrid | TreeGrid component|
+|  | SignFooter | Sign in footer component|
+|  | SignHeader | Sign in header component|
+|  | SignHeaderSelect | Sign in select language component|
+|  | TreeGrid | All treeGrid services component|
 |  | UserCardManagementPanel | User card management panel component|
 |  | UserDetailPanel | User detail panel component|
-|  | UserGroupList | User group service treegrid component|
-|  | UserList | User service treegrid component|
 | pages | Dashboard | Dashboard page|
 |  | Home | Home page|
 |  | signin | Signin page|
