@@ -16,7 +16,7 @@ Bynar frontend react web application
 |  | Cards |Credit card manment service component|
 |  | Dashboard |Dashboard page comppnent|
 |  | HeaderAuthenticated | Authenticated Page header component|
-|  | HeaderTab | Unauthenticated Page header component|
+|  | HeaderTab | Inline and drop-down tabs in header|
 |  | JSONS | Json config files |
 |  | Login | Sign in page component |
 |  | MagicLinkValidation | Magic link validation component|
