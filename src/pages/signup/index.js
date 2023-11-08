@@ -446,16 +446,31 @@ const Signup = () => {
                 } else if (response.status === 500) {
                     setIsError(true);
                     let err = res.error
-                    if (err.includes("timestamp has expired")) {
-                        err = t("timestamp-has-expired")
-                    } else if (err.includes("has already exist")) {
-                        const parts = err.split(' ');
-                        const emailAddress = parts[1];
-                        err = t("email-label") + " "+ emailAddress + " "+ t("has-already-exist")
-                    } else if (err.includes("send registration email fail")) {
-                        err = t("send-registration-email-fail")
-                    } else if (err.includes("check user exists fail")) {
-                        err = t("check-user-exists-fail")
+                    const errorMappings = {
+                        "check user exists failed": "check-user-exists-failed",
+                        "has already exist": "has-already-exist",
+                        "delete user failed": "delete-user-failed",
+                        "number already exists": "create-user-failed-email",
+                        "email already exists": "create-user-failed-phone-number",
+                        "update user failed": "update-user-failed",
+                        "no user found": "no-user-found",
+                        "set custom token with claims fail": "set-custom-fail"
+                    };
+                    let errorMessage = "";
+                    for (const [key, value] of Object.entries(errorMappings)) {
+                        if (err.includes(key)) {
+                            if (key === "has already exist") {
+                                const parts = err.split(' ');
+                                const emailAddress = parts[1];
+                                errorMessage = `${t("email-label")} ${emailAddress} ${t(value)}`;
+                            } else {
+                                errorMessage = t(value);
+                            }
+                            break;
+                        }
+                    }
+                    if (errorMessage !== "") {
+                        err = errorMessage;
                     }
                     setErrorNotification({
                         title: err,

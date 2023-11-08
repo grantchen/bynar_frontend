@@ -515,5 +515,10 @@
     "sending-confirmation-email": "envoi d'un email de confirmation",
     "re-sending-confirmation-email": "renvoyer l'e-mail de confirmation",
     "error-user-account": "une erreur s'est produite lors de la création du compte utilisateur",
-    "login-failed-invalid": "Échec de la connexion, lien expiré ou invalide"
+    "login-failed-invalid": "Échec de la connexion, lien expiré ou invalide",
+    "check-user-exists-failed": "échec de la vérification de l'existence de l'utilisateur",
+    "delete-user-failed": "échec de la suppression de l'utilisateur",
+    "create-user-failed-email": "échec de la création de l'utilisateur : un utilisateur avec le numéro de téléphone fourni existe déjà",
+    "create-user-failed-phone-number": "échec de la création de l'utilisateur : un utilisateur avec l'adresse e-mail fournie existe déjà",
+    "update-user-failed": "échec de la mise à jour de l'utilisateur"
 }

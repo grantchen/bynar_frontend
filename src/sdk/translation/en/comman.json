@@ -515,5 +515,10 @@
     "sending-confirmation-email": "sending confirmation email",
     "re-sending-confirmation-email": "re-sending confirmation email",
     "error-user-account": "error occurred while creating user account",
-    "login-failed-invalid": "Login failed, link expired or invalid"
+    "login-failed-invalid": "Login failed, link expired or invalid",
+    "check-user-exists-failed": "check user exists failed",
+    "delete-user-failed": "delete user failed",
+    "create-user-failed-email": "create user failed: user with the provided phone number already exists",
+    "create-user-failed-phone-number": "create user failed: user with the provided email already exists",
+    "update-user-failed": "update user failed"
 }
