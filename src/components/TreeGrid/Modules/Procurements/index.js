@@ -15,6 +15,21 @@ const ProcurementList = ({ tabId }) => {
         if (row.Def.Name === "Node") {
             G.SetAttribute(row, row.parent, "Calculated", 1);
         }
+
+        // Set the value of the group field when adding data after grouping
+        if (G.Group !== "") {
+            for (let key of G.Group.split(",")) {
+                let parentNode = row.parentNode
+                // Recursively parent node to get the value of the group field
+                while (parentNode !== undefined) {
+                    if (parentNode.Visible === 1 && parentNode[key] !== undefined) {
+                        row[key] = parentNode[key]
+                        break
+                    }
+                    parentNode = parentNode.parentNode
+                }
+            }
+        }
     }
 
     events.OnPasteRow = function (G, row, col, val) {
