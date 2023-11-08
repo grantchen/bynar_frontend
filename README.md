@@ -12,8 +12,7 @@ Bynar frontend react web application
 ### src
 | Name | Sub Directory | Description |
 | :--- | :--- |:--- |
-| components | Auth | Auth react component|
-|  | Auth |Auth service component|
+| components | Auth | Auth service component|
 |  | Cards |Credit card manment service component|
 |  | Dashboard |Dashboard page comppnent|
 |  | HeaderAuthenticated | Authenticated Page header component|
