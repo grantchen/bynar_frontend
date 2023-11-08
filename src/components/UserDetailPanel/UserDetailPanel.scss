@@ -1,7 +1,9 @@
 .user-detail-panel {
     display: flex;
+
     .cds--form-item {
         margin-top: 16px;
+
         .cds--select-input {
             transition: all 7s cubic-bezier(0.2, 0, 0.38, 0.9);
         }
@@ -25,7 +27,7 @@
         margin-bottom: 0 !important;
         padding-left: 44px;
         margin-left: 0;
-        background: #ffffff;
+        background-color: var(--cds-field-02, #ffffff) !important;
         box-shadow: 0 1px 2px #e3e3e3 inset;
         line-height: 25px;
         height: 28px;
@@ -77,6 +79,7 @@
     .cds--dropdown__wrapper {
         margin-top: 16px;
     }
+
     .phone-label {
         font-size: 0.75rem;
         letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
