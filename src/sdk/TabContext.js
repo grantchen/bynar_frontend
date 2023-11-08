@@ -1,6 +1,6 @@
 import { Heading } from "@carbon/react";
 import React, { createContext, lazy, useCallback, useEffect, useState, useRef } from "react";
-import DashboardContainer from "./../components/Dashboard/DashboardContainer";
+import HomeContent from "../components/Dashboard";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "./AuthContext";
 
@@ -19,11 +19,13 @@ const ProcurementList = lazy(() => import("../components/TreeGrid/Modules/Procur
 const TabContext = createContext();
 const EmptyTabName = "EmptyTab";
 
+// TabContextProvider is used to manage tabs
 const TabContextProvider = ({ children }) => {
+    // TabComponent is used to render tab content
     const TabComponent = (name, tabId) => {
         switch (name) {
             case "Dashboard":
-                return <DashboardContainer />;
+                return <HomeContent />;
             case "UserList":
                 return <UserList tabId={tabId} />;
             case "InvoiceList":
@@ -55,7 +57,7 @@ const TabContextProvider = ({ children }) => {
     let ref = useRef([]);
     const [tab, setTab] = useState([
         {
-            content: <DashboardContainer />,
+            content: <HomeContent />,
             id: 0,
             label: t('title'),
             labelKey: 'title',
@@ -74,6 +76,7 @@ const TabContextProvider = ({ children }) => {
         ref.current = tab;
     }, [tab]);
 
+    // update tab label when language changed
     useEffect(() => {
         setTab(prev => prev.map((val, idx) => {
             if (val.name === EmptyTabName) {
@@ -85,6 +88,7 @@ const TabContextProvider = ({ children }) => {
         }))
     }, [user?.languagePreference, t]);
 
+    // handle remove tab
     const handleRemoveTab = useCallback((idToRemove) => {
         const selectedTabId = tab[activeTab]?.id;
         const indexToRemove = tab.findIndex((item) => item.id === idToRemove);
@@ -102,6 +106,7 @@ const TabContextProvider = ({ children }) => {
         }
     }, [tab, setActiveTab, activeTab, setTab]);
 
+    // set tab loaded
     const handleSetTabLoaded = (tabId) => {
         let tmpTabs = [...ref.current]
         tmpTabs.forEach((item, index) => {
@@ -113,6 +118,8 @@ const TabContextProvider = ({ children }) => {
         })
         setTab(tmpTabs)
     }
+
+    // handle add tab
     const handleAddTab = (name = EmptyTabName, labelKey = '', tabType = 'default') => {
         const maxId = tab.reduce((max, item) => {
             return item.id > max ? item.id : max;
@@ -148,6 +155,7 @@ const TabContextProvider = ({ children }) => {
         }
     };
 
+    // go to tab if tab is already opened, if not, add new tab
     const goToTab = (name, labelKey, tabType) => {
         // find tab by name of tab, if not found, add new tab, if found, set active tab to that tab
         const tabIndexToGo = tab.findIndex((item) => item.name === name);

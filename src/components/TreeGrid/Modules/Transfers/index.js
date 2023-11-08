@@ -1,6 +1,8 @@
 import { TreeGrid } from "../../index";
 
+// TransferList is the transfer list component
 const TransferList = ({ tabId }) => {
+    // events is an object that contains all the event handlers for the TreeGrid
     const events = {}
 
     events.OnExpand = function (G, row) {

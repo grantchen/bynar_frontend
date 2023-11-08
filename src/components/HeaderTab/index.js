@@ -10,6 +10,7 @@ import "./HeaderTab.scss";
 import { TabContext } from "../../sdk";
 import TabSkeleton from "carbon-web-components/es/components-react/tabs/tab-skeleton";
 
+// TabIcon is the tab icon component
 const TabIcon = (tabItem) => {
     return (
         <>
@@ -29,17 +30,19 @@ const TabIcon = (tabItem) => {
     )
 }
 
-
+// HeaderTab is the header tab component
 const HeaderTab = ({ className }) => {
     const { tab, handleAddTab, handleRemoveTab, activeTab, setActiveTab } =
         useContext(TabContext);
 
+    // set active tab when tab changes
     const handleTabChange = (evt) => {
         if (tab[evt.selectedIndex]?.loaded === true) {
             setActiveTab(evt.selectedIndex);
         }
     };
 
+    // remove tab when close button is clicked
     const removeTab = (tabId) => {
         handleRemoveTab(tabId);
     };

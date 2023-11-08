@@ -1,19 +1,35 @@
-import React, { useContext } from 'react';
+import React from "react";
 
-import '../Dashboard/Dashboard.scss'
-import { TabContext } from '../../sdk';
+import { Button, Heading } from "@carbon/react";
+
+import "../Dashboard/Dashboard.scss";
+import { NewsInfoCard } from "../Cards/NewsInfoCard/NewsInfoCard.js";
+import { ViewUsageCard } from "../Cards/ViewUsageCard/ViewUsageCard";
+import { SupportCard } from "../Cards/SupportCard/SupportCard";
+import { useTranslation } from "react-i18next";
+import { Add } from "@carbon/react/icons";
+import { useMobile } from "../../sdk";
+import { SubscribeCloseTabMessage } from "../../sdk/tabMessage";
 
 const Dashboard = () => {
-  const { tab, activeTab } = useContext(TabContext);
+    const { t } = useTranslation();
+    const isMobile = useMobile()
 
-  return (
-  <div>
-      <div className={'active-tab'}>
-         {tab[activeTab-1]?.content}
-       </div>
-  </div>
-
-  );
-}
+    return (
+        <div className="dashboard-box">
+            <SubscribeCloseTabMessage></SubscribeCloseTabMessage>
+            <div className="bynar-heading">
+                <Heading className="heading">{t("header")}</Heading>
+                <Button renderIcon={Add}
+                    hasIconOnly={isMobile ? true : false}>{t("create-resource-button")}</Button>
+            </div>
+            <div className="dashboard-container-box">
+                <NewsInfoCard />
+                <ViewUsageCard />
+                <SupportCard style={{ marginRight: "0px", }} />
+            </div>
+        </div >
+    );
+};
 
 export default Dashboard;

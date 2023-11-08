@@ -1,3 +1,14 @@
+/** === cell suggest hover color  ===  */
+.TSSuggestMenuBody .TSMenuItem.TSMenuHover,
+.TSSuggestMenuBody .TSMenuItem.TSMenuFocus {
+  background-color: #DBEEF4;
+}
+
+table > tbody > tr:has(> td > .TSMenuItem.TSMenuHover) {
+  background-color: #DBEEF4;
+}
+/** === cell suggest hover color end  ===  */
+
 .TSMain .TSHasSpace4 {
   border-bottom: 0px solid transparent;
 }

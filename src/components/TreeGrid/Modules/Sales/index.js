@@ -1,6 +1,8 @@
 import { TreeGrid } from "../../index";
 
+// SaleList is the sale list component
 const SaleList = ({ tabId }) => {
+    // events is an object that contains all the event handlers for the TreeGrid
     const events = {}
 
     events.OnExpand = function (G, row) {

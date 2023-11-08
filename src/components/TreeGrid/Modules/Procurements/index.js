@@ -1,6 +1,8 @@
 import { TreeGrid } from "../..";
 
+// ProcurementList is the procurement list component.
 const ProcurementList = ({ tabId }) => {
+    // events is an object that contains all the event handlers for the TreeGrid
     const events = {}
 
     events.OnExpand = function (G, row) {
