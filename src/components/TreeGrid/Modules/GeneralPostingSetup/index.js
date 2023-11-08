@@ -1,6 +1,8 @@
 import { TreeGrid } from "../../index";
 
+// GeneralPostingSetupList is the general posting setup list component
 const GeneralPostingSetupList = ({ tabId }) => {
+    // events is an object that contains all the event handlers for the TreeGrid
     const events = {}
 
     events.OnExpand = function (G, row) {

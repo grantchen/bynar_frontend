@@ -1,6 +1,8 @@
 import { TreeGrid } from "../../index";
 
+// InvoiceList is the invoice list component
 const InvoiceList = ({ tabId }) => {
+    // events is an object that contains all the event handlers for the TreeGrid
     const events = {}
 
     return (

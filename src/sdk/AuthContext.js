@@ -29,6 +29,7 @@ export const AuthContext = createContext(initialState);
 const { Provider } = AuthContext;
 const simpleReducer = (state, payload) => ({ ...state, ...payload });
 
+// AuthProvider is used to provide authentication context
 export const AuthProvider = ({ children }) => {
     const [state, setState] = useReducer(simpleReducer, initialState);
 
@@ -83,6 +84,7 @@ export const AuthProvider = ({ children }) => {
         }
     }, []);
 
+    // get user info
     const getUser = useCallback(async () => {
         if (state.token === "loading" || state.token === null) {
             return;
@@ -147,6 +149,7 @@ export const AuthProvider = ({ children }) => {
         }
     }, [location.pathname, state.token]);
 
+    // authFetch is used to fetch api with authorization token
     const authFetch = useCallback(
         async (url, options = {}) => {
             let token = state.token;
@@ -208,6 +211,7 @@ export const AuthProvider = ({ children }) => {
         return true
     }, [authFetch]);
 
+    // signin is used to sign in with email and magic link
     const signin = useCallback(async (email, href) => {
         try {
             const auth = getAuth();
@@ -243,6 +247,7 @@ export const AuthProvider = ({ children }) => {
         }
     }, []);
 
+    // signout is used to sign out
     const signout = useCallback(async () => {
         try {
             const auth = getAuth();
@@ -260,6 +265,7 @@ export const AuthProvider = ({ children }) => {
         }
     }, []);
 
+    // refreshPostSignIn is used to refresh token after sign in
     const refreshPostSignIn = useCallback(async () => {
         try {
             const auth = getAuth();
@@ -274,6 +280,7 @@ export const AuthProvider = ({ children }) => {
         }
     }, []);
 
+    // update user language preference
     const updateUserLanguagePreference = useCallback(
         async ({ languagePreference }) => {
             if (!state?.user) {
@@ -344,6 +351,7 @@ export const AuthProvider = ({ children }) => {
         })
     }, [state.user, state.tokenClaims]);
 
+    // update user theme preference
     const updateUserThemePreference = useCallback(
         async ({ themePreference }) => {
             if (!state?.user) {

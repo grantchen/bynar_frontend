@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import jsonData from '../JSONs/usen.json';
+import jsonData from '../JSONs/wide-menus.json';
 import { ArrowRight } from "@carbon/react/icons";
-
 import { TabContext, useAuth, useMobile, useCardManagement } from "../../sdk";
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav.js';
 import '@carbon/ibmdotcom-web-components/es/components/masthead/left-nav-menu.js';
@@ -11,6 +10,7 @@ import "./CustomWideMenu.scss";
 import { useTranslation } from "react-i18next";
 import { useOrganizationAccount } from "../../sdk/context/OrganizationAccountManagementContext";
 
+// CustomWideMenu is the drop down(left in mobile) menu in the header
 export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
     const { goToTab } = useContext(TabContext);
     const { openCardManagementPanel } = useCardManagement();
@@ -29,6 +29,7 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
     const { t } = useTranslation();
     const { hasPermission } = useAuth();
 
+    // open side panel for click menu item
     const openSidePanel = (menuItem) => {
         switch (menuItem.sidePanel) {
             case "UserCardManagementPanel":
@@ -51,6 +52,7 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
         return !menuItem.permission || hasPermission(menuItem.permission, "list")
     }
 
+    // expand/collapse wide menu in pc
     useEffect(() => {
         if (!isMobile) {
             return
@@ -66,6 +68,7 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
         }
     }, [expanded, isMobile]);
 
+    // search tabs in drop down menus
     useEffect(() => {
         if (isMobile) {
             return
@@ -199,7 +202,7 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
                 ) : (
                     <>
                         <div ref={wideMenuButtonRef}>{children}</div>
-                        <div className="menu-body" expanded={`${expanded}`}>
+                        <div className="header-wide-menu-body" expanded={`${expanded}`}>
                             <div ref={wideMenuRef} className="mega-menu">
                                 <div className="bmegamenu-container">
                                     <div className="megamenu-container-row">
@@ -345,7 +348,7 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
 
                             </div>
                         </div>
-                        <div className={`menu-overlay ${expanded ? 'active' : ''}`}>
+                        <div className={`header-wide-menu-overlay ${expanded ? 'active' : ''}`}>
                         </div>
                     </>
                 )

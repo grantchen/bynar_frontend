@@ -33,6 +33,7 @@ export function getAPIRequestURL(url) {
     }
 }
 
+// TreeGrid is the tree grid component
 export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) => {
     const ref = useRef(null);
     const { handleSetTabLoaded } = useContext(TabContext);
@@ -55,6 +56,7 @@ export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) 
         }
     }
 
+    // load tree grid when component is mounted
     useEffect(() => {
         let treeGrid = null;
         const fetchData = () => {
@@ -76,18 +78,18 @@ export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) 
                 },
             }
 
-            config = { ...defaultConfig, ...config }
-            config.Data.Url = getAPIRequestURL(config.Data.Url)
-            config.Page.Url = getAPIRequestURL(config.Page.Url)
-            config.Upload.Url = getAPIRequestURL(config.Upload.Url)
+            const mergedConfig = { ...defaultConfig, ...config }
+            mergedConfig.Data.Url = getAPIRequestURL(mergedConfig.Data.Url)
+            mergedConfig.Page.Url = getAPIRequestURL(mergedConfig.Page.Url)
+            mergedConfig.Upload.Url = getAPIRequestURL(mergedConfig.Upload.Url)
 
             // only for debug
-            if (config.Debug) {
-                console.log(config)
+            if (mergedConfig.Debug) {
+                console.log(mergedConfig)
             }
 
             treeGrid = window.TreeGrid(
-                config,
+                mergedConfig,
                 ref.current.id,
                 {}
             );

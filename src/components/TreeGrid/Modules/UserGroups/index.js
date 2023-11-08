@@ -2,9 +2,11 @@ import { TreeGrid, getAPIRequestURL } from "../../index";
 import debounce from "lodash/debounce";
 import { useAuth } from "../../../../sdk";
 
+// UserGroupList is the user group list component
 const UserGroupList = ({ tabId }) => {
     const { treeGridRequest } = useAuth();
 
+    // cell suggest configs
     const keySuggest = 'full_nameSuggest'
     const lsSuggestionField = ["full_name", "email", "user_id"]
 
@@ -21,8 +23,9 @@ const UserGroupList = ({ tabId }) => {
         });
     }, 300)
 
+    // events is an object that contains all the event handlers for the TreeGrid
     const events = {}
-    // suggest
+    // set cell value after choose suggestion item
     events.OnAfterValueChanged = window.parseCellSuggestionCallback(keySuggest, lsSuggestionField)
 
     events.OnExpand = function (G, row) {

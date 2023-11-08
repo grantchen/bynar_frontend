@@ -3,6 +3,7 @@ import { TabContext } from "../../sdk";
 import './Dashboard.scss'
 import { TabPanel, TabPanels, Tabs } from "@carbon/react";
 
+// Dashboard is a component that renders the content of the selected tab
 const Dashboard = () => {
     const { tab, activeTab } = useContext(TabContext);
     return (

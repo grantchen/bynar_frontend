@@ -1,6 +1,8 @@
 import { TreeGrid } from "../../index";
 
+// SiteList is the site list component
 const SiteList = ({ tabId }) => {
+    // events is an object that contains all the event handlers for the TreeGrid
     const events = {}
 
     events.OnExpand = function (G, row) {

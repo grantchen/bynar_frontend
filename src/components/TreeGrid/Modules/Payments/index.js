@@ -1,6 +1,8 @@
 import { TreeGrid } from "../../index";
 
+// PaymentList is the payment list component
 const PaymentList = ({ tabId }) => {
+    // events is an object that contains all the event handlers for the TreeGrid
     const events = {}
 
     events.OnExpand = function (G, row) {
