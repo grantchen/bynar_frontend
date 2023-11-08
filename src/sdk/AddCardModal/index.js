@@ -59,7 +59,15 @@ const AddCardModal = ({ open }) => {
             setNotification({ message: e.message, type: "error" });
             console.log("adding card", e)
         } finally {
+            document.querySelectorAll(".frame-heading").forEach(a => a.style.display = "none");
+            document.querySelectorAll(".card-number").forEach(a => a.style.display = "none");
+            document.querySelectorAll(".frame-skeleton-loading").forEach(a => a.style.display = "");
             setLoading(false);
+            Frames.init({
+                publicKey: CheckoutPublicKey,
+                style: themePreference === "white" ? g10style : g90style,
+                "ready": handleReady,
+            });
         }
     }, []);
 

@@ -16,41 +16,19 @@ const Home = () => {
         function handleResize() {
             setWindowWidth(window.innerWidth);
         }
-
-        // 添加窗口大小改变事件监听器
         window.addEventListener('resize', handleResize);
-
-        // 在组件卸载时移除事件监听器
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-    }, []); // 空数组表示仅在组件挂载和卸载时执行
+    }, []);
 
-    // 根据窗口宽度决定 md 属性的值
-    let mdValue1 = 4;
-    let mdValue2 = 4;
-    let step = 5
-    let button = 1
-    let buttonWidth = '380px'
-    if (windowWidth >= 672 && windowWidth <= 768) {
-        mdValue1 = 0;
-        mdValue2 = 8;
-    }
+    let wordAmount = 5
+
     if (windowWidth > 800 && windowWidth < 1059) {
-        step = 3
+        wordAmount = 3
     }
     if (windowWidth > 700 && windowWidth < 828) {
-        step = 2
-    }
-    if (windowWidth < 700 ) {
-        step = 1
-    }
-    if (windowWidth < 672 ) {
-        button = 0
-    }
-
-    if (windowWidth < 400 ) {
-        buttonWidth = '300px'
+        wordAmount = 2
     }
     return (
         <div>
@@ -59,8 +37,8 @@ const Home = () => {
                 className={"auth-login-container"}
             >
                 <Grid className={"auth-login-grid"}>
-                    {step ===5 && (
-                        <Column sm={0} md={mdValue1} lg={10} className={"auth-login-column"} style={{
+                    {wordAmount === 5 && windowWidth > 768 && (
+                        <Column sm={0} md={windowWidth >= 672 && windowWidth <= 768 ? 0 : 4} lg={10} className={"auth-login-column"} style={{
                             backgroundImage: `url(${ backgroundImage })`,
                             backgroundSize: 'cover',
                             backgroundPosition: 'center center',
@@ -83,8 +61,8 @@ const Home = () => {
                             </div>
                         </Column>
                     )}
-                    {step ===3 && (
-                        <Column sm={0} md={mdValue1} lg={10} className={"auth-login-column"} style={{
+                    {wordAmount === 3 && windowWidth > 768 && (
+                        <Column sm={0} md={windowWidth >= 672 && windowWidth <= 768 ? 0 : 4} lg={10} className={"auth-login-column"} style={{
                             backgroundImage: `url(${ backgroundImage })`,
                             backgroundSize: 'cover',
                             backgroundPosition: 'center center',
@@ -107,8 +85,8 @@ const Home = () => {
                         </Column>
                     )}
 
-                    {step ===2 && (
-                        <Column sm={0} md={mdValue1} lg={10} className={"auth-login-column"} style={{
+                    {wordAmount === 2 && windowWidth > 768 && (
+                        <Column sm={0} md={windowWidth >= 672 && windowWidth <= 768 ? 0 : 4} lg={10} className={"auth-login-column"} style={{
                             backgroundImage: `url(${ backgroundImage })`,
                             backgroundSize: 'cover',
                             backgroundPosition: 'center center',
@@ -117,7 +95,7 @@ const Home = () => {
                             <div className="header-caption">
                                 <TypeAnimation
                                     sequence={ [
-                                        'Introducing \n the bynar erp \n system',
+                                        'Introducing \n the bynar \n erp system',
                                         1000,
                                         'Test to \n for testing',
                                         1000,
@@ -131,107 +109,43 @@ const Home = () => {
                         </Column>
                     )}
 
-                    {step ===1 && (
-                        <Column sm={0} md={mdValue1} lg={10} className={"auth-login-column"} style={{
-                            backgroundImage: `url(${ backgroundImage })`,
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center center',
-                            backgroundRepeat: 'no-repeat',
-                        }}>
-                            <div className="header-caption">
-                                <TypeAnimation
-                                    sequence={ [
-                                        'Introducing \n the \n bynar erp \n system',
-                                        1000,
-                                        'Test \n to \n for \n testing',
-                                        1000,
-                                    ]}
-                                    speed={80}
-                                    deletionSpeed={80}
-                                    style={{ fontSize: '40px', whiteSpace: 'pre-line', color: 'rgb(254, 118, 0)' }}
-                                    repeat={Infinity}
-                                />
-                            </div>
-                        </Column>
-                    )}
-
-                    {button ===1 && (
-                        <Column sm={4} md={mdValue2} lg={6} className="auth-login-container">
-                            <div className="auth-login-area">
-                                <div className="bx--row">
-                                    <div className="bx--col auth-login-bx">
-                                        <div className="button-container">
-                                            <h2 style={{ fontWeight: 'bold' }}>Get started</h2>
-                                            <div className="fields-container">
-                                                <div style={{ flex:1 }}>
-                                                    <Button
-                                                        type="submit"
-                                                        size={'md'}
-                                                        className="login-submit-button bx--btn bx--btn--primary"
-                                                        onClick={() => {
-                                                            navigate("/signin");
-                                                        }}
-                                                    >
-                                                        {"Login"}
-                                                    </Button>
-                                                </div>
-                                                <div style={{ width: '20px' }} />
-                                                <div style={{ flex: 1 }}>
-                                                    <Button
-                                                        type="submit"
-                                                        size={'md'}
-                                                        className="login-submit-button bx--btn bx--btn--primary"
-                                                        disabled={true}
-                                                    >
-                                                        {"Signup"}
-                                                    </Button>
-                                                </div>
+                    <Column sm={4} md={windowWidth >= 672 && windowWidth <= 768 ? 8 : 4} lg={6} className="auth-login-container">
+                        <div className="auth-login-area">
+                            <div className="bx--row">
+                                <div className="bx--col auth-login-bx">
+                                    <div className="button-container">
+                                        <h2 style={{ fontWeight: 'bold' }}>Get started</h2>
+                                        <div className="fields-container">
+                                            <div style={{ flex:1 }}>
+                                                <Button
+                                                    type="submit"
+                                                    size={'md'}
+                                                    className="login-submit-button bx--btn bx--btn--primary"
+                                                    onClick={() => {
+                                                        navigate("/signin");
+                                                    }}
+                                                >
+                                                    {"Login"}
+                                                </Button>
+                                            </div>
+                                            <div style={{ width: '20px' }} />
+                                            <div style={{ flex: 1, marginTop: windowWidth < 672 ? '15px' : 0 }}>
+                                                <Button
+                                                    type="submit"
+                                                    size={'md'}
+                                                    className="login-submit-button bx--btn bx--btn--primary"
+                                                    disabled={true}
+                                                >
+                                                    {"Signup"}
+                                                </Button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <SignFooter></SignFooter>
-                        </Column>
-                    )}
-                    {button ===0 && (
-                        <Column sm={4} md={mdValue2} lg={6} className="auth-login-container">
-                            <div className="auth-login-area">
-                                <div className="bx--row">
-                                    <div className="bx--col auth-login-bx">
-                                        <div className="button-container">
-                                            <h3 style={{ fontWeight: 'bold' }}>Get started</h3>
-                                            <div style={{ marginTop: '15px',  width: buttonWidth }}>
-                                                <div style={{ flex:1 }}>
-                                                    <Button
-                                                        type="submit"
-                                                        size={'md'}
-                                                        className="login-submit-button bx--btn bx--btn--primary"
-                                                        onClick={() => {
-                                                            navigate("/signin");
-                                                        }}
-                                                    >
-                                                        {"Login"}
-                                                    </Button>
-                                                </div>
-                                                <div style={{ flex: 1, marginTop: '15px' }}>
-                                                    <Button
-                                                        type="submit"
-                                                        size={'md'}
-                                                        className="login-submit-button bx--btn bx--btn--primary"
-                                                        disabled={true}
-                                                    >
-                                                        {"Signup"}
-                                                    </Button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <SignFooter></SignFooter>
-                        </Column>
-                    )}
+                        </div>
+                        <SignFooter></SignFooter>
+                    </Column>
                 </Grid>
             </div>
         </div>

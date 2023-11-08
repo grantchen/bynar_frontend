@@ -21,6 +21,7 @@ initializeApp(firebaseConfig);
 const initialState = {
     user: null,
     token: "loading",
+    tokenClaims: null, // token claims
     theme: null,
     lang: null,
 };
@@ -34,35 +35,44 @@ export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const { i18n } = useTranslation();
+    const { t } = useTranslation();
+
+    const clearLoginState = useCallback(() => {
+        setState({ token: null, user: null, tokenClaims: null });
+    }, [])
 
     useEffect(() => {
         let unsubscribeIdTokenChanged;
         (async () => {
             try {
                 const auth = getAuth();
+                unsubscribeIdTokenChanged = auth.onIdTokenChanged(async (user) => {
+                    if (user) {
+                        const idTokenResult = await auth.currentUser.getIdTokenResult()
+                        const token = idTokenResult.token
+                        const claims = idTokenResult.claims
+                        if (token !== state.token || claims !== state.tokenClaims) {
+                            setState({ token: token, tokenClaims: claims });
+                        }
+                    } else {
+                        console.log('clear token, id token changed')
+                        clearLoginState();
+                    }
+                })
+
                 await auth.authStateReady()
                 if (auth.currentUser) {
-                    const token = await auth.currentUser.getIdToken()
-                    setState({ token: token });
-
-                    unsubscribeIdTokenChanged = auth.onIdTokenChanged(async (user) => {
-                      if (user) {
-                        const token = await user.getIdToken()
-                        if (token !== state.token) {
-                          setState({ token: token });
-                        }
-                      } else {
-                        console.log('clear token, id token changed')
-                        setState({ token: null, user: null });
-                      }
-                    })
+                    const idTokenResult = await auth.currentUser.getIdTokenResult()
+                    const token = idTokenResult.token
+                    const claims = idTokenResult.claims
+                    setState({ token: token, tokenClaims: claims });
                 } else {
                     console.log('clear token, no currentUser')
-                    setState({ token: null });
+                    clearLoginState();
                 }
             } catch (e) {
                 console.log(e, 'clear token, error in auth state ready')
-                setState({ token: null, user: null });
+                clearLoginState();
             }
         })();
 
@@ -78,7 +88,7 @@ export const AuthProvider = ({ children }) => {
             return;
         }
         try {
-            const response = await fetch(`${ BaseURL }/user`, {
+            const response = await fetch(`${BaseURL}/user`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -100,6 +110,7 @@ export const AuthProvider = ({ children }) => {
             signout()
         }
     }, [state.token]);
+
     useEffect(() => {
         getUser();
     }, [getUser]);
@@ -118,7 +129,6 @@ export const AuthProvider = ({ children }) => {
                     !(
                         location.pathname === "/signin" ||
                         location.pathname === "/forgotpassword" ||
-                        location.pathname === "/auth/login" ||
                         location.pathname === "/signup"
                     )
                 ) {
@@ -129,10 +139,9 @@ export const AuthProvider = ({ children }) => {
                 if (
                     location.pathname === "/signin" ||
                     location.pathname === "/forgotpassword" ||
-                    location.pathname === "/auth/login" ||
                     location.pathname === "/signup"
                 ) {
-                  navigate("/home/dashboard");
+                    navigate("/home/dashboard");
                 }
                 break;
         }
@@ -141,15 +150,15 @@ export const AuthProvider = ({ children }) => {
     const authFetch = useCallback(
         async (url, options = {}) => {
             let token = state.token;
-            if (token === "loading") {
-                try {
-                    const auth = getAuth();
-                    token = await auth.currentUser?.getIdToken()
-                } catch (error) {
-                    return new Promise();
-                }
-            }
             // TODO fetch exception, not call getAuthorizationToken
+            // if (token === "loading") {
+            //     try {
+            //         const auth = getAuth();
+            //         token = await auth.currentUser?.getIdToken()
+            //     } catch (error) {
+            //         return new Promise();
+            //     }
+            // }
             let res = await fetch(url, {
                 ...options,
                 headers: {
@@ -187,6 +196,18 @@ export const AuthProvider = ({ children }) => {
         [state.token]
     );
 
+    // request TreeGrid api
+    const treeGridRequest = useCallback((url, param, callback) => {
+        authFetch(url, {
+            method: "POST",
+            body: new URLSearchParams(`Data=${ param }`),
+        }).then((response) => response.json())
+            .then((data) => {
+                callback(data)
+            });
+        return true
+    }, [authFetch]);
+
     const signin = useCallback(async (email, href) => {
         try {
             const auth = getAuth();
@@ -199,9 +220,9 @@ export const AuthProvider = ({ children }) => {
                 return result
             }
         } catch (e) {
-            setState({ user: null, token: null });
+            clearLoginState();
             console.log(e)
-            throw new Error('Login failed, link expired or invalid')
+            throw new Error(t("login-failed-invalid"))
         }
 
         throw new Error('Login failed, invalid link')
@@ -217,7 +238,7 @@ export const AuthProvider = ({ children }) => {
             setState({ token: token });
             return result
         } catch (e) {
-            setState({ user: null, token: null });
+            clearLoginState();
             throw e
         }
     }, []);
@@ -246,10 +267,10 @@ export const AuthProvider = ({ children }) => {
             if (token) {
                 setState({ token: token });
             } else {
-                setState({ token: null });
+                clearLoginState();
             }
         } catch (e) {
-            setState({ token: null });
+            clearLoginState();
         }
     }, []);
 
@@ -262,7 +283,7 @@ export const AuthProvider = ({ children }) => {
                 languagePreference,
             };
 
-            const response = await authFetch(`${ BaseURL }/update-user-language-preference`, {
+            const response = await authFetch(`${BaseURL}/update-user-language-preference`, {
                 method: "PUT",
                 body: JSON.stringify(updateUserLanguage),
             });
@@ -301,6 +322,9 @@ export const AuthProvider = ({ children }) => {
             return false;
         }
 
+        if (name === "payment-method") {
+            return state.tokenClaims?.organization_account === true
+        }
         if (!state.user.permissions) {
             return false;
         }
@@ -318,7 +342,7 @@ export const AuthProvider = ({ children }) => {
                 }
             }
         })
-    }, [state.user]);
+    }, [state.user, state.tokenClaims]);
 
     const updateUserThemePreference = useCallback(
         async ({ themePreference }) => {
@@ -366,11 +390,11 @@ export const AuthProvider = ({ children }) => {
             getUser,
             getAuthorizationToken,
             hasPermission,
+            treeGridRequest,
         }),
         [
             state,
             signin,
-            signinWithCustomToken,
             signout,
             authFetch,
             refreshPostSignIn,
@@ -379,9 +403,10 @@ export const AuthProvider = ({ children }) => {
             getUser,
             getAuthorizationToken,
             hasPermission,
+            treeGridRequest,
         ]
     );
-    return <Provider value={ providerValue }>{ children }</Provider>;
+    return <Provider value={providerValue}>{children}</Provider>;
 };
 
 export const useAuth = () => useContext(AuthContext);

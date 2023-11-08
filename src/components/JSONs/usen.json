@@ -3526,7 +3526,7 @@
                 "url": "?openCardMangementPanel=true",
                 "sidePanel": "UserCardManagementPanel",
                 "tabType": "",
-                "permission": "cards",
+                "permission": "payment-method",
                 "megapanelContent": {
                   "headingTitle": "",
                   "headingUrl": "",
@@ -3609,6 +3609,19 @@
                   "headingTitle": "",
                   "headingUrl": "",
                   "description": "sales"
+                }
+              },
+              {
+                "title": "organization-account",
+                "titleEnglish": "",
+                "url": "?openOrganizationAccountPanel=true",
+                "sidePanel": "OrganizationAccountPanel",
+                "tabType": "",
+                "permission": "",
+                "megapanelContent": {
+                  "headingTitle": "",
+                  "headingUrl": "",
+                  "description": "Organization Account Information"
                 }
               },
               {

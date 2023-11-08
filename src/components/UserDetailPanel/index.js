@@ -9,6 +9,9 @@ import { useSearchParams } from "react-router-dom";
 import { BaseURL, Languages, Themes } from "../../sdk/constant";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import es from 'react-phone-input-2/lang/es.json'
+import de from 'react-phone-input-2/lang/de.json'
+import fr from 'react-phone-input-2/lang/fr.json'
 import { useAuth, useUserManagement, useThemePreference } from "../../sdk";
 
 import {
@@ -16,7 +19,6 @@ import {
 } from "google-libphonenumber";
 import "./UserDetailPanel.scss";
 import { useTranslation } from "react-i18next";
-import {f} from "carbon-web-components/dist/collection-helpers-10ca40d0";
 
 pkg.component.SidePanel = true;
 
@@ -43,7 +45,7 @@ export const UserDetailPanel = ({ open }) => {
     const inputRefs = useRef([]);
     const [searchParams] = useSearchParams();
     const { closeModalAndGoBackToUserList } = useUserManagement();
-    const [defaultData,setDefaultData] = useState({});
+    const [defaultData, setDefaultData] = useState({});
     const themeItems = Themes.map(themeObject => themeObject.code);
     const languagesItems = Languages.map(languageObject => languageObject.code);
     const handleThemeChange = (selectedTheme) => {
@@ -95,12 +97,14 @@ export const UserDetailPanel = ({ open }) => {
         }
     };
     const validateOrganizationForm = (email) => {
-        const errors = {};
+        // const errors = {};
         if (email.trim() === "") {
             errors.email = "Email is required";
         } else if (email.length > 0) {
             if (!checkEmailValid(email.trim())) {
                 errors.email = "Suggested format (name@company.com)";
+            } else {
+                delete errors.email
             }
         }
 
@@ -120,9 +124,11 @@ export const UserDetailPanel = ({ open }) => {
         setServerNotification(false);
         const { name, value } = e.target;
         setFullName(value);
-        const errors = {};
+        // const errors = {};
         if (value.trim() === "") {
             errors.fullName = "FullName is required";
+        } else {
+            delete errors.fullName
         }
         setErrors(errors);
         if (value === defaultData?.fullName) {
@@ -255,6 +261,8 @@ export const UserDetailPanel = ({ open }) => {
         const getUserList = async (userid) => {
             try {
                 setServerErrorNotification({});
+                setErrors({});
+                setErrorMessage("");
                 setServerNotification(false);
                 setDataLoading(true);
                 const response = await authFetch(`${BaseURL}/user/${userid}`, {
@@ -305,7 +313,7 @@ export const UserDetailPanel = ({ open }) => {
                             handleUpdateProfile();
                         },
                         kind: 'primary',
-                        disabled: updateHappened,
+                        disabled: updateHappened || errorMessage !== "" || Object.keys(errors).length !== 0,
                         loading: disable,
                     }, {
                         label: t("cancel"),
@@ -367,28 +375,69 @@ export const UserDetailPanel = ({ open }) => {
                                             {`${t("phone-number-label")} *`}
                                         </p>
                                     </div>
-                                    <PhoneInput
-                                        className="phone-input-sidepanel"
-                                        ref={(el) => (inputRefs.current[2] = el)}
-                                        inputProps={{
-                                            disabled: false,
-                                        }}
-                                        disableDropdown={false}
-                                        style={{
-                                            border:
-                                                !phoneNumberValid &&
-                                                    errorMessage.length > 0
-                                                    ? "2px solid red"
-                                                    : 0,
-                                            cursor: "not-allowed",
-                                        }}
-                                        name="phoneNumber"
-                                        country={""}
-                                        value={phoneNumber}
-                                        onChange={(value, country, formattedValue) =>
-                                            handlePhoneNumber(value, country)
-                                        }
-                                    />
+                                    {language === "es" && (
+                                        <PhoneInput
+                                            className="phone-input-signup"
+                                            localization={es}
+                                            ref={(el) => (inputRefs.current[5] = el)}
+                                            style={{
+                                                border: !phoneNumberValid && errorMessage.length > 0 ? "2px solid red" : 0,
+                                            }}
+                                            name="phoneNumber"
+                                            country={""}
+                                            value={phoneNumber}
+                                            onChange={(value, country, formattedValue) =>
+                                                handlePhoneNumber(value, country)
+                                            }
+                                        />
+                                    )}
+                                    {language === "de" && (
+                                        <PhoneInput
+                                            className="phone-input-signup"
+                                            localization={de}
+                                            ref={(el) => (inputRefs.current[5] = el)}
+                                            style={{
+                                                border: !phoneNumberValid && errorMessage.length > 0 ? "2px solid red" : 0,
+                                            }}
+                                            name="phoneNumber"
+                                            country={""}
+                                            value={phoneNumber}
+                                            onChange={(value, country, formattedValue) =>
+                                                handlePhoneNumber(value, country)
+                                            }
+                                        />
+                                    )}
+                                    {language === "fr" && (
+                                        <PhoneInput
+                                            className="phone-input-signup"
+                                            localization={fr}
+                                            ref={(el) => (inputRefs.current[5] = el)}
+                                            style={{
+                                                border: !phoneNumberValid && errorMessage.length > 0 ? "2px solid red" : 0,
+                                            }}
+                                            name="phoneNumber"
+                                            country={""}
+                                            value={phoneNumber}
+                                            onChange={(value, country, formattedValue) =>
+                                                handlePhoneNumber(value, country)
+                                            }
+                                        />
+                                    )}
+                                    {language === "en" && (
+                                        <PhoneInput
+                                            className="phone-input-signup"
+                                            ref={(el) => (inputRefs.current[5] = el)}
+                                            style={{
+                                                border: !phoneNumberValid && errorMessage.length > 0 ? "2px solid red" : 0,
+                                            }}
+                                            name="phoneNumber"
+                                            country={""}
+                                            value={phoneNumber}
+                                            onChange={(value, country, formattedValue) =>
+                                                handlePhoneNumber(value, country)
+                                            }
+                                        />
+                                    )}
                                     {!phoneNumberValid && errorMessage.length > 0 && (
                                         <p
                                             style={{
@@ -414,7 +463,7 @@ export const UserDetailPanel = ({ open }) => {
                                         selectedItem={theme}
                                         onChange={selectedItem => handleThemeChange(selectedItem)}
                                         itemToString={(item) => (item ? t(item) : '')}
-                                        label={theme}/>
+                                        label={theme} />
                                 </>
                             )}
                             {dataLoading ? (
@@ -429,7 +478,7 @@ export const UserDetailPanel = ({ open }) => {
                                         selectedItem={language}
                                         itemToString={(item) => (item ? t(item) : '')}
                                         onChange={selectedItem => handleLanguageChange(selectedItem)}
-                                        label={language}/>
+                                        label={language} />
                                 </>
                             )}
                         </div>

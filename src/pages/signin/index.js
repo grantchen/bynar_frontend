@@ -10,6 +10,7 @@ import {
     SubscribeCloseTabMessage,
     SubscribeTabMessage
 } from "../../sdk/tabMessage";
+import {useTranslation} from "react-i18next";
 
 const Signin = () => {
     const navigate = useNavigate();
@@ -20,7 +21,7 @@ const Signin = () => {
     const [email, setEmail] = useState("");
     const [loadingSuccess, setLoadingSuccess] = useState(false);
     const { signin } = useAuth();
-
+    const { t } = useTranslation();
 
     /** function to validate email address. */
     const validateEmail = (email) => {
@@ -36,11 +37,11 @@ const Signin = () => {
         e.preventDefault();
         if (email.length === 0) {
             setErrorNotification({
-                title: "Email should not be blank",
+                title: t("email-should-not-blank"),
             });
         } else if (!validateEmail(email)) {
             setErrorNotification({
-                title: "Enter valid email",
+                title: t("enter-valid-email"),
             });
         } else {
             setErrorNotification({});
@@ -62,13 +63,23 @@ const Signin = () => {
                     setSignInPhaseOne(false);
                     setLoadingSuccess(false);
                     setServerErrorNotification({
-                        title: `Login link sent to ${email}`,
+                        title: `${t("login-link-sent")} ${email}`,
                         status: "success",
                     });
                 } else if (response.status === 500) {
                     setLoadingSuccess(false);
+                    let err = res.error
+                    if (err.includes("no user found")) {
+                        err = t("no-user-found")
+                    } else if (err.includes("email not signed up")) {
+                        err = t("email-not-signed-up")
+                    } else if (err.includes("set custom user claims fail")) {
+                        err = t("set-custom-fail")
+                    } else if (err.includes("send email fail")) {
+                        err = t("send-email-fail")
+                    }
                     setServerErrorNotification({
-                        title: res.error,
+                        title: err,
                         status: "success",
                     });
                 }
@@ -76,7 +87,7 @@ const Signin = () => {
                 console.log(e);
                 setLoadingSuccess(false);
                 setServerErrorNotification({
-                    title: "Something went wrong",
+                    title: t("something-went-wrong"),
                     status: "error",
                 });
             }
@@ -152,7 +163,7 @@ const Signin = () => {
             <div style={{ height:"100%" }}>
                 {signInPhaseOne ? (
                     <Login
-                        heading={"Log in to Bynar"}
+                        heading={t("login-to-bynar")}
                         loading={loadingSuccess}
                         handleFormSubmit={handleEmailFormSubmit}
                         setErrorNotification={setErrorNotification}
@@ -160,36 +171,36 @@ const Signin = () => {
                         serverErrorNotification={serverErrorNotification}
                         errorNotification={errorNotification}
                         showCreateAccount={true}
-                        createAccountText={"Don't have an account?"}
+                        createAccountText={t("have-an-account")}
                         navigationUrl={"/signup"}
-                        navigationUrlText={"Create an Bynar account"}
-                        labelText={"E-mail"}
+                        navigationUrlText={t("create-account")}
+                        labelText={t("email-label")}
                         labelValue={email}
                         setFormLabelState={setEmail}
-                        buttonText={"Continue"}
+                        buttonText={t("continue")}
                         enableForgotPassword={false}
                         placeholderText={" "}
                         showRememberId={false}
-                        text={`Logging in as ${email}`}
-                        subtitle={"Not you?"}
+                        text={`${t("logging-in-as")} ${email}`}
+                        subtitle={t("not-you")}
                         setSignInPhaseOne={setSignInPhaseOne}
                     />
                 ) : (
                     /* isPaswordLessSignin if true then sign in using magic link based on otp validation */
                     <MagicLinkValidation
-                        heading={"Log in to Bynar"}
+                        heading={t("login-to-bynar")}
                         loading={loading}
                         loadingSuccess={loadingSuccess}
                         handleFormSubmit={verifyMagicLink}
                         errorNotification={errorNotification}
                         buttonText={"Login"}
-                        text={`Logging in as ${email}`}
-                        subtitle={"Not you?"}
+                        text={`${t("logging-in-as")} ${email}`}
+                        subtitle={t("not-you")}
                         setSignInPhaseOne={setSignInPhaseOne}
                         showCreateAccount={true}
-                        createAccountText={"Don't have an account?"}
+                        createAccountText={t("have-an-account")}
                         navigationUrl={"/signup"}
-                        navigationUrlText={"Create an Bynar account"}
+                        navigationUrlText={t("create-account")}
                         placeholderText={""}
                         setErrorNotification={setErrorNotification}
                         setServerErrorNotification={setServerErrorNotification}

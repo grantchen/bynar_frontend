@@ -10,15 +10,8 @@ const Dashboard = () => {
             <Tabs selectedIndex={ activeTab }>
                 <TabPanels>
                     {
-                        tab.map((item, index) => {
-                            return <TabPanel
-                                className="content-wrapper"
-                                key={ item.id }
-                                style={ {
-                                    display: "block", // treegrid does not load page data if display none, use visible(absolute position) instead
-                                    visibility: index === activeTab ? "visible" : "hidden",
-                                    overflow: index === activeTab ? "unset" : "hidden",
-                                } }>
+                        tab.map((item) => {
+                            return <TabPanel className="content-wrapper" key={ item.id }>
                                 <Suspense
                                     fallback={ <div style={ { display: 'none' } }>Loading...</div> }
                                 >
