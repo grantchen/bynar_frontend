@@ -30,7 +30,6 @@ const PaymentList = ({ tabId }) => {
         }
     }
 
-
     events.OnPasteRow = function (G, row, col, val) {
         if (row.Def.Name === "Node") {
             G.SetAttribute(row, row.parent, "Calculated", 1);
