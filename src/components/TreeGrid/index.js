@@ -4,21 +4,7 @@ import {
     useAuth, uuidv4,
 } from "../../sdk";
 import "./TreeGrid.scss";
-import "./TreeGridBorders.scss"
-import "./TreeGridBlack.scss"
-import "./TreeGridGradient.scss"
-import "./TreeGridLight.scss"
-import "./TreeGridMaterial.scss"
-import "./TreeGridOffice.scss"
-import "./TreeGridRelief.scss"
 import "./TreeGridStandard.scss"
-import "./TreeGridTurg.scss"
-import "./TreeGridWhite.scss"
-import "./TreeGridQuery.scss"
-import "./TreeGridExtJS.scss"
-import "./TreeGridSharp.scss"
-import "./TreeGridRound.scss"
-import "./TreeGridColors.scss"
 
 // get api request url
 export function getAPIRequestURL(url) {
