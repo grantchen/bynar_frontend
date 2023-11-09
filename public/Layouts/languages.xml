@@ -98,18 +98,10 @@
    </Head>
 
    <Head>
-   <Filter id='Filter'   Calculated='1' CaseSensitive='0'
-
-      nameSuggest='|*RowsCanFilter'
-      codeSuggest='|*RowsCanFilter'
-      sales_accountSuggest='|*RowsCanFilter'
-      purchases_accountSuggest='|*RowsCanFilter'
-      descriptionSuggest='|*RowsCanFilter'
-      noteSuggest='|*RowsCanFilter'
-      uuidSuggest='|*RowsCanFilter'
-      calculationSuggest='|*RowsCanFilter'
-      percentageSuggest='|*RowsCanFilter'
-
+      <Filter id='Filter' Calculated='1' CaseSensitive='0' CanEdit='1'
+              descriptionSuggest='|*RowsCanFilter'
+              codeSuggest='|*RowsCanFilter'
+              def_vat_bus_posting_groupSuggest='|*RowsCanFilter'
       />
    </Head>
 

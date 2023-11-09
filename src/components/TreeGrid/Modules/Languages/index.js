@@ -81,20 +81,20 @@ const LanguageList = ({ tabId }) => {
     }
 
     events.OnDownloadPage = function (G, Row) {
-        // G.RecalculateRows(G.Rows.Fix1, 1);
+        G.RecalculateRows(G.Rows.Fix1, 1);
     }
 
     events.OnRenderPageFinish = function (G) {
-        // G.RecalculateRows(G.Rows.Fix1, 1);
+        G.RecalculateRows(G.Rows.Fix1, 1);
     }
 
     events.OnPageReady = function (G, Row) {
-        // G.RecalculateRows(G.Rows.Fix1, 1);
+        G.RecalculateRows(G.Rows.Fix1, 1);
     }
 
     events.OnLanguageFinish = function (G, code) {
-        // var row = G.Rows.Fix3;
-        // G.SetValue(row, "C", window.Get(row, window.Get(row, "D") + "Rate"), 1);
+        var row = G.Rows.Fix3;
+        G.SetValue(row, "C", window.Get(row, window.Get(row, "D") + "Rate"), 1);
     }
 
     return (
