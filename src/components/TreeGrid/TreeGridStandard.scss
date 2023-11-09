@@ -153,7 +153,7 @@
   }
 }
 .TSBodyLeft .TSSectionScroll tbody .TSDataRow:nth-child(2){
-  .TSCellBase:nth-child(2){
+  .TSCellBase{
       border-top: 1px solid #CDD8E4;
   }
   .TSCellBase:last-child{
