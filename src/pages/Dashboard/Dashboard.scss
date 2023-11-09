@@ -1,11 +1,15 @@
-.dashboard-container{
-    color: var(--cds-text-01, #161616);
-    width: 100%;
-    height: calc(100% - 3rem); // 3rem is header height
+.dashboard-container {
+  color: var(--cds-text-01, #161616);
+  width: 100%;
+  height: calc(100% - 3rem); // 3rem is header height
 
-    .content-wrapper {
-        padding: 0;
-        outline: none;
-        height: 100%;
+  .content-wrapper {
+    padding: 0;
+    outline: none;
+    height: 100%;
+
+    &:focus {
+      outline: none;
     }
+  }
 }

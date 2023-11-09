@@ -31,12 +31,13 @@ import MastheadSearch from "@carbon/ibmdotcom-react/lib/components/Masthead/Mast
 import DropdownTabList from "../HeaderTab/DropdownTabList";
 import { OrganizationAccountProvider } from "../../sdk/context/OrganizationAccountManagementContext";
 
+// _AuthenticatedAppHeader is the header component for the authenticated app
 function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
     const { user } = useAuth();
     const { t } = useTranslation();
     const isMobile = useMobile();
     const { theme } = useThemePreference();
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [, setSearchParams] = useSearchParams();
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
     const [isUploadProfileImageModalOpen, openUploadProfileImageModal] =
         useState(false);
@@ -44,8 +45,9 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
     const wrapperRef = useRef(null);
     const [isSearchBarExpanded, setIsSearchBarExpanded] = useState(false)
 
+    // close the wide menu when clicked outside
     useEffect(() => {
-        const handleClickOutside = (event) => {
+        const handleClickWideMenuOutside = (event) => {
             if (
                 wrapperRef.current &&
                 !wrapperRef.current.contains(event.target)
@@ -53,10 +55,10 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                 setIsProfileDropdownOpen(false);
             }
         };
-        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("mousedown", handleClickWideMenuOutside);
 
         return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("mousedown", handleClickWideMenuOutside);
         };
     }, []);
 
@@ -191,6 +193,7 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
     );
 }
 
+// AuthenticatedAppHeader is the header component for the authenticated app with the providers
 export default function AuthenticatedAppHeader(props) {
     return (
         <CardManagementProvider>

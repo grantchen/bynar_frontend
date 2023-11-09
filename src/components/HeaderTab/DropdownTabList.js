@@ -11,6 +11,7 @@ import { ChevronDown, Close, Home } from "@carbon/react/icons";
 import { useTranslation } from "react-i18next";
 import TabSkeleton from "carbon-web-components/es/components-react/tabs/tab-skeleton";
 
+// DropdownTabList is the dropdown tab list component
 const DropdownTabList = ({ className }) => {
     const { t } = useTranslation();
     const { tab, handleRemoveTab, activeTab, setActiveTab } =
@@ -19,10 +20,13 @@ const DropdownTabList = ({ className }) => {
     const [isDropdownTabsOpen, setIsDropdownTabsOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState(tab);
+
+    // set search term when search input changes
     const handleSearchChange = event => {
         setSearchTerm(event.target.value);
     };
 
+    // set active tab when tab changes
     const handleTabListChange = (tabId) => {
         const index = tab.findIndex((item) => item.id === tabId);
         if (tab[index]?.loaded === true) {
@@ -30,15 +34,18 @@ const DropdownTabList = ({ className }) => {
         }
     };
 
+    // remove tab when close button is clicked
     const removeTab = (tabId) => {
         handleRemoveTab(tabId);
     };
 
+    // filter tab list when search term changes
     useEffect(() => {
         const results = tab.filter(listItem => listItem.label.toLowerCase().includes(searchTerm.toLowerCase()));
         setSearchResults(results);
     }, [searchTerm, tab]);
 
+    // close the dropdown when clicked outside
     useEffect(() => {
         const handleClickDropdownTabsOutside = (event) => {
             if (

@@ -2,9 +2,11 @@ import { TreeGrid, getAPIRequestURL } from "../../index";
 import debounce from "lodash/debounce";
 import { useAuth } from "../../../../sdk";
 
+// UserGroupList is the user group list component
 const UserGroupList = ({ tabId }) => {
     const { treeGridRequest } = useAuth();
 
+    // cell suggest configs
     const keySuggest = 'full_nameSuggest'
     const lsSuggestionField = ["full_name", "email", "user_id"]
 
@@ -21,22 +23,15 @@ const UserGroupList = ({ tabId }) => {
         });
     }, 300)
 
+    // events is an object that contains all the event handlers for the TreeGrid
     const events = {}
-    // suggest
+    // set cell value after choose suggestion item
     events.OnAfterValueChanged = window.parseCellSuggestionCallback(keySuggest, lsSuggestionField)
 
     events.OnExpand = function (G, row) {
         if (row.Def.Name === "Node") {
             G.SetAttribute(row, row.parent, "Calculated", 1);
         }
-    }
-
-    // before add
-    events.OnCanRowAdd = function (G, par, next) {
-        if (G.Editing === 2) return false;
-        // Disable adding rows to grouped category
-        if (par.Def?.Name === "Group" && par.Def?.CDef === "R" && par.Rows) return false;
-        return
     }
 
     // on add
@@ -49,6 +44,21 @@ const UserGroupList = ({ tabId }) => {
 
         if (row.Def.Name === "Node") {
             G.SetAttribute(row, row.parent, "Calculated", 1);
+        }
+
+        // Set the value of the group field when adding data after grouping
+        if (G.Group !== "") {
+            for (let key of G.Group.split(",")) {
+                let parentNode = row.parentNode
+                // Recursively parent node to get the value of the group field
+                while (parentNode !== undefined) {
+                    if (parentNode.Visible === 1 && parentNode[key] !== undefined) {
+                        row[key] = parentNode[key]
+                        break
+                    }
+                    parentNode = parentNode.parentNode
+                }
+            }
         }
     }
 

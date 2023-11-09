@@ -115,6 +115,7 @@ const Signup = () => {
         addressLine1.trim().length === 0 ||
         Object.keys(postalCodeErrorNotification).length !== 0;
 
+    // Function to set state, check full name validation when full name is changed
     const handleFullName = (e) => {
         const { name, value } = e.target;
         setFullName(value);
@@ -126,11 +127,12 @@ const Signup = () => {
 
     const [language, setLanguage] = useState(localStorage.getItem('lang') ?? 'en');
 
+    // Function to set state, when language is changed
     const handleLanguageChange = (newLanguage) => {
-        console.log(newLanguage)
         setLanguage(newLanguage);
     };
 
+    // Function to set state, check address line validation when address line is changed
     const handleAddressLine1 = (e) => {
         const { name, value } = e.target;
         setAddressLine1(value);
@@ -140,6 +142,7 @@ const Signup = () => {
         });
     };
 
+    // Function to set state, check city validation when city is changed
     const handleCity = (e) => {
         const { name, value } = e.target;
         setCity(value);
@@ -149,6 +152,7 @@ const Signup = () => {
         });
     };
 
+    // Function to set state, check state validation when state is changed
     const handleState = (e) => {
         const { name, value } = e.target;
         setState(value);
@@ -158,6 +162,7 @@ const Signup = () => {
         });
     };
 
+    // check phone number is valid or not
     const validatePhoneNumber = (value, dialCode, country) => {
         if (value === dialCode) {
             setErrorMessage(t("enter-valid-phone-number"))
@@ -190,6 +195,7 @@ const Signup = () => {
         }
     }
 
+    // Function to set state, check phone number validation when phone number is changed
     const handlePhoneNumber = (value, country) => {
         setPhoneNumber(value)
         setCountryCode(country?.countryCode);
@@ -213,7 +219,7 @@ const Signup = () => {
         setErrorNotification({});
         setIsError(false);
         setEmailAddress(value);
-        const errors = validateOrganizationForm(value);
+        const errors = validateEmail(value);
         setErrors(errors);
         // change email needs to verify again
     };
@@ -360,6 +366,7 @@ const Signup = () => {
         fetchData();
     };
 
+    // Function to verify card details
     const handleVerifyCard = (token) => {
         const fetchData = async () => {
             try {
@@ -383,9 +390,6 @@ const Signup = () => {
                 } else if (response.status === 500) {
                     setIsError(true);
                     let title = t("invalid-card-details")
-                    // if (res?.error) {
-                    //     title = res?.error
-                    // }
                     setErrorNotification({
                         title: title,
                         status: "error",
@@ -442,16 +446,31 @@ const Signup = () => {
                 } else if (response.status === 500) {
                     setIsError(true);
                     let err = res.error
-                    if (err.includes("timestamp has expired")) {
-                        err = t("timestamp-has-expired")
-                    } else if (err.includes("has already exist")) {
-                        const parts = err.split(' ');
-                        const emailAddress = parts[1];
-                        err = t("email-label") + " "+ emailAddress + " "+ t("has-already-exist")
-                    } else if (err.includes("send registration email fail")) {
-                        err = t("send-registration-email-fail")
-                    } else if (err.includes("check user exists fail")) {
-                        err = t("check-user-exists-fail")
+                    const errorMappings = {
+                        "check user exists failed": "check-user-exists-failed",
+                        "has already exist": "has-already-exist",
+                        "delete user failed": "delete-user-failed",
+                        "number already exists": "create-user-failed-email",
+                        "email already exists": "create-user-failed-phone-number",
+                        "update user failed": "update-user-failed",
+                        "no user found": "no-user-found",
+                        "set custom token with claims fail": "set-custom-fail"
+                    };
+                    let errorMessage = "";
+                    for (const [key, value] of Object.entries(errorMappings)) {
+                        if (err.includes(key)) {
+                            if (key === "has already exist") {
+                                const parts = err.split(' ');
+                                const emailAddress = parts[1];
+                                errorMessage = `${t("email-label")} ${emailAddress} ${t(value)}`;
+                            } else {
+                                errorMessage = t(value);
+                            }
+                            break;
+                        }
+                    }
+                    if (errorMessage !== "") {
+                        err = errorMessage;
                     }
                     setErrorNotification({
                         title: err,
@@ -473,10 +492,12 @@ const Signup = () => {
         fetchData();
     };
 
+    // set step to personal info page
     const handlePersonalInfo = () => {
         setActiveStep(4);
     };
 
+    // Function to set state, check vat number validation when vat number is changed
     const handleVatNumberChange = (e) => {
         const { name, value } = e.target;
         setVatNumber(value);
@@ -486,6 +507,7 @@ const Signup = () => {
         });
     };
 
+    // Function to set state, check organization name validation when organization name is changed
     const handleOrganizationNameChange = (e) => {
         const { name, value } = e.target;
         setOrganizationName(value);
@@ -495,6 +517,7 @@ const Signup = () => {
         });
     };
 
+    // Function to set state, check organization country validation when organization country is changed
     const handleOrganizationCountryChange = (e) => {
         const { name, value } = e.target;
         setOrganizationCountry(value);
@@ -504,15 +527,18 @@ const Signup = () => {
         });
     };
 
+    // Function to set state, when data sovereignty is changed
     const handleDataSovereigntyChange = (e) => {
-        const { name, value } = e.target;
+        const { value } = e.target;
         setDataSovereignty(value);
     }
 
+    // change step to tax info page
     const handleTaxInfo = () => {
         setActiveStep(5);
     };
 
+    // check postal code is valid or not
     const postalCodeValidation = (value) => {
         if (value.length === 0) {
             setPostalCodeErrorNotification({ title: t("postal-code-required")});
@@ -527,8 +553,9 @@ const Signup = () => {
         postalCodeValidation(e.target.value.trim());
     };
 
+    // init Frames when step is 5
     useEffect(() => {
-        if (activeStep == 5) {
+        if (activeStep === 5) {
             Frames.init({
                 publicKey: CheckoutPublicKey,
                 "ready": handleReady,
@@ -536,6 +563,7 @@ const Signup = () => {
         }
     }, [activeStep])
 
+    // submit card details to checkout.com
     const handleVerifyCardDetails = async (e) => {
         e.preventDefault();
         setLoadingCardSuccess(true);
@@ -560,6 +588,7 @@ const Signup = () => {
         }
     };
 
+    // Function to create environment
     const handleCreateEnvironment = async (e) => {
         e.preventDefault();
         handleCreateAccount();
@@ -578,7 +607,6 @@ const Signup = () => {
 
     useEffect(() => {
         // 👇️ scroll to top on page load
-
         if (isError && activeStep !== 1 && activeStep !== 5 && activeStep !== 4) {
             const currentWidth = containerRef.current
                 ? containerRef.current.offsetWidth
@@ -611,7 +639,8 @@ const Signup = () => {
         })
     }
 
-    const validateOrganizationForm = (email) => {
+    // Function to validate email address
+    const validateEmail = (email) => {
         const errors = {};
         if (email.trim() === "") {
             errors.email = t("email-required");
@@ -626,7 +655,7 @@ const Signup = () => {
 
     // sign up first step submit
     const handleOrganizationFormSubmit = () => {
-        const errors = validateOrganizationForm(email);
+        const errors = validateEmail(email);
         setErrors(errors);
 
         if (Object.keys(errors).length === 0) {
@@ -639,6 +668,7 @@ const Signup = () => {
             }
         }
     };
+
     // sign up second step submit
     const handleVerifyEmailFormSubmit = () => {
         if (isEmailVerified) {
@@ -652,6 +682,7 @@ const Signup = () => {
         }
     };
 
+    // handle account information form submit
     const handleAccountInformationFormSubmit = () => {
         const error = {};
         postalCodeValidation(postalCode);
@@ -680,6 +711,7 @@ const Signup = () => {
         }
     };
 
+    // handle organization information form submit
     const handleOrganizationInformationFormSubmit = () => {
         const error = {};
         error.organizationName = organizationName.trim().length === 0;
@@ -690,6 +722,7 @@ const Signup = () => {
         }
     };
 
+    // Function to set state, check country validation when country is changed
     const handleCountryChange = (e) => {
         const selectedItem = COUNTRIES.find((item) => item.name === e.target.value);
         if (Object.keys(selectedItem).length === 0) {

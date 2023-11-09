@@ -515,5 +515,10 @@
     "sending-confirmation-email": "enviando correo electrónico de confirmación",
     "re-sending-confirmation-email": "reenviar correo electrónico de confirmación",
     "error-user-account": "se produjo un error al crear una cuenta de usuario",
-    "login-failed-invalid": "Error al iniciar sesión, enlace caducado o no válido"
+    "login-failed-invalid": "Error al iniciar sesión, enlace caducado o no válido",
+    "check-user-exists-failed": "error al verificar la existencia del usuario",
+    "delete-user-failed": "error al eliminar el usuario",
+    "create-user-failed-email": "error al crear el usuario: ya existe un usuario con el número de teléfono proporcionado",
+    "create-user-failed-phone-number": "error al crear el usuario: ya existe un usuario con el correo electrónico proporcionado",
+    "update-user-failed": "error al actualizar el usuario"
 }

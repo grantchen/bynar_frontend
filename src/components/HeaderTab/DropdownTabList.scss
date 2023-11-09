@@ -1,17 +1,20 @@
 // drop down tabs
 .header-tab-list {
-
   .cds--dropdown__wrapper--inline {
     grid-gap: 0;
   }
+
   .cds--list-box__menu {
     display: block;
   }
+
   .cds--list-box--expanded.cds--list-box--lg .cds--list-box__menu {
-    transition: all 0.15s cubic-bezier(0,0,.38,.9);
+    transition: all 0.15s cubic-bezier(0, 0, .38, .9);
   }
+
   .header-dynamic-dropdown-tabs-content {
     background-color: var(--cds-ui-02, #ffffff);
+
     .list-wrapper {
       .cds--contained-list {
 
@@ -122,7 +125,7 @@
       }
     }
 
-    +.cds--popover-caret {
+    + .cds--popover-caret {
       background-color: var(--cds-ui-02, #ffffff);
     }
   }
@@ -167,7 +170,7 @@
         }
       }
 
-      +.cds--popover-caret {
+      + .cds--popover-caret {
         background-color: var(--cds-layer);
       }
     }

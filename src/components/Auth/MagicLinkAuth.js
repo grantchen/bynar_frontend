@@ -2,13 +2,15 @@ import { getQueryVariable } from "../../sdk";
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
+// MagicLinkAuth is a component that handles the redirect from the magic link
 export const MagicLinkAuth = () => {
-  const [searchParams, _] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     handleContinueUrlRedirect()
   }, [])
 
+  // handleContinueUrlRedirect open the continueUrl if it exists
   const handleContinueUrlRedirect = () => {
     let continueUrl = getQueryVariable(window.location.href, "continueUrl")
     if (!continueUrl) {

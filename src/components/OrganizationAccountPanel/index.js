@@ -4,7 +4,7 @@ import {
     TextInput, Dropdown,
     InlineNotification
 } from "@carbon/react";
-import React, {useState, useEffect, useRef, useMemo} from "react";
+import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import {BaseURL, COUNTRIES} from "../../sdk/constant";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -16,9 +16,13 @@ import {
 import "./OrganizationAccountPanel.scss";
 import {useTranslation} from "react-i18next";
 import {useOrganizationAccount} from "../../sdk/context/OrganizationAccountManagementContext";
+import es from 'react-phone-input-2/lang/es.json'
+import de from 'react-phone-input-2/lang/de.json'
+import fr from 'react-phone-input-2/lang/fr.json'
 
 pkg.component.SidePanel = true;
 
+// OrganizationAccountPanel is the organization account panel component
 export const OrganizationAccountPanel = ({open}) => {
     const {t} = useTranslation();
     const {closeOrganizationAccountPanel, openDeleteModal, notification, setNotification} = useOrganizationAccount();
@@ -37,15 +41,27 @@ export const OrganizationAccountPanel = ({open}) => {
     const [organizationCountry, setOrganizationCountry] = useState("");
 
     const {themePreference} = useThemePreference();
-    const {refreshPostSignIn, getUser, authFetch} = useAuth();
+    const {user, refreshPostSignIn, getUser, authFetch} = useAuth();
     const phoneUtil = PhoneNumberUtil.getInstance();
-
     const [disable, setDisable] = useState(false)
     const [dataLoading, setDataLoading] = useState(false);
     const [errors, setErrors] = useState({});
-
     const inputRefs = useRef([]);
     const [defaultData, setDefaultData] = useState({});
+
+    // phone number input localization
+    const phoneNumberInputLocalization = useCallback(()=> {
+        switch(user?.languagePreference) {
+            case 'es':
+                return es;
+            case 'de':
+                return de;
+            case 'fr':
+                return fr;
+            default:
+                return {};
+        }
+    }, [user?.languagePreference]);
 
     /* Function to set state, check email address validation when email address is changed  */
     const handleEmailChange = (value) => {
@@ -54,7 +70,7 @@ export const OrganizationAccountPanel = ({open}) => {
         validateEmail(value);
     };
 
-
+    // Function to set state, check full name validation when full name is changed
     const handleFullNameChange = (e) => {
         setNotification({});
         const {value} = e.target;
@@ -66,11 +82,13 @@ export const OrganizationAccountPanel = ({open}) => {
         setErrors(errors);
     };
 
+    // Function to set state, check country validation when country is changed
     const handleCountryChange = (data) => {
         setNotification({});
         setCountry(data.selectedItem);
     }
 
+    // Function to set state, check address line validation when address line is changed
     const handleAddressLineChange = (e) => {
         setNotification({});
         const {value} = e.target;
@@ -82,12 +100,14 @@ export const OrganizationAccountPanel = ({open}) => {
         setErrors(errors);
     }
 
+    // Function to set state, check address line 2 validation when address line 2 is changed
     const handleAddressLine2Change = (e) => {
         setNotification({});
         const {value} = e.target;
         setAddressLine2(value);
     }
 
+    // Function to set state, check city validation when city is changed
     const handleCityChange = (e) => {
         setNotification({});
         const {value} = e.target;
@@ -99,6 +119,7 @@ export const OrganizationAccountPanel = ({open}) => {
         setErrors(errors);
     }
 
+    // Function to set state, check state validation when state is changed
     const handleStateChange = (e) => {
         setNotification({});
         const {value} = e.target;
@@ -110,6 +131,7 @@ export const OrganizationAccountPanel = ({open}) => {
         setErrors(errors);
     }
 
+    // Function to set state, check postal code validation when postal code is changed
     const handlePostalCodeChange = (e) => {
         setNotification({});
         const {value} = e.target;
@@ -121,11 +143,13 @@ export const OrganizationAccountPanel = ({open}) => {
         setErrors(errors);
     }
 
+    // Function to set state, check phone number validation when phone number is changed
     const handlePhoneNumberChange = (value, country) => {
         setPhoneNumber(value)
         validatePhoneNumber(value, country?.dialCode, country?.countryCode);
     }
 
+    // Function to set state, check organization name validation when organization name is changed
     const handleOrganizationNameChange = (e) => {
         setNotification({});
         const {value} = e.target;
@@ -137,6 +161,7 @@ export const OrganizationAccountPanel = ({open}) => {
         setErrors(errors);
     }
 
+    // Function to set state, check organization number validation when organization number is changed
     const handleVatNumberChange = (e) => {
         setNotification({});
         const {value} = e.target;
@@ -148,12 +173,13 @@ export const OrganizationAccountPanel = ({open}) => {
         setErrors(errors);
     }
 
+    // Function to set state, check organization country validation when organization country is changed
     const handleOrganizationCountryChange = (data) => {
         setNotification({});
         setOrganizationCountry(data.selectedItem);
     }
 
-
+    // Function to check email address validation
     const validateEmail = (email) => {
         delete errors.email;
         if (email.trim() === "") {
@@ -176,7 +202,7 @@ export const OrganizationAccountPanel = ({open}) => {
             );
     };
 
-
+    // Function to check phone number is valid or not
     const validatePhoneNumber = (value, dialCode, country) => {
         delete errors.phoneNumber;
         if (value === dialCode) {
@@ -202,12 +228,14 @@ export const OrganizationAccountPanel = ({open}) => {
         setErrors(errors)
     }
 
+    // Function to close organization account panel
     const handleClose = () => {
         setNotification({});
         setErrors({});
         closeOrganizationAccountPanel()
     };
 
+    // Function to update organization account
     const handleUpdateOrganizationAccount = () => {
         setNotification({});
 
@@ -257,6 +285,7 @@ export const OrganizationAccountPanel = ({open}) => {
         fetchData()
     };
 
+    // Function to open delete modal
     const handleDeleteOrganizationAccount = () => {
         openDeleteModal(
             {
@@ -265,6 +294,7 @@ export const OrganizationAccountPanel = ({open}) => {
         );
     };
 
+    // Function to check if form can be submitted or not
     const canSubmitted = useMemo(() => {
             if (dataLoading) {
                 return false
@@ -292,6 +322,7 @@ export const OrganizationAccountPanel = ({open}) => {
             defaultData.postalCode, defaultData.phoneNumber, defaultData.organizationName, defaultData.VAT,
             defaultData.organizationCountry, errors])
 
+    // fetch organization account data when open panel
     useEffect(() => {
         const getOrganizationAccount = async () => {
             try {
@@ -424,7 +455,8 @@ export const OrganizationAccountPanel = ({open}) => {
                                         items={COUNTRIES.map(obj => obj.name)}
                                         selectedItem={country}
                                         onChange={selectedItem => handleCountryChange(selectedItem)}
-                                        label={country}/>
+                                        itemToString={(item) => (t(`${item}`))}
+                                        label={''}/>
                                 </>
                             )}
 
@@ -515,6 +547,7 @@ export const OrganizationAccountPanel = ({open}) => {
                                     </div>
                                     <PhoneInput
                                         className="phone-input-sidepanel"
+                                        localization={ phoneNumberInputLocalization() }
                                         ref={(el) => (inputRefs.current[8] = el)}
                                         inputProps={{
                                             disabled: false,
@@ -590,7 +623,8 @@ export const OrganizationAccountPanel = ({open}) => {
                                         items={COUNTRIES.map(obj => obj.name)}
                                         selectedItem={organizationCountry}
                                         onChange={selectedItem => handleOrganizationCountryChange(selectedItem)}
-                                        label={organizationCountry}/>
+                                        itemToString={(item) => (t(`${item}`))}
+                                        label={""}/>
                                 </>
                             )}
 
