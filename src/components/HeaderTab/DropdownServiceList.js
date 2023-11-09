@@ -141,6 +141,7 @@ const DropdownServiceList = () => {
                     <div
                         className={ `cds--dropdown cds--dropdown--inline cds--dropdown--lg cds--list-box cds--list-box--lg ${ isDropdownTabsOpen ? 'cds--dropdown--open cds--list-box--expanded' : '' }` }>
                         <Button
+                            label={ "" }
                             kind="ghost"
                             className="add-new-tab"
                             hasIconOnly
@@ -151,7 +152,7 @@ const DropdownServiceList = () => {
                             <Add size={ 20 } aria-label="Add" />
                         </Button>
 
-                        <ul className="cds--list-box__menu" ref={dropdownListBoxRef}  role="listbox"
+                        <ul className="cds--list-box__menu" ref={ dropdownListBoxRef } role="listbox"
                             style={ { maxHeight: isDropdownTabsOpen ? '16.5rem' : 0 } }>
                             <div className="header-dynamic-dropdown-services-content">
                                 <div className="list-wrapper">
