@@ -1,0 +1,97 @@
+// drop down services list
+.header-dropdown-services-list {
+  .cds--dropdown__wrapper--inline {
+    grid-gap: 0;
+  }
+
+  .cds--list-box__menu {
+    display: block;
+  }
+
+  .cds--dropdown--inline .cds--list-box__menu {
+    min-width: 15rem;
+  }
+
+  .cds--list-box--expanded.cds--list-box--lg .cds--list-box__menu {
+    transition: all 0.15s cubic-bezier(0, 0, .38, .9);
+  }
+
+  .header-dynamic-dropdown-services-content {
+    background-color: var(--cds-ui-02, #ffffff);
+
+    .list-wrapper {
+      .cds--contained-list {
+
+        // hide tooltip popover
+        .cds--popover[role="tooltip"] {
+          display: none;
+        }
+
+        .cds--contained-list-item {
+          .cds--contained-list-item__content {
+            color: var(--cds-text-02, #525252);
+          }
+
+          // no border between services
+          &:not(:last-of-type)::before {
+            content: none;
+          }
+
+          &:hover {
+            .cds--contained-list-item__content {
+              color: var(--cds-text-01);
+              background-color: var(--cds-layer-hover);
+            }
+          }
+        }
+
+        .cds--contained-list__header {
+          display: none; // no header title
+        }
+
+        .cds--search {
+          top: 0; // no header title
+        }
+
+      }
+    }
+
+    + .cds--popover-caret {
+      background-color: var(--cds-ui-02, #ffffff);
+    }
+  }
+}
+
+[data-carbon-theme="g90"] {
+  .header-dropdown-services-list {
+    .header-dynamic-dropdown-services-content {
+      background-color: var(--cds-layer);
+      transform: translateX(0);
+      transition-behavior: normal;
+      transition-delay: 0s;
+      transition-duration: 0.15s;
+      transition-property: all;
+      transition-timing-function: cubic-bezier(0, 0, 0.38, 0.9);
+
+      .list-wrapper {
+        .cds--contained-list {
+          .cds--contained-list-item {
+            &:hover {
+              .cds--contained-list-item__content {
+                background-color: #444444;
+              }
+            }
+          }
+        }
+
+        .cds--search .cds--search-input {
+          background-color: var(--cds-layer);
+        }
+      }
+
+      + .cds--popover-caret {
+        background-color: var(--cds-layer);
+      }
+    }
+  }
+}

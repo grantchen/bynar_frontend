@@ -27,7 +27,7 @@ const DropdownTabList = ({ className }) => {
     };
 
     // set active tab when tab changes
-    const handleTabListChange = (tabId) => {
+    const handleTabChange = (tabId) => {
         const index = tab.findIndex((item) => item.id === tabId);
         if (tab[index]?.loaded === true) {
             setActiveTab(index);
@@ -106,7 +106,7 @@ const DropdownTabList = ({ className }) => {
                                                 key={`${item.id}-${index}`}
                                                 className={tab[activeTab].id === item.id ? 'list-item-active' : ''}
                                                 action={
-                                                    item.isDelted ? (
+                                                    item.canDelete ? (
                                                         <>
                                                             <Button
                                                                 label=""
@@ -129,7 +129,7 @@ const DropdownTabList = ({ className }) => {
                                                                 className="home-tab-icon"
                                                                 hasIconOnly
                                                                 onClick={() => {
-                                                                    handleTabListChange(item.id);
+                                                                    handleTabChange(item.id);
                                                                     setIsDropdownTabsOpen(false);
                                                                 }}
                                                             >
@@ -139,7 +139,7 @@ const DropdownTabList = ({ className }) => {
                                                     )
                                                 }
                                                 onClick={() => {
-                                                    handleTabListChange(item.id);
+                                                    handleTabChange(item.id);
                                                     setIsDropdownTabsOpen(false);
                                                 }}
                                             >

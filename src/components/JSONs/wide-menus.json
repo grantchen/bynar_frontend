@@ -3445,8 +3445,8 @@
         ]
       },
       {
-        "title": "Explore more",
-        "titleEnglish": "Explore more",
+        "title": "explore-more",
+        "titleEnglish": "",
         "url": "",
         "description": "Blend cloud and on-premises resources for flexibility and balance",
         "hasMenu": true,
@@ -3526,7 +3526,7 @@
                 "url": "?openCardMangementPanel=true",
                 "sidePanel": "UserCardManagementPanel",
                 "tabType": "",
-                "permission": "payment-method",
+                "permission": "",
                 "megapanelContent": {
                   "headingTitle": "",
                   "headingUrl": "",
@@ -3634,7 +3634,7 @@
                 "megapanelContent": {
                   "headingTitle": "",
                   "headingUrl": "",
-                  "description": "Organization Account Information"
+                  "description": "organization-account-information"
                 }
               },
               {

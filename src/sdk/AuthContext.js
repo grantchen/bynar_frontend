@@ -329,9 +329,6 @@ export const AuthProvider = ({ children }) => {
             return false;
         }
 
-        if (name === "payment-method") {
-            return state.tokenClaims?.organization_account === true
-        }
         if (!state.user.permissions) {
             return false;
         }
