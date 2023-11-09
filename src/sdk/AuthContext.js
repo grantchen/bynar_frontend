@@ -346,7 +346,7 @@ export const AuthProvider = ({ children }) => {
                 }
             }
         })
-    }, [state.user, state.tokenClaims]);
+    }, [state.user]);
 
     // update user theme preference
     const updateUserThemePreference = useCallback(
