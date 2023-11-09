@@ -28,6 +28,12 @@ const SaleList = ({ tabId }) => {
                 }
             }
         }
+
+        // Set parent id
+        let parentId = row.parentNode.parentNode.id
+        if (parentId !== undefined) {
+            row.parentNode.id = parentId
+        }
     }
 
     events.OnPasteRow = function (G, row, col, val) {
