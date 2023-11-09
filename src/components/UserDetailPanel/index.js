@@ -220,6 +220,7 @@ export const UserDetailPanel = ({ open }) => {
                         status: "success",
                         title: t("update-profile-successfully"),
                     });
+                    setServerNotification(true)
                     setDisable(false)
                     // handleClose()
                     await getUser();
