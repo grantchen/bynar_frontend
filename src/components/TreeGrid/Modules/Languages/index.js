@@ -28,6 +28,12 @@ const LanguageList = ({ tabId }) => {
                 }
             }
         }
+
+        // Set parent id
+        let parentId = row.parentNode.parentNode.id
+        if (parentId !== undefined) {
+            row.parentNode.id = parentId
+        }
     }
 
 
