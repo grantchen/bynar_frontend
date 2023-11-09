@@ -75,12 +75,17 @@ table > tbody > tr:has(> td > .TSMenuItem.TSMenuHover) {
   border-bottom: 0px solid #CDD8E4;
 }
 
-.TSHeadLeft .TSFilterRow td:nth-child(2) {
-  border-bottom: 2px #CDD8E4 solid;
-  border-image: linear-gradient(90deg, #ffffff 0%, #CDD8E4 20px) 0 0 1 0
-}
-.TSHeadLeft .TSFilterRow .TSCellBase{
-  border-bottom: 2px #CDD8E4 solid;
+.TSHeadLeft .TSFilterRow {
+  .TSCellBase{
+    border-bottom: 2px #CDD8E4 solid;
+  }
+  td:nth-child(2) {
+    border-bottom: 2px #CDD8E4 solid;
+    border-image: linear-gradient(90deg, #ffffff 0%, #CDD8E4 20px) 0 0 1 0
+  }
+  td:nth-child(3) {
+    border-left: 1px #CDD8E4 solid;
+  }
 }
 
 .TSRowSpace1.TSRowSpaceLast .TSSolidRow{
@@ -92,21 +97,38 @@ table > tbody > tr:has(> td > .TSMenuItem.TSMenuHover) {
 }
 
 .TSHeadLeft .TSHeaderRow .TSCellHeader:nth-child(2) {
-  border-image: linear-gradient(90deg, #ffffff 0%, #6F7F94 20px) 0 1 1 0
+  border-image: linear-gradient(90deg, #ffffff 0%, #6F7F94 20px) 0 0 1 0
 }
 
 .TSHeadMid .TSSectionScroll .TSSection tbody tr:nth-child(2) {
   .TSCellBase{
-    border-image: linear-gradient(180deg,#ffffff 0%, #6F7F94 100%) 0 1 1 0;
+    border-image: linear-gradient(180deg,#ffffff 0%, #6F7F94 20px) 0 1 1 0;
   }
 }
 .TSHeadMid .TSHeaderRow .TSCellBase:nth-last-child(2) {
-  border-image: linear-gradient(180deg,#ffffff 0%, #6F7F94 100%) 0 1 1 0;
+  border-image: linear-gradient(270deg,#ffffff 0%, #6F7F94 20px) 0 0 1 0;
 }
 
-.TSHeadLeft .TSSectionScroll table tbody tr:nth-child(2) .TSCellHeader:nth-child(3){
-  border-image: linear-gradient(180deg,#ffffff 0%, #6F7F94 100%) 0 0 1 1;
-  border-left: 1px #6F7F94 solid;
+.TSHeadLeft .TSSectionScroll table tbody {
+  tr:nth-child(2) {
+    .TSCellHeader{
+      border-image: linear-gradient(180deg,#ffffff 0%, #6F7F94 20px) 0 0 1 1;
+      border-left: 1px #6F7F94 solid;
+    }
+    .TSCellHeader:nth-child(2) {
+      border-image: linear-gradient(90deg, #ffffff 0%, #6F7F94 20px) 0 0 1 0;
+      border-left: 0px #6F7F94 solid;
+    }
+  }
+  tr:nth-child(3){
+    .TSCellHeader{
+      border-left: 1px #6F7F94 solid;
+    }
+    .TSCellHeader:nth-child(2) {
+      border-image: linear-gradient(90deg, #ffffff 0%, #6F7F94 20px) 0 0 1 0;
+      border-left: 0px #6F7F94 solid;
+    }
+  }
 }
 // set TSBodyMid border-top
 .TSBodyMid .TSSectionScroll .TSPageOne .TSDataRow:nth-child(2){
@@ -120,9 +142,6 @@ table > tbody > tr:has(> td > .TSMenuItem.TSMenuHover) {
   }
 }
 
-.TSHeadMid{
-  border-bottom: 0px solid #CDD8E4;
-}
 .TSHeadMid .TSFilterRow .TSCellBase{
   border-bottom: 2px solid #CDD8E4;
 }
@@ -130,28 +149,22 @@ table > tbody > tr:has(> td > .TSMenuItem.TSMenuHover) {
 
 
 .TSHeadMid{
-  border-left: 0px solid #CDD8E4;
+  border-image: linear-gradient(180deg, #fff 0%,#CDD8E4 20px) 0 0 1 1;
+  border-bottom: 0px solid #CDD8E4;
   .TSHeaderRow {
-    .TSCellBase:nth-child(3){
-      border-left: 1px solid #6F7F94;
-    }
     .TSCellBase:nth-child(2){
       border-left: 1px solid #6F7F94;
     }
   }
 }
 .TSHeadMid .TSSectionScroll .TSSection tbody tr:nth-child(2) {
-  .TSCellBase:nth-child(3){
-    border-image: linear-gradient(180deg, #fff 0%, #6F7F94 100%) 0 1 1 1;
-    border-left: 1px solid #6F7F94;
-  }
   .TSCellBase:nth-child(2){
-    border-image: linear-gradient(180deg, #fff 0%, #6F7F94 100%) 0 1 1 1;
+    border-image: linear-gradient(180deg, #fff 0%, #6F7F94 20px) 0 1 1 0;
     border-left: 1px solid #6F7F94;
   }
 }
 .TSBodyLeft .TSSectionScroll tbody .TSDataRow:nth-child(2){
-  .TSCellBase:nth-child(2){
+  .TSCellBase{
       border-top: 1px solid #CDD8E4;
   }
   .TSCellBase:last-child{
