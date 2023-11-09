@@ -147,7 +147,7 @@
     "provider": "Provider",
     "payment-status": "Payment Status",
     "payment-failed": "Payment Failed",
-    "payment-successful": "Payment Successful",
+    "payment-successful": "update payment successfully",
     "invoices-load-failed": "Failed to load invoices",
     "card-management": "Card management",
     "payment-method": "Payment method",
@@ -214,12 +214,12 @@
     "account-notice-text4": " More information on our processing can \n be found in the",
     "account-notice-text5": "  By submitting this form, I acknowledge \n that I have \n read and understand the Bynar Privacy \n  Statement.",
     "account-notice-text6": " . Also you \n may unsubscribe from receiving marketing \n emails by clicking the unsubscribe link in each email.",
-    "opt-out": "opt-out request" ,
+    "opt-out": "opt-out request",
     "bynar-privacy": "Bynar Privacy Statement.",
     "accept-product": "I accept the product",
-    "terms-and":"Terms and Conditions",
+    "terms-and": "Terms and Conditions",
     "registration-form": "of this registration form.",
-    "creating-environment":"Creating environment. Please wait",
+    "creating-environment": "Creating environment. Please wait",
     "credit-card": "Credit card information",
     "verify-card": "Verify card",
     "create-environment": "Create environment",
@@ -520,5 +520,7 @@
     "delete-user-failed": "delete user failed",
     "create-user-failed-email": "create user failed: user with the provided phone number already exists",
     "create-user-failed-phone-number": "create user failed: user with the provided email already exists",
-    "update-user-failed": "update user failed"
+    "update-user-failed": "update user failed",
+    "update-organization-account-successfully": "update organization account successfully",
+    "update-profile-successfully": "update profile successfully"
 }
