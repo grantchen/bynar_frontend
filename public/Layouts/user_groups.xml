@@ -65,10 +65,9 @@
     <D
       Name='Node'
       Parent='#Body' CDef='Data' Sorted='1' AcceptDef='Data' Spanned='1' Calculated='1' Expanded='1' CanFilter='1'
-      CanEdit='1'
+      CanEdit='1'  full_name='Parent' full_nameType='Text' full_nameSpan="3" full_nameCanEdit="0" full_nameAlign="Center"
       applies_document_type='Parent' applies_document_typeType='Text' applies_document_typeSpan="4"
       applies_document_typeCanEdit="0" applies_document_typeAlign="Center"
-
     />
 
     <D
