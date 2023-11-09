@@ -1,21 +1,21 @@
-import {SidePanel, pkg} from "@carbon/ibm-products";
+import { SidePanel, pkg } from "@carbon/ibm-products";
 import {
     TextInputSkeleton, Theme,
     TextInput, Dropdown,
     InlineNotification
 } from "@carbon/react";
 import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
-import {BaseURL, COUNTRIES} from "../../sdk/constant";
+import { BaseURL, COUNTRIES } from "../../sdk/constant";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import {useAuth, useThemePreference} from "../../sdk";
+import { useAuth, useThemePreference } from "../../sdk";
 
 import {
     PhoneNumberUtil,
 } from "google-libphonenumber";
 import "./OrganizationAccountPanel.scss";
-import {useTranslation} from "react-i18next";
-import {useOrganizationAccount} from "../../sdk/context/OrganizationAccountManagementContext";
+import { useTranslation } from "react-i18next";
+import { useOrganizationAccount } from "../../sdk/context/OrganizationAccountManagementContext";
 import es from 'react-phone-input-2/lang/es.json'
 import de from 'react-phone-input-2/lang/de.json'
 import fr from 'react-phone-input-2/lang/fr.json'
@@ -23,9 +23,9 @@ import fr from 'react-phone-input-2/lang/fr.json'
 pkg.component.SidePanel = true;
 
 // OrganizationAccountPanel is the organization account panel component
-export const OrganizationAccountPanel = ({open}) => {
-    const {t} = useTranslation();
-    const {closeOrganizationAccountPanel, openDeleteModal, notification, setNotification} = useOrganizationAccount();
+export const OrganizationAccountPanel = ({ open }) => {
+    const { t } = useTranslation();
+    const { closeOrganizationAccountPanel, openDeleteModal, notification, setNotification } = useOrganizationAccount();
 
     const [email, setEmail] = useState("");
     const [fullName, setFullName] = useState("");
@@ -40,8 +40,8 @@ export const OrganizationAccountPanel = ({open}) => {
     const [vatNumber, setVatNumber] = useState("");
     const [organizationCountry, setOrganizationCountry] = useState("");
 
-    const {themePreference} = useThemePreference();
-    const {user, refreshPostSignIn, getUser, authFetch} = useAuth();
+    const { themePreference } = useThemePreference();
+    const { user, refreshPostSignIn, getUser, authFetch } = useAuth();
     const phoneUtil = PhoneNumberUtil.getInstance();
     const [disable, setDisable] = useState(false)
     const [dataLoading, setDataLoading] = useState(false);
@@ -50,8 +50,8 @@ export const OrganizationAccountPanel = ({open}) => {
     const [defaultData, setDefaultData] = useState({});
 
     // phone number input localization
-    const phoneNumberInputLocalization = useCallback(()=> {
-        switch(user?.languagePreference) {
+    const phoneNumberInputLocalization = useCallback(() => {
+        switch (user?.languagePreference) {
             case 'es':
                 return es;
             case 'de':
@@ -73,7 +73,7 @@ export const OrganizationAccountPanel = ({open}) => {
     // Function to set state, check full name validation when full name is changed
     const handleFullNameChange = (e) => {
         setNotification({});
-        const {value} = e.target;
+        const { value } = e.target;
         setFullName(value);
         delete errors.fullName;
         if (value.trim() === "") {
@@ -91,7 +91,7 @@ export const OrganizationAccountPanel = ({open}) => {
     // Function to set state, check address line validation when address line is changed
     const handleAddressLineChange = (e) => {
         setNotification({});
-        const {value} = e.target;
+        const { value } = e.target;
         setAddressLine(value);
         delete errors.addressLine;
         if (value.trim() === "") {
@@ -103,14 +103,14 @@ export const OrganizationAccountPanel = ({open}) => {
     // Function to set state, check address line 2 validation when address line 2 is changed
     const handleAddressLine2Change = (e) => {
         setNotification({});
-        const {value} = e.target;
+        const { value } = e.target;
         setAddressLine2(value);
     }
 
     // Function to set state, check city validation when city is changed
     const handleCityChange = (e) => {
         setNotification({});
-        const {value} = e.target;
+        const { value } = e.target;
         setCity(value);
         delete errors.city;
         if (value.trim() === "") {
@@ -122,7 +122,7 @@ export const OrganizationAccountPanel = ({open}) => {
     // Function to set state, check state validation when state is changed
     const handleStateChange = (e) => {
         setNotification({});
-        const {value} = e.target;
+        const { value } = e.target;
         setState(value);
         delete errors.state;
         if (value.trim() === "") {
@@ -134,7 +134,7 @@ export const OrganizationAccountPanel = ({open}) => {
     // Function to set state, check postal code validation when postal code is changed
     const handlePostalCodeChange = (e) => {
         setNotification({});
-        const {value} = e.target;
+        const { value } = e.target;
         setPostalCode(value);
         delete errors.postalCode;
         if (value.trim() === "") {
@@ -152,7 +152,7 @@ export const OrganizationAccountPanel = ({open}) => {
     // Function to set state, check organization name validation when organization name is changed
     const handleOrganizationNameChange = (e) => {
         setNotification({});
-        const {value} = e.target;
+        const { value } = e.target;
         setOrganizationName(value);
         delete errors.organizationName;
         if (value.trim() === "") {
@@ -164,7 +164,7 @@ export const OrganizationAccountPanel = ({open}) => {
     // Function to set state, check organization number validation when organization number is changed
     const handleVatNumberChange = (e) => {
         setNotification({});
-        const {value} = e.target;
+        const { value } = e.target;
         setVatNumber(value);
         delete errors.vatNumber;
         if (value.trim() === "") {
@@ -262,8 +262,12 @@ export const OrganizationAccountPanel = ({open}) => {
                 });
                 const res = await response.json();
                 if (response.ok) {
+                    setNotification({
+                        type: "success",
+                        message: t("update-organization-account-successfully"),
+                    });
                     setDisable(false)
-                    handleClose()
+                    // handleClose()
                     await getUser();
                     await refreshPostSignIn();
                 } else {
@@ -296,27 +300,27 @@ export const OrganizationAccountPanel = ({open}) => {
 
     // Function to check if form can be submitted or not
     const canSubmitted = useMemo(() => {
-            if (dataLoading) {
-                return false
-            }
+        if (dataLoading) {
+            return false
+        }
 
-            if (Object.keys(errors).length > 0) {
-                return false
-            }
+        if (Object.keys(errors).length > 0) {
+            return false
+        }
 
-            return defaultData?.email !== email ||
-                defaultData?.fullName !== fullName ||
-                defaultData?.country !== country ||
-                defaultData?.addressLine !== addressLine ||
-                defaultData?.addressLine2 !== addressLine2 ||
-                defaultData?.city !== city ||
-                defaultData?.state !== state ||
-                defaultData?.postalCode !== postalCode ||
-                defaultData?.phoneNumber.substring(1) !== phoneNumber && defaultData?.phoneNumber !== phoneNumber ||
-                defaultData?.organizationName !== organizationName ||
-                defaultData?.VAT !== vatNumber ||
-                defaultData?.organizationCountry !== organizationCountry
-        },
+        return defaultData?.email !== email ||
+            defaultData?.fullName !== fullName ||
+            defaultData?.country !== country ||
+            defaultData?.addressLine !== addressLine ||
+            defaultData?.addressLine2 !== addressLine2 ||
+            defaultData?.city !== city ||
+            defaultData?.state !== state ||
+            defaultData?.postalCode !== postalCode ||
+            defaultData?.phoneNumber.substring(1) !== phoneNumber && defaultData?.phoneNumber !== phoneNumber ||
+            defaultData?.organizationName !== organizationName ||
+            defaultData?.VAT !== vatNumber ||
+            defaultData?.organizationCountry !== organizationCountry
+    },
         [dataLoading, email, fullName, country, addressLine, city, state, postalCode, phoneNumber, organizationName, vatNumber, organizationCountry,
             defaultData.email, defaultData.fullName, defaultData.country, defaultData.addressLine, defaultData.city, defaultData.state,
             defaultData.postalCode, defaultData.phoneNumber, defaultData.organizationName, defaultData.VAT,
@@ -409,12 +413,12 @@ export const OrganizationAccountPanel = ({open}) => {
                                 timeout={0}
                                 title={""}
                                 kind={notification?.type}
-                                />
+                            />
                         )}
 
                         <div>
                             {dataLoading ? (
-                                <TextInputSkeleton className="skeleton-loading"/>
+                                <TextInputSkeleton className="skeleton-loading" />
                             ) : (
                                 <TextInput
                                     id="email"
@@ -429,7 +433,7 @@ export const OrganizationAccountPanel = ({open}) => {
                             )}
 
                             {dataLoading ? (
-                                <TextInputSkeleton className="skeleton-loading"/>
+                                <TextInputSkeleton className="skeleton-loading" />
                             ) : (
                                 <TextInput
                                     id="fullName"
@@ -444,7 +448,7 @@ export const OrganizationAccountPanel = ({open}) => {
                             )}
 
                             {dataLoading ? (
-                                <TextInputSkeleton className="skeleton-loading"/>
+                                <TextInputSkeleton className="skeleton-loading" />
                             ) : (
                                 <>
                                     <Dropdown
@@ -456,12 +460,12 @@ export const OrganizationAccountPanel = ({open}) => {
                                         selectedItem={country}
                                         onChange={selectedItem => handleCountryChange(selectedItem)}
                                         itemToString={(item) => (t(`${item}`))}
-                                        label={''}/>
+                                        label={''} />
                                 </>
                             )}
 
                             {dataLoading ? (
-                                <TextInputSkeleton className="skeleton-loading"/>
+                                <TextInputSkeleton className="skeleton-loading" />
                             ) : (
                                 <TextInput
                                     id="addressLine"
@@ -476,7 +480,7 @@ export const OrganizationAccountPanel = ({open}) => {
                             )}
 
                             {dataLoading ? (
-                                <TextInputSkeleton className="skeleton-loading"/>
+                                <TextInputSkeleton className="skeleton-loading" />
                             ) : (
                                 <TextInput
                                     id="addressLine2"
@@ -491,7 +495,7 @@ export const OrganizationAccountPanel = ({open}) => {
                             )}
 
                             {dataLoading ? (
-                                <TextInputSkeleton className="skeleton-loading"/>
+                                <TextInputSkeleton className="skeleton-loading" />
                             ) : (
                                 <TextInput
                                     id="city"
@@ -507,7 +511,7 @@ export const OrganizationAccountPanel = ({open}) => {
 
 
                             {dataLoading ? (
-                                <TextInputSkeleton className="skeleton-loading"/>
+                                <TextInputSkeleton className="skeleton-loading" />
                             ) : (
                                 <TextInput
                                     id="state"
@@ -522,7 +526,7 @@ export const OrganizationAccountPanel = ({open}) => {
                             )}
 
                             {dataLoading ? (
-                                <TextInputSkeleton className="skeleton-loading"/>
+                                <TextInputSkeleton className="skeleton-loading" />
                             ) : (
                                 <TextInput
                                     id="postalCode"
@@ -537,7 +541,7 @@ export const OrganizationAccountPanel = ({open}) => {
                             )}
 
                             {dataLoading ? (
-                                <TextInputSkeleton className="skeleton-loading"/>
+                                <TextInputSkeleton className="skeleton-loading" />
                             ) : (
                                 <>
                                     <div className="phone-label-wrapper">
@@ -547,7 +551,7 @@ export const OrganizationAccountPanel = ({open}) => {
                                     </div>
                                     <PhoneInput
                                         className="phone-input-sidepanel"
-                                        localization={ phoneNumberInputLocalization() }
+                                        localization={phoneNumberInputLocalization()}
                                         ref={(el) => (inputRefs.current[8] = el)}
                                         inputProps={{
                                             disabled: false,
@@ -582,7 +586,7 @@ export const OrganizationAccountPanel = ({open}) => {
                             )}
 
                             {dataLoading ? (
-                                <TextInputSkeleton className="skeleton-loading"/>
+                                <TextInputSkeleton className="skeleton-loading" />
                             ) : (
                                 <TextInput
                                     id="organizationName"
@@ -597,7 +601,7 @@ export const OrganizationAccountPanel = ({open}) => {
                             )}
 
                             {dataLoading ? (
-                                <TextInputSkeleton className="skeleton-loading"/>
+                                <TextInputSkeleton className="skeleton-loading" />
                             ) : (
                                 <TextInput
                                     id="vatNumber"
@@ -612,7 +616,7 @@ export const OrganizationAccountPanel = ({open}) => {
                             )}
 
                             {dataLoading ? (
-                                <TextInputSkeleton className="skeleton-loading"/>
+                                <TextInputSkeleton className="skeleton-loading" />
                             ) : (
                                 <>
                                     <Dropdown
@@ -624,7 +628,7 @@ export const OrganizationAccountPanel = ({open}) => {
                                         selectedItem={organizationCountry}
                                         onChange={selectedItem => handleOrganizationCountryChange(selectedItem)}
                                         itemToString={(item) => (t(`${item}`))}
-                                        label={""}/>
+                                        label={""} />
                                 </>
                             )}
 
