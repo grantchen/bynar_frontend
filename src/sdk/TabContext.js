@@ -64,7 +64,7 @@ const TabContextProvider = ({ children }) => {
             id: 0,
             label: t('title'),
             labelKey: 'title',
-            isDelted: false,
+            canDelete: false,
             name: 'Dashboard',
             loaded: true
         },
@@ -145,9 +145,9 @@ const TabContextProvider = ({ children }) => {
             label: label,
             labelKey: labelKey,
             content: content,
-            isDelted: true,
+            canDelete: true,
             name: name,
-            loaded: tabType === "treeGrid" ? false : true
+            loaded: tabType !== "treeGrid"
         };
         setTab([...tab, newTab]);
         setActiveTab(tab.length);

@@ -1,21 +1,21 @@
 import React, { useContext } from "react";
 import {
-    Button,
     TabList,
     Tabs,
     Tab,
 } from "@carbon/react";
-import { Add, Home } from "@carbon/react/icons";
+import { Home } from "@carbon/react/icons";
 import "./HeaderTab.scss";
 import { TabContext } from "../../sdk";
 import TabSkeleton from "carbon-web-components/es/components-react/tabs/tab-skeleton";
+import DropdownServiceList from "./DropdownServiceList";
 
 // TabIcon is the tab icon component
 const TabIcon = (tabItem) => {
     return (
         <>
             {
-                tabItem.isDelted ? (
+                tabItem.canDelete ? (
                     <>
                         {/* use native dismissable because of Chevron scroll misbehave */}
                     </>
@@ -32,7 +32,7 @@ const TabIcon = (tabItem) => {
 
 // HeaderTab is the header tab component
 const HeaderTab = ({ className }) => {
-    const { tab, handleAddTab, handleRemoveTab, activeTab, setActiveTab } =
+    const { tab, handleRemoveTab, activeTab, setActiveTab } =
         useContext(TabContext);
 
     // set active tab when tab changes
@@ -65,7 +65,7 @@ const HeaderTab = ({ className }) => {
                                         renderIcon={() => {
                                             return TabIcon(item)
                                         }}
-                                        className={`custom-tab ${!item.isDelted ? 'tab-stable' : ''} ${item.name === 'Dashboard' ? 'tab-icon-reverse' : ''}`}>
+                                        className={`custom-tab ${!item.canDelete ? 'tab-stable' : ''} ${item.name === 'Dashboard' ? 'tab-icon-reverse' : ''}`}>
                                         {
                                             item.loaded ? (item.label) : (<TabSkeleton></TabSkeleton>)
                                         }
@@ -76,15 +76,7 @@ const HeaderTab = ({ className }) => {
                     </div>
                 </div>
 
-                <Button
-                    kind="ghost"
-                    className="add-new-tab"
-                    hasIconOnly
-                    onClick={(e) => handleAddTab()}
-                >
-                    <Add size={20} aria-label="Add" />
-                </Button>
-
+                <DropdownServiceList></DropdownServiceList>
             </div>
         </>
     );

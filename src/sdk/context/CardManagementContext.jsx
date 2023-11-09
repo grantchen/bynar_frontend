@@ -23,7 +23,7 @@ const CARD_MANAGEMENT_CONSTANTS = {
 };
 
 const CardManagementProvider = ({ children }) => {
-    const { user, authFetch } = useAuth();
+    const { tokenClaims, authFetch } = useAuth();
     const { t } = useTranslation();
     /**render aware states */
     const [cardsData, setCardsData] = useState({});
@@ -62,8 +62,8 @@ const CardManagementProvider = ({ children }) => {
     )]);
 
     const isCardManagementAllowed = useMemo(
-        () => user,
-        [user]
+        () => tokenClaims?.organization_account === true,
+        [tokenClaims?.organization_account],
     );
 
     const closeCardManagementPanel = useCallback(() => {
