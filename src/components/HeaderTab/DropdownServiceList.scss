@@ -8,6 +8,10 @@
     display: block;
   }
 
+  .cds--dropdown--inline .cds--list-box__menu {
+    min-width: 15rem;
+  }
+
   .cds--list-box--expanded.cds--list-box--lg .cds--list-box__menu {
     transition: all 0.15s cubic-bezier(0, 0, .38, .9);
   }

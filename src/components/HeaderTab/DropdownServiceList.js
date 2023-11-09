@@ -11,16 +11,18 @@ import { Add } from "@carbon/react/icons";
 import { useTranslation } from "react-i18next";
 import jsonData from '../JSONs/wide-menus.json';
 import { useOrganizationAccount } from "../../sdk/context/OrganizationAccountManagementContext";
+import throttle from "lodash/throttle";
 
 // DropdownServiceList is a dropdown list component including all the services
 const DropdownServiceList = () => {
     const { t } = useTranslation();
     const { hasPermission } = useAuth();
-    const { goToTab } = useContext(TabContext);
+    const { goToTab, tab } = useContext(TabContext);
     const { openCardManagementPanel, isCardManagementAllowed } = useCardManagement();
     const { openOrganizationAccountPanel, isOrganizationAccountAllowed } = useOrganizationAccount();
 
     const dropdownServicesRef = useRef(null);
+    const dropdownListBoxRef = useRef(null);
     const [isDropdownTabsOpen, setIsDropdownTabsOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [allMenuItems, setAllMenuItems] = useState([]);
@@ -102,6 +104,35 @@ const DropdownServiceList = () => {
         };
     }, []);
 
+    // fit the dropdown list position
+    const fitDropdownListPosition = throttle(() => {
+        if (!dropdownServicesRef.current || !dropdownListBoxRef.current) return
+
+        const windowWith = window.innerWidth
+        // the distance between the add button and the left side of the window
+        const addButtonLeft = dropdownServicesRef.current.getBoundingClientRect().left
+        // space width between the add button left and the right side of the window
+        const spaceWidth = windowWith - addButtonLeft
+        // if the dropdown list width is larger than the space width,
+        // set the dropdown shown on the left side of the add button
+        if (spaceWidth < dropdownListBoxRef.current.offsetWidth) {
+            dropdownListBoxRef.current.style.left = "unset"
+        } else {
+            dropdownListBoxRef.current.style.left = `0`
+        }
+    }, 200)
+
+    // fit the dropdown list position when tabs changed
+    useEffect(() => {
+        fitDropdownListPosition()
+    }, [tab])
+
+    // fit the dropdown list position when window resize
+    useEffect(() => {
+        window.addEventListener('resize', fitDropdownListPosition)
+        return () => window.removeEventListener('resize', fitDropdownListPosition)
+    }, [])
+
     return (
         <>
             <div ref={ dropdownServicesRef } className={ `header-dropdown-services-list` }>
@@ -120,7 +151,7 @@ const DropdownServiceList = () => {
                             <Add size={ 20 } aria-label="Add" />
                         </Button>
 
-                        <ul className="cds--list-box__menu" role="listbox"
+                        <ul className="cds--list-box__menu" ref={dropdownListBoxRef}  role="listbox"
                             style={ { maxHeight: isDropdownTabsOpen ? '16.5rem' : 0 } }>
                             <div className="header-dynamic-dropdown-services-content">
                                 <div className="list-wrapper">
