@@ -147,7 +147,7 @@
     "provider": "Provider",
     "payment-status": "Payment Status",
     "payment-failed": "Payment Failed",
-    "payment-successful": "Payment Successful",
+    "payment-successful": "update payment successfully",
     "invoices-load-failed": "Failed to load invoices",
     "card-management": "Card management",
     "payment-method": "Payment method",

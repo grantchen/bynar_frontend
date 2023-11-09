@@ -147,7 +147,7 @@
     "provider": "Proveedor",
     "payment-status": "Estado de pago",
     "payment-failed": "Pago fallido",
-    "payment-successful": "Pago exitoso",
+    "payment-successful": "actualizar pago exitosamente",
     "invoices-load-failed": "Error al cargar las facturas",
     "card-management": "Gestión de tarjetas",
     "payment-method": "Método de pago",
