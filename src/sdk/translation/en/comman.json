@@ -521,5 +521,6 @@
     "create-user-failed-email": "create user failed: user with the provided phone number already exists",
     "create-user-failed-phone-number": "create user failed: user with the provided email already exists",
     "update-user-failed": "update user failed",
-    "update-organization-account-successfully": "update organization account successfully"
+    "update-organization-account-successfully": "update organization account successfully",
+    "update-profile-successfully": "update profile successfully"
 }

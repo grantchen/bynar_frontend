@@ -521,5 +521,6 @@
     "create-user-failed-email": "Benutzererstellung fehlgeschlagen: Benutzer mit der angegebenen Telefonnummer existiert bereits",
     "create-user-failed-phone-number": "Benutzererstellung fehlgeschlagen: Benutzer mit der angegebenen E-Mail-Adresse existiert bereits",
     "update-user-failed": "Aktualisierung des Benutzers fehlgeschlagen",
-    "update-organization-account-successfully": "Organisationskonto erfolgreich aktualisieren"
+    "update-organization-account-successfully": "Organisationskonto erfolgreich aktualisieren",
+    "update-profile-successfully": "Profil erfolgreich aktualisieren"
 }

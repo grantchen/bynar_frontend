@@ -216,8 +216,12 @@ export const UserDetailPanel = ({ open }) => {
                 });
                 const res = await response.json();
                 if (response.ok) {
+                    setServerErrorNotification({
+                        status: "success",
+                        title: t("update-profile-successfully"),
+                    });
                     setDisable(false)
-                    handleClose()
+                    // handleClose()
                     await getUser();
                     await refreshPostSignIn();
                 } else {
