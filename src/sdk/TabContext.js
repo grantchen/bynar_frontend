@@ -15,6 +15,7 @@ const TransferList = lazy(() => import("./../components/TreeGrid/Modules/Transfe
 const SaleList = lazy(() => import("../components/TreeGrid/Modules/Sales/index"));
 const PaymentList = lazy(() => import("../components/TreeGrid/Modules/Payments/index"));
 const ProcurementList = lazy(() => import("../components/TreeGrid/Modules/Procurements/index"));
+const LanguageList = lazy(() => import("../components/TreeGrid/Modules/Languages/index"));
 
 const TabContext = createContext();
 const EmptyTabName = "EmptyTab";
@@ -48,6 +49,8 @@ const TabContextProvider = ({ children }) => {
                 return <PaymentList tabId={tabId} />
             case "ProcurementList":
                 return <ProcurementList tabId={tabId} />
+            case "LanguageList":
+                return <LanguageList tabId={tabId} />
             default:
                 return null;
         }

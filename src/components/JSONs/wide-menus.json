@@ -3612,6 +3612,19 @@
                 }
               },
               {
+                "title": "languages",
+                "titleEnglish": "",
+                "url": "",
+                "tab": "LanguageList",
+                "tabType": "treeGrid",
+                "permission": "languages",
+                "megapanelContent": {
+                  "headingTitle": "",
+                  "headingUrl": "",
+                  "description": "languages"
+                }
+              },
+              {
                 "title": "organization-account",
                 "titleEnglish": "",
                 "url": "?openOrganizationAccountPanel=true",
