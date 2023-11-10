@@ -66,7 +66,12 @@ export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) 
             const defaultConfig = {
                 Debug: NodeEnv === "production" ? '' : 'error', // check, info, error
                 id: `treeGrid_${ table || uuidv4() }`,
-                Layout: { Url: `/Layouts/${ table }.xml` },
+                Cache: 2, // 0 - Never cache; 1 - Component version; 2 - Cache version; 3 - Standard cache
+                CacheVersion: 1, // When the value is increased, the files are forced to download.
+                Layout: {
+                    Url: `/Layouts/${ table }.xml`,
+                    Cache: 0, // 0 - Never cache
+                },
                 Data: {
                     Url: `/${ table }/data`,
                     Format: 'Json',
