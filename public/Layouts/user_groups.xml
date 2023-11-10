@@ -78,7 +78,7 @@
       user_group_id='Child' user_group_idSpan='6' user_group_idAlign="Center" user_group_idType='Text'
       user_group_idCanEdit="0"
       code='Child' codeSpan='3' codeAlign="Center" codeType='Text' codeCanEdit="0"
-      FormulaSuggest="1" full_nameSuggestServer='1' full_nameSuggestType='StartAll,Empty,Existing'
+      FormulaSuggest="1" full_nameSuggestServer='1' full_nameSuggestType='StartAll,Empty'
     />
     <!-- FormulaSuggest="1" full_nameSuggestServer='1'  full_nameSuggestType='StartAll,Empty,Existing' -->
   </Def>
