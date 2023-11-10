@@ -3461,7 +3461,7 @@
                 "url": "",
                 "tab": "InvoiceList",
                 "tabType": "treeGrid",
-                "permission": "invoices",
+                "permission": "",
                 "megapanelContent": {
                   "headingTitle": "",
                   "headingUrl": "",

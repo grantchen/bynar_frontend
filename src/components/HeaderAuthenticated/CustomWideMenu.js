@@ -48,6 +48,9 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
         if (menuItem.sidePanel === "OrganizationAccountPanel") {
             return isOrganizationAccountAllowed
         }
+        if (menuItem.tab === "InvoiceList") {
+            return isOrganizationAccountAllowed
+        }
 
         return !menuItem.permission || hasPermission(menuItem.permission, "list")
     }
