@@ -145,9 +145,10 @@ const TabContextProvider = ({ children }) => {
     // focus tab by id
     const focusTabById = (tabId) => {
         // find tab by id of tab, if found, set active tab to that tab
-        const tabIndexToGo = tab.findIndex((item) => item.id === tabId);
+        const tabs = ref.current
+        const tabIndexToGo = tabs.findIndex((item) => item.id === tabId);
         if (tabIndexToGo > -1) {
-            if (tab[tabIndexToGo]) {
+            if (tabs[tabIndexToGo]) {
                 setActiveTab(tabIndexToGo);
             }
         }
