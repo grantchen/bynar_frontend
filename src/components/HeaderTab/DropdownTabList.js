@@ -78,7 +78,7 @@ const DropdownTabList = ({ className }) => {
                             }}>
                             <div className="cds--list-box__label">
                                 {
-                                    tab[activeTab].loaded ? (tab[activeTab].label) : (<TabSkeleton></TabSkeleton>)
+                                    tab[activeTab]?.loaded ? (tab[activeTab]?.label) : (<TabSkeleton></TabSkeleton>)
                                 }
                             </div>
                             <div
@@ -104,7 +104,7 @@ const DropdownTabList = ({ className }) => {
                                         {searchResults.map((item, index) =>
                                             <ContainedListItem
                                                 key={`${item.id}-${index}`}
-                                                className={tab[activeTab].id === item.id ? 'list-item-active' : ''}
+                                                className={tab[activeTab]?.id === item.id ? 'list-item-active' : ''}
                                                 action={
                                                     item.canDelete ? (
                                                         <>

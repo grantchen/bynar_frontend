@@ -42,7 +42,7 @@
       TestIdSeparator="-"
       AutoUpdate="0"
       ReloadChanged="5"
-      CacheTimeout="10"
+      CacheTimeout="120"
       ChangesUpdate="1"
       ExportCols="2" ExportFormat="xlsx" ExportType="Expanded,Outline,ForceBorder,TextType,Strings" ExportImages="Img,Html,Space" ExportLinks="Link,Html,Other,Underline" ExportFontSize="15" ExportFontFace="Calibri" ExportWidthRatio="1.1" ExportRowHeight="20" ExportBool="||X|?" ExportEmptyDecimals="1" JSZip="1"
       CSVValueSeparator=";" CSVRowSeparator="&#x0a;" CSVQuote='"' CSVLevel="#" CSVDateFormat="1" CSVNumberFormat="1"

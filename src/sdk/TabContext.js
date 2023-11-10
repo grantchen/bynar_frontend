@@ -2,6 +2,8 @@ import React, { createContext, lazy, useCallback, useEffect, useState, useRef } 
 import Dashboard from "../components/Dashboard";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "./AuthContext";
+import debounce from "lodash/debounce";
+import { uuidv4 } from "./util";
 
 const UserList = lazy(() => import("../components/TreeGrid/Modules/Users/index"));
 const InvoiceList = lazy(() => import("../components/TreeGrid/Modules/Invoices/index"));
@@ -59,7 +61,7 @@ const TabContextProvider = ({ children }) => {
     const [tab, setTab] = useState([
         {
             content: <Dashboard />,
-            id: 0,
+            id: uuidv4(),
             label: t('title'),
             labelKey: 'title',
             canDelete: false,
@@ -68,9 +70,6 @@ const TabContextProvider = ({ children }) => {
         },
     ]);
     const [activeTab, setActiveTab] = useState(0);
-    const [startIndex, setStartIndex] = useState(0);
-    const [endIndex, setEndIndex] = useState(0);
-    const [maxTab, setMaxTab] = useState(0);
     const { user } = useAuth()
 
     useEffect(() => {
@@ -106,7 +105,7 @@ const TabContextProvider = ({ children }) => {
     const handleSetTabLoaded = (tabId) => {
         let tmpTabs = [...ref.current]
         tmpTabs.forEach((item, index) => {
-            if (item.id === Number(tabId)) {
+            if (item.id === tabId) {
                 let tmpTab = item
                 tmpTab.loaded = true
                 tmpTabs[index] = tmpTab
@@ -117,11 +116,7 @@ const TabContextProvider = ({ children }) => {
 
     // handle add tab
     const handleAddTab = (name, labelKey = '', tabType = 'default') => {
-        const maxId = tab.reduce((max, item) => {
-            return item.id > max ? item.id : max;
-        }, 0);
-
-        let tabId = maxId + 1
+        let tabId = uuidv4()
         const newTab = {
             id: tabId,
             label: t(labelKey),
@@ -132,12 +127,6 @@ const TabContextProvider = ({ children }) => {
             loaded: tabType !== "treeGrid"
         };
         setTab([...tab, newTab]);
-        setActiveTab(tab.length);
-
-        if (tab.length >= maxTab && maxTab > 0) {
-            setStartIndex(startIndex + 1);
-            setEndIndex(endIndex + 1);
-        }
     };
 
     // go to tab if tab is already opened, if not, add new tab
@@ -153,6 +142,21 @@ const TabContextProvider = ({ children }) => {
         }
     }
 
+    // focus tab by id
+    const focusTabById = (tabId) => {
+        // find tab by id of tab, if found, set active tab to that tab
+        const tabs = ref.current
+        const tabIndexToGo = tabs.findIndex((item) => item.id === tabId);
+        if (tabIndexToGo > -1) {
+            if (tabs[tabIndexToGo]) {
+                setActiveTab(tabIndexToGo);
+            }
+        }
+    }
+
+    // debounced focus tab by id
+    const debouncedFocusTabById = debounce(focusTabById, 500)
+
     return (
         <TabContext.Provider
             value={{
@@ -161,15 +165,10 @@ const TabContextProvider = ({ children }) => {
                 handleAddTab,
                 handleRemoveTab,
                 activeTab,
-                startIndex,
-                endIndex,
-                setStartIndex,
-                setEndIndex,
                 setActiveTab,
-                maxTab,
-                setMaxTab,
                 goToTab,
                 handleSetTabLoaded,
+                debouncedFocusTabById,
             }}
         >
             {children}
