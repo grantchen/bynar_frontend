@@ -11,6 +11,14 @@
     padding-left:0;
     padding-right:0;
   }
+  .cds--btn {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   @media screen and (max-width: 768px) {
     .auth-login-column {
       display: none;
@@ -70,7 +78,6 @@
     color: white;
   }
   .login-submit-button {
-    width: 100%;
     max-width: 100%;
     display: flex;
     justify-content: center;

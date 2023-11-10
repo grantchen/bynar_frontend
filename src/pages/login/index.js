@@ -6,12 +6,15 @@ import "./login.scss";
 import { TypeAnimation } from 'react-type-animation';
 import SignHeader from "../../components/SignHeader";
 import SignFooter from "../../components/SignFooter";
+import {useTranslation} from "react-i18next";
 
 const Home = () => {
     const [showVideo, setShowVideo] = useState(false);
     const [videoBackgroundColor, setVideoBackgroundColor] = useState("white");
     const navigate = useNavigate();
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [language, setLanguage] = useState(localStorage.getItem('lang') ?? 'en');
+    const { t } = useTranslation();
     useEffect(() => {
         function handleResize() {
             setWindowWidth(window.innerWidth);
@@ -22,13 +25,35 @@ const Home = () => {
         };
     }, []);
 
+    // word wrap
     let wordAmount = 5
-
     if (windowWidth > 800 && windowWidth < 1059) {
         wordAmount = 3
     }
     if (windowWidth > 700 && windowWidth < 828) {
         wordAmount = 2
+    }
+    // To adapt to the resolution
+    let loginWight = '100%'
+    let signupWight = '100%'
+    let signupLeft = 0
+    if (language === 'de') {
+        signupWight = '75%'
+    }
+    if (language === 'es') {
+        signupWight = '95%'
+    }
+    if (language === 'fr') {
+        loginWight = '88%'
+    }
+    if (language === 'de' || language === 'es') {
+        loginWight = '93%'
+        signupLeft = '10px'
+    }
+    if (windowWidth < 672) {
+        signupWight = '100%'
+        loginWight = '100%'
+        signupLeft = 0
     }
     return (
         <div>
@@ -48,9 +73,9 @@ const Home = () => {
                             <div className="header-caption">
                                 <TypeAnimation
                                     sequence={ [
-                                        'Introducing the bynar erp system',
+                                        t("animation-words"),
                                         1000,
-                                        'Test to for testing',
+                                        t("animation-words-test"),
                                         1000,
                                     ]}
                                     speed={80}
@@ -71,9 +96,9 @@ const Home = () => {
                             <div className="header-caption">
                                 <TypeAnimation
                                     sequence={ [
-                                        'Introducing the bynar \n erp system',
+                                        t("animation-words-2"),
                                         1000,
-                                        'Test to for testing',
+                                        t("animation-words-test"),
                                         1000,
                                     ]}
                                     speed={80}
@@ -95,7 +120,7 @@ const Home = () => {
                             <div className="header-caption">
                                 <TypeAnimation
                                     sequence={ [
-                                        'Introducing \n the bynar \n erp system',
+                                        t("animation-words-3"),
                                         1000,
                                         'Test to \n for testing',
                                         1000,
@@ -114,18 +139,19 @@ const Home = () => {
                             <div className="bx--row">
                                 <div className="bx--col auth-login-bx">
                                     <div className="button-container">
-                                        <h2 style={{ fontWeight: 'bold' }}>Get started</h2>
+                                        <h2 style={{ fontWeight: 'bold' }}>{t("get-started")}</h2>
                                         <div className="fields-container">
                                             <div style={{ flex:1 }}>
                                                 <Button
                                                     type="submit"
                                                     size={'md'}
+                                                    style={{ width: loginWight }}
                                                     className="login-submit-button bx--btn bx--btn--primary"
                                                     onClick={() => {
                                                         navigate("/signin");
                                                     }}
                                                 >
-                                                    {"Login"}
+                                                    {t("login-button")}
                                                 </Button>
                                             </div>
                                             <div style={{ width: '20px' }} />
@@ -133,10 +159,11 @@ const Home = () => {
                                                 <Button
                                                     type="submit"
                                                     size={'md'}
+                                                    style={{ width: signupWight, marginLeft: signupLeft }}
                                                     className="login-submit-button bx--btn bx--btn--primary"
                                                     disabled={true}
                                                 >
-                                                    {"Signup"}
+                                                    {t("sign-up-button")}
                                                 </Button>
                                             </div>
                                         </div>
