@@ -2,6 +2,7 @@ import React, { createContext, lazy, useCallback, useEffect, useState, useRef } 
 import Dashboard from "../components/Dashboard";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "./AuthContext";
+import debounce from "lodash/debounce";
 
 const UserList = lazy(() => import("../components/TreeGrid/Modules/Users/index"));
 const InvoiceList = lazy(() => import("../components/TreeGrid/Modules/Invoices/index"));
@@ -132,7 +133,6 @@ const TabContextProvider = ({ children }) => {
             loaded: tabType !== "treeGrid"
         };
         setTab([...tab, newTab]);
-        setActiveTab(tab.length);
 
         if (tab.length >= maxTab && maxTab > 0) {
             setStartIndex(startIndex + 1);
@@ -153,6 +153,21 @@ const TabContextProvider = ({ children }) => {
         }
     }
 
+    // focus tab by id
+    const focusTabById = (tabId) => {
+        tabId = Number(tabId)
+        // find tab by id of tab, if found, set active tab to that tab
+        const tabIndexToGo = tab.findIndex((item) => item.id === tabId);
+        if (tabIndexToGo > -1) {
+            if (tab[tabIndexToGo]) {
+                setActiveTab(tabIndexToGo);
+            }
+        }
+    }
+
+    // debounced focus tab by id
+    const debouncedFocusTabById = debounce(focusTabById, 500)
+
     return (
         <TabContext.Provider
             value={{
@@ -170,6 +185,7 @@ const TabContextProvider = ({ children }) => {
                 setMaxTab,
                 goToTab,
                 handleSetTabLoaded,
+                debouncedFocusTabById,
             }}
         >
             {children}

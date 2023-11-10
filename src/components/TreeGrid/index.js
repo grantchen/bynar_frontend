@@ -22,7 +22,7 @@ export function getAPIRequestURL(url) {
 // TreeGrid is the tree grid component
 export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) => {
     const ref = useRef(null);
-    const { handleSetTabLoaded } = useContext(TabContext);
+    const { handleSetTabLoaded, debouncedFocusTabById } = useContext(TabContext);
     const { treeGridRequest } = useAuth();
 
     // custom TreeGrid default ajax request
@@ -89,6 +89,7 @@ export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) 
             window.TGAddEvent("OnReady", treeGrid.id, function (G) {
                 // update tab loaded
                 handleSetTabLoaded(tabId)
+                debouncedFocusTabById(tabId)
             })
         }
 
