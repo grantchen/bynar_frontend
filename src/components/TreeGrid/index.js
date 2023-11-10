@@ -6,6 +6,10 @@ import {
 import "./TreeGrid.scss";
 import "./TreeGridStandard.scss"
 
+// State: Page or parent row state of loading / rendering its children.
+// 0 - not yet loaded, 1 - children are loading, 2 - children are loaded, but not rendered, 3 - children are rendering, 4 - fully rendered.
+const rowStateFullyRendered = 4
+
 // get api request url
 export function getAPIRequestURL(url) {
     if (!url) {
@@ -22,7 +26,7 @@ export function getAPIRequestURL(url) {
 // TreeGrid is the tree grid component
 export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) => {
     const ref = useRef(null);
-    const { handleSetTabLoaded, debouncedFocusTabById } = useContext(TabContext);
+    const { tab, handleSetTabLoaded, debouncedFocusTabById } = useContext(TabContext);
     const { treeGridRequest } = useAuth();
 
     // custom TreeGrid default ajax request
@@ -39,6 +43,19 @@ export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) 
                 }
             });
             return true;
+        }
+    }
+
+    // set tab loaded and focus
+    const setTabLoadedAndFocus = (tabId, grid, row) => {
+        // load node and fully rendered
+        if (row.Level === -1 && row?.State === rowStateFullyRendered) {
+            if (tab.find((item) => item.id === tabId)?.loaded === false) {
+                // update tab loaded
+                handleSetTabLoaded(tabId)
+                // focus tab
+                debouncedFocusTabById(tabId)
+            }
         }
     }
 
@@ -86,10 +103,8 @@ export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) 
             })
 
             // add event on ready
-            window.TGAddEvent("OnReady", treeGrid.id, function (G) {
-                // update tab loaded
-                handleSetTabLoaded(tabId)
-                debouncedFocusTabById(tabId)
+            window.TGAddEvent("OnRenderPageFinish", treeGrid.id, function (grid, row) {
+                setTabLoadedAndFocus(tabId, grid, row)
             })
         }
 
