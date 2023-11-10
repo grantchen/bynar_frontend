@@ -524,5 +524,13 @@
     "create-user-failed-phone-number": "échec de la création de l'utilisateur : un utilisateur avec l'adresse e-mail fournie existe déjà",
     "update-user-failed": "échec de la mise à jour de l'utilisateur",
     "update-organization-account-successfully": "mettre à jour le compte de l'organisation avec succès",
-    "update-profile-successfully": "mettre à jour le profil avec succès"
+    "update-profile-successfully": "mettre à jour le profil avec succès",
+    "login-button": "Se connecter",
+    "sign-up-button": "S'inscrire",
+    "get-started": "Commencer",
+    "animation-words": "Présentation du système ERP Bynar",
+    "animation-words-test": "Tester pour tester",
+    "animation-words-2": "Présentation du bynar\n système ERP",
+    "animation-words-3": "Présentation\n le bynar\n système ERP",
+    "animation-words-test-2": "Testez pour\n pour tester"
 }

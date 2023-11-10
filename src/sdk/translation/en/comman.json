@@ -524,5 +524,13 @@
     "create-user-failed-phone-number": "create user failed: user with the provided email already exists",
     "update-user-failed": "update user failed",
     "update-organization-account-successfully": "update organization account successfully",
-    "update-profile-successfully": "update profile successfully"
+    "update-profile-successfully": "update profile successfully",
+    "login-button": "Login",
+    "sign-up-button": "Signup",
+    "get-started": "Get started",
+    "animation-words": "Introducing the bynar erp system",
+    "animation-words-test": "Test to for testing",
+    "animation-words-2": "Introducing the bynar\n erp system",
+    "animation-words-3": "Introducing\n the bynar\n erp system",
+    "animation-words-test-2": "Test to \n for testing"
 }
