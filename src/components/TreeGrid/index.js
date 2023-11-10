@@ -48,7 +48,7 @@ export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) 
         const fetchData = () => {
             const defaultConfig = {
                 Debug: NodeEnv === "production" ? '' : 'error', // check, info, error
-                id: `treeGrid_${ tabId || uuidv4() }`,
+                id: `treeGrid_${ table || uuidv4() }`,
                 Layout: { Url: `/Layouts/${ table }.xml` },
                 Data: {
                     Url: `/${ table }/data`,
@@ -88,14 +88,17 @@ export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) 
             // add event on ready
             window.TGAddEvent("OnReady", treeGrid.id, function (G) {
                 // update tab loaded
-                handleSetTabLoaded(G.id.replace('treeGrid_', ''))
+                handleSetTabLoaded(tabId)
             })
         }
 
         fetchData();
 
         return () => {
-            treeGrid?.Dispose && treeGrid?.Dispose()
+            if (treeGrid) {
+                window.TGDelEvent(null, treeGrid.id, null)
+                treeGrid.Dispose && treeGrid?.Dispose()
+            }
         }
     }, []);
 
