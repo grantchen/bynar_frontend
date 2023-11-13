@@ -528,10 +528,5 @@
     "update-profile-successfully": "actualizar perfil exitosamente",
     "login-button": "Anmeldung",
     "sign-up-button": "Inscribirse",
-    "get-started": "Empezar",
-    "animation-words": "Presentamos el sistema bynar erp",
-    "animation-words-test": "Prueba para probar",
-    "animation-words-2": "Presentando el bynar\n sistema ERP",
-    "animation-words-3": "Presentando\n el bynar\n sistema ERP",
-    "animation-words-test-2": "prueba para\n para las pruebas"
+    "get-started": "Empezar"
 }
