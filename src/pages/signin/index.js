@@ -12,6 +12,7 @@ import {
 } from "../../sdk/tabMessage";
 import {useTranslation} from "react-i18next";
 
+// Signin is the signin page of the application.
 const Signin = () => {
     const navigate = useNavigate();
     const [signInPhaseOne, setSignInPhaseOne] = useState(true); // state to store signInPhase ,initially set to true to show initial login component

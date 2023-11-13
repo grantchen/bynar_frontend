@@ -44,6 +44,7 @@ import SignFooter from "../../components/SignFooter";
 import SignHeaderSelect from "../../components/SignHeaderSelect";
 import {useTranslation} from "react-i18next";
 
+// Signup is the signup page of the application.
 const Signup = () => {
     const handleReady = useCallback(async () => {
         document.querySelectorAll(".frame-heading").forEach(a => a.style.display = "");

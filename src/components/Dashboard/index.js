@@ -11,6 +11,7 @@ import { Add } from "@carbon/react/icons";
 import { useMobile } from "../../sdk";
 import { SubscribeCloseTabMessage } from "../../sdk/tabMessage";
 
+// Dashboard is the home content of the application.
 const Dashboard = () => {
     const { t } = useTranslation();
     const isMobile = useMobile()
