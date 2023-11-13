@@ -514,6 +514,7 @@
     "check-user-exists-fail": "check user exists fail",
     "account-notice": "Account notice",
     "by-email": "by email",
+    "wrong-signature": "wrong signature",
     "sending-confirmation-email": "sending confirmation email",
     "re-sending-confirmation-email": "re-sending confirmation email",
     "error-user-account": "error occurred while creating user account",

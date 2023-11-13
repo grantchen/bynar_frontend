@@ -514,6 +514,7 @@
     "check-user-exists-fail": "échec de la vérification de l'existence de l'utilisateur",
     "account-notice": "Avis de compte",
     "by-email": "par email",
+    "wrong-signature": "mauvaise signature",
     "sending-confirmation-email": "envoi d'un email de confirmation",
     "re-sending-confirmation-email": "renvoyer l'e-mail de confirmation",
     "error-user-account": "une erreur s'est produite lors de la création du compte utilisateur",

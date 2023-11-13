@@ -278,21 +278,10 @@ const Signup = () => {
                 } else if (response.status === 500) {
                     setIsError(true);
                     setActiveStep(1);
-                    let err = res.error
-                    if (err.includes("timestamp has expired")) {
-                        err = t("timestamp-has-expired")
-                    } else if (err.includes("has already exist")) {
-                        const parts = err.split(' ');
-                        const emailAddress = parts[1];
-                        err = t("email-label") + " "+ emailAddress + " "+ t("has-already-exist")
-                    } else if (err.includes("send registration email fail")) {
-                        err = t("send-registration-email-fail")
-                    } else if (err.includes("check user exists fail")) {
-                        err = t("check-user-exists-fail")
-                    }
+                    const errorMessage = mapErrorToMessage(res.error);
                     setErrorNotification({
                         title:
-                            res.error === "username already exist" || "email is not valid" ? err
+                            res.error === "username already exist" || "email is not valid" ? errorMessage
                                 : t("handle-signup-request"),
                         status: "error",
                     });
@@ -340,20 +329,9 @@ const Signup = () => {
                     setIsError(true);
                     setIsEmailVerified(false);
                     setEmailVerified("");
-                    let err = res.error
-                    if (err.includes("timestamp has expired")) {
-                        err = t("timestamp-has-expired")
-                    } else if (err.includes("has already exist")) {
-                        const parts = err.split(' ');
-                        const emailAddress = parts[1];
-                        err = t("email-label") + " "+ emailAddress + " "+ t("has-already-exist")
-                    } else if (err.includes("send registration email fail")) {
-                        err = t("send-registration-email-fail")
-                    } else if (err.includes("check user exists fail")) {
-                        err = t("check-user-exists-fail")
-                    }
+                    const errorMessage = mapErrorToMessage(res.error);
                     setErrorNotification({
-                        title: err,
+                        title: errorMessage,
                         status: "error",
                     });
                 }
@@ -445,35 +423,9 @@ const Signup = () => {
                     return
                 } else if (response.status === 500) {
                     setIsError(true);
-                    let err = res.error
-                    const errorMappings = {
-                        "check user exists failed": "check-user-exists-failed",
-                        "has already exist": "has-already-exist",
-                        "delete user failed": "delete-user-failed",
-                        "number already exists": "create-user-failed-email",
-                        "email already exists": "create-user-failed-phone-number",
-                        "update user failed": "update-user-failed",
-                        "no user found": "no-user-found",
-                        "set custom token with claims fail": "set-custom-fail"
-                    };
-                    let errorMessage = "";
-                    for (const [key, value] of Object.entries(errorMappings)) {
-                        if (err.includes(key)) {
-                            if (key === "has already exist") {
-                                const parts = err.split(' ');
-                                const emailAddress = parts[1];
-                                errorMessage = `${t("email-label")} ${emailAddress} ${t(value)}`;
-                            } else {
-                                errorMessage = t(value);
-                            }
-                            break;
-                        }
-                    }
-                    if (errorMessage !== "") {
-                        err = errorMessage;
-                    }
+                    const errorMessage = mapErrorToMessage(res.error);
                     setErrorNotification({
-                        title: err,
+                        title: errorMessage,
                         status: "error",
                     });
                     setActiveStep(1);
@@ -490,6 +442,38 @@ const Signup = () => {
             }
         };
         fetchData();
+    };
+
+    //  Convert error messages into internationalized languages
+    const mapErrorToMessage = (err) => {
+        const errorMappings = {
+            "send registration email fail": "send-registration-email-fail",
+            "check user exists fail": "check-user-exists-fail",
+            "check user exists failed": "check-user-exists-failed",
+            "has already exist": "has-already-exist",
+            "timestamp has expired": "timestamp-has-expired",
+            "wrong signature": "wrong-signature",
+            "delete user failed": "delete-user-failed",
+            "number already exists": "create-user-failed-email",
+            "email already exists": "create-user-failed-phone-number",
+            "update user failed": "update-user-failed",
+            "no user found": "no-user-found",
+            "set custom token with claims fail": "set-custom-fail"
+        };
+        let errorMessage = err;
+        for (const [key, value] of Object.entries(errorMappings)) {
+            if (err.includes(key)) {
+                if (key === "has already exist") {
+                    const parts = err.split(' ');
+                    const emailAddress = parts[1];
+                    errorMessage = `${t("email-label")} ${emailAddress} ${t(value)}`;
+                } else {
+                    errorMessage = t(value);
+                }
+                break;
+            }
+        }
+        return errorMessage
     };
 
     // set step to personal info page
