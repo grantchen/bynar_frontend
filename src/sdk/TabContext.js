@@ -2,7 +2,6 @@ import React, { createContext, lazy, useCallback, useEffect, useState, useRef } 
 import Dashboard from "../components/Dashboard";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "./AuthContext";
-import debounce from "lodash/debounce";
 import { uuidv4 } from "./util";
 
 const UserList = lazy(() => import("../components/TreeGrid/Modules/Users/index"));
@@ -154,9 +153,6 @@ const TabContextProvider = ({ children }) => {
         }
     }
 
-    // debounced focus tab by id
-    const debouncedFocusTabById = debounce(focusTabById, 500)
-
     return (
         <TabContext.Provider
             value={{
@@ -168,7 +164,7 @@ const TabContextProvider = ({ children }) => {
                 setActiveTab,
                 goToTab,
                 handleSetTabLoaded,
-                debouncedFocusTabById,
+                focusTabById,
             }}
         >
             {children}
