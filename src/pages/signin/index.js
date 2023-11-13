@@ -84,7 +84,6 @@ const Signin = () => {
                     });
                 }
             } catch (e) {
-                console.log(e);
                 setLoadingSuccess(false);
                 setServerErrorNotification({
                     title: t("something-went-wrong"),
@@ -102,15 +101,9 @@ const Signin = () => {
         try {
             await signin(email, window.location.href)
             sendTabMessage('signin-verification', { email: email })
-            // close tab before 300ms, it cannot be closed after navigating to other page
-            // setTimeout(() => {
-            //     setLoading(false);
-            //     navigate("/home/dashboard");
-            // }, 300)
             setLoading(false);
             navigate("/home/dashboard");
         } catch (err) {
-            console.log(err);
             let title = "Login fail"
             if (err?.message){
               title = err?.message
@@ -147,7 +140,6 @@ const Signin = () => {
     const checkOtherTabVerification = (e) => {
         parseTabMessage(e, 'signin-verification', (data, e) => {
             if (data?.message?.email) {
-                // sendCloseTabMessage(data?.from)
                 window.focus()
                 window.location.href = "/home/dashboard"
             }
