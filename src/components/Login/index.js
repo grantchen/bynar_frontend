@@ -10,14 +10,16 @@ import {
     InlineLoading,
     Link,
     Grid,
-    Column, Dropdown, Header, HeaderName,
+    Column,
 } from "@carbon/react";
 import { ArrowRight } from "@carbon/react/icons";
 import { useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import SignFooter from "../../components/SignFooter";
 import {useTranslation} from "react-i18next";
 import SignHeaderSelect from "../SignHeaderSelect";
+
+// Login component is used to render the login form.
 const Login = ({
     heading,
     loading,
