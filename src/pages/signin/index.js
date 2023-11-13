@@ -102,11 +102,6 @@ const Signin = () => {
         try {
             await signin(email, window.location.href)
             sendTabMessage('signin-verification', { email: email })
-            // close tab before 300ms, it cannot be closed after navigating to other page
-            // setTimeout(() => {
-            //     setLoading(false);
-            //     navigate("/home/dashboard");
-            // }, 300)
             setLoading(false);
             navigate("/home/dashboard");
         } catch (err) {

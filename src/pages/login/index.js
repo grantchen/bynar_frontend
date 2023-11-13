@@ -25,7 +25,7 @@ const Home = () => {
         };
     }, []);
 
-    // word wrap
+    // word wrap newline
     let wordAmount = 5
     if (windowWidth > 800 && windowWidth < 1059) {
         wordAmount = 3
@@ -33,7 +33,7 @@ const Home = () => {
     if (windowWidth > 700 && windowWidth < 828) {
         wordAmount = 2
     }
-    // To adapt to the resolution
+    // To adapt to the Language length by country
     let loginWight = '100%'
     let signupWight = '100%'
     let signupLeft = 0
