@@ -1,5 +1,5 @@
-import React, {useCallback, useEffect, useState} from "react";
-import {Button, Column, Grid, Header, Link,} from "@carbon/react";
+import React, { useEffect, useState} from "react";
+import {Button, Column, Grid,} from "@carbon/react";
 import { useNavigate } from "react-router-dom";
 import backgroundImage from '../../components/media/background.svg';
 import "./login.scss";
@@ -7,7 +7,6 @@ import { TypeAnimation } from 'react-type-animation';
 import SignFooter from "../../components/SignFooter";
 import {useTranslation} from "react-i18next";
 import SignHeaderSelect from "../../components/SignHeaderSelect";
-import PhoneInput from "react-phone-input-2";
 
 const Home = () => {
     const [showVideo, setShowVideo] = useState(false);
