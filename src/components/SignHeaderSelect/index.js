@@ -11,6 +11,7 @@ const SignHeaderSelect = ({ onLanguageChange }) => {
     const languagesItems = Languages.map((languageObject) => languageObject.code);
     const { t } = useTranslation();
 
+    // after Change Language, set to localStorage
     const handleLanguageChange = (selectedLanguage) => {
         localStorage.clear();
         const selectedItem = Languages.find((item) => item.code === selectedLanguage.selectedItem);
