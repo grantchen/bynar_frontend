@@ -32,10 +32,14 @@ const ProcurementList = ({ tabId }) => {
         }
 
         // Set parent id
-        let parentId = row.parentNode.parentNode.id
-        if (parentId !== undefined) {
-            row.parentNode.id = parentId
+        let parentId
+        if (row.parentNode.Visible === 1 && row.parentNode.Def.Name === "R") {
+            parentId = row.parentNode.id
+        } else if (row.parentNode.parentNode.Visible === 1 && row.parentNode.parentNode.Def.Name === "R") {
+            parentId = row.parentNode.parentNode.id
         }
+        // Override the current value with the default value
+        row.parentNode.id = parentId === undefined ? "0" : parentId
     }
 
     events.OnPasteRow = function (G, row, col, val) {
