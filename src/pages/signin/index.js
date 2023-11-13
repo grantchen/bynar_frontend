@@ -84,7 +84,6 @@ const Signin = () => {
                     });
                 }
             } catch (e) {
-                console.log(e);
                 setLoadingSuccess(false);
                 setServerErrorNotification({
                     title: t("something-went-wrong"),
@@ -105,7 +104,6 @@ const Signin = () => {
             setLoading(false);
             navigate("/home/dashboard");
         } catch (err) {
-            console.log(err);
             let title = "Login fail"
             if (err?.message){
               title = err?.message
@@ -142,7 +140,6 @@ const Signin = () => {
     const checkOtherTabVerification = (e) => {
         parseTabMessage(e, 'signin-verification', (data, e) => {
             if (data?.message?.email) {
-                // sendCloseTabMessage(data?.from)
                 window.focus()
                 window.location.href = "/home/dashboard"
             }

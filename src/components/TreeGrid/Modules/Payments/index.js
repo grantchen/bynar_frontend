@@ -106,31 +106,7 @@ const PaymentList = ({ tabId }) => {
                 break;
         }
     }
-
-    events.OnDownloadPage = function (G, Row) {
-        // var row = G.Rows.Fix1;
-        // if (!row) return
-        // G.RecalculateRows(G.Rows.Fix1, 1);
-    }
-
-    events.OnRenderPageFinish = function (G) {
-        // var row = G.Rows.Fix1;
-        // if (!row) return
-        // G.RecalculateRows(G.Rows.Fix1, 1);
-    }
-
-    events.OnPageReady = function (G, Row) {
-        // var row = G.Rows.Fix1;
-        // if (!row) return
-        // G.RecalculateRows(G.Rows.Fix1, 1);
-    }
-
-    events.OnLanguageFinish = function (G, code) {
-        // var row = G.Rows.Fix3;
-        // if (!row) return
-        // G.SetValue(row, "C", window.Get(row, window.Get(row, "D") + "Rate"), 1);
-    }
-
+    
     return (
         <>
             <div className="tree-grid-content">
