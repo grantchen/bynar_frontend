@@ -32,10 +32,14 @@ const TransferList = ({ tabId }) => {
         }
 
         // Set parent id
-        let parentId = row.parentNode.parentNode.id
-        if (parentId !== undefined) {
-            row.parentNode.id = parentId
+        let parentId
+        if (row.parentNode.Visible === 1 && ["Node", "R"].includes(row.parentNode.Def.Name)) {
+            parentId = row.parentNode.id
+        } else if (row.parentNode.parentNode.Visible === 1 && ["Node", "R"].includes(row.parentNode.parentNode.Def.Name)) {
+            parentId = row.parentNode.parentNode.id
         }
+        // Override the current value with the default value
+        row.parentNode.id = parentId === undefined ? "0" : parentId
     }
 
     events.OnPasteRow = function (G, row, col, val) {
