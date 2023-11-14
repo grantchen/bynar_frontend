@@ -81,7 +81,7 @@
           .cds--contained-list-item__action {
             align-items: center;
             height: 100%;
-            margin-right: 0.625rem;
+            margin-right: var(--cds-layout-density-padding-inline-local);
 
             .close-list-tab {
               --cds-layout-size-height-local: 1.5rem;
