@@ -67,7 +67,7 @@ const HeaderTab = ({ className }) => {
                                         }}
                                         className={`custom-tab ${!item.canDelete ? 'tab-stable' : ''} ${item.name === 'Dashboard' ? 'tab-icon-reverse' : ''}`}>
                                         {
-                                            item.loaded ? (item.label) : (<TabSkeleton></TabSkeleton>)
+                                            item.loaded ? (item.label) : (<div className={"tab-skeleton"}><TabSkeleton></TabSkeleton></div>)
                                         }
                                     </Tab>
                                 )}

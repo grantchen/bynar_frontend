@@ -70,6 +70,13 @@
           }
         }
       }
+
+      // set tab skeleton align center
+      .tab-skeleton {
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
     }
   }
 
