@@ -62,6 +62,10 @@ $ npm start # start server on port 3000
 | REACT_APP_FIREBASE_API_KEY| firebase api key|
 | REACT_APP_FIREBASE_AUTH_DOMAIN| firebase auth domains|
 
+## How to test
+
+env file REACT_APP_BASE_URL change to http://127.0.0.1:8080
+
 ## How to deploy
 
 When push code to master will trigger google cloud build, google cloud build will run by cloudbuild.yaml step by step. As it store in google storage cloud, just access static files.
