@@ -27,10 +27,7 @@ const Home = () => {
 
     // word wrap newline
     let wordAmount = 5
-    if (windowWidth > 800 && windowWidth < 1140) {
-        wordAmount = 3
-    }
-    if (windowWidth > 700 && windowWidth < 828) {
+    if (windowWidth > 700 && windowWidth < 1176) {
         wordAmount = 2
     }
     // To adapt to the Language length by country
@@ -86,7 +83,7 @@ const Home = () => {
                                         ]}
                                         speed={80}
                                         deletionSpeed={80}
-                                        style={{ fontSize: '40px', whiteSpace: 'pre-line', color: 'rgb(254, 118, 0)' }}
+                                        className={"animation-type"}
                                         repeat={Infinity}
                                     />
                                 )}
@@ -100,7 +97,7 @@ const Home = () => {
                                         ]}
                                         speed={80}
                                         deletionSpeed={80}
-                                        style={{ fontSize: '40px', whiteSpace: 'pre-line', color: 'rgb(254, 118, 0)' }}
+                                        className={"animation-type"}
                                         repeat={Infinity}
                                     />
                                 )}
@@ -114,7 +111,7 @@ const Home = () => {
                                         ]}
                                         speed={80}
                                         deletionSpeed={80}
-                                        style={{ fontSize: '40px', whiteSpace: 'pre-line', color: 'rgb(254, 118, 0)' }}
+                                        className={"animation-type"}
                                         repeat={Infinity}
                                     />
                                 )}
@@ -128,81 +125,13 @@ const Home = () => {
                                         ]}
                                         speed={80}
                                         deletionSpeed={80}
-                                        style={{ fontSize: '40px', whiteSpace: 'pre-line', color: 'rgb(254, 118, 0)' }}
+                                        className={"animation-type"}
                                         repeat={Infinity}
                                     />
                                 )}
                             </div>
                         </Column>
                     )}
-                    {wordAmount === 3 && windowWidth > 768 && (
-                        <Column sm={0} md={windowWidth >= 672 && windowWidth <= 768 ? 0 : 4} lg={10} className={"auth-login-column"} style={{
-                            backgroundImage: `url(${ backgroundImage })`,
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center center',
-                            backgroundRepeat: 'no-repeat',
-                        }}>
-                            <div className="header-caption">
-                                {language === "de" && (
-                                    <TypeAnimation
-                                        sequence={ [
-                                            'Einführung des bynar\n ERP-Systems',
-                                            1000,
-                                            'Testen Sie zum\n Testen',
-                                            1000,
-                                        ]}
-                                        speed={80}
-                                        deletionSpeed={80}
-                                        style={{ fontSize: '40px', whiteSpace: 'pre-line', color: 'rgb(254, 118, 0)' }}
-                                        repeat={Infinity}
-                                    />
-                                )}
-                                {language === "es" && (
-                                    <TypeAnimation
-                                        sequence={ [
-                                            'Presentamos el\n sistema bynar\n erp',
-                                            1000,
-                                            'Prueba para\n probar',
-                                            1000,
-                                        ]}
-                                        speed={80}
-                                        deletionSpeed={80}
-                                        style={{ fontSize: '40px', whiteSpace: 'pre-line', color: 'rgb(254, 118, 0)' }}
-                                        repeat={Infinity}
-                                    />
-                                )}
-                                {language === "en" && (
-                                    <TypeAnimation
-                                        sequence={ [
-                                            'Introducing the bynar\n erp system',
-                                            1000,
-                                            'Test to\n for testing',
-                                            1000,
-                                        ]}
-                                        speed={80}
-                                        deletionSpeed={80}
-                                        style={{ fontSize: '40px', whiteSpace: 'pre-line', color: 'rgb(254, 118, 0)' }}
-                                        repeat={Infinity}
-                                    />
-                                )}
-                                {language === "fr" && (
-                                    <TypeAnimation
-                                        sequence={ [
-                                            'Présentation du\n système ERP Bynar',
-                                            1000,
-                                            'Tester pour tester',
-                                            1000,
-                                        ]}
-                                        speed={80}
-                                        deletionSpeed={80}
-                                        style={{ fontSize: '40px', whiteSpace: 'pre-line', color: 'rgb(254, 118, 0)' }}
-                                        repeat={Infinity}
-                                    />
-                                )}
-                            </div>
-                        </Column>
-                    )}
-
                     {wordAmount === 2 && windowWidth > 768 && (
                         <Column sm={0} md={windowWidth >= 672 && windowWidth <= 768 ? 0 : 4} lg={10} className={"auth-login-column"} style={{
                             backgroundImage: `url(${ backgroundImage })`,
@@ -214,14 +143,14 @@ const Home = () => {
                                 {language === "de" && (
                                     <TypeAnimation
                                         sequence={ [
-                                            'Einführung \n des bynar\n ERP-Systems',
+                                            'Einführung des\n bynar\n ERP-Systems',
                                             1000,
                                             'Testen Sie\n zum Testen',
                                             1000,
                                         ]}
                                         speed={80}
                                         deletionSpeed={80}
-                                        style={{ fontSize: '40px', whiteSpace: 'pre-line', color: 'rgb(254, 118, 0)' }}
+                                        className={"animation-type"}
                                         repeat={Infinity}
                                     />
                                 )}
@@ -230,7 +159,7 @@ const Home = () => {
                                         sequence={ [
                                             'Presentamos el\n sistema bynar\n erp',
                                             1000,
-                                            'Prueba para\n probar',
+                                            'Prueba para probar',
                                             1000,
                                         ]}
                                         speed={80}
@@ -249,7 +178,7 @@ const Home = () => {
                                         ]}
                                         speed={80}
                                         deletionSpeed={80}
-                                        style={{ fontSize: '40px', whiteSpace: 'pre-line', color: 'rgb(254, 118, 0)' }}
+                                        className={"animation-type"}
                                         repeat={Infinity}
                                     />
                                 )}
@@ -263,7 +192,7 @@ const Home = () => {
                                         ]}
                                         speed={80}
                                         deletionSpeed={80}
-                                        style={{ fontSize: '40px', whiteSpace: 'pre-line', color: 'rgb(254, 118, 0)' }}
+                                        className={"animation-type"}
                                         repeat={Infinity}
                                     />
                                 )}

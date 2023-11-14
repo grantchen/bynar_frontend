@@ -34,6 +34,14 @@
     position: absolute;
     top: 45%;
     left:1%;
+    .animation-type {
+      font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+      color: rgb(254, 118, 0);
+      white-space: pre-line;
+      font-size: 2.625rem;
+      line-height: 3.125rem;
+      letter-spacing: 0;
+    }
   }
   .auth-login-container {
     .auth-login-area{
@@ -46,7 +54,7 @@
       position: absolute;
       top: 45%;
       transform: translate(-50%, -50%);
-      @media (max-width: 1059px) {
+      @media (max-width: 1176px) {
         margin-left: 15px;
       }
     }
