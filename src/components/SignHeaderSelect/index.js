@@ -1,10 +1,9 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState} from 'react';
 import {Dropdown, Header, HeaderName} from '@carbon/react';
 import {Languages} from "../../sdk";
 import {useTranslation} from "react-i18next";
 import i18n from "i18next";
 import "./SideHeader.scss";
-import PhoneInput from "react-phone-input-2";
 
 const SignHeaderSelect = ({ onLanguageChange }) => {
     const [language, setLanguage] = useState(localStorage.getItem('lang') ?? "en");
@@ -52,6 +51,7 @@ const SignHeaderSelect = ({ onLanguageChange }) => {
                     selectedItem={language}
                     itemToString={(item) => (item ? t(item) : '')}
                     onChange={(selectedItem) => handleLanguageChange(selectedItem)}
+                    label={''}
                 />
             </div>
         </Header>
