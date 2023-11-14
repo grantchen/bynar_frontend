@@ -8,12 +8,13 @@ const InvoiceList = ({ tabId }) => {
     events.OnRowAdd = function (G, row) {
         // Set the value of the group field when adding data after grouping
         if (G.Group !== "") {
-            for (let key of G.Group.split(",")) {
-                let parentNode = row.parentNode
+            let parentNode = row.parentNode
+            for (let key of G.Group.split(",").reverse()) {
                 // Recursively parent node to get the value of the group field
                 while (parentNode !== undefined) {
-                    if (parentNode.Visible === 1 && parentNode[key] !== undefined) {
-                        row[key] = parentNode[key]
+                    if (parentNode.Visible === 1 && parentNode[G.MainCol] !== undefined) {
+                        row[key] = parentNode[G.MainCol]
+                        parentNode = parentNode.parentNode
                         break
                     }
                     parentNode = parentNode.parentNode
