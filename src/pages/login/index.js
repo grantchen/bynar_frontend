@@ -205,7 +205,7 @@ const Home = () => {
                             <div className="bx--row">
                                 <div className="bx--col auth-login-bx">
                                     <div className="button-container">
-                                        <h2 style={{ fontWeight: 'bold' }}>{t("get-started")}</h2>
+                                        <h1 className="form-mainHeading">{t("get-started")}</h1>
                                         <div className="fields-container">
                                             <div style={{ flex:1 }}>
                                                 <Button
