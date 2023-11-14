@@ -28,15 +28,21 @@
             color: var(--cds-text-02, #525252);
           }
 
-          // no border between tabs
+          // border between tabs
           &:not(:last-of-type)::before {
-            content: none;
+            right: var(--cds-layout-density-padding-inline-local);
+            left: var(--cds-layout-density-padding-inline-local);
           }
 
           &:hover {
             .cds--contained-list-item__content {
               color: var(--cds-text-01);
               background-color: var(--cds-layer-hover);
+            }
+
+            // set border transparent when hover on tab item
+            &:not(:last-of-type)::before {
+              background-color: transparent;
             }
 
             .close-list-tab {
@@ -75,7 +81,7 @@
           .cds--contained-list-item__action {
             align-items: center;
             height: 100%;
-            margin-right: 0.625rem;
+            margin-right: var(--cds-layout-density-padding-inline-local);
 
             .close-list-tab {
               --cds-layout-size-height-local: 1.5rem;
