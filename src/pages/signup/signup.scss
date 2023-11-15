@@ -3,7 +3,9 @@
   display: flex;
   flex-direction: column;
 
-
+  .cds--inline-notification--error .cds--inline-notification__icon, .cds--inline-notification--error .cds--toast-notification__icon, .cds--inline-notification--error .cds--actionable-notification__icon {
+    margin-top: 0;
+  }
   .sign-up-form-area {
     max-width: 448px;
     margin: auto;
@@ -33,7 +35,6 @@
     display: flex;
     background: #525252;
     width: 100%;
-    height: 48px;
     margin-top: 8px;
     color: #ffffff;
     align-items: center;
