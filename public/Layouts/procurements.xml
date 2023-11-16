@@ -9,6 +9,7 @@
    	RemoveUnusedPages='3' />
    <Cfg ChildPaging="3" ChildPageLength="25" ChildPageDiff="0"/>
    <Cfg ChildParts="2" ChildPartLength="1" ChildPartMin="1"/>
+   <Cfg DuplicateId='4' AutoIdPrefix='test' FullId='1'/>
    <Cfg MaxHeight='1'/>
    <Cfg CopyPasteTree ='3'/>
    <Cfg Alternate='2'/>
