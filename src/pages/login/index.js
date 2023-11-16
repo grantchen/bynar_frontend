@@ -258,6 +258,7 @@ const Home = () => {
                                                     onClick={() => {
                                                         navigate("/signin");
                                                     }}
+                                                    disabled={true}
                                                 >
                                                     {t("login-button")}
                                                 </Button>
