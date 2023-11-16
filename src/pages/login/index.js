@@ -73,60 +73,92 @@ const Home = () => {
                             marginRight: '50px',
                         }}>
                             <div className="header-caption">
+                                <p>
+                                    <span className={"bynar-style"}>bynar</span>
+                                    <span className={"erp-style"}>ERP</span>
+                                </p>
                                 {language === "de" && (
                                     <TypeAnimation
                                         sequence={ [
-                                            'Einführung des bynar ERP-Systems',
-                                            1000,
-                                            'Testen Sie zum Testen',
-                                            1000,
+                                            'Wir stellen unsere\n Unternehmensanwendung der nächsten\n Generation vor',
+                                            2000,
+                                            'Das weltweit erste\n tabellenbasierte ERP-System',
+                                            2000,
+                                            'Stärken Sie Ihre Daten mit integrierter\n KI für aussagekräftige Erkenntnisse',
+                                            2000,
+                                            'Machen Sie Ihr Unternehmen\n zukunftssicher mit unserer nahezu\n unbegrenzt skalierbaren Lösung',
+                                            2000,
+                                            'Verbessern Sie Ihren Betrieb durch\n unser anpassungsfähiges\n Pay-per-Use-Preismodell',
+                                            2000,
                                         ]}
-                                        speed={80}
+                                        speed={75}
                                         deletionSpeed={80}
                                         className={"animation-type"}
                                         repeat={Infinity}
+                                        omitDeletionAnimation={true}
                                     />
                                 )}
                                 {language === "es" && (
                                     <TypeAnimation
                                         sequence={ [
-                                            'Presentamos el sistema bynar erp',
-                                            1000,
-                                            'Prueba para probar',
-                                            1000,
+                                            'Presentamos nuestra aplicación empresarial\n de próxima generación',
+                                            2000,
+                                            'El primer sistema ERP del mundo basado\n en hojas de cálculo',
+                                            2000,
+                                            'Empower your data with integrated\n AI for meaningful insights',
+                                            2000,
+                                            'Prepare su negocio para el futuro con\n nuestra solución escalable\n prácticamente ilimitada',
+                                            2000,
+                                            'Mejore las operaciones a través de nuestro\n modelo de precios adaptable de pago por uso',
+                                            2000,
                                         ]}
-                                        speed={80}
+                                        speed={75}
                                         deletionSpeed={80}
                                         className={"animation-type"}
                                         repeat={Infinity}
+                                        omitDeletionAnimation={true}
                                     />
                                 )}
                                 {language === "en" && (
                                     <TypeAnimation
                                         sequence={ [
-                                            'Introducing the bynar erp system',
-                                            1000,
-                                            'Test to for testing',
-                                            1000,
+                                            'Introducing our next-gen\n enterprise application',
+                                            2000,
+                                            'The world\'s first spreadsheet-based\n ERP system',
+                                            2000,
+                                            'Empower your data with integrated\n AI for meaningful insights',
+                                            2000,
+                                            'Future-proof your business with our\n virtually unlimited scalable solution',
+                                            2000,
+                                            'Enhance operations through our\n adaptable pay-per-use pricing model',
+                                            2000,
                                         ]}
-                                        speed={80}
-                                        deletionSpeed={80}
+                                        speed={75}
+                                        deletionSpeed={99}
                                         className={"animation-type"}
                                         repeat={Infinity}
+                                        omitDeletionAnimation={true}
                                     />
                                 )}
                                 {language === "fr" && (
                                     <TypeAnimation
                                         sequence={ [
-                                            'Présentation du système ERP Bynar',
-                                            1000,
-                                            'Tester pour tester',
-                                            1000,
+                                            'Présentation de notre application\n d\'entreprise de nouvelle génération',
+                                            2000,
+                                            'Le premier système ERP basé\n sur un tableur au monde',
+                                            2000,
+                                            'Renforcez vos données grâce\n à l\'IA intégrée pour obtenir\n des informations significatives',
+                                            2000,
+                                            'Préparez votre entreprise pour\n l’avenir grâce à notre solution\n évolutive pratiquement illimitée',
+                                            2000,
+                                            'Améliorez vos opérations grâce\n à notre modèle de tarification\n adaptable à l\'utilisation',
+                                            2000,
                                         ]}
-                                        speed={80}
+                                        speed={75}
                                         deletionSpeed={80}
                                         className={"animation-type"}
                                         repeat={Infinity}
+                                        omitDeletionAnimation={true}
                                     />
                                 )}
                             </div>
@@ -140,60 +172,92 @@ const Home = () => {
                             backgroundRepeat: 'no-repeat',
                         }}>
                             <div className="header-caption">
+                                <p>
+                                    <span className={"bynar-style"}>bynar</span>
+                                    <span className={"erp-style"}>ERP</span>
+                                </p>
                                 {language === "de" && (
                                     <TypeAnimation
                                         sequence={ [
-                                            'Einführung des\n bynar\n ERP-Systems',
-                                            1000,
-                                            'Testen Sie\n zum Testen',
-                                            1000,
+                                            'Wir stellen unsere\n Unternehmensanwendung der\n nächsten Generation vor',
+                                            2000,
+                                            'Das weltweit\n erste tabellenbasierte\n ERP-System',
+                                            2000,
+                                            'Stärken Sie Ihre\n Daten mit integrierter\n KI für aussagekräftige\n Erkenntnisse',
+                                            2000,
+                                            'Machen Sie Ihr\n Unternehmen zukunftssicher mit\n unserer nahezu unbegrenzt\n skalierbaren Lösung',
+                                            2000,
+                                            'Verbessern Sie Ihren\n Betrieb durch unser\n anpassungsfähiges Pay-per-Use-Preismodell',
+                                            2000,
                                         ]}
-                                        speed={80}
+                                        speed={75}
                                         deletionSpeed={80}
                                         className={"animation-type"}
                                         repeat={Infinity}
+                                        omitDeletionAnimation={true}
                                     />
                                 )}
                                 {language === "es" && (
                                     <TypeAnimation
                                         sequence={ [
-                                            'Presentamos el\n sistema bynar\n erp',
-                                            1000,
-                                            'Prueba para probar',
-                                            1000,
+                                            'Presentamos nuestra\n aplicación empresarial\n de próxima generación',
+                                            2000,
+                                            'El primer sistema ERP\n del mundo basado\n en hojas de cálculo',
+                                            2000,
+                                            'Empower your data\n with integrated AI\n for meaningful insights',
+                                            2000,
+                                            'Prepare su negocio para el\n futuro con nuestra solución\n escalable prácticamente\n ilimitada',
+                                            2000,
+                                            'Mejore las operaciones\n a través de nuestro\n modelo de precios adaptable\n de pago por uso',
+                                            2000,
                                         ]}
-                                        speed={80}
+                                        speed={75}
                                         deletionSpeed={80}
-                                        style={{ fontSize: '40px', whiteSpace: 'pre-line', color: 'rgb(254, 118, 0)' }}
+                                        className={"animation-type"}
                                         repeat={Infinity}
+                                        omitDeletionAnimation={true}
                                     />
                                 )}
                                 {language === "en" && (
                                     <TypeAnimation
                                         sequence={ [
-                                            'Introducing the\n bynar erp\n system',
-                                            1000,
-                                            'Test to\n for testing',
-                                            1000,
+                                            'Introducing our\n next-gen enterprise\n application',
+                                            2000,
+                                            'The world\'s first\n spreadsheet-based\n ERP system',
+                                            2000,
+                                            'Empower your data\n with integrated AI\n for meaningful insights',
+                                            2000,
+                                            'Future-proof your business\n with our virtually\n unlimited scalable solution',
+                                            2000,
+                                            'Enhance operations\n through our adaptable\n pay-per-use pricing model',
+                                            2000,
                                         ]}
-                                        speed={80}
-                                        deletionSpeed={80}
+                                        speed={75}
+                                        deletionSpeed={99}
                                         className={"animation-type"}
                                         repeat={Infinity}
+                                        omitDeletionAnimation={true}
                                     />
                                 )}
                                 {language === "fr" && (
                                     <TypeAnimation
                                         sequence={ [
-                                            'Présentation du\n système ERP\n Bynar',
-                                            1000,
-                                            'Tester pour\n tester',
-                                            1000,
+                                            'Présentation de notre\n application d\'entreprise de\n nouvelle génération',
+                                            2000,
+                                            'Le premier système\n ERP basé sur un tableur\n au monde',
+                                            2000,
+                                            'Renforcez vos\n données grâce\n à l\'IA intégrée\n pour obtenir des\n informations significatives',
+                                            2000,
+                                            'Préparez votre\n entreprise pour\n l’avenir grâce à\n notre solution\n évolutive pratiquement\n illimitée',
+                                            2000,
+                                            'Améliorez vos\n opérations grâce\n à notre modèle\n de tarification\n adaptable à\n l\'utilisation',
+                                            2000,
                                         ]}
-                                        speed={80}
-                                        deletionSpeed={80}
+                                        speed={75}
+                                        deletionSpeed={99}
                                         className={"animation-type"}
                                         repeat={Infinity}
+                                        omitDeletionAnimation={true}
                                     />
                                 )}
                             </div>

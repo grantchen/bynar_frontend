@@ -36,11 +36,21 @@
     left:1%;
     .animation-type {
       font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-      color: rgb(254, 118, 0);
+      color: #0f62fe;
       white-space: pre-line;
-      font-size: 2.625rem;
+      font-size: 35px;
       line-height: 3.125rem;
       letter-spacing: 0;
+    }
+    .bynar-style {
+      color: #747475;
+      font-weight: bold;
+      font-size: 40px;
+    }
+    .erp-style {
+      color: #0f62fe;
+      font-weight: bold;
+      font-size: 40px;
     }
   }
   .auth-login-container {
@@ -51,7 +61,7 @@
     }
     .form-mainHeading {
       font-size: 2rem;
-      font-weight: 400;
+      font-weight: bold;
       line-height: 1.25;
       letter-spacing: 0;
       color: #161616;
