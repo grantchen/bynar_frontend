@@ -32,15 +32,25 @@
   }
   .header-caption{
     position: absolute;
-    top: 45%;
+    top: 38%;
     left:1%;
     .animation-type {
       font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-      color: rgb(254, 118, 0);
+      color: #0f62fe;
       white-space: pre-line;
-      font-size: 2.625rem;
-      line-height: 3.125rem;
+      font-size: 30px;
+      line-height: 2.5rem;
       letter-spacing: 0;
+    }
+    .bynar-style {
+      color: #747475;
+      font-weight: bold;
+      font-size: 40px;
+    }
+    .erp-style {
+      color: #0f62fe;
+      font-weight: bold;
+      font-size: 40px;
     }
   }
   .auth-login-container {
@@ -51,7 +61,7 @@
     }
     .form-mainHeading {
       font-size: 2rem;
-      font-weight: 400;
+      font-weight: bold;
       line-height: 1.25;
       letter-spacing: 0;
       color: #161616;
@@ -97,7 +107,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-left: 55px;
+    padding-right: 15px;
   }
 }
 
