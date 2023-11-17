@@ -203,7 +203,8 @@ export const AuthProvider = ({ children }) => {
     const treeGridRequest = useCallback((url, param, callback) => {
         authFetch(url, {
             method: "POST",
-            body: new URLSearchParams(`Data=${ param }`),
+            body: `Data=${ encodeURIComponent(param) }`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
         }).then((response) => response.json())
             .then((data) => {
                 callback(data)
