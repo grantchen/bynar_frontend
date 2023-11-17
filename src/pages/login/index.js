@@ -52,61 +52,60 @@ const Home = () => {
                         }}>
                             <div className="header-caption">
                                 <p>
-                                    <span className={"bynar-style"}>bynar</span>
-                                    <span className={"erp-style"}>ERP</span>
+                                    <span className={"bynar-style"}>{t("introducing-bynar")}</span>
                                 </p>
                                 {language === "de" && (
                                     <TypeAnimation
                                         sequence={ [
-                                            'Wir stellen unsere Unternehmensanwendung\n der nächsten Generation vor',
+                                            'Die Unternehmensanwendung der nächsten\n Generation',
                                             2800,
-                                            'Das weltweit erste\n tabellenbasierte ERP-System',
+                                            'Das weltweit erste tabellenbasierte ERP-System',
                                             2800,
-                                            'Stärken Sie Ihre Daten mit integrierter\n KI für aussagekräftige Erkenntnisse',
+                                            'Stärken Sie Ihren Betrieb mit integrierter\n KI für aussagekräftige Erkenntnisse',
                                             2800,
-                                            'Machen Sie Ihr Unternehmen zukunftssicher mit\n unserer nahezu unbegrenzt skalierbaren Lösung',
+                                            'Machen Sie Ihr Unternehmen zukunftssicher mit\n unserer nahezu unbegrenzt skalierbaren\n Anwendungslösung',
                                             2800,
                                             'Verbessern Sie Ihren Betrieb durch unser\n anpassungsfähiges Pay-per-Use-Preismodell',
                                             2800,
                                         ]}
                                         speed={75}
-                                        deletionSpeed={80}
+                                        deletionSpeed={99}
                                         className={"animation-type"}
                                         repeat={Infinity}
-                                        omitDeletionAnimation={true}
+                                        omitDeletionAnimation={false}
                                     />
                                 )}
                                 {language === "es" && (
                                     <TypeAnimation
                                         sequence={ [
-                                            'Presentamos nuestra aplicación\n empresarial de próxima generación',
+                                            'La aplicación empresarial de próxima generación',
                                             2800,
                                             'El primer sistema ERP del mundo basado\n en hojas de cálculo',
                                             2800,
-                                            'Empower your data with integrated\n AI for meaningful insights',
+                                            'Potencie sus operaciones con IA integrada\n para obtener información valiosa',
                                             2800,
-                                            'Prepare su negocio para el futuro con nuestra\n  solución escalable prácticamente ilimitada',
+                                            'Prepare su negocio para el futuro con nuestra\n solución de aplicaciones escalable\n prácticamente ilimitada',
                                             2800,
                                             'Mejore las operaciones a través de nuestro\n modelo de precios adaptable de pago por uso',
                                             2800,
                                         ]}
                                         speed={75}
-                                        deletionSpeed={80}
+                                        deletionSpeed={99}
                                         className={"animation-type"}
                                         repeat={Infinity}
-                                        omitDeletionAnimation={true}
+                                        omitDeletionAnimation={false}
                                     />
                                 )}
                                 {language === "en" && (
                                     <TypeAnimation
                                         sequence={ [
-                                            'Introducing our next-gen\n enterprise application',
+                                            'The next-generation enterprise application',
                                             2800,
-                                            'The world\'s first spreadsheet-based\n ERP system',
+                                            'World\'s first spreadsheet-based ERP system',
                                             2800,
-                                            'Empower your data with integrated\n AI for meaningful insights',
+                                            'Empower your operations with\n integrated AI for meaningful insights',
                                             2800,
-                                            'Future-proof your business with our\n virtually unlimited scalable solution',
+                                            'Future-proof your business with our\n virtually limitless scalable application solution',
                                             2800,
                                             'Enhance operations through our\n adaptable pay-per-use pricing model',
                                             2800,
@@ -115,28 +114,28 @@ const Home = () => {
                                         deletionSpeed={99}
                                         className={"animation-type"}
                                         repeat={Infinity}
-                                        omitDeletionAnimation={true}
+                                        omitDeletionAnimation={false}
                                     />
                                 )}
                                 {language === "fr" && (
                                     <TypeAnimation
                                         sequence={ [
-                                            'Présentation de notre application\n d\'entreprise de nouvelle génération',
+                                            'L\'application d\'entreprise de nouvelle génération',
                                             2800,
-                                            'Le premier système ERP basé\n sur un tableur au monde',
+                                            'Le premier système ERP basé sur une feuille\n de calcul au monde',
                                             2800,
-                                            'Renforcez vos données grâce à l\'IA intégrée\n pour obtenir des informations significatives',
+                                            'Renforcez vos opérations grâce à l\'IA intégrée\n pour obtenir des informations significatives',
                                             2800,
-                                            'Préparez votre entreprise pour l’avenir grâce\n à notre solution évolutive pratiquement illimitée',
+                                            'Préparez votre entreprise pour l’avenir grâce\n à notre solution d’applications évolutive\n pratiquement illimitée',
                                             2800,
                                             'Améliorez vos opérations grâce à notre\n modèle de tarification adaptable à l\'utilisation',
                                             2800,
                                         ]}
                                         speed={75}
-                                        deletionSpeed={80}
+                                        deletionSpeed={99}
                                         className={"animation-type"}
                                         repeat={Infinity}
-                                        omitDeletionAnimation={true}
+                                        omitDeletionAnimation={false}
                                     />
                                 )}
                             </div>
@@ -151,91 +150,90 @@ const Home = () => {
                         }}>
                             <div className="header-caption">
                                 <p>
-                                    <span className={"bynar-style"}>bynar</span>
-                                    <span className={"erp-style"}>ERP</span>
+                                    <span className={"bynar-style"}>{t("introducing-bynar")}</span>
                                 </p>
                                 {language === "de" && (
                                     <TypeAnimation
                                         sequence={ [
-                                            'Wir stellen unsere\n Unternehmensanwendung\n der nächsten Generation\n vor',
+                                            'Die Unternehmensanwendung\n der nächsten Generation',
                                             2800,
-                                            'Das weltweit\n erste tabellenbasierte\n ERP-System',
+                                            'Das weltweit erste\n tabellenbasierte\n ERP-System',
                                             2800,
-                                            'Stärken Sie Ihre\n Daten mit integrierter\n KI für aussagekräftige\n Erkenntnisse',
+                                            'Stärken Sie Ihren\n Betrieb mit integrierter\n KI für aussagekräftige\n Erkenntnisse',
                                             2800,
-                                            'Machen Sie Ihr\n Unternehmen zukunftssicher\n mit unserer nahezu\n unbegrenzt skalierbaren\n Lösung',
+                                            'Machen Sie Ihr\n Unternehmen\n zukunftssicher mit\n unserer nahezu\n unbegrenzt skalierbaren\n Anwendungslösung',
                                             2800,
-                                            'Verbessern Sie Ihren\n Betrieb durch\n unser anpassungsfähiges\n Pay-per-Use-Preismodell',
+                                            'Verbessern Sie Ihren\n Betrieb durch unser\n anpassungsfähiges\n Pay-per-Use-Preismodell',
                                             2800,
                                         ]}
                                         speed={75}
-                                        deletionSpeed={80}
+                                        deletionSpeed={99}
                                         className={"animation-type"}
                                         repeat={Infinity}
-                                        omitDeletionAnimation={true}
+                                        omitDeletionAnimation={false}
                                     />
                                 )}
                                 {language === "es" && (
                                     <TypeAnimation
                                         sequence={ [
-                                            'Presentamos nuestra\n aplicación empresarial\n de próxima generación',
+                                            'La aplicación\n empresarial de\n próxima generación',
                                             2800,
-                                            'El primer sistema ERP\n del mundo basado\n en hojas de cálculo',
+                                            'El primer sistema ERP\n del mundo basado en\n hojas de cálculo',
                                             2800,
-                                            'Empower your data\n with integrated AI\n for meaningful insights',
+                                            'Potencie sus\n operaciones con IA\n integrada para obtener\n información valiosa',
                                             2800,
-                                            'Prepare su negocio para el\n futuro con nuestra solución\n escalable prácticamente\n ilimitada',
+                                            'Prepare su negocio\n para el futuro con\n nuestra solución de\n aplicaciones escalable\n prácticamente ilimitada',
                                             2800,
-                                            'Mejore las operaciones\n a través de nuestro\n modelo de precios\n adaptable de pago\n por uso',
+                                            'Mejore las operaciones\n a través de nuestro\n modelo de precios\n adaptable de pago por uso',
                                             2800,
                                         ]}
                                         speed={75}
-                                        deletionSpeed={80}
+                                        deletionSpeed={99}
                                         className={"animation-type"}
                                         repeat={Infinity}
-                                        omitDeletionAnimation={true}
+                                        omitDeletionAnimation={false}
                                     />
                                 )}
                                 {language === "en" && (
                                     <TypeAnimation
                                         sequence={ [
-                                            'Introducing our\n next-gen enterprise\n application',
+                                            'The next-generation\n enterprise application',
                                             2800,
-                                            'The world\'s first\n spreadsheet-based\n ERP system',
+                                            'World\'s first\n spreadsheet-based\n ERP system',
                                             2800,
-                                            'Empower your data\n with integrated AI\n for meaningful insights',
+                                            'Empower your operations\n with integrated AI for\n meaningful insights',
                                             2800,
-                                            'Future-proof your\n business with our\n virtually unlimited\n scalable solution',
+                                            'Future-proof your\n business with our\n virtually limitless scalable\n application solution',
                                             2800,
-                                            'Enhance operations\n through our\n adaptable pay-per-use\n pricing model',
+                                            'Enhance operations\n through our adaptable\n pay-per-use pricing model',
                                             2800,
                                         ]}
                                         speed={75}
                                         deletionSpeed={99}
                                         className={"animation-type"}
                                         repeat={Infinity}
-                                        omitDeletionAnimation={true}
+                                        omitDeletionAnimation={false}
                                     />
                                 )}
                                 {language === "fr" && (
                                     <TypeAnimation
                                         sequence={ [
-                                            'Présentation de notre\n application d\'entreprise de\n nouvelle génération',
+                                            'L\'application\n d\'entreprise de\n nouvelle génération',
                                             2800,
-                                            'Le premier système\n ERP basé sur un tableur\n au monde',
+                                            'Le premier système ERP\n basé sur une feuille de\n calcul au monde',
                                             2800,
-                                            'Renforcez vos\n données grâce\n à l\'IA intégrée\n pour obtenir des\n informations significatives',
+                                            'Renforcez vos\n opérations grâce\n à l\'IA intégrée pour\n obtenir des\n informations significatives',
                                             2800,
-                                            'Préparez votre entreprise\n pour l’avenir grâce\n à notre solution évolutive\n pratiquement illimitée',
+                                            'Préparez votre\n entreprise pour\n l’avenir grâce à notre\n solution d’applications\n évolutive pratiquement\n illimitée',
                                             2800,
-                                            'Améliorez vos opérations\n grâce à notre modèle\n de tarification\n adaptable à\n l\'utilisation',
+                                            'Améliorez vos opérations\n grâce à notre modèle\n de tarification adaptable\n à l\'utilisation',
                                             2800,
                                         ]}
                                         speed={75}
                                         deletionSpeed={99}
                                         className={"animation-type"}
                                         repeat={Infinity}
-                                        omitDeletionAnimation={true}
+                                        omitDeletionAnimation={false}
                                     />
                                 )}
                             </div>
