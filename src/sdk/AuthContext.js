@@ -90,7 +90,7 @@ export const AuthProvider = ({ children }) => {
             return;
         }
         try {
-            const response = await fetch(`${BaseURL}/user`, {
+            const response = await fetch(`${ BaseURL }/user`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -291,7 +291,7 @@ export const AuthProvider = ({ children }) => {
                 languagePreference,
             };
 
-            const response = await authFetch(`${BaseURL}/update-user-language-preference`, {
+            const response = await authFetch(`${ BaseURL }/update-user-language-preference`, {
                 method: "PUT",
                 body: JSON.stringify(updateUserLanguage),
             });
@@ -320,6 +320,10 @@ export const AuthProvider = ({ children }) => {
     const getAuthorizationToken = useCallback(async () => {
         const auth = getAuth();
         await auth.authStateReady()
+        if (!auth.currentUser) {
+            return ''
+        }
+
         const token = await auth.currentUser.getIdToken()
         return "Bearer " + token
     }, []);
@@ -359,7 +363,7 @@ export const AuthProvider = ({ children }) => {
                 themePreference,
             };
 
-            const response = await authFetch(`${BaseURL}/update-user-theme-preference`, {
+            const response = await authFetch(`${ BaseURL }/update-user-theme-preference`, {
                 method: "PUT",
                 body: JSON.stringify(updateUserTheme),
             });
@@ -412,7 +416,7 @@ export const AuthProvider = ({ children }) => {
             treeGridRequest,
         ]
     );
-    return <Provider value={providerValue}>{children}</Provider>;
+    return <Provider value={ providerValue }>{ children }</Provider>;
 };
 
 export const useAuth = () => useContext(AuthContext);
