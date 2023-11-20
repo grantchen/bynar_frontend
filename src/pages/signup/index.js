@@ -757,7 +757,7 @@ const Signup = () => {
                                             <div>
                                                 <InlineNotification
                                                     className="error-notification-box"
-                                                    iconDescription="describes the close button"
+                                                    icondescription="describes the close button"
                                                     subtitle={errorNotification?.title}
                                                     timeout={0}
                                                     title={""}
@@ -1192,23 +1192,18 @@ const Signup = () => {
                                                             disabled={loadingSuccess}
                                                         />
                                                     </div>
-                                                    <div>
-                                                        <p className="account-notice-text">
+                                                    <div className="account-notice-text">
                                                             {t("account-notice-text2")}{" "}
                                                             <Link href="/signup">{t("opt-out")}
                                                                 request</Link> {t("account-notice-text3")}
-                                                        </p>
                                                     </div>
-                                                    <div>
-                                                        <p className="account-notice-text">
+                                                    <div className="account-notice-text">
                                                             {t("account-notice-text4")}{" "}
                                                             <Link href="/signup"> {t("bynar-privacy")}
                                                                 </Link>{" "}
                                                             {t("account-notice-text5")}
-                                                        </p>
                                                     </div>
-                                                    <div>
-                                                        <p className="account-notice-text">
+                                                    <div className="account-notice-text">
                                                             <Checkbox
                                                                 labelText={<>
                                                                     {t("accept-product")}{" "}
@@ -1222,7 +1217,6 @@ const Signup = () => {
                                                                     setIsAgreementSigned(checked);
                                                                 }}
                                                             />
-                                                        </p>
                                                     </div>
                                                     {loadingSuccess ? (
                                                         <>
