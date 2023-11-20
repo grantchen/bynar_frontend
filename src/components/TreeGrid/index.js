@@ -10,8 +10,8 @@ import "./TreeGridStandard.scss"
 // 0 - not yet loaded, 1 - children are loading, 2 - children are loaded, but not rendered, 3 - children are rendering, 4 - fully rendered.
 const rowStateFullyRendered = 4
 
-// has no policy message
-const hasNoPolicyMessage = 'do not have policy'
+// has no permission error reason
+const hasNoPermissionErrReason = 'NO_PERMISSION'
 
 // get api request url
 export function getAPIRequestURL(url) {
@@ -55,7 +55,7 @@ export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) 
 
     // close tab if it has no policy and tab is not loaded
     const closeTabIfHasNoPolicy = (tabId, res) => {
-        if (res?.IO?.Result === -1 && res?.IO?.Message === hasNoPolicyMessage) {
+        if (res?.IO?.Result === -1 && res?.IO?.Reason === hasNoPermissionErrReason) {
             if (tab.find((item) => item.id === tabId)?.loaded === false) {
                 handleRemoveTab(tabId)
             }
