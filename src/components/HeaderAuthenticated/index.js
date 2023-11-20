@@ -6,7 +6,7 @@ import {
     HeaderGlobalAction,
     SkipToContent,
     Popover,
-    PopoverContent, HeaderMenuButton,
+    PopoverContent,HeaderMenuButton
 } from "@carbon/react";
 import {
     CardManagementProvider, omitQueryParams,
@@ -68,7 +68,7 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                 <SkipToContent />
                 <CustomWideMenu expanded={isSideNavExpanded}
                     onClickSideNavExpand={onClickSideNavExpand}>
-                    <HeaderGlobalAction
+                    <HeaderMenuButton
                         className={isSearchBarExpanded ? 'has-search-active' : ''}
                         aria-label={
                             isSideNavExpanded ? 'Close' : 'Open'
@@ -78,13 +78,10 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                             e.stopPropagation()
                             onClickSideNavExpand()
                         }}
-                        tooltipAlignment="end"
-                        id="switcher-button">
-                        <HeaderMenuButton
-                            aria-label=""
-                            isActive={isSideNavExpanded}
-                        />
-                    </HeaderGlobalAction>
+                        id="switcher-button"
+                        isActive={isSideNavExpanded}
+                    >
+                    </HeaderMenuButton>
                 </CustomWideMenu>
 
                 <HeaderName

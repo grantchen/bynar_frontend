@@ -9,9 +9,7 @@ import {
     Column,
 } from "@carbon/react";
 import { useNavigate } from "react-router-dom";
-import SignHeader from "../SignHeader";
-import { Footer } from "@carbon/ibmdotcom-react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import SignFooter from "../../components/SignFooter";
 import {useTranslation} from "react-i18next";
 import SignHeaderSelect from "../SignHeaderSelect";

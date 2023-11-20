@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }) => {
                             setState({ token: token, tokenClaims: claims });
                         }
                     } else {
-                        console.log('clear token, id token changed')
+                        //clear token, id token changed
                         clearLoginState();
                     }
                 })
@@ -68,11 +68,11 @@ export const AuthProvider = ({ children }) => {
                     const claims = idTokenResult.claims
                     setState({ token: token, tokenClaims: claims });
                 } else {
-                    console.log('clear token, no currentUser')
+                    //clear token, no currentUser
                     clearLoginState();
                 }
             } catch (e) {
-                console.log(e, 'clear token, error in auth state ready')
+                //clear token, error in auth state ready
                 clearLoginState();
             }
         })();
