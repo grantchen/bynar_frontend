@@ -92,17 +92,18 @@ const UserCardManagementPanel = ({ open }) => {
                 <SidePanel
                     preventCloseOnClickOutside
                     includeOverlay
-                    className="test"
+                    className="test card-list"
                     open={open}
                     onRequestClose={closeCardManagementPanel}
                     title={t("payment-method")}
                     subtitle={t("user-payment-method-information")}
+                    data-floating-menu-container
                 >
-                    <div className="card-list">
+                    <div className="card-list-2">
                         {notification && (
                             <InlineNotification
                                 className="error-notification-box"
-                                iconDescription="Close Notification"
+                                icondescription="Close Notification"
                                 subtitle={notification?.message}
                                 timeout={0}
                                 title={""}
@@ -150,89 +151,61 @@ const UserCardManagementPanel = ({ open }) => {
                                         return (
                                             <ContainedListItem
                                                 action={
-                                                    <Popover
-                                                        open={
-                                                            openOptionIndex ===
-                                                            index
-                                                        }
-                                                        align="bottom-right"
-                                                        dropShadow
-                                                        isTabTip
-                                                        className="card-row-popover"
-                                                    >
-                                                        <IconButton
+                                                    listItem?.id !==
+                                                    cardsData?.default && (<OverflowMenu id={listItem.id} flipped={true} aria-label="overflow-menu" focusTrap={false}>
+                                                        <OverflowMenuItem
+                                                            className="test"
+                                                            itemText={
+                                                                <div className="row-action-renderer">
+                                                                    <CheckmarkFilled size={16} />
+                                                                    <div>&nbsp;&nbsp;
+                                                                        {t(
+                                                                            "default-payment-method"
+                                                                        )}</div>
+                                                                </div>
+                                                            }
                                                             onClick={() =>
-                                                                setOpenOptionIndex(
-                                                                    index
+                                                                handleDefaultCardOptionClick(
+                                                                    listItem?.id
                                                                 )
                                                             }
-                                                            kind="ghost"
-                                                        >
-                                                            <OverflowMenuVertical />
-                                                        </IconButton>
-                                                        {openOptionIndex ===
-                                                            index && (
-                                                                <PopoverContent
-                                                                    className="card-popver-content"
-                                                                    ref={
-                                                                        wrapperRef
+                                                            disabled={
+                                                                listItem?.id ===
+                                                                cardsData?.default
+                                                            }
+                                                        />
+                                                        <OverflowMenuItem
+                                                            itemText={
+                                                                <div className="row-action-renderer">
+                                                                    <TrashCan />
+                                                                    <div>&nbsp;&nbsp;
+                                                                        {t(
+                                                                            "remove-payment-method"
+                                                                        )}</div>
+                                                                </div>
+                                                            }
+                                                            isDelete={listItem?.id !==
+                                                                cardsData?.default}
+                                                            hasDivider
+                                                            disabled={
+                                                                listItem?.id ===
+                                                                cardsData?.default
+                                                            }
+                                                            onClick={() => {
+                                                                openUserCardDeleteModal(
+                                                                    {
+                                                                        cardIdToBeDeleted:
+                                                                        listItem?.id,
+                                                                        last4Digit:
+                                                                        listItem?.last4,
                                                                     }
-                                                                >
-                                                                    <OverflowMenuItem
-                                                                        className="test"
-                                                                        itemText={
-                                                                            <div className="row-action-renderer">
-                                                                                <CheckmarkFilled size={16} />
-                                                                                <div>&nbsp;&nbsp;
-                                                                                    {t(
-                                                                                        "default-payment-method"
-                                                                                    )}</div>
-                                                                            </div>
-                                                                        }
-                                                                        onClick={() =>
-                                                                            handleDefaultCardOptionClick(
-                                                                                listItem?.id
-                                                                            )
-                                                                        }
-                                                                        disabled={
-                                                                            listItem?.id ===
-                                                                            cardsData?.default
-                                                                        }
-                                                                    />
-                                                                    <OverflowMenuItem
-                                                                        itemText={
-                                                                            <div className="row-action-renderer">
-                                                                                <TrashCan />
-                                                                                <div>&nbsp;&nbsp;
-                                                                                    {t(
-                                                                                        "remove-payment-method"
-                                                                                    )}</div>
-                                                                            </div>
-                                                                        }
-                                                                        isDelete={listItem?.id !==
-                                                                            cardsData?.default}
-                                                                        hasDivider
-                                                                        disabled={
-                                                                            listItem?.id ===
-                                                                            cardsData?.default
-                                                                        }
-                                                                        onClick={() => {
-                                                                            openUserCardDeleteModal(
-                                                                                {
-                                                                                    cardIdToBeDeleted:
-                                                                                        listItem?.id,
-                                                                                    last4Digit:
-                                                                                        listItem?.last4,
-                                                                                }
-                                                                            );
-                                                                            setOpenOptionIndex(
-                                                                                -1
-                                                                            );
-                                                                        }}
-                                                                    ></OverflowMenuItem>
-                                                                </PopoverContent>
-                                                            )}
-                                                    </Popover>
+                                                                );
+                                                                setOpenOptionIndex(
+                                                                    -1
+                                                                );
+                                                            }}
+                                                        ></OverflowMenuItem>
+                                                    </OverflowMenu>)
                                                 }
                                                 key={listItem.id}
                                             >

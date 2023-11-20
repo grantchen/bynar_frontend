@@ -69,6 +69,13 @@
         display: flex;
         align-items: center;
     }
+    .cds--overflow-menu-options{
+        max-width: 23rem;
+        width: max-content;
+    }
+    .cds--overflow-menu-options__btn {
+        max-width: 23rem;
+    }
 }
 
 // .cds--toast-notification__subtitle {
