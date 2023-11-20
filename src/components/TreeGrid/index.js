@@ -26,7 +26,7 @@ export function getAPIRequestURL(url) {
 // TreeGrid is the tree grid component
 export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) => {
     const ref = useRef(null);
-    const { tab, handleSetTabLoaded, focusTabById } = useContext(TabContext);
+    const { tab, handleSetTabLoaded, focusTabById, handleRemoveTab } = useContext(TabContext);
     const { treeGridRequest } = useAuth();
 
     // custom TreeGrid default ajax request
@@ -34,15 +34,28 @@ export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) 
         events.OnCustomAjax = function (G, IO, data, func) {
             if (["Data", "Page", "Upload"].indexOf(IO.Name) === -1) return null;
 
+            const tabId = G.Data.customTabId
             treeGridRequest(IO.Url, data, function (res) {
                 if (res?.IO?.Result === -1) {
                     // alert message
                     func(0, res)
+
+                    // remove tab if do not have policy
+                    closeTabIfHasNoPolicy(tabId, res)
                 } else {
                     func(0, res)
                 }
             });
             return true;
+        }
+    }
+
+    // close tab if it has no policy and tab is not loaded
+    const closeTabIfHasNoPolicy = (tabId, res) => {
+        if (res?.IO?.Result === -1 && res?.IO?.Message === 'do not have policy') {
+            if (tab.find((item) => item.id === tabId)?.loaded === false) {
+                handleRemoveTab(tabId)
+            }
         }
     }
 
@@ -64,6 +77,7 @@ export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) 
         let treeGrid = null;
         const fetchData = () => {
             const defaultConfig = {
+                customTabId: tabId, // custom tab id
                 Debug: NodeEnv === "production" ? '' : 'error', // check, info, error
                 id: `treeGrid_${ table || uuidv4() }`,
                 Cache: 2, // 0 - Never cache; 1 - Component version; 2 - Cache version; 3 - Standard cache
@@ -109,7 +123,7 @@ export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) 
 
             // add event on ready
             window.TGAddEvent("OnRenderPageFinish", treeGrid.id, function (grid, row) {
-                setTabLoadedAndFocus(tabId, grid, row)
+                setTabLoadedAndFocus(grid.Data.customTabId, grid, row)
             })
         }
 
