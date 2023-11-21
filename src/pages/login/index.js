@@ -15,10 +15,14 @@ const Home = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [language, setLanguage] = useState(localStorage.getItem('lang') ?? 'en');
     const { t } = useTranslation();
+    const [showText, setShowText] = useState(false);
     useEffect(() => {
         function handleResize() {
             setWindowWidth(window.innerWidth);
         }
+        const timeout = setTimeout(() => {
+            setShowText(true);
+        }, 300); // Adjust the delay time according to your preference
         window.addEventListener('resize', handleResize);
         return () => {
             window.removeEventListener('resize', handleResize);
@@ -52,7 +56,7 @@ const Home = () => {
                         }}>
                             <div className="header-caption">
                                 <p>
-                                    <span className={"bynar-style"}>{t("introducing-bynar")}</span>
+                                    <span className={`bynar-style ${showText ? 'slide-down' : ''}`}>{t("introducing-bynar")}</span>
                                 </p>
                                 {language === "de" && (
                                     <TypeAnimation
@@ -150,7 +154,7 @@ const Home = () => {
                         }}>
                             <div className="header-caption">
                                 <p>
-                                    <span className={"bynar-style"}>{t("introducing-bynar")}</span>
+                                    <span className={`bynar-style ${showText ? 'slide-down' : ''}`}>{t("introducing-bynar")}</span>
                                 </p>
                                 {language === "de" && (
                                     <TypeAnimation
