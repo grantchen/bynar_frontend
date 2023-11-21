@@ -92,7 +92,7 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                 <HeaderName
                     href="/"
                     prefix=""
-                    className={`${isSearchBarExpanded ? 'has-search-active' : ''}`}
+                    className={`${isSearchBarExpanded ? 'has-search-active header-name' : 'header-name'}`}
                 >
                     <img src={document.documentElement.getAttribute(
                         "data-carbon-theme") !== null &&
@@ -105,6 +105,7 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                         <HeaderName
                             className={`seperatorHead ${isSearchBarExpanded ? 'has-search-active' : ''}`}
                             prefix=""
+                            style={{ marginLeft:"-12px" }}
                         >
                             <div className="logoSeperator" />
                         </HeaderName>
