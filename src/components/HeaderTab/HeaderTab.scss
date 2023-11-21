@@ -19,6 +19,15 @@
 
   }
 
+  .cds--tabs:not(.cds--tabs--contained) .cds--tabs__nav-item:not(.cds--tabs__nav-item--selected):not(.cds--tabs__nav-item--disabled):hover {
+    border-block-end: 2px solid var(--cds-layer-hover);
+    color: var(--cds-text-primary, #161616);
+  }
+
+  .cds--tabs:not(.cds--tabs--contained) .cds--tabs__nav-item:hover {
+    background-color: var(--cds-layer-hover);
+  }
+
   .tab-buttons-list {
     overflow-x: auto;
 
