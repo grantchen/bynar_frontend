@@ -152,7 +152,7 @@ const UserCardManagementPanel = ({ open }) => {
                                             <ContainedListItem
                                                 action={
                                                     listItem?.id !==
-                                                    cardsData?.default && (<OverflowMenu id={listItem.id} flipped={true} aria-label="overflow-menu" focusTrap={false}>
+                                                    cardsData?.default ? (<OverflowMenu className="card-row-popover" id={listItem.id} flipped={true} aria-label="overflow-menu" focusTrap={false}>
                                                         <OverflowMenuItem
                                                             className="test"
                                                             itemText={
@@ -205,7 +205,20 @@ const UserCardManagementPanel = ({ open }) => {
                                                                 );
                                                             }}
                                                         ></OverflowMenuItem>
-                                                    </OverflowMenu>)
+                                                    </OverflowMenu>) : (<Popover
+                                                        open={false}
+                                                        align="bottom-right"
+                                                        dropShadow
+                                                        isTabTip
+                                                        className="card-row-popover"
+                                                    >
+                                                        <IconButton
+                                                            label={''}
+                                                            kind="ghost"
+                                                        >
+                                                            <CheckmarkFilled />
+                                                        </IconButton>
+                                                    </Popover>)
                                                 }
                                                 key={listItem.id}
                                             >
@@ -230,11 +243,6 @@ const UserCardManagementPanel = ({ open }) => {
                                                             date,
                                                             "MM/yyyy"
                                                         )}
-                                                    </span>
-                                                    <span className="card-checkbox">
-                                                        {(listItem?.id === cardsData?.default) ? (
-                                                            <CheckmarkFilled size={14} />
-                                                        ) : <CheckmarkFilled size={14} style={{ visibility: "hidden" }} />}
                                                     </span>
                                                 </div>
                                             </ContainedListItem>);
