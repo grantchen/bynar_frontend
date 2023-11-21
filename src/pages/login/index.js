@@ -65,7 +65,7 @@ const Home = () => {
                                             2800,
                                             'Machen Sie Ihr Unternehmen zukunftssicher mit\n unserer nahezu unbegrenzt skalierbaren\n Anwendungslösung',
                                             2800,
-                                            'Verbessern Sie Ihren Betrieb durch unser\n anpassungsfähiges Pay-per-Use-Preismodell',
+                                            'Steigern Sie die Effizienz und senken Sie\n die Kosten mit unserem skalierbaren\n Pay-per-Use-Preismodell',
                                             2800,
                                         ]}
                                         speed={75}
@@ -86,7 +86,7 @@ const Home = () => {
                                             2800,
                                             'Prepare su negocio para el futuro con nuestra\n solución de aplicaciones escalable\n prácticamente ilimitada',
                                             2800,
-                                            'Mejore las operaciones a través de nuestro\n modelo de precios adaptable de pago por uso',
+                                            'Aumente la eficiencia y reduzca los costos con\n nuestro modelo de precios escalable de pago\n por uso',
                                             2800,
                                         ]}
                                         speed={75}
@@ -107,7 +107,7 @@ const Home = () => {
                                             2800,
                                             'Future-proof your business with our\n virtually limitless scalable application solution',
                                             2800,
-                                            'Enhance operations through our\n adaptable pay-per-use pricing model',
+                                            'Boost efficiency and reduce costs with\n our scalable pay-per-use pricing model',
                                             2800,
                                         ]}
                                         speed={75}
@@ -128,7 +128,7 @@ const Home = () => {
                                             2800,
                                             'Préparez votre entreprise pour l’avenir grâce\n à notre solution d’applications évolutive\n pratiquement illimitée',
                                             2800,
-                                            'Améliorez vos opérations grâce à notre\n modèle de tarification adaptable à l\'utilisation',
+                                            'Améliorez l\'efficacité et réduisez les coûts grâce\n à notre modèle de tarification évolutif\n à l\'utilisation',
                                             2800,
                                         ]}
                                         speed={75}
@@ -155,7 +155,7 @@ const Home = () => {
                                 {language === "de" && (
                                     <TypeAnimation
                                         sequence={ [
-                                            'Die Unternehmensanwendung\n der nächsten Generation',
+                                            'Die\n Unternehmensanwendung\n der nächsten Generation',
                                             2800,
                                             'Das weltweit erste\n tabellenbasierte\n ERP-System',
                                             2800,
@@ -163,7 +163,7 @@ const Home = () => {
                                             2800,
                                             'Machen Sie Ihr\n Unternehmen\n zukunftssicher mit\n unserer nahezu\n unbegrenzt skalierbaren\n Anwendungslösung',
                                             2800,
-                                            'Verbessern Sie Ihren\n Betrieb durch unser\n anpassungsfähiges\n Pay-per-Use-Preismodell',
+                                            'Steigern Sie die\n Effizienz und senken\n Sie die Kosten mit\n unserem skalierbaren\n Pay-per-Use-Preismodell',
                                             2800,
                                         ]}
                                         speed={75}
@@ -184,7 +184,7 @@ const Home = () => {
                                             2800,
                                             'Prepare su negocio\n para el futuro con\n nuestra solución de\n aplicaciones escalable\n prácticamente ilimitada',
                                             2800,
-                                            'Mejore las operaciones\n a través de nuestro\n modelo de precios\n adaptable de pago por uso',
+                                            'Aumente la eficiencia\n y reduzca los costos\n con nuestro modelo de\n precios escalable\n de pago por uso',
                                             2800,
                                         ]}
                                         speed={75}
@@ -205,7 +205,7 @@ const Home = () => {
                                             2800,
                                             'Future-proof your\n business with our\n virtually limitless scalable\n application solution',
                                             2800,
-                                            'Enhance operations\n through our adaptable\n pay-per-use pricing model',
+                                            'Boost efficiency\n and reduce costs\n with our scalable\n pay-per-use pricing model',
                                             2800,
                                         ]}
                                         speed={75}
@@ -226,7 +226,7 @@ const Home = () => {
                                             2800,
                                             'Préparez votre\n entreprise pour\n l’avenir grâce à notre\n solution d’applications\n évolutive pratiquement\n illimitée',
                                             2800,
-                                            'Améliorez vos opérations\n grâce à notre modèle\n de tarification adaptable\n à l\'utilisation',
+                                            'Améliorez l\'efficacité\n et réduisez les coûts\n grâce à notre modèle\n de tarification évolutif\n à l\'utilisation',
                                             2800,
                                         ]}
                                         speed={75}
