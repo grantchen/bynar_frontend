@@ -176,7 +176,7 @@ const AddCardModal = ({ open }) => {
                     {notification && (
                         <InlineNotification
                             className="error-notification-box"
-                            iconDescription="Clear Notification"
+                            icondescription="Clear Notification"
                             title={notification?.message}
                             onCloseButtonClick={() => {
                                 setNotification(null);
