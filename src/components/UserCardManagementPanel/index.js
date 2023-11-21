@@ -7,26 +7,18 @@ import {
     OverflowMenuItem,
     SkeletonText,
     Popover,
-    PopoverContent,
     IconButton,
     Theme,
-    SkeletonPlaceholder,
-    InlineNotification,
-    ToastNotification,
-    Checkbox
+    InlineNotification
 } from "@carbon/react";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Add, CheckmarkFilled, TrashCan, OverflowMenuVertical } from "@carbon/react/icons";
+import { Add, CheckmarkFilled, TrashCan } from "@carbon/react/icons";
 import "./UserCardManagementPanel.scss";
 
 import {
-    BaseURL,
-    useAuth,
     useCardManagement,
-    useUserManagement,
     useThemePreference,
 } from "../../sdk";
-import { notificationTokens } from "@carbon/themes";
 import { useTranslation } from "react-i18next";
 import { format } from "date-fns";
 const UserCardManagementPanel = ({ open }) => {
@@ -37,7 +29,6 @@ const UserCardManagementPanel = ({ open }) => {
         getUserCardList,
         closeCardManagementPanel,
         makeDefaultMethod,
-        handleVerifyCard,
         openUserCardDeleteModal,
         openCardAddModal,
         setNotification
