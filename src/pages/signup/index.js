@@ -177,7 +177,6 @@ const Signup = () => {
                 setErrorMessage(t("enter-valid-phone-number"))
                 setIsPhoneNumberValid(false)
             } else {
-
                 try {
                     const number = phoneUtil.parse(phoneNumberWithoutDialCode, country);
                     const isValid = phoneUtil.isValidNumber(number);
@@ -668,6 +667,7 @@ const Signup = () => {
     };
 
     // handle account information form submit
+    let phoneNumberIsValid = true
     const handleAccountInformationFormSubmit = () => {
         const error = {};
         postalCodeValidation(postalCode);
@@ -678,20 +678,21 @@ const Signup = () => {
         error.state = state.trim().length === 0;
         error.phoneNumber = phoneNumber.length === 0;
         setAccountInfoErrors(error);
-        if (phoneNumber.length === 0) {
+        const phoneNumberWithoutDialCode = phoneNumber.toString().replace(countryDialCode, "");
+        if (phoneNumber.length === 0 || phoneNumberWithoutDialCode.length === 1) {
             setErrorMessage(t("phone-number-required"))
             setIsPhoneNumberValid(false)
-        } else {
+            phoneNumberIsValid = false
+        }
+        else {
             validatePhoneNumber(phoneNumber, countryDialCode, countryCode)
         }
-
         const emptyInput = inputRefs.current.find((ref) => ref && ref.value === "");
 
         if (emptyInput) {
             emptyInput.scrollIntoView({ behavior: "smooth" });
         }
-
-        if (!personalInfoButtonDisabled) {
+        if (!personalInfoButtonDisabled && phoneNumberIsValid) {
             handlePersonalInfo();
         }
     };
@@ -756,7 +757,7 @@ const Signup = () => {
                                             <div>
                                                 <InlineNotification
                                                     className="error-notification-box"
-                                                    iconDescription="describes the close button"
+                                                    icondescription="describes the close button"
                                                     subtitle={errorNotification?.title}
                                                     timeout={0}
                                                     title={""}
@@ -870,7 +871,7 @@ const Signup = () => {
                                                     name="fullName"
                                                     className="email-form-input"
                                                     id="full name"
-                                                    labelText={`${t("full-name")} *`}
+                                                    labelText={`${t("full-name-label")} *`}
                                                     value={fullName}
                                                     onChange={handleFullName}
                                                     invalid={accountInfoErrors.fullName}
@@ -1191,23 +1192,18 @@ const Signup = () => {
                                                             disabled={loadingSuccess}
                                                         />
                                                     </div>
-                                                    <div>
-                                                        <p className="account-notice-text">
+                                                    <div className="account-notice-text">
                                                             {t("account-notice-text2")}{" "}
                                                             <Link href="/signup">{t("opt-out")}
                                                                 request</Link> {t("account-notice-text3")}
-                                                        </p>
                                                     </div>
-                                                    <div>
-                                                        <p className="account-notice-text">
+                                                    <div className="account-notice-text">
                                                             {t("account-notice-text4")}{" "}
                                                             <Link href="/signup"> {t("bynar-privacy")}
                                                                 </Link>{" "}
                                                             {t("account-notice-text5")}
-                                                        </p>
                                                     </div>
-                                                    <div>
-                                                        <p className="account-notice-text">
+                                                    <div className="account-notice-text">
                                                             <Checkbox
                                                                 labelText={<>
                                                                     {t("accept-product")}{" "}
@@ -1221,7 +1217,6 @@ const Signup = () => {
                                                                     setIsAgreementSigned(checked);
                                                                 }}
                                                             />
-                                                        </p>
                                                     </div>
                                                     {loadingSuccess ? (
                                                         <>

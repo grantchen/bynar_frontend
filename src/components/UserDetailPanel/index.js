@@ -330,7 +330,7 @@ export const UserDetailPanel = ({ open }) => {
                         {serverNotification && (
                             <InlineNotification
                                 className="error-notification-box"
-                                iconDescription="Close Notification"
+                                icondescription="Close Notification"
                                 subtitle={serverErrorNotification?.title}
                                 onCloseButtonClick={() => {
                                     setServerErrorNotification({});
