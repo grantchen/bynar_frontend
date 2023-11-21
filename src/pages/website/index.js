@@ -2,7 +2,7 @@ import React, { useEffect, useState} from "react";
 import {Button, Column, Grid,} from "@carbon/react";
 import { useNavigate } from "react-router-dom";
 import backgroundImage from '../../components/media/background.svg';
-import "./login.scss";
+import "./website.scss";
 import { TypeAnimation } from 'react-type-animation';
 import SignFooter from "../../components/SignFooter";
 import {useTranslation} from "react-i18next";
@@ -262,7 +262,7 @@ const Home = () => {
                                                     }}
                                                     disabled={true}
                                                 >
-                                                    {t("login-button")}
+                                                    {t("website-button")}
                                                 </Button>
                                             </div>
                                             <div style={{ width: '20px' }} />

@@ -16,7 +16,7 @@ import AuthenticatedAppHeader from "./components/HeaderAuthenticated";
 import MagicLinkAuth from "./components/Auth/MagicLinkAuth";
 import Signin from "./pages/signin";
 import Signup from "./pages/signup";
-import Login from "./pages/login";
+import Website from "./pages/website";
 
 function App() {
     return (
@@ -34,7 +34,7 @@ function App() {
                                         <Route
                                             path="/"
                                             // TODO
-                                            element={<Login />}
+                                            element={<Website />}
                                         />
                                         <Route
                                             path="/auth/magic-link"
