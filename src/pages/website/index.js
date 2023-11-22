@@ -22,7 +22,7 @@ const Home = () => {
         }
         const timeout = setTimeout(() => {
             setShowText(true);
-        }, 1200); // Adjust the delay time according to your preference
+        }, 600); // Adjust the delay time according to your preference
         window.addEventListener('resize', handleResize);
         return () => {
             window.removeEventListener('resize', handleResize);
