@@ -48,6 +48,10 @@
             .close-list-tab {
               color: var(--cds-text-primary, #161616);
             }
+
+            .close-list-tab:hover {
+              background-color: var(--cds-layer-active);
+            }
           }
 
           &.list-item-active {
@@ -131,7 +135,7 @@
       }
     }
 
-    + .cds--popover-caret {
+    +.cds--popover-caret {
       background-color: var(--cds-ui-02, #ffffff);
     }
   }
@@ -176,7 +180,7 @@
         }
       }
 
-      + .cds--popover-caret {
+      +.cds--popover-caret {
         background-color: var(--cds-layer);
       }
     }
