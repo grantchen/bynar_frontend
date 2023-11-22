@@ -47,8 +47,17 @@
       font-weight: bold;
       font-size: 35px;
       opacity: 0;
-      transform: translateY(-100px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
+      animation: slideDown 1s ease forwards;
+    }
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-100px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     .slide-down {
       opacity: 1;

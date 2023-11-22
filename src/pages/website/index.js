@@ -22,7 +22,7 @@ const Home = () => {
         }
         const timeout = setTimeout(() => {
             setShowText(true);
-        }, 500); // Adjust the delay time according to your preference
+        }, 1200); // Adjust the delay time according to your preference
         window.addEventListener('resize', handleResize);
         return () => {
             window.removeEventListener('resize', handleResize);
@@ -55,9 +55,7 @@ const Home = () => {
                             marginRight: '50px',
                         }}>
                             <div className="header-caption">
-                                <p>
-                                    <span className={`bynar-style ${showText ? 'slide-down' : ''}`}>{t("introducing-bynar")}</span>
-                                </p>
+                                <p className="bynar-style">{t("introducing-bynar")}</p>
                                 {showText && language === "de" && (
                                     <TypeAnimation
                                         sequence={ [
