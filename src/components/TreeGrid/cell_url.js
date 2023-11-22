@@ -1,4 +1,4 @@
-function parseCellSuggestionCallback(suggestionKey, lsSuggestionField){
+export function parseCellSuggestionCallback(suggestionKey, lsSuggestionField){
 	return (G, row, col, val) => {
 		try {
 			if(col + "Suggest" !== suggestionKey){
@@ -8,11 +8,11 @@ function parseCellSuggestionCallback(suggestionKey, lsSuggestionField){
 			let suggestionData = row[suggestionKey]
 			// console.log(suggestionData)
 			const s_items = suggestionData.Items;
-			for (i = 0; i < s_items.length; i++) {
+			for (let i = 0; i < s_items.length; i++) {
 			   if (s_items[i].Value === val) {
 				  // Clear the undo buffer to remove the entry with html string
 				  G.ClearUndo();
-				  for (j = 0; j < lsSuggestionField.length; j++) {
+				  for (let j = 0; j < lsSuggestionField.length; j++) {
 					 let field = lsSuggestionField[j]
 					 G.SetValue(row, field, s_items[i][field], 1);
 				  }
@@ -25,7 +25,7 @@ function parseCellSuggestionCallback(suggestionKey, lsSuggestionField){
 	}
 }
 
-function parseItemSuggestionCallBack(suggestionKey, data, lsSuggestionField){
+export function parseItemSuggestionCallBack(suggestionKey, data, lsSuggestionField){
 	let jsonData = JSON.parse(data);
 	let dataSuggest = jsonData.Changes[0][suggestionKey];
 	let Items = dataSuggest.Items;
