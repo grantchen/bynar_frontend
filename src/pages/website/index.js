@@ -261,6 +261,7 @@ const Home = () => {
                                                         navigate("/signin");
                                                     }}
                                                     disabled={true}
+                                                    title="Coming soon"
                                                 >
                                                     {t("login-button")}
                                                 </Button>
@@ -273,6 +274,7 @@ const Home = () => {
                                                     style={{ width: '100%', marginLeft: 0 }}
                                                     className="login-submit-button bx--btn bx--btn--primary"
                                                     disabled={true}
+                                                    title="Coming soon"
                                                 >
                                                     {t("sign-up-button")}
                                                 </Button>
