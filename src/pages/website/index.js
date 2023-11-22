@@ -2,7 +2,7 @@ import React, { useEffect, useState} from "react";
 import {Button, Column, Grid,} from "@carbon/react";
 import { useNavigate } from "react-router-dom";
 import backgroundImage from '../../components/media/background.svg';
-import "./login.scss";
+import "./website.scss";
 import { TypeAnimation } from 'react-type-animation';
 import SignFooter from "../../components/SignFooter";
 import {useTranslation} from "react-i18next";
@@ -15,10 +15,14 @@ const Home = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [language, setLanguage] = useState(localStorage.getItem('lang') ?? 'en');
     const { t } = useTranslation();
+    const [showText, setShowText] = useState(false);
     useEffect(() => {
         function handleResize() {
             setWindowWidth(window.innerWidth);
         }
+        const timeout = setTimeout(() => {
+            setShowText(true);
+        }, 500); // Adjust the delay time according to your preference
         window.addEventListener('resize', handleResize);
         return () => {
             window.removeEventListener('resize', handleResize);
@@ -52,9 +56,9 @@ const Home = () => {
                         }}>
                             <div className="header-caption">
                                 <p>
-                                    <span className={"bynar-style"}>{t("introducing-bynar")}</span>
+                                    <span className={`bynar-style ${showText ? 'slide-down' : ''}`}>{t("introducing-bynar")}</span>
                                 </p>
-                                {language === "de" && (
+                                {showText && language === "de" && (
                                     <TypeAnimation
                                         sequence={ [
                                             'Die Unternehmensanwendung der nächsten\n Generation',
@@ -70,12 +74,12 @@ const Home = () => {
                                         ]}
                                         speed={75}
                                         deletionSpeed={99}
-                                        className={"animation-type"}
+                                        className={`animation-type ${showText ? 'slide-down' : ''}`}
                                         repeat={Infinity}
                                         omitDeletionAnimation={false}
                                     />
                                 )}
-                                {language === "es" && (
+                                {showText && language === "es" && (
                                     <TypeAnimation
                                         sequence={ [
                                             'La aplicación empresarial de próxima generación',
@@ -96,7 +100,7 @@ const Home = () => {
                                         omitDeletionAnimation={false}
                                     />
                                 )}
-                                {language === "en" && (
+                                {showText && language === "en" && (
                                     <TypeAnimation
                                         sequence={ [
                                             'The next-generation enterprise application',
@@ -117,7 +121,7 @@ const Home = () => {
                                         omitDeletionAnimation={false}
                                     />
                                 )}
-                                {language === "fr" && (
+                                {showText && language === "fr" && (
                                     <TypeAnimation
                                         sequence={ [
                                             'L\'application d\'entreprise de nouvelle génération',
@@ -150,9 +154,9 @@ const Home = () => {
                         }}>
                             <div className="header-caption">
                                 <p>
-                                    <span className={"bynar-style"}>{t("introducing-bynar")}</span>
+                                    <span className={`bynar-style ${showText ? 'slide-down' : ''}`}>{t("introducing-bynar")}</span>
                                 </p>
-                                {language === "de" && (
+                                {showText && language === "de" && (
                                     <TypeAnimation
                                         sequence={ [
                                             'Die\n Unternehmensanwendung\n der nächsten Generation',
@@ -173,7 +177,7 @@ const Home = () => {
                                         omitDeletionAnimation={false}
                                     />
                                 )}
-                                {language === "es" && (
+                                {showText && language === "es" && (
                                     <TypeAnimation
                                         sequence={ [
                                             'La aplicación\n empresarial de\n próxima generación',
@@ -194,7 +198,7 @@ const Home = () => {
                                         omitDeletionAnimation={false}
                                     />
                                 )}
-                                {language === "en" && (
+                                {showText && language === "en" && (
                                     <TypeAnimation
                                         sequence={ [
                                             'The next-generation\n enterprise application',
@@ -215,7 +219,7 @@ const Home = () => {
                                         omitDeletionAnimation={false}
                                     />
                                 )}
-                                {language === "fr" && (
+                                {showText && language === "fr" && (
                                     <TypeAnimation
                                         sequence={ [
                                             'L\'application\n d\'entreprise de\n nouvelle génération',

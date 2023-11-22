@@ -46,6 +46,13 @@
       color: #747475;
       font-weight: bold;
       font-size: 35px;
+      opacity: 0;
+      transform: translateY(-100px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .slide-down {
+      opacity: 1;
+      transform: translateY(0);
     }
     .erp-style {
       color: #0f62fe;
