@@ -257,7 +257,6 @@ const Home = () => {
                                                         size={'md'}
                                                         style={{ width: '100%' }}
                                                         className="login-submit-button bx--btn bx--btn--primary"
-                                                        title="Coming soon"
                                                     >
                                                         {t("login-button")}
                                                     </Button>
