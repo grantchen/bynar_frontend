@@ -262,7 +262,7 @@ const Home = () => {
                                                     }}
                                                     disabled={true}
                                                 >
-                                                    {t("website-button")}
+                                                    {t("login-button")}
                                                 </Button>
                                             </div>
                                             <div style={{ width: '20px' }} />
