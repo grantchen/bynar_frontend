@@ -110,7 +110,7 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                 }
 
                 {
-                    !isMobile && (
+                     (
                         <DropdownTabList
                             className={`${isSearchBarExpanded ? 'has-search-active' : ''}`}
                         >
