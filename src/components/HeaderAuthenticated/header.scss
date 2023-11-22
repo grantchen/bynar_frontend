@@ -180,7 +180,9 @@
 .cds--popover--high-contrast .cds--popover {
     display: none;
 }
-
+.header-name{
+    width: 50px;
+}
 .header-name:hover {
     background-color: var(--cds-layer-hover, rgba(141, 141, 141, 0.12));
 }

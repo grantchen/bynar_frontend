@@ -102,7 +102,6 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                         <HeaderName
                             className={`seperatorHead ${isSearchBarExpanded ? 'has-search-active' : ''}`}
                             prefix=""
-                            style={{ marginLeft:"-12px" }}
                         >
                             <div className="logoSeperator" />
                         </HeaderName>
