@@ -1,5 +1,5 @@
 import React, { useEffect, useState} from "react";
-import {Button, Column, Grid,} from "@carbon/react";
+import {Button, Column, Grid, Tooltip} from "@carbon/react";
 import { useNavigate } from "react-router-dom";
 import backgroundImage from '../../components/media/background.svg';
 import "./website.scss";
@@ -16,13 +16,14 @@ const Home = () => {
     const [language, setLanguage] = useState(localStorage.getItem('lang') ?? 'en');
     const { t } = useTranslation();
     const [showText, setShowText] = useState(false);
+    const label = 'Occasionally, services are updated in a specified time window to ensure no down time for customers.';
     useEffect(() => {
         function handleResize() {
             setWindowWidth(window.innerWidth);
         }
         const timeout = setTimeout(() => {
             setShowText(true);
-        }, 500); // Adjust the delay time according to your preference
+        }, 600); // Adjust the delay time according to your preference
         window.addEventListener('resize', handleResize);
         return () => {
             window.removeEventListener('resize', handleResize);
@@ -55,9 +56,7 @@ const Home = () => {
                             marginRight: '50px',
                         }}>
                             <div className="header-caption">
-                                <p>
-                                    <span className={`bynar-style ${showText ? 'slide-down' : ''}`}>{t("introducing-bynar")}</span>
-                                </p>
+                                <p className="bynar-style">{t("introducing-bynar")}</p>
                                 {showText && language === "de" && (
                                     <TypeAnimation
                                         sequence={ [
@@ -74,7 +73,7 @@ const Home = () => {
                                         ]}
                                         speed={75}
                                         deletionSpeed={99}
-                                        className={`animation-type ${showText ? 'slide-down' : ''}`}
+                                        className={"animation-type"}
                                         repeat={Infinity}
                                         omitDeletionAnimation={false}
                                     />
@@ -154,7 +153,7 @@ const Home = () => {
                         }}>
                             <div className="header-caption">
                                 <p>
-                                    <span className={`bynar-style ${showText ? 'slide-down' : ''}`}>{t("introducing-bynar")}</span>
+                                    <p className="bynar-style">{t("introducing-bynar")}</p>
                                 </p>
                                 {showText && language === "de" && (
                                     <TypeAnimation
@@ -252,30 +251,29 @@ const Home = () => {
                                         <h1 className="form-mainHeading">{t("get-started")}</h1>
                                         <div className="fields-container">
                                             <div style={{ flex:1 }}>
-                                                <Button
-                                                    type="submit"
-                                                    size={'md'}
-                                                    style={{ width: '100%' }}
-                                                    className="login-submit-button bx--btn bx--btn--primary"
-                                                    onClick={() => {
-                                                        navigate("/signin");
-                                                    }}
-                                                    disabled={true}
-                                                >
-                                                    {t("login-button")}
-                                                </Button>
+                                                <Tooltip label="Coming soon" align="bottom">
+                                                    <Button
+                                                        type="submit"
+                                                        size={'md'}
+                                                        style={{ width: '100%' }}
+                                                        className="login-submit-button bx--btn bx--btn--primary"
+                                                    >
+                                                        {t("login-button")}
+                                                    </Button>
+                                                </Tooltip>
                                             </div>
                                             <div style={{ width: '20px' }} />
                                             <div style={{ flex: 1, marginTop: windowWidth < 672 ? '15px' : 0 }}>
-                                                <Button
-                                                    type="submit"
-                                                    size={'md'}
-                                                    style={{ width: '100%', marginLeft: 0 }}
-                                                    className="login-submit-button bx--btn bx--btn--primary"
-                                                    disabled={true}
-                                                >
-                                                    {t("sign-up-button")}
-                                                </Button>
+                                                <Tooltip label="Coming soon" align="bottom" >
+                                                    <Button
+                                                        type="submit"
+                                                        size={'md'}
+                                                        style={{ width: '100%', marginLeft: 0 }}
+                                                        className="login-submit-button bx--btn bx--btn--primary "
+                                                    >
+                                                        {t("sign-up-button")}
+                                                    </Button>
+                                                </Tooltip>
                                             </div>
                                         </div>
                                     </div>

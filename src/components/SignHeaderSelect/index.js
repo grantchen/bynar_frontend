@@ -31,7 +31,7 @@ const SignHeaderSelect = ({ onLanguageChange }) => {
     return (
         <Header aria-label="Bynar">
             <HeaderName href="/" prefix="" className="header-name">
-                <img src={bynarLogo} alt="ibm_logo"  style={{ marginLeft:"-5px" }}/>
+                <img src={bynarLogo} alt="ibm_logo"/>
             </HeaderName>
             <div className="header-right">
                 <Dropdown
