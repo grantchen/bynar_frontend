@@ -251,7 +251,7 @@ const Home = () => {
                                         <h1 className="form-mainHeading">{t("get-started")}</h1>
                                         <div className="fields-container">
                                             <div style={{ flex:1 }}>
-                                                <Tooltip label="Coming soon" align="bottom-left">
+                                                <Tooltip label="Coming soon" align="bottom">
                                                     <Button
                                                         type="submit"
                                                         size={'md'}
@@ -264,7 +264,7 @@ const Home = () => {
                                             </div>
                                             <div style={{ width: '20px' }} />
                                             <div style={{ flex: 1, marginTop: windowWidth < 672 ? '15px' : 0 }}>
-                                                <Tooltip label="Coming soon" align="bottom-left">
+                                                <Tooltip label="Coming soon" align="bottom" >
                                                     <Button
                                                         type="submit"
                                                         size={'md'}
