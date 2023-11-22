@@ -86,13 +86,17 @@
 
         // search
         &:hover {
-            background-color: var(--cds-layer-active, rgba(141, 141, 141, 0.12));
+            background-color: var(--cds-layer-hover, rgba(141, 141, 141, 0.12));
         }
 
         &:active {
             background-color: var(--cds-background-active, rgba(141, 141, 141, 0.5));
             color: var(--cds-text-primary, #161616);
         }
+    }
+
+    .cds--tabs__nav-item--close-icon:hover {
+        background-color: var(--cds-background-active, rgba(141, 141, 141, 0.5)) !important;
     }
 
     .bx--header__global,
