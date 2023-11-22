@@ -1,5 +1,5 @@
 import React, { useEffect, useState} from "react";
-import {Button, Column, Grid,} from "@carbon/react";
+import {Button, Column, Grid, Tooltip} from "@carbon/react";
 import { useNavigate } from "react-router-dom";
 import backgroundImage from '../../components/media/background.svg';
 import "./website.scss";
@@ -16,6 +16,7 @@ const Home = () => {
     const [language, setLanguage] = useState(localStorage.getItem('lang') ?? 'en');
     const { t } = useTranslation();
     const [showText, setShowText] = useState(false);
+    const label = 'Occasionally, services are updated in a specified time window to ensure no down time for customers.';
     useEffect(() => {
         function handleResize() {
             setWindowWidth(window.innerWidth);
@@ -72,7 +73,7 @@ const Home = () => {
                                         ]}
                                         speed={75}
                                         deletionSpeed={99}
-                                        className={`animation-type ${showText ? 'slide-down' : ''}`}
+                                        className={"animation-type"}
                                         repeat={Infinity}
                                         omitDeletionAnimation={false}
                                     />
@@ -152,7 +153,7 @@ const Home = () => {
                         }}>
                             <div className="header-caption">
                                 <p>
-                                    <span className={`bynar-style ${showText ? 'slide-down' : ''}`}>{t("introducing-bynar")}</span>
+                                    <p className="bynar-style">{t("introducing-bynar")}</p>
                                 </p>
                                 {showText && language === "de" && (
                                     <TypeAnimation
@@ -250,32 +251,30 @@ const Home = () => {
                                         <h1 className="form-mainHeading">{t("get-started")}</h1>
                                         <div className="fields-container">
                                             <div style={{ flex:1 }}>
-                                                <Button
-                                                    type="submit"
-                                                    size={'md'}
-                                                    style={{ width: '100%' }}
-                                                    className="login-submit-button bx--btn bx--btn--primary"
-                                                    onClick={() => {
-                                                        navigate("/signin");
-                                                    }}
-                                                    disabled={true}
-                                                    title="Coming soon"
-                                                >
-                                                    {t("login-button")}
-                                                </Button>
+                                                <Tooltip label="Coming soon" align="bottom-left">
+                                                    <Button
+                                                        type="submit"
+                                                        size={'md'}
+                                                        style={{ width: '100%' }}
+                                                        className="login-submit-button bx--btn bx--btn--primary"
+                                                        title="Coming soon"
+                                                    >
+                                                        {t("login-button")}
+                                                    </Button>
+                                                </Tooltip>
                                             </div>
                                             <div style={{ width: '20px' }} />
                                             <div style={{ flex: 1, marginTop: windowWidth < 672 ? '15px' : 0 }}>
-                                                <Button
-                                                    type="submit"
-                                                    size={'md'}
-                                                    style={{ width: '100%', marginLeft: 0 }}
-                                                    className="login-submit-button bx--btn bx--btn--primary"
-                                                    disabled={true}
-                                                    title="Coming soon"
-                                                >
-                                                    {t("sign-up-button")}
-                                                </Button>
+                                                <Tooltip label="Coming soon" align="bottom-left">
+                                                    <Button
+                                                        type="submit"
+                                                        size={'md'}
+                                                        style={{ width: '100%', marginLeft: 0 }}
+                                                        className="login-submit-button bx--btn bx--btn--primary "
+                                                    >
+                                                        {t("sign-up-button")}
+                                                    </Button>
+                                                </Tooltip>
                                             </div>
                                         </div>
                                     </div>
