@@ -86,7 +86,7 @@
 
         // search
         &:hover {
-            background-color: var(--cds-layer-hover, rgba(141, 141, 141, 0.12));
+            background-color: var(--cds-layer-active, rgba(141, 141, 141, 0.12));
         }
 
         &:active {
@@ -121,7 +121,7 @@
     }
 
     .cds--popover-content {
-        transition: all 0.15s cubic-bezier(0,0,.38,.9);
+        transition: all 0.15s cubic-bezier(0, 0, .38, .9);
     }
 
 }
