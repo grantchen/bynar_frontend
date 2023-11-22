@@ -6,7 +6,7 @@ import {
     Search
 } from "@carbon/react";
 import "./DropdownTabList.scss";
-import { TabContext } from "../../sdk";
+import {TabContext, useMobile} from "../../sdk";
 import { ChevronDown, Close, Home } from "@carbon/react/icons";
 import { useTranslation } from "react-i18next";
 import TabSkeleton from "carbon-web-components/es/components-react/tabs/tab-skeleton";
@@ -20,7 +20,7 @@ const DropdownTabList = ({ className }) => {
     const [isDropdownTabsOpen, setIsDropdownTabsOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState(tab);
-
+    const isMobile = useMobile();
     // set search term when search input changes
     const handleSearchChange = event => {
         setSearchTerm(event.target.value);
@@ -71,7 +71,8 @@ const DropdownTabList = ({ className }) => {
                         className={`cds--dropdown cds--dropdown--inline cds--dropdown--lg cds--list-box cds--list-box--lg ${isDropdownTabsOpen ? 'cds--dropdown--open cds--list-box--expanded' : ''}`}>
                         <Button
                             kind="ghost"
-                            className={"cds--list-box__field"}
+                            className={`cds--list-box__field`}
+                            style={isMobile ? { maxWidth: '9rem' } : {}}
                             onClick={() => {
                                 setIsDropdownTabsOpen(!isDropdownTabsOpen);
                                 setSearchTerm('');
@@ -90,7 +91,7 @@ const DropdownTabList = ({ className }) => {
 
                         <ul className="cds--list-box__menu" role="listbox" style={{ maxHeight: isDropdownTabsOpen ? '16.5rem' : 0 }}>
                             <div className="header-dynamic-dropdown-tabs-content">
-                                <div className="list-wrapper">
+                                <div className="list-wrapper" style={isMobile ? {maxWidth: '16rem'}:{}}>
                                     <ContainedList
                                         label={""}
                                         size="md"
