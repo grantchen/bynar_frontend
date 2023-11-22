@@ -72,7 +72,7 @@ const DropdownTabList = ({ className }) => {
                         <Button
                             kind="ghost"
                             className={`cds--list-box__field`}
-                            style={isMobile ? { maxWidth: '10rem' } : {}}
+                            style={isMobile ? { maxWidth: '10rem',minWidth: '10rem' } : {}}
                             onClick={() => {
                                 setIsDropdownTabsOpen(!isDropdownTabsOpen);
                                 setSearchTerm('');
