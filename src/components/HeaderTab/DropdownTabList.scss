@@ -7,7 +7,10 @@
   .cds--list-box__menu {
     display: block;
   }
-
+  .cds--dropdown--inline .mobile-width{
+    min-width: 14rem;
+    max-width: 18rem;
+  }
   .cds--list-box--expanded.cds--list-box--lg .cds--list-box__menu {
     transition: all 0.15s cubic-bezier(0, 0, .38, .9);
   }
@@ -47,6 +50,10 @@
 
             .close-list-tab {
               color: var(--cds-text-primary, #161616);
+            }
+
+            .close-list-tab:hover {
+              background-color: var(--cds-layer-active);
             }
           }
 
@@ -131,7 +138,7 @@
       }
     }
 
-    + .cds--popover-caret {
+    +.cds--popover-caret {
       background-color: var(--cds-ui-02, #ffffff);
     }
   }
@@ -176,7 +183,7 @@
         }
       }
 
-      + .cds--popover-caret {
+      +.cds--popover-caret {
         background-color: var(--cds-layer);
       }
     }
