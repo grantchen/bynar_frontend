@@ -64,7 +64,8 @@ const DropdownTabList = ({ className }) => {
 
     return (
         <>
-            <div ref={dropdownTabsRef} className={`header-tab-list ${className ? className : ''}`}>
+            <div ref={dropdownTabsRef} className={`header-tab-list ${className ? className : ''}`}
+                 style={isMobile ? {width: "13rem",textAlign: "center"}:{}}>
                 <div
                     className={"cds--dropdown__wrapper cds--list-box__wrapper cds--dropdown__wrapper--inline cds--list-box__wrapper--inline"}>
                     <div
@@ -72,7 +73,7 @@ const DropdownTabList = ({ className }) => {
                         <Button
                             kind="ghost"
                             className={`cds--list-box__field`}
-                            style={isMobile ? { maxWidth: '10rem',minWidth: '10rem' } : {}}
+                            style={isMobile ? { maxWidth: '13rem' } : {}}
                             onClick={() => {
                                 setIsDropdownTabsOpen(!isDropdownTabsOpen);
                                 setSearchTerm('');
