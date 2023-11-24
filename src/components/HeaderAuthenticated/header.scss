@@ -63,6 +63,10 @@
 .main-header-container {
     padding-top: 3rem; // fixed header height
 
+    .cds--popover--high-contrast .cds--popover {
+        display: none;
+    }
+
     // dropdown
     .cds--dropdown--inline,
     .cds--dropdown {
@@ -181,9 +185,6 @@
     padding-left: 0px !important;
 }
 
-//.cds--popover--high-contrast .cds--popover {
-//    display: none;
-//}
 .logo-header-name {
     width: 50px;
 }
