@@ -8,7 +8,7 @@
    <Cfg Paging="3" ColPaging="2" PageLengthDiv="2" FastPages="500" PageLength="100" AllPages='1' RemoveUnusedPages='3'/>
    <Cfg ChildPaging="3" ChildPageLength="100" ChildPageDiff="0"/>
    <Cfg ChildParts="2" ChildPartMin="0"/>
-   <Cfg DuplicateId='4' AutoIdPrefix='test' FullId='1'/>
+   <Cfg DuplicateId='4' FullId='1'/>
    <Cfg MaxHeight='1'/>
    <Cfg CopyPasteTree ='3'/>
    <Cfg Alternate='2'/>
