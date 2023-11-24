@@ -36,12 +36,6 @@ const UserGroupList = ({ tabId }) => {
 
     // on add
     events.OnRowAdd = function (G, row) {
-        let par = row.parentNode
-        // add child to grouped row, set code to empty
-        if (par && par.Def?.Name === "Group" && par.Def?.CDef === "R") {
-            row.code = ''
-        }
-
         if (row.Def.Name === "Node") {
             G.SetAttribute(row, row.parent, "Calculated", 1);
         }
