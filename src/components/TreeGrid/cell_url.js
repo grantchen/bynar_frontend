@@ -6,6 +6,10 @@ export function parseCellSuggestionCallback(suggestionKey, lsSuggestionField){
 			}
 
 			let suggestionData = row[suggestionKey]
+			if (suggestionData === undefined) {
+				return
+			}
+
 			// console.log(suggestionData)
 			const s_items = suggestionData.Items;
 			for (let i = 0; i < s_items.length; i++) {
