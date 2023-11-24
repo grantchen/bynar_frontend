@@ -181,10 +181,15 @@
     padding-left: 0px !important;
 }
 
-.cds--popover--high-contrast .cds--popover {
-    display: none;
+//.cds--popover--high-contrast .cds--popover {
+//    display: none;
+//}
+.logo-header-name {
+    width: 50px;
 }
-
-.header-name:hover {
+.logoImg {
+    margin-left: -11px;
+}
+.logo-header-name:hover {
     background-color: var(--cds-layer-hover, rgba(141, 141, 141, 0.12));
 }

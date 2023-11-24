@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext, useCallback, Fragment } from 'react';
+import React, { useState, useEffect, useRef, useContext, useCallback, Fragment, useMemo } from 'react';
 import jsonData from '../JSONs/wide-menus.json';
 import { ArrowRight } from "@carbon/react/icons";
 import { TabContext, useAuth, useMobile, useCardManagement } from "../../sdk";
@@ -24,7 +24,7 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
 
     const isMobile = useMobile();
     const { t } = useTranslation();
-    const { hasPermission } = useAuth();
+    const { hasPermission, tokenClaims } = useAuth();
 
     // set active tab by title
     const handleClickTab = (title) => {
@@ -56,13 +56,20 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
         }
     };
 
+    // check if the user is an organization account
+    const isOrganizationAccount = useMemo(
+        () => tokenClaims?.organization_account === true,
+        [tokenClaims?.organization_account],
+    );
+
     // check if the menu item has permission to be displayed
     const hasLinkPermission = useCallback((menuItem) => {
         if (menuItem.sidePanel === "OrganizationAccountPanel") {
             return isOrganizationAccountAllowed
         }
+
         if (menuItem.tab === "InvoiceList") {
-            return isOrganizationAccountAllowed
+            return isOrganizationAccount
         }
 
         if (menuItem.sidePanel === "UserCardManagementPanel") {
@@ -70,7 +77,7 @@ export function CustomWideMenu({ expanded, onClickSideNavExpand, children }) {
         }
 
         return !menuItem.permission || hasPermission(menuItem.permission, "list")
-    }, [hasPermission, isOrganizationAccountAllowed, isCardManagementAllowed])
+    }, [hasPermission, isCardManagementAllowed, isOrganizationAccount])
 
     // expand/collapse wide menu in pc
     useEffect(() => {

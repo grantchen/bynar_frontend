@@ -1,7 +1,7 @@
 import { TreeGrid, getAPIRequestURL } from "../../index";
 import debounce from "lodash/debounce";
 import { useAuth } from "../../../../sdk";
-
+import {parseItemSuggestionCallBack,parseCellSuggestionCallback} from "../../cell_url"
 // UserGroupList is the user group list component
 const UserGroupList = ({ tabId }) => {
     const { treeGridRequest } = useAuth();
@@ -17,7 +17,7 @@ const UserGroupList = ({ tabId }) => {
                 // alert message
                 callback(0, res);
             } else {
-                const data = window.parseItemSuggestionCallBack(keySuggest, JSON.stringify(res), lsSuggestionField);
+                const data = parseItemSuggestionCallBack(keySuggest, JSON.stringify(res), lsSuggestionField);
                 callback(0, data);
             }
         });
@@ -26,7 +26,7 @@ const UserGroupList = ({ tabId }) => {
     // events is an object that contains all the event handlers for the TreeGrid
     const events = {}
     // set cell value after choose suggestion item
-    events.OnAfterValueChanged = window.parseCellSuggestionCallback(keySuggest, lsSuggestionField)
+    events.OnAfterValueChanged = parseCellSuggestionCallback(keySuggest, lsSuggestionField)
 
     events.OnExpand = function (G, row) {
         if (row.Def.Name === "Node") {

@@ -89,12 +89,12 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                 <HeaderName
                     href="/"
                     prefix=""
-                    className={`${isSearchBarExpanded ? 'has-search-active header-name' : 'header-name'}`}
+                    className={`${isSearchBarExpanded ? 'has-search-active header-name' : 'logo-header-name'}`}
                 >
                     <img src={document.documentElement.getAttribute(
                         "data-carbon-theme") !== null &&
                         document.documentElement.getAttribute(
-                            "data-carbon-theme") !== 'white' ? logoOnlyDarkMode : logoOnly} alt="ibm_logo" />
+                            "data-carbon-theme") !== 'white' ? logoOnlyDarkMode : logoOnly} className="logoImg" alt="ibm_logo" />
                 </HeaderName>
 
                 {
@@ -102,7 +102,6 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                         <HeaderName
                             className={`seperatorHead ${isSearchBarExpanded ? 'has-search-active' : ''}`}
                             prefix=""
-                            style={{ marginLeft:"-12px" }}
                         >
                             <div className="logoSeperator" />
                         </HeaderName>
@@ -110,7 +109,7 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                 }
 
                 {
-                    !isMobile && (
+                     (
                         <DropdownTabList
                             className={`${isSearchBarExpanded ? 'has-search-active' : ''}`}
                         >
