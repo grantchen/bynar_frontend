@@ -6,7 +6,7 @@ import {
     Search
 } from "@carbon/react";
 import "./DropdownTabList.scss";
-import {TabContext, useMobile} from "../../sdk";
+import { TabContext, useMobile, handleActiveTabCfg } from "../../sdk";
 import { ChevronDown, Close, Home } from "@carbon/react/icons";
 import { useTranslation } from "react-i18next";
 import TabSkeleton from "@carbon/web-components/es/components-react/tabs/tab-skeleton";
@@ -31,6 +31,7 @@ const DropdownTabList = ({ className }) => {
         const index = tab.findIndex((item) => item.id === tabId);
         if (tab[index]?.loaded === true) {
             setActiveTab(index);
+            handleActiveTabCfg(index);
         }
     };
 
@@ -65,7 +66,7 @@ const DropdownTabList = ({ className }) => {
     return (
         <>
             <div ref={dropdownTabsRef} className={`header-tab-list ${className ? className : ''}`}
-                 style={isMobile ? {width: "100%",textAlign: "center"}:{}}>
+                style={isMobile ? { width: "100%", textAlign: "center" } : {}}>
                 <div
                     className={"cds--dropdown__wrapper cds--list-box__wrapper cds--dropdown__wrapper--inline cds--list-box__wrapper--inline"}>
                     <div

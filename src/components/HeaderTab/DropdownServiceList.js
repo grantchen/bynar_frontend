@@ -6,7 +6,7 @@ import {
     Search
 } from "@carbon/react";
 import "./DropdownServiceList.scss";
-import { TabContext, useAuth, useCardManagement } from "../../sdk";
+import { TabContext, handleActiveTabCfg, useAuth, useCardManagement } from "../../sdk";
 import { Add } from "@carbon/react/icons";
 import { useTranslation } from "react-i18next";
 import jsonData from '../JSONs/wide-menus.json';
@@ -67,6 +67,7 @@ const DropdownServiceList = () => {
 
     // open the service tab/panel when click on the service
     const openService = (item) => {
+        handleActiveTabCfg(0)
         if (item.tab) {
             goToTab(item.tab, item.title, item.tabType)
         } else if (item.sidePanel) {
@@ -145,52 +146,52 @@ const DropdownServiceList = () => {
 
     return (
         <>
-            <div ref={ dropdownServicesRef } className={ `header-dropdown-services-list` }>
+            <div ref={dropdownServicesRef} className={`header-dropdown-services-list`}>
                 <div
-                    className={ "cds--dropdown__wrapper cds--list-box__wrapper cds--dropdown__wrapper--inline cds--list-box__wrapper--inline" }>
+                    className={"cds--dropdown__wrapper cds--list-box__wrapper cds--dropdown__wrapper--inline cds--list-box__wrapper--inline"}>
                     <div
-                        className={ `cds--dropdown cds--dropdown--inline cds--dropdown--lg cds--list-box cds--list-box--lg ${ isDropdownTabsOpen ? 'cds--dropdown--open cds--list-box--expanded' : '' }` }>
+                        className={`cds--dropdown cds--dropdown--inline cds--dropdown--lg cds--list-box cds--list-box--lg ${isDropdownTabsOpen ? 'cds--dropdown--open cds--list-box--expanded' : ''}`}>
                         <Button
-                            label={ "" }
+                            label={""}
                             kind="ghost"
                             className="add-new-tab"
                             hasIconOnly
-                            onClick={ () => {
+                            onClick={() => {
                                 setIsDropdownTabsOpen(true);
                                 setSearchTerm('');
-                            } }>
-                            <Add size={ 20 } aria-label="Add" />
+                            }}>
+                            <Add size={20} aria-label="Add" />
                         </Button>
 
-                        <ul className="cds--list-box__menu" ref={ dropdownListBoxRef } role="listbox"
-                            style={ { maxHeight: isDropdownTabsOpen ? '16.5rem' : 0 } }>
+                        <ul className="cds--list-box__menu" ref={dropdownListBoxRef} role="listbox"
+                            style={{ maxHeight: isDropdownTabsOpen ? '16.5rem' : 0 }}>
                             <div className="header-dynamic-dropdown-services-content">
                                 <div className="list-wrapper">
                                     <ContainedList
-                                        label={ "" }
+                                        label={""}
                                         size="md"
                                     >
-                                        <Search placeholder={ t("search-services") }
-                                                value={ searchTerm }
-                                                onChange={ handleSearchChange }
-                                                closeButtonLabelText={ t("clear") }
-                                                size="md"
-                                                labelText={ "" } />
-                                        { searchResults.map((item) =>
+                                        <Search placeholder={t("search-services")}
+                                            value={searchTerm}
+                                            onChange={handleSearchChange}
+                                            closeButtonLabelText={t("clear")}
+                                            size="md"
+                                            labelText={""} />
+                                        {searchResults.map((item) =>
                                             <ContainedListItem
-                                                key={ item.title }
-                                                onClick={ () => {
+                                                key={item.title}
+                                                onClick={() => {
                                                     openService(item)
                                                     setIsDropdownTabsOpen(false);
-                                                } }
+                                                }}
                                             >
-                                                { t(item.title) }
+                                                {t(item.title)}
                                             </ContainedListItem>
-                                        ) }
+                                        )}
                                         {
                                             searchResults.length === 0 && (
                                                 <ContainedListItem>
-                                                    { t("no-results-found") }
+                                                    {t("no-results-found")}
                                                 </ContainedListItem>
                                             )
                                         }
