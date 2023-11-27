@@ -22,7 +22,7 @@ export function getAPIRequestURL(url) {
     if (url.startsWith('http')) {
         return url
     } else {
-        return `${ BaseURL }/apprunnerurl${ url }`
+        return `${BaseURL}/apprunnerurl${url}`
     }
 }
 
@@ -82,23 +82,23 @@ export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) 
             const defaultConfig = {
                 customTabId: tabId, // custom tab id
                 Debug: NodeEnv === "production" ? '' : 'error', // check, info, error
-                id: `treeGrid_${ table || uuidv4() }`,
+                id: `treeGrid_${table || uuidv4()}`,
                 Cache: 2, // 0 - Never cache; 1 - Component version; 2 - Cache version; 3 - Standard cache
                 CacheVersion: 1, // When the value is increased, the files are forced to download.
                 Layout: {
-                    Url: `/Layouts/${ table }.xml`,
+                    Url: `/Layouts/${table}.xml`,
                     Cache: 0, // 0 - Never cache
                 },
                 Data: {
-                    Url: `/${ table }/data`,
+                    Url: `/${table}/data`,
                     Format: 'Json',
                 },
                 Page: {
-                    Url: `/${ table }/page`,
+                    Url: `/${table}/page`,
                     Format: 'Json',
                 },
                 Upload: {
-                    Url: `/${ table }/upload`,
+                    Url: `/${table}/upload`,
                     Format: 'Json',
                 },
             }
@@ -128,6 +128,16 @@ export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) 
             window.TGAddEvent("OnRenderPageFinish", treeGrid.id, function (grid, row) {
                 setTabLoadedAndFocus(grid.Data.customTabId, grid, row)
             })
+
+            window.TGAddEvent("OnShowMenu", treeGrid.id, function (grid, row) {
+                window.localStorage.setItem("treeGridMainTag_" + mergedConfig.customTabId, "true")
+            })
+
+            window.TGAddEvent("OnCloseMenu", treeGrid.id, function (grid, row) {
+                window.localStorage.removeItem("treeGridMainTag_" + mergedConfig.customTabId)
+            })
+
+
         }
 
         fetchData();
@@ -142,11 +152,11 @@ export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) 
 
     return (
         <>
-            <div className={ `tree-grid-wrapper ${ className ? className : '' }` }>
+            <div className={`tree-grid-wrapper ${className ? className : ''}`}>
                 <div
-                    ref={ ref }
-                    id={ `treeGridMainTag_${ tabId || uuidv4() }` }
-                    style={ { width: '100%', height: '100%' } }
+                    ref={ref}
+                    id={`treeGridMainTag_${tabId || uuidv4()}`}
+                    style={{ width: '100%', height: '100%' }}
                 >
                 </div>
             </div>

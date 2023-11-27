@@ -6,7 +6,7 @@ import {
 } from "@carbon/react";
 import { Home } from "@carbon/react/icons";
 import "./HeaderTab.scss";
-import { TabContext } from "../../sdk";
+import { TabContext, handleActiveTabCfg } from "../../sdk";
 import TabSkeleton from "carbon-web-components/es/components-react/tabs/tab-skeleton";
 import DropdownServiceList from "./DropdownServiceList";
 
@@ -39,6 +39,7 @@ const HeaderTab = ({ className }) => {
     const handleTabChange = (evt) => {
         if (tab[evt.selectedIndex]?.loaded === true) {
             setActiveTab(evt.selectedIndex);
+            handleActiveTabCfg(evt.selectedIndex);
         }
     };
 

@@ -2,7 +2,7 @@ import React, { createContext, lazy, useCallback, useEffect, useState, useRef } 
 import Dashboard from "../components/Dashboard";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "./AuthContext";
-import { uuidv4 } from "./util";
+import { handleActiveTabCfg, uuidv4 } from "./util";
 
 const UserList = lazy(() => import("../components/TreeGrid/Modules/Users/index"));
 const InvoiceList = lazy(() => import("../components/TreeGrid/Modules/Invoices/index"));
@@ -135,6 +135,7 @@ const TabContextProvider = ({ children }) => {
         if (tabIndexToGo > -1) {
             if (tab[tabIndexToGo].loaded === true) {
                 setActiveTab(tabIndexToGo);
+                handleActiveTabCfg(tabIndexToGo);
             }
         } else {
             handleAddTab(name, labelKey, tabType);

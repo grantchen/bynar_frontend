@@ -6,12 +6,13 @@ import {
     HeaderGlobalAction,
     SkipToContent,
     Popover,
-    PopoverContent,HeaderMenuButton
+    PopoverContent, HeaderMenuButton
 } from "@carbon/react";
 import {
     CardManagementProvider, omitQueryParams,
     useAuth, useMobile,
     useThemePreference,
+    handleActiveTabCfg
 } from "../../sdk";
 import { useTranslation } from "react-i18next";
 import { UserProfileImage } from "@carbon/ibm-products";
@@ -79,6 +80,7 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                         onClick={(e) => {
                             e.stopPropagation()
                             onClickSideNavExpand()
+                            handleActiveTabCfg(0)
                         }}
                         id="switcher-button"
                         isActive={isSideNavExpanded}
@@ -109,7 +111,7 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                 }
 
                 {
-                     (
+                    (
                         <DropdownTabList
                             className={`${isSearchBarExpanded ? 'has-search-active' : ''}`}
                         >
