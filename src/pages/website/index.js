@@ -1,8 +1,8 @@
 import React, { useEffect, useState} from "react";
-import {Button, Column, Grid,} from "@carbon/react";
+import {Button, Column, Grid, Tooltip} from "@carbon/react";
 import { useNavigate } from "react-router-dom";
 import backgroundImage from '../../components/media/background.svg';
-import "./login.scss";
+import "./website.scss";
 import { TypeAnimation } from 'react-type-animation';
 import SignFooter from "../../components/SignFooter";
 import {useTranslation} from "react-i18next";
@@ -15,10 +15,15 @@ const Home = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [language, setLanguage] = useState(localStorage.getItem('lang') ?? 'en');
     const { t } = useTranslation();
+    const [showText, setShowText] = useState(false);
+    const label = 'Occasionally, services are updated in a specified time window to ensure no down time for customers.';
     useEffect(() => {
         function handleResize() {
             setWindowWidth(window.innerWidth);
         }
+        const timeout = setTimeout(() => {
+            setShowText(true);
+        }, 600); // Adjust the delay time according to your preference
         window.addEventListener('resize', handleResize);
         return () => {
             window.removeEventListener('resize', handleResize);
@@ -51,10 +56,8 @@ const Home = () => {
                             marginRight: '50px',
                         }}>
                             <div className="header-caption">
-                                <p>
-                                    <span className={"bynar-style"}>{t("introducing-bynar")}</span>
-                                </p>
-                                {language === "de" && (
+                                <p className="bynar-style">{t("introducing-bynar")}</p>
+                                {showText && language === "de" && (
                                     <TypeAnimation
                                         sequence={ [
                                             'Die Unternehmensanwendung der nächsten\n Generation',
@@ -75,7 +78,7 @@ const Home = () => {
                                         omitDeletionAnimation={false}
                                     />
                                 )}
-                                {language === "es" && (
+                                {showText && language === "es" && (
                                     <TypeAnimation
                                         sequence={ [
                                             'La aplicación empresarial de próxima generación',
@@ -96,7 +99,7 @@ const Home = () => {
                                         omitDeletionAnimation={false}
                                     />
                                 )}
-                                {language === "en" && (
+                                {showText && language === "en" && (
                                     <TypeAnimation
                                         sequence={ [
                                             'The next-generation enterprise application',
@@ -117,7 +120,7 @@ const Home = () => {
                                         omitDeletionAnimation={false}
                                     />
                                 )}
-                                {language === "fr" && (
+                                {showText && language === "fr" && (
                                     <TypeAnimation
                                         sequence={ [
                                             'L\'application d\'entreprise de nouvelle génération',
@@ -150,9 +153,9 @@ const Home = () => {
                         }}>
                             <div className="header-caption">
                                 <p>
-                                    <span className={"bynar-style"}>{t("introducing-bynar")}</span>
+                                    <p className="bynar-style">{t("introducing-bynar")}</p>
                                 </p>
-                                {language === "de" && (
+                                {showText && language === "de" && (
                                     <TypeAnimation
                                         sequence={ [
                                             'Die\n Unternehmensanwendung\n der nächsten Generation',
@@ -173,7 +176,7 @@ const Home = () => {
                                         omitDeletionAnimation={false}
                                     />
                                 )}
-                                {language === "es" && (
+                                {showText && language === "es" && (
                                     <TypeAnimation
                                         sequence={ [
                                             'La aplicación\n empresarial de\n próxima generación',
@@ -194,7 +197,7 @@ const Home = () => {
                                         omitDeletionAnimation={false}
                                     />
                                 )}
-                                {language === "en" && (
+                                {showText && language === "en" && (
                                     <TypeAnimation
                                         sequence={ [
                                             'The next-generation\n enterprise application',
@@ -215,7 +218,7 @@ const Home = () => {
                                         omitDeletionAnimation={false}
                                     />
                                 )}
-                                {language === "fr" && (
+                                {showText && language === "fr" && (
                                     <TypeAnimation
                                         sequence={ [
                                             'L\'application\n d\'entreprise de\n nouvelle génération',
@@ -248,30 +251,29 @@ const Home = () => {
                                         <h1 className="form-mainHeading">{t("get-started")}</h1>
                                         <div className="fields-container">
                                             <div style={{ flex:1 }}>
-                                                <Button
-                                                    type="submit"
-                                                    size={'md'}
-                                                    style={{ width: '100%' }}
-                                                    className="login-submit-button bx--btn bx--btn--primary"
-                                                    onClick={() => {
-                                                        navigate("/signin");
-                                                    }}
-                                                    disabled={true}
-                                                >
-                                                    {t("login-button")}
-                                                </Button>
+                                                <Tooltip label="Coming soon" align="bottom">
+                                                    <Button
+                                                        type="submit"
+                                                        size={'md'}
+                                                        style={{ width: '100%' }}
+                                                        className="login-submit-button bx--btn bx--btn--primary"
+                                                    >
+                                                        {t("login-button")}
+                                                    </Button>
+                                                </Tooltip>
                                             </div>
                                             <div style={{ width: '20px' }} />
                                             <div style={{ flex: 1, marginTop: windowWidth < 672 ? '15px' : 0 }}>
-                                                <Button
-                                                    type="submit"
-                                                    size={'md'}
-                                                    style={{ width: '100%', marginLeft: 0 }}
-                                                    className="login-submit-button bx--btn bx--btn--primary"
-                                                    disabled={true}
-                                                >
-                                                    {t("sign-up-button")}
-                                                </Button>
+                                                <Tooltip label="Coming soon" align="bottom" >
+                                                    <Button
+                                                        type="submit"
+                                                        size={'md'}
+                                                        style={{ width: '100%', marginLeft: 0 }}
+                                                        className="login-submit-button bx--btn bx--btn--primary "
+                                                    >
+                                                        {t("sign-up-button")}
+                                                    </Button>
+                                                </Tooltip>
                                             </div>
                                         </div>
                                     </div>

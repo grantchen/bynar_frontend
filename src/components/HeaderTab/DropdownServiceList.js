@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useState, useEffect, useCallback } from "react";
+import React, { useRef, useContext, useState, useEffect, useCallback, useMemo } from "react";
 import {
     Button,
     ContainedList,
@@ -16,7 +16,7 @@ import throttle from "lodash/throttle";
 // DropdownServiceList is a dropdown list component including all the services
 const DropdownServiceList = () => {
     const { t } = useTranslation();
-    const { hasPermission } = useAuth();
+    const { hasPermission, tokenClaims } = useAuth();
     const { goToTab, tab } = useContext(TabContext);
     const { openCardManagementPanel, isCardManagementAllowed } = useCardManagement();
     const { openOrganizationAccountPanel, isOrganizationAccountAllowed } = useOrganizationAccount();
@@ -28,10 +28,20 @@ const DropdownServiceList = () => {
     const [allMenuItems, setAllMenuItems] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
 
+    // check if the user is an organization account
+    const isOrganizationAccount = useMemo(
+        () => tokenClaims?.organization_account === true,
+        [tokenClaims?.organization_account],
+    );
+
     // check if the menu item has permission to be displayed
     const hasLinkPermission = useCallback((menuItem) => {
         if (menuItem.sidePanel === "OrganizationAccountPanel") {
             return isOrganizationAccountAllowed
+        }
+
+        if (menuItem.tab === "InvoiceList") {
+            return isOrganizationAccount
         }
 
         if (menuItem.sidePanel === "UserCardManagementPanel") {
@@ -39,7 +49,7 @@ const DropdownServiceList = () => {
         }
 
         return !menuItem.permission || hasPermission(menuItem.permission, "list")
-    }, [hasPermission, isOrganizationAccountAllowed, isCardManagementAllowed])
+    }, [hasPermission, isCardManagementAllowed, isOrganizationAccount])
 
     // open side panel for click menu item
     const openSidePanel = (menuItem) => {

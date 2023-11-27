@@ -26,6 +26,8 @@ import UploadProfileImageModal from "../../sdk/uploadprofileimage";
 
 import ibmLogo from '../media/IBM_logo_black.svg'
 import ibmWhiteLogo from '../media/IBM_logo_white.svg'
+import logoOnly from '../media/logoOnly.svg';
+import logoOnlyDarkMode from '../media/logoOnlyDarkMode.svg';
 import { CustomWideMenu } from "./CustomWideMenu";
 import MastheadSearch from "@carbon/ibmdotcom-react/lib/components/Masthead/MastheadSearch";
 import DropdownTabList from "../HeaderTab/DropdownTabList";
@@ -87,12 +89,12 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                 <HeaderName
                     href="/"
                     prefix=""
-                    className={`${isSearchBarExpanded ? 'has-search-active' : ''}`}
+                    className={`${isSearchBarExpanded ? 'has-search-active header-name' : 'logo-header-name'}`}
                 >
                     <img src={document.documentElement.getAttribute(
                         "data-carbon-theme") !== null &&
                         document.documentElement.getAttribute(
-                            "data-carbon-theme") !== 'white' ? ibmWhiteLogo : ibmLogo} alt="ibm_logo" />
+                            "data-carbon-theme") !== 'white' ? logoOnlyDarkMode : logoOnly} className="logoImg" alt="ibm_logo" />
                 </HeaderName>
 
                 {
@@ -107,7 +109,7 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                 }
 
                 {
-                    !isMobile && (
+                     (
                         <DropdownTabList
                             className={`${isSearchBarExpanded ? 'has-search-active' : ''}`}
                         >

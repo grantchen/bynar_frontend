@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Heading } from "@carbon/react";
+import { Button, Heading,IconButton } from "@carbon/react";
 
 import "../Dashboard/Dashboard.scss";
 import { NewsInfoCard } from "../Cards/NewsInfoCard/NewsInfoCard.js";
@@ -21,8 +21,13 @@ const Dashboard = () => {
             <SubscribeCloseTabMessage></SubscribeCloseTabMessage>
             <div className="bynar-heading">
                 <Heading className="heading">{t("header")}</Heading>
-                <Button renderIcon={Add}
-                    hasIconOnly={isMobile ? true : false}>{t("create-resource-button")}</Button>
+                    {isMobile ? (
+                        <IconButton label="">
+                            <Add />
+                        </IconButton>
+                    ) : (
+                    <Button renderIcon={Add}>{t("create-resource-button")}</Button>
+                )}
             </div>
             <div className="dashboard-container-box">
                 <NewsInfoCard />

@@ -1,3 +1,9 @@
+.header-name {
+  max-width: 123px;
+}
+.header-name:hover {
+  background-color: var(--cds-layer-hover, rgba(141, 141, 141, 0.12));
+}
 .header-right {
   margin-left: auto;
   height: 48px;

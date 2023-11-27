@@ -69,16 +69,48 @@
         display: flex;
         align-items: center;
     }
-    .cds--overflow-menu{
+
+    .cds--overflow-menu {
         width: 3rem;
         height: 3rem;
     }
-    .cds--overflow-menu-options{
+
+    .cds--overflow-menu-options {
         max-width: 23rem;
         width: max-content;
     }
+
     .cds--overflow-menu-options__btn {
         max-width: 23rem;
+    }
+}
+
+.default-card-row-popover {
+
+    &.cds--popover--open,
+    .card-popver-content {
+        margin-top: 0;
+        box-shadow: 0 2px 6px var(--cds-shadow, rgba(0, 0, 0, 0.3));
+    }
+
+    .cds--tooltip-content,
+    .cds--popover-caret {
+        display: none !important;
+    }
+
+    .cds--overflow-menu-options__btn {
+        max-width: max-content;
+    }
+
+    .cds--btn--ghost:hover,
+    .cds--btn--ghost:active,
+    .cds--btn--ghost:focus {
+        background-color: transparent;
+        cursor: default;
+    }
+
+    .cds--btn--ghost:focus {
+        box-shadow: inset 0 0 0 1px transparent, inset 0 0 0 2px transparent;
     }
 }
 
