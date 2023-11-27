@@ -6,7 +6,7 @@ import {
     Search
 } from "@carbon/react";
 import "./DropdownTabList.scss";
-import {TabContext, useMobile} from "../../sdk";
+import { TabContext, useMobile } from "../../sdk";
 import { ChevronDown, Close, Home } from "@carbon/react/icons";
 import { useTranslation } from "react-i18next";
 import TabSkeleton from "carbon-web-components/es/components-react/tabs/tab-skeleton";
@@ -31,6 +31,36 @@ const DropdownTabList = ({ className }) => {
         const index = tab.findIndex((item) => item.id === tabId);
         if (tab[index]?.loaded === true) {
             setActiveTab(index);
+            // config hidden or display
+            const elem = document.querySelector("#ccs-20-tabpanel-" + index + " .tree-grid-content .tree-grid-wrapper div")
+            if (elem !== null) {
+                let gridDisabled = document.getElementsByClassName('GridDisabled')
+                let menuMain = document.getElementsByClassName('TSMenuMain')
+                if (localStorage.getItem(elem.id) === "true") {
+                    for (let i = 0; i < gridDisabled.length; i++) {
+                        gridDisabled[i].style.zIndex = "256";
+                    }
+                    for (let i = 0; i < menuMain.length; i++) {
+                        menuMain[i].style.display = "block";
+                    }
+                } else {
+                    for (let i = 0; i < gridDisabled.length; i++) {
+                        gridDisabled[i].style.zIndex = "-99";
+                    }
+                    for (let i = 0; i < menuMain.length; i++) {
+                        menuMain[i].style.display = "none";
+                    }
+                }
+            } else {
+                let gridDisabled = document.getElementsByClassName('GridDisabled')
+                let menuMain = document.getElementsByClassName('TSMenuMain')
+                for (let i = 0; i < gridDisabled.length; i++) {
+                    gridDisabled[i].style.zIndex = "-99";
+                }
+                for (let i = 0; i < menuMain.length; i++) {
+                    menuMain[i].style.display = "none";
+                }
+            }
         }
     };
 
@@ -65,7 +95,7 @@ const DropdownTabList = ({ className }) => {
     return (
         <>
             <div ref={dropdownTabsRef} className={`header-tab-list ${className ? className : ''}`}
-                 style={isMobile ? {width: "100%",textAlign: "center"}:{}}>
+                style={isMobile ? { width: "100%", textAlign: "center" } : {}}>
                 <div
                     className={"cds--dropdown__wrapper cds--list-box__wrapper cds--dropdown__wrapper--inline cds--list-box__wrapper--inline"}>
                     <div
