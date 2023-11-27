@@ -6,7 +6,7 @@ import {
 } from "@carbon/react";
 import { Home } from "@carbon/react/icons";
 import "./HeaderTab.scss";
-import { TabContext } from "../../sdk";
+import { TabContext, handleActiveTabCfg } from "../../sdk";
 import TabSkeleton from "carbon-web-components/es/components-react/tabs/tab-skeleton";
 import DropdownServiceList from "./DropdownServiceList";
 
@@ -39,36 +39,7 @@ const HeaderTab = ({ className }) => {
     const handleTabChange = (evt) => {
         if (tab[evt.selectedIndex]?.loaded === true) {
             setActiveTab(evt.selectedIndex);
-            // config hidden or display
-            const elem = document.querySelector("#ccs-20-tabpanel-" + evt.selectedIndex + " .tree-grid-content .tree-grid-wrapper div")
-            if (elem !== null) {
-                let gridDisabled = document.getElementsByClassName('GridDisabled')
-                let menuMain = document.getElementsByClassName('TSMenuMain')
-                if (localStorage.getItem(elem.id) === "true") {
-                    for (let i = 0; i < gridDisabled.length; i++) {
-                        gridDisabled[i].style.zIndex = "256";
-                    }
-                    for (let i = 0; i < menuMain.length; i++) {
-                        menuMain[i].style.display = "block";
-                    }
-                } else {
-                    for (let i = 0; i < gridDisabled.length; i++) {
-                        gridDisabled[i].style.zIndex = "-99";
-                    }
-                    for (let i = 0; i < menuMain.length; i++) {
-                        menuMain[i].style.display = "none";
-                    }
-                }
-            } else {
-                let gridDisabled = document.getElementsByClassName('GridDisabled')
-                let menuMain = document.getElementsByClassName('TSMenuMain')
-                for (let i = 0; i < gridDisabled.length; i++) {
-                    gridDisabled[i].style.zIndex = "-99";
-                }
-                for (let i = 0; i < menuMain.length; i++) {
-                    menuMain[i].style.display = "none";
-                }
-            }
+            handleActiveTabCfg(evt.selectedIndex);
         }
     };
 

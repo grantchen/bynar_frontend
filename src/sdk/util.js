@@ -109,14 +109,14 @@ export const getAutoSizedColumnWidth = (rows, accessor, headerText, overrideRowV
 
 export const uuidv4 = () => {
     const randomValues = (c) =>
-      typeof crypto !== 'undefined'
-        ? crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4))
-        : (Math.random() * 16) >> (c / 4);
+        typeof crypto !== 'undefined'
+            ? crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4))
+            : (Math.random() * 16) >> (c / 4);
 
     return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
-      (c ^ randomValues(c)).toString(16)
+        (c ^ randomValues(c)).toString(16)
     );
-  }
+}
 
 
 export const downloadFile = (url, filename = '') => {
@@ -125,38 +125,71 @@ export const downloadFile = (url, filename = '') => {
     req.open('GET', url, true);
     req.responseType = 'blob';
     req.onload = function () {
-      const blob = new Blob([req.response], {
-        type: 'application/pdf',
-      });
-      debugger
+        const blob = new Blob([req.response], {
+            type: 'application/pdf',
+        });
+        debugger
 
-      const isIE = false || !!document.documentMode;
-      if (isIE) {
-        window.navigator.msSaveBlob(blob, filename);
-      } else {
-        const windowUrl = window.URL || window.webkitURL;
-        const href = windowUrl.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.setAttribute('download', filename);
-        a.setAttribute('href', href);
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      }
+        const isIE = false || !!document.documentMode;
+        if (isIE) {
+            window.navigator.msSaveBlob(blob, filename);
+        } else {
+            const windowUrl = window.URL || window.webkitURL;
+            const href = windowUrl.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('download', filename);
+            a.setAttribute('href', href);
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
     };
     req.send();
-  };
+};
 
 
 // getQueryVariable is a function to get the query variable from the url(handle url containing '+', '=')
 export function getQueryVariable(url, variable) {
-  const u = new URL(url)
-  const query = u.search.substring(1);
-  const vars = query.split('&');
-  for (let i = 0; i < vars.length; i++) {
-    const pair = vars[i].split(/=(.*)/s);
-    if (decodeURIComponent(pair[0]) === variable) {
-      return decodeURIComponent(pair[1]);
+    const u = new URL(url)
+    const query = u.search.substring(1);
+    const vars = query.split('&');
+    for (let i = 0; i < vars.length; i++) {
+        const pair = vars[i].split(/=(.*)/s);
+        if (decodeURIComponent(pair[0]) === variable) {
+            return decodeURIComponent(pair[1]);
+        }
     }
-  }
+}
+
+export function handleActiveTabCfg(idx) {
+    // config hidden or display
+    const elem = document.querySelector("#ccs-20-tabpanel-" + idx + " .tree-grid-content .tree-grid-wrapper div");
+    if (elem !== null) {
+        let gridDisabled = document.getElementsByClassName('GridDisabled')
+        let menuMain = document.getElementsByClassName('TSMenuMain')
+        if (localStorage.getItem(elem.id) === "true") {
+            for (let i = 0; i < gridDisabled.length; i++) {
+                gridDisabled[i].style.zIndex = "256";
+            }
+            for (let i = 0; i < menuMain.length; i++) {
+                menuMain[i].style.display = "block";
+            }
+        } else {
+            for (let i = 0; i < gridDisabled.length; i++) {
+                gridDisabled[i].style.zIndex = "-99";
+            }
+            for (let i = 0; i < menuMain.length; i++) {
+                menuMain[i].style.display = "none";
+            }
+        }
+    } else {
+        let gridDisabled = document.getElementsByClassName('GridDisabled')
+        let menuMain = document.getElementsByClassName('TSMenuMain')
+        for (let i = 0; i < gridDisabled.length; i++) {
+            gridDisabled[i].style.zIndex = "-99";
+        }
+        for (let i = 0; i < menuMain.length; i++) {
+            menuMain[i].style.display = "none";
+        }
+    }
 }
