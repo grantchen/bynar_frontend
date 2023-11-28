@@ -14,6 +14,7 @@ import de from 'react-phone-input-2/lang/de.json'
 import fr from 'react-phone-input-2/lang/fr.json'
 import { useAuth, useUserManagement, useThemePreference } from "../../sdk";
 
+import "react-phone-input-2/lib/style.css";
 import {
     PhoneNumberUtil,
 } from "google-libphonenumber";
@@ -382,7 +383,7 @@ export const UserDetailPanel = ({ open }) => {
                                     </div>
                                     {language === "es" && (
                                         <PhoneInput
-                                            className="phone-input-signup"
+                                            className="phone-input-sidepanel"
                                             localization={es}
                                             ref={(el) => (inputRefs.current[5] = el)}
                                             style={{
@@ -398,7 +399,7 @@ export const UserDetailPanel = ({ open }) => {
                                     )}
                                     {language === "de" && (
                                         <PhoneInput
-                                            className="phone-input-signup"
+                                            className="phone-input-sidepanel"
                                             localization={de}
                                             ref={(el) => (inputRefs.current[5] = el)}
                                             style={{
@@ -414,7 +415,7 @@ export const UserDetailPanel = ({ open }) => {
                                     )}
                                     {language === "fr" && (
                                         <PhoneInput
-                                            className="phone-input-signup"
+                                            className="phone-input-sidepanel"
                                             localization={fr}
                                             ref={(el) => (inputRefs.current[5] = el)}
                                             style={{
@@ -430,7 +431,7 @@ export const UserDetailPanel = ({ open }) => {
                                     )}
                                     {language === "en" && (
                                         <PhoneInput
-                                            className="phone-input-signup"
+                                            className="phone-input-sidepanel"
                                             ref={(el) => (inputRefs.current[5] = el)}
                                             style={{
                                                 border: !phoneNumberValid && errorMessage.length > 0 ? "2px solid red" : 0,
