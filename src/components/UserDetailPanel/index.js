@@ -4,7 +4,7 @@ import {
     TextInput, Select, SelectItem, Dropdown,
     InlineNotification
 } from "@carbon/react";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback, useContext } from "react";
 import { useSearchParams } from "react-router-dom";
 import { BaseURL, Languages, Themes } from "../../sdk/constant";
 import PhoneInput from "react-phone-input-2";
@@ -12,7 +12,7 @@ import "react-phone-input-2/lib/style.css";
 import es from 'react-phone-input-2/lang/es.json'
 import de from 'react-phone-input-2/lang/de.json'
 import fr from 'react-phone-input-2/lang/fr.json'
-import { useAuth, useUserManagement, useThemePreference } from "../../sdk";
+import { useAuth, useUserManagement, useThemePreference, handleActiveTabCfg, TabContext } from "../../sdk";
 
 import "react-phone-input-2/lib/style.css";
 import {
@@ -138,11 +138,14 @@ export const UserDetailPanel = ({ open }) => {
             setUpdateHappened(false);
         }
     };
-    const handleClose = () => {
+
+    const { activeTab } = useContext(TabContext)
+    const handleClose = useCallback(() => {
         setServerErrorNotification({});
         setServerNotification(false);
         closeModalAndGoBackToUserList();
-    };
+        handleActiveTabCfg(activeTab)
+    }, [activeTab]);
 
     const handlePhoneNumber = (value, country) => {
         setPhoneNumber(value)
@@ -298,6 +301,7 @@ export const UserDetailPanel = ({ open }) => {
             setUpdateHappened(true)
             return;
         }
+        handleActiveTabCfg(0)
         getUserList(user?.id || parseInt(searchParams?.get("userIdToShowDetails")))
     }, [open, authFetch]);
 
@@ -383,7 +387,7 @@ export const UserDetailPanel = ({ open }) => {
                                     </div>
                                     {language === "es" && (
                                         <PhoneInput
-                                            className="phone-input-sidepanel"
+                                            className="phone-input-signup"
                                             localization={es}
                                             ref={(el) => (inputRefs.current[5] = el)}
                                             style={{
@@ -399,7 +403,7 @@ export const UserDetailPanel = ({ open }) => {
                                     )}
                                     {language === "de" && (
                                         <PhoneInput
-                                            className="phone-input-sidepanel"
+                                            className="phone-input-signup"
                                             localization={de}
                                             ref={(el) => (inputRefs.current[5] = el)}
                                             style={{
@@ -415,7 +419,7 @@ export const UserDetailPanel = ({ open }) => {
                                     )}
                                     {language === "fr" && (
                                         <PhoneInput
-                                            className="phone-input-sidepanel"
+                                            className="phone-input-signup"
                                             localization={fr}
                                             ref={(el) => (inputRefs.current[5] = el)}
                                             style={{
@@ -431,7 +435,7 @@ export const UserDetailPanel = ({ open }) => {
                                     )}
                                     {language === "en" && (
                                         <PhoneInput
-                                            className="phone-input-sidepanel"
+                                            className="phone-input-signup"
                                             ref={(el) => (inputRefs.current[5] = el)}
                                             style={{
                                                 border: !phoneNumberValid && errorMessage.length > 0 ? "2px solid red" : 0,
