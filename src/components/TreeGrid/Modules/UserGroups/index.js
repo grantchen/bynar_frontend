@@ -39,6 +39,14 @@ const UserGroupList = ({ tabId }) => {
         if (row.Def.Name === "Node") {
             G.SetAttribute(row, row.parent, "Calculated", 1);
         }
+
+
+        // set merged cell value to Parent or Child
+        if (row.Def.Name === "Node") {
+            row.full_name = row.full_nameOrig
+        } else if (row.Def.Name === "Data") {
+            row.code = row.codeOrig
+        }
     }
 
     events.OnRowDelete = function (G, row, col, val) {

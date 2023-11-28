@@ -15,6 +15,14 @@ const ProcurementList = ({ tabId }) => {
         if (row.Def.Name === "Node") {
             G.SetAttribute(row, row.parent, "Calculated", 1);
         }
+
+        // set merged cell value to Parent or Child
+        if (row.Def.Name === "Node") {
+            row.item_id = row.item_idOrig
+        } else if (row.Def.Name === "Data") {
+            row.document_id = row.document_idOrig
+            row.user_group_id = row.user_group_idOrig
+        }
     }
 
     events.OnPasteRow = function (G, row, col, val) {
