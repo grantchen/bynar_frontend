@@ -16,31 +16,13 @@ const PaymentList = ({ tabId }) => {
             G.SetAttribute(row, row.parent, "Calculated", 1);
         }
 
-        // Set the value of the group field when adding data after grouping
-        if (G.Group !== "") {
-            let parentNode = row.parentNode
-            for (let key of G.Group.split(",").reverse()) {
-                // Recursively parent node to get the value of the group field
-                while (parentNode !== undefined) {
-                    if (parentNode.Visible === 1 && parentNode[G.MainCol] !== undefined) {
-                        row[key] = parentNode[G.MainCol]
-                        parentNode = parentNode.parentNode
-                        break
-                    }
-                    parentNode = parentNode.parentNode
-                }
-            }
+        // set merged cell value to Parent or Child
+        if (row.Def.Name === "Node") {
+            row.applies_document_type = row.applies_document_typeOrig
+        } else if (row.Def.Name === "Data") {
+            row.document_id = row.document_idOrig
+            row.user_group_id = row.user_group_idOrig
         }
-
-        // Set parent id
-        let parentId
-        if (row.parentNode.Visible === 1 && ["Node", "R"].includes(row.parentNode.Def.Name)) {
-            parentId = row.parentNode.id
-        } else if (row.parentNode.parentNode.Visible === 1 && ["Node", "R"].includes(row.parentNode.parentNode.Def.Name)) {
-            parentId = row.parentNode.parentNode.id
-        }
-        // Override the current value with the default value
-        row.parentNode.id = parentId === undefined ? "0" : parentId
     }
 
     events.OnPasteRow = function (G, row, col, val) {
@@ -107,7 +89,7 @@ const PaymentList = ({ tabId }) => {
                 break;
         }
     }
-    
+
     return (
         <>
             <div className="tree-grid-content">

@@ -36,41 +36,17 @@ const UserGroupList = ({ tabId }) => {
 
     // on add
     events.OnRowAdd = function (G, row) {
-        let par = row.parentNode
-        // add child to grouped row, set code to empty
-        if (par && par.Def?.Name === "Group" && par.Def?.CDef === "R") {
-            row.code = ''
-        }
-
         if (row.Def.Name === "Node") {
             G.SetAttribute(row, row.parent, "Calculated", 1);
         }
 
-        // Set the value of the group field when adding data after grouping
-        if (G.Group !== "") {
-            let parentNode = row.parentNode
-            for (let key of G.Group.split(",").reverse()) {
-                // Recursively parent node to get the value of the group field
-                while (parentNode !== undefined) {
-                    if (parentNode.Visible === 1 && parentNode[G.MainCol] !== undefined) {
-                        row[key] = parentNode[G.MainCol]
-                        parentNode = parentNode.parentNode
-                        break
-                    }
-                    parentNode = parentNode.parentNode
-                }
-            }
-        }
 
-        // Set parent id
-        let parentId
-        if (row.parentNode.Visible === 1 && ["Node", "R"].includes(row.parentNode.Def.Name)) {
-            parentId = row.parentNode.id
-        } else if (row.parentNode.parentNode.Visible === 1 && ["Node", "R"].includes(row.parentNode.parentNode.Def.Name)) {
-            parentId = row.parentNode.parentNode.id
+        // set merged cell value to Parent or Child
+        if (row.Def.Name === "Node") {
+            row.full_name = row.full_nameOrig
+        } else if (row.Def.Name === "Data") {
+            row.code = row.codeOrig
         }
-        // Override the current value with the default value
-        row.parentNode.id = parentId === undefined ? "0" : parentId
     }
 
     events.OnRowDelete = function (G, row, col, val) {

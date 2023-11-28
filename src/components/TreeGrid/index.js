@@ -129,6 +129,21 @@ export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) 
                 setTabLoadedAndFocus(grid.Data.customTabId, grid, row)
             })
 
+            // Called after the root page or child page is fully rendered and ready.
+            window.TGAddEvent("OnRenderChildPartFinish", treeGrid.id, function (grid, row) {
+                // The children have preset Expanded='3' Visible='0' AggChildren='1' as defined in SPage default.
+                // doc in ChildPageLength
+                if (row.AggChildren === 1 && row.Visible === 0 && row.Expanded === 3) {
+                    const parentNodeId = row.parentNode.id
+                    // skip if row id starts with parent node id
+                    if (row.id.startsWith(parentNodeId)) {
+                        return
+                    }
+                    // set full id for sub page row
+                    row.id = `${parentNodeId}$${row.id}`
+                }
+            })
+
             window.TGAddEvent("OnShowMenu", treeGrid.id, function (grid, row) {
                 window.localStorage.setItem("treeGridMainTag_" + mergedConfig.customTabId, "true")
             })
