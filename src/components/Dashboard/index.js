@@ -1,11 +1,9 @@
 import React from "react";
-
 import { Button, Heading,IconButton } from "@carbon/react";
-
 import "../Dashboard/Dashboard.scss";
-import { NewsInfoCard } from "../Cards/NewsInfoCard/NewsInfoCard.js";
-import { ViewUsageCard } from "../Cards/ViewUsageCard/ViewUsageCard";
-import { SupportCard } from "../Cards/SupportCard/SupportCard";
+import { NewsInfoCard } from "../Cards";
+import { ViewUsageCard } from "../Cards";
+import { SupportCard } from "../Cards";
 import { useTranslation } from "react-i18next";
 import { Add } from "@carbon/react/icons";
 import { useMobile } from "../../sdk";

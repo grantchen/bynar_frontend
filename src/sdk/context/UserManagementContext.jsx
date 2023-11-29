@@ -16,6 +16,7 @@ import { useTranslation } from "react-i18next";
 import { RemoveModalWithLoading } from "../RemoveModalWithLoading";
 const UserManagementContext = createContext();
 
+// UserManagementProvider is a wrapper component that provides the UserManagementContext
 const UserManagementProvider = ({ children }) => {
     const { authFetch, hasPermission } = useAuth();
     const { t } = useTranslation();

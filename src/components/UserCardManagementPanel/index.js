@@ -23,6 +23,8 @@ import {
 } from "../../sdk";
 import { useTranslation } from "react-i18next";
 import { format } from "date-fns";
+
+// UserCardManagementPanel is the user card management panel component
 const UserCardManagementPanel = ({ open }) => {
     const {
         cardsData,

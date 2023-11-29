@@ -22,6 +22,7 @@ const CARD_MANAGEMENT_CONSTANTS = {
     openAddCardModal: "openCardAddModal",
 };
 
+// CardManagementProvider is a wrapper component that provides the CardManagementContext
 const CardManagementProvider = ({ children }) => {
     const { tokenClaims, authFetch } = useAuth();
     const { t } = useTranslation();

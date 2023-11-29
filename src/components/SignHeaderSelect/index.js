@@ -5,8 +5,8 @@ import {useTranslation} from "react-i18next";
 import i18n from "i18next";
 import "./SideHeader.scss";
 import bynarLogo from '../media/bynarLogo.svg';
-import bynarLogoDarkMode from '../media/bynarLogoDarkMode.svg';
 
+// SignHeaderSelect is the header component with language select
 const SignHeaderSelect = ({ onLanguageChange }) => {
     const [language, setLanguage] = useState(localStorage.getItem('lang') ?? "en");
     const languagesItems = Languages.map((languageObject) => languageObject.code);

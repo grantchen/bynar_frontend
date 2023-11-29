@@ -1,7 +1,7 @@
 import { SidePanel, pkg } from "@carbon/ibm-products";
 import {
     TextInputSkeleton, Theme,
-    TextInput, Select, SelectItem, Dropdown,
+    TextInput, Dropdown,
     InlineNotification
 } from "@carbon/react";
 import React, { useState, useEffect, useRef, useCallback, useContext } from "react";
@@ -23,6 +23,7 @@ import { useTranslation } from "react-i18next";
 
 pkg.component.SidePanel = true;
 
+// UserDetailPanel is the user detail panel component
 export const UserDetailPanel = ({ open }) => {
     const { t } = useTranslation();
     const { themePreference } = useThemePreference();

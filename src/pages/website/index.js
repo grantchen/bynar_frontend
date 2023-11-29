@@ -9,19 +9,15 @@ import {useTranslation} from "react-i18next";
 import SignHeaderSelect from "../../components/SignHeaderSelect";
 
 const Home = () => {
-    const [showVideo, setShowVideo] = useState(false);
-    const [videoBackgroundColor, setVideoBackgroundColor] = useState("white");
-    const navigate = useNavigate();
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [language, setLanguage] = useState(localStorage.getItem('lang') ?? 'en');
     const { t } = useTranslation();
     const [showText, setShowText] = useState(false);
-    const label = 'Occasionally, services are updated in a specified time window to ensure no down time for customers.';
     useEffect(() => {
         function handleResize() {
             setWindowWidth(window.innerWidth);
         }
-        const timeout = setTimeout(() => {
+        setTimeout(() => {
             setShowText(true);
         }, 600); // Adjust the delay time according to your preference
         window.addEventListener('resize', handleResize);

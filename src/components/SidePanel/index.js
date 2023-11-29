@@ -9,12 +9,9 @@ import "./SidePanel.scss";
 import { useState, useRef, useEffect } from "react";
 
 import PhoneInput from "react-phone-input-2";
-// import { countries } from 'react-phone-input-2/countries';
-// import 'react-phone-input-2/dist/style.css'
 import "react-phone-input-2/lib/style.css";
-// import './AddUser.scss';
 import { useSearchParams } from "react-router-dom";
-import { COUNTRIES, useUserManagement, useCardManagement } from "../../sdk";
+import { COUNTRIES, useUserManagement } from "../../sdk";
 import {
     PhoneNumberUtil
 } from "google-libphonenumber";

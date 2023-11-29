@@ -1,6 +1,8 @@
 import React from "react";
 import "./SideFooterl.scss";
 import { useTranslation } from "react-i18next";
+
+// SignFooter is the footer component
 const SignFooter = ({ className }) => {
     const { t } = useTranslation();
     return (

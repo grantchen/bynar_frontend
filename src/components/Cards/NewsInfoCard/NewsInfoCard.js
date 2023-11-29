@@ -1,6 +1,5 @@
 import "../NewsInfoCard/NewsInfoCard.scss";
 import { useTranslation } from "react-i18next";
-// import { Warning } from "@carbon/react/icons";
 
 export const NewsInfoCard = () => {
   const { t } = useTranslation();
@@ -10,8 +9,6 @@ export const NewsInfoCard = () => {
         <p>
           <strong>{t("newsinfocard_heading1")}</strong>
         </p>
-
-        {/* <Warning size="100" style={{ color: "cornflowerblue" }} /> */}
 
         <p style={{ cursor: "pointer" }}>{t("newsinfocard_heading2")}</p>
       </div>

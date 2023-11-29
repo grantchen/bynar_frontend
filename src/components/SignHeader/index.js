@@ -1,6 +1,7 @@
 import React from 'react';
 import { Header, HeaderName } from '@carbon/react';
 
+// SignHeader is the header component
 const SignHeader = () => {
     return (
         <Header aria-label="Bynar">
