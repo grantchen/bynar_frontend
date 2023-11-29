@@ -163,7 +163,7 @@ export function getQueryVariable(url, variable) {
 
 export function handleActiveTabCfg(idx) {
     // config hidden or display
-    const elem = document.querySelector("#ccs-20-tabpanel-" + idx + " .tree-grid-content .tree-grid-wrapper div");
+    const elem = document.querySelector(`.tab-content-wrapper.tab-content-${idx} .tree-grid-content .tree-grid-wrapper div`);
     if (elem !== null) {
         let gridDisabled = document.getElementsByClassName('GridDisabled')
         let menuMain = document.getElementsByClassName('TSMenuMain')

@@ -13,7 +13,7 @@ const Dashboard = () => {
                     {
                         tab.map((item, index) => {
                             return <TabPanel
-                                className="content-wrapper"
+                                className={ `tab-content-wrapper tab-content-${index}` }
                                 key={ item.id }
                                 style={ {
                                     // doc: `Data source to download data for individual page or child page. It is loaded on request, when the page is being displayed.`
