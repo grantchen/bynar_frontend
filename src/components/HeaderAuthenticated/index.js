@@ -24,7 +24,6 @@ import { useRef } from "react";
 import { useEffect } from "react";
 import ProfileDropdown from "../ProfileDropdown";
 import UploadProfileImageModal from "../../sdk/uploadprofileimage";
-
 import logoName from '../media/logoName.svg';
 import logoNameDark from '../media/logoNameDark.svg';
 import { CustomWideMenu } from "./CustomWideMenu";

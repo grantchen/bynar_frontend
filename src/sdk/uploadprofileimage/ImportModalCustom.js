@@ -21,7 +21,6 @@ import { BaseURL } from "../constant";
 import { uuidv4 } from "../util";
 
 import { pkg } from "@carbon/ibm-products";
-import { async } from "@carbon/themes";
 import {useThemePreference} from "../new-theme";
 const componentName = "ImportModal";
 

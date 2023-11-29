@@ -21,13 +21,15 @@ import { useNavigate } from "react-router-dom";
 import {
     CheckoutPublicKey,
 } from "./../../sdk";
+
+// AddCardModal is the add card modal component
 const AddCardModal = ({ open }) => {
     const [loading, setLoading] = useState(false);
     const modalBodyRef = useRef(null)
     const { authFetch } = useAuth();
     const navigate = useNavigate()
     const { handleVerifyCard, notification, setNotification } = useCardManagement();
-    const { theme, themePreference } = useThemePreference()
+    const { themePreference } = useThemePreference()
 
     const { t } = useTranslation();
     const handleClose = useCallback(() => {

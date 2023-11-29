@@ -19,6 +19,7 @@ const CONSTANTS = {
     openOrganizationAccountPanel: "openOrganizationAccountPanel",
 };
 
+// OrganizationAccountProvider is a wrapper component that provides the OrganizationAccountContext
 const OrganizationAccountProvider = ({children}) => {
     const {tokenClaims, authFetch} = useAuth();
     const {t} = useTranslation();

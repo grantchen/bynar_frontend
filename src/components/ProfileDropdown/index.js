@@ -1,8 +1,8 @@
 import { UserProfileImage } from "@carbon/ibm-products";
-import { Link, Tile, Tooltip } from "@carbon/react";
+import { Link, Tile } from "@carbon/react";
 import { ArrowRight, Camera } from "@carbon/react/icons";
 import React from "react";
-import { useAuth, useThemePreference, useCardManagement } from "../../sdk";
+import { useAuth, useThemePreference } from "../../sdk";
 
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
@@ -13,11 +13,10 @@ const ProfileDropdown = React.memo(
     setUploadProfileModalOpen,
     onProfileOptionClick = () => null
   }) => {
-    const [t, i18n] = useTranslation();
+    const [t] = useTranslation();
     const { signout, user } = useAuth();
     const [isHovered, setIsHovered] = useState(false);
-    const { theme, themePreference } = useThemePreference();
-    const { openCardManagementPanel, isCardManagementAllowed } = useCardManagement();
+    const { themePreference } = useThemePreference();
     const handleLogout = async (e) => {
       e.preventDefault();
       await signout();

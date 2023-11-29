@@ -1,5 +1,4 @@
 import React, {
-    useEffect,
     useState,
 } from "react";
 import { useAuth } from "../AuthContext";
@@ -12,7 +11,7 @@ const UploadProfileImageModal = ({
     isUploadProfileImageModalOpen,
     openUploadProfileImageModal,
 }) => {
-    const { user,getUser,authFetch } = useAuth();
+    const { getUser,authFetch } = useAuth();
     const [loading, setLoading] = useState(false);
     const {t} = useTranslation()
     /**

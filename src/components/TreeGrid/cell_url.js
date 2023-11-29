@@ -1,3 +1,4 @@
+// parseCellSuggestionCallback parse cell suggestion data
 export function parseCellSuggestionCallback(suggestionKey, lsSuggestionField){
 	return (G, row, col, val) => {
 		try {
@@ -29,6 +30,7 @@ export function parseCellSuggestionCallback(suggestionKey, lsSuggestionField){
 	}
 }
 
+// parseItemSuggestionCallBack parse item suggestion data
 export function parseItemSuggestionCallBack(suggestionKey, data, lsSuggestionField){
 	let jsonData = JSON.parse(data);
 	let dataSuggest = jsonData.Changes[0][suggestionKey];
