@@ -64,6 +64,16 @@ function ThemePreferenceProvider({ children }) {
         setThemePreference(mapCarbonThemeFromThemePreference(theme))
     }, [theme, user, isSystemThemeDark]);
 
+    useEffect(() => {
+        // if system theme is dark, set favicon logo-icon-dark-mode.svg, else set favicon logo-icon.svg
+        const favicon = document.getElementById("favicon");
+        if (isSystemThemeDark) {
+            favicon.href = "/images/logo-icon-dark-mode.svg";
+        } else {
+            favicon.href = "/images/logo-icon.svg";
+        }
+    },  [isSystemThemeDark]);
+
     const value = {
         theme,
         setTheme,
