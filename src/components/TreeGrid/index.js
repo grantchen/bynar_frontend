@@ -82,7 +82,7 @@ export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) 
             const defaultConfig = {
                 customTabId: tabId, // custom tab id
                 Debug: NodeEnv === "production" ? '' : 'error', // check, info, error
-                id: `treeGrid_${table || uuidv4()}`,
+                id: `${table}_${uuidv4()}`,
                 Cache: 2, // 0 - Never cache; 1 - Component version; 2 - Cache version; 3 - Standard cache
                 CacheVersion: 1, // When the value is increased, the files are forced to download.
                 Layout: {
@@ -113,31 +113,29 @@ export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) 
                 console.log(mergedConfig)
             }
 
+            // iterate events and call window.TGSetEvent
+            Object.keys(events).forEach((key) => {
+                window.TGSetEvent(key, mergedConfig.id, events[key])
+            })
+
+            // add event on ready
+            window.TGAddEvent("OnRenderPageFinish", mergedConfig.id, function (grid, row) {
+                setTabLoadedAndFocus(grid.Data.customTabId, grid, row)
+            })
+
+            window.TGAddEvent("OnShowMenu", mergedConfig.id, function (grid, row) {
+                window.localStorage.setItem("treeGridMainTag_" + grid.Data.customTabId, "true")
+            })
+
+            window.TGAddEvent("OnCloseMenu", mergedConfig.id, function (grid, row) {
+                window.localStorage.removeItem("treeGridMainTag_" + grid.Data.customTabId)
+            })
+
             treeGrid = window.TreeGrid(
                 mergedConfig,
                 ref.current.id,
                 {}
             );
-
-            // iterate events and call window.TGSetEvent
-            Object.keys(events).forEach((key) => {
-                window.TGSetEvent(key, treeGrid.id, events[key])
-            })
-
-            // add event on ready
-            window.TGAddEvent("OnRenderPageFinish", treeGrid.id, function (grid, row) {
-                setTabLoadedAndFocus(grid.Data.customTabId, grid, row)
-            })
-
-            window.TGAddEvent("OnShowMenu", treeGrid.id, function (grid, row) {
-                window.localStorage.setItem("treeGridMainTag_" + mergedConfig.customTabId, "true")
-            })
-
-            window.TGAddEvent("OnCloseMenu", treeGrid.id, function (grid, row) {
-                window.localStorage.removeItem("treeGridMainTag_" + mergedConfig.customTabId)
-            })
-
-
         }
 
         fetchData();
