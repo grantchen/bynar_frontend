@@ -82,7 +82,7 @@ export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) 
             const defaultConfig = {
                 customTabId: tabId, // custom tab id
                 Debug: NodeEnv === "production" ? '' : 'error', // check, info, error
-                id: `treeGrid_${table || uuidv4()}`,
+                id: `${table}_${uuidv4()}`,
                 Cache: 2, // 0 - Never cache; 1 - Component version; 2 - Cache version; 3 - Standard cache
                 CacheVersion: 1, // When the value is increased, the files are forced to download.
                 Layout: {
@@ -113,24 +113,18 @@ export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) 
                 console.log(mergedConfig)
             }
 
-            treeGrid = window.TreeGrid(
-                mergedConfig,
-                ref.current.id,
-                {}
-            );
-
             // iterate events and call window.TGSetEvent
             Object.keys(events).forEach((key) => {
-                window.TGSetEvent(key, treeGrid.id, events[key])
+                window.TGSetEvent(key, mergedConfig.id, events[key])
             })
 
             // add event on ready
-            window.TGAddEvent("OnRenderPageFinish", treeGrid.id, function (grid, row) {
+            window.TGAddEvent("OnRenderPageFinish", mergedConfig.id, function (grid, row) {
                 setTabLoadedAndFocus(grid.Data.customTabId, grid, row)
             })
 
             // Called after the root page or child page is fully rendered and ready.
-            window.TGAddEvent("OnRenderChildPartFinish", treeGrid.id, function (grid, row) {
+            window.TGAddEvent("OnRenderChildPartFinish", mergedConfig.id, function (grid, row) {
                 // The children have preset Expanded='3' Visible='0' AggChildren='1' as defined in SPage default.
                 // doc in ChildPageLength
                 if (row.AggChildren === 1 && row.Visible === 0 && row.Expanded === 3) {
@@ -144,15 +138,19 @@ export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) 
                 }
             })
 
-            window.TGAddEvent("OnShowMenu", treeGrid.id, function (grid, row) {
-                window.localStorage.setItem("treeGridMainTag_" + mergedConfig.customTabId, "true")
+            window.TGAddEvent("OnShowMenu", mergedConfig.id, function (grid, row) {
+                window.localStorage.setItem("treeGridMainTag_" + grid.Data.customTabId, "true")
             })
 
-            window.TGAddEvent("OnCloseMenu", treeGrid.id, function (grid, row) {
-                window.localStorage.removeItem("treeGridMainTag_" + mergedConfig.customTabId)
+            window.TGAddEvent("OnCloseMenu", mergedConfig.id, function (grid, row) {
+                window.localStorage.removeItem("treeGridMainTag_" + grid.Data.customTabId)
             })
 
-
+            treeGrid = window.TreeGrid(
+                mergedConfig,
+                ref.current.id,
+                {}
+            );
         }
 
         fetchData();

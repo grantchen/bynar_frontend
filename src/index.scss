@@ -5,7 +5,8 @@ $feature-flags: (
 $prefix: "cds";
 @use "@carbon/react";
 @use '@carbon/react/scss/zone';
-@import "../node_modules/carbon-components/scss/globals/scss/vars";
+@import "../node_modules/@carbon/themes/scss/_theme.scss";
+@import "../node_modules/@carbon/themes/scss/compat/generated/_themes.scss";
 
 .display-none {
     display: none;
@@ -30,7 +31,7 @@ body {
 [data-carbon-theme="g90"] {
     @include react.theme(react.$g90);
 
-    @include carbon--theme($carbon--theme--g90, true);
+    @include theme($g90, true);
     //--cds-background: #404040;
     background-color: var(--cds-ui-background);
     color: var(--cds-text-01);

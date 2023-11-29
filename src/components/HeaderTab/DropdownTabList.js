@@ -9,7 +9,7 @@ import "./DropdownTabList.scss";
 import { TabContext, useMobile, handleActiveTabCfg } from "../../sdk";
 import { ChevronDown, Close, Home } from "@carbon/react/icons";
 import { useTranslation } from "react-i18next";
-import TabSkeleton from "carbon-web-components/es/components-react/tabs/tab-skeleton";
+import TabSkeleton from "@carbon/web-components/es/components-react/tabs/tab-skeleton";
 
 // DropdownTabList is the dropdown tab list component
 const DropdownTabList = ({ className }) => {

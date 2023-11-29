@@ -7,7 +7,7 @@ import {
 import { Home } from "@carbon/react/icons";
 import "./HeaderTab.scss";
 import { TabContext, handleActiveTabCfg } from "../../sdk";
-import TabSkeleton from "carbon-web-components/es/components-react/tabs/tab-skeleton";
+import TabSkeleton from "@carbon/web-components/es/components-react/tabs/tab-skeleton";
 import DropdownServiceList from "./DropdownServiceList";
 
 // TabIcon is the tab icon component
