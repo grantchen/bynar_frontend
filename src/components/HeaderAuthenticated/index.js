@@ -25,10 +25,8 @@ import { useEffect } from "react";
 import ProfileDropdown from "../ProfileDropdown";
 import UploadProfileImageModal from "../../sdk/uploadprofileimage";
 
-import ibmLogo from '../media/IBM_logo_black.svg'
-import ibmWhiteLogo from '../media/IBM_logo_white.svg'
-import logoOnly from '../media/logoOnly.svg';
-import logoOnlyDarkMode from '../media/logoOnlyDarkMode.svg';
+import logoName from '../media/logoName.svg';
+import logoNameDark from '../media/logoNameDark.svg';
 import { CustomWideMenu } from "./CustomWideMenu";
 import MastheadSearch from "@carbon/ibmdotcom-react/lib/components/Masthead/MastheadSearch";
 import DropdownTabList from "../HeaderTab/DropdownTabList";
@@ -70,7 +68,7 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
 
     return (
         <>
-            <Header aria-label="Bynar">
+            <Header aria-label="Bynar" className={"webapp-header"}>
                 <SkipToContent />
                 <CustomWideMenu expanded={isSideNavExpanded}
                     onClickSideNavExpand={onClickSideNavExpand}>
@@ -98,12 +96,12 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                 <HeaderName
                     href="/"
                     prefix=""
-                    className={`${isSearchBarExpanded ? 'has-search-active header-name' : 'logo-header-name'}`}
+                    className={`logo-header-name ${isSearchBarExpanded ? 'has-search-active' : ''}`}
                 >
                     <img src={document.documentElement.getAttribute(
                         "data-carbon-theme") !== null &&
                         document.documentElement.getAttribute(
-                            "data-carbon-theme") !== 'white' ? logoOnlyDarkMode : logoOnly} className="logoImg" alt="ibm_logo" />
+                            "data-carbon-theme") !== 'white' ? logoNameDark : logoName} className="logo-img" alt="logo" />
                 </HeaderName>
 
                 {
