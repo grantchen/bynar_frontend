@@ -16,7 +16,7 @@ import {
 } from "../../sdk";
 import { useTranslation } from "react-i18next";
 import { UserProfileImage } from "@carbon/ibm-products";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import HeaderTab from "../HeaderTab/index";
 import { Outlet, useSearchParams } from "react-router-dom";
 import "./header.scss";
@@ -33,6 +33,7 @@ import { CustomWideMenu } from "./CustomWideMenu";
 import MastheadSearch from "@carbon/ibmdotcom-react/lib/components/Masthead/MastheadSearch";
 import DropdownTabList from "../HeaderTab/DropdownTabList";
 import { OrganizationAccountProvider } from "../../sdk/context/OrganizationAccountManagementContext";
+import { TabContext } from "../../sdk";
 
 // _AuthenticatedAppHeader is the header component for the authenticated app
 function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
@@ -44,6 +45,8 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
     const [isUploadProfileImageModalOpen, openUploadProfileImageModal] =
         useState(false);
+
+    const { activeTab } = useContext(TabContext);
 
     const wrapperRef = useRef(null);
     const [isSearchBarExpanded, setIsSearchBarExpanded] = useState(false)
@@ -80,7 +83,11 @@ function _AuthenticatedAppHeader({ isSideNavExpanded, onClickSideNavExpand }) {
                         onClick={(e) => {
                             e.stopPropagation()
                             onClickSideNavExpand()
-                            handleActiveTabCfg(0)
+                            if (!isSideNavExpanded) {
+                                handleActiveTabCfg(0)
+                            } else {
+                                handleActiveTabCfg(activeTab)
+                            }
                         }}
                         id="switcher-button"
                         isActive={isSideNavExpanded}

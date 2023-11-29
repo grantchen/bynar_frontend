@@ -11,11 +11,13 @@ import {
     Theme,
     InlineNotification
 } from "@carbon/react";
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, useContext } from "react";
 import { Add, CheckmarkFilled, TrashCan } from "@carbon/react/icons";
 import "./UserCardManagementPanel.scss";
 
 import {
+    TabContext,
+    handleActiveTabCfg,
     useCardManagement,
     useThemePreference,
 } from "../../sdk";
@@ -49,6 +51,13 @@ const UserCardManagementPanel = ({ open }) => {
         },
         [makeDefaultMethod, setDisable]
     );
+
+    const { activeTab } = useContext(TabContext)
+
+    const handleClose = useCallback(() => {
+        closeCardManagementPanel();
+        handleActiveTabCfg(activeTab)
+    }, [closeCardManagementPanel, activeTab])
 
     useEffect(() => {
         if (!open) {
@@ -85,7 +94,7 @@ const UserCardManagementPanel = ({ open }) => {
                     includeOverlay
                     className="test card-list"
                     open={open}
-                    onRequestClose={closeCardManagementPanel}
+                    onRequestClose={handleClose}
                     title={t("payment-method")}
                     subtitle={t("user-payment-method-information")}
                     data-floating-menu-container

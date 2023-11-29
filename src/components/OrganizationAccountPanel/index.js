@@ -4,11 +4,11 @@ import {
     TextInput, Dropdown,
     InlineNotification
 } from "@carbon/react";
-import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useRef, useMemo, useCallback, useContext } from "react";
 import { BaseURL, COUNTRIES } from "../../sdk/constant";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { useAuth, useThemePreference } from "../../sdk";
+import { useAuth, useThemePreference, handleActiveTabCfg, TabContext } from "../../sdk";
 
 import {
     PhoneNumberUtil,
@@ -228,12 +228,14 @@ export const OrganizationAccountPanel = ({ open }) => {
         setErrors(errors)
     }
 
+    const { activeTab } = useContext(TabContext)
     // Function to close organization account panel
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
         setNotification({});
         setErrors({});
         closeOrganizationAccountPanel()
-    };
+        handleActiveTabCfg(activeTab)
+    }, [activeTab]);
 
     // Function to update organization account
     const handleUpdateOrganizationAccount = () => {
@@ -550,7 +552,7 @@ export const OrganizationAccountPanel = ({ open }) => {
                                         </p>
                                     </div>
                                     <PhoneInput
-                                        className="phone-input-sidepanel"
+                                        className="phone-input-signup"
                                         localization={phoneNumberInputLocalization()}
                                         ref={(el) => (inputRefs.current[8] = el)}
                                         inputProps={{

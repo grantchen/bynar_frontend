@@ -15,22 +15,6 @@ const SiteList = ({ tabId }) => {
         if (row.Def.Name === "Node") {
             G.SetAttribute(row, row.parent, "Calculated", 1);
         }
-
-        // Set the value of the group field when adding data after grouping
-        if (G.Group !== "") {
-            let parentNode = row.parentNode
-            for (let key of G.Group.split(",").reverse()) {
-                // Recursively parent node to get the value of the group field
-                while (parentNode !== undefined) {
-                    if (parentNode.Visible === 1 && parentNode[G.MainCol] !== undefined) {
-                        row[key] = parentNode[G.MainCol]
-                        parentNode = parentNode.parentNode
-                        break
-                    }
-                    parentNode = parentNode.parentNode
-                }
-            }
-        }
     }
 
     events.OnPasteRow = function (G, row, col, val) {
