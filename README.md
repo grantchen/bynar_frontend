@@ -70,11 +70,29 @@ env file REACT_APP_BASE_URL change to http://127.0.0.1:8080
 
 When push code to master will trigger google cloud build, google cloud build will run by cloudbuild.yaml step by step. As it store in google storage cloud, just access static files.
 
-## How to config domain
-* DNS A address set
+## How to config custom domain
+### Create A records
 
-A address set to ip 34.111.11.161
+create A records for custom domain www.example.com and example.com, use the following:
 
-* Upload https Certificate
+```
+NAME                  TYPE     DATA
+www                   A        34.111.11.161
+@                     A        34.111.11.161
+```
 
-Network services -> Load balancing -> bynar-frontend -> EDIT -> Frontend configuration -> Add Frontend IP and protocol -> Upload https certificate.
+### Create an SSL certificate resource
+
+Please reference below guide:
+
+https://cloud.google.com/load-balancing/docs/ssl-certificates/google-managed-certs?hl=en
+
+### Create load balancer
+
+Please reference below guide:
+
+https://cloud.google.com/load-balancing/docs/https/ext-load-balancer-backend-buckets?hl=en#create_an_with_backend_buckets
+
+- ip select 34.111.11.161
+- Protocol select https, and select certificate which you set in above step
+- Enable HTTP to HTTPS redirect
