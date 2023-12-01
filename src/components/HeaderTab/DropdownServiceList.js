@@ -157,7 +157,7 @@ const DropdownServiceList = () => {
                             className="add-new-tab"
                             hasIconOnly
                             onClick={() => {
-                                setIsDropdownTabsOpen(true);
+                                setIsDropdownTabsOpen(!isDropdownTabsOpen);
                                 setSearchTerm('');
                             }}>
                             <Add size={20} aria-label="Add" />
