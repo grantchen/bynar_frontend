@@ -62,6 +62,8 @@
         <C Name='state' RelWidth='150' MinWidth='150' Type='Text' CaseSensitive='0' CanEdit='1' VarHeight='1'/>
     </Cols>
 
+    <Root CDef='Node' AcceptDef='Node'/>
+
     <Solid>
 
         <!-- <Group Space='1' Calculated='1' Panel='1' id='Group' CanFocus='0' NoUpload="0" Visible='0' CanGroup='1'/> -->

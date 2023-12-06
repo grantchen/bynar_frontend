@@ -65,6 +65,8 @@
         <C Name='responsibility_center_uuid' RelWidth='150'  Width='150' Type='Int' CanEdit='1' CaseSensitive='0' VarHeight='1'/>
     </Cols>
 
+    <Root CDef='Node' AcceptDef='Node'/>
+
     <Solid>
 
         <!-- <Group Space='1' Calculated='1' Panel='1' id='Group' CanFocus='0' NoUpload="0" Visible='0' CanGroup='1'/> -->
