@@ -123,6 +123,16 @@ export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) 
                 setTabLoadedAndFocus(grid.Data.customTabId, grid, row)
             })
 
+            // On update row, if row is added, changed or deleted, accept changes
+            // The backend needs to process rows one by one.
+            // Failed rows do not affect successfully processed rows, but API response Result needs to be < 0
+            window.TGAddEvent("OnUpdateRow", mergedConfig.id, function (G, row, update) {
+                // Changed is also 1 when added
+                if (update.Changed === 1 || update.Deleted === 1) {
+                    G.AcceptChanges(row)
+                }
+            })
+
             // Called after the root page or child page is fully rendered and ready.
             window.TGAddEvent("OnRenderChildPartFinish", mergedConfig.id, function (grid, row) {
                 // The children have preset Expanded='3' Visible='0' AggChildren='1' as defined in SPage default.
