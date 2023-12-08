@@ -81,7 +81,7 @@ export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) 
         const fetchData = () => {
             const defaultConfig = {
                 customTabId: tabId, // custom tab id
-                Debug: NodeEnv === "production" ? '' : 'error', // check, info, error
+                Debug: '', // check, info, error
                 id: `${table}_${uuidv4()}`,
                 Cache: 2, // 0 - Never cache; 1 - Component version; 2 - Cache version; 3 - Standard cache
                 CacheVersion: 1, // When the value is increased, the files are forced to download.
@@ -129,6 +129,14 @@ export const TreeGrid = ({ table, config = {}, tabId, className, events = {} }) 
             window.TGAddEvent("OnUpdateRow", mergedConfig.id, function (G, row, update) {
                 // Changed is also 1 when added
                 if (update.Changed === 1 || update.Deleted === 1) {
+                    G.AcceptChanges(row)
+                }
+            })
+
+            // Called before the row is deleted. Called after the row is marked as Deleted, but before it is hidden or colored.
+            window.TGAddEvent("OnRowDelete", mergedConfig.id, function (G, row, type) {
+                // if row is new added, accept changes
+                if (row.Added === 1) {
                     G.AcceptChanges(row)
                 }
             })
